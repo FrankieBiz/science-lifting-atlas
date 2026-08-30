@@ -9,6 +9,7 @@ work, not after.
 | [`branch-and-worktree.md`](branch-and-worktree.md) | Creating, finishing, integrating, or repairing a task branch and worktree      |
 | [`handoff-template.md`](handoff-template.md)       | Writing the handoff that ends every task                                       |
 | [`claude-environments.md`](claude-environments.md) | Confirming a Claude role's environment, path boundaries, and transfer fallback |
+| [`operating-policy.json`](operating-policy.json)   | Canonical machine-readable authority, lifecycle, and role write boundaries     |
 
 The shared agent contract is [`AGENTS.md`](../../AGENTS.md); Claude-specific
 instructions are [`CLAUDE.md`](../../CLAUDE.md). The canonical plan is

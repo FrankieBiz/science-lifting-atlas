@@ -44,6 +44,22 @@ pnpm verify
 `pnpm verify` must be green on the untouched base before you start. If it is
 not, stop and report — you have inherited a broken base, not created one.
 
+### Restricted Claude-role claims
+
+Claude Research and Claude Review cannot edit the ledger. Before either role
+writes, it sends Codex the task, role, exact output paths, branch/worktree, base
+commit, start time, and expected handoff. Codex records the claim in
+[`current-work.md`](current-work.md) and commits it. The restricted role verifies
+that committed claim, uses the Codex claim commit as the base of its role-path
+diff, then writes only within the structured policy boundary. This keeps the
+Codex-authored ledger change outside the restricted role's diff.
+
+For independent review, **Codex records the exact append-only report path**
+before dispatch. The review claim owns no builder file. When the report becomes
+an immutable commit, Codex records closure. If the report fails, Codex opens a
+separate bounded remediation claim; the closed builder and review claims do not
+reopen.
+
 ## Finishing a task
 
 A builder claim closes when its immutable handoff is committed.
@@ -58,6 +74,10 @@ Review owns only its append-only report path and does not keep the builder's
 files locked. If a report fails, Codex opens a new remediation claim naming the
 failed candidate as its base and the exact repair paths. A pending review is a
 status, not an ownership lock.
+
+The canonical authority, lifecycle, and boundary values are in
+[`operating-policy.json`](operating-policy.json). This runbook is explanatory
+and cannot grant a role permissions absent from that structured policy.
 
 ## Integration
 

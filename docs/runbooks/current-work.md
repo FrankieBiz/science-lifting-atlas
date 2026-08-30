@@ -6,40 +6,49 @@ discovers what is already owned without reading anyone's chat history.
 
 Rules:
 
-- Claim before you edit. One writer owns a file at a time.
+- Claim before you edit. One writer owns a file at a time. Codex records every
+  restricted-role claim on that role's behalf because Claude Research and
+  Claude Review cannot write this ledger.
 - Record the exact branch, worktree, and **base commit** you started from.
 - A claim is stale after **24 hours** with no handoff and no active session.
 - **Codex is the only merge authority.** Only Codex may clear a stale claim, and
   only after checking the branch and worktree for unmerged changes and recording
   the recovery action below. Never delete unmerged work.
 - A builder claim closes when its immutable handoff is committed. Independent
-  review is non-owning outside its exact append-only report path. A failed review
-  creates a new bounded remediation claim; it never silently reopens the builder
-  claim.
+  review owns only its exact append-only report path, claimed by Codex before
+  the reviewer writes. Codex closes that review claim when the immutable report
+  is committed. A failed review creates a new bounded remediation claim; it
+  never silently reopens the builder claim.
+
+The canonical state machine and authorities are
+[`operating-policy.json`](operating-policy.json). This ledger records instances
+of that policy; prose cannot expand an agent's authority.
 
 ## Active claims
 
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-None. SBLA-002 is awaiting the two external Claude-role readiness simulations
-required by authoritative §18; no repository path is locked while that external
-gate is pending.
+| Task                    | Role  | Branch                                 | Worktree                                    | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                                                                                             |
+| ----------------------- | ----- | -------------------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-002 remediation R2 | Codex | `codex/SBLA-002-agent-operating-model` | `.worktrees/sbla-002-agent-operating-model` | `c6f7d52358e12817a01fcdb528735a7cdf6cae5c` | 2026-08-30 15:48 EDT | `reviews/releases/SBLA-002-handoff.md` | `README.md`; `AGENTS.md`; `CLAUDE.md`; `docs/runbooks/{README.md,current-work.md,branch-and-worktree.md,claude-environments.md,operating-policy.json}`; `scripts/foundation/{operating-model.mjs,role-paths.mjs,check-role-paths.mjs}`; `tests/unit/{operating-model-contract.test.ts,role-paths-cli.test.ts}`; `reviews/releases/{SBLA-002-handoff.md,SBLA-002-r2.md}` |
 
 ## Closed claims
 
-| Task                 | Role  | Branch                                 | Base commit                                | Closed               | Handoff                                | Result                                                                                                                     |
-| -------------------- | ----- | -------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| SBLA-001             | Codex | `codex/SBLA-001-repository-foundation` | `399966fc1ccb0dbcdd8d4d3620e19b3d401e70bb` | 2026-08-29           | `reviews/releases/SBLA-001-handoff.md` | Implementation candidate `9ac1408`; acceptance-record/integration base `141b639`; accepted after Round 2 review            |
-| SBLA-002 builder     | Codex | `codex/SBLA-002-agent-operating-model` | `141b63913b75791a6630303fdd1936fc615b3471` | 2026-08-30 12:58 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `af1b920`; Round 1 failed with four Important findings; bounded remediation opened at 13:23                      |
-| SBLA-002 remediation | Codex | `codex/SBLA-002-agent-operating-model` | `af1b920afef8614c5cfc58bb1ddedfbab9933bc3` | 2026-08-30 13:30 EDT | `reviews/releases/SBLA-002-handoff.md` | Repair candidate `66299986a588eb44d64331844c9b0e561d363b61`; repository findings repaired; external §18 simulations remain |
+| Task                 | Role           | Branch                                 | Base commit                                | Closed               | Handoff                                | Result                                                                                                                                    |
+| -------------------- | -------------- | -------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-001             | Codex          | `codex/SBLA-001-repository-foundation` | `399966fc1ccb0dbcdd8d4d3620e19b3d401e70bb` | 2026-08-29           | `reviews/releases/SBLA-001-handoff.md` | Implementation candidate `9ac1408`; acceptance-record/integration base `141b639`; accepted after Round 2 review                           |
+| SBLA-002 builder     | Codex          | `codex/SBLA-002-agent-operating-model` | `141b63913b75791a6630303fdd1936fc615b3471` | 2026-08-30 12:58 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `af1b920`; Round 1 failed with four Important findings; bounded remediation opened at 13:23                                     |
+| SBLA-002 remediation | Codex          | `codex/SBLA-002-agent-operating-model` | `af1b920afef8614c5cfc58bb1ddedfbab9933bc3` | 2026-08-30 13:30 EDT | `reviews/releases/SBLA-002-handoff.md` | Repair candidate `66299986a588eb44d64331844c9b0e561d363b61`; repository findings repaired; external §18 simulations remain                |
+| SBLA-002 review R2   | Codex reviewer | `codex/SBLA-002-agent-operating-model` | `c6f7d52358e12817a01fcdb528735a7cdf6cae5c` | 2026-08-30 15:50 EDT | `reviews/releases/SBLA-002-r2.md`      | FAIL with four Important findings; report preserved. The exact-path claim was not recorded before dispatch; recovery is documented below. |
 
 ## Recovery log
 
 Record every stale-claim clearance and every unusual integration action here,
 with what was checked and what was preserved.
 
-| Date       | Action                                                                                                                                                                          | Checked                                                                            | Outcome                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| 2026-08-30 | Repository relocated from `~/Documents/Codex/2026-08-29/g/outputs/science-lifting-atlas` to `~/dev/science-lifting-atlas`; `git worktree repair` run against the moved worktree | `git fsck` clean; all refs and reflogs intact; `pnpm verify` green at the new path | No work lost; original `.git` retained at the old path as a backup pending owner deletion |
-| 2026-08-30 | `main` fast-forwarded `399966f` → `141b639` (accepted SBLA-001)                                                                                                                 | `main` confirmed a strict ancestor; fast-forward only                              | `codex/SBLA-001-repository-foundation` preserved, not deleted                             |
+| Date       | Action                                                                                                                                                                          | Checked                                                                                    | Outcome                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| 2026-08-30 | Repository relocated from `~/Documents/Codex/2026-08-29/g/outputs/science-lifting-atlas` to `~/dev/science-lifting-atlas`; `git worktree repair` run against the moved worktree | `git fsck` clean; all refs and reflogs intact; `pnpm verify` green at the new path         | No work lost; original `.git` retained at the old path as a backup pending owner deletion                            |
+| 2026-08-30 | `main` fast-forwarded `399966f` → `141b639` (accepted SBLA-001)                                                                                                                 | `main` confirmed a strict ancestor; fast-forward only                                      | `codex/SBLA-001-repository-foundation` preserved, not deleted                                                        |
+| 2026-08-30 | Round 2 reviewer was dispatched before an exact report-path claim was committed                                                                                                 | Reviewer wrote only `reviews/releases/SBLA-002-r2.md`; Git status and report scope checked | Report preserved; omission recorded rather than backdated; Codex-mediated pre-claim is mandatory from Round 3 onward |

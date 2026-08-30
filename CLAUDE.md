@@ -70,8 +70,13 @@ back to its author, who repairs, after which you recheck the complete artifact.
 
 1. Read the approved handoff for the task you depend on and start only from the
    commit it names.
-2. Claim the task and your exact paths in
-   [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md).
+2. Tell Codex the task, role, exact output paths, branch/worktree, base commit,
+   start time, and expected handoff. **Codex records the exact-path claim on
+   your behalf** in
+   [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md), because
+   your role cannot write that ledger. Verify the committed claim exists before
+   writing your permitted output; do not edit the ledger yourself. The Codex
+   claim commit is the base for your role-path diff.
 3. Create your branch or worktree per
    [`docs/runbooks/branch-and-worktree.md`](docs/runbooks/branch-and-worktree.md);
    research branches are `claude-research/<task-id>-<slug>` and review branches
@@ -80,6 +85,10 @@ back to its author, who repairs, after which you recheck the complete artifact.
    [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md).
    If you are chat-only, use the documented bundle fallback and say so in the
    handoff.
+
+The canonical structured limits are in
+[`docs/runbooks/operating-policy.json`](docs/runbooks/operating-policy.json).
+Markdown explanations never grant permission beyond that policy.
 
 ## When you finish
 

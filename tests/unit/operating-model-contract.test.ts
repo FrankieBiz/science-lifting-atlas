@@ -19,6 +19,30 @@ function completeDocFileContents() {
     'docs/runbooks/handoff-template.md',
     REQUIRED_HANDOFF_SECTIONS.join('\n\n'),
   );
+  contents.set(
+    'docs/runbooks/operating-policy.json',
+    JSON.stringify({
+      schemaVersion: 1,
+      authority: {
+        merge: 'codex',
+        staleClaimClearance: 'codex',
+        contentPromotion: 'codex',
+      },
+      lifecycle: {
+        builderClaimCloses: 'immutable-handoff-commit',
+        reviewClaimRecordedBy: 'codex',
+        reviewClaimScope: 'exact-append-only-report-path',
+        restrictedRoleDiffBase: 'codex-claim-commit',
+        reviewClaimCloses: 'immutable-review-report-commit',
+        failedReviewOpens: 'bounded-remediation-claim',
+      },
+      writeBoundaries: {
+        codex: null,
+        'claude-research': ['research/', 'content-drafts/'],
+        'claude-review': ['reviews/'],
+      },
+    }),
+  );
 
   return contents;
 }
@@ -33,6 +57,7 @@ describe('agent operating-model contract', () => {
         'docs/runbooks/current-work.md',
         'docs/runbooks/branch-and-worktree.md',
         'docs/runbooks/claude-environments.md',
+        'docs/runbooks/operating-policy.json',
       ]),
     );
   });
@@ -115,6 +140,75 @@ describe('agent operating-model contract', () => {
     });
 
     expect(issues).toEqual([]);
+  });
+
+  it('rejects a structured grant of merge authority to Claude Review', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.authority.merge = 'claude-review';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain('operating policy authority.merge must equal codex');
+  });
+
+  it('rejects a structured lifecycle that keeps the builder claim through review', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.lifecycle.builderClaimCloses = 'after-independent-review';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain(
+      'operating policy lifecycle.builderClaimCloses must equal immutable-handoff-commit',
+    );
+  });
+
+  it('requires Codex-mediated exact-path review claims and immutable closure', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.lifecycle.reviewClaimRecordedBy = 'claude-review';
+    policy.lifecycle.reviewClaimScope = 'all-reviews';
+    policy.lifecycle.restrictedRoleDiffBase = 'pre-claim-candidate';
+    policy.lifecycle.reviewClaimCloses = 'review-start';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    const issues = validateOperatingModel({
+      existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+      fileContents,
+    });
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        'operating policy lifecycle.reviewClaimRecordedBy must equal codex',
+        'operating policy lifecycle.reviewClaimScope must equal exact-append-only-report-path',
+        'operating policy lifecycle.restrictedRoleDiffBase must equal codex-claim-commit',
+        'operating policy lifecycle.reviewClaimCloses must equal immutable-review-report-commit',
+      ]),
+    );
   });
 
   it('requires handoff headings exactly once and in canonical order', () => {

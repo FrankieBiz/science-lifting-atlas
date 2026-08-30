@@ -19,6 +19,7 @@ environment-readiness and fallback report — with `pnpm verify` green.
 - Base commit: `141b63913b75791a6630303fdd1936fc615b3471`
 - Round 1 candidate: `af1b920afef8614c5cfc58bb1ddedfbab9933bc3`
 - Round 1 repair candidate: `66299986a588eb44d64331844c9b0e561d363b61`
+- Round 2 reviewed candidate: `c6f7d52358e12817a01fcdb528735a7cdf6cae5c`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`
@@ -58,13 +59,19 @@ Six required artifacts, each written so a reviewer can act without chat context:
 
 The operating model is enforced, not merely documented:
 
+- `docs/runbooks/operating-policy.json` — canonical structured authority,
+  lifecycle, and write boundaries. Markdown explains this policy but cannot
+  expand it.
 - `scripts/foundation/operating-model.mjs` — pure validator requiring every
-  artifact to exist, the handoff template to carry all ten §13.6 headings, and
-  each document to retain its load-bearing rules.
+  artifact to exist, the handoff template to carry all ten §13.6 headings, each
+  document to retain its load-bearing rules, and the structured policy to match
+  the authoritative values exactly.
 - `scripts/foundation/role-paths.mjs` + `check-role-paths.mjs` — canonical path
-  validator and Git-derived CLI for §13.9 step 6. The CLI requires a clean
-  worktree and enumerates the complete committed diff from the reviewed base,
-  so a caller cannot omit a prohibited change.
+  validator sourced from the structured policy and Git-derived CLI for §13.9
+  step 6. The CLI requires a clean worktree, requires the base to be an ancestor
+  of `HEAD`, and enumerates additions, modifications, deletions, and both sides
+  of renames from the reviewed base, so a caller cannot omit a prohibited
+  change.
 - `scripts/foundation/verify.mjs` — extended to run both validators; the two
   filesystem collection loops were extracted into helpers with identical
   semantics.
@@ -84,6 +91,21 @@ with four Important findings. Remediation:
 - restores Claude Review's plagiarism-style responsibility; and
 - preserves the mandatory external Claude-account simulations as an explicit
   unresolved gate rather than weakening it.
+
+Round 2 review at `c6f7d52358e12817a01fcdb528735a7cdf6cae5c`
+returned FAIL with four Important findings. This remediation:
+
+- makes the Git-derived boundary check include deletions and treat renames as a
+  deletion plus addition, requires the reviewed base to be an ancestor, and
+  adds executable regressions for all three cases;
+- replaces policy-by-English-blacklist as the source of authority with a strict
+  structured policy consumed by role-path enforcement and checked by
+  `pnpm verify`;
+- defines a Codex-mediated exact-path claim and immutable closure lifecycle for
+  restricted reviewers, corrects `CLAUDE.md` so Claude never edits the ledger,
+  and records the missing Round 2 pre-claim honestly in the recovery log; and
+- corrects the environment record to identify the original sandbox as the
+  SBLA-002 builder sandbox, not a Claude environment.
 
 Repository state actions performed under owner authorization:
 
@@ -107,18 +129,22 @@ Both actions are recorded in the ledger's recovery log.
   pipeline step would have changed the command contract that SBLA-001's tests
   pin. Hooking the existing `verify:foundation` step keeps `pnpm verify`
   identical in shape while still enforcing SBLA-002.
-- **Layered policy checks.** Documents retain load-bearing phrases, the handoff
-  template's level-two headings must appear exactly once in canonical order,
-  contradictory authority/lifecycle phrases fail, and required policy artifacts
-  must be regular files rather than symlinks. This is intentionally narrower
-  than general natural-language interpretation but closes the Round 1 bypasses.
+- **Structured policy is authoritative.** Authority, claim lifecycle, and role
+  boundaries live in `operating-policy.json`. The validator checks its exact
+  schema and values, and the role-path checker consumes its boundaries.
+  Markdown retains required routing statements and explicitly cannot override
+  the structured policy. Exact phrase checks remain defense-in-depth only; no
+  claim of general natural-language interpretation is made.
 - **Executable path-boundary check.** §13.9 step 6 asks for a boundary check;
   the checker now derives the role's complete committed diff from an exact base
-  SHA instead of trusting caller-supplied paths.
+  SHA instead of trusting caller-supplied paths. Deletions are included, renames
+  are evaluated as old and new paths, and a divergent base is rejected.
 - **Separate ownership states.** A builder claim closes with its immutable
   handoff. Review owns only its append-only report. A failed review creates a
   separately bounded remediation claim so a disappeared author cannot leave an
-  already-handed-off builder claim permanently active.
+  already-handed-off builder claim permanently active. Because restricted
+  reviewers cannot edit the ledger, Codex records and closes their exact report
+  claims on their behalf.
 
 ## Tests/checks run and results
 
@@ -126,11 +152,11 @@ Run with the pinned runtime (Node.js `v24.20.0`, pnpm `11.24.0`) at the new
 repository path.
 
 - `pnpm install --frozen-lockfile` — PASS.
-- `pnpm verify` — **PASS (exit 0)** after Round 1 remediation:
+- `pnpm verify` — **PASS (exit 0)** after Round 2 remediation:
   - Prettier check PASS
   - ESLint PASS, zero warnings
   - `astro check` — 30 files, 0 errors, 0 warnings, 0 hints
-  - Unit tests — 7 files, 34 tests passed
+  - Unit tests — 7 files, 40 tests passed
   - Content adapter — foundation mode, 0 records
   - Graph adapter — foundation mode, 0 nodes and 0 edges
   - Evidence adapter — foundation mode, 0 sources
@@ -151,17 +177,35 @@ Fail-closed evidence at the filesystem level, not only against fixtures:
   dropped rule.
 - Reordering or duplicating the ten handoff headings → unit contract failure.
 - Adding a conflicting Claude merge-authority grant → unit contract failure.
+- Changing the structured merge authority to Claude Review → unit contract
+  failure naming `authority.merge`.
+- Changing builder-claim closure to post-review or making Claude Review record
+  its own broad claim → unit contract failures naming the exact lifecycle
+  fields.
 - Restoring each mutation → exit **0**.
 
 Role-boundary coverage uses temporary Git repositories and exact reviewed bases:
 
 - A clean, committed, review-only diff → exit 0 for Claude Review.
 - A complete diff containing `src/pages/index.astro` → exit 1.
+- Deleting prohibited `src/pages/index.astro` while adding an allowed review
+  file → exit 1, naming the deleted path.
+- Renaming prohibited `src/pages/index.astro` into `reviews/` → evaluated as
+  deletion plus addition and exit 1, naming the prohibited source path.
+- A base commit that is not an ancestor of `HEAD` → exit 2.
 - Traversal such as `reviews/../src/pages/index.astro` → canonicalized and
   rejected.
 - Absolute/repository-escaping paths → rejected.
 - Dirty worktree or empty committed diff → rejected.
 - Unknown role → rejected.
+
+Additional required gates after Round 2 remediation:
+
+- `pnpm test:e2e` — PASS, 1 Chromium test with JavaScript disabled.
+- `pnpm test:a11y` — PASS, 1 test.
+- `pnpm test:visual` — PASS, 1 test.
+- `pnpm test:performance` — PASS, 1 test.
+- `pnpm audit --audit-level high` — PASS, no known vulnerabilities.
 
 ## Known uncertainties
 
@@ -173,10 +217,9 @@ Role-boundary coverage uses temporary Git repositories and exact reviewed bases:
   runs. `docs/runbooks/claude-environments.md` records both roles as
   `OUTSTANDING` and SBLA-008 as blocked. **A reviewer should treat this as the
   open item on SBLA-002.**
-- Natural-language policy validation remains deliberately bounded: exact
-  heading structure, required rules, prohibited authority/lifecycle grants, and
-  regular-file artifacts are enforced, but this is not a general semantic
-  theorem prover.
+- Markdown policy descriptions are explanatory rather than authoritative. The
+  machine-readable policy is strict and validated; exact phrase lint remains
+  defense-in-depth and is not represented as a semantic theorem prover.
 - The repository has no Git remote. Nothing has been pushed or published.
 - An untracked `.pnpm-store/` directory exists at the repository root, created
   when the sandboxed shell could not reach the user-level pnpm store. It is a
@@ -192,6 +235,7 @@ Created:
 - `docs/runbooks/current-work.md`
 - `docs/runbooks/branch-and-worktree.md`
 - `docs/runbooks/claude-environments.md`
+- `docs/runbooks/operating-policy.json`
 - `scripts/foundation/operating-model.mjs`
 - `scripts/foundation/role-paths.mjs`
 - `scripts/foundation/check-role-paths.mjs`
@@ -210,13 +254,14 @@ Modified:
 Independent review artifact preserved with the repair:
 
 - `reviews/releases/SBLA-002-r1.md`
+- `reviews/releases/SBLA-002-r2.md`
 
 ## Required reviewer action
 
 Independently review the repaired exact commit and return PASS or FAIL per
 criterion, with evidence and exact paths, to
-`reviews/releases/SBLA-002-r2.md`. Do not repair the artifact and do not
-overwrite Round 1.
+`reviews/releases/SBLA-002-r3.md`. Do not repair the artifact and do not
+overwrite Round 1 or Round 2.
 
 Specifically decide:
 
@@ -232,7 +277,9 @@ Specifically decide:
    completed; do not count this Codex remediation/review as either run.
 6. Whether the added validators strengthen the contract without weakening any
    SBLA-001 gate.
-7. Whether the repository relocation and `main` fast-forward were recorded
+7. Whether the Codex-mediated review claim is durably recorded before Round 3
+   review and can be closed without granting the reviewer ledger access.
+8. Whether the repository relocation and `main` fast-forward were recorded
    adequately.
 
 ## Acceptance criteria
@@ -248,8 +295,9 @@ Specifically decide:
 - The operating-model contract fails closed when an artifact is missing or a
   load-bearing rule is dropped, demonstrated at the filesystem level.
 - The role path-boundary check derives the complete committed diff from an exact
-  base, requires a clean/non-empty worktree state, canonicalizes paths, and
-  rejects out-of-boundary writes and unknown roles.
+  ancestor base, requires a clean/non-empty worktree state, canonicalizes paths,
+  includes deletions and both sides of renames, and rejects out-of-boundary
+  writes and unknown roles.
 - No SBLA-001 command, gate, or review report was renamed, removed, or weakened.
 - `pnpm verify`, `pnpm test:a11y`, `pnpm test:visual`, and
   `pnpm test:performance` exit zero.

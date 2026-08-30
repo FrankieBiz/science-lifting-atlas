@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "authority": {
+    "merge": "codex",
+    "staleClaimClearance": "codex",
+    "contentPromotion": "codex"
+  },
+  "lifecycle": {
+    "builderClaimCloses": "immutable-handoff-commit",
+    "reviewClaimRecordedBy": "codex",
+    "reviewClaimScope": "exact-append-only-report-path",
+    "restrictedRoleDiffBase": "codex-claim-commit",
+    "reviewClaimCloses": "immutable-review-report-commit",
+    "failedReviewOpens": "bounded-remediation-claim"
+  },
+  "writeBoundaries": {
+    "codex": null,
+    "claude-research": ["research/", "content-drafts/"],
+    "claude-review": ["reviews/"]
+  }
+}

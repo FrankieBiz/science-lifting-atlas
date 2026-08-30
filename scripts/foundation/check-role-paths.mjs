@@ -37,6 +37,17 @@ try {
   process.exit(2);
 }
 
+try {
+  await execFileAsync(
+    'git',
+    ['merge-base', '--is-ancestor', baseCommit, 'HEAD'],
+    { encoding: 'utf8' },
+  );
+} catch {
+  console.error(`Base commit must be an ancestor of HEAD: ${baseCommit}`);
+  process.exit(2);
+}
+
 const status = await execFileAsync(
   'git',
   ['status', '--porcelain=v1', '-z', '--untracked-files=all'],
@@ -56,7 +67,8 @@ const changedPathOutput = await execFileAsync(
     'diff',
     '--name-only',
     '-z',
-    '--diff-filter=ACMRTUXB',
+    '--no-renames',
+    '--diff-filter=ACDMRTUXB',
     `${baseCommit}...HEAD`,
     '--',
   ],

@@ -5,6 +5,12 @@ here. It is binding for all roles. Where this file and
 [`docs/product/master-plan.md`](docs/product/master-plan.md) disagree, the master
 plan wins and this file must be corrected in the same change.
 
+[`docs/runbooks/operating-policy.json`](docs/runbooks/operating-policy.json) is
+the canonical machine-readable authority, lifecycle, and write-boundary policy.
+The prose in this file and the runbooks explains that policy but cannot expand
+or override it. `pnpm verify` rejects a structured policy that differs from the
+master-plan contract.
+
 Read before doing anything:
 
 1. `docs/product/master-plan.md` — canonical product, evidence, and execution

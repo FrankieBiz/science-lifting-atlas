@@ -70,9 +70,10 @@ Demonstrated in the SBLA-002 session at base commit
 
 ### Environment-specific browser evidence
 
-The original Claude builder shell could not launch Chromium because its sandbox
-denied Mach-port registration. That result remains a truthful limitation of
-that environment, not a pass. During Round 1 remediation on 2026-08-30, Codex
+The original SBLA-002 builder sandbox could not launch Chromium because its
+sandbox denied Mach-port registration. That result remains a truthful
+limitation of that environment, not Claude readiness evidence. During Round 1
+remediation on 2026-08-30, Codex
 cleared the builder's orphaned preview process and ran the canonical
 `pnpm test:e2e` command with the pinned runtime: one Chromium test passed with
 JavaScript disabled.

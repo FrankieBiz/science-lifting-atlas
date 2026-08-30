@@ -46,6 +46,11 @@ async function commitFile(
   await git(repository, 'commit', '--quiet', '-m', `add ${relativePath}`);
 }
 
+async function removeAndCommit(repository: string, relativePath: string) {
+  await git(repository, 'rm', '--quiet', relativePath);
+  await git(repository, 'commit', '--quiet', '-m', `remove ${relativePath}`);
+}
+
 async function runChecker(repository: string, role: string, base: string) {
   return execFileAsync(process.execPath, [checkerPath, role, '--base', base], {
     cwd: repository,
@@ -98,6 +103,64 @@ describe('role path boundary CLI', () => {
       stderr: expect.stringContaining(
         'role claude-review may not write: src/pages/index.astro',
       ),
+    });
+  });
+
+  it('rejects a prohibited deletion found in the complete diff', async () => {
+    const { repository } = await createRepository();
+    await commitFile(repository, 'src/pages/index.astro');
+    const base = (await git(repository, 'rev-parse', 'HEAD')).stdout.trim();
+    await removeAndCommit(repository, 'src/pages/index.astro');
+    await commitFile(repository, 'reviews/releases/SBLA-test-r1.md');
+
+    await expect(
+      runChecker(repository, 'claude-review', base),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'role claude-review may not write: src/pages/index.astro',
+      ),
+    });
+  });
+
+  it('rejects the prohibited source path of a rename into an allowed directory', async () => {
+    const { repository } = await createRepository();
+    await commitFile(repository, 'src/pages/index.astro');
+    const base = (await git(repository, 'rev-parse', 'HEAD')).stdout.trim();
+    await mkdir(path.join(repository, 'reviews/releases'), { recursive: true });
+    await git(
+      repository,
+      'mv',
+      'src/pages/index.astro',
+      'reviews/releases/index.astro',
+    );
+    await git(repository, 'commit', '--quiet', '-m', 'rename prohibited file');
+
+    await expect(
+      runChecker(repository, 'claude-review', base),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'role claude-review may not write: src/pages/index.astro',
+      ),
+    });
+  });
+
+  it('rejects a base commit that is not an ancestor of HEAD', async () => {
+    const { repository, base } = await createRepository();
+    await git(repository, 'checkout', '--quiet', '-b', 'unrelated-base');
+    await commitFile(repository, 'branch-only.md');
+    const divergentBase = (
+      await git(repository, 'rev-parse', 'HEAD')
+    ).stdout.trim();
+    await git(repository, 'checkout', '--quiet', '-b', 'review-branch', base);
+    await commitFile(repository, 'reviews/releases/SBLA-test-r1.md');
+
+    await expect(
+      runChecker(repository, 'claude-review', divergentBase),
+    ).rejects.toMatchObject({
+      code: 2,
+      stderr: expect.stringContaining('must be an ancestor of HEAD'),
     });
   });
 

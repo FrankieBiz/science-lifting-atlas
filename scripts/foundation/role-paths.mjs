@@ -1,5 +1,7 @@
 import path from 'node:path';
 
+import operatingPolicy from '../../docs/runbooks/operating-policy.json' with { type: 'json' };
+
 /**
  * Write boundaries from master plan sections 13.3, 13.4, and 13.7.
  * `null` means unrestricted. Every other role is confined to the listed
@@ -7,11 +9,14 @@ import path from 'node:path';
  *
  * @type {Readonly<Record<string, readonly string[] | null>>}
  */
-export const ROLE_WRITE_BOUNDARIES = Object.freeze({
-  codex: null,
-  'claude-research': Object.freeze(['research/', 'content-drafts/']),
-  'claude-review': Object.freeze(['reviews/']),
-});
+export const ROLE_WRITE_BOUNDARIES = Object.freeze(
+  Object.fromEntries(
+    Object.entries(operatingPolicy.writeBoundaries).map(([role, prefixes]) => [
+      role,
+      prefixes === null ? null : Object.freeze([...prefixes]),
+    ]),
+  ),
+);
 
 /** @param {string} changedPath */
 function normalize(changedPath) {
