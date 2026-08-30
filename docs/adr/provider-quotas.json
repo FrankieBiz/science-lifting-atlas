@@ -1,0 +1,78 @@
+{
+  "$comment": "Recorded provider quotas for the SBLA-003 zero-cost model. Master plan 11.8 forbids copying assumed free-tier limits from model memory: every value here was read from the cited URL on the cited date. Re-verify before any provider decision is acted on.",
+  "recordedOn": "2026-08-30",
+  "recordedBy": "SBLA-003",
+  "reverifyBy": "2026-11-30",
+  "providers": [
+    {
+      "id": "cloudflare-pages",
+      "role": "primary static host candidate",
+      "plan": "Free",
+      "source": "https://developers.cloudflare.com/pages/platform/limits/",
+      "accessedOn": "2026-08-30",
+      "quotas": {
+        "buildsPerMonth": 500,
+        "concurrentBuilds": 1,
+        "filesPerSite": 20000,
+        "maxFileSize": "25 MiB",
+        "customDomains": 100,
+        "projectsPerAccount": 100,
+        "previewDeployments": "unlimited",
+        "bandwidth": "not stated on the limits page"
+      }
+    },
+    {
+      "id": "cloudflare-pages-requests",
+      "role": "primary static host candidate: request pricing",
+      "plan": "Free",
+      "source": "https://developers.cloudflare.com/pages/functions/pricing/",
+      "accessedOn": "2026-08-30",
+      "quotas": {
+        "staticAssetRequests": "free and unlimited",
+        "staticAssetRequestsQuote": "requests to static assets are free and unlimited. A request is considered static when it does not invoke Functions.",
+        "functionsRequestsPerDay": 100000,
+        "functionsNote": "100,000 daily request quota shared between Pages Functions and Workers; resets at midnight UTC"
+      }
+    },
+    {
+      "id": "cloudflare-r2",
+      "role": "large 3D and media asset delivery",
+      "plan": "Free tier",
+      "source": "https://developers.cloudflare.com/r2/pricing/",
+      "accessedOn": "2026-08-30",
+      "quotas": {
+        "storagePerMonth": "10 GB-month",
+        "classAOperationsPerMonth": 1000000,
+        "classBOperationsPerMonth": 10000000,
+        "egress": "Free",
+        "caveat": "The free tier only applies to Standard storage, and does not apply to Infrequent Access storage."
+      }
+    },
+    {
+      "id": "github-pages",
+      "role": "portability target: second static host",
+      "plan": "Free",
+      "source": "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits",
+      "accessedOn": "2026-08-30",
+      "quotas": {
+        "publishedSiteSize": "1 GB",
+        "bandwidthPerMonth": "100 GB soft limit",
+        "buildsPerHour": "10 soft limit",
+        "usageRestriction": "not intended for or allowed to be used as a free web-hosting service to run an online business, e-commerce site, or commercial SaaS"
+      }
+    },
+    {
+      "id": "netlify",
+      "role": "portability target considered and not selected",
+      "plan": "Free",
+      "source": "https://www.netlify.com/pricing/",
+      "accessedOn": "2026-08-30",
+      "quotas": {
+        "creditLimit": 300,
+        "bandwidthPerMonth": "not stated on the pricing page",
+        "buildMinutesPerMonth": "not stated on the pricing page",
+        "note": "The free plan is expressed as a 300-credit allowance rather than byte and minute quotas. Byte-level limits could not be read from the pricing page on the access date, so Netlify cannot be modelled against the master plan 11.8 requirement without a further sourced quota reading."
+      }
+    }
+  ]
+}
