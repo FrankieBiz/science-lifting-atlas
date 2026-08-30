@@ -47,9 +47,9 @@ Session header:
 > paths/locations. Write only to the assigned review file.
 
 Owns citation-entailment audits, adversarial evidence review and
-contradictory-source search, scope/wording/certainty checks, content
-consistency checks, UX specification review, milestone acceptance review, and
-the random pre-release claim audit.
+contradictory-source search, scope/wording/certainty checks, content consistency
+and plagiarism-style checks, UX specification review, milestone acceptance
+review, and the random pre-release claim audit.
 
 Writes only to `reviews/`. Never repairs the artifact under review — findings go
 back to its author, who repairs, after which you recheck the complete artifact.

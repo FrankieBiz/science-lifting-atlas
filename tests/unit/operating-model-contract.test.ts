@@ -116,4 +116,69 @@ describe('agent operating-model contract', () => {
 
     expect(issues).toEqual([]);
   });
+
+  it('requires handoff headings exactly once and in canonical order', () => {
+    const fileContents = completeDocFileContents();
+    fileContents.set(
+      'docs/runbooks/handoff-template.md',
+      [...REQUIRED_HANDOFF_SECTIONS].reverse().join('\n\n'),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain(
+      'handoff template sections must appear exactly once in required order',
+    );
+
+    fileContents.set(
+      'docs/runbooks/handoff-template.md',
+      [...REQUIRED_HANDOFF_SECTIONS, '## Objective'].join('\n\n'),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain(
+      'handoff template sections must appear exactly once in required order',
+    );
+  });
+
+  it('rejects authority grants that contradict Codex-only policy', () => {
+    const fileContents = completeDocFileContents();
+    fileContents.set(
+      'AGENTS.md',
+      `${fileContents.get('AGENTS.md')}\nClaude Review may merge task branches.`,
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain(
+      'operating document contains prohibited content: AGENTS.md -> Claude Review may merge',
+    );
+  });
+
+  it('rejects the contradictory post-handoff ownership lifecycle', () => {
+    const fileContents = completeDocFileContents();
+    fileContents.set(
+      'docs/runbooks/current-work.md',
+      `${fileContents.get('docs/runbooks/current-work.md')}\nThe claim stays open until independent review completes.`,
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain(
+      'operating document contains prohibited content: docs/runbooks/current-work.md -> claim stays open until independent review',
+    );
+  });
 });

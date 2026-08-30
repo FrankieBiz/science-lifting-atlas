@@ -49,6 +49,7 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'Expected handoff',
     '24 hours',
     'Codex is the only merge authority',
+    'A builder claim closes when its immutable handoff is committed.',
   ]),
   'docs/runbooks/branch-and-worktree.md': Object.freeze([
     'codex/<task-id>-<slug>',
@@ -56,6 +57,7 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'claude-review/<task-id>-<slug>',
     'git worktree add',
     'Codex is the only merge authority',
+    'A builder claim closes when its immutable handoff is committed.',
   ]),
   'docs/runbooks/claude-environments.md': Object.freeze([
     'Environment type',
@@ -65,6 +67,31 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'Readiness result',
     'Fallback',
     'SBLA-008',
+  ]),
+});
+
+export const FORBIDDEN_DOC_SNIPPETS = Object.freeze({
+  'AGENTS.md': Object.freeze([
+    'Claude Review may merge',
+    'Claude Research may merge',
+    'Claude Review may clear stale',
+    'Claude Research may clear stale',
+  ]),
+  'CLAUDE.md': Object.freeze([
+    'Claude Review may merge',
+    'Claude Research may merge',
+    'Claude Review may clear stale',
+    'Claude Research may clear stale',
+  ]),
+  'docs/runbooks/current-work.md': Object.freeze([
+    'claim stays open until independent review',
+    'ownership is not released at the review gate',
+  ]),
+  'docs/runbooks/branch-and-worktree.md': Object.freeze([
+    'Claude Review may merge',
+    'Claude Research may merge',
+    'Claude Review may clear stale',
+    'Claude Research may clear stale',
   ]),
 });
 
@@ -95,12 +122,36 @@ export function validateOperatingModel({
     }
   }
 
+  const actualHandoffSections =
+    handoffTemplate.match(/^## .+$/gm)?.map((section) => section.trim()) ?? [];
+  if (
+    actualHandoffSections.length !== REQUIRED_HANDOFF_SECTIONS.length ||
+    actualHandoffSections.some(
+      (section, index) => section !== REQUIRED_HANDOFF_SECTIONS[index],
+    )
+  ) {
+    issues.push(
+      'handoff template sections must appear exactly once in required order',
+    );
+  }
+
   for (const [filePath, snippets] of Object.entries(REQUIRED_DOC_SNIPPETS)) {
     const content = fileContents.get(filePath) ?? '';
     for (const snippet of snippets) {
       if (!content.includes(snippet)) {
         issues.push(
           `operating document missing required content: ${filePath} -> ${snippet}`,
+        );
+      }
+    }
+  }
+
+  for (const [filePath, snippets] of Object.entries(FORBIDDEN_DOC_SNIPPETS)) {
+    const content = fileContents.get(filePath) ?? '';
+    for (const snippet of snippets) {
+      if (content.includes(snippet)) {
+        issues.push(
+          `operating document contains prohibited content: ${filePath} -> ${snippet}`,
         );
       }
     }

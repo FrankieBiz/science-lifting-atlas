@@ -1,4 +1,4 @@
-import { access, readFile } from 'node:fs/promises';
+import { access, lstat, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -8,6 +8,7 @@ import {
 } from './contract.mjs';
 import {
   REQUIRED_DOC_SNIPPETS,
+  FORBIDDEN_DOC_SNIPPETS,
   REQUIRED_OPERATING_PATHS,
   validateOperatingModel,
 } from './operating-model.mjs';
@@ -39,6 +40,26 @@ async function collectExistingPaths(paths, into) {
 }
 
 /**
+ * Required policy documents must be repository files, never symlinks or other
+ * filesystem entry types that disappear or resolve differently in an archive.
+ *
+ * @param {readonly string[]} paths
+ * @param {Set<string>} into
+ */
+async function collectRegularFilePaths(paths, into) {
+  await Promise.all(
+    paths.map(async (path) => {
+      try {
+        const stats = await lstat(new URL(`../../${path}`, import.meta.url));
+        if (stats.isFile()) into.add(path);
+      } catch {
+        // The pure validator reports every missing/non-file path together.
+      }
+    }),
+  );
+}
+
+/**
  * @param {readonly string[]} paths
  * @param {Map<string, string>} into
  */
@@ -58,7 +79,7 @@ async function collectFileContents(paths, into) {
 }
 
 await collectExistingPaths(REQUIRED_PATHS, existingPaths);
-await collectExistingPaths(REQUIRED_OPERATING_PATHS, operatingPaths);
+await collectRegularFilePaths(REQUIRED_OPERATING_PATHS, operatingPaths);
 await collectFileContents(
   Object.keys(REQUIRED_WORKFLOW_SNIPPETS),
   fileContents,
@@ -68,6 +89,7 @@ await collectFileContents(
     ...new Set([
       ...REQUIRED_OPERATING_PATHS,
       ...Object.keys(REQUIRED_DOC_SNIPPETS),
+      ...Object.keys(FORBIDDEN_DOC_SNIPPETS),
     ]),
   ],
   operatingContents,

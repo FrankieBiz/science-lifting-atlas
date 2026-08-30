@@ -12,25 +12,23 @@ Rules:
 - **Codex is the only merge authority.** Only Codex may clear a stale claim, and
   only after checking the branch and worktree for unmerged changes and recording
   the recovery action below. Never delete unmerged work.
-- Closing a claim requires a handoff path, not a promise.
+- A builder claim closes when its immutable handoff is committed. Independent
+  review is non-owning outside its exact append-only report path. A failed review
+  creates a new bounded remediation claim; it never silently reopens the builder
+  claim.
 
 ## Active claims
 
-| Task     | Role  | Branch                                 | Worktree                                    | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                  |
-| -------- | ----- | -------------------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SBLA-002 | Codex | `codex/SBLA-002-agent-operating-model` | `.worktrees/sbla-002-agent-operating-model` | `141b63913b75791a6630303fdd1936fc615b3471` | 2026-08-30 11:40 EDT | `reviews/releases/SBLA-002-handoff.md` | `AGENTS.md`, `CLAUDE.md`, `docs/runbooks/**`, `scripts/foundation/operating-model.mjs`, `scripts/foundation/role-paths.mjs`, `scripts/foundation/verify.mjs`, `tests/unit/operating-model-contract.test.ts`, `tests/unit/role-paths.test.ts` |
-
-SBLA-002 status: implementation complete and the handoff is delivered at
-`reviews/releases/SBLA-002-handoff.md`. The claim stays open until independent
-review completes and any repairs land, because ownership is not released at the
-review gate. Its one open item is the un-provisioned Claude Team accounts
-recorded in [`claude-environments.md`](claude-environments.md).
+| Task                 | Role  | Branch                                 | Worktree                                    | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------- | ----- | -------------------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-002 remediation | Codex | `codex/SBLA-002-agent-operating-model` | `.worktrees/sbla-002-agent-operating-model` | `af1b920afef8614c5cfc58bb1ddedfbab9933bc3` | 2026-08-30 13:23 EDT | `reviews/releases/SBLA-002-handoff.md` | `AGENTS.md`, `CLAUDE.md`, `docs/runbooks/**`, `reviews/releases/SBLA-002-handoff.md`, `scripts/foundation/check-role-paths.mjs`, `scripts/foundation/operating-model.mjs`, `scripts/foundation/role-paths.mjs`, `scripts/foundation/verify.mjs`, `tests/unit/operating-model-contract.test.ts`, `tests/unit/operating-model-filesystem.test.ts`, `tests/unit/role-paths-cli.test.ts`, `tests/unit/role-paths.test.ts` |
 
 ## Closed claims
 
-| Task     | Role  | Branch                                 | Base commit                                | Closed     | Handoff                                | Result                                     |
-| -------- | ----- | -------------------------------------- | ------------------------------------------ | ---------- | -------------------------------------- | ------------------------------------------ |
-| SBLA-001 | Codex | `codex/SBLA-001-repository-foundation` | `399966fc1ccb0dbcdd8d4d3620e19b3d401e70bb` | 2026-08-29 | `reviews/releases/SBLA-001-handoff.md` | Accepted at `141b639` after Round 2 review |
+| Task             | Role  | Branch                                 | Base commit                                | Closed               | Handoff                                | Result                                                                                                          |
+| ---------------- | ----- | -------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| SBLA-001         | Codex | `codex/SBLA-001-repository-foundation` | `399966fc1ccb0dbcdd8d4d3620e19b3d401e70bb` | 2026-08-29           | `reviews/releases/SBLA-001-handoff.md` | Implementation candidate `9ac1408`; acceptance-record/integration base `141b639`; accepted after Round 2 review |
+| SBLA-002 builder | Codex | `codex/SBLA-002-agent-operating-model` | `141b63913b75791a6630303fdd1936fc615b3471` | 2026-08-30 12:58 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `af1b920`; Round 1 failed with four Important findings; bounded remediation opened at 13:23           |
 
 ## Recovery log
 

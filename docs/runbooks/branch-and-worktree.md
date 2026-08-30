@@ -46,11 +46,18 @@ not, stop and report — you have inherited a broken base, not created one.
 
 ## Finishing a task
 
+A builder claim closes when its immutable handoff is committed.
+
 1. `pnpm verify` green, plus any other gates the queue row requires.
 2. Working tree clean; every intended file committed.
 3. Handoff written from [`handoff-template.md`](handoff-template.md).
 4. Ledger entry closed in [`current-work.md`](current-work.md).
 5. Stop at the review gate. Do not merge your own task.
+
+Review owns only its append-only report path and does not keep the builder's
+files locked. If a report fails, Codex opens a new remediation claim naming the
+failed candidate as its base and the exact repair paths. A pending review is a
+status, not an ownership lock.
 
 ## Integration
 

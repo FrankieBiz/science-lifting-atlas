@@ -6,9 +6,11 @@ access. This file records what has actually been demonstrated, not what is
 assumed to work.
 
 **Current gate status: NOT COMPLETE.** The Codex role is demonstrated. The two
-Claude Team accounts have not been provisioned or tested. SBLA-008 remains
-blocked until both roles pass the readiness test below or the chat-only
-fallback is demonstrated end to end. See [Outstanding owner action](#outstanding-owner-action).
+Claude Team accounts have not been provisioned or tested. Authoritative master
+plan §18 therefore blocks SBLA-002 acceptance now, and SBLA-008 also remains
+blocked, until both roles pass the readiness test below or the chat-only
+fallback is demonstrated end to end. See
+[Outstanding owner action](#outstanding-owner-action).
 
 ## Environment record
 
@@ -38,15 +40,18 @@ table above with a date.
 6. Pass a path-boundary check that rejects edits outside the role's allowed
    directories.
 
-Step 6 is executable. Run it against a role and a set of changed paths:
+Step 6 is executable. Run it against the role's complete committed diff from
+the reviewed base:
 
 ```bash
-node scripts/foundation/check-role-paths.mjs claude-research research/questions/test.md
-node scripts/foundation/check-role-paths.mjs claude-review reviews/evidence/test.md
+node scripts/foundation/check-role-paths.mjs claude-research --base <reviewed-base-sha>
+node scripts/foundation/check-role-paths.mjs claude-review --base <reviewed-base-sha>
 ```
 
-The check exits non-zero when a role touches a path it does not own, so a
-failed boundary is a build failure rather than a matter of opinion.
+The checker requires a clean worktree, resolves the hexadecimal base to a Git
+commit, derives every changed path from `<base>...HEAD`, canonicalizes each
+repository-relative path, and exits non-zero when a role touches a path it does
+not own. The caller cannot pass an incomplete path subset.
 
 ## Codex readiness evidence (2026-08-30)
 
@@ -63,18 +68,18 @@ Demonstrated in the SBLA-002 session at base commit
   `pnpm test:performance` green.
 - Produced this handoff-backed record with no reliance on chat context.
 
-### Known environment limitation
+### Environment-specific browser evidence
 
-`pnpm test:e2e` cannot run inside the sandboxed shell used by this session:
-Chromium aborts at launch with
-`bootstrap_check_in ... Permission denied` from
-`mach_port_rendezvous_mac.cc`, because the sandbox denies Mach port
-registration. This is an environment limitation, not a repository defect — the
-Astro build and preview server start normally and the page's asserted content
-was confirmed in the built output and in a real browser.
+The original Claude builder shell could not launch Chromium because its sandbox
+denied Mach-port registration. That result remains a truthful limitation of
+that environment, not a pass. During Round 1 remediation on 2026-08-30, Codex
+cleared the builder's orphaned preview process and ran the canonical
+`pnpm test:e2e` command with the pinned runtime: one Chromium test passed with
+JavaScript disabled.
 
-Run `pnpm test:e2e` in an unsandboxed shell or in CI, where it is already part
-of the pipeline. Do not treat a sandboxed skip as a pass.
+Each future account still records its own actual command capability. One
+environment's successful browser run must not be copied into another account's
+readiness result.
 
 ## Preferred environment
 
@@ -109,7 +114,8 @@ Git so restricted material is never committed.
 
 ## Outstanding owner action
 
-SBLA-008 stays blocked until these are done and recorded above:
+SBLA-002 acceptance and SBLA-008 stay blocked until these are done and recorded
+above:
 
 1. Provision Claude Team account A (Research) and account B (Review) as separate
    accounts, so the review is genuinely independent.

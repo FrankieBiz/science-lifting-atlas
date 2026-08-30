@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 /**
  * Write boundaries from master plan sections 13.3, 13.4, and 13.7.
  * `null` means unrestricted. Every other role is confined to the listed
@@ -13,7 +15,19 @@ export const ROLE_WRITE_BOUNDARIES = Object.freeze({
 
 /** @param {string} changedPath */
 function normalize(changedPath) {
-  return changedPath.replace(/^\.\/+/, '');
+  const portablePath = changedPath.replaceAll('\\', '/');
+  if (
+    !portablePath ||
+    portablePath.includes('\0') ||
+    path.posix.isAbsolute(portablePath) ||
+    /^[A-Za-z]:\//.test(portablePath)
+  ) {
+    return null;
+  }
+
+  const normalized = path.posix.normalize(portablePath);
+  if (normalized === '..' || normalized.startsWith('../')) return null;
+  return normalized.replace(/^\.\/+/, '');
 }
 
 /**
@@ -37,6 +51,11 @@ export function validateRolePaths({ role, changedPaths }) {
 
   for (const changedPath of changedPaths) {
     const normalized = normalize(changedPath);
+    if (!normalized) {
+      issues.push(`invalid repository-relative path: ${changedPath}`);
+      continue;
+    }
+
     const allowed = allowedPrefixes.some((prefix) =>
       normalized.startsWith(prefix),
     );

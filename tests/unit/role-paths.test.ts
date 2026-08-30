@@ -100,4 +100,32 @@ describe('role write boundaries', () => {
 
     expect(issues).toEqual([]);
   });
+
+  it('canonicalizes traversal before applying a role boundary', () => {
+    expect(
+      validateRolePaths({
+        role: 'claude-review',
+        changedPaths: ['reviews/../src/pages/index.astro'],
+      }),
+    ).toContain('role claude-review may not write: src/pages/index.astro');
+
+    expect(
+      validateRolePaths({
+        role: 'claude-research',
+        changedPaths: ['content-drafts/../AGENTS.md'],
+      }),
+    ).toContain('role claude-research may not write: AGENTS.md');
+  });
+
+  it('rejects absolute and repository-escaping paths', () => {
+    expect(
+      validateRolePaths({
+        role: 'claude-review',
+        changedPaths: ['/tmp/reviews/report.md', '../reviews/report.md'],
+      }),
+    ).toEqual([
+      'invalid repository-relative path: /tmp/reviews/report.md',
+      'invalid repository-relative path: ../reviews/report.md',
+    ]);
+  });
 });
