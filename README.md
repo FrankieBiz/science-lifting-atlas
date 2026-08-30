@@ -2,7 +2,7 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-The repository is currently at **SBLA-001: repository foundation**. It contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
+The repository is currently at **SBLA-002: agent operating model**. It contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
 
@@ -44,7 +44,8 @@ pnpm exec playwright install --with-deps chromium
 ## Current boundaries
 
 - Do not add scientific or anatomy records yet; foundation validators intentionally reject them.
-- SBLA-002 owns repository-local agent roles, branch/worktree operating rules, the current-work ledger, and Claude environment readiness.
+- Agent roles, branch/worktree rules, the current-work ledger, the handoff template, and Claude environment readiness are defined in [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md), and [`docs/runbooks/`](docs/runbooks/). Claim your task in [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md) before editing.
+- SBLA-008 is blocked until both Claude accounts pass the readiness test in [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md).
 - SBLA-003 owns architecture/provider ADRs and current free-tier modeling.
 - SBLA-004 through SBLA-006 own anatomy and exercise-media license selection.
 - SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
