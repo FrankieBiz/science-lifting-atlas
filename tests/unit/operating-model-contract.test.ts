@@ -32,7 +32,8 @@ function completeDocFileContents() {
         builderClaimCloses: 'immutable-handoff-commit',
         reviewClaimRecordedBy: 'codex',
         reviewClaimScope: 'exact-append-only-report-path',
-        restrictedRoleDiffBase: 'codex-claim-commit',
+        restrictedRoleDiffBase: 'reviewed-artifact-commit',
+        claimRecordLocation: 'codex-coordination-branch',
         reviewClaimCloses: 'immutable-review-report-commit',
         failedReviewOpens: 'bounded-remediation-claim',
       },
@@ -189,7 +190,8 @@ describe('agent operating-model contract', () => {
     );
     policy.lifecycle.reviewClaimRecordedBy = 'claude-review';
     policy.lifecycle.reviewClaimScope = 'all-reviews';
-    policy.lifecycle.restrictedRoleDiffBase = 'pre-claim-candidate';
+    policy.lifecycle.restrictedRoleDiffBase = 'codex-claim-commit';
+    policy.lifecycle.claimRecordLocation = 'reviewer-branch';
     policy.lifecycle.reviewClaimCloses = 'review-start';
     fileContents.set(
       'docs/runbooks/operating-policy.json',
@@ -205,7 +207,8 @@ describe('agent operating-model contract', () => {
       expect.arrayContaining([
         'operating policy lifecycle.reviewClaimRecordedBy must equal codex',
         'operating policy lifecycle.reviewClaimScope must equal exact-append-only-report-path',
-        'operating policy lifecycle.restrictedRoleDiffBase must equal codex-claim-commit',
+        'operating policy lifecycle.restrictedRoleDiffBase must equal reviewed-artifact-commit',
+        'operating policy lifecycle.claimRecordLocation must equal codex-coordination-branch',
         'operating policy lifecycle.reviewClaimCloses must equal immutable-review-report-commit',
       ]),
     );

@@ -50,9 +50,10 @@ Claude Research and Claude Review cannot edit the ledger. Before either role
 writes, it sends Codex the task, role, exact output paths, branch/worktree, base
 commit, start time, and expected handoff. Codex records the claim in
 [`current-work.md`](current-work.md) and commits it. The restricted role verifies
-that committed claim, uses the Codex claim commit as the base of its role-path
-diff, then writes only within the structured policy boundary. This keeps the
-Codex-authored ledger change outside the restricted role's diff.
+that committed claim on the Codex coordination branch, then writes only within
+the structured policy boundary. Its separate role branch stays based on the
+exact reviewed artifact commit, so the Codex-authored ledger change is outside
+the restricted role's diff.
 
 For independent review, **Codex records the exact append-only report path**
 before dispatch. The review claim owns no builder file. When the report becomes

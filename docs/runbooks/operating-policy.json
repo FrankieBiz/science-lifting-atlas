@@ -9,7 +9,8 @@
     "builderClaimCloses": "immutable-handoff-commit",
     "reviewClaimRecordedBy": "codex",
     "reviewClaimScope": "exact-append-only-report-path",
-    "restrictedRoleDiffBase": "codex-claim-commit",
+    "restrictedRoleDiffBase": "reviewed-artifact-commit",
+    "claimRecordLocation": "codex-coordination-branch",
     "reviewClaimCloses": "immutable-review-report-commit",
     "failedReviewOpens": "bounded-remediation-claim"
   },

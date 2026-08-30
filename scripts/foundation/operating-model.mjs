@@ -110,7 +110,8 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'lifecycle.builderClaimCloses': 'immutable-handoff-commit',
   'lifecycle.reviewClaimRecordedBy': 'codex',
   'lifecycle.reviewClaimScope': 'exact-append-only-report-path',
-  'lifecycle.restrictedRoleDiffBase': 'codex-claim-commit',
+  'lifecycle.restrictedRoleDiffBase': 'reviewed-artifact-commit',
+  'lifecycle.claimRecordLocation': 'codex-coordination-branch',
   'lifecycle.reviewClaimCloses': 'immutable-review-report-commit',
   'lifecycle.failedReviewOpens': 'bounded-remediation-claim',
 });
@@ -132,6 +133,7 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'reviewClaimRecordedBy',
     'reviewClaimScope',
     'restrictedRoleDiffBase',
+    'claimRecordLocation',
     'reviewClaimCloses',
     'failedReviewOpens',
   ]),

@@ -108,6 +108,12 @@ returned FAIL with four Important findings. This remediation:
 - corrects the environment record to identify the original sandbox as the
   SBLA-002 builder sandbox, not a Claude environment.
 
+A final pre-review rehearsal then caught that placing Codex's claim commit in a
+restricted role branch would contaminate the Git-derived role diff. The
+structured policy and runbooks now keep the durable claim on the Codex
+coordination branch while the restricted branch starts from the exact reviewed
+artifact commit. The lifecycle contract test pins both values.
+
 Repository state actions performed under owner authorization:
 
 - Relocated the repository from
@@ -145,7 +151,9 @@ Both actions are recorded in the ledger's recovery log.
   separately bounded remediation claim so a disappeared author cannot leave an
   already-handed-off builder claim permanently active. Because restricted
   reviewers cannot edit the ledger, Codex records and closes their exact report
-  claims on their behalf.
+  claims on their behalf on the coordination branch. The restricted role branch
+  remains based on the reviewed artifact commit, keeping Codex ledger edits out
+  of its role-path diff.
 
 ## Tests/checks run and results
 

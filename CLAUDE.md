@@ -75,8 +75,9 @@ back to its author, who repairs, after which you recheck the complete artifact.
    your behalf** in
    [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md), because
    your role cannot write that ledger. Verify the committed claim exists before
-   writing your permitted output; do not edit the ledger yourself. The Codex
-   claim commit is the base for your role-path diff.
+   writing your permitted output; do not edit the ledger yourself. Codex keeps
+   the claim record on its coordination branch; your role-path diff stays based
+   on the exact reviewed artifact commit.
 3. Create your branch or worktree per
    [`docs/runbooks/branch-and-worktree.md`](docs/runbooks/branch-and-worktree.md);
    research branches are `claude-research/<task-id>-<slug>` and review branches
