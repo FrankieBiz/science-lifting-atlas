@@ -11,7 +11,8 @@ Establish the reproducible repository baseline and stable command contract requi
 - Approved implementation plan: `docs/superpowers/plans/2026-08-29-sbla-001-repository-foundation.md`
 - Implementation branch: `codex/SBLA-001-repository-foundation`
 - Initial branch base: `399966f`
-- Candidate implementation commit: pending final acceptance commit
+- Accepted implementation candidate: `9ac14081f13f191eaf6feaa67fb98d2f18e14bbd`
+- Independent review reports: `reviews/releases/SBLA-001-r1.md`, `reviews/releases/SBLA-001-r2.md`
 
 ## Constraints
 
@@ -34,6 +35,7 @@ Establish the reproducible repository baseline and stable command contract requi
 - Added executable foundation contracts for accessibility, deterministic visual viewports, and the initial performance budgets.
 - Added CI, monthly/manual source-status automation, a pull-request template, and clean-checkout documentation.
 - Added unit, E2E, accessibility, visual-contract, and performance-contract tests.
+- Repaired the Round 1 symlink bypass so every non-directory record entry reaches the fail-closed guard, with filesystem-level regression coverage across all three public adapters.
 
 ## Decisions made
 
@@ -50,8 +52,8 @@ Establish the reproducible repository baseline and stable command contract requi
 - `pnpm verify`: PASS.
   - Prettier check: PASS.
   - ESLint: PASS with zero warnings.
-  - Astro typecheck: 22 files, zero errors, warnings, or hints.
-  - Unit tests: 2 files, 7 tests passed.
+  - Astro typecheck: 23 files, zero errors, warnings, or hints.
+  - Unit tests: 3 files, 10 tests passed.
   - Content adapter: 0 records, foundation mode PASS.
   - Graph adapter: 0 nodes and 0 edges, foundation mode PASS.
   - Evidence adapter: 0 sources, foundation mode PASS.
@@ -61,8 +63,10 @@ Establish the reproducible repository baseline and stable command contract requi
 - `pnpm test:a11y`: 1 test passed.
 - `pnpm test:visual`: 1 test passed.
 - `pnpm test:performance`: 1 test passed.
-- Clean-archive reproduction: pending final candidate commit.
-- Independent candidate review: pending final candidate commit.
+- `pnpm audit --audit-level high`: PASS with no known vulnerabilities reported.
+- Clean-archive reproduction of accepted candidate `9ac14081f13f191eaf6feaa67fb98d2f18e14bbd`: frozen install and `pnpm verify` PASS, independently repeated by the Round 2 reviewer.
+- Round 1 review of `f34acc9984b6fbed2dc5c950b99ee894582f018d`: FAIL with one Important symlink-bypass finding and no Critical findings.
+- Round 2 review of repaired candidate `9ac14081f13f191eaf6feaa67fb98d2f18e14bbd`: PASS with no Critical or Important findings.
 
 ## Known uncertainties
 
@@ -70,6 +74,7 @@ Establish the reproducible repository baseline and stable command contract requi
 - Source, content, and graph validators intentionally support only the empty foundation state. Adding a record before the owning schema tasks will fail the command contract.
 - The repository has no provider selection, licensed anatomy media, exercise-media policy, evidence corpus, 3D renderer, search index, analytics, or production deployment. Those remain queued work.
 - The host's default Node.js is newer than the repository engine. Clean-checkout commands must run through the exact Node.js version declared in `.node-version`/`.nvmrc`.
+- GitHub Actions currently use approved major-version tags rather than immutable commit SHAs. The accepted review records this as a non-blocking future supply-chain hardening opportunity.
 
 ## Files created or modified
 
@@ -79,11 +84,11 @@ Establish the reproducible repository baseline and stable command contract requi
 - Static shell: `public/health.txt`, `src/env.d.ts`, `src/pages/index.astro`, `src/styles/global.css`
 - Foundation validation: `scripts/foundation/**`, `scripts/content/validate.mjs`, `scripts/graph/validate.mjs`, `scripts/evidence/status.mjs`, `src/lib/foundation/gates.ts`, `src/content.config.ts`
 - Tests: `tests/unit/**`, `tests/e2e/**`, `tests/accessibility/**`, `tests/visual/**`, `tests/performance/**`
-- Canonical tracked roots: `content/**`, `content-drafts/**`, `research/**`, `reviews/**`, `public/assets/anatomy/**`, and the remaining `scripts/**`, `src/**`, and `tests/**` directories named by master plan §11.3
+- Canonical tracked roots: `content/**`, `content-drafts/**`, `research/**`, `reviews/**`, `public/anatomy/**`, and the remaining `scripts/**`, `src/**`, and `tests/**` directories named by master plan §11.3
 
 ## Required reviewer action
 
-Review the exact candidate commit recorded above against the three input documents. Verify SBLA-001 scope, command fidelity, clean-checkout reproducibility, security posture, test quality/TDD evidence, and adherence to later-task boundaries. Record findings in `reviews/releases/SBLA-001-r<number>.md`; do not modify this handoff or implementation files.
+Complete. Round 1 identified one Important fail-closed bypass. The implementation author repaired it with red-green filesystem coverage, and Round 2 independently accepted exact candidate `9ac14081f13f191eaf6feaa67fb98d2f18e14bbd`. No Critical or Important findings remain. Preserve both immutable review reports with this handoff.
 
 ## Acceptance criteria
 
