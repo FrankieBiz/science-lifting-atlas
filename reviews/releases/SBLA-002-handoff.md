@@ -24,6 +24,7 @@ environment-readiness and fallback report — with `pnpm verify` green.
 - Pre-review coordination-fix candidate:
   `26376e9c07179443683f54dce071c19613529b77`
 - Round 3 reviewed candidate: `3f05124895c974db2d159b75f08ed491ec148912`
+- Round 3 repair candidate: `a4b147b42eae7e5268f646f0362553c482dca51d`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`

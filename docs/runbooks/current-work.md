@@ -29,9 +29,10 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task                    | Role  | Branch                                 | Worktree                                    | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                          |
-| ----------------------- | ----- | -------------------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SBLA-002 remediation R3 | Codex | `codex/SBLA-002-agent-operating-model` | `.worktrees/sbla-002-agent-operating-model` | `38335746bc80027fb81fd78531ea1b07417a686c` | 2026-08-30 16:14 EDT | `reviews/releases/SBLA-002-handoff.md` | `CLAUDE.md`; `docs/runbooks/{current-work.md,branch-and-worktree.md,claude-environments.md}`; `scripts/foundation/{role-paths.mjs,check-role-paths.mjs}`; `tests/unit/{role-paths.test.ts,role-paths-cli.test.ts}`; `reviews/releases/SBLA-002-handoff.md`; readiness prompts outside the repository |
+None. All locally actionable Round 3 findings are repaired. SBLA-002 is paused
+at its authoritative external gate: separate Claude Team account A and account B
+must complete the §18 readiness simulations (or the lawful fallback) before
+final independent review.
 
 ## Closed claims
 
@@ -44,6 +45,7 @@ Expected handoff, and Paths owned.
 | SBLA-002 remediation R2   | Codex                      | `codex/SBLA-002-agent-operating-model` | `c6f7d52358e12817a01fcdb528735a7cdf6cae5c` | 2026-08-30 15:59 EDT | `reviews/releases/SBLA-002-handoff.md` | Repair candidate `cb2ded3da5e9fb2336e471e78c2cef317f25f75f`; all three locally actionable Round 2 findings repaired; external §18 simulations remain.       |
 | SBLA-002 coordination fix | Codex                      | `codex/SBLA-002-agent-operating-model` | `679e81762089b30684f1eb3436829dee58f66f72` | 2026-08-30 16:03 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `26376e9c07179443683f54dce071c19613529b77`; claim record isolated on Codex coordination branch; restricted diff stays based on reviewed artifact. |
 | SBLA-002 review R3        | Independent Codex reviewer | `codex/SBLA-002-independent-review-r3` | `3f05124895c974db2d159b75f08ed491ec148912` | 2026-08-30 16:14 EDT | `reviews/releases/SBLA-002-r3.md`      | Report commit `fd3220565ece00a82c1b1267734a55d64db34287`; FAIL with mutable-HEAD-policy self-authorization and external Claude simulations open.            |
+| SBLA-002 remediation R3   | Codex                      | `codex/SBLA-002-agent-operating-model` | `38335746bc80027fb81fd78531ea1b07417a686c` | 2026-08-30 16:19 EDT | `reviews/releases/SBLA-002-handoff.md` | Repair candidate `a4b147b42eae7e5268f646f0362553c482dca51d`; trusted base policy/runner repairs green; external Claude simulations remain.                  |
 
 ## Recovery log
 
