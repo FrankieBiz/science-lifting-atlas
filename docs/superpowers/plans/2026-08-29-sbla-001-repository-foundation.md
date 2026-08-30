@@ -32,6 +32,7 @@
 ### Task 1: Pin the workspace and expose the command contract
 
 **Files:**
+
 - Create: `package.json`
 - Create: `pnpm-workspace.yaml`
 - Create: `.npmrc`
@@ -115,6 +116,7 @@ Expected: FAIL only because `scripts/foundation/contract.mjs` is missing.
 ### Task 2: Implement the pure foundation contract
 
 **Files:**
+
 - Create: `scripts/foundation/contract.mjs`
 - Create: `scripts/foundation/verify.mjs`
 - Modify: `tests/unit/foundation-contract.test.ts`
@@ -141,10 +143,15 @@ export const REQUIRED_SCRIPTS = Object.freeze([
   'evidence:status',
 ]);
 
-export function validateFoundation({ packageJson, existingPaths, fileContents = new Map() }) {
+export function validateFoundation({
+  packageJson,
+  existingPaths,
+  fileContents = new Map(),
+}) {
   const issues = [];
   for (const name of REQUIRED_SCRIPTS) {
-    if (!packageJson.scripts?.[name]) issues.push(`missing package script: ${name}`);
+    if (!packageJson.scripts?.[name])
+      issues.push(`missing package script: ${name}`);
   }
   // Validate the exact pnpm pin, ordered verify composition, required tracked
   // roots, and selected workflow invariants.
@@ -169,6 +176,7 @@ Expected: non-zero with a complete list of still-missing repository roots.
 ### Task 3: Scaffold the strict static Astro shell
 
 **Files:**
+
 - Create: `astro.config.mjs`
 - Create: `tsconfig.json`
 - Create: `src/env.d.ts`
@@ -192,10 +200,16 @@ import { expect, test } from '@playwright/test';
 
 test.use({ javaScriptEnabled: false });
 
-test('serves a useful static foundation without client JavaScript', async ({ page }) => {
+test('serves a useful static foundation without client JavaScript', async ({
+  page,
+}) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'Science-Based Lifting Atlas' })).toBeVisible();
-  await expect(page.getByText('Evidence-first resistance training anatomy')).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Science-Based Lifting Atlas' }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Evidence-first resistance training anatomy'),
+  ).toBeVisible();
 });
 ```
 
@@ -220,6 +234,7 @@ Expected: all exit 0, with one Playwright test passing.
 ### Task 4: Add stage-aware validation commands
 
 **Files:**
+
 - Create: `scripts/content/validate.mjs`
 - Create: `scripts/graph/validate.mjs`
 - Create: `scripts/evidence/status.mjs`
@@ -250,6 +265,7 @@ Expected: all exit 0 with explicit foundation-stage messages.
 ### Task 5: Track the canonical SBLA-001 repository structure
 
 **Files:**
+
 - Create: `.gitignore`
 - Create: `README.md`
 - Create: tracked roots from master plan §11.3
@@ -297,6 +313,7 @@ Expected: PASS with the pinned package manager, required scripts, and every trac
 ### Task 6: Add continuous integration
 
 **Files:**
+
 - Create: `.github/workflows/ci.yml`
 - Create: `.github/workflows/source-status.yml`
 - Create: `.github/pull_request_template.md`
@@ -327,6 +344,7 @@ Expected: PASS.
 ### Task 7: Verify, commit, independently review, and reproduce from a clean archive
 
 **Files:**
+
 - Create: `reviews/releases/SBLA-001-handoff.md`
 - Create: `reviews/releases/SBLA-001-r1.md`
 

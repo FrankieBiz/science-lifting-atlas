@@ -1,0 +1,7 @@
+.astro/
+dist/
+node_modules/
+playwright-report/
+test-results/
+pnpm-lock.yaml
+docs/product/master-plan.md

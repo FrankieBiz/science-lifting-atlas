@@ -1,0 +1,46 @@
+{
+  "name": "science-based-lifting-atlas",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.24.0",
+  "engines": {
+    "node": ">=24.20.0 <25",
+    "pnpm": "11.24.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "astro check",
+    "test": "vitest run tests/unit",
+    "test:e2e": "playwright test",
+    "test:a11y": "vitest run tests/accessibility",
+    "test:visual": "vitest run tests/visual",
+    "test:performance": "vitest run tests/performance",
+    "validate:content": "node scripts/content/validate.mjs",
+    "validate:graph": "node scripts/graph/validate.mjs",
+    "evidence:status": "node scripts/evidence/status.mjs",
+    "verify:foundation": "node scripts/foundation/verify.mjs",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:graph && pnpm evidence:status && pnpm build && pnpm verify:foundation"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@playwright/test": "1.62.1",
+    "@types/node": "24.13.3",
+    "astro": "7.2.9",
+    "eslint": "9.39.5",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-astro": "1.6.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "globals": "17.11.0",
+    "prettier": "3.9.6",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.68.0",
+    "vitest": "4.1.11"
+  }
+}

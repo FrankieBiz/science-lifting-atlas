@@ -1,0 +1,31 @@
+name: Source status — SBLA-001 foundation mode only
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 1 * *'
+
+permissions:
+  contents: read
+
+jobs:
+  foundation-source-status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pinned pnpm and Node.js
+        uses: pnpm/setup@v2
+        with:
+          version: 11.24.0
+          runtime: node@24.20.0
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Confirm zero-source foundation state
+        run: pnpm evidence:status

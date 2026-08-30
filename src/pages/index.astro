@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+const title = 'Science-Based Lifting Atlas';
+const description = 'Evidence-first resistance training anatomy';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead" aria-label="Site header">
+      <a class="wordmark" href="/" aria-label={`${title}, home`}>
+        <span class="wordmark__mark" aria-hidden="true">S</span>
+        <span>{title}</span>
+      </a>
+      <p class="build-id">SBLA / 001</p>
+    </header>
+
+    <main id="main" class="stage">
+      <div class="plate" aria-hidden="true">
+        <span class="plate__orbit plate__orbit--outer"></span>
+        <span class="plate__orbit plate__orbit--inner"></span>
+        <span class="plate__axis"></span>
+        <span class="plate__core"></span>
+      </div>
+
+      <section class="introduction" aria-labelledby="page-title">
+        <p class="eyebrow">Plate 00 · Repository foundation</p>
+        <h1 id="page-title">{title}</h1>
+        <p class="thesis">{description}</p>
+        <p class="status">
+          The evidence-system vertical slice is being assembled. No scientific
+          claims are published yet.
+        </p>
+      </section>
+
+      <dl class="scope" aria-label="Foundation status">
+        <div>
+          <dt>Architecture</dt>
+          <dd>Static-first</dd>
+        </div>
+        <div>
+          <dt>Evidence</dt>
+          <dd>Claim-level</dd>
+        </div>
+        <div>
+          <dt>Access</dt>
+          <dd>Progressive</dd>
+        </div>
+      </dl>
+    </main>
+
+    <footer>
+      <span>Build foundation</span>
+      <span aria-hidden="true">◆</span>
+      <span>2026</span>
+    </footer>
+  </body>
+</html>
