@@ -29,9 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-None. The locally actionable Round 2 repairs and pre-review coordination fix
-are handed off. SBLA-002 still awaits independent Round 3 review and the two
-external Claude-role readiness simulations required by authoritative §18.
+| Task               | Role                       | Branch                                 | Worktree                        | Base commit                                | Started              | Expected handoff                  | Paths owned                       |
+| ------------------ | -------------------------- | -------------------------------------- | ------------------------------- | ------------------------------------------ | -------------------- | --------------------------------- | --------------------------------- |
+| SBLA-002 review R3 | Independent Codex reviewer | `codex/SBLA-002-independent-review-r3` | `.worktrees/sbla-002-review-r3` | `3f05124895c974db2d159b75f08ed491ec148912` | 2026-08-30 16:05 EDT | `reviews/releases/SBLA-002-r3.md` | `reviews/releases/SBLA-002-r3.md` |
 
 ## Closed claims
 
