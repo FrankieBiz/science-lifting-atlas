@@ -19,16 +19,20 @@ Rules:
 
 ## Active claims
 
-| Task                 | Role  | Branch                                 | Worktree                                    | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                                                                                                                                           |
-| -------------------- | ----- | -------------------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SBLA-002 remediation | Codex | `codex/SBLA-002-agent-operating-model` | `.worktrees/sbla-002-agent-operating-model` | `af1b920afef8614c5cfc58bb1ddedfbab9933bc3` | 2026-08-30 13:23 EDT | `reviews/releases/SBLA-002-handoff.md` | `AGENTS.md`, `CLAUDE.md`, `docs/runbooks/**`, `reviews/releases/SBLA-002-handoff.md`, `scripts/foundation/check-role-paths.mjs`, `scripts/foundation/operating-model.mjs`, `scripts/foundation/role-paths.mjs`, `scripts/foundation/verify.mjs`, `tests/unit/operating-model-contract.test.ts`, `tests/unit/operating-model-filesystem.test.ts`, `tests/unit/role-paths-cli.test.ts`, `tests/unit/role-paths.test.ts` |
+Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
+Expected handoff, and Paths owned.
+
+None. SBLA-002 is awaiting the two external Claude-role readiness simulations
+required by authoritative §18; no repository path is locked while that external
+gate is pending.
 
 ## Closed claims
 
-| Task             | Role  | Branch                                 | Base commit                                | Closed               | Handoff                                | Result                                                                                                          |
-| ---------------- | ----- | -------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| SBLA-001         | Codex | `codex/SBLA-001-repository-foundation` | `399966fc1ccb0dbcdd8d4d3620e19b3d401e70bb` | 2026-08-29           | `reviews/releases/SBLA-001-handoff.md` | Implementation candidate `9ac1408`; acceptance-record/integration base `141b639`; accepted after Round 2 review |
-| SBLA-002 builder | Codex | `codex/SBLA-002-agent-operating-model` | `141b63913b75791a6630303fdd1936fc615b3471` | 2026-08-30 12:58 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `af1b920`; Round 1 failed with four Important findings; bounded remediation opened at 13:23           |
+| Task                 | Role  | Branch                                 | Base commit                                | Closed               | Handoff                                | Result                                                                                                                     |
+| -------------------- | ----- | -------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-001             | Codex | `codex/SBLA-001-repository-foundation` | `399966fc1ccb0dbcdd8d4d3620e19b3d401e70bb` | 2026-08-29           | `reviews/releases/SBLA-001-handoff.md` | Implementation candidate `9ac1408`; acceptance-record/integration base `141b639`; accepted after Round 2 review            |
+| SBLA-002 builder     | Codex | `codex/SBLA-002-agent-operating-model` | `141b63913b75791a6630303fdd1936fc615b3471` | 2026-08-30 12:58 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `af1b920`; Round 1 failed with four Important findings; bounded remediation opened at 13:23                      |
+| SBLA-002 remediation | Codex | `codex/SBLA-002-agent-operating-model` | `af1b920afef8614c5cfc58bb1ddedfbab9933bc3` | 2026-08-30 13:30 EDT | `reviews/releases/SBLA-002-handoff.md` | Repair candidate `66299986a588eb44d64331844c9b0e561d363b61`; repository findings repaired; external §18 simulations remain |
 
 ## Recovery log
 

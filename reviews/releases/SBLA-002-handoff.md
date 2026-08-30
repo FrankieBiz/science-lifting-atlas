@@ -17,6 +17,8 @@ environment-readiness and fallback report — with `pnpm verify` green.
 - Prior handoff and reviews: `reviews/releases/SBLA-001-handoff.md`,
   `reviews/releases/SBLA-001-r1.md`, `reviews/releases/SBLA-001-r2.md`
 - Base commit: `141b63913b75791a6630303fdd1936fc615b3471`
+- Round 1 candidate: `af1b920afef8614c5cfc58bb1ddedfbab9933bc3`
+- Round 1 repair candidate: `66299986a588eb44d64331844c9b0e561d363b61`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`
