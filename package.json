@@ -25,7 +25,8 @@
     "validate:graph": "node scripts/graph/validate.mjs",
     "evidence:status": "node scripts/evidence/status.mjs",
     "verify:foundation": "node scripts/foundation/verify.mjs",
-    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:graph && pnpm evidence:status && pnpm build && pnpm verify:foundation"
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:graph && pnpm evidence:status && pnpm build && pnpm verify:foundation && pnpm assets:spike",
+    "assets:spike": "node scripts/assets/spike.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
