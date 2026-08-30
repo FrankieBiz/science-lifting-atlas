@@ -55,6 +55,21 @@ the structured policy boundary. Its separate role branch stays based on the
 exact reviewed artifact commit, so the Codex-authored ledger change is outside
 the restricted role's diff.
 
+Codex or CI runs the path gate from a trusted checkout, targeting the restricted
+worktree explicitly:
+
+```bash
+node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
+  <claude-research-or-claude-review> \
+  --base <reviewed-artifact-commit> \
+  --repository <restricted-role-worktree>
+```
+
+The trusted checker loads `operating-policy.json` from the exact base commit and
+rejects a target diff that edits the checker, the policy, or any other
+out-of-boundary path. Running a possibly edited checker from the target branch
+is not acceptance evidence.
+
 For independent review, **Codex records the exact append-only report path**
 before dispatch. The review claim owns no builder file. When the report becomes
 an immutable commit, Codex records closure. If the report fails, Codex opens a

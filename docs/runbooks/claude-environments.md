@@ -40,18 +40,26 @@ table above with a date.
 6. Pass a path-boundary check that rejects edits outside the role's allowed
    directories.
 
-Step 6 is executable. Run it against the role's complete committed diff from
-the reviewed base:
+Step 6 is executable. Codex or CI runs the script from a trusted checkout
+against the role's complete committed diff from the reviewed base. The
+restricted role does not establish its own boundary evidence from mutable code:
 
 ```bash
-node scripts/foundation/check-role-paths.mjs claude-research --base <reviewed-base-sha>
-node scripts/foundation/check-role-paths.mjs claude-review --base <reviewed-base-sha>
+node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
+  claude-research --base <reviewed-base-sha> \
+  --repository <claude-research-worktree>
+node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
+  claude-review --base <reviewed-base-sha> \
+  --repository <claude-review-worktree>
 ```
 
-The checker requires a clean worktree, resolves the hexadecimal base to a Git
-commit, derives every changed path from `<base>...HEAD`, canonicalizes each
+The checker requires a clean target worktree, resolves the hexadecimal base to
+a Git commit, requires it to be an ancestor of the target `HEAD`, loads and
+validates write boundaries from that trusted base rather than mutable `HEAD`,
+derives every changed path from `<base>...HEAD`, canonicalizes each
 repository-relative path, and exits non-zero when a role touches a path it does
-not own. The caller cannot pass an incomplete path subset.
+not own. The caller cannot pass an incomplete path subset, self-authorize by
+editing policy, or substitute a modified target-branch checker.
 
 ## Codex readiness evidence (2026-08-30)
 

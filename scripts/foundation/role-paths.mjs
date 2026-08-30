@@ -1,7 +1,5 @@
 import path from 'node:path';
 
-import operatingPolicy from '../../docs/runbooks/operating-policy.json' with { type: 'json' };
-
 /**
  * Write boundaries from master plan sections 13.3, 13.4, and 13.7.
  * `null` means unrestricted. Every other role is confined to the listed
@@ -9,14 +7,11 @@ import operatingPolicy from '../../docs/runbooks/operating-policy.json' with { t
  *
  * @type {Readonly<Record<string, readonly string[] | null>>}
  */
-export const ROLE_WRITE_BOUNDARIES = Object.freeze(
-  Object.fromEntries(
-    Object.entries(operatingPolicy.writeBoundaries).map(([role, prefixes]) => [
-      role,
-      prefixes === null ? null : Object.freeze([...prefixes]),
-    ]),
-  ),
-);
+export const ROLE_WRITE_BOUNDARIES = Object.freeze({
+  codex: null,
+  'claude-research': Object.freeze(['research/', 'content-drafts/']),
+  'claude-review': Object.freeze(['reviews/']),
+});
 
 /** @param {string} changedPath */
 function normalize(changedPath) {
@@ -39,17 +34,22 @@ function normalize(changedPath) {
  * @typedef {object} RolePathsInput
  * @property {string} role
  * @property {readonly string[]} changedPaths
+ * @property {Readonly<Record<string, readonly string[] | null>>} [writeBoundaries]
  */
 
 /** @param {RolePathsInput} input */
-export function validateRolePaths({ role, changedPaths }) {
-  if (!Object.hasOwn(ROLE_WRITE_BOUNDARIES, role)) {
+export function validateRolePaths({
+  role,
+  changedPaths,
+  writeBoundaries = ROLE_WRITE_BOUNDARIES,
+}) {
+  if (!Object.hasOwn(writeBoundaries, role)) {
     return [`unknown role: ${role}`];
   }
 
   // `hasOwn` above guarantees the key exists, so the only falsy value that
   // reaches here is the `null` unrestricted marker.
-  const allowedPrefixes = ROLE_WRITE_BOUNDARIES[role];
+  const allowedPrefixes = writeBoundaries[role];
   if (!allowedPrefixes) return [];
 
   const issues = [];

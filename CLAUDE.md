@@ -110,3 +110,8 @@ must be able to act on it.
 If your environment can run repository commands, `pnpm verify` must be green
 before you hand off any change that touches tracked files. If it cannot, state
 that plainly in the handoff rather than implying a check that never ran.
+
+The role-path result must come from Codex or CI executing the checker from a
+trusted checkout against your worktree with `--repository`. Do not treat a
+checker executed from your mutable role branch as independent boundary
+evidence.

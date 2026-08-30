@@ -23,6 +23,7 @@ environment-readiness and fallback report — with `pnpm verify` green.
 - Round 2 repair candidate: `cb2ded3da5e9fb2336e471e78c2cef317f25f75f`
 - Pre-review coordination-fix candidate:
   `26376e9c07179443683f54dce071c19613529b77`
+- Round 3 reviewed candidate: `3f05124895c974db2d159b75f08ed491ec148912`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`
@@ -116,6 +117,14 @@ structured policy and runbooks now keep the durable claim on the Codex
 coordination branch while the restricted branch starts from the exact reviewed
 artifact commit. The lifecycle contract test pins both values.
 
+Round 3 review at `3f05124895c974db2d159b75f08ed491ec148912`
+returned FAIL with two Important findings. The external Claude simulations
+remain outstanding. The locally actionable path-gate finding is repaired by
+loading write authority from the exact trusted base commit and by supporting a
+trusted-checkout runner that targets the restricted worktree explicitly. Tests
+now reproduce both same-commit policy self-authorization and target-branch
+checker replacement.
+
 Repository state actions performed under owner authorization:
 
 - Relocated the repository from
@@ -148,6 +157,11 @@ Both actions are recorded in the ledger's recovery log.
   the checker now derives the role's complete committed diff from an exact base
   SHA instead of trusting caller-supplied paths. Deletions are included, renames
   are evaluated as old and new paths, and a divergent base is rejected.
+- **Trusted checker, trusted policy.** Codex or CI invokes the checker from a
+  trusted checkout with `--repository <restricted-worktree>`. The checker loads
+  `operating-policy.json` from the exact base commit, validates its boundaries
+  against the immutable checker contract, and never authorizes from mutable
+  target `HEAD` state.
 - **Separate ownership states.** A builder claim closes with its immutable
   handoff. Review owns only its append-only report. A failed review creates a
   separately bounded remediation claim so a disappeared author cannot leave an
@@ -167,7 +181,7 @@ repository path.
   - Prettier check PASS
   - ESLint PASS, zero warnings
   - `astro check` — 30 files, 0 errors, 0 warnings, 0 hints
-  - Unit tests — 7 files, 40 tests passed
+  - Unit tests — 7 files, 42 tests passed
   - Content adapter — foundation mode, 0 records
   - Graph adapter — foundation mode, 0 nodes and 0 edges
   - Evidence adapter — foundation mode, 0 sources
@@ -204,6 +218,10 @@ Role-boundary coverage uses temporary Git repositories and exact reviewed bases:
 - Renaming prohibited `src/pages/index.astro` into `reviews/` → evaluated as
   deletion plus addition and exit 1, naming the prohibited source path.
 - A base commit that is not an ancestor of `HEAD` → exit 2.
+- A same-commit policy edit that grants Claude Review the empty prefix while
+  changing application code → exit 1, naming the policy and prohibited paths.
+- A target branch that replaces its checker and changes application code → the
+  trusted external checker exits 1, naming the modified checker path.
 - Traversal such as `reviews/../src/pages/index.astro` → canonicalized and
   rejected.
 - Absolute/repository-escaping paths → rejected.
@@ -266,13 +284,15 @@ Independent review artifact preserved with the repair:
 
 - `reviews/releases/SBLA-002-r1.md`
 - `reviews/releases/SBLA-002-r2.md`
+- `reviews/releases/SBLA-002-r3.md`
 
 ## Required reviewer action
 
-Independently review the repaired exact commit and return PASS or FAIL per
-criterion, with evidence and exact paths, to
-`reviews/releases/SBLA-002-r3.md`. Do not repair the artifact and do not
-overwrite Round 1 or Round 2.
+After both separate Claude readiness simulations or the lawful chat-only
+fallback are committed, independently review the repaired exact commit and
+return PASS or FAIL per criterion, with evidence and exact paths, to
+`reviews/releases/SBLA-002-r4.md`. Do not repair the artifact and do not
+overwrite any prior round.
 
 Specifically decide:
 
@@ -288,9 +308,11 @@ Specifically decide:
    completed; do not count this Codex remediation/review as either run.
 6. Whether the added validators strengthen the contract without weakening any
    SBLA-001 gate.
-7. Whether the Codex-mediated review claim is durably recorded before Round 3
-   review and can be closed without granting the reviewer ledger access.
-8. Whether the repository relocation and `main` fast-forward were recorded
+7. Whether the trusted-checkout runner rejects target-branch policy and checker
+   self-modification while deriving the complete target worktree diff.
+8. Whether the Codex-mediated review claim is durably recorded before review
+   and can be closed without granting the reviewer ledger access.
+9. Whether the repository relocation and `main` fast-forward were recorded
    adequately.
 
 ## Acceptance criteria
@@ -308,7 +330,8 @@ Specifically decide:
 - The role path-boundary check derives the complete committed diff from an exact
   ancestor base, requires a clean/non-empty worktree state, canonicalizes paths,
   includes deletions and both sides of renames, and rejects out-of-boundary
-  writes and unknown roles.
+  writes, unknown roles, mutable-policy self-authorization, and replacement of
+  the target branch's checker.
 - No SBLA-001 command, gate, or review report was renamed, removed, or weakened.
 - `pnpm verify`, `pnpm test:a11y`, `pnpm test:visual`, and
   `pnpm test:performance` exit zero.

@@ -1,5 +1,5 @@
 import { execFile } from 'node:child_process';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -10,6 +10,14 @@ const execFileAsync = promisify(execFile);
 const checkerPath = path.resolve(
   import.meta.dirname,
   '../../scripts/foundation/check-role-paths.mjs',
+);
+const rolePathsPath = path.resolve(
+  import.meta.dirname,
+  '../../scripts/foundation/role-paths.mjs',
+);
+const operatingPolicyPath = path.resolve(
+  import.meta.dirname,
+  '../../docs/runbooks/operating-policy.json',
 );
 const temporaryRepositories: string[] = [];
 
@@ -24,8 +32,22 @@ async function createRepository() {
   await git(repository, 'init', '--quiet');
   await git(repository, 'config', 'user.name', 'SBLA Test');
   await git(repository, 'config', 'user.email', 'sbla-test@example.invalid');
+  await mkdir(path.join(repository, 'scripts/foundation'), { recursive: true });
+  await mkdir(path.join(repository, 'docs/runbooks'), { recursive: true });
+  await cp(
+    checkerPath,
+    path.join(repository, 'scripts/foundation/check-role-paths.mjs'),
+  );
+  await cp(
+    rolePathsPath,
+    path.join(repository, 'scripts/foundation/role-paths.mjs'),
+  );
+  await cp(
+    operatingPolicyPath,
+    path.join(repository, 'docs/runbooks/operating-policy.json'),
+  );
   await writeFile(path.join(repository, 'README.md'), 'base\n');
-  await git(repository, 'add', 'README.md');
+  await git(repository, 'add', '.');
   await git(repository, 'commit', '--quiet', '-m', 'base');
 
   return {
@@ -52,10 +74,31 @@ async function removeAndCommit(repository: string, relativePath: string) {
 }
 
 async function runChecker(repository: string, role: string, base: string) {
-  return execFileAsync(process.execPath, [checkerPath, role, '--base', base], {
-    cwd: repository,
-    encoding: 'utf8',
-  });
+  return execFileAsync(
+    process.execPath,
+    [
+      path.join(repository, 'scripts/foundation/check-role-paths.mjs'),
+      role,
+      '--base',
+      base,
+    ],
+    {
+      cwd: repository,
+      encoding: 'utf8',
+    },
+  );
+}
+
+async function runTrustedChecker(
+  repository: string,
+  role: string,
+  base: string,
+) {
+  return execFileAsync(
+    process.execPath,
+    [checkerPath, role, '--base', base, '--repository', repository],
+    { encoding: 'utf8' },
+  );
 }
 
 afterEach(async () => {
@@ -102,6 +145,52 @@ describe('role path boundary CLI', () => {
       code: 1,
       stderr: expect.stringContaining(
         'role claude-review may not write: src/pages/index.astro',
+      ),
+    });
+  });
+
+  it('rejects same-commit policy self-authorization using the trusted base policy', async () => {
+    const { repository, base } = await createRepository();
+    const policyPath = path.join(
+      repository,
+      'docs/runbooks/operating-policy.json',
+    );
+    const policy = JSON.parse(await readFile(policyPath, 'utf8'));
+    policy.writeBoundaries['claude-review'] = [''];
+    await commitFile(
+      repository,
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+    await commitFile(repository, 'src/pages/index.astro');
+    await commitFile(repository, 'reviews/releases/SBLA-test-r1.md');
+
+    await expect(
+      runChecker(repository, 'claude-review', base),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'role claude-review may not write: docs/runbooks/operating-policy.json',
+      ),
+    });
+  });
+
+  it('lets a trusted checkout validate a target repository even when its checker is modified', async () => {
+    const { repository, base } = await createRepository();
+    await commitFile(
+      repository,
+      'scripts/foundation/check-role-paths.mjs',
+      'console.log("bypassed");\n',
+    );
+    await commitFile(repository, 'src/pages/index.astro');
+    await commitFile(repository, 'reviews/releases/SBLA-test-r1.md');
+
+    await expect(
+      runTrustedChecker(repository, 'claude-review', base),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'role claude-review may not write: scripts/foundation/check-role-paths.mjs',
       ),
     });
   });
