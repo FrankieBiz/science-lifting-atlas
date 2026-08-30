@@ -14,7 +14,7 @@ export async function listRelativeFiles(absoluteRoot, repositoryRoot) {
     const absolutePath = path.join(absoluteRoot, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await listRelativeFiles(absolutePath, repositoryRoot)));
-    } else if (entry.isFile()) {
+    } else {
       files.push(
         path.relative(repositoryRoot, absolutePath).split(path.sep).join('/'),
       );
