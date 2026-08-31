@@ -29,9 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task                                 | Role  | Branch                                 | Worktree                                    | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                      |
-| ------------------------------------ | ----- | -------------------------------------- | ------------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| SBLA-002 role-mapping reconciliation | Codex | `codex/SBLA-002-agent-operating-model` | `.worktrees/sbla-002-agent-operating-model` | `4acd27cc30261db1f177d0b4fe6523c938e12294` | 2026-08-31 12:07 EDT | `reviews/releases/SBLA-002-handoff.md` | `docs/runbooks/{current-work.md,claude-environments.md}`; `reviews/releases/SBLA-002-handoff.md` |
+None. The sequential-run clarification is reconciled with the master plan.
+Claude Research may begin only after Codex records its exact readiness paths
+against the corrected base; Claude Review still requires distinct account B.
 
 ## Closed claims
 
@@ -45,6 +45,7 @@ Expected handoff, and Paths owned.
 | SBLA-002 coordination fix | Codex                      | `codex/SBLA-002-agent-operating-model` | `679e81762089b30684f1eb3436829dee58f66f72` | 2026-08-30 16:03 EDT | `reviews/releases/SBLA-002-handoff.md` | Candidate `26376e9c07179443683f54dce071c19613529b77`; claim record isolated on Codex coordination branch; restricted diff stays based on reviewed artifact. |
 | SBLA-002 review R3        | Independent Codex reviewer | `codex/SBLA-002-independent-review-r3` | `3f05124895c974db2d159b75f08ed491ec148912` | 2026-08-30 16:14 EDT | `reviews/releases/SBLA-002-r3.md`      | Report commit `fd3220565ece00a82c1b1267734a55d64db34287`; FAIL with mutable-HEAD-policy self-authorization and external Claude simulations open.            |
 | SBLA-002 remediation R3   | Codex                      | `codex/SBLA-002-agent-operating-model` | `38335746bc80027fb81fd78531ea1b07417a686c` | 2026-08-30 16:19 EDT | `reviews/releases/SBLA-002-handoff.md` | Repair candidate `a4b147b42eae7e5268f646f0362553c482dca51d`; trusted base policy/runner repairs green; external Claude simulations remain.                  |
+| SBLA-002 role mapping     | Codex                      | `codex/SBLA-002-agent-operating-model` | `4acd27cc30261db1f177d0b4fe6523c938e12294` | 2026-08-31 12:11 EDT | `reviews/releases/SBLA-002-handoff.md` | Reconciliation candidate `09cd757eed8965b54704a676cb3ea993a481d775`; sequential timing accepted; distinct Claude Team accounts A/B preserved.               |
 
 ## Recovery log
 
