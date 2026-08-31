@@ -49,9 +49,10 @@ Nothing here depends on the $0 model or the analytics decision.
   the required license-field list, `validateLicenseFields`, `evaluateCandidate`,
   `evaluateInventory`.
 - `scripts/assets/spike.mjs` — deterministic CLI producing the scorecard report.
-- `tests/unit/asset-spike.test.ts` — 8 tests covering weights, missing fields,
-  the clarity floor, refusal to total unmeasured candidates, determinism, and
-  out-of-range rejection.
+- `tests/unit/asset-spike.test.ts` — 16 tests pinning the §8.3 weights and floor
+  to literals, and covering missing/malformed fields, inventory malformations,
+  status validation, duplicate ids, eligibility acknowledgement, refusal to total
+  unmeasured candidates, and determinism.
 - `package.json` — new stable command `pnpm assets:spike`, appended to
   `pnpm verify`. The SBLA-001 `REQUIRED_VERIFY_STEPS` order is unchanged.
 
@@ -94,13 +95,42 @@ Three findings worth the reviewer's attention:
   license to record, so requiring complete fields would fail the gate for the
   wrong reason. Placeholders are reported and skipped; `inventoried` candidates
   must have complete fields.
-- **No asset downloaded.** Inventorying license terms needs the license text, not
-  the binary. Downloading third-party assets is an owner decision under §8.4 and
-  would have put unlicensed material near the repository for no gain.
-- **Lawful samples.** No third-party sample is committed. The "samples lawful"
-  condition is satisfied vacuously and deliberately — see Known uncertainties.
+- **No asset downloaded, and the §18 "sample files" deliverable is NOT met.**
+  The first draft justified this by citing §8.4's "Store original purchased/open
+  assets outside the public repository" — but that rule ends
+  "**unless their license permits repository distribution**", and both CC BY-SA
+  candidates _do_ permit redistribution. The truncated quotation made a
+  permission look like a prohibition. Corrected: lawful samples were permitted,
+  none were gathered, and this task is therefore **incomplete on that
+  deliverable**. It is recorded as an open item rather than argued away.
 - **Wired into `pnpm verify`.** A malformed inventory now fails the build rather
   than sitting unnoticed until SBLA-005.
+
+## Pre-review remediation
+
+An adversarial pre-review audit of candidate `4b0a830` found defects including
+two rated CRITICAL. All were repaired before this handoff:
+
+| Finding                                                                                                                                                                                                                                 | Repair                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Z-Anatomy recorded as blanket CC BY-SA 4.0 / commercial-permitted.** The cited `LICENSE` licenses the _app_ and defers models to a separate document listing CC-BY-NC-SA 4.0 and CC-BY-NC 4.0 reference models inside the human model | Licence chain followed and recorded; component licences enumerated; attribution string populated; clarity re-scored 4 → **3**, below the §8.3 floor; marked `selectionEligible: false` |
+| **`spike.mjs` printed "passed" and exited 0 on an inventory with no candidates** — also on a missing, null, non-array, or unparseable list                                                                                              | `evaluateInventory` now fails closed on all five; malformed JSON is caught and reported                                                                                                |
+| OpenStax recorded as having no AI-processing restriction, though its cited page prohibits LLM ingestion                                                                                                                                 | Corrected and quoted verbatim; marked ineligible under §8.1                                                                                                                            |
+| An unvalidated `status` string disabled both gates                                                                                                                                                                                      | `status` validated against `VALID_STATUSES`; unknown values are inventory defects                                                                                                      |
+| Unit tests derived expectations from the constants under test, so the clarity floor and required-field list could be gutted with the suite green                                                                                        | Expectations re-pinned to **literals** transcribed from §8.3                                                                                                                           |
+| Individual §8.3 weights unpinned — a redistribution preserving the sum passed                                                                                                                                                           | Each weight pinned individually                                                                                                                                                        |
+| Licence-field validation was presence-only, so `"source": "TODO"` passed                                                                                                                                                                | `source` format-checked as an http(s) URL, `accessedOn` as an ISO date                                                                                                                 |
+| An out-of-range score threw an uncaught `RangeError`, aborting before other candidates were checked                                                                                                                                     | Collected as a reported issue; every problem surfaces in one run                                                                                                                       |
+| Duplicate candidate ids undetected                                                                                                                                                                                                      | Detected and reported                                                                                                                                                                  |
+| `evaluateInventory` was exported, listed as delivered, but never called or tested                                                                                                                                                       | Now the single entry point used by `spike.mjs`, and covered by tests                                                                                                                   |
+| The "samples lawful" argument rested on a truncated quote of §8.4                                                                                                                                                                       | Corrected; the deliverable is now recorded as unmet                                                                                                                                    |
+
+Also found: two primary sources disagree on the BodyParts3D licence — Z-Anatomy
+attributes it CC-BY 4.0, DBCLS states CC-BY-SA 2.1 Japan. Recorded as an
+unresolved conflict, with DBCLS treated as authoritative.
+
+Re-run of the break battery after repair: **13 malformation cases, all exit 1**;
+the real inventory exits 0.
 
 ## Tests/checks run and results
 
@@ -108,7 +138,7 @@ Pinned runtime: Node.js `v24.20.0`, pnpm `11.24.0`.
 
 - `pnpm install --frozen-lockfile` — PASS.
 - `pnpm verify` — **PASS (exit 0)**: Prettier PASS; ESLint PASS 0 warnings;
-  `astro check` 26 files, 0 errors/warnings/hints; 4 unit files, **18 tests**;
+  `astro check` 26 files, 0 errors/warnings/hints; 4 unit files, **26 tests**;
   content/graph/evidence adapters PASS; 1 page built; foundation contract PASS;
   asset spike PASS.
 - `pnpm test:a11y`, `pnpm test:visual`, `pnpm test:performance` — PASS.
@@ -124,12 +154,11 @@ Pinned runtime: Node.js `v24.20.0`, pnpm `11.24.0`.
 
 ## Known uncertainties
 
-- **"Samples lawful" is satisfied by having no samples.** §18 asks for sample
-  files; none are committed because acquiring them means downloading third-party
-  assets. A reviewer may reasonably judge that SBLA-004 is incomplete without
-  real samples — if so, the owner must authorise acquisition and the task should
-  be reopened. **This is the most likely reason to fail this handoff, and it is
-  a deliberate choice, not an oversight.**
+- **The §18 "sample files" deliverable is unmet.** §8.4 permits repository
+  distribution where the licence allows it, and both CC BY-SA candidates allow
+  it, so no rule prevented gathering lawful samples. None were gathered.
+  SBLA-005's benchmarking depends on them. **A reviewer should treat SBLA-004 as
+  incomplete on this deliverable.**
 - **Only `license_clarity` is scored.** Every weighted total is `null` by design.
   The scorecard is unexercised on a fully-scored real candidate outside unit
   tests.
