@@ -21,19 +21,40 @@ Base URL: `https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/`
 
 ### Ontology and naming metadata — fetched and verified
 
-Plain tab-separated text. Fetched to a temporary directory, checksummed, then
-discarded.
+All **eight** published text files, tab-separated. Fetched to a temporary
+directory, checksummed, then discarded. **60,317 lines total.**
 
-| File                                 |     Bytes |  Lines | SHA-256                                                            |
-| ------------------------------------ | --------: | -----: | ------------------------------------------------------------------ |
-| `isa_parts_list_e.txt`               |   128,086 |  2,906 | `ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513` |
-| `partof_parts_list_e.txt`            |    59,351 |  1,369 | `9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd` |
-| `isa_element_parts.txt`              | 1,142,159 | 29,550 | `a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf` |
-| `partof_element_parts.txt`           |   651,179 | 17,944 | `3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea` |
-| `partof_inclusion_relation_list.txt` |    91,241 |  1,368 | `1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c` |
+| File                                 |     Bytes |  Lines | SHA-256 (first 16) |
+| ------------------------------------ | --------: | -----: | ------------------ |
+| `isa_element_parts.txt`              | 1,142,159 | 29,550 | `a3de74423f943b0d` |
+| `isa_inclusion_relation_list.txt`    |   207,664 |  2,905 | `26e7d818e03a8c90` |
+| `isa_parts_list.txt`                 |   302,828 |  2,906 | `e5f32398b916e259` |
+| `isa_parts_list_e.txt`               |   128,086 |  2,906 | `ab7796deedd49205` |
+| `partof_element_parts.txt`           |   651,179 | 17,944 | `3f5f6df1028eb122` |
+| `partof_inclusion_relation_list.txt` |    91,241 |  1,368 | `1b40738270931e3c` |
+| `partof_parts_list.txt`              |   142,590 |  1,369 | `dd29cceba270ffaa` |
+| `partof_parts_list_e.txt`            |    59,351 |  1,369 | `9224080557053e6f` |
+
+Full SHA-256 values for the five files first fetched are:
+`isa_parts_list_e` `ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513`,
+`partof_parts_list_e` `9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd`,
+`isa_element_parts` `a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf`,
+`partof_element_parts` `3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea`,
+`partof_inclusion_relation_list` `1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c`.
 
 Schema of `isa_element_parts.txt`: `concept id` (FMA), `name` (English),
-`element file id` — i.e. it maps an anatomical concept to its mesh file.
+`element file id` — it maps an anatomical concept to its mesh file.
+
+`isa_parts_list.txt` adds `kanji` and `kana` columns to the English list. It
+contains the **same 2,905 distinct concept ids**, so it adds no structures — only
+Japanese labels. That rules out the possibility that a structure exists under a
+Japanese-only name.
+
+**Correction:** an earlier revision of this file described five metadata files
+and 47,137 lines as the complete set. There are eight files and 60,317 lines. The
+three missed files (`isa_parts_list.txt`, `partof_parts_list.txt`,
+`isa_inclusion_relation_list.txt`) have now been fetched and searched; they did
+not change the finding below, but the earlier "complete set" claim was wrong.
 
 ### Mesh archives — NOT fetched
 
@@ -51,8 +72,8 @@ archives were not downloaded.
 SBLA-005 owns scoring `coverage_naming`, and should confirm this by inspecting
 meshes, not labels.
 
-Method: case-insensitive substring search for each §4.3 structure across all five
-metadata files above (47,137 lines total).
+Method: case-insensitive substring search for each §4.3 structure across all
+**eight** metadata files above (60,317 lines total).
 
 **24 of 28 structures present. 4 absent:**
 
@@ -63,9 +84,14 @@ metadata files above (47,137 lines total).
 | **erector spinae**   | "…spinal erector/multifidus groupings with careful claims."           |
 | **multifidus**       | "…spinal erector/multifidus groupings with careful claims."           |
 
-Loose substring counts across the full set: `latissimus` 0, `abdominis` 0,
-`erector` 0, `spinae` 0, `multifid` 0, `hamstring` 0 — against `oblique` 85,
-`adductor` 61, `deltoid` 41, `pectoralis major` 46, `vastus` 21, `gluteus` 21.
+Loose substring counts across all 60,317 lines: `latissimus` **0**, `abdominis`
+**0**, `erector` **0**, `spinae` **0**, `multifid` **0**, `hamstring` **0**.
+
+The contrast is what makes this credible rather than a search artefact — the
+_neighbouring_ back muscles are all present: `pectoralis major` 72, `deltoid` 69,
+`trapezius` 44, `rhomboid` 42, `teres major` 13. A dataset that names teres major
+and the rhomboids 55 times between them, while never once naming latissimus
+dorsi, has a genuine gap rather than a naming-convention mismatch.
 
 Two further observations:
 
@@ -83,10 +109,12 @@ trained muscles in the sport this atlas is about. Their absence from the
 published naming metadata is a **material coverage risk for the only candidate
 that currently passes the licence gate**.
 
-Caveat, stated plainly: this is a search of English labels in the ontology
-metadata, not an inspection of the 198 MB of meshes. A mesh could exist under an
-FMA concept whose English label differs from the term searched. `latissimus`
-returning **zero** across 47,137 lines makes that unlikely but does not prove it.
+Caveat, stated plainly: this is a search of labels in the ontology metadata, not
+an inspection of the 198 MB of meshes. A mesh could still exist under an FMA
+concept whose label differs from every term searched. Three things make that
+unlikely — zero hits across 60,317 lines, the Japanese-label file adding no
+concepts, and the neighbouring back muscles all being present — but none of them
+is mesh inspection, so this remains an observation and not proof.
 
 **SBLA-005 must resolve this before SBLA-006's decision**, because the
 combination — Path B licence-ineligible, Path C possibly coverage-inadequate,

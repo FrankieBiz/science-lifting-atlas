@@ -146,7 +146,7 @@
       "sampleManifest": "docs/licenses/bodyparts3d-sample-manifest.md",
       "coverageObservation": {
         "accessedOn": "2026-08-30",
-        "method": "case-insensitive substring search for each master plan 4.3 structure across 47,137 lines of published ontology metadata; English labels only, meshes not inspected",
+        "method": "case-insensitive substring search for each master plan 4.3 structure across all eight published text metadata files (60,317 lines); labels only, meshes not inspected",
         "structuresRequired": 28,
         "structuresPresent": 24,
         "structuresAbsent": [
@@ -157,7 +157,11 @@
         ],
         "distinctMuscleNames": 96,
         "namingGranularity": "largely group/compartment level rather than individual muscles",
-        "caveat": "This is an observation, NOT a section 8.3 coverage_naming score. SBLA-005 owns scoring and must confirm by inspecting meshes."
+        "caveat": "This is an observation, NOT a section 8.3 coverage_naming score. SBLA-005 owns scoring and must confirm by inspecting meshes.",
+        "filesSearched": 8,
+        "linesSearched": 60317,
+        "corroboration": "neighbouring back muscles are present - pectoralis major 72, deltoid 69, trapezius 44, rhomboid 42, teres major 13 - so zero hits for latissimus is a gap, not a naming mismatch",
+        "japaneseLabelsChecked": true
       }
     },
     {
