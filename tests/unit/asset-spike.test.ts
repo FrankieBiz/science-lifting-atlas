@@ -2,23 +2,53 @@ import { describe, expect, it } from 'vitest';
 
 import {
   LICENSE_CLARITY_FLOOR,
+  MAX_SCORE,
   REQUIRED_LICENSE_FIELDS,
   SPIKE_CRITERIA,
+  VALID_STATUSES,
   evaluateCandidate,
+  evaluateInventory,
   validateLicenseFields,
 } from '../../scripts/assets/scorecard.mjs';
 
-function fullyScored() {
-  return Object.fromEntries(SPIKE_CRITERIA.map((c) => [c.key, 4])) as Record<
-    string,
-    number | null
-  >;
+/**
+ * Expectations below are LITERALS transcribed from master plan §8.3, not values
+ * derived from the module under test. Deriving them would let an edit to the
+ * module move the goalposts with the suite green.
+ */
+const PLAN_WEIGHTS: ReadonlyArray<readonly [string, number]> = [
+  ['coverage_naming', 20],
+  ['mesh_separability', 15],
+  ['visual_quality', 15],
+  ['browser_performance', 15],
+  ['license_clarity', 20],
+  ['pipeline_ease', 10],
+  ['presentation_options', 5],
+];
+
+const PLAN_REQUIRED_LICENSE_FIELDS = [
+  'name',
+  'version',
+  'source',
+  'accessedOn',
+  'commercialUse',
+  'shareAlike',
+  'modification',
+  'attributionRequired',
+  'webDistribution',
+];
+
+function scored(value: number | null = 4) {
+  return Object.fromEntries(
+    SPIKE_CRITERIA.map((c) => [c.key, value]),
+  ) as Record<string, number | null>;
 }
 
-function licensedCandidate(license = {}) {
+function candidate(overrides: Record<string, unknown> = {}) {
   return {
     id: 'test',
     name: 'Test candidate',
+    status: 'inventoried',
     license: {
       name: 'CC BY-SA 4.0',
       version: '4.0',
@@ -29,87 +59,154 @@ function licensedCandidate(license = {}) {
       modification: 'permitted',
       attributionRequired: true,
       webDistribution: 'permitted',
-      ...license,
     },
-    scores: fullyScored(),
+    scores: scored(),
+    ...overrides,
   };
 }
 
 describe('asset spike scorecard', () => {
-  it('uses the master plan section 8.3 criteria and weights summing to 100', () => {
-    const total = SPIKE_CRITERIA.reduce((sum, c) => sum + c.weight, 0);
-    expect(total).toBe(100);
-    expect(SPIKE_CRITERIA.map((c) => c.key)).toEqual([
-      'coverage_naming',
-      'mesh_separability',
-      'visual_quality',
-      'browser_performance',
-      'license_clarity',
-      'pipeline_ease',
-      'presentation_options',
-    ]);
+  it('pins each master plan section 8.3 weight, not merely their sum', () => {
+    expect(SPIKE_CRITERIA.map((c) => [c.key, c.weight])).toEqual(
+      PLAN_WEIGHTS.map(([k, w]) => [k, w]),
+    );
+    expect(SPIKE_CRITERIA.reduce((s, c) => s + c.weight, 0)).toBe(100);
+  });
+
+  it('pins the licence-clarity floor and max score to the plan literals', () => {
+    expect(LICENSE_CLARITY_FLOOR).toBe(4);
+    expect(MAX_SCORE).toBe(5);
+  });
+
+  it('pins the required licence-field list to a literal', () => {
+    expect([...REQUIRED_LICENSE_FIELDS]).toEqual(PLAN_REQUIRED_LICENSE_FIELDS);
   });
 
   it('reports every missing licence field rather than the first', () => {
     const issues = validateLicenseFields({ id: 'x', license: {} });
-    for (const field of REQUIRED_LICENSE_FIELDS) {
+    for (const field of PLAN_REQUIRED_LICENSE_FIELDS) {
       expect(issues).toContain(`x: missing licence field: ${field}`);
     }
   });
 
-  it('accepts a complete licence record', () => {
-    expect(validateLicenseFields(licensedCandidate())).toEqual([]);
+  it('rejects a placeholder source URL and a non-ISO access date', () => {
+    const issues = validateLicenseFields(
+      candidate({
+        license: {
+          ...candidate().license,
+          source: 'TODO',
+          accessedOn: 'banana',
+        },
+      }),
+    );
+    expect(issues.some((i) => i.includes('must be an http(s) URL'))).toBe(true);
+    expect(issues.some((i) => i.includes('must be an ISO date'))).toBe(true);
   });
 
-  it('rejects a candidate whose licence clarity is below the floor, whatever its total', () => {
-    const candidate = licensedCandidate();
-    candidate.scores = {
-      ...fullyScored(),
-      license_clarity: LICENSE_CLARITY_FLOOR - 1,
-    };
-    for (const key of [
-      'coverage_naming',
-      'mesh_separability',
-      'visual_quality',
-    ]) {
-      candidate.scores[key] = 5;
-    }
+  it('accepts a complete licence record', () => {
+    expect(validateLicenseFields(candidate())).toEqual([]);
+  });
 
-    const result = evaluateCandidate(candidate);
+  it('fails an inventory whose candidate list is missing, null, empty, or not an array', () => {
+    for (const bad of [undefined, null, [], {}, 'nope']) {
+      const { issues, results } = evaluateInventory({
+        candidates: bad,
+      } as never);
+      expect(issues.length).toBeGreaterThan(0);
+      expect(results).toEqual([]);
+    }
+  });
+
+  it('flags an unknown status instead of letting it disable the gates', () => {
+    const result = evaluateCandidate(candidate({ status: 'placehlder' }));
+    expect(
+      result.issues.some((i: string) => i.includes('unknown status')),
+    ).toBe(true);
+    expect(VALID_STATUSES).toEqual(['inventoried', 'placeholder']);
+  });
+
+  it('flags duplicate candidate ids', () => {
+    const { issues } = evaluateInventory({
+      candidates: [candidate(), candidate()],
+    });
+    expect(issues).toContain('duplicate candidate id: test');
+  });
+
+  it('fails a sub-floor candidate that does not acknowledge its ineligibility', () => {
+    const result = evaluateCandidate(
+      candidate({
+        scores: { ...scored(), license_clarity: LICENSE_CLARITY_FLOOR - 1 },
+      }),
+    );
     expect(result.rejected).toBe(true);
-    expect(result.rejectionReason).toContain('licence clarity');
+    expect(
+      result.issues.some((i: string) => i.includes('below the §8.3 floor')),
+    ).toBe(true);
+  });
+
+  it('allows a sub-floor candidate only when it is explicitly acknowledged with a reason', () => {
+    const ok = evaluateCandidate(
+      candidate({
+        scores: { ...scored(), license_clarity: 3 },
+        selectionEligible: false,
+        ineligibleReason: 'unresolved mixed licensing',
+      }),
+    );
+    expect(ok.rejected).toBe(true);
+    expect(ok.issues).toEqual([]);
+
+    const missingReason = evaluateCandidate(
+      candidate({
+        scores: { ...scored(), license_clarity: 3 },
+        selectionEligible: false,
+      }),
+    );
+    expect(
+      missingReason.issues.some((i: string) => i.includes('ineligibleReason')),
+    ).toBe(true);
+  });
+
+  it('honours selectionEligible:false even when clarity is above the floor', () => {
+    const result = evaluateCandidate(
+      candidate({
+        scores: { ...scored(), license_clarity: 5 },
+        selectionEligible: false,
+        ineligibleReason: 'NonCommercial terms',
+      }),
+    );
+    expect(result.rejected).toBe(true);
+    expect(result.rejectionReason).toContain('NonCommercial');
+    expect(result.issues).toEqual([]);
   });
 
   it('refuses to total a candidate with unmeasured criteria instead of guessing', () => {
-    const candidate = licensedCandidate();
-    candidate.scores = { ...fullyScored(), browser_performance: null };
-
-    const result = evaluateCandidate(candidate);
+    const result = evaluateCandidate(
+      candidate({ scores: { ...scored(), browser_performance: null } }),
+    );
     expect(result.complete).toBe(false);
     expect(result.weightedTotal).toBeNull();
     expect(result.unmeasured).toContain('browser_performance');
   });
 
   it('computes a weighted total only when every criterion is measured', () => {
-    const candidate = licensedCandidate();
-    candidate.scores = Object.fromEntries(
-      SPIKE_CRITERIA.map((c) => [c.key, 5]),
-    );
-
-    const result = evaluateCandidate(candidate);
+    const result = evaluateCandidate(candidate({ scores: scored(5) }));
     expect(result.complete).toBe(true);
     expect(result.weightedTotal).toBe(100);
   });
 
-  it('is deterministic: identical input yields identical output', () => {
-    const a = evaluateCandidate(licensedCandidate());
-    const b = evaluateCandidate(licensedCandidate());
-    expect(JSON.stringify(a)).toBe(JSON.stringify(b));
+  it('reports an out-of-range score as an issue rather than throwing', () => {
+    const result = evaluateCandidate(
+      candidate({ scores: { ...scored(), visual_quality: 9 } }),
+    );
+    expect(
+      result.issues.some((i: string) => i.includes('visual_quality')),
+    ).toBe(true);
+    expect(result.weightedTotal).toBeNull();
   });
 
-  it('rejects an out-of-range score rather than clamping it', () => {
-    const candidate = licensedCandidate();
-    candidate.scores = { ...fullyScored(), visual_quality: 9 };
-    expect(() => evaluateCandidate(candidate)).toThrow(/visual_quality/);
+  it('is deterministic: identical input yields identical output', () => {
+    expect(JSON.stringify(evaluateCandidate(candidate()))).toBe(
+      JSON.stringify(evaluateCandidate(candidate())),
+    );
   });
 });

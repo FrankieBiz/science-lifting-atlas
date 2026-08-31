@@ -1,7 +1,7 @@
 /**
- * Master plan §8.3 fixes these criteria and weights. The weights must sum to
- * 100; the unit test asserts it so a future edit cannot silently unbalance the
- * scorecard.
+ * Master plan §8.3 fixes these criteria and weights. Both the individual
+ * weights and their sum are pinned by unit tests against literals, so neither a
+ * redistribution nor an unbalancing can pass silently.
  */
 export const SPIKE_CRITERIA = Object.freeze([
   {
@@ -42,6 +42,9 @@ export const LICENSE_CLARITY_FLOOR = 4;
 
 export const MAX_SCORE = 5;
 
+/** Only these statuses gate behaviour. Anything else is an inventory defect. */
+export const VALID_STATUSES = Object.freeze(['inventoried', 'placeholder']);
+
 /**
  * §18 SBLA-004 requires "licence fields complete". A candidate missing any of
  * these cannot be evaluated; the gate fails closed rather than assuming.
@@ -58,16 +61,27 @@ export const REQUIRED_LICENSE_FIELDS = Object.freeze([
   'webDistribution',
 ]);
 
+const URL_FIELDS = Object.freeze(['source']);
+const DATE_FIELDS = Object.freeze(['accessedOn']);
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
 /**
  * @typedef {object} SpikeCandidate
  * @property {string} [id]
  * @property {string} [name]
  * @property {string} [status]
+ * @property {boolean} [selectionEligible]
+ * @property {string} [ineligibleReason]
  * @property {Record<string, unknown>} [license]
  * @property {Record<string, number|null>} [scores]
  */
 
-/** @param {SpikeCandidate} candidate */
+/**
+ * Presence is not enough: the acceptance criterion is that each fact carries a
+ * real source URL and a real access date, so those two are format-checked.
+ *
+ * @param {SpikeCandidate} candidate
+ */
 export function validateLicenseFields(candidate) {
   const id = candidate.id ?? '<unidentified>';
   const license = candidate.license ?? {};
@@ -77,6 +91,19 @@ export function validateLicenseFields(candidate) {
     const value = license[field];
     if (value === undefined || value === null || value === '') {
       issues.push(`${id}: missing licence field: ${field}`);
+      continue;
+    }
+
+    if (URL_FIELDS.includes(field) && !/^https?:\/\/\S+$/.test(String(value))) {
+      issues.push(
+        `${id}: licence field ${field} must be an http(s) URL; received ${String(value)}`,
+      );
+    }
+
+    if (DATE_FIELDS.includes(field) && !ISO_DATE.test(String(value))) {
+      issues.push(
+        `${id}: licence field ${field} must be an ISO date (YYYY-MM-DD); received ${String(value)}`,
+      );
     }
   }
 
@@ -84,19 +111,25 @@ export function validateLicenseFields(candidate) {
 }
 
 /**
- * Evaluate one candidate deterministically.
- *
- * Returns a plain object with stable key order so repeated runs are
- * byte-identical. An unmeasured criterion yields `weightedTotal: null` — the
- * spike must not invent a number for work SBLA-005 has not done yet.
+ * Evaluate one candidate deterministically. Never throws on bad data: a
+ * malformed score becomes a reported issue so a multi-candidate inventory
+ * surfaces every problem in one run.
  *
  * @param {SpikeCandidate} candidate
  */
 export function evaluateCandidate(candidate) {
   const id = candidate.id ?? '<unidentified>';
+  const status = candidate.status ?? 'inventoried';
   const scores = candidate.scores ?? {};
+  const issues = [];
   const unmeasured = [];
   let weighted = 0;
+
+  if (!VALID_STATUSES.includes(status)) {
+    issues.push(
+      `${id}: unknown status "${status}"; expected one of ${VALID_STATUSES.join(', ')}`,
+    );
+  }
 
   for (const criterion of SPIKE_CRITERIA) {
     const value = scores[criterion.key];
@@ -112,35 +145,94 @@ export function evaluateCandidate(candidate) {
       value < 0 ||
       value > MAX_SCORE
     ) {
-      throw new RangeError(
+      issues.push(
         `${id}: ${criterion.key} must be a number between 0 and ${MAX_SCORE}; received ${String(value)}`,
       );
+      continue;
     }
 
     weighted += (value / MAX_SCORE) * criterion.weight;
   }
 
   const clarity = scores.license_clarity;
-  const clarityKnown = typeof clarity === 'number';
-  const rejected = clarityKnown && clarity < LICENSE_CLARITY_FLOOR;
+  const belowFloor =
+    typeof clarity === 'number' && clarity < LICENSE_CLARITY_FLOOR;
+  const acknowledged = candidate.selectionEligible === false;
+  // A candidate can be ineligible for reasons the clarity score does not
+  // capture - NonCommercial terms, an AI-ingestion prohibition - so an explicit
+  // selectionEligible:false is honoured on its own.
+  const ineligible = belowFloor || acknowledged;
+
+  // §8.3 rejection is an outcome, not a repo defect - but it must be recorded
+  // deliberately. An unacknowledged sub-floor candidate fails the gate.
+  if (belowFloor && !acknowledged) {
+    issues.push(
+      `${id}: licence clarity ${clarity} is below the §8.3 floor of ${LICENSE_CLARITY_FLOOR} and the record does not set selectionEligible:false with a reason`,
+    );
+  }
+  if (acknowledged && !candidate.ineligibleReason) {
+    issues.push(`${id}: selectionEligible:false requires an ineligibleReason`);
+  }
+
+  const complete = unmeasured.length === 0 && issues.length === 0;
 
   return {
     id,
     name: candidate.name ?? id,
-    licenceIssues: validateLicenseFields(candidate),
+    status,
+    licenceIssues:
+      status === 'placeholder' ? [] : validateLicenseFields(candidate),
+    issues,
     unmeasured,
-    complete: unmeasured.length === 0,
-    weightedTotal:
-      unmeasured.length === 0 ? Math.round(weighted * 100) / 100 : null,
-    rejected,
-    rejectionReason: rejected
+    complete,
+    weightedTotal: complete ? Math.round(weighted * 100) / 100 : null,
+    rejected: ineligible,
+    rejectionReason: belowFloor
       ? `licence clarity ${clarity} is below the required floor of ${LICENSE_CLARITY_FLOOR} (master plan §8.3)`
-      : null,
+      : acknowledged
+        ? (candidate.ineligibleReason ?? 'recorded as ineligible')
+        : null,
   };
 }
 
-/** @param {{candidates?: readonly SpikeCandidate[]}} inventory */
+/**
+ * Evaluate a whole inventory. Fails closed on a missing, empty, or non-array
+ * candidate list: losing the candidates is the most damaging malformation, and
+ * an empty run must never report success.
+ *
+ * @param {{candidates?: unknown}} inventory
+ */
 export function evaluateInventory(inventory) {
-  const candidates = inventory.candidates ?? [];
-  return candidates.map((candidate) => evaluateCandidate(candidate));
+  const raw = inventory?.candidates;
+
+  if (!Array.isArray(raw)) {
+    return {
+      issues: [
+        `inventory.candidates must be an array; received ${raw === undefined ? 'undefined' : String(raw === null ? 'null' : typeof raw)}`,
+      ],
+      results: [],
+    };
+  }
+
+  if (raw.length === 0) {
+    return {
+      issues: [
+        'inventory.candidates is empty; an inventory with no candidates cannot pass',
+      ],
+      results: [],
+    };
+  }
+
+  const results = raw.map((candidate) => evaluateCandidate(candidate));
+  const issues = [];
+  const seen = new Set();
+
+  for (const result of results) {
+    if (seen.has(result.id))
+      issues.push(`duplicate candidate id: ${result.id}`);
+    seen.add(result.id);
+    issues.push(...result.licenceIssues, ...result.issues);
+  }
+
+  return { issues, results };
 }

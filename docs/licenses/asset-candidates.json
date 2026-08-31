@@ -48,30 +48,63 @@
         "name": "Creative Commons Attribution-ShareAlike 4.0 International",
         "version": "4.0",
         "jurisdiction": "International",
-        "source": "https://raw.githubusercontent.com/LluisV/Z-Anatomy/PC-Version/LICENSE",
+        "source": "https://docs.google.com/document/d/1peWW_7IiVgTTAwcI_auv38YSJ6qGWRuTMxzzhkRpXIk/edit",
         "accessedOn": "2026-08-30",
-        "commercialUse": "permitted",
+        "commercialUse": "permitted for Z-Anatomy content; NOT permitted for two bundled reference models",
         "shareAlike": "required",
         "modification": "permitted",
         "attributionRequired": true,
-        "attributionString": null,
+        "attributionString": "\"BodyParts3D\" - The Database Center for Life Science - CC-BY 4.0; \"Z-Anatomy\" - CC-BY-SA 4.0",
         "webDistribution": "permitted",
         "aiProcessingPermitted": "not restricted by the licence text",
-        "shareAlikeQuote": "If You Share Adapted Material You produce, the following conditions also apply. The Adapter's License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.",
-        "notes": "Share-alike attaches to adapted material. Whether an optimised mesh derived from Z-Anatomy obliges the surrounding application to any licence is a legal question this project has not answered; §8.2 explicitly warns not to assume either way without actual legal guidance. Treat the asset package as separately licensed and clearly attributed."
+        "shareAlikeQuote": "ShareAlike: Derivative works must be shared under CC-BY-SA 4.0.",
+        "notes": "The cited GitHub LICENSE file licenses the APP and on its second line defers model licensing to a separate document. That document states all Z-Anatomy content is CC-BY-SA 4.0 including commercial use, but its ATTRIBUTIONS/HUMAN MODEL section lists reference models under CC-BY-NC-SA 4.0 (inner ear) and CC-BY-NC 4.0 (kidney). Whether those NonCommercial models ship as geometry or were used only as modelling reference is NOT established. Separately, Z-Anatomy attributes BodyParts3D as CC-BY 4.0 while DBCLS itself states CC-BY-SA 2.1 Japan - an unresolved conflict between two primary sources. Share-alike boundary between the asset package and the application also remains open per master plan 8.2.",
+        "sourceChain": [
+          "https://raw.githubusercontent.com/LluisV/Z-Anatomy/PC-Version/LICENSE (licenses the APP; defers models)",
+          "https://docs.google.com/document/d/1peWW_7IiVgTTAwcI_auv38YSJ6qGWRuTMxzzhkRpXIk/edit (the model licence document)"
+        ],
+        "topLevelQuote": "All the code and content shared by 'Z-Anatomy' is under CC-BY-SA 4.0 license. You are free to: Share, adapt, and redistribute the material for any purpose, even commercially.",
+        "componentLicences": [
+          {
+            "component": "BodyParts3D",
+            "licence": "CC-BY 4.0 (as attributed by Z-Anatomy)"
+          },
+          {
+            "component": "Z-Anatomy",
+            "licence": "CC-BY-SA 4.0"
+          },
+          {
+            "component": "Cranial Nerves and Foramina (University of Dundee, CAHID)",
+            "licence": "CC-BY 4.0"
+          },
+          {
+            "component": "Anatomy of the Inner Ear (University of Dundee School of Medicine)",
+            "licence": "CC-BY-NC-SA 4.0"
+          },
+          {
+            "component": "Kidney (Lissie Cowley)",
+            "licence": "CC-BY-NC 4.0"
+          },
+          {
+            "component": "Brainder / White matter (University of Washington)",
+            "licence": "not stated in the source"
+          }
+        ]
       },
       "scores": {
         "coverage_naming": null,
         "mesh_separability": null,
         "visual_quality": null,
         "browser_performance": null,
-        "license_clarity": 4,
+        "license_clarity": 3,
         "pipeline_ease": null,
         "presentation_options": null
       },
       "scoreRationale": {
-        "license_clarity": "4, not 5: the licence itself is unambiguous and read from the repository's own LICENSE file, but the share-alike boundary between the asset package and the application is unresolved and needs legal input."
-      }
+        "license_clarity": "3, below the 8.3 floor. Revised down from an earlier 4 after following the referral the LICENSE file gives on its own second line: the picture is mixed, not blanket CC BY-SA 4.0."
+      },
+      "selectionEligible": false,
+      "ineligibleReason": "Mixed licensing: two NonCommercial reference models are listed inside the human model and their redistribution status is unestablished, and two primary sources disagree on the BodyParts3D component licence. Ineligible under master plan 8.3 until a lawyer resolves both."
     },
     {
       "id": "path-c-bodyparts3d",
@@ -95,7 +128,8 @@
         "aiProcessingPermitted": "not restricted by the licence text",
         "formats": ["Wavefront OBJ", "tab-delimited text"],
         "meshVariants": "95% and 99% polygon reduction rates, distributed as ZIP archives",
-        "notes": "The licence is not stated on the bp3d-dev.dbcls.jp landing page named in master plan §20; it was found on the DBCLS data-archive README, which is the primary source cited here. CC BY-SA 2.1 Japan is an unported-era national licence and is not the same instrument as 4.0; compatibility with a 4.0 asset package must be checked before mixing sources."
+        "notes": "The licence is not stated on the bp3d-dev.dbcls.jp landing page named in master plan §20; it was found on the DBCLS data-archive README, which is the primary source cited here. CC BY-SA 2.1 Japan is an unported-era national licence and is not the same instrument as 4.0; compatibility with a 4.0 asset package must be checked before mixing sources.",
+        "licenceConflict": "Z-Anatomy attributes BodyParts3D as CC-BY 4.0, while the DBCLS README cited here states CC-BY-SA 2.1 Japan. Two primary sources disagree; DBCLS is the originator and is treated as authoritative."
       },
       "scores": {
         "coverage_naming": null,
@@ -129,8 +163,9 @@
         "attributionRequired": true,
         "attributionString": "Copyright Rice University, OpenStax, under CC BY-NC-SA 4.0 license.",
         "webDistribution": "permitted non-commercially",
-        "aiProcessingPermitted": "not restricted by the licence text",
-        "notes": "NonCommercial. Master plan §8.1 prefers commercially flexible terms to avoid a future rebuild, so this cannot back the 2D fallback if the project may ever become commercial. Usable as a reading reference for editorial accuracy without redistributing its artwork. Commercial entities must contact OpenStax separately."
+        "aiProcessingPermitted": "PROHIBITED for LLM training or ingestion without permission",
+        "notes": "NonCommercial, and it explicitly prohibits LLM ingestion without permission. Master plan 8.1 lists \"No prohibition on AI-assisted processing\" as a required asset capability, and this project is executed by AI agents, so the restriction is directly disqualifying for any ingestion-based use. It may still be read by a human as a reference. Commercial entities must contact OpenStax separately.",
+        "aiRestrictionQuote": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax’s permission."
       },
       "scores": {
         "coverage_naming": null,
@@ -143,7 +178,9 @@
       },
       "scoreRationale": {
         "license_clarity": "5: terms, attribution string, and the commercial restriction are stated unambiguously at the primary source. Clear terms are not the same as suitable terms - the NC restriction is a suitability problem, recorded in notes, not a clarity problem."
-      }
+      },
+      "selectionEligible": false,
+      "ineligibleReason": "NonCommercial under 8.1, and prohibits LLM ingestion without permission, which this AI-executed project cannot satisfy for ingestion-based use."
     }
   ],
   "exerciseMedia": {
