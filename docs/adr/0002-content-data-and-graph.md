@@ -1,6 +1,6 @@
 # ADR 0002 — Content data model and graph generation
 
-- Status: Proposed — requires owner approval
+- Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
 - Note: This ADR fixes the _mechanism_. The entity and claim **schemas

@@ -1,6 +1,6 @@
 # ADR 0003 — Hosting and asset delivery
 
-- Status: Proposed — requires owner approval
+- Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
 - Related: [ADR 0001](0001-static-first-architecture.md), [ADR 0005](0005-zero-cost-infrastructure-model.md)
@@ -21,9 +21,13 @@ Quotas cited here were read on 2026-08-30 and are recorded in
    documented as "free and unlimited", which removes traffic from the cost model
    entirely.
 2. **Large assets: Cloudflare R2 (Free tier).** Egress is Free, storage
-   allowance is 10 GB-month, and Class B reads are 10M/month — all far above the
-   modelled need. R2 is also required, not merely preferred, because Pages
-   enforces a **25 MiB maximum file size** that a full anatomy GLB can exceed.
+   allowance is 10 GB-month, and Class B reads are 10M/month — far above the
+   modelled need. The binding rule is conditional, not a blanket dependency:
+   **any single asset above the Pages 25 MiB per-file limit must be served from
+   R2.** Whether the anatomy model actually exceeds 25 MiB is unmeasured — §12.2
+   budgets the initial desktop 3D payload at 6 MB target / 10 MB ceiling, both
+   _under_ the limit. SBLA-005 measures. If every asset stays under 25 MiB, R2 is
+   an optimisation rather than a requirement.
 3. **Portability target: GitHub Pages**, for the HTML/CSS/JS shell only.
 4. **No Pages Functions in Release 1.** Functions consume a 100,000/day quota
    shared with Workers; a purely static build keeps the site on the unmetered
@@ -67,10 +71,12 @@ domain root.
   **custom apex domain**, both of which serve at a root. A default _project_
   site (`<user>.github.io/<repo>/`) requires an Astro `base` setting and a
   **different build**, which would break the "same build artifact" requirement.
-- The portability fallback covers the **shell only**. GitHub Pages' 1 GB site
-  cap and 100 GB/month soft bandwidth limit cannot carry the 3D assets: the
-  modelled 100k-page-view scenario already reaches ≈91 GB. Under failover, the
-  site must degrade to its no-WebGL 2D path rather than serve models.
+- The portability fallback covers the **shell only**, decided on the 1 GB
+  published-site cap, which conflicts with 3D assets directly. On bandwidth the
+  picture is less dramatic than it first looks: the modelled 100k-page-view
+  scenario reaches ≈91.3 GB, _within_ the 100 GB/month soft limit at about 91% of
+  it. Scenario 3 exceeds it roughly ninefold. Under failover the site should
+  degrade to its no-WebGL 2D path rather than serve models.
 - GitHub Pages' terms exclude commercial use. If the atlas ever becomes
   commercial, this fallback must be replaced and this ADR superseded.
 - A future task must add a portability regression check that builds once and
@@ -79,10 +85,11 @@ domain root.
 
 ## Alternatives considered
 
-- **Netlify as the portability target.** Not selected: on the access date its
-  free plan was expressed as a 300-credit allowance with no byte or build-minute
-  quotas stated on the pricing page, so it cannot be modelled against §11.8
-  without a further sourced reading.
+- **Netlify as the portability target.** Not selected on capacity. Its pricing
+  page does state credit conversion rates (20 credits/GB bandwidth against a
+  300-credit free allowance), giving a ceiling of ~15 GB/month before deploys and
+  requests are counted. That covers scenario 1 but not scenario 2 or 3, whereas
+  GitHub Pages' 100 GB soft limit leaves far more headroom for the shell.
 - **Serving large assets from Pages.** Rejected: the 25 MiB per-file limit makes
   it unsafe for anatomy models, and it would couple asset delivery to the host.
 - **A CDN in front of a runtime origin.** Rejected by §11.1 — no runtime service

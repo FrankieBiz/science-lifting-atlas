@@ -76,14 +76,23 @@ Five ADRs plus a machine-readable evidence record:
 
 ## Decisions made
 
-- **No analytics in Release 1.** Cloudflare Web Analytics' overview page, read
-  2026-08-30, did not state whether it sets cookies or client-side state,
-  whether it fingerprints, or how it samples. §11.8 makes analytics optional and
-  forbids assumed provider behaviour, so deferring is correct and adopting on
-  memory would not be. This also enables the strictest CSP.
-- **GitHub Pages, not Netlify, as the portability target.** Netlify's free plan
-  is now expressed as a 300-credit allowance; the pricing page stated no byte or
-  build-minute quotas on the access date, so it cannot be modelled under §11.8.
+- **Adopt Cloudflare Web Analytics for Release 1 pageviews.** The first draft of
+  ADR 0004 recommended shipping with no analytics, on the stated ground that
+  Cloudflare's documentation did not describe its cookie, fingerprinting, or
+  sampling behaviour. **That premise was false** — it came from reading only the
+  product overview page. The FAQ states the sampling behaviour verbatim, and
+  Cloudflare's documentation states it uses no client-side state and does not
+  fingerprint. Master plan §4.1 lists cookieless analytics as a Release 1
+  deliverable "if available on the chosen host", and the condition is met, so
+  shipping without it would have been an uncited descope. Custom events are _not_
+  adopted: whether the seven enumerated §11.8 event names are supported was not
+  established, so only pageview measurement is in scope.
+- **GitHub Pages, not Netlify, as the portability target — on capacity, not
+  opacity.** The first draft claimed Netlify "cannot be modelled". That was
+  wrong: the pricing page states conversion rates (20 credits/GB bandwidth, 2
+  credits/10k requests, 15 credits/deploy) against a 300-credit free allowance,
+  which yields a computable ceiling of ~15 GB/month before deploys and requests
+  are counted. That covers scenario 1 but not scenario 2 or 3.
 - **Builds, not bandwidth, are the binding free-tier constraint.** Static
   requests are documented unmetered, so the 500 builds/month ceiling is what the
   70%/85% alerts must watch.
@@ -93,6 +102,23 @@ Five ADRs plus a machine-readable evidence record:
   forecast.
 - **Pessimistic mix and no cache credit** (90/10 split, every visitor downloads
   everything) so the $0 conclusion is not flattered by optimistic assumptions.
+
+## Pre-review remediation
+
+An adversarial pre-review audit of candidate `0df3e9d` found factual errors in
+the first draft. All were repaired before this handoff:
+
+| Finding                                                                                                                 | Repair                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| ADR 0004's premise — that Cloudflare's docs do not state cookie/fingerprint/sampling behaviour — is false               | ADR 0004 rewritten; decision reversed to adopt                                                                    |
+| ADR 0004 descoped the §4.1 Release 1 analytics item without citing §4.1                                                 | §4.1 now cited as the governing requirement                                                                       |
+| "Netlify cannot be modelled" is refuted by its own pricing page                                                         | Conversion rates recorded; rejection re-argued on computed capacity                                               |
+| ADR 0005 said GitHub Pages' 100 GB limit "is exceeded at scenario 2" when 91.3 GB is within it                          | Corrected to ~91% of the limit, ~9% headroom; rejection re-grounded on the 1 GB site cap and commercial-use terms |
+| The 90/10 traffic mix was labelled "deliberately pessimistic" though it is a guess and the model's most sensitive input | Relabelled honestly, with the sensitivity stated                                                                  |
+| "R2 is required, not merely preferred" rested on an unmeasured asset size                                               | Made conditional on the 25 MiB per-file limit; notes §12.2 budgets sit under it                                   |
+| The model silently omits exercise-media loops and the search index                                                      | Omission now stated explicitly as a gap                                                                           |
+| The "measured" gzip figure was not reproducible                                                                         | Method stated (`cat` then `gzip -9`); flagged indicative, raw total is authoritative                              |
+| All five ADRs violated the Status vocabulary the same commit defines                                                    | Normalised to `Proposed`                                                                                          |
 
 ## Tests/checks run and results
 

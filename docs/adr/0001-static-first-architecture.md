@@ -1,6 +1,6 @@
 # ADR 0001 — Static-first application architecture
 
-- Status: Proposed — requires owner approval
+- Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
 

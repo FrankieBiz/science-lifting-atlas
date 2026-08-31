@@ -1,6 +1,6 @@
 # ADR 0005 — $0/month infrastructure model at three traffic scenarios
 
-- Status: Proposed — requires owner approval
+- Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
 - Supersedes: none
@@ -30,6 +30,11 @@ The only true measurement available today is the SBLA-001 foundation build:
 | `_astro/index.*.css` |     4,214 |         — |
 | **Total build**      | **5,816** | **2,331** |
 
+The raw total is the sum of all emitted files. The gzip figure is the whole build
+concatenated and compressed as a single stream (`cat` then `gzip -9`), which is
+not how a server compresses files individually — treat it as indicative only. The
+raw total is the reproducible number.
+
 That is a one-page shell, not the product. Release 1 transfer is therefore
 modelled from the master plan §12.2 budgets, which are the contractual ceilings
 future pages must meet:
@@ -45,14 +50,28 @@ future pages must meet:
 **This model is budget-derived, not measured, and must be re-run against real
 measurements at SBLA-012 and SBLA-015 before it is treated as a forecast.**
 
+It also **omits** two components Release 1 will ship: exercise-media loops (§11.9
+allows up to a 3 MB hard ceiling each, half a 3D payload) and the Pagefind search
+index. Their exclusion is a gap, not a conservative choice. They do not change the
+$0 outcome on unmetered delivery, but they must be added before this model sizes
+any metered provider.
+
 Modelled per-view transfer:
 
 - Non-3D page view: 25 KB + 100 KB + 200 KB poster ≈ **325 KB**
 - Anatomy view including 3D payload: 25 KB + 180 KB + 6 MB ≈ **6.2 MB**
 
 Mix assumption: **90% non-3D, 10% anatomy-with-3D**, and no CDN or browser cache
-credit. Both are deliberately pessimistic; real caching of the model and the
-shared CSS/JS should reduce these materially.
+credit.
+
+Be clear about what these are. The no-cache assumption _is_ pessimistic. The
+90/10 mix is **not** a conservative bound — it is the model's most sensitive
+input and it is a guess. The plan's own information architecture (§5.2 makes
+"body to understanding" the primary journey) could plausibly push anatomy views
+well above 10%, which would raise total egress several-fold. The $0 conclusion is
+insensitive to it because Cloudflare's static requests are unmetered and R2
+egress is free — but any second host or future metered provider is highly
+sensitive to it, so re-measure before relying on it there.
 
 ## Three scenarios
 
@@ -119,13 +138,20 @@ excluding the anatomy model purchase and domain registration as §11.8 permits.
 
 ## Alternatives considered
 
-- **Netlify.** Rejected as un-modellable on the access date: its free plan is
-  expressed as a 300-credit allowance and the pricing page did not state byte or
-  build-minute quotas, so it cannot satisfy §11.8's "record current provider
-  quotas with date and source" without a further sourced reading.
-- **GitHub Pages as primary.** Rejected: its 100 GB/month soft bandwidth limit is
-  exceeded at scenario 2 (≈91 GB is already at 91% of it) and massively at
-  scenario 3, its 1 GB site cap conflicts with 3D assets, and its terms exclude
-  commercial use. It remains the portability target — see ADR 0003.
+- **Netlify.** Rejected on capacity, not on opacity. Its free plan is a
+  300-credit allowance, and the pricing page **does** state conversion rates: 20
+  credits/GB bandwidth, 2 credits/10k web requests, 15 credits per production
+  deploy. Spending the whole allowance on bandwidth gives a ceiling of **15
+  GB/month** (300 ÷ 20), and deploys and requests draw on the same pool, so the
+  real ceiling is lower. Scenario 1 (≈9.1 GB) fits; scenario 2 (≈91 GB) needs
+  ~1,826 credits and scenario 3 ~18,260 — both far beyond free. Netlify is
+  unusable as a primary host and viable only as a low-traffic portability
+  target.
+- **GitHub Pages as primary.** Rejected, but with the arithmetic stated
+  correctly: scenario 2 (≈91.3 GB) is **within** the 100 GB/month soft limit, at
+  about 91% of it — roughly 9% headroom, not an overrun. Scenario 3 (≈913 GB)
+  exceeds it about ninefold. The decisive objections are the 1 GB published-site
+  cap, which conflicts with 3D assets, and terms that exclude commercial use. It
+  remains the portability target — see ADR 0003.
 - **Runtime server or database.** Rejected by §11.1: Release 1 has no accounts,
   user content, payments, or personalized data.

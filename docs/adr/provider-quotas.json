@@ -68,10 +68,38 @@
       "source": "https://www.netlify.com/pricing/",
       "accessedOn": "2026-08-30",
       "quotas": {
-        "creditLimit": 300,
-        "bandwidthPerMonth": "not stated on the pricing page",
-        "buildMinutesPerMonth": "not stated on the pricing page",
-        "note": "The free plan is expressed as a 300-credit allowance rather than byte and minute quotas. Byte-level limits could not be read from the pricing page on the access date, so Netlify cannot be modelled against the master plan 11.8 requirement without a further sourced quota reading."
+        "freePlanCredits": 300,
+        "creditRates": {
+          "bandwidth": "20 credits per GB",
+          "webRequests": "2 credits per 10k requests",
+          "productionDeploys": "15 credits each",
+          "compute": "10 credits per GB-hour"
+        },
+        "usdRate": "$10 per 1,500 credits",
+        "derivedBandwidthCeiling": "15 GB/month if the entire 300-credit allowance were spent on bandwidth (300 / 20)",
+        "note": "The free plan is expressed in credits, but the pricing page states the credit cost of each resource, so it IS modellable. Deploys and requests consume the same 300 credits as bandwidth, so the real bandwidth ceiling is below 15 GB/month."
+      }
+    },
+    {
+      "id": "cloudflare-web-analytics",
+      "role": "analytics candidate for Release 1",
+      "plan": "Available on all plans",
+      "source": "https://developers.cloudflare.com/web-analytics/faq/",
+      "additionalSources": [
+        "https://developers.cloudflare.com/analytics/web-analytics/",
+        "https://blog.cloudflare.com/privacy-first-web-analytics/"
+      ],
+      "accessedOn": "2026-08-30",
+      "quotas": {
+        "cost": "free; available on all plans",
+        "cookies": "none - does not use client-side state such as cookies or localStorage for analytics",
+        "fingerprinting": "none - does not fingerprint individuals via IP, User Agent, or other data for analytics",
+        "samplingQuote": "We retain unsampled beacon data for the past 7 days, after this point data is aggregated down to around 10%.",
+        "ingestionQuote": "The beacon script will fire on every pageview. The data ingestion pipeline does not apply sampling-every received beacon will be recorded.",
+        "querySampling": "between 0.0001% and 100%, dynamically selected based on the filters applied",
+        "beaconScript": "required; manual embed for sites not proxied through Cloudflare",
+        "visitorMethodology": "counts page views arriving from a different site rather than tracking individuals",
+        "customEvents": "NOT ESTABLISHED - whether the enumerated master plan §11.8 event names can be sent as custom events was not confirmed from documentation on the access date"
       }
     }
   ]
