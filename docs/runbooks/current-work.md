@@ -29,9 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-None. The sequential-run clarification is reconciled with the master plan.
-Claude Research may begin only after Codex records its exact readiness paths
-against the corrected base; Claude Review still requires distinct account B.
+| Task                               | Role                        | Branch                               | Worktree                                        | Base commit                                | Started              | Expected handoff                                                 | Paths owned                                                                                                                                                |
+| ---------------------------------- | --------------------------- | ------------------------------------ | ----------------------------------------------- | ------------------------------------------ | -------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-002 Claude Research readiness | Claude Research (account A) | `claude-research/SBLA-002-readiness` | `.worktrees/sbla-002-claude-research-readiness` | `e22cdf3855c069e356659c513eab2600a7815a2c` | 2026-08-31 12:12 EDT | `research/packets/SBLA-002-claude-research-readiness-handoff.md` | `research/questions/SBLA-002-readiness.md`; `research/extractions/SBLA-002-readiness.md`; `research/packets/SBLA-002-claude-research-readiness-handoff.md` |
 
 ## Closed claims
 
