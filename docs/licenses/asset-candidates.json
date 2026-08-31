@@ -142,6 +142,22 @@
       },
       "scoreRationale": {
         "license_clarity": "4, not 5: terms and the exact attribution string are explicit at the primary source, but the licence is absent from the project's public landing page and the 2.1-Japan/4.0 compatibility question is open."
+      },
+      "sampleManifest": "docs/licenses/bodyparts3d-sample-manifest.md",
+      "coverageObservation": {
+        "accessedOn": "2026-08-30",
+        "method": "case-insensitive substring search for each master plan 4.3 structure across 47,137 lines of published ontology metadata; English labels only, meshes not inspected",
+        "structuresRequired": 28,
+        "structuresPresent": 24,
+        "structuresAbsent": [
+          "latissimus dorsi",
+          "rectus abdominis",
+          "erector spinae",
+          "multifidus"
+        ],
+        "distinctMuscleNames": 96,
+        "namingGranularity": "largely group/compartment level rather than individual muscles",
+        "caveat": "This is an observation, NOT a section 8.3 coverage_naming score. SBLA-005 owns scoring and must confirm by inspecting meshes."
       }
     },
     {
