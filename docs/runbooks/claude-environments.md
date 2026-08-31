@@ -5,24 +5,24 @@ a Claude Team web account has repository, terminal, Git, or local full-text
 access. This file records what has actually been demonstrated, not what is
 assumed to work.
 
-**Current gate status: NOT COMPLETE.** The Codex role is demonstrated. The two
-Claude Team accounts have not been provisioned or tested. Authoritative master
-plan §18 therefore blocks SBLA-002 acceptance now, and SBLA-008 also remains
-blocked, until both roles pass the readiness test below or the chat-only
-fallback is demonstrated end to end. See
+**Current gate status: NOT COMPLETE.** The Codex role and Claude Research
+account A are demonstrated. Claude Review account B has not been provisioned or
+tested. Authoritative master plan §18 therefore blocks SBLA-002 acceptance now,
+and SBLA-008 also remains blocked, until account B passes the readiness test
+below or the chat-only fallback is demonstrated end to end. See
 [Outstanding owner action](#outstanding-owner-action).
 
 ## Environment record
 
-| Field                  | Codex (technical lead)                                   | Claude Research (account A)    | Claude Review (account B)   |
-| ---------------------- | -------------------------------------------------------- | ------------------------------ | --------------------------- |
-| Environment type       | Repository-capable local shell with its own Git worktree | Not provisioned                | Not provisioned             |
-| Git remote             | None configured; repository is local-only                | Not provisioned                | Not provisioned             |
-| Credential method      | No remote credentials in use; nothing to expose          | Not provisioned                | Not provisioned             |
-| Source-transfer method | Direct local filesystem access                           | Not provisioned                | Not provisioned             |
-| Allowed directories    | Entire repository                                        | `research/`, `content-drafts/` | `reviews/`                  |
-| Readiness result       | PASS (2026-08-30, see evidence below)                    | OUTSTANDING                    | OUTSTANDING                 |
-| Fallback               | Not required                                             | Versioned bundle, see below    | Versioned bundle, see below |
+| Field                  | Codex (technical lead)                                   | Claude Research (account A)                                          | Claude Review (account B)   |
+| ---------------------- | -------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------- |
+| Environment type       | Repository-capable local shell with its own Git worktree | Claude desktop Code session with its own local Git worktree          | Not provisioned             |
+| Git remote             | None configured; repository is local-only                | None configured; repository is local-only                            | Not provisioned             |
+| Credential method      | No remote credentials in use; nothing to expose          | No remote credentials used or exposed                                | Not provisioned             |
+| Source-transfer method | Direct local filesystem access                           | Direct local filesystem plus an assigned inline CC0 fixture          | Not provisioned             |
+| Allowed directories    | Entire repository                                        | `research/`, `content-drafts/`                                       | `reviews/`                  |
+| Readiness result       | PASS (2026-08-30, see evidence below)                    | PASS (2026-08-31, `f2e0f005`; trusted boundary passed, see evidence) | OUTSTANDING                 |
+| Fallback               | Not required                                             | Not required                                                         | Versioned bundle, see below |
 
 ## Readiness test
 
@@ -89,6 +89,35 @@ JavaScript disabled.
 Each future account still records its own actual command capability. One
 environment's successful browser run must not be copied into another account's
 readiness result.
+
+## Claude Research readiness evidence (2026-08-31)
+
+Demonstrated by Claude Team account A on branch
+`claude-research/SBLA-002-readiness`, starting from the Codex-assigned corrected
+base `e22cdf3855c069e356659c513eab2600a7815a2c`:
+
+- Read the master plan, operating contract, runbooks, prior review history, and
+  the task packet from the repository.
+- Verified the exact-path claim committed by Codex at `77a750f` before writing.
+- Created only the three claimed files under `research/`, including a standalone
+  handoff and a seven-fact extraction in which every fact has an exact `[L#]`
+  locator into the assigned lawful CC0 fixture.
+- Kept extracted facts separate from interpretation and recorded limitations,
+  applicability, conflicts, contradictory-evidence scope, and uncertainty.
+- Committed the final role-owned state as
+  `f2e0f00543bdc923e0b436059598314c237f1f85` and left the worktree clean.
+- Ran the pinned Node.js `24.20.0` / pnpm `11.24.0` `pnpm verify` gate green: 7
+  test files and 42 tests passed, the build completed, and the foundation
+  contract passed.
+- Codex independently ran `check-role-paths.mjs` from its trusted checkout
+  against the complete `e22cdf3...f2e0f00` diff. The gate passed for exactly
+  three added `research/` paths; Codex then integrated the role commits through
+  coordination commit `94cd82c`.
+
+The durable handoff is
+`research/packets/SBLA-002-claude-research-readiness-handoff.md`. This simulation
+proves environment and operating-model plumbing only; none of its fixture
+content may be promoted to `content/` or used as lifting evidence.
 
 ## Preferred environment
 
@@ -171,13 +200,13 @@ by accident later.
 SBLA-002 acceptance and SBLA-008 stay blocked until these are done and recorded
 above:
 
-1. Run the six-step readiness test for the **Claude Research** role in Claude
-   Team account A, and record the date and result in the environment record.
-2. Run it separately for the **Claude Review** role in distinct Claude Team
-   account B and a different session, subject to the standing constraint above.
-3. Decide each role's environment type: repository-capable or chat-only.
-4. If chat-only, demonstrate the bundle fallback end to end at least once —
-   bundle out, Markdown back, committed by Codex with checksums recorded.
+1. Run the six-step readiness test for the **Claude Review** role in distinct
+   Claude Team account B and a different session, subject to the standing
+   constraint above.
+2. Decide account B's environment type: repository-capable or chat-only.
+3. If account B is chat-only, demonstrate the bundle fallback end to end at
+   least once — bundle out, Markdown back, committed by Codex with checksums
+   recorded.
 
-Steps 1 and 2 may be done on different days. Neither blocks the other, but both
-must pass before SBLA-002 acceptance.
+Claude Research account A passed on 2026-08-31. Account B remains the sole
+external readiness blocker before SBLA-002 acceptance.
