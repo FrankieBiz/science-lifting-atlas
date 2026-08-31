@@ -68,7 +68,8 @@ Six required artifacts, each written so a reviewer can act without chat context:
   ownership, and the non-negotiable edit rules.
 - `docs/runbooks/claude-environments.md` — §13.9 environment record, the
   six-step readiness test, Codex readiness evidence, the chat-only bundle
-  fallback, and the outstanding owner action that blocks SBLA-008.
+  fallback, and the outstanding acceptance action that keeps the ordered queue
+  from advancing to SBLA-008.
 
 The operating model is enforced, not merely documented:
 
