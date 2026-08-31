@@ -14,6 +14,12 @@
     "reviewClaimCloses": "immutable-review-report-commit",
     "failedReviewOpens": "bounded-remediation-claim"
   },
+  "roleIdentity": {
+    "claudeResearchAccount": "A",
+    "claudeReviewAccount": "B",
+    "requiresDistinctClaudeTeamAccounts": true,
+    "sameAccountSessionSatisfiesReview": false
+  },
   "writeBoundaries": {
     "codex": null,
     "claude-research": ["research/", "content-drafts/"],

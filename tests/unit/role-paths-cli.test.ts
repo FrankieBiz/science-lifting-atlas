@@ -1,5 +1,13 @@
 import { execFile } from 'node:child_process';
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import {
+  cp,
+  mkdir,
+  mkdtemp,
+  readFile,
+  rm,
+  symlink,
+  writeFile,
+} from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -73,32 +81,47 @@ async function removeAndCommit(repository: string, relativePath: string) {
   await git(repository, 'commit', '--quiet', '-m', `remove ${relativePath}`);
 }
 
+async function commitSymlink(
+  repository: string,
+  relativePath: string,
+  target: string,
+) {
+  const absolutePath = path.join(repository, relativePath);
+  await mkdir(path.dirname(absolutePath), { recursive: true });
+  await symlink(target, absolutePath);
+  await git(repository, 'add', relativePath);
+  await git(repository, 'commit', '--quiet', '-m', `add ${relativePath}`);
+}
+
 async function runChecker(repository: string, role: string, base: string) {
-  return execFileAsync(
-    process.execPath,
-    [
-      path.join(repository, 'scripts/foundation/check-role-paths.mjs'),
-      role,
-      '--base',
-      base,
-    ],
-    {
-      cwd: repository,
-      encoding: 'utf8',
-    },
-  );
+  const args = [
+    path.join(repository, 'scripts/foundation/check-role-paths.mjs'),
+    role,
+    '--base',
+    base,
+  ];
+  if (role === 'claude-review') {
+    args.push('--allowed-path', 'reviews/releases/SBLA-test-r1.md');
+  }
+
+  return execFileAsync(process.execPath, args, {
+    cwd: repository,
+    encoding: 'utf8',
+  });
 }
 
 async function runTrustedChecker(
   repository: string,
   role: string,
   base: string,
+  allowedPath = role === 'claude-review'
+    ? 'reviews/releases/SBLA-test-r1.md'
+    : undefined,
 ) {
-  return execFileAsync(
-    process.execPath,
-    [checkerPath, role, '--base', base, '--repository', repository],
-    { encoding: 'utf8' },
-  );
+  const args = [checkerPath, role, '--base', base, '--repository', repository];
+  if (allowedPath) args.push('--allowed-path', allowedPath);
+
+  return execFileAsync(process.execPath, args, { encoding: 'utf8' });
 }
 
 afterEach(async () => {
@@ -131,6 +154,103 @@ describe('role path boundary CLI', () => {
       runChecker(repository, 'claude-review', base),
     ).resolves.toMatchObject({
       stdout: expect.stringContaining('1 changed path(s)'),
+    });
+  });
+
+  it('requires an exact claimed path for Claude Review', async () => {
+    const { repository, base } = await createRepository();
+    await commitFile(repository, 'reviews/releases/SBLA-test-r1.md');
+
+    await expect(
+      execFileAsync(
+        process.execPath,
+        [
+          checkerPath,
+          'claude-review',
+          '--base',
+          base,
+          '--repository',
+          repository,
+        ],
+        { encoding: 'utf8' },
+      ),
+    ).rejects.toMatchObject({
+      code: 2,
+      stderr: expect.stringContaining(
+        'Claude Review requires exactly one --allowed-path',
+      ),
+    });
+  });
+
+  it('rejects modification of an existing review report even when it is the claimed path', async () => {
+    const { repository } = await createRepository();
+    await commitFile(
+      repository,
+      'reviews/releases/SBLA-test-r1.md',
+      'original\n',
+    );
+    const base = (await git(repository, 'rev-parse', 'HEAD')).stdout.trim();
+    await commitFile(
+      repository,
+      'reviews/releases/SBLA-test-r1.md',
+      'changed\n',
+    );
+
+    await expect(
+      runTrustedChecker(
+        repository,
+        'claude-review',
+        base,
+        'reviews/releases/SBLA-test-r1.md',
+      ),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'Claude Review must add a new report instead of modifying',
+      ),
+    });
+  });
+
+  it('rejects changes outside the exact claimed review path even under reviews', async () => {
+    const { repository } = await createRepository();
+    await commitFile(
+      repository,
+      'reviews/releases/SBLA-002-handoff.md',
+      'original handoff\n',
+    );
+    const base = (await git(repository, 'rev-parse', 'HEAD')).stdout.trim();
+    await commitFile(
+      repository,
+      'reviews/releases/SBLA-002-handoff.md',
+      'modified handoff\n',
+    );
+    await commitFile(repository, 'reviews/releases/SBLA-test-r1.md');
+
+    await expect(
+      runTrustedChecker(repository, 'claude-review', base),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'Claude Review path is outside the exact claim: reviews/releases/SBLA-002-handoff.md',
+      ),
+    });
+  });
+
+  it('rejects a symlink committed at the exact claimed review path', async () => {
+    const { repository, base } = await createRepository();
+    await commitSymlink(
+      repository,
+      'reviews/releases/SBLA-test-r1.md',
+      '../../AGENTS.md',
+    );
+
+    await expect(
+      runTrustedChecker(repository, 'claude-review', base),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'restricted roles may add only regular files: reviews/releases/SBLA-test-r1.md has mode 120000',
+      ),
     });
   });
 

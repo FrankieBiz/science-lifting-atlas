@@ -114,6 +114,10 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'lifecycle.claimRecordLocation': 'codex-coordination-branch',
   'lifecycle.reviewClaimCloses': 'immutable-review-report-commit',
   'lifecycle.failedReviewOpens': 'bounded-remediation-claim',
+  'roleIdentity.claudeResearchAccount': 'A',
+  'roleIdentity.claudeReviewAccount': 'B',
+  'roleIdentity.requiresDistinctClaudeTeamAccounts': true,
+  'roleIdentity.sameAccountSessionSatisfiesReview': false,
 });
 
 const REQUIRED_POLICY_KEYS = Object.freeze({
@@ -121,6 +125,7 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'schemaVersion',
     'authority',
     'lifecycle',
+    'roleIdentity',
     'writeBoundaries',
   ]),
   authority: Object.freeze([
@@ -136,6 +141,12 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'claimRecordLocation',
     'reviewClaimCloses',
     'failedReviewOpens',
+  ]),
+  roleIdentity: Object.freeze([
+    'claudeResearchAccount',
+    'claudeReviewAccount',
+    'requiresDistinctClaudeTeamAccounts',
+    'sameAccountSessionSatisfiesReview',
   ]),
   writeBoundaries: Object.freeze(['codex', 'claude-research', 'claude-review']),
 });
@@ -187,6 +198,11 @@ function validateStructuredPolicy(policy) {
       'lifecycle',
       valueAtPath(policy, 'lifecycle'),
       REQUIRED_POLICY_KEYS.lifecycle,
+    ],
+    [
+      'roleIdentity',
+      valueAtPath(policy, 'roleIdentity'),
+      REQUIRED_POLICY_KEYS.roleIdentity,
     ],
     [
       'writeBoundaries',

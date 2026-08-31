@@ -29,6 +29,10 @@ environment-readiness and fallback report — with `pnpm verify` green.
   `4acd27cc30261db1f177d0b4fe6523c938e12294`
 - Role-mapping reconciliation candidate:
   `09cd757eed8965b54704a676cb3ea993a481d775`
+- Claude Research readiness commit:
+  `f2e0f00543bdc923e0b436059598314c237f1f85`
+- Round 4 Claude Review report commit:
+  `555d6dd0a406ca50af94ee887c071640bc5ef17b`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`
@@ -75,12 +79,14 @@ The operating model is enforced, not merely documented:
   artifact to exist, the handoff template to carry all ten §13.6 headings, each
   document to retain its load-bearing rules, and the structured policy to match
   the authoritative values exactly.
-- `scripts/foundation/role-paths.mjs` + `check-role-paths.mjs` — canonical path
-  validator sourced from the structured policy and Git-derived CLI for §13.9
-  step 6. The CLI requires a clean worktree, requires the base to be an ancestor
-  of `HEAD`, and enumerates additions, modifications, deletions, and both sides
-  of renames from the reviewed base, so a caller cannot omit a prohibited
-  change.
+- `scripts/foundation/role-paths.mjs` + `check-role-paths.mjs` — immutable
+  checker-side write-boundary constants cross-checked against policy loaded from
+  the trusted base, plus a Git-derived CLI for §13.9 step 6. The CLI requires a
+  clean worktree, requires the base to be an ancestor of `HEAD`, and enumerates
+  additions, modifications, deletions, Git modes, and both sides of renames from
+  the reviewed base, so a caller cannot omit a prohibited change. Claude Review
+  additionally requires the one exact Codex-claimed path and may only add that
+  new regular report file.
 - `scripts/foundation/verify.mjs` — extended to run both validators; the two
   filesystem collection loops were extracted into helpers with identical
   semantics.
@@ -123,12 +129,12 @@ coordination branch while the restricted branch starts from the exact reviewed
 artifact commit. The lifecycle contract test pins both values.
 
 Round 3 review at `3f05124895c974db2d159b75f08ed491ec148912`
-returned FAIL with two Important findings. The external Claude simulations
-remain outstanding. The locally actionable path-gate finding is repaired by
-loading write authority from the exact trusted base commit and by supporting a
-trusted-checkout runner that targets the restricted worktree explicitly. Tests
-now reproduce both same-commit policy self-authorization and target-branch
-checker replacement.
+returned FAIL with two Important findings. At that candidate, the external
+Claude simulations remained outstanding. The locally actionable path-gate
+finding was repaired by loading write authority from the exact trusted base
+commit and by supporting a trusted-checkout runner that targets the restricted
+worktree explicitly. Tests reproduce both same-commit policy
+self-authorization and target-branch checker replacement.
 
 On 2026-08-31, the owner clarified that the two Claude readiness runs will be
 sequential and that ChatGPT Codex fills the Codex role. Sequential timing is
@@ -137,6 +143,16 @@ Team account A and account B, because §§13.3–13.4 make that identity separat
 explicit; separate sessions in one account are not substituted for it. Internal
 Codex review reports remain useful pre-review evidence but do not count as the
 Claude Review gate.
+
+Both readiness runs are now complete. Account A committed its three-path
+Research packet at `f2e0f00543bdc923e0b436059598314c237f1f85`. Distinct account
+B committed the immutable Round 4 review at
+`555d6dd0a406ca50af94ee887c071640bc5ef17b`; Codex independently confirmed the
+one-file boundary and pinned verification. Round 4 returned FAIL with two
+Important findings. This remediation synchronizes the stale handoff and makes
+the exact append-only review claim executable: one required `--allowed-path`,
+add-only status, and regular-file Git mode. It also pins the distinct A/B
+identity rule in structured policy. A new Round 5 remains the acceptance gate.
 
 Repository state actions performed under owner authorization:
 
@@ -161,11 +177,12 @@ Both actions are recorded in the ledger's recovery log.
   pin. Hooking the existing `verify:foundation` step keeps `pnpm verify`
   identical in shape while still enforcing SBLA-002.
 - **Structured policy is authoritative.** Authority, claim lifecycle, and role
-  boundaries live in `operating-policy.json`. The validator checks its exact
-  schema and values, and the role-path checker consumes its boundaries.
-  Markdown retains required routing statements and explicitly cannot override
-  the structured policy. Exact phrase checks remain defense-in-depth only; no
-  claim of general natural-language interpretation is made.
+  boundaries plus the distinct Claude account identity contract live in
+  `operating-policy.json`. The validator checks its exact schema and values, and
+  the role-path checker consumes its boundaries. Markdown retains required
+  routing statements and explicitly cannot override the structured policy.
+  Exact phrase checks remain defense-in-depth only; no claim of general
+  natural-language interpretation is made.
 - **Executable path-boundary check.** §13.9 step 6 asks for a boundary check;
   the checker now derives the role's complete committed diff from an exact base
   SHA instead of trusting caller-supplied paths. Deletions are included, renames
@@ -190,11 +207,11 @@ Run with the pinned runtime (Node.js `v24.20.0`, pnpm `11.24.0`) at the new
 repository path.
 
 - `pnpm install --frozen-lockfile` — PASS.
-- `pnpm verify` — **PASS (exit 0)** after Round 2 remediation:
+- `pnpm verify` — **PASS (exit 0)** after Round 4 remediation:
   - Prettier check PASS
   - ESLint PASS, zero warnings
   - `astro check` — 30 files, 0 errors, 0 warnings, 0 hints
-  - Unit tests — 7 files, 42 tests passed
+  - Unit tests — 7 files, 47 tests passed
   - Content adapter — foundation mode, 0 records
   - Graph adapter — foundation mode, 0 nodes and 0 edges
   - Evidence adapter — foundation mode, 0 sources
@@ -235,13 +252,18 @@ Role-boundary coverage uses temporary Git repositories and exact reviewed bases:
   changing application code → exit 1, naming the policy and prohibited paths.
 - A target branch that replaces its checker and changes application code → the
   trusted external checker exits 1, naming the modified checker path.
+- Omitting Claude Review's exact `--allowed-path` → exit 2.
+- Modifying an existing review report, modifying the artifact under review, or
+  adding any second path beneath `reviews/` → exit 1 with the exact violation.
+- Adding a symlink at the exact claimed report path → exit 1, naming Git mode
+  `120000`.
 - Traversal such as `reviews/../src/pages/index.astro` → canonicalized and
   rejected.
 - Absolute/repository-escaping paths → rejected.
 - Dirty worktree or empty committed diff → rejected.
 - Unknown role → rejected.
 
-Additional required gates after Round 2 remediation:
+Additional required gates after Round 4 remediation:
 
 - `pnpm test:e2e` — PASS, 1 Chromium test with JavaScript disabled.
 - `pnpm test:a11y` — PASS, 1 test.
@@ -251,21 +273,19 @@ Additional required gates after Round 2 remediation:
 
 ## Known uncertainties
 
-- **The §18 pass condition for SBLA-002 is not fully met.** It requires both
-  Claude roles to complete the path/source/handoff simulation or the documented
-  chat-only fallback. Claude Team accounts A and B have not been provisioned, so
-  neither run has happened. This handoff delivers the documented procedure, the
-  environment record, and the executable boundary check — not the two completed
-  runs. `docs/runbooks/claude-environments.md` records both roles as
-  `OUTSTANDING` and SBLA-008 as blocked. **A reviewer should treat this as the
-  open item on SBLA-002.**
+- **The §18 pass condition for SBLA-002 is not yet met.** Claude Research account
+  A passed at `f2e0f00543bdc923e0b436059598314c237f1f85`; distinct Claude Review
+  account B passed the environment-readiness simulation and committed Round 4
+  at `555d6dd0a406ca50af94ee887c071640bc5ef17b`. Round 4's substantive verdict
+  was FAIL because this handoff was stale and the review gate did not yet
+  enforce its exact append-only path. This remediation corrects both defects;
+  acceptance still requires a fresh independent account-B review of the new
+  exact candidate.
 - Markdown policy descriptions are explanatory rather than authoritative. The
-  machine-readable policy is strict and validated; exact phrase lint remains
-  defense-in-depth and is not represented as a semantic theorem prover.
+  machine-readable policy now pins the distinct A/B identity rule and exact
+  append-only review-claim lifecycle. Exact phrase lint remains defense-in-depth
+  and is not represented as a semantic theorem prover.
 - The repository has no Git remote. Nothing has been pushed or published.
-- An untracked `.pnpm-store/` directory exists at the repository root, created
-  when the sandboxed shell could not reach the user-level pnpm store. It is a
-  local artifact, not project content, and is not in `.gitignore`.
 
 ## Files created or modified
 
@@ -298,14 +318,14 @@ Independent review artifact preserved with the repair:
 - `reviews/releases/SBLA-002-r1.md`
 - `reviews/releases/SBLA-002-r2.md`
 - `reviews/releases/SBLA-002-r3.md`
+- `reviews/releases/SBLA-002-r4.md`
 
 ## Required reviewer action
 
-After both separate Claude readiness simulations or the lawful chat-only
-fallback are committed, independently review the repaired exact commit and
-return PASS or FAIL per criterion, with evidence and exact paths, to
-`reviews/releases/SBLA-002-r4.md`. Do not repair the artifact and do not
-overwrite any prior round.
+Distinct Claude Review account B must independently review the repaired exact
+commit in a new session and return PASS or FAIL per criterion, with evidence and
+exact paths, to `reviews/releases/SBLA-002-r5.md`. Do not repair the artifact and
+do not overwrite any prior round.
 
 Specifically decide:
 
@@ -316,9 +336,8 @@ Specifically decide:
 3. Whether the handoff template matches §13.6 exactly.
 4. Whether the ledger and runbook implement §13.7, including the 24-hour stale
    rule and Codex-only merge authority.
-5. Confirm that authoritative §18 still blocks SBLA-002 acceptance until both
-   separate Claude role simulations or the end-to-end fallback are actually
-   completed; do not count this Codex remediation/review as either run.
+5. Confirm both distinct-account role simulations remain complete and that
+   readiness PASS is not confused with the Round 4 candidate FAIL.
 6. Whether the added validators strengthen the contract without weakening any
    SBLA-001 gate.
 7. Whether the trusted-checkout runner rejects target-branch policy and checker
@@ -327,6 +346,9 @@ Specifically decide:
    and can be closed without granting the reviewer ledger access.
 9. Whether the repository relocation and `main` fast-forward were recorded
    adequately.
+10. Whether Claude Review can change only the one exact claimed new report and
+    the gate rejects prior-report edits, artifact edits, extra paths, and
+    non-regular Git entries.
 
 ## Acceptance criteria
 
@@ -343,8 +365,14 @@ Specifically decide:
 - The role path-boundary check derives the complete committed diff from an exact
   ancestor base, requires a clean/non-empty worktree state, canonicalizes paths,
   includes deletions and both sides of renames, and rejects out-of-boundary
-  writes, unknown roles, mutable-policy self-authorization, and replacement of
-  the target branch's checker.
+  writes, unknown roles, mutable-policy self-authorization, replacement of the
+  target branch's checker, modifications or extra paths under an exact review
+  claim, and non-regular Git entries.
+- The structured policy requires distinct Claude Team accounts A and B and
+  rejects the claim that a second session in the same account satisfies review.
+- The environment record and this handoff agree that both readiness simulations
+  passed, Round 4 failed on candidate defects, and Round 5 is the acceptance
+  review.
 - No SBLA-001 command, gate, or review report was renamed, removed, or weakened.
 - `pnpm verify`, `pnpm test:a11y`, `pnpm test:visual`, and
   `pnpm test:performance` exit zero.

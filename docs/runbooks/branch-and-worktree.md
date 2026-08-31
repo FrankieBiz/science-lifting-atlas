@@ -60,9 +60,15 @@ worktree explicitly:
 
 ```bash
 node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
-  <claude-research-or-claude-review> \
+  claude-research \
   --base <reviewed-artifact-commit> \
-  --repository <restricted-role-worktree>
+  --repository <claude-research-worktree>
+
+node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
+  claude-review \
+  --base <reviewed-artifact-commit> \
+  --repository <claude-review-worktree> \
+  --allowed-path <exact-claimed-new-review-report-path>
 ```
 
 The trusted checker loads `operating-policy.json` from the exact base commit and
@@ -72,9 +78,11 @@ is not acceptance evidence.
 
 For independent review, **Codex records the exact append-only report path**
 before dispatch. The review claim owns no builder file. When the report becomes
-an immutable commit, Codex records closure. If the report fails, Codex opens a
-separate bounded remediation claim; the closed builder and review claims do not
-reopen.
+an immutable commit, Codex records closure. The gate requires that exact path,
+requires it to be a newly added regular file, and rejects prior-report edits,
+artifact edits, extra files, deletions, renames, symlinks, and Git links. If the
+report fails, Codex opens a separate bounded remediation claim; the closed
+builder and review claims do not reopen.
 
 ## Finishing a task
 

@@ -37,6 +37,12 @@ function completeDocFileContents() {
         reviewClaimCloses: 'immutable-review-report-commit',
         failedReviewOpens: 'bounded-remediation-claim',
       },
+      roleIdentity: {
+        claudeResearchAccount: 'A',
+        claudeReviewAccount: 'B',
+        requiresDistinctClaudeTeamAccounts: true,
+        sameAccountSessionSatisfiesReview: false,
+      },
       writeBoundaries: {
         codex: null,
         'claude-research': ['research/', 'content-drafts/'],
@@ -211,6 +217,27 @@ describe('agent operating-model contract', () => {
         'operating policy lifecycle.claimRecordLocation must equal codex-coordination-branch',
         'operating policy lifecycle.reviewClaimCloses must equal immutable-review-report-commit',
       ]),
+    );
+  });
+
+  it('requires distinct Claude Team accounts as structured policy', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.roleIdentity.sameAccountSessionSatisfiesReview = true;
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toContain(
+      'operating policy roleIdentity.sameAccountSessionSatisfiesReview must equal false',
     );
   });
 
