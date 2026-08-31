@@ -121,15 +121,56 @@ Constraints that are not negotiable:
 Bundles are written to `research/source-transfer-bundles/`, which is ignored by
 Git so restricted material is never committed.
 
+## Role-to-tool mapping (owner-confirmed 2026-08-31)
+
+Master plan §13 names three roles but does not dictate which product fills each
+one. The owner's actual toolchain is:
+
+| Plan role                                           | Filled by                                 | Notes                                         |
+| --------------------------------------------------- | ----------------------------------------- | --------------------------------------------- |
+| Codex — technical lead, integrator, merge authority | **ChatGPT Codex**                         | Authored the SBLA-002 r1/r2/r3 review reports |
+| Claude Research — evidence lead (account A)         | **Claude Team account**                   | Writes only `research/`, `content-drafts/`    |
+| Claude Review — independent auditor (account B)     | **Claude Team account, separate session** | Writes only `reviews/`                        |
+
+## Runs are sequential, not parallel
+
+The two Claude role runs are performed **one after another in independent
+sessions**, not simultaneously. Nothing in master plan §13.9 requires
+concurrency: it requires _independence_, which a separate session satisfies.
+
+What independence actually requires, and what it does not:
+
+- **Required:** the session performing a Claude Review audit must not be the
+  session that authored the artifact under review. Independence is about _who
+  judged the work_, not about wall-clock separation.
+- **Required:** each role writes only within its own paths, enforced by
+  `check-role-paths.mjs` run by Codex from a trusted checkout.
+- **Not required:** the two runs happening at the same time, or the accounts
+  existing simultaneously before either run may start.
+
+Consequently the readiness gate is satisfied by two sequential runs, and
+`Readiness result` in the environment record is filled in per role as each run
+completes rather than only when both are done.
+
+### Standing constraint on Claude Review
+
+A Claude session that has acted in the Codex role — authoring SBLA-002, SBLA-003,
+or SBLA-004 — **must not** serve as Claude Review for those tasks. Their
+independent review belongs to ChatGPT Codex or to a Claude session with no
+authorship of them. Record which session audited what, so this cannot be
+violated by accident later.
+
 ## Outstanding owner action
 
 SBLA-002 acceptance and SBLA-008 stay blocked until these are done and recorded
 above:
 
-1. Provision Claude Team account A (Research) and account B (Review) as separate
-   accounts, so the review is genuinely independent.
-2. Decide each account's environment type: repository-capable or chat-only.
-3. Run the six-step readiness test for each account and record the date and
-   result in the environment record table.
+1. Run the six-step readiness test for the **Claude Research** role in a Claude
+   Team session, and record the date and result in the environment record table.
+2. Run it separately for the **Claude Review** role in a different session,
+   subject to the standing constraint above.
+3. Decide each role's environment type: repository-capable or chat-only.
 4. If chat-only, demonstrate the bundle fallback end to end at least once —
    bundle out, Markdown back, committed by Codex with checksums recorded.
+
+Steps 1 and 2 may be done on different days. Neither blocks the other.
