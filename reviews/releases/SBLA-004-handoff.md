@@ -154,11 +154,16 @@ Pinned runtime: Node.js `v24.20.0`, pnpm `11.24.0`.
 
 ## Known uncertainties
 
-- **The §18 "sample files" deliverable is unmet.** §8.4 permits repository
-  distribution where the licence allows it, and both CC BY-SA candidates allow
-  it, so no rule prevented gathering lawful samples. None were gathered.
-  SBLA-005's benchmarking depends on them. **A reviewer should treat SBLA-004 as
-  incomplete on this deliverable.**
+- **The §18 "sample files" deliverable is PARTIALLY met.**
+  `docs/licenses/bodyparts3d-sample-manifest.md` now records every published
+  BodyParts3D file with URL, size, line count, and SHA-256 for the five metadata
+  files (fetched and verified), plus published sizes for the two mesh archives
+  (136 MB and 62 MB, not fetched). **No licensed file is committed**: the licence
+  permits redistribution, but CC BY-SA 2.1 Japan share-alike plus the unresolved
+  asset/application boundary means committing geometry could create obligations
+  the owner has not agreed to. Acquiring the meshes remains an owner decision.
+  A reviewer may still judge the deliverable incomplete without the meshes
+  themselves.
 - **Only `license_clarity` is scored.** Every weighted total is `null` by design.
   The scorecard is unexercised on a fully-scored real candidate outside unit
   tests.
@@ -174,11 +179,34 @@ Pinned runtime: Node.js `v24.20.0`, pnpm `11.24.0`.
   shell. This task changes no runtime code.
 - SBLA-003, this task's dependency, is itself unreviewed.
 
+## Coverage finding on the only licence-eligible candidate
+
+Recorded in `docs/licenses/bodyparts3d-sample-manifest.md` from published
+ontology metadata (47,137 lines, checksummed):
+
+**24 of 28 master plan §4.3 structures are present. Four are absent:
+latissimus dorsi, rectus abdominis, erector spinae, multifidus.** Loose
+substring counts across the whole set: `latissimus` 0, `abdominis` 0, `erector`
+0, `spinae` 0, `multifid` 0, `hamstring` 0 — against `oblique` 85, `adductor`
+61, `pectoralis major` 46, `deltoid` 41. Only 96 distinct names contain
+"muscle", and naming is largely at group/compartment rather than
+individual-muscle granularity.
+
+This is an **observation from English labels, not a §8.3 score** — SBLA-005 owns
+scoring and must confirm against meshes rather than labels.
+
+It matters because of what it combines with: Path B is licence-ineligible, the
+OpenStax reference is ineligible, and Path C is the only candidate that passes
+the licence gate. If this coverage gap survives mesh inspection, **Path A
+(purchase) is the only viable route**, and SBLA-006's decision narrows to one
+option.
+
 ## Files created or modified
 
 Created:
 
 - `docs/licenses/asset-candidates.json`
+- `docs/licenses/bodyparts3d-sample-manifest.md`
 - `scripts/assets/scorecard.mjs`
 - `scripts/assets/spike.mjs`
 - `tests/unit/asset-spike.test.ts`
