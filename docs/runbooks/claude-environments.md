@@ -126,51 +126,58 @@ Git so restricted material is never committed.
 Master plan §13 names three roles but does not dictate which product fills each
 one. The owner's actual toolchain is:
 
-| Plan role                                           | Filled by                                 | Notes                                         |
-| --------------------------------------------------- | ----------------------------------------- | --------------------------------------------- |
-| Codex — technical lead, integrator, merge authority | **ChatGPT Codex**                         | Authored the SBLA-002 r1/r2/r3 review reports |
-| Claude Research — evidence lead (account A)         | **Claude Team account**                   | Writes only `research/`, `content-drafts/`    |
-| Claude Review — independent auditor (account B)     | **Claude Team account, separate session** | Writes only `reviews/`                        |
+| Plan role                                           | Filled by                          | Notes                                                              |
+| --------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------ |
+| Codex — technical lead, integrator, merge authority | **ChatGPT Codex**                  | Implements and integrates; internal Codex reviews do not satisfy B |
+| Claude Research — evidence lead (account A)         | **Claude Team account A**          | Writes only `research/`, `content-drafts/`                         |
+| Claude Review — independent auditor (account B)     | **Distinct Claude Team account B** | Uses a separate account and session; writes only `reviews/`        |
 
-## Runs are sequential, not parallel
+## Runs are sequential, with distinct accounts and sessions
 
-The two Claude role runs are performed **one after another in independent
-sessions**, not simultaneously. Nothing in master plan §13.9 requires
-concurrency: it requires _independence_, which a separate session satisfies.
+The two Claude role runs may be performed **one after another**, not
+simultaneously. Nothing in master plan §13.9 requires concurrency. Master plan
+§§13.3–13.4 and the production constraint do require distinct Claude Team
+account A and account B; a new session in the same account does not replace that
+identity boundary.
 
 What independence actually requires, and what it does not:
 
-- **Required:** the session performing a Claude Review audit must not be the
-  session that authored the artifact under review. Independence is about _who
-  judged the work_, not about wall-clock separation.
+- **Required:** Claude Research runs in account A and Claude Review runs in
+  distinct account B, each in its own session.
+- **Required:** the account/session performing a Claude Review audit must not
+  have authored the artifact under review. Independence is about _who judged
+  the work_, not about wall-clock separation.
 - **Required:** each role writes only within its own paths, enforced by
   `check-role-paths.mjs` run by Codex from a trusted checkout.
-- **Not required:** the two runs happening at the same time, or the accounts
-  existing simultaneously before either run may start.
+- **Not sufficient:** opening two sessions under one Claude Team account.
+- **Not required:** the two runs happening at the same time or both accounts
+  being actively logged in simultaneously.
 
-Consequently the readiness gate is satisfied by two sequential runs, and
-`Readiness result` in the environment record is filled in per role as each run
-completes rather than only when both are done.
+Consequently the readiness gate is satisfied by two sequential runs only when
+they use distinct accounts A and B. `Readiness result` in the environment record
+is filled in per role as each run completes rather than only when both are done.
 
 ### Standing constraint on Claude Review
 
-A Claude session that has acted in the Codex role — authoring SBLA-002, SBLA-003,
-or SBLA-004 — **must not** serve as Claude Review for those tasks. Their
-independent review belongs to ChatGPT Codex or to a Claude session with no
-authorship of them. Record which session audited what, so this cannot be
-violated by accident later.
+A Claude account or session that acted as an author — including by making
+Codex-owned changes to SBLA-002, SBLA-003, or SBLA-004 — **must not** serve as
+Claude Review for those artifacts. Internal ChatGPT Codex review may catch
+defects but does not replace the authoritative Claude Review gate. Record which
+account/session authored and audited each artifact so this cannot be violated
+by accident later.
 
 ## Outstanding owner action
 
 SBLA-002 acceptance and SBLA-008 stay blocked until these are done and recorded
 above:
 
-1. Run the six-step readiness test for the **Claude Research** role in a Claude
-   Team session, and record the date and result in the environment record table.
-2. Run it separately for the **Claude Review** role in a different session,
-   subject to the standing constraint above.
+1. Run the six-step readiness test for the **Claude Research** role in Claude
+   Team account A, and record the date and result in the environment record.
+2. Run it separately for the **Claude Review** role in distinct Claude Team
+   account B and a different session, subject to the standing constraint above.
 3. Decide each role's environment type: repository-capable or chat-only.
 4. If chat-only, demonstrate the bundle fallback end to end at least once —
    bundle out, Markdown back, committed by Codex with checksums recorded.
 
-Steps 1 and 2 may be done on different days. Neither blocks the other.
+Steps 1 and 2 may be done on different days. Neither blocks the other, but both
+must pass before SBLA-002 acceptance.

@@ -25,6 +25,8 @@ environment-readiness and fallback report — with `pnpm verify` green.
   `26376e9c07179443683f54dce071c19613529b77`
 - Round 3 reviewed candidate: `3f05124895c974db2d159b75f08ed491ec148912`
 - Round 3 repair candidate: `a4b147b42eae7e5268f646f0362553c482dca51d`
+- Owner-directed sequential-run/tool-mapping candidate:
+  `4acd27cc30261db1f177d0b4fe6523c938e12294`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`
@@ -125,6 +127,14 @@ loading write authority from the exact trusted base commit and by supporting a
 trusted-checkout runner that targets the restricted worktree explicitly. Tests
 now reproduce both same-commit policy self-authorization and target-branch
 checker replacement.
+
+On 2026-08-31, the owner clarified that the two Claude readiness runs will be
+sequential and that ChatGPT Codex fills the Codex role. Sequential timing is
+compatible with the master plan. The runbook still requires distinct Claude
+Team account A and account B, because §§13.3–13.4 make that identity separation
+explicit; separate sessions in one account are not substituted for it. Internal
+Codex review reports remain useful pre-review evidence but do not count as the
+Claude Review gate.
 
 Repository state actions performed under owner authorization:
 
