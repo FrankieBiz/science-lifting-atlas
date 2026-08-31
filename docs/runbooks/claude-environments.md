@@ -7,22 +7,22 @@ assumed to work.
 
 **Current readiness status: COMPLETE.** Codex, Claude Research account A, and
 distinct Claude Review account B have all completed the repository-capable
-readiness test. SBLA-002 is not yet accepted because Round 4 found two Important
-candidate defects; those findings require Codex remediation and a new
-independent account-B review round. The environment gate is no longer the
-blocker.
+readiness test. **SBLA-002 acceptance status: PASS.** Round 5 independently
+confirmed that both Round 4 Important findings are repaired; Codex then passed
+the trusted exact-path boundary and pinned verification gates. Two Minor
+findings remain recorded and do not block acceptance.
 
 ## Environment record
 
-| Field                  | Codex (technical lead)                                   | Claude Research (account A)                                          | Claude Review (account B)                                                                                 |
-| ---------------------- | -------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Environment type       | Repository-capable local shell with its own Git worktree | Claude desktop Code session with its own local Git worktree          | Claude desktop Code session with its own local Git worktree                                               |
-| Git remote             | None configured; repository is local-only                | None configured; repository is local-only                            | None configured; repository is local-only                                                                 |
-| Credential method      | No remote credentials in use; nothing to expose          | No remote credentials used or exposed                                | No remote credentials used or exposed                                                                     |
-| Source-transfer method | Direct local filesystem access                           | Direct local filesystem plus an assigned inline CC0 fixture          | Direct local filesystem plus the assigned inline CC0 fixture used to audit the Research extraction        |
-| Allowed directories    | Entire repository                                        | `research/`, `content-drafts/`                                       | `reviews/`, narrowed by the gate to the one exact claimed new report path                                 |
-| Readiness result       | PASS (2026-08-30, see evidence below)                    | PASS (2026-08-31, `f2e0f005`; trusted boundary passed, see evidence) | PASS (2026-08-31, `555d6dd`; trusted boundary and pinned verification passed; R4 candidate verdict FAIL)  |
-| Fallback               | Not required                                             | Not required                                                         | Not required; the versioned bundle fallback remains documented but undemonstrated because it was not used |
+| Field                  | Codex (technical lead)                                   | Claude Research (account A)                                          | Claude Review (account B)                                                                                                          |
+| ---------------------- | -------------------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Environment type       | Repository-capable local shell with its own Git worktree | Claude desktop Code session with its own local Git worktree          | Claude desktop Code session with its own local Git worktree                                                                        |
+| Git remote             | None configured; repository is local-only                | None configured; repository is local-only                            | None configured; repository is local-only                                                                                          |
+| Credential method      | No remote credentials in use; nothing to expose          | No remote credentials used or exposed                                | No remote credentials used or exposed                                                                                              |
+| Source-transfer method | Direct local filesystem access                           | Direct local filesystem plus an assigned inline CC0 fixture          | Direct local filesystem plus the assigned inline CC0 fixture used to audit the Research extraction                                 |
+| Allowed directories    | Entire repository                                        | `research/`, `content-drafts/`                                       | `reviews/`, narrowed by the gate to the one exact claimed new report path                                                          |
+| Readiness result       | PASS (2026-08-30, see evidence below)                    | PASS (2026-08-31, `f2e0f005`; trusted boundary passed, see evidence) | PASS (2026-08-31, `555d6dd`; R4 readiness passed); R5 acceptance PASS (`9c53820`; trusted boundary and pinned verification passed) |
+| Fallback               | Not required                                             | Not required                                                         | Not required; the versioned bundle fallback remains documented but undemonstrated because it was not used                          |
 
 ## Readiness test
 
@@ -145,6 +145,37 @@ Demonstrated by distinct Claude Team account B on branch
 The immutable review is `reviews/releases/SBLA-002-r4.md`. Account B did not
 author SBLA-002, SBLA-003, SBLA-004, or the account-A readiness artifacts.
 
+## Claude Review Round 5 acceptance evidence (2026-08-31)
+
+Distinct Claude Team account B audited candidate
+`0636754db244f0d628edc7acb22d99291c8b5135` in a new session on branch
+`claude-review/SBLA-002-r5`, under the exact Codex claim recorded at
+`4defd73832881e1d857fd64857d7bf526de0dc7c`:
+
+- The reviewer rechecked every Round 4 finding and returned PASS on all ten
+  criteria, with no Critical or Important finding.
+- Seventeen throwaway-repository probes rejected prior-report edits, artifact
+  edits, extra paths, symlinks, Git links, policy tampering, checker replacement,
+  and argument abuse as specified.
+- The reviewer ran `pnpm verify` on a Git export whose tree hash matched the
+  candidate exactly: Node.js `24.20.0`, pnpm `11.24.0`, 7 test files and 47
+  tests, 30 checked files with zero errors, one built page, and the foundation
+  contract all passed.
+- The reviewer-authored report is `reviews/releases/SBLA-002-r5.md`, committed
+  as `9c538209bef0f13204090d7203e173e5091316e1`. Because the account-B Bash
+  sandbox could not write the external worktree, Codex placed the delivered
+  37,711-byte report there byte-for-byte (SHA-256
+  `c974e5d838fdd02892ad1a2ae1ddacc06e5fc75fb5ca1d1b150d34e9f0cd96a2`) before
+  committing; this fallback is recorded in the ledger.
+- Codex independently confirmed the clean one-file `A` diff with regular mode
+  `100644`, ran the trusted checker with the exact `--allowed-path`, and reran
+  pinned `pnpm verify` successfully before acceptance.
+
+Round 5 recorded two nonblocking Minor findings: stale completion tense in this
+environment record, repaired by this acceptance record, and the carried
+account-A wording issue from R4-M-3. The latter remains outside Codex ownership
+and does not affect source entailment or SBLA-002 acceptance.
+
 ## Preferred environment
 
 Each Claude role runs in a repository-capable environment with its own worktree,
@@ -221,11 +252,11 @@ defects but does not replace the authoritative Claude Review gate. Record which
 account/session authored and audited each artifact so this cannot be violated
 by accident later.
 
-## Outstanding acceptance action
+## SBLA-002 acceptance result
 
 The owner-side environment decision is complete: both Claude roles are
-repository-capable and the fallback was not needed. Codex must repair the two
-Important Round 4 findings, produce a new exact candidate, and dispatch a fresh
-append-only report path to distinct account B. SBLA-002 is accepted only if that
-new round passes with no unresolved blocking finding; the ordered queue does not
-advance to SBLA-008 before then.
+repository-capable, and the normal readiness fallback was not needed. Codex
+repaired the two Important Round 4 findings and distinct account B passed the
+fresh append-only Round 5 audit with no unresolved blocking finding. The trusted
+boundary and pinned verification gates also passed, so SBLA-002 is accepted and
+no longer blocks its dependants in the ordered queue.

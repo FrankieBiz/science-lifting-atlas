@@ -45,7 +45,7 @@ pnpm exec playwright install --with-deps chromium
 
 - Do not add scientific or anatomy records yet; foundation validators intentionally reject them.
 - Agent roles, branch/worktree rules, the current-work ledger, the handoff template, and Claude environment readiness are defined in [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md), and [`docs/runbooks/`](docs/runbooks/). The canonical structured policy is [`docs/runbooks/operating-policy.json`](docs/runbooks/operating-policy.json). Claim your task in [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md) before editing; restricted Claude roles ask Codex to record their exact-path claim.
-- SBLA-008 is blocked until both Claude accounts pass the readiness test in [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md).
+- Both Claude accounts passed the readiness test recorded in [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md); SBLA-002 no longer blocks SBLA-008.
 - SBLA-003 owns architecture/provider ADRs and current free-tier modeling.
 - SBLA-004 through SBLA-006 own anatomy and exercise-media license selection.
 - SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.

@@ -33,6 +33,12 @@ environment-readiness and fallback report — with `pnpm verify` green.
   `f2e0f00543bdc923e0b436059598314c237f1f85`
 - Round 4 Claude Review report commit:
   `555d6dd0a406ca50af94ee887c071640bc5ef17b`
+- Round 4 remediation and Round 5 reviewed candidate:
+  `0636754db244f0d628edc7acb22d99291c8b5135`
+- Round 5 Claude Review report role commit:
+  `9c538209bef0f13204090d7203e173e5091316e1`
+- Round 5 report integration commit:
+  `25663436ccf4b162920b61e377f89abef1de741f`
 - Branch: `codex/SBLA-002-agent-operating-model`
 - Worktree: `.worktrees/sbla-002-agent-operating-model`
 - Repository root: `/Users/frankbisignano/dev/science-lifting-atlas`
@@ -68,8 +74,8 @@ Six required artifacts, each written so a reviewer can act without chat context:
   ownership, and the non-negotiable edit rules.
 - `docs/runbooks/claude-environments.md` — §13.9 environment record, the
   six-step readiness test, Codex readiness evidence, the chat-only bundle
-  fallback, and the outstanding acceptance action that keeps the ordered queue
-  from advancing to SBLA-008.
+  fallback, and the completed Round 5 acceptance evidence that unblocks the
+  ordered queue from SBLA-002.
 
 The operating model is enforced, not merely documented:
 
@@ -92,7 +98,7 @@ The operating model is enforced, not merely documented:
   filesystem collection loops were extracted into helpers with identical
   semantics.
 - `docs/runbooks/README.md` and `README.md` — updated to route a new reader to
-  the runbooks and to record that SBLA-008 is blocked.
+  the runbooks and to record the completed readiness gate.
 
 Round 1 review at `af1b920afef8614c5cfc58bb1ddedfbab9933bc3` returned FAIL
 with four Important findings. Remediation:
@@ -145,15 +151,16 @@ explicit; separate sessions in one account are not substituted for it. Internal
 Codex review reports remain useful pre-review evidence but do not count as the
 Claude Review gate.
 
-Both readiness runs are now complete. Account A committed its three-path
-Research packet at `f2e0f00543bdc923e0b436059598314c237f1f85`. Distinct account
-B committed the immutable Round 4 review at
-`555d6dd0a406ca50af94ee887c071640bc5ef17b`; Codex independently confirmed the
-one-file boundary and pinned verification. Round 4 returned FAIL with two
-Important findings. This remediation synchronizes the stale handoff and makes
-the exact append-only review claim executable: one required `--allowed-path`,
-add-only status, and regular-file Git mode. It also pins the distinct A/B
-identity rule in structured policy. A new Round 5 remains the acceptance gate.
+Both readiness runs and the SBLA-002 acceptance review are complete. Account A
+committed its three-path Research packet at
+`f2e0f00543bdc923e0b436059598314c237f1f85`. Distinct account B committed the
+immutable Round 4 review at `555d6dd0a406ca50af94ee887c071640bc5ef17b`;
+Round 4 returned FAIL with two Important findings. Codex repaired both in
+candidate `0636754db244f0d628edc7acb22d99291c8b5135`, including the executable
+exact append-only claim, regular-file mode enforcement, and structured distinct
+A/B identity rule. Account B then returned PASS on all ten Round 5 criteria in
+`reviews/releases/SBLA-002-r5.md`, with no Critical or Important finding. Codex
+independently passed the trusted one-file boundary and pinned verification gates.
 
 Repository state actions performed under owner authorization:
 
@@ -272,16 +279,26 @@ Additional required gates after Round 4 remediation:
 - `pnpm test:performance` — PASS, 1 test.
 - `pnpm audit --audit-level high` — PASS, no known vulnerabilities.
 
+Round 5 acceptance gates:
+
+- Distinct account-B review — **PASS**, all 10 criteria; no Critical or
+  Important finding; two nonblocking Minor findings recorded.
+- Trusted exact-path boundary at `9c53820` — **PASS**, exactly one added regular
+  `100644` file at `reviews/releases/SBLA-002-r5.md`.
+- Independent pinned `pnpm verify` at `9c53820` — **PASS**, 7 files and 47 tests,
+  30 checked files with zero errors, one built page, foundation contract passed.
+- Claude-delivered report identity — **PASS**, 518 lines, 37,711 bytes, SHA-256
+  `c974e5d838fdd02892ad1a2ae1ddacc06e5fc75fb5ca1d1b150d34e9f0cd96a2`, copied
+  byte-for-byte under the documented external-worktree sandbox fallback.
+
 ## Known uncertainties
 
-- **The §18 pass condition for SBLA-002 is not yet met.** Claude Research account
-  A passed at `f2e0f00543bdc923e0b436059598314c237f1f85`; distinct Claude Review
-  account B passed the environment-readiness simulation and committed Round 4
-  at `555d6dd0a406ca50af94ee887c071640bc5ef17b`. Round 4's substantive verdict
-  was FAIL because this handoff was stale and the review gate did not yet
-  enforce its exact append-only path. This remediation corrects both defects;
-  acceptance still requires a fresh independent account-B review of the new
-  exact candidate.
+- **The §18 pass condition for SBLA-002 is met.** Claude Research account A
+  passed at `f2e0f00543bdc923e0b436059598314c237f1f85`; distinct Claude Review
+  account B passed Round 5 at `9c538209bef0f13204090d7203e173e5091316e1`;
+  and Codex independently passed the trusted exact-path and pinned verification
+  gates. R5-M-1 is repaired by the acceptance record. The carried account-A
+  wording issue R5-M-2 remains Minor and nonblocking.
 - Markdown policy descriptions are explanatory rather than authoritative. The
   machine-readable policy now pins the distinct A/B identity rule and exact
   append-only review-claim lifecycle. Exact phrase lint remains defense-in-depth
@@ -320,36 +337,19 @@ Independent review artifact preserved with the repair:
 - `reviews/releases/SBLA-002-r2.md`
 - `reviews/releases/SBLA-002-r3.md`
 - `reviews/releases/SBLA-002-r4.md`
+- `reviews/releases/SBLA-002-r5.md`
 
 ## Required reviewer action
 
-Distinct Claude Review account B must independently review the repaired exact
-commit in a new session and return PASS or FAIL per criterion, with evidence and
-exact paths, to `reviews/releases/SBLA-002-r5.md`. Do not repair the artifact and
-do not overwrite any prior round.
+Completed by distinct Claude Review account B in a new session. The immutable
+report `reviews/releases/SBLA-002-r5.md` returns PASS on all ten criteria, with
+no Critical or Important finding and two explicitly nonblocking Minor findings.
+Codex confirmed the claimed one-file regular diff with the trusted checker and
+reran pinned `pnpm verify` successfully.
 
-Specifically decide:
-
-1. Whether the six artifacts satisfy the SBLA-002 row of §18 and are usable
-   without chat context.
-2. Whether `AGENTS.md` and `CLAUDE.md` faithfully encode §13.2–13.4, §13.7, and
-   §13.8 without inventing authority the master plan does not grant.
-3. Whether the handoff template matches §13.6 exactly.
-4. Whether the ledger and runbook implement §13.7, including the 24-hour stale
-   rule and Codex-only merge authority.
-5. Confirm both distinct-account role simulations remain complete and that
-   readiness PASS is not confused with the Round 4 candidate FAIL.
-6. Whether the added validators strengthen the contract without weakening any
-   SBLA-001 gate.
-7. Whether the trusted-checkout runner rejects target-branch policy and checker
-   self-modification while deriving the complete target worktree diff.
-8. Whether the Codex-mediated review claim is durably recorded before review
-   and can be closed without granting the reviewer ledger access.
-9. Whether the repository relocation and `main` fast-forward were recorded
-   adequately.
-10. Whether Claude Review can change only the one exact claimed new report and
-    the gate rejects prior-report edits, artifact edits, extra paths, and
-    non-regular Git entries.
+No further SBLA-002 reviewer action is required. Preserve every prior review
+report unchanged. Any future regression creates a new append-only round rather
+than editing `SBLA-002-r5.md`.
 
 ## Acceptance criteria
 
@@ -360,7 +360,7 @@ Specifically decide:
   authority.
 - `claude-environments.md` records environment type, Git remote/credential
   method, source-transfer method, allowed directories, readiness result, and
-  fallback for each role, and names SBLA-008 as blocked.
+  fallback for each role, and records that SBLA-002 no longer blocks SBLA-008.
 - The operating-model contract fails closed when an artifact is missing or a
   load-bearing rule is dropped, demonstrated at the filesystem level.
 - The role path-boundary check derives the complete committed diff from an exact
@@ -372,8 +372,8 @@ Specifically decide:
 - The structured policy requires distinct Claude Team accounts A and B and
   rejects the claim that a second session in the same account satisfies review.
 - The environment record and this handoff agree that both readiness simulations
-  passed, Round 4 failed on candidate defects, and Round 5 is the acceptance
-  review.
+  passed, Round 4 failed on candidate defects, and Round 5 passed the acceptance
+  review with no unresolved blocking finding.
 - No SBLA-001 command, gate, or review report was renamed, removed, or weakened.
 - `pnpm verify`, `pnpm test:a11y`, `pnpm test:visual`, and
   `pnpm test:performance` exit zero.
