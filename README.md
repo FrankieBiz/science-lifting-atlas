@@ -35,6 +35,7 @@ pnpm exec playwright install --with-deps chromium
 | `pnpm build`            | Generate the static production output.                                                                                                               |
 | `pnpm preview`          | Preview the most recent static build.                                                                                                                |
 | `pnpm verify`           | Run formatting, linting, type checking, unit tests, stage-aware content/graph/evidence checks, the production build, and the repository contract.    |
+| `pnpm test:portability` | Build and serve the static output from a bare `node:http` server to prove the artifact needs no host-specific runtime.                               |
 | `pnpm test:e2e`         | Build and test the static output in Chromium, including JavaScript-disabled behavior.                                                                |
 | `pnpm test:a11y`        | Check the executable foundation accessibility contract. Later tasks expand this into the full accessibility matrix.                                  |
 | `pnpm test:visual`      | Check deterministic viewport definitions. Later tasks add screenshot baselines.                                                                      |

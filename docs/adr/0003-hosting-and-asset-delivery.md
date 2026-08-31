@@ -79,9 +79,16 @@ domain root.
   degrade to its no-WebGL 2D path rather than serve models.
 - GitHub Pages' terms exclude commercial use. If the atlas ever becomes
   commercial, this fallback must be replaced and this ADR superseded.
-- A future task must add a portability regression check that builds once and
-  serves the artifact from a non-Cloudflare server, so this property cannot
-  silently regress.
+- **This property is now enforced, not just observed.** `pnpm test:portability`
+  builds once and serves `dist/` from a bare `node:http` server — no Astro,
+  Cloudflare, or adapter — asserting that the home page renders, that every asset
+  the HTML references resolves at a domain root, and that no server-side redirect
+  is needed. It runs inside `pnpm verify` after the build.
+
+  The same suite also pins the subpath limitation. If a future change makes the
+  build subpath-safe, the check **fails deliberately** with a message telling the
+  author to update this ADR, so the documented constraint and the real behaviour
+  cannot drift apart in either direction.
 
 ## Alternatives considered
 

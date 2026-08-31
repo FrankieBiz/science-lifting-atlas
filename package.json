@@ -25,7 +25,8 @@
     "validate:graph": "node scripts/graph/validate.mjs",
     "evidence:status": "node scripts/evidence/status.mjs",
     "verify:foundation": "node scripts/foundation/verify.mjs",
-    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:graph && pnpm evidence:status && pnpm build && pnpm verify:foundation"
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:graph && pnpm evidence:status && pnpm build && pnpm test:portability && pnpm verify:foundation",
+    "test:portability": "vitest run --config vitest.portability.config.ts"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

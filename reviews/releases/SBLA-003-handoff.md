@@ -74,6 +74,33 @@ Five ADRs plus a machine-readable evidence record:
 - `docs/adr/README.md` — ADR format, immutability rule, index, and the
   cite-your-source requirement.
 
+### Portability made enforceable
+
+ADR 0003 originally recorded that "a future task must add a portability
+regression check". That check now exists rather than being deferred:
+
+- `scripts/portability/static-server.mjs` — a bare `node:http` static file
+  server with no framework, adapter, or host behaviour, plus path-traversal
+  rejection.
+- `tests/integration/portability.test.ts` — 4 tests: the home page renders, every
+  asset the built HTML references resolves at a domain root, no server-side
+  redirect is needed, and the subpath limitation still holds.
+- `pnpm test:portability`, wired into `pnpm verify` **after** the build (it needs
+  `dist/`), with its own vitest config so `pnpm test` — which runs before the
+  build — is unaffected.
+
+The subpath assertion is two-directional on purpose. If a later change makes the
+build subpath-safe, the test fails with a message telling the author to update
+ADR 0003, so the document and the behaviour cannot drift apart in either
+direction.
+
+**Mutation-tested, so it is not vacuous.** Three independent regressions were
+injected and each was caught: removing a referenced asset from the build
+(`asset /_astro/index.*.css must resolve at a domain root: expected 404 to be
+200`), removing required page content, and switching asset paths to relative
+(which correctly flags that ADR 0003 needs updating). All three exited non-zero;
+the unmutated build passes.
+
 ## Decisions made
 
 - **Adopt Cloudflare Web Analytics for Release 1 pageviews.** The first draft of
