@@ -149,7 +149,10 @@ result in the `Readiness result` column of
    correct scope discipline or an evasion.
 5. Whether a CC0 fixture satisfies §13.9 step 5's "one lawful test source", or
    whether a real paywalled source is required before SBLA-008.
-6. Whether basing on `4acd27c` rather than the packet's `555dc23` is acceptable.
+6. Confirm that `e22cdf3855c069e356659c513eab2600a7815a2c` is the Codex-assigned
+   corrected base. It is the commit Codex issued and committed the path claim
+   `77a750f` against, so this run carries **no unilateral base deviation and
+   needs no deviation waiver**. The packet's original `555dc23` is superseded.
 
 ## Acceptance criteria
 
