@@ -56,7 +56,7 @@ describe('build artifact portability', () => {
     const html = await (await fetch(`${rootUrl}/`)).text();
     const refs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
       .map((m) => m[1])
-      .filter((ref): ref is string => Boolean(ref?.includes('_astro/')));
+      .filter((ref): ref is string => Boolean(ref?.includes('/assets/')));
 
     expect(refs.length).toBeGreaterThan(0);
 
@@ -82,7 +82,7 @@ describe('build artifact portability', () => {
     expect(html).toContain('Science-Based Lifting Atlas');
     const assetRefs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
       .map((m) => m[1])
-      .filter((ref): ref is string => Boolean(ref?.includes('_astro/')));
+      .filter((ref): ref is string => Boolean(ref?.includes('/assets/')));
 
     expect(assetRefs.length).toBeGreaterThan(0);
 
