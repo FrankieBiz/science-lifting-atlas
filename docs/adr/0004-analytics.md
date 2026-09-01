@@ -3,98 +3,116 @@
 - Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
-- Revision: rewritten 2026-08-30 after review. The first draft recommended
-  shipping with no analytics on the stated grounds that Cloudflare's
-  documentation did not describe its cookie, fingerprinting, or sampling
-  behaviour. **That premise was false** — it rested on reading only the product
-  overview page. The behaviour is documented, so the decision is reversed.
+- Reverified: 2026-09-01
 
 ## Context
 
-Master plan **§4.1 lists "Privacy-respecting, cookieless analytics if available
-on the chosen host" as a Release 1 deliverable.** It is conditional, not
-optional-by-default: the condition is availability on the chosen host.
+Master plan §4.1 lists privacy-respecting, cookieless analytics if available on
+the chosen host, while §11.8 explicitly makes analytics optional and says it
+must not block launch. The decision can adopt a suitable provider without
+turning it into a release gate.
 
-§11.8 adds that analytics must not block launch; that Release 1 must not create
-a persistent per-user identifier solely to calculate retention; that allowed
-event names are enumerated (`search_submitted`, `entity_selected`,
-`related_opened`, `evidence_opened`, `source_opened`, `comparison_shared`,
-`webgl_fallback`); and that events may carry entity IDs or controlled categories
-only — never raw queries, URLs containing health information, or free text.
+§11.8 also forbids creating a persistent per-user identifier solely to calculate
+retention. The only allowed custom event names are `search_submitted`,
+`entity_selected`, `related_opened`, `evidence_opened`, `source_opened`,
+`comparison_shared`, and `webgl_fallback`. Events may contain entity IDs or
+controlled categories only—never raw queries, URLs containing health
+information, or free text.
 
 §11.7 requires a strict Content Security Policy with limited script origins, no
 sensitive health data, and a plain-language privacy page even when no cookies
 are used.
 
-## What the documentation actually says
+## Verified provider facts
 
-Read 2026-08-30; recorded in [`provider-quotas.json`](provider-quotas.json)
-under `cloudflare-web-analytics`.
+Cloudflare’s official documentation was re-read on 2026-09-01. Facts and source
+URLs are recorded under `cloudflare-web-analytics` in
+[`provider-quotas.json`](provider-quotas.json).
 
-| Question                    | Documented answer                                                                                                                            |
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Cost                        | Free, available on all plans                                                                                                                 |
-| Cookies / client-side state | None used for analytics                                                                                                                      |
-| Fingerprinting              | Not performed for analytics                                                                                                                  |
-| Sampling (ingestion)        | "The beacon script will fire on every pageview. The data ingestion pipeline does not apply sampling—every received beacon will be recorded." |
-| Sampling (retention)        | "We retain unsampled beacon data for the past 7 days, after this point data is aggregated down to around 10%."                               |
-| Sampling (query)            | 0.0001%–100%, dynamically selected by filter                                                                                                 |
-| Visitor methodology         | Counts page views arriving from a different site rather than tracking individuals                                                            |
-| Beacon script               | Required; manual embed for sites not proxied through Cloudflare                                                                              |
+| Question                    | Documented answer                                                                    |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| Cost                        | Free                                                                                 |
+| Cookies / client-side state | None used for analytics                                                              |
+| Fingerprinting              | Not performed for analytics                                                          |
+| Ingestion sampling          | Beacon fires on every pageview; every received beacon is recorded                    |
+| Retention                   | Unsampled for 7 days, then aggregated to around 10%                                  |
+| Query sampling              | 0.0001%–100%, dynamically selected by filter and volume                              |
+| Query strings               | Not logged                                                                           |
+| Beacon script               | Required; manual embed when the site is not proxied through Cloudflare               |
+| Documented ingestion quota  | None found in the reviewed official pages; this is not a claim of unlimited capacity |
+| Custom-event support        | Not established from the reviewed documentation                                      |
 
-This satisfies §4.1's "privacy-respecting, cookieless" wording and §11.8's
-prohibition on a persistent per-user identifier: the product does not create one.
+These facts satisfy the privacy boundary for aggregate pageviews without the
+atlas creating a persistent identifier.
 
 ## Decision
 
-**Adopt Cloudflare Web Analytics for Release 1 pageview measurement**, subject to
-the two conditions below.
+**Adopt Cloudflare Web Analytics as the optional Release 1 aggregate pageview
+direction**, subject to these boundaries:
 
-1. **Pageview analytics only at launch.** Whether the seven enumerated §11.8
-   event names can be sent as custom events was **not** established from
-   documentation on the access date. Custom events are therefore _not_ adopted
-   here. A follow-up task must establish support before any event is sent, and
-   no event may carry raw queries or free text.
-2. **Analytics must not block launch (§11.8).** If integration is not ready, ship
-   without it and add it afterwards. It is not a release gate.
+1. **Pageviews only at launch.** Custom events are not adopted until official
+   support is established. If later supported, only the seven enumerated names
+   and controlled values are permitted.
+2. **Never block launch.** If integration, privacy disclosure, or CSP work is not
+   ready, ship without analytics and add it later.
+3. **No persistent per-user identifier and no retention proxy.** Do not add a
+   cookie, local-storage value, fingerprint, or other identifier to estimate
+   repeat use. If a metric cannot be reported in aggregate without one, omit it.
+4. **No raw logs.** Release 1 does not enable Logpush, retained request-log
+   export, or another per-request log store.
 
-A plain-language privacy page is published either way, stating what the beacon
-does and does not collect.
+A plain-language privacy page is published either way. The beacon must not gate
+content, and the site must remain useful with JavaScript disabled.
 
-Pre-launch performance gates remain **lab** measurements per §11.8. Field Core
-Web Vitals stay a post-launch gate.
+Pre-launch performance gates remain lab measurements. Field Core Web Vitals
+become a post-launch gate only after enough observations exist for a stable 75th
+percentile; elapsed time alone is not sufficient.
+
+## Analytics and log volume
+
+The Release 1 model is one pageview beacon per page view and zero custom events.
+The beacon script measured 28,467 raw bytes / 9,509 gzip response-body bytes on
+2026-09-01 and advertised a one-day cache lifetime. ADR 0005 deliberately gives
+no cache credit and includes that gzip transfer on every view.
+
+The beacon payload cannot be measured without a configured analytics site, so
+ADR 0005 assigns an explicit 1 KB/event planning ceiling rather than labelling
+it measured. At the three traffic scenarios this produces 10k/100k/1M beacons
+and budgeted ingestion of 10 MB/100 MB/1 GB. Raw-log volume, custom-event volume,
+and stored per-user records remain zero.
 
 ## Consequences
 
-- **The CSP must permit one external script origin** for the beacon. This is a
-  real cost: ADR 0001's static-first posture would otherwise allow forbidding
-  external scripts outright. §11.7 requires _limited_ script origins, not zero,
-  so this is conformant — but it is a weakening, and it should be the only
-  exception.
-- The beacon is client-side JavaScript. It must not gate content, and the site
-  must remain fully useful with JavaScript disabled, per the SBLA-001 contract.
-- Retention beyond 7 days is ~10% aggregated. Any metric requiring precise
-  long-window counts cannot rely on this source; §19's beta task testing remains
-  the source for behavioural success metrics.
-- Cost stays $0 — the service is free on all plans, so
-  [ADR 0005](0005-zero-cost-infrastructure-model.md) is unaffected.
-- Adopting analytics does **not** license retention metrics that would need a
-  persistent identifier. Those remain out of scope under §11.8.
+- The CSP permits one external script origin for the beacon. This is the only
+  planned third-party script exception.
+- Long-window counts are approximate after provider aggregation; do not present
+  them as precise cohort or retention data.
+- Cost remains $0 because the service is free. Lack of a documented ingestion
+  quota is an uncertainty to re-check, not permission to claim unlimited use.
+- Analytics adds 9,509 gzip bytes to the deliberately no-cache transfer model.
 
 ## Alternatives considered
 
-- **No analytics at all.** This was the first draft's decision. Rejected on
-  re-reading: §4.1 lists cookieless analytics as a Release 1 item conditional on
-  host availability, and the condition is met. Dropping it would be a descope
-  requiring explicit owner approval, not a default.
-- **Self-hosted analytics.** Rejected: requires a runtime service, contradicting
-  [ADR 0001](0001-static-first-architecture.md) and threatening the $0 target.
-- **Server log analysis.** Not available: free static hosting does not expose
-  retained request logs.
+- **No analytics.** Permitted by §11.8 and retained as the launch fallback. Not
+  selected as the preferred direction because a suitable free, cookieless
+  aggregate pageview option exists.
+- **Self-hosted analytics.** Rejected: requires runtime compute/storage, weakens
+  ADR 0001, and risks recurring cost.
+- **Server-log analysis.** Rejected: the selected free static path does not
+  expose a retained request-log product, and Release 1 does not add one.
+- **A richer event analytics provider.** Rejected until controlled events,
+  privacy behaviour, hard cost controls, and quotas are verified.
+
+## Reversal cost
+
+- Disabling Web Analytics is **low** cost: remove the beacon and its CSP origin;
+  content, routing, and evidence records do not change.
+- Switching cookieless pageview providers is **moderate** cost because privacy
+  behaviour, sampling, CSP, quotas, transfer, and disclosures must be reviewed.
+- Adding controlled events is **moderate** cost: schemas and tests must reject
+  every non-enumerated name, raw query, health-bearing URL, and free-text field.
 
 ## Open items for the owner
 
-- Confirm adopting Cloudflare Web Analytics, given it requires one external
-  script origin in the CSP.
-- If you would rather ship with **no** analytics, that is a §4.1 descope and
-  should be recorded as such in a superseding ADR — not left implicit.
+- Owner approval is not yet recorded. Confirm the optional pageview direction
+  and whether it should be enabled at launch or added afterward.

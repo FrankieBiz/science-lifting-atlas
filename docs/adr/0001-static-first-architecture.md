@@ -3,6 +3,7 @@
 - Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
+- Reverified: 2026-09-01
 
 ## Context
 
@@ -34,6 +35,13 @@ The stack is fixed as:
 A runtime service may be introduced only when a specific feature is proven to
 require one, via a superseding ADR.
 
+**No runtime AI is part of Release 1.** AI may assist the offline research and
+drafting workflow only inside the role, evidence, and review boundaries in the
+master plan. The published site performs no inference, exposes no chat endpoint,
+and sends no user input to a model provider. A future runtime-AI feature must
+prove a user need, privacy model, scientific review boundary, hard cost control,
+and graceful static fallback in a superseding ADR.
+
 ## Consequences
 
 - Every user-visible fact must exist as a validated record **at build time**.
@@ -58,3 +66,17 @@ require one, via a superseding ADR.
   claim rendering away from build-time validation.
 - **Pre-rendering into a runtime cache.** Rejected as strictly more moving parts
   than static output for the same result.
+- **Runtime AI search, recommendation, or chat.** Rejected: unrestricted AI chat
+  is outside Release 1 scope, inference would add privacy and cost exposure, and
+  generated answers could bypass the claim-level evidence gate.
+
+## Reversal cost
+
+- Replacing Pagefind or one React island is **low to moderate** cost because
+  pages, records, and the generated graph remain host-independent inputs.
+- Replacing Astro or the file-to-page pipeline is **high** cost because routing,
+  content integration, metadata, and build gates would need reimplementation.
+- Adding a runtime service or runtime AI is **high** cost: it adds deployment,
+  security, privacy, observability, fallback, and evidence-control surfaces.
+  The static pages and versioned JSON remain reusable, which limits data
+  migration cost even if the delivery architecture changes.

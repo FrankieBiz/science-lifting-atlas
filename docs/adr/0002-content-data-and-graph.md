@@ -3,6 +3,7 @@
 - Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
+- Reverified: 2026-09-01
 - Note: This ADR fixes the _mechanism_. The entity and claim **schemas
   themselves** are owned by SBLA-007 and are deliberately not specified here.
 
@@ -58,3 +59,15 @@ SBLA-007 and SBLA-011 build against a settled pipeline.
   layer, and the graph is small at Release 1 scale.
 - **Hand-authored graph edges.** Rejected: it would allow the graph to drift out
   of agreement with the records it claims to describe.
+
+## Reversal cost
+
+- Replacing Pagefind or the generated JSON serialization is **moderate** cost:
+  the validated records and typed IDs remain reusable, but search/graph clients
+  and build outputs change.
+- Moving authoring to a CMS is **high** cost because the project must preserve
+  Git-equivalent provenance, immutable review history, role boundaries, and
+  fail-closed validation during migration.
+- Changing individual schemas after SBLA-007 is **moderate to high** depending on
+  record count. Stable IDs reduce the cost; renaming IDs requires a versioned
+  migration and redirect/reference plan.

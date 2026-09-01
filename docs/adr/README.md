@@ -7,8 +7,8 @@ ADR that supersedes it and update the older record's Status line to point at it.
 ## Format
 
 Every ADR carries: `Status`, `Date`, `Task`, then **Context**, **Decision**,
-**Consequences**, and **Alternatives considered**. Status is one of `Proposed`,
-`Accepted`, `Superseded by NNNN`, or `Rejected`.
+**Consequences**, **Alternatives considered**, and **Reversal cost**. Status is
+one of `Proposed`, `Accepted`, `Superseded by NNNN`, or `Rejected`.
 
 Where an ADR relies on an external fact — a provider quota, a limit, a price —
 it must cite the source URL and the date it was read. Master plan §11.8 forbids

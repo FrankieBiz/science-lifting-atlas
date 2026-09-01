@@ -1,105 +1,146 @@
 {
-  "$comment": "Recorded provider quotas for the SBLA-003 zero-cost model. Master plan 11.8 forbids copying assumed free-tier limits from model memory: every value here was read from the cited URL on the cited date. Re-verify before any provider decision is acted on.",
-  "recordedOn": "2026-08-30",
+  "$comment": "Decision-relevant provider facts for SBLA-003. Each fact was re-read from the cited official provider documentation on the access date. Strings labelled inference or operationalFallback are project conclusions, not provider promises.",
+  "recordedOn": "2026-09-01",
   "recordedBy": "SBLA-003",
-  "reverifyBy": "2026-11-30",
+  "reverifyBy": "2026-12-01",
   "providers": [
     {
       "id": "cloudflare-pages",
-      "role": "primary static host candidate",
+      "role": "selected Release 1 static host and asset host",
       "plan": "Free",
       "source": "https://developers.cloudflare.com/pages/platform/limits/",
-      "accessedOn": "2026-08-30",
+      "additionalSources": [
+        "https://developers.cloudflare.com/pages/functions/pricing/",
+        "https://developers.cloudflare.com/billing/understand/usage-based-billing/"
+      ],
+      "accessedOn": "2026-09-01",
       "quotas": {
         "buildsPerMonth": 500,
         "concurrentBuilds": 1,
         "filesPerSite": 20000,
         "maxFileSize": "25 MiB",
-        "customDomains": 100,
+        "customDomainsPerProject": 100,
         "projectsPerAccount": 100,
         "previewDeployments": "unlimited",
-        "bandwidth": "not stated on the limits page"
-      }
-    },
-    {
-      "id": "cloudflare-pages-requests",
-      "role": "primary static host candidate: request pricing",
-      "plan": "Free",
-      "source": "https://developers.cloudflare.com/pages/functions/pricing/",
-      "accessedOn": "2026-08-30",
-      "quotas": {
         "staticAssetRequests": "free and unlimited",
-        "staticAssetRequestsQuote": "requests to static assets are free and unlimited. A request is considered static when it does not invoke Functions.",
         "functionsRequestsPerDay": 100000,
-        "functionsNote": "100,000 daily request quota shared between Pages Functions and Workers; resets at midnight UTC"
+        "functionsNote": "Shared Workers Free and Pages Functions quota; resets at midnight UTC. Release 1 does not use Functions."
+      },
+      "costControl": {
+        "providerFact": "The cited Pages docs describe Free-plan limits and free, unlimited static asset requests; they do not describe automatic conversion of a Free Pages project to a paid plan.",
+        "projectDecision": "Use only static Pages features. Do not add Pages Functions or a paid plan."
+      },
+      "alerting": {
+        "providerFact": "Cloudflare documents usage-based billing notifications for Professional plans or higher and Pay-as-you-go accounts. The reviewed docs do not document a Free Pages build-count alert.",
+        "inference": "Configurable 70% and 85% Pages-build alerts are not supported by the documented Free-plan controls.",
+        "operationalFallback": "Review the Pages build count weekly. At 350 builds in a month, batch non-urgent changes; at 425, permit only correction or release-blocking builds until reset."
       }
     },
     {
       "id": "cloudflare-r2",
-      "role": "large 3D and media asset delivery",
-      "plan": "Free tier",
+      "role": "considered but not selected for Release 1 asset delivery",
+      "plan": "Standard storage with monthly free tier and metered overage",
       "source": "https://developers.cloudflare.com/r2/pricing/",
-      "accessedOn": "2026-08-30",
+      "additionalSources": [
+        "https://developers.cloudflare.com/billing/threshold-billing/",
+        "https://developers.cloudflare.com/billing/manage/budget-alerts/"
+      ],
+      "accessedOn": "2026-09-01",
       "quotas": {
         "storagePerMonth": "10 GB-month",
         "classAOperationsPerMonth": 1000000,
         "classBOperationsPerMonth": 10000000,
         "egress": "Free",
-        "caveat": "The free tier only applies to Standard storage, and does not apply to Infrequent Access storage."
+        "freeTierCaveat": "The free tier applies only to Standard storage, not Infrequent Access.",
+        "standardOverage": {
+          "storage": "$0.015 per GB-month",
+          "classAOperations": "$4.50 per million requests",
+          "classBOperations": "$0.36 per million requests"
+        }
+      },
+      "costControl": {
+        "providerFact": "R2 usage above the free tier is billed, and Cloudflare threshold billing automatically charges a payment method when accumulated usage charges reach the account threshold.",
+        "projectDecision": "Do not activate R2 for Release 1 because the product plan forbids a service that can incur usage charges. Assets must remain within Pages limits or degrade to the 2D fallback."
+      },
+      "alerting": {
+        "providerFact": "Cloudflare budget alerts use dollar thresholds, are informational, and do not pause or cap usage.",
+        "projectDecision": "No R2 alerts are configured because R2 is not activated. Alerts cannot substitute for the required hard no-charge boundary."
       }
     },
     {
       "id": "github-pages",
-      "role": "portability target: second static host",
-      "plan": "Free",
+      "role": "deployed second-host portability proof",
+      "plan": "GitHub Free, public repository",
       "source": "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits",
-      "accessedOn": "2026-08-30",
+      "additionalSources": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site"
+      ],
+      "accessedOn": "2026-09-01",
       "quotas": {
+        "sourceRepositoryRecommendedSize": "1 GB",
         "publishedSiteSize": "1 GB",
         "bandwidthPerMonth": "100 GB soft limit",
-        "buildsPerHour": "10 soft limit",
-        "usageRestriction": "not intended for or allowed to be used as a free web-hosting service to run an online business, e-commerce site, or commercial SaaS"
+        "buildsPerHour": "10 soft limit; not applicable when publishing with a custom GitHub Actions workflow",
+        "usageRestriction": "not intended for or allowed as free hosting for an online business, e-commerce site, or commercial SaaS"
+      },
+      "alerting": {
+        "providerFact": "The Pages limits page says GitHub Support may email when quotas are exceeded; it does not document configurable 70% or 85% Pages bandwidth alerts.",
+        "inference": "The requested thresholds are not supported for GitHub Pages in the reviewed documentation."
       }
     },
     {
       "id": "netlify",
-      "role": "portability target considered and not selected",
+      "role": "portability alternative considered and not selected",
       "plan": "Free",
       "source": "https://www.netlify.com/pricing/",
-      "accessedOn": "2026-08-30",
+      "additionalSources": [
+        "https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/"
+      ],
+      "accessedOn": "2026-09-01",
       "quotas": {
         "freePlanCredits": 300,
         "creditRates": {
           "bandwidth": "20 credits per GB",
-          "webRequests": "2 credits per 10k requests",
+          "webRequests": "2 credits per 10,000 requests",
           "productionDeploys": "15 credits each",
           "compute": "10 credits per GB-hour"
         },
-        "usdRate": "$10 per 1,500 credits",
-        "derivedBandwidthCeiling": "15 GB/month if the entire 300-credit allowance were spent on bandwidth (300 / 20)",
-        "note": "The free plan is expressed in credits, but the pricing page states the credit cost of each resource, so it IS modellable. Deploys and requests consume the same 300 credits as bandwidth, so the real bandwidth ceiling is below 15 GB/month."
+        "derivedBandwidthCeiling": "15 GB/month if all 300 credits were used for bandwidth; requests and production deploys reduce it",
+        "hardLimit": "The Free plan has hard monthly limits that cannot be exceeded or incur costs.",
+        "automaticUsageNotices": "50%, 75%, and 100%"
+      },
+      "alerting": {
+        "providerFact": "Free-plan usage notices are fixed at 50%, 75%, and 100%.",
+        "inference": "Exact 70% and 85% thresholds are not configurable in the documented Free plan."
       }
     },
     {
       "id": "cloudflare-web-analytics",
-      "role": "analytics candidate for Release 1",
-      "plan": "Available on all plans",
-      "source": "https://developers.cloudflare.com/web-analytics/faq/",
+      "role": "selected optional Release 1 aggregate pageview analytics",
+      "plan": "Free",
+      "source": "https://developers.cloudflare.com/web-analytics/about/",
       "additionalSources": [
-        "https://developers.cloudflare.com/analytics/web-analytics/",
-        "https://blog.cloudflare.com/privacy-first-web-analytics/"
+        "https://developers.cloudflare.com/web-analytics/faq/",
+        "https://developers.cloudflare.com/web-analytics/data-metrics/core-web-vitals/",
+        "https://static.cloudflareinsights.com/beacon.min.js"
       ],
-      "accessedOn": "2026-08-30",
+      "accessedOn": "2026-09-01",
       "quotas": {
-        "cost": "free; available on all plans",
-        "cookies": "none - does not use client-side state such as cookies or localStorage for analytics",
-        "fingerprinting": "none - does not fingerprint individuals via IP, User Agent, or other data for analytics",
-        "samplingQuote": "We retain unsampled beacon data for the past 7 days, after this point data is aggregated down to around 10%.",
-        "ingestionQuote": "The beacon script will fire on every pageview. The data ingestion pipeline does not apply sampling-every received beacon will be recorded.",
-        "querySampling": "between 0.0001% and 100%, dynamically selected based on the filters applied",
-        "beaconScript": "required; manual embed for sites not proxied through Cloudflare",
-        "visitorMethodology": "counts page views arriving from a different site rather than tracking individuals",
-        "customEvents": "NOT ESTABLISHED - whether the enumerated master plan §11.8 event names can be sent as custom events was not confirmed from documentation on the access date"
+        "cost": "free",
+        "cookies": "does not use client-side state such as cookies or localStorage",
+        "fingerprinting": "does not fingerprint individuals via IP address, User Agent, or other data",
+        "ingestion": "the beacon fires on every pageview and every received beacon is recorded without ingestion sampling",
+        "retention": "unsampled beacon data for 7 days; after 7 days data is aggregated to around 10%",
+        "querySampling": "between 0.0001% and 100%, dynamically selected by filter and matching-row volume",
+        "queryStrings": "not logged",
+        "documentedIngestionQuota": "none found in the reviewed official pages; this is not a claim of unlimited capacity",
+        "customEvents": "NOT ESTABLISHED - the reviewed documentation did not establish support for the seven controlled Release 1 custom event names"
+      },
+      "measuredTransfer": {
+        "beaconScriptRawBytes": 28467,
+        "beaconScriptGzipBodyBytes": 9509,
+        "measurement": "curl response from static.cloudflareinsights.com with Accept-Encoding: gzip on 2026-09-01; cache-control max-age=86400",
+        "beaconPayloadBytes": "not measured because no production analytics site/token exists"
       }
     }
   ]

@@ -3,155 +3,188 @@
 - Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
+- Reverified: 2026-09-01
 - Supersedes: none
 
 ## Context
 
 Master plan §11.8 sets an operating-cost target of **$0/month excluding the
-anatomy-model purchase and domain registration**, forbids services that
-auto-upgrade or incur usage charges, and requires any forecast above $5/month to
-carry an owner decision and its own ADR.
+anatomy-model purchase and domain registration**. No service may auto-upgrade or
+incur usage charges. The plan requires 10,000, 100,000, and 1,000,000 monthly
+page-view scenarios covering HTML, JavaScript, image/model transfer, build
+frequency, object operations, and log/analytics volume.
 
-It also requires modelling at least 10,000, 100,000, and 1,000,000 monthly page
-views using measured transfer, build frequency, object operations, and
-log/analytics volume — and requires that provider quotas be recorded with date
-and source rather than recalled.
+All provider facts were re-read from official documentation on 2026-09-01 and
+are recorded with source URLs in
+[`provider-quotas.json`](provider-quotas.json). Re-verify by 2026-12-01.
 
-All quotas below were read from provider documentation on **2026-08-30** and are
-recorded machine-readably in [`provider-quotas.json`](provider-quotas.json).
+## Measured foundation build
 
-## Measurement basis, and its limits
+The current repository can measure only the one-page SBLA-001 foundation shell.
+The 2026-09-01 pinned build emitted:
 
-The only true measurement available today is the SBLA-001 foundation build:
+| Artifact class             | Raw bytes | Independent gzip -9 |
+| -------------------------- | --------: | ------------------: |
+| HTML (`index.html`)        |     1,595 |                 733 |
+| CSS (`assets/index.*.css`) |     4,214 |               1,693 |
+| JavaScript                 |         0 |                   0 |
+| Images                     |         0 |                   0 |
+| 3D models                  |         0 |                   0 |
+| Other emitted files        |         9 |        not material |
+| **Complete `dist/`**       | **5,818** |           **2,640** |
 
-| Artifact             |     Bytes |      Gzip |
-| -------------------- | --------: | --------: |
-| `index.html`         |     1,593 |         — |
-| `_astro/index.*.css` |     4,214 |         — |
-| **Total build**      | **5,816** | **2,331** |
+The raw count is the sum of every emitted file. The gzip values compress files
+independently and are diagnostic, not a claim about a future host’s exact
+content negotiation. One real build and deployment occurred in this remediation,
+but there is no production history from which to measure monthly build frequency
+or cache behaviour.
 
-The raw total is the sum of all emitted files. The gzip figure is the whole build
-concatenated and compressed as a single stream (`cat` then `gzip -9`), which is
-not how a server compresses files individually — treat it as indicative only. The
-raw total is the reproducible number.
+The Cloudflare Web Analytics beacon script was separately measured at 28,467 raw
+bytes and 9,509 gzip transfer bytes. Its beacon payload is not measurable until
+a site is configured.
 
-That is a one-page shell, not the product. Release 1 transfer is therefore
-modelled from the master plan §12.2 budgets, which are the contractual ceilings
-future pages must meet:
+## Budget-derived Release 1 model
 
-| Component                           |           Budget used | Source  |
-| ----------------------------------- | --------------------: | ------- |
-| Non-3D page JS                      |  100 KB gzip (target) | §12.2   |
-| Anatomy page JS excluding 3D engine |  180 KB gzip (target) | §12.2   |
-| Desktop initial 3D payload          |         6 MB (target) | §12.2   |
-| Exercise poster image               |                200 KB | §11.9   |
-| HTML + CSS per page                 | 25 KB gzip (modelled) | derived |
+The product does not exist yet, so Release 1 numbers below are **budget-derived
+planning ceilings, not measurements or forecasts**. They are deliberately
+modelled with no browser/CDN cache credit.
 
-**This model is budget-derived, not measured, and must be re-run against real
-measurements at SBLA-012 and SBLA-015 before it is treated as a forecast.**
+| Component                  | Per applicable view | Basis                                         |
+| -------------------------- | ------------------: | --------------------------------------------- |
+| HTML + CSS                 |               25 KB | SBLA-003 planning allowance                   |
+| Non-3D application JS      |         100 KB gzip | master plan §12.2 target                      |
+| Anatomy application JS     |         180 KB gzip | master plan §12.2 target                      |
+| Exercise poster            |              200 KB | master plan §11.9 budget                      |
+| Exercise loop              |              1.5 MB | master plan §11.9 target                      |
+| Desktop initial 3D payload |                6 MB | master plan §12.2 target                      |
+| Pagefind index             |                1 MB | interim SBLA-003 ceiling; measure in SBLA-016 |
+| Analytics beacon script    |       9.509 KB gzip | measured 2026-09-01                           |
+| Analytics beacon payload   |                1 KB | explicit planning ceiling; unmeasured         |
 
-It also **omits** two components Release 1 will ship: exercise-media loops (§11.9
-allows up to a 3 MB hard ceiling each, half a 3D payload) and the Pagefind search
-index. Their exclusion is a gap, not a conservative choice. They do not change the
-$0 outcome on unmetered delivery, but they must be added before this model sizes
-any metered provider.
+Traffic mix is 90% non-3D and 10% anatomy-with-3D. To close the earlier omission,
+every non-3D view is charged a poster and target-size exercise loop, and every
+view is charged the full interim Pagefind index. This overstates likely transfer
+because those assets load on interaction and caches exist. The 90/10 mix itself
+is not conservative; it is an unmeasured assumption and must be replaced with
+real aggregate traffic after launch.
 
-Modelled per-view transfer:
+Weighted per page view:
 
-- Non-3D page view: 25 KB + 100 KB + 200 KB poster ≈ **325 KB**
-- Anatomy view including 3D payload: 25 KB + 180 KB + 6 MB ≈ **6.2 MB**
-
-Mix assumption: **90% non-3D, 10% anatomy-with-3D**, and no CDN or browser cache
-credit.
-
-Be clear about what these are. The no-cache assumption _is_ pessimistic. The
-90/10 mix is **not** a conservative bound — it is the model's most sensitive
-input and it is a guess. The plan's own information architecture (§5.2 makes
-"body to understanding" the primary journey) could plausibly push anatomy views
-well above 10%, which would raise total egress several-fold. The $0 conclusion is
-insensitive to it because Cloudflare's static requests are unmetered and R2
-egress is free — but any second host or future metered provider is highly
-sensitive to it, so re-measure before relying on it there.
+- HTML/CSS: 25 KB
+- application JS: 108 KB
+- analytics script JS: 9.509 KB
+- poster images: 180 KB
+- exercise loops: 1.35 MB
+- Pagefind index: 1 MB
+- 3D model transfer: 0.6 MB
+- analytics beacon payload: 1 KB
+- **total: 3.273509 MB/page view**
 
 ## Three scenarios
 
-| Monthly page views | Non-3D transfer | 3D transfer | **Total egress** |
-| -----------------: | --------------: | ----------: | ---------------: |
-|             10,000 |          2.9 GB |      6.2 GB |     **≈ 9.1 GB** |
-|            100,000 |         29.3 GB |       62 GB |      **≈ 91 GB** |
-|          1,000,000 |        292.5 GB |      620 GB |     **≈ 913 GB** |
+### Transfer
 
-Object operations on R2, assuming ~5 object reads per 3D view:
+Decimal units are used for modelling (1 GB = 1,000 MB).
 
-|  Scenario | 3D views | Class B reads | Free allowance |
-| --------: | -------: | ------------: | -------------- |
-|    10,000 |    1,000 |         5,000 | 10,000,000     |
-|   100,000 |   10,000 |        50,000 | 10,000,000     |
-| 1,000,000 |  100,000 |       500,000 | 10,000,000     |
+| Monthly page views | HTML/CSS |  App JS | Analytics JS | Images | Exercise loops | Search index | 3D models | Beacon payload |       **Total** |
+| -----------------: | -------: | ------: | -----------: | -----: | -------------: | -----------: | --------: | -------------: | --------------: |
+|             10,000 |  0.25 GB | 1.08 GB |     0.095 GB | 1.8 GB |        13.5 GB |        10 GB |      6 GB |        0.01 GB |    **32.74 GB** |
+|            100,000 |   2.5 GB | 10.8 GB |     0.951 GB |  18 GB |         135 GB |       100 GB |     60 GB |         0.1 GB |   **327.35 GB** |
+|          1,000,000 |    25 GB |  108 GB |     9.509 GB | 180 GB |       1,350 GB |     1,000 GB |    600 GB |           1 GB | **3,273.51 GB** |
 
-Build frequency: content waves and code merges are modelled at ≤10 builds/day
-worst case ≈ 300/month, against a 500/month free allowance.
+### Builds and object operations
 
-Log/analytics volume: **zero**, because ADR 0004 ships Release 1 with no
-analytics provider.
+Build demand does not scale automatically with traffic. Content waves and code
+merges are capped operationally at 10 builds/day, approximately 300/month.
+Static-object demand uses an eight-request/page-view planning allowance. Pages
+documents static requests as free and unlimited.
 
-## Cost outcome
+| Monthly page views | Builds/month | Pages static object GETs | R2 Class A | R2 Class B | Hypothetical R2 reads if activated |
+| -----------------: | -----------: | -----------------------: | ---------: | ---------: | ---------------------------------: |
+|             10,000 |         ≤300 |                   80,000 |          0 |          0 |                              5,000 |
+|            100,000 |         ≤300 |                  800,000 |          0 |          0 |                             50,000 |
+|          1,000,000 |         ≤300 |                8,000,000 |          0 |          0 |                            500,000 |
 
-| Cost driver           | 10k    | 100k   | 1M     | Why                                                |
-| --------------------- | ------ | ------ | ------ | -------------------------------------------------- |
-| Pages static requests | $0     | $0     | $0     | "requests to static assets are free and unlimited" |
-| Pages bandwidth       | $0     | $0     | $0     | Not metered on the free plan                       |
-| Pages builds          | $0     | $0     | $0     | ~300/month vs 500 allowance                        |
-| R2 storage            | $0     | $0     | $0     | Assets well under 10 GB-month                      |
-| R2 egress             | $0     | $0     | $0     | Egress is Free                                     |
-| R2 Class B ops        | $0     | $0     | $0     | ≤500k vs 10M allowance                             |
-| Analytics             | $0     | $0     | $0     | None in Release 1                                  |
-| **Total**             | **$0** | **$0** | **$0** |                                                    |
+The hypothetical column retains the prior sensitivity assumption of five reads
+per 3D view. It is not selected-provider usage: R2 is disabled, so actual R2
+operations are zero in every scenario.
 
-**The $0/month target holds at all three scenarios** on Cloudflare Pages + R2,
-excluding the anatomy model purchase and domain registration as §11.8 permits.
+### Analytics and logs
+
+| Monthly page views | Pageview beacons | Custom events | Budgeted beacon ingestion | Raw log export | Persistent per-user records |
+| -----------------: | ---------------: | ------------: | ------------------------: | -------------: | --------------------------: |
+|             10,000 |           10,000 |             0 |                     10 MB |              0 |                           0 |
+|            100,000 |          100,000 |             0 |                    100 MB |              0 |                           0 |
+|          1,000,000 |        1,000,000 |             0 |                      1 GB |              0 |                           0 |
+
+Cloudflare documents no ingestion sampling and no quota in the official pages
+reviewed. “No documented quota” is not treated as “unlimited”; it is a
+re-verification risk. Field Core Web Vitals wait for enough data to produce a
+stable 75th percentile.
+
+## Cost and hard-stop outcome
+
+| Cost driver                    |    10k |   100k |     1M | Hard-cost boundary               |
+| ------------------------------ | -----: | -----: | -----: | -------------------------------- |
+| Pages static requests/transfer |     $0 |     $0 |     $0 | Free, unlimited static requests  |
+| Pages builds                   |     $0 |     $0 |     $0 | ≤300 vs 500 Free-plan builds     |
+| Pages asset storage/delivery   |     $0 |     $0 |     $0 | ≤20,000 files; each ≤25 MiB      |
+| Web Analytics                  |     $0 |     $0 |     $0 | Free; optional and removable     |
+| R2                             |     $0 |     $0 |     $0 | **Not activated**                |
+| GitHub Pages proof             |     $0 |     $0 |     $0 | Non-production public proof only |
+| **Total**                      | **$0** | **$0** | **$0** | No metered product enabled       |
+
+**The $0/month outcome holds at all three scenarios** because traffic is served
+only by free static Pages features. R2 is excluded even though the hypothetical
+operations fit its free allowance: R2 can bill overage and therefore fails the
+stricter “may not incur usage charges” rule.
 
 ## Decision
 
-1. Model Release 1 on **Cloudflare Pages** for the static site and **Cloudflare
-   R2** for large 3D/media assets.
-2. Treat the **500 builds/month** ceiling as the binding free-tier constraint,
-   not bandwidth. Configure usage alerts at **70% (350 builds)** and **85% (425
-   builds)** where the provider supports them, per §11.8.
-3. Treat the **25 MiB Pages per-file limit** as a hard architectural boundary:
-   any single asset above it must be served from R2, never from Pages.
-4. Re-run this model against measured page weights at SBLA-012 and SBLA-015, and
-   re-verify every quota by **2026-11-30**.
-5. Escalate to the owner with a new ADR if any scenario forecasts above
-   $5/month.
+1. Use Cloudflare Pages Free static delivery for site and Release 1 assets.
+2. Do not enable Pages Functions, Workers Paid, R2, a paid plan, or another
+   metered add-on.
+3. Enforce the 25 MiB per-file boundary. Compress/split/omit oversized assets or
+   use the 2D fallback.
+4. Re-run this model with measured pages at SBLA-012, measured anatomy/media at
+   SBLA-015, and measured Pagefind output at SBLA-016.
+5. Escalate any nonzero cost forecast or any proposed metered service through a
+   superseding ADR and owner decision.
 
-## Consequences
+## 70% and 85% usage controls
 
-- The dominant cost risk is **not** traffic; it is build frequency and per-file
-  size. Content waves that rebuild on every record merge could approach the
-  build ceiling; batch them.
-- Because R2 egress is free and static requests are unmetered, traffic growth
-  does not threaten the $0 target on this provider pair. Provider _policy
-  change_ does — hence the fixed re-verification date.
-- The pessimistic no-cache assumption means real usage should sit well below
-  these figures; the model should not be used to justify heavier budgets.
+The reviewed Cloudflare documentation does not expose configurable Free Pages
+build alerts. Generic usage-billing notifications are documented for
+Professional/pay-as-you-go accounts, not as a Pages Free build counter. No
+Cloudflare account credential/project existed here, so no alert configuration
+is claimed.
+
+The operational substitute is weekly build-count review with actions at 350
+builds (70%) and 425 builds (85%). Netlify’s unselected Free plan has fixed
+50%/75%/100% notices, not configurable 70%/85% thresholds. GitHub Pages does not
+document configurable Pages quota alerts. R2 budget alerts are informational and
+do not cap charges, so R2 remains disabled rather than “protected” by an alert.
 
 ## Alternatives considered
 
-- **Netlify.** Rejected on capacity, not on opacity. Its free plan is a
-  300-credit allowance, and the pricing page **does** state conversion rates: 20
-  credits/GB bandwidth, 2 credits/10k web requests, 15 credits per production
-  deploy. Spending the whole allowance on bandwidth gives a ceiling of **15
-  GB/month** (300 ÷ 20), and deploys and requests draw on the same pool, so the
-  real ceiling is lower. Scenario 1 (≈9.1 GB) fits; scenario 2 (≈91 GB) needs
-  ~1,826 credits and scenario 3 ~18,260 — both far beyond free. Netlify is
-  unusable as a primary host and viable only as a low-traffic portability
-  target.
-- **GitHub Pages as primary.** Rejected, but with the arithmetic stated
-  correctly: scenario 2 (≈91.3 GB) is **within** the 100 GB/month soft limit, at
-  about 91% of it — roughly 9% headroom, not an overrun. Scenario 3 (≈913 GB)
-  exceeds it about ninefold. The decisive objections are the 1 GB published-site
-  cap, which conflicts with 3D assets, and terms that exclude commercial use. It
-  remains the portability target — see ADR 0003.
-- **Runtime server or database.** Rejected by §11.1: Release 1 has no accounts,
-  user content, payments, or personalized data.
+- **Cloudflare R2.** Capacity fits the hypothetical operation model, but metered
+  overage and automatic threshold billing violate the no-charge rule.
+- **Netlify Free.** Its hard limit cannot incur cost, but 300 credits cap pure
+  bandwidth at 15 GB before requests/deploys. Even the 10k conservative scenario
+  exceeds that ceiling.
+- **GitHub Pages as primary.** The 1 GB site limit, 100 GB/month soft bandwidth
+  limit, and commercial-use restriction reject it. It remains the successfully
+  deployed portability proof.
+- **Runtime server/database.** Rejected by §11.1 and would create both runtime
+  cost and security surface.
+
+## Reversal cost
+
+- Updating assumptions and rerunning the model is **low** cost because inputs are
+  explicit.
+- Moving the unchanged static artifact to another host is **low to moderate**
+  cost; quotas, headers, alerts, and terms still require review.
+- Activating a separate asset store is **moderate** cost because URLs, CORS,
+  caching, operations, fallback, and hard cost controls must be implemented.
+- Moving to runtime infrastructure is **high** cost and requires superseding ADRs
+  0001, 0003, and this record.

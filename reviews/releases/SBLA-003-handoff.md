@@ -1,199 +1,209 @@
 # Handoff: SBLA-003 — Architecture, hosting, analytics, and $0 infrastructure ADRs
 
+## Status
+
+Builder implementation is complete and ready for independent review. All five
+ADRs remain **Proposed**. Owner approval has not been recorded and must occur
+after the independent review.
+
 ## Objective
 
-Deliver the SBLA-003 row of master plan §18: ADRs for static architecture,
-content data, hosting, and analytics, plus a $0 infrastructure model at three
-traffic scenarios, with quotas cited with access date and the portability build
-tested.
+Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
 
-## Inputs and exact paths
+- decide static-first architecture, Astro/React islands, file content, Pagefind,
+  hosting, asset delivery, analytics, and no runtime AI;
+- record alternatives and reversal cost;
+- model $0/month at 10,000, 100,000, and 1,000,000 monthly page views with
+  transfer, builds, object operations, and analytics/log volume;
+- verify decision-relevant provider facts from primary sources; and
+- build once, deploy that unchanged artifact to a second static host, and test
+  the real deployment.
 
-- Canonical plan: `docs/product/master-plan.md` (§11.1, §11.2, §11.7, §11.8,
-  §12.2, §18)
-- Dependency per §18: **SBLA-001**, accepted at
+## Inputs and repository state
+
+- Canonical plan: `docs/product/master-plan.md` (§4.1, §10, §11.1, §11.2,
+  §11.7, §11.8, §11.9, §12.2, §18)
+- Exact §18 dependency: accepted SBLA-001 commit
   `141b63913b75791a6630303fdd1936fc615b3471`
-- Base commit: `141b63913b75791a6630303fdd1936fc615b3471`
+- Preliminary SBLA-003 candidate:
+  `790576994402b9ae17b72174938d3b105d3bbcee`
+- Accepted operating-model mainline merged before remediation:
+  `77a76231df2f9ce8c127885e1383e1da4034b1f5`
+- Remediation start HEAD:
+  `84c3e06b2cb6e487fabcfa897d128490be05394a`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
+- Active claim: `docs/runbooks/current-work.md`, expanded before each newly
+  required path (`astro.config.mjs`, then `src/pages/index.astro`) was edited
 
-## Constraints
-
-- SBLA-003 owns architecture and provider decisions only. It defines no entity
-  or claim schema (SBLA-007), selects no anatomy asset (SBLA-004–006), and
-  builds no product surface (SBLA-012+).
-- §11.8 forbids copying assumed free-tier limits from model memory; every quota
-  is sourced and dated.
-- No scientific claim, media asset, or content record was added.
-- Nothing was deployed. Deploying publishes the project and is an owner action.
-
-### Process note on the base commit
-
-§18 names SBLA-003's dependency as **SBLA-001**, so this branch starts from
-`141b639`, not from the SBLA-002 candidate. Consequently the SBLA-002 operating
-model (`AGENTS.md`, `CLAUDE.md`, `docs/runbooks/**`) does not exist on this
-branch, and the current-work ledger could not be used. The claim is recorded
-here in the ledger's own fields instead:
-
-| Field            | Value                                                 |
-| ---------------- | ----------------------------------------------------- |
-| Task             | SBLA-003                                              |
-| Role             | Codex                                                 |
-| Branch           | `codex/SBLA-003-architecture-adrs`                    |
-| Worktree         | `.worktrees/sbla-003-architecture-adrs`               |
-| Base commit      | `141b63913b75791a6630303fdd1936fc615b3471`            |
-| Started          | 2026-08-30 18:41 EDT                                  |
-| Expected handoff | `reviews/releases/SBLA-003-handoff.md`                |
-| Paths owned      | `docs/adr/**`, `reviews/releases/SBLA-003-handoff.md` |
-
-When SBLA-002 is accepted and merged, this claim must be back-recorded into
-`docs/runbooks/current-work.md` as a closed claim. Integrating both branches will
-conflict only on `README.md` if SBLA-003 is later extended to touch it; it does
-not touch it today.
+The remediation preserves the accepted SBLA-002 operating model. It does not
+define the SBLA-007 schemas, select SBLA-004–006 assets, or build later product
+surfaces.
 
 ## Work completed
 
-Five ADRs plus a machine-readable evidence record:
+### Architecture package
 
-- `docs/adr/0001-static-first-architecture.md` — ratifies static-first with no
-  runtime service; fixes the §11.2 stack; makes build-time validation the only
-  path to a published fact.
-- `docs/adr/0002-content-data-and-graph.md` — records are Git files under
-  `content/`; Zod is the single validation authority for both Astro collections
-  and the standalone validators; the graph is generated, never hand-edited;
-  claims are referenced by typed ID. Explicitly does **not** define the schemas,
-  which are SBLA-007's.
-- `docs/adr/0003-hosting-and-asset-delivery.md` — Cloudflare Pages primary, R2
-  for large assets, GitHub Pages as portability target, no Pages Functions;
-  carries the measured portability result below.
-- `docs/adr/0004-analytics.md` — **no analytics provider in Release 1**, with the
-  reasoning and the exact conditions for a superseding ADR.
-- `docs/adr/0005-zero-cost-infrastructure-model.md` — the three-scenario model.
-- `docs/adr/provider-quotas.json` — every quota with source URL and access date,
-  plus a `reverifyBy` date of 2026-11-30.
-- `docs/adr/README.md` — ADR format, immutability rule, index, and the
-  cite-your-source requirement.
+- `docs/adr/0001-static-first-architecture.md` adopts static pages and versioned
+  JSON, Astro, React islands, R3F/Three.js, Zod, MDX with typed claim IDs,
+  Pagefind, a generated graph, and explicitly no runtime AI.
+- `docs/adr/0002-content-data-and-graph.md` adopts Git-backed file records,
+  shared Zod validation, generated graph output, typed claim references, and
+  fail-closed validation without pre-empting SBLA-007 schema ownership.
+- `docs/adr/0003-hosting-and-asset-delivery.md` selects Cloudflare Pages Free
+  static delivery, keeps Release 1 assets under its 25 MiB/file boundary,
+  excludes metered R2, and records the real GitHub Pages portability proof.
+- `docs/adr/0004-analytics.md` selects Cloudflare Web Analytics only as an
+  optional, launch-nonblocking aggregate pageview direction. It permits no raw
+  queries/free text, persistent per-user ID, raw log export, or unverified
+  custom event implementation.
+- `docs/adr/0005-zero-cost-infrastructure-model.md` separates measured
+  foundation output from budget-derived Release 1 modelling and covers every
+  required dimension at all three traffic scenarios.
+- Every ADR or the package records alternatives and reversal cost, including
+  the high reversal cost of introducing runtime AI.
 
-### Portability made enforceable
+### Current provider evidence
 
-ADR 0003 originally recorded that "a future task must add a portability
-regression check". That check now exists rather than being deferred:
+`docs/adr/provider-quotas.json` was reverified on **2026-09-01** from official
+provider documentation only. It distinguishes provider facts from project
+inference and records a 2026-12-01 re-verification date.
 
-- `scripts/portability/static-server.mjs` — a bare `node:http` static file
-  server with no framework, adapter, or host behaviour, plus path-traversal
-  rejection.
-- `tests/integration/portability.test.ts` — 4 tests: the home page renders, every
-  asset the built HTML references resolves at a domain root, no server-side
-  redirect is needed, and the subpath limitation still holds.
-- `pnpm test:portability`, wired into `pnpm verify` **after** the build (it needs
-  `dist/`), with its own vitest config so `pnpm test` — which runs before the
-  build — is unaffected.
+Decision-relevant findings:
 
-The subpath assertion is two-directional on purpose. If a later change makes the
-build subpath-safe, the test fails with a message telling the author to update
-ADR 0003, so the document and the behaviour cannot drift apart in either
-direction.
+- Cloudflare Pages Free: 500 builds/month, one concurrent build, 20,000 files,
+  25 MiB/file, and free/unlimited static asset requests.
+- R2: 10 GB-month, 1 million Class A, and 10 million Class B free allowances,
+  followed by metered overage; threshold billing can charge a payment method.
+  R2 is therefore not activated.
+- GitHub Pages: 1 GB published-site limit, 100 GB/month soft bandwidth limit,
+  and a commercial-hosting restriction. It is only a public portability proof.
+- Netlify Free: 300 credits with a hard no-overage boundary, but at most 15 GB
+  if all credits went to bandwidth; requests/deploys reduce that capacity.
+- Cloudflare Web Analytics: free, no cookie/local-storage state, no analytics
+  fingerprinting, every received beacon recorded, seven days unsampled then
+  aggregated, query sampling, and no query-string logging. No ingestion quota
+  or support for the planned controlled custom events was established.
 
-**Mutation-tested, so it is not vacuous.** Three independent regressions were
-injected and each was caught: removing a referenced asset from the build
-(`asset /_astro/index.*.css must resolve at a domain root: expected 404 to be
-200`), removing required page content, and switching asset paths to relative
-(which correctly flags that ADR 0003 needs updating). All three exited non-zero;
-the unmutated build passes.
+No provider was credited with an unsupported 70%/85% alert. Cloudflare's
+reviewed documentation does not expose configurable Free Pages build-count
+alerts. The evidence-backed operating fallback is a weekly review at 350 builds
+(70%) and correction/release-blocking builds only at 425 (85%). No Cloudflare
+project or alert configuration is claimed.
 
-## Decisions made
+### Measured and modelled infrastructure
 
-- **Adopt Cloudflare Web Analytics for Release 1 pageviews.** The first draft of
-  ADR 0004 recommended shipping with no analytics, on the stated ground that
-  Cloudflare's documentation did not describe its cookie, fingerprinting, or
-  sampling behaviour. **That premise was false** — it came from reading only the
-  product overview page. The FAQ states the sampling behaviour verbatim, and
-  Cloudflare's documentation states it uses no client-side state and does not
-  fingerprint. Master plan §4.1 lists cookieless analytics as a Release 1
-  deliverable "if available on the chosen host", and the condition is met, so
-  shipping without it would have been an uncited descope. Custom events are _not_
-  adopted: whether the seven enumerated §11.8 event names are supported was not
-  established, so only pageview measurement is in scope.
-- **GitHub Pages, not Netlify, as the portability target — on capacity, not
-  opacity.** The first draft claimed Netlify "cannot be modelled". That was
-  wrong: the pricing page states conversion rates (20 credits/GB bandwidth, 2
-  credits/10k requests, 15 credits/deploy) against a 300-credit free allowance,
-  which yields a computable ceiling of ~15 GB/month before deploys and requests
-  are counted. That covers scenario 1 but not scenario 2 or 3.
-- **Builds, not bandwidth, are the binding free-tier constraint.** Static
-  requests are documented unmetered, so the 500 builds/month ceiling is what the
-  70%/85% alerts must watch.
-- **The cost model is labelled budget-derived, not measured.** Only the
-  foundation shell exists today, so Release 1 weights come from §12.2 budgets
-  and are marked for re-measurement at SBLA-012/015 rather than presented as a
-  forecast.
-- **Pessimistic mix and no cache credit** (90/10 split, every visitor downloads
-  everything) so the $0 conclusion is not flattered by optimistic assumptions.
+The final foundation artifact contains nine files and measures:
 
-## Pre-review remediation
+| Class         | Raw bytes | Independent gzip -9 |
+| ------------- | --------: | ------------------: |
+| HTML          |     1,595 |                 733 |
+| CSS           |     4,214 |               1,693 |
+| JS/images/3D  |         0 |                   0 |
+| Other files   |         9 |        not material |
+| Complete dist |     5,818 |               2,640 |
 
-An adversarial pre-review audit of candidate `0df3e9d` found factual errors in
-the first draft. All were repaired before this handoff:
+Those are measurements of the current shell only. The Release 1 traffic model
+is explicitly budget-derived and charges every view with HTML/CSS, application
+JS, the Pagefind ceiling, analytics script/payload, and a weighted poster,
+exercise loop, and model payload without cache credit. It records builds,
+Pages object GETs, actual zero R2 operations, hypothetical R2 sensitivity,
+pageview beacons, zero custom events, zero raw logs, and zero persistent user
+records at 10k/100k/1M views.
 
-| Finding                                                                                                                 | Repair                                                                                                            |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| ADR 0004's premise — that Cloudflare's docs do not state cookie/fingerprint/sampling behaviour — is false               | ADR 0004 rewritten; decision reversed to adopt                                                                    |
-| ADR 0004 descoped the §4.1 Release 1 analytics item without citing §4.1                                                 | §4.1 now cited as the governing requirement                                                                       |
-| "Netlify cannot be modelled" is refuted by its own pricing page                                                         | Conversion rates recorded; rejection re-argued on computed capacity                                               |
-| ADR 0005 said GitHub Pages' 100 GB limit "is exceeded at scenario 2" when 91.3 GB is within it                          | Corrected to ~91% of the limit, ~9% headroom; rejection re-grounded on the 1 GB site cap and commercial-use terms |
-| The 90/10 traffic mix was labelled "deliberately pessimistic" though it is a guess and the model's most sensitive input | Relabelled honestly, with the sensitivity stated                                                                  |
-| "R2 is required, not merely preferred" rested on an unmeasured asset size                                               | Made conditional on the 25 MiB per-file limit; notes §12.2 budgets sit under it                                   |
-| The model silently omits exercise-media loops and the search index                                                      | Omission now stated explicitly as a gap                                                                           |
-| The "measured" gzip figure was not reproducible                                                                         | Method stated (`cat` then `gzip -9`); flagged indicative, raw total is authoritative                              |
-| All five ADRs violated the Status vocabulary the same commit defines                                                    | Normalised to `Proposed`                                                                                          |
+The $0 result depends on a hard product boundary, not on staying within a
+metered free allowance: use only Cloudflare Pages Free static delivery and the
+optional free analytics service; do not activate R2, Functions, Workers Paid,
+or another metered product.
 
-## Tests/checks run and results
+## Portability implementation and TDD evidence
 
-Pinned runtime: Node.js `v24.20.0`, pnpm `11.24.0`.
+The preliminary candidate added a bare `node:http` static server, a dedicated
+Vitest integration config, and `pnpm test:portability` inside the stable
+`pnpm verify` contract. Remediation changed the test from pinning a known
+subpath failure to requiring one artifact to work at both mounts.
 
-- `pnpm install --frozen-lockfile` — PASS.
-- `pnpm verify` — **PASS (exit 0)**: Prettier PASS; ESLint PASS 0 warnings;
-  `astro check` 23 files, 0 errors/warnings/hints; 3 unit files, 10 tests;
-  content/graph/evidence adapters PASS in foundation mode; 1 page built;
-  foundation contract PASS.
-- **Measured** foundation build transfer: `index.html` 1,593 B, CSS 4,214 B,
-  total **5,816 B raw / 2,331 B gzip**.
-- **Portability, Test 1 — root.** `dist/` served by `python3 -m http.server`
-  (no Cloudflare, Astro, or Node runtime): `/` → 200, `/_astro/index.*.css` →
-  200, page content assertion present. Host independence confirmed.
-- **Portability, Test 2 — subpath.** Same artifact served at
-  `/science-lifting-atlas/`: page → 200, but the CSS reference
-  `/_astro/index.*.css` → **404**, because the build emits root-absolute asset
-  paths. Recorded as a constraint in ADR 0003.
-- **Link integrity:** 13 relative links across `docs/adr/` checked, 0 broken.
-- **Cited sources:** all 5 provider URLs returned HTTP 200 on 2026-08-30.
-- Arithmetic in ADR 0005 re-checked by hand against the stated per-view figures.
+TDD cycles on 2026-09-01:
 
-## Known uncertainties
+1. **RED:** generated `/_astro/index.*.css` escaped
+   `/science-lifting-atlas/`. `vite.base: './'` was overridden by Astro;
+   Astro `base: './'` emitted `/./_astro/...` and remained red.
+2. **GREEN:** Astro `build.assetsPrefix: '.'` emitted a mount-relative URL.
+3. **RED:** the exact branch-based GitHub Pages publication path could not
+   carry the host-reserved `_astro` directory without a host-specific marker.
+4. **GREEN:** supported Astro `build.assets: 'assets'` emitted a generic asset
+   directory. No post-build mutation was introduced.
+5. The first external deployment rendered page/CSS byte-identically, but a
+   later navigation inspection found its wordmark `href="/"` escaped to the
+   GitHub host root. This earlier proof is intentionally retained in ADR 0003
+   as incomplete evidence.
+6. **RED:** the new navigation contract failed because `/` was outside
+   `/science-lifting-atlas/`.
+7. **GREEN:** the minimum application change used the standard
+   document-relative `href="./"`. All five tests pass at a root and project
+   subpath, including every emitted asset reference and every same-origin
+   application-authored anchor.
 
-- **The cost model is budget-derived, not measured.** No Release 1 page exists.
-  If real page weights exceed §12.2 budgets, every scenario grows proportionally.
-  It must be re-run at SBLA-012 and SBLA-015.
-- **The 5-object-reads-per-3D-view assumption** in the R2 operations table is an
-  estimate, not a measurement. It has three orders of magnitude of headroom, so
-  it does not change the $0 conclusion, but it is not evidence.
-- **Nothing has been deployed.** Portability is proven against a generic static
-  server, not against Cloudflare Pages or GitHub Pages themselves. A real deploy
-  needs owner authorisation and a domain.
-- **Provider terms change.** Every quota is a point-in-time reading with a
-  2026-11-30 re-verification date. Netlify's shift to credits is a live example
-  of why.
-- **Netlify was not fully evaluated** — only enough to establish it could not be
-  modelled from its pricing page on the access date.
-- **`pnpm test:e2e` was not run** on this branch: Chromium cannot launch in this
-  sandboxed shell (`bootstrap_check_in … Permission denied`). SBLA-003 changes no
-  runtime code — it adds only Markdown and JSON — but the gate is unrun here.
-- The GitHub Pages fallback covers the **shell only**; its bandwidth and size
-  limits cannot carry 3D assets, so failover implies the 2D degraded path.
+Astro documents standard anchor navigation and does not rewrite manually
+authored root links for `base`. The document-relative link is required because
+the final mount is intentionally unknown at build time.
 
-## Files created or modified
+## Exact second-host deployment evidence
 
-Created:
+Deployment date: **2026-09-01**. The owner-authorized proof used the existing
+authenticated GitHub account and made no billing, paid-plan, secret, custom
+domain, or unrelated account change.
+
+- Source repository commit used for the artifact:
+  `9f26a3a3d94bb2ea763304f57e817d39758c5bf6`
+- Exact artifact content-manifest SHA-256:
+  `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`
+- Public deployment-only repository:
+  <https://github.com/FrankieBiz/sbla-003-portability-proof-20260901>
+- Deployment repository commit:
+  `569eef0d0ff4d2528f0fd7eaf0f5a0e7fa3e92ca`
+- GitHub Pages run:
+  <https://github.com/FrankieBiz/sbla-003-portability-proof-20260901/actions/runs/33524170082>
+  — success
+- Public URL:
+  <https://frankiebiz.github.io/sbla-003-portability-proof-20260901/>
+
+The deployment repository's `main` branch contains only the nine generated
+`dist/` files. `diff -qr --exclude=.git dist DEPLOYMENT_COPY` returned no
+difference before the push. After the Pages run completed:
+
+- page: HTTP 200; downloaded/local SHA-256 both
+  `bc1ac51076b718db0343aa69136f25e9248360c3675fbe65da27333ae5187110`;
+- referenced CSS: HTTP 200; downloaded/local SHA-256 both
+  `76a9808cd41f62deae3f4c609fa4fd58d28a57f083b414a137e48aa20d271d5e`;
+- wordmark `./` navigation: HTTP 200 at the project URL; and
+- `health.txt`: HTTP 200 under the project mount.
+
+The earlier, superseded run `33515952080` proved page/CSS delivery but failed
+the later navigation inspection. It is not the acceptance proof.
+
+## Verification results
+
+Pinned runtime throughout: Node.js `v24.20.0`, pnpm `11.24.0`.
+
+- Post-mainline baseline before remediation: `pnpm install --frozen-lockfile`
+  PASS; `pnpm verify` PASS with 7 unit files/47 tests, 4 portability tests,
+  production build, and foundation contract.
+- Final `pnpm verify`: PASS with Prettier, ESLint (0 warnings), Astro diagnostics
+  (0 errors/warnings/hints), 7 unit files/47 tests, foundation-mode
+  content/graph/evidence validation, production build, 5 portability tests,
+  and foundation contract.
+- `pnpm test:e2e`: PASS, 1 Chromium test including the JavaScript-disabled
+  static foundation.
+- `jq empty docs/adr/provider-quotas.json`: PASS.
+- ADR and handoff relative-link check: PASS, 0 broken links.
+- Every cited provider URL: HTTP 200 on 2026-09-01.
+- Model arithmetic assertion: PASS.
+- `git diff --check`: PASS.
+
+## Files created or modified for SBLA-003
+
+Created in the preliminary candidate:
 
 - `docs/adr/0001-static-first-architecture.md`
 - `docs/adr/0002-content-data-and-graph.md`
@@ -202,41 +212,76 @@ Created:
 - `docs/adr/0005-zero-cost-infrastructure-model.md`
 - `docs/adr/provider-quotas.json`
 - `reviews/releases/SBLA-003-handoff.md`
+- `scripts/portability/static-server.mjs`
+- `tests/integration/portability.test.ts`
+- `vitest.portability.config.ts`
 
-Modified:
+Modified across the preliminary candidate and remediation:
 
+- `README.md`
+- `astro.config.mjs`
 - `docs/adr/README.md`
+- `docs/runbooks/current-work.md`
+- `package.json`
+- `src/pages/index.astro`
+- `tests/integration/portability.test.ts`
 
-## Required reviewer action
+## Self-review
 
-Independently review this branch at its final commit and return PASS or FAIL per
-criterion to `reviews/releases/SBLA-003-r1.md`. Do not repair the artifact.
+- Reviewed the full SBLA-003 diff from its exact SBLA-001 dependency and the
+  bounded remediation diff from `84c3e06...`.
+- Confirmed no stable command/gate was renamed, removed, weakened, or reordered
+  around its prerequisites.
+- Confirmed all ADR statuses remain Proposed and no owner approval is implied.
+- Confirmed provider facts are dated and sourced; inference, measured shell
+  bytes, and budget-derived Release 1 inputs are labelled separately.
+- Confirmed the analytics and cost ADRs agree: optional pageview analytics is
+  included in transfer/volume/cost, while custom events, raw logs, and
+  persistent per-user records are zero.
+- Confirmed R2 is excluded rather than protected by a non-blocking budget alert.
+- Confirmed the proof repo is non-production, has no custom domain, contains no
+  secret/source/workflow, and serves bytes identical to the local artifact.
 
-Specifically decide:
+No Critical or Important defect was found in self-review.
 
-1. Whether every quota in `provider-quotas.json` matches its cited source, and
-   whether any was taken from memory rather than the page.
-2. Whether the three-scenario model satisfies §11.8, and whether labelling it
-   budget-derived is an acceptable answer to "measured transfer" given that no
-   Release 1 page exists yet.
-3. Whether the $0 conclusion survives your own arithmetic.
-4. Whether the portability evidence satisfies "can export and deploy to a second
-   static host from the same build artifact", given the demonstrated subpath
-   limitation and that no real deploy occurred.
-5. Whether deferring analytics is correct under §11.8, or whether Release 1
-   requires a provider decision now.
-6. Whether ADR 0002 stays clear of SBLA-007's schema ownership.
-7. Whether starting from `141b639` rather than the SBLA-002 candidate, and
-   recording the claim in the handoff instead of the ledger, is acceptable.
+## Remaining concerns and owner decisions
 
-## Acceptance criteria
+- Provider quotas and terms are time-unstable; reverify by 2026-12-01 and before
+  production provider activation.
+- The Release 1 weights, traffic mix, Pagefind allowance, build frequency,
+  object request count, and beacon payload are planning inputs, not production
+  measurements. Re-measure at SBLA-012, SBLA-015, and SBLA-016.
+- No Cloudflare account/project was authenticated here. The production Pages
+  project, CSP/privacy integration, optional analytics beacon, and weekly quota
+  review remain future implementation; none is falsely claimed configured.
+- The reviewed Cloudflare Web Analytics pages document no ingestion quota and
+  did not establish controlled custom-event support. Analytics must remain
+  optional, pageviews-only, and launch-nonblocking until reverified.
+- GitHub Pages is a public non-production proof, not a commercial fallback for
+  the full atlas. Its repository should be removed or replaced if its proof
+  purpose ends or commercial restrictions become relevant.
+- Owner approval is still required for the proposed provider direction, $0
+  model, and optional analytics choice.
 
-- ADRs exist for static architecture, content data, hosting, and analytics.
-- A $0 model covers 10,000, 100,000, and 1,000,000 monthly page views.
-- Every provider quota carries a source URL and an access date.
-- The portability property is tested from the same build artifact, with results
-  recorded including failures.
-- No SBLA-001 command, gate, or test is renamed, removed, or weakened.
-- No later-task scope (schemas, assets, design system, content) is pre-empted.
-- `pnpm verify` exits zero and the working tree is clean.
-- The owner approves the provider direction and the $0 model, per §18.
+## Required independent reviewer action
+
+Review the final branch without repairing it and write the exact append-only
+report `reviews/releases/SBLA-003-r1.md`. Return PASS or FAIL per criterion:
+
+1. All five ADR decisions, alternatives, consequences, and reversal costs match
+   master plan §§11.1–11.2 and Phase 0 task 0.2, including no runtime AI.
+2. Every decision-relevant provider fact is supported by its dated official
+   source and no inference is presented as a provider guarantee.
+3. The three-scenario model covers measured HTML/JS/image/model transfer, build
+   frequency, object operations, and analytics/log volume, and its arithmetic
+   and $0 conclusion survive independent recalculation.
+4. The no-auto-charge rule is satisfied by excluding metered services, and the
+   70%/85% alert limitation and fallback are honest.
+5. The optional analytics decision obeys the privacy/event/log restrictions and
+   is represented consistently in the cost model.
+6. One unchanged artifact actually deploys and works at a second static host,
+   including page, assets, navigation, and health path.
+7. ADR 0002 stays clear of SBLA-007 schema ownership and no later-task scope is
+   pre-empted.
+8. The accepted SBLA-002 operating model, stable command contract, claim ledger,
+   and owner-approval boundary remain intact.
