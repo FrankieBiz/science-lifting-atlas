@@ -74,6 +74,38 @@ describe('build artifact portability', () => {
     expect(response.status).toBe(200);
   });
 
+  it('keeps same-origin navigation inside both deployment mounts', async () => {
+    const deployments = [
+      { pageUrl: `${rootUrl}/`, mount: '/' },
+      {
+        pageUrl: `${subpathUrl}/science-lifting-atlas/`,
+        mount: '/science-lifting-atlas/',
+      },
+    ];
+
+    for (const deployment of deployments) {
+      const page = await fetch(deployment.pageUrl);
+      const html = await page.text();
+      const hrefs = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(
+        (match) => match[1],
+      );
+
+      expect(hrefs.length).toBeGreaterThan(0);
+
+      for (const href of hrefs) {
+        if (!href) continue;
+        const target = new URL(href, page.url);
+        if (target.origin !== new URL(page.url).origin) continue;
+
+        expect(
+          target.pathname,
+          `navigation ${href} must remain inside ${deployment.mount}`,
+        ).toMatch(new RegExp(`^${deployment.mount.replaceAll('/', '\\/')}`));
+        expect((await fetch(target)).status).toBe(200);
+      }
+    }
+  });
+
   it('serves the same built assets from a project subpath', async () => {
     const page = await fetch(`${subpathUrl}/science-lifting-atlas/`);
     expect(page.status).toBe(200);
