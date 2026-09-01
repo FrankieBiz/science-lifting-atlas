@@ -54,14 +54,14 @@ describe('build artifact portability', () => {
 
   it('resolves every asset the built HTML references, at a domain root', async () => {
     const html = await (await fetch(`${rootUrl}/`)).text();
-    const refs = [...html.matchAll(/(?:href|src)="(\/[^"]*)"/g)].map(
-      (m) => m[1],
-    );
+    const refs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
+      .map((m) => m[1])
+      .filter((ref): ref is string => Boolean(ref?.includes('_astro/')));
 
     expect(refs.length).toBeGreaterThan(0);
 
     for (const ref of refs) {
-      const response = await fetch(`${rootUrl}${ref}`);
+      const response = await fetch(new URL(ref, `${rootUrl}/`));
       expect(
         response.status,
         `asset ${ref} must resolve at a domain root`,
@@ -74,28 +74,30 @@ describe('build artifact portability', () => {
     expect(response.status).toBe(200);
   });
 
-  it('documents the known subpath limitation: root-absolute assets escape a subpath', async () => {
+  it('serves the same built assets from a project subpath', async () => {
     const page = await fetch(`${subpathUrl}/science-lifting-atlas/`);
     expect(page.status).toBe(200);
 
     const html = await page.text();
-    const assetRefs = [...html.matchAll(/(?:href|src)="(\/[^"]*)"/g)]
+    expect(html).toContain('Science-Based Lifting Atlas');
+    const assetRefs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)]
       .map((m) => m[1])
-      .filter((ref): ref is string => Boolean(ref?.startsWith('/_astro/')));
+      .filter((ref): ref is string => Boolean(ref?.includes('_astro/')));
 
-    expect(
-      assetRefs.length,
-      'the build still emits root-absolute /_astro/ asset paths',
-    ).toBeGreaterThan(0);
+    expect(assetRefs.length).toBeGreaterThan(0);
 
-    // If this assertion ever fails, the build has become subpath-safe. That is
-    // an improvement: update ADR 0003, which currently records the opposite.
     for (const ref of assetRefs) {
-      const response = await fetch(`${subpathUrl}${ref}`);
+      const assetUrl = new URL(ref, page.url);
+      expect(
+        assetUrl.pathname,
+        `asset ${ref} must remain inside the project subpath`,
+      ).toMatch(/^\/science-lifting-atlas\//);
+
+      const response = await fetch(assetUrl);
       expect(
         response.status,
-        `ADR 0003 records that ${ref} 404s under a subpath. If this now resolves, the constraint is gone and ADR 0003 must be updated.`,
-      ).toBe(404);
+        `asset ${ref} must resolve from the same artifact under a subpath`,
+      ).toBe(200);
     }
   });
 });
