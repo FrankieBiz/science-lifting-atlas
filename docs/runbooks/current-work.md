@@ -29,8 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task | Role | Branch | Worktree | Base commit | Started | Expected handoff | Paths owned |
-| ---- | ---- | ------ | -------- | ----------- | ------- | ---------------- | ----------- |
+| Task                              | Role  | Branch                             | Worktree                                | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                                                                                                     |
+| --------------------------------- | ----- | ---------------------------------- | --------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-003 code-quality remediation | Codex | `codex/SBLA-003-architecture-adrs` | `.worktrees/sbla-003-architecture-adrs` | `16fda3b24b5f9905ded03cec4da7b86391ef00ab` | 2026-09-01 19:54 EDT | `reviews/releases/SBLA-003-handoff.md` | `docs/runbooks/current-work.md`; `scripts/portability/static-server.mjs`; `tests/integration/portability.test.ts`; optional focused helpers/tests under `tests/integration/portability/`; `vitest.portability.config.ts`; `README.md`; `reviews/releases/SBLA-003-handoff.md`; `package.json` only if an explicit build wrapper materially improves the stable command contract |
 
 ## Closed claims
 
