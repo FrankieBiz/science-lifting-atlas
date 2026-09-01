@@ -21,8 +21,9 @@ overage; Cloudflare budget alerts are informational and do not cap usage.
 
 ## Decision
 
-1. **Primary host: Cloudflare Pages Free, static features only.** Release 1 uses
-   no Pages Functions, runtime Worker, paid plan, or metered add-on.
+1. **Proposed primary host: Cloudflare Pages Free, static features only.** If
+   approved, Release 1 uses no Pages Functions, runtime Worker, paid plan, or
+   metered add-on.
 2. **Asset delivery: Pages itself while every file is ≤25 MiB.** The current
    6 MB target/10 MB ceiling for initial desktop 3D and the 3 MB exercise-loop
    ceiling fit. SBLA-005 must measure real assets. If an asset exceeds 25 MiB,
@@ -36,12 +37,13 @@ overage; Cloudflare budget alerts are informational and do not cap usage.
    fallback, not the production host. Its 1 GB published-site cap, 100 GB/month
    soft bandwidth limit, and commercial-use restriction prevent using it as the
    primary Release 1 host.
-5. **Emit relative, host-safe generated and application-authored URLs.** Astro
-   `build.assetsPrefix: '.'` makes generated URLs relative, and
-   `build.assets: 'assets'` avoids a host-reserved underscore directory. No
-   post-build rewrite or host-specific build is permitted. Application-authored
-   navigation uses document-relative anchors such as `./`, never root-relative
-   `/`, so one artifact preserves an unknown mount prefix.
+5. **Make the current shell artifact host-safe.** Astro
+   `build.assetsPrefix: '.'` makes the current generated stylesheet URL
+   relative, and `build.assets: 'assets'` avoids a host-reserved underscore
+   directory. No post-build rewrite or host-specific build is permitted. The
+   current homepage wordmark uses `href="./"`, which is correct only because the
+   homepage sits at the deployment mount root; it is not a general solution for
+   nested future routes.
 
 ## Same-artifact deployment proof
 
@@ -63,9 +65,9 @@ On 2026-09-01 the positive subpath test was written before configuration:
   asset-only test did not cover: the wordmark's author-supplied `href="/"`
   navigated to the GitHub host root. A new same-origin navigation test was
   written first and failed on that escaped path.
-- **GREEN:** changing only the wordmark to `href="./"` retained the current
-  deployment mount at both a root and project subpath. All five portability
-  tests then passed against the same artifact.
+- **GREEN:** changing only the current homepage wordmark to `href="./"`
+  retained the deployment mount at both a root and project subpath. All five
+  portability tests then passed against that one-page artifact.
 
 [Vite documents relative bases for unknown deployment paths](https://vite.dev/guide/build#relative-base),
 and [Astro documents `build.assets` and `build.assetsPrefix`](https://docs.astro.build/en/reference/configuration-reference/#buildassets).
@@ -76,8 +78,10 @@ documentation pages were accessed 2026-09-01.
 [Astro documents ordinary `<a>` elements for navigation](https://docs.astro.build/en/guides/routing/#linking-to-pages),
 and [Astro's issue tracker confirms that the `base` setting does not rewrite
 manually authored links](https://github.com/withastro/astro/issues/11159).
-Therefore `./` is intentionally document-relative: unlike a build-time concrete
-base, it works when the final mount is not known while building.
+Therefore the current homepage's `./` is intentionally document-relative:
+unlike a build-time concrete base, it works for this mount-root page when the
+final mount is not known while building. A nested route would resolve `./` to
+its own directory and needs route-aware home-link logic instead.
 
 ### Real GitHub Pages deployment
 
@@ -109,8 +113,17 @@ domain, or billing configuration.
 | Downloaded CSS SHA-256                   | `76a9808cd41f62deae3f4c609fa4fd58d28a57f083b414a137e48aa20d271d5e`, identical to local |
 
 This satisfies “export and deploy to a second static host from the same build
-artifact” for the current shell. Later generated routes and asset types remain
-covered by the integration test, which enumerates built asset references.
+artifact” for the current one-page shell only. The current tests inspect the
+built homepage and its present HTML `href`/`src` references and anchors. They do
+not recursively inspect future routes, CSS `url()` values, JSON, Pagefind, fonts,
+or GLB dependencies.
+
+Before a task adds or nests a route or introduces a new asset class, that task
+must extend the portability suite to recursively enumerate every
+`dist/**/*.html`; exercise each route at a domain root and project subpath;
+validate all same-origin HTML references and anchors plus relevant CSS `url()`,
+JSON, Pagefind, font, and GLB references; and verify route-aware home navigation.
+The same unchanged `dist/` must pass both mounts before that task can hand off.
 
 ## Usage thresholds
 
@@ -135,10 +148,12 @@ alerts.
   Pages static delivery and optional free Web Analytics.
 - The 25 MiB per-file boundary is a release gate. A large model cannot be
   “temporarily” moved to R2 without superseding this ADR.
-- Relative asset and navigation references make the artifact portable to a
-  domain root or an arbitrary nested path. The integration contract now checks
-  every emitted asset reference and every same-origin authored anchor; future
-  routes inherit that requirement.
+- The current homepage, current stylesheet, health file, and current wordmark
+  are portable to a domain root or project subpath. No claim is made for routes
+  or asset classes that do not yet exist.
+- Every task that expands routes or asset classes inherits the recursive
+  portability-suite extension gate above; the current five tests alone are
+  insufficient evidence for that future output.
 - GitHub Pages is non-production proof infrastructure. If the project becomes
   commercial, its deployment must be removed or replaced.
 
@@ -156,8 +171,9 @@ alerts.
 
 ## Reversal cost
 
-- Moving the unchanged artifact to another root or subpath-capable static host
-  is **low** cost; the real GitHub Pages deployment demonstrates the boundary.
+- Moving the current unchanged one-page artifact to another root or
+  subpath-capable static host is **low** cost; the real GitHub Pages deployment
+  demonstrates only that present boundary.
 - Changing asset hosts is **moderate** cost because URLs, CORS, cache headers,
   integrity, fallback behaviour, and quota monitoring must be revalidated.
 - Introducing runtime hosting is **high** cost because security, observability,

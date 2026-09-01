@@ -2,7 +2,7 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-The repository is currently at **SBLA-002: agent operating model**. It contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
+**SBLA-002 is accepted; SBLA-003 is a Proposed candidate under remediation and review.** The repository contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
 

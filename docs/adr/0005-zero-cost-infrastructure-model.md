@@ -14,6 +14,13 @@ incur usage charges. The plan requires 10,000, 100,000, and 1,000,000 monthly
 page-view scenarios covering HTML, JavaScript, image/model transfer, build
 frequency, object operations, and log/analytics volume.
 
+The owner-authorized §11.8 queue-staging clarification makes that requirement
+executable at SBLA-003 without pretending later product components exist: this
+task measures every current artifact/payload and uses explicit budget-derived
+ceilings for not-yet-built components. This is **capacity planning, not a
+forecast** and not final provider approval. Representative measurements and a
+full rerun remain mandatory before production provider activation.
+
 All provider facts were re-read from official documentation on 2026-09-01 and
 are recorded with source URLs in
 [`provider-quotas.json`](provider-quotas.json). Re-verify by 2026-12-01.
@@ -40,14 +47,15 @@ but there is no production history from which to measure monthly build frequency
 or cache behaviour.
 
 The Cloudflare Web Analytics beacon script was separately measured at 28,467 raw
-bytes and 9,509 gzip transfer bytes. Its beacon payload is not measurable until
-a site is configured.
+bytes and 9,509 gzip transfer bytes. Its report payloads are not measurable
+until a site is configured.
 
-## Budget-derived Release 1 model
+## Phase 0 capacity model
 
-The product does not exist yet, so Release 1 numbers below are **budget-derived
-planning ceilings, not measurements or forecasts**. They are deliberately
-modelled with no browser/CDN cache credit.
+Representative Release 1 product surfaces do not exist yet, so the
+future-component inputs below are **budget-derived planning ceilings, not
+measurements or forecasts**. They are deliberately modelled with no browser/CDN
+cache credit.
 
 | Component                  | Per applicable view | Basis                                         |
 | -------------------------- | ------------------: | --------------------------------------------- |
@@ -59,7 +67,7 @@ modelled with no browser/CDN cache credit.
 | Desktop initial 3D payload |                6 MB | master plan §12.2 target                      |
 | Pagefind index             |                1 MB | interim SBLA-003 ceiling; measure in SBLA-016 |
 | Analytics beacon script    |       9.509 KB gzip | measured 2026-09-01                           |
-| Analytics beacon payload   |                1 KB | explicit planning ceiling; unmeasured         |
+| Analytics report payload   |         1 KB/report | explicit planning ceiling; unmeasured         |
 
 Traffic mix is 90% non-3D and 10% anatomy-with-3D. To close the earlier omission,
 every non-3D view is charged a poster and target-size exercise loop, and every
@@ -77,8 +85,8 @@ Weighted per page view:
 - exercise loops: 1.35 MB
 - Pagefind index: 1 MB
 - 3D model transfer: 0.6 MB
-- analytics beacon payload: 1 KB
-- **total: 3.273509 MB/page view**
+- analytics report payload: 2 KB (two reports/page view)
+- **total: 3.274509 MB/page view**
 
 ## Three scenarios
 
@@ -86,11 +94,11 @@ Weighted per page view:
 
 Decimal units are used for modelling (1 GB = 1,000 MB).
 
-| Monthly page views | HTML/CSS |  App JS | Analytics JS | Images | Exercise loops | Search index | 3D models | Beacon payload |       **Total** |
-| -----------------: | -------: | ------: | -----------: | -----: | -------------: | -----------: | --------: | -------------: | --------------: |
-|             10,000 |  0.25 GB | 1.08 GB |     0.095 GB | 1.8 GB |        13.5 GB |        10 GB |      6 GB |        0.01 GB |    **32.74 GB** |
-|            100,000 |   2.5 GB | 10.8 GB |     0.951 GB |  18 GB |         135 GB |       100 GB |     60 GB |         0.1 GB |   **327.35 GB** |
-|          1,000,000 |    25 GB |  108 GB |     9.509 GB | 180 GB |       1,350 GB |     1,000 GB |    600 GB |           1 GB | **3,273.51 GB** |
+| Monthly page views | HTML/CSS |  App JS | Analytics JS | Images | Exercise loops | Search index | 3D models | RUM reports |       **Total** |
+| -----------------: | -------: | ------: | -----------: | -----: | -------------: | -----------: | --------: | ----------: | --------------: |
+|             10,000 |  0.25 GB | 1.08 GB |     0.095 GB | 1.8 GB |        13.5 GB |        10 GB |      6 GB |     0.02 GB |    **32.75 GB** |
+|            100,000 |   2.5 GB | 10.8 GB |     0.951 GB |  18 GB |         135 GB |       100 GB |     60 GB |      0.2 GB |   **327.45 GB** |
+|          1,000,000 |    25 GB |  108 GB |     9.509 GB | 180 GB |       1,350 GB |     1,000 GB |    600 GB |        2 GB | **3,274.51 GB** |
 
 ### Builds and object operations
 
@@ -111,16 +119,25 @@ operations are zero in every scenario.
 
 ### Analytics and logs
 
-| Monthly page views | Pageview beacons | Custom events | Budgeted beacon ingestion | Raw log export | Persistent per-user records |
-| -----------------: | ---------------: | ------------: | ------------------------: | -------------: | --------------------------: |
-|             10,000 |           10,000 |             0 |                     10 MB |              0 |                           0 |
-|            100,000 |          100,000 |             0 |                    100 MB |              0 |                           0 |
-|          1,000,000 |        1,000,000 |             0 |                      1 GB |              0 |                           0 |
+| Monthly completed page views | Load reports | Web Vitals/leave reports | Total RUM reports | Custom events | Budgeted ingestion | Raw log export | Persistent per-user records |
+| ---------------------------: | -----------: | -----------------------: | ----------------: | ------------: | -----------------: | -------------: | --------------------------: |
+|                       10,000 |       10,000 |                   10,000 |            20,000 |             0 |              20 MB |              0 |                           0 |
+|                      100,000 |      100,000 |                  100,000 |           200,000 |             0 |             200 MB |              0 |                           0 |
+|                    1,000,000 |    1,000,000 |                1,000,000 |         2,000,000 |             0 |               2 GB |              0 |                           0 |
 
-Cloudflare documents no ingestion sampling and no quota in the official pages
-reviewed. “No documented quota” is not treated as “unlimited”; it is a
-re-verification risk. Field Core Web Vitals wait for enough data to produce a
-stable 75th percentile.
+Cloudflare's [FAQ](https://developers.cloudflare.com/web-analytics/faq/) says a
+traditional page reports at the load event and when the user leaves. Its [data
+collection documentation](https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/)
+says Core Web Vitals report at the first hidden state after load. Both were
+accessed 2026-09-01. Capacity therefore assumes every modelled pageview
+completes and emits both reports, each at the unmeasured 1 KB ceiling; network
+loss is not used to reduce the model.
+
+Cloudflare documents no ingestion sampling. The official [Web Analytics limits
+page](https://developers.cloudflare.com/web-analytics/limits/) lists site and
+rules limits but no ingestion quota; this sourced absence is not treated as
+“unlimited” and remains a re-verification risk. Field Core Web Vitals wait for
+enough data to produce a stable 75th percentile.
 
 ## Cost and hard-stop outcome
 
@@ -141,15 +158,34 @@ stricter “may not incur usage charges” rule.
 
 ## Decision
 
-1. Use Cloudflare Pages Free static delivery for site and Release 1 assets.
+1. Propose Cloudflare Pages Free static delivery for site and Release 1 assets;
+   owner approval remains pending.
 2. Do not enable Pages Functions, Workers Paid, R2, a paid plan, or another
    metered add-on.
 3. Enforce the 25 MiB per-file boundary. Compress/split/omit oversized assets or
    use the 2D fallback.
-4. Re-run this model with measured pages at SBLA-012, measured anatomy/media at
-   SBLA-015, and measured Pagefind output at SBLA-016.
+4. Before any production provider activation, replace HTML/JS/image inputs with
+   representative SBLA-012 measurements, model/media inputs with SBLA-015
+   measurements, and the Pagefind input with an SBLA-016 measurement; then
+   rerun every scenario.
 5. Escalate any nonzero cost forecast or any proposed metered service through a
    superseding ADR and owner decision.
+
+## Consequences
+
+- This Phase 0 model can compare provider capacity, but it cannot authorize
+  production activation until SBLA-012/015/016 replace every future-component
+  ceiling and all scenarios are rerun.
+- The $0 conclusion is insensitive to traffic transfer only because the
+  proposed path excludes metered products. It does not imply that multi-terabyte
+  payloads are performant or desirable.
+- The no-charge boundary can force compression, delayed loading, omission, or a
+  2D fallback instead of moving an oversized asset into metered storage.
+- Optional analytics doubles the conservative report count to two per completed
+  pageview. Its undocumented ingestion ceiling remains an explicit launch-time
+  re-verification risk.
+- Free Pages build usage requires manual weekly review because documented
+  controls do not expose the requested configurable thresholds.
 
 ## 70% and 85% usage controls
 
@@ -170,7 +206,7 @@ do not cap charges, so R2 remains disabled rather than “protected” by an ale
 - **Cloudflare R2.** Capacity fits the hypothetical operation model, but metered
   overage and automatic threshold billing violate the no-charge rule.
 - **Netlify Free.** Its hard limit cannot incur cost, but 300 credits cap pure
-  bandwidth at 15 GB before requests/deploys. Even the 10k conservative scenario
+  bandwidth at 15 GB before requests/deploys. Even the 10k capacity scenario
   exceeds that ceiling.
 - **GitHub Pages as primary.** The 1 GB site limit, 100 GB/month soft bandwidth
   limit, and commercial-use restriction reject it. It remains the successfully

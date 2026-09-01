@@ -25,34 +25,35 @@ are used.
 
 ## Verified provider facts
 
-Cloudflare’s official documentation was re-read on 2026-09-01. Facts and source
-URLs are recorded under `cloudflare-web-analytics` in
-[`provider-quotas.json`](provider-quotas.json).
+Each exact official Cloudflare source below was reopened on 2026-09-01. The
+same fact-to-source mapping is machine-readable under `cloudflare-web-analytics`
+in [`provider-quotas.json`](provider-quotas.json).
 
-| Question                    | Documented answer                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------ |
-| Cost                        | Free                                                                                 |
-| Cookies / client-side state | None used for analytics                                                              |
-| Fingerprinting              | Not performed for analytics                                                          |
-| Ingestion sampling          | Beacon fires on every pageview; every received beacon is recorded                    |
-| Retention                   | Unsampled for 7 days, then aggregated to around 10%                                  |
-| Query sampling              | 0.0001%–100%, dynamically selected by filter and volume                              |
-| Query strings               | Not logged                                                                           |
-| Beacon script               | Required; manual embed when the site is not proxied through Cloudflare               |
-| Documented ingestion quota  | None found in the reviewed official pages; this is not a claim of unlimited capacity |
-| Custom-event support        | Not established from the reviewed documentation                                      |
+| Question                    | Documented answer                                                                                                       | Exact official source                                                                                                                                                                            |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cost / personal data        | Free and privacy-first; does not collect or use visitors' personal data                                                 | [About](https://developers.cloudflare.com/web-analytics/about/), accessed 2026-09-01                                                                                                             |
+| Cookies / client-side state | Does not use cookies, `localStorage`, or other client-side state for analytics                                          | [Privacy-first Web Analytics](https://www.cloudflare.com/web-analytics/), accessed 2026-09-01                                                                                                    |
+| Fingerprinting              | Does not fingerprint by IP address, User Agent, or other data for analytics                                             | [Privacy-first Web Analytics](https://www.cloudflare.com/web-analytics/), accessed 2026-09-01                                                                                                    |
+| Reports per completed page  | Traditional pages report at load and on leave; Core Web Vitals report at the first hidden state after load              | [FAQ](https://developers.cloudflare.com/web-analytics/faq/) and [data collection](https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/), accessed 2026-09-01 |
+| Ingestion sampling          | Script fires on every pageview; every received report is recorded without ingestion sampling                            | [FAQ](https://developers.cloudflare.com/web-analytics/faq/), accessed 2026-09-01                                                                                                                 |
+| Retention                   | Unsampled for 7 days, then aggregated to around 10%                                                                     | [FAQ](https://developers.cloudflare.com/web-analytics/faq/), accessed 2026-09-01                                                                                                                 |
+| Query sampling              | 0.0001%–100%, dynamically selected by filter and volume                                                                 | [FAQ](https://developers.cloudflare.com/web-analytics/faq/), accessed 2026-09-01                                                                                                                 |
+| Query strings               | Not logged                                                                                                              | [FAQ](https://developers.cloudflare.com/web-analytics/faq/), accessed 2026-09-01                                                                                                                 |
+| Documented limits           | 10 non-proxied sites, no proxied-site limit, 1,000 sites viewed in parallel, and zero rules on Free                     | [Limits](https://developers.cloudflare.com/web-analytics/limits/), accessed 2026-09-01                                                                                                           |
+| Documented ingestion quota  | The official Limits page enumerates site/rule limits but no ingestion quota; this is a sourced absence, not “unlimited” | [Limits](https://developers.cloudflare.com/web-analytics/limits/), accessed 2026-09-01                                                                                                           |
+| Custom-event support        | Not supported                                                                                                           | [FAQ](https://developers.cloudflare.com/web-analytics/faq/), accessed 2026-09-01                                                                                                                 |
 
 These facts satisfy the privacy boundary for aggregate pageviews without the
 atlas creating a persistent identifier.
 
 ## Decision
 
-**Adopt Cloudflare Web Analytics as the optional Release 1 aggregate pageview
-direction**, subject to these boundaries:
+**Propose Cloudflare Web Analytics as the optional Release 1 aggregate pageview
+direction**, subject to these boundaries and owner approval:
 
-1. **Pageviews only at launch.** Custom events are not adopted until official
-   support is established. If later supported, only the seven enumerated names
-   and controlled values are permitted.
+1. **Pageviews only at launch.** Cloudflare documents that custom events are not
+   supported. If support is added later, only the seven enumerated names and
+   controlled values are permitted after re-verification.
 2. **Never block launch.** If integration, privacy disclosure, or CSP work is not
    ready, ship without analytics and add it later.
 3. **No persistent per-user identifier and no retention proxy.** Do not add a
@@ -70,16 +71,20 @@ percentile; elapsed time alone is not sufficient.
 
 ## Analytics and log volume
 
-The Release 1 model is one pageview beacon per page view and zero custom events.
+The Phase 0 capacity model uses **two RUM reports per completed pageview** and
+zero custom events. Cloudflare's FAQ documents a load report and a leave report
+for traditional pages; its data-collection page says Core Web Vitals report at
+the first hidden state after load. Capacity assumes both arrive and takes no
+credit for network loss.
+
 The beacon script measured 28,467 raw bytes / 9,509 gzip response-body bytes on
 2026-09-01 and advertised a one-day cache lifetime. ADR 0005 deliberately gives
-no cache credit and includes that gzip transfer on every view.
+no cache credit and includes one script transfer on every view.
 
-The beacon payload cannot be measured without a configured analytics site, so
-ADR 0005 assigns an explicit 1 KB/event planning ceiling rather than labelling
-it measured. At the three traffic scenarios this produces 10k/100k/1M beacons
-and budgeted ingestion of 10 MB/100 MB/1 GB. Raw-log volume, custom-event volume,
-and stored per-user records remain zero.
+Report payloads cannot be measured without a configured analytics site, so ADR
+0005 assigns an explicit unmeasured 1 KB/report ceiling. At the three scenarios
+this produces 20k/200k/2M reports and budgeted ingestion of 20 MB/200 MB/2 GB.
+Raw-log volume, custom-event volume, and stored per-user records remain zero.
 
 ## Consequences
 
@@ -89,7 +94,8 @@ and stored per-user records remain zero.
   them as precise cohort or retention data.
 - Cost remains $0 because the service is free. Lack of a documented ingestion
   quota is an uncertainty to re-check, not permission to claim unlimited use.
-- Analytics adds 9,509 gzip bytes to the deliberately no-cache transfer model.
+- Analytics adds 9,509 gzip script bytes plus a 2 KB two-report payload ceiling
+  to each completed pageview in the deliberately no-cache capacity model.
 
 ## Alternatives considered
 
