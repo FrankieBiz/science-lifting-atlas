@@ -1,4 +1,4 @@
-import { access, readFile } from 'node:fs/promises';
+import { access, lstat, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -6,6 +6,12 @@ import {
   REQUIRED_WORKFLOW_SNIPPETS,
   validateFoundation,
 } from './contract.mjs';
+import {
+  REQUIRED_DOC_SNIPPETS,
+  FORBIDDEN_DOC_SNIPPETS,
+  REQUIRED_OPERATING_PATHS,
+  validateOperatingModel,
+} from './operating-model.mjs';
 
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
 const packageJson = JSON.parse(
@@ -13,37 +19,89 @@ const packageJson = JSON.parse(
 );
 const existingPaths = new Set();
 const fileContents = new Map();
+const operatingPaths = new Set();
+const operatingContents = new Map();
 
-await Promise.all(
-  REQUIRED_PATHS.map(async (path) => {
-    try {
-      await access(new URL(`../../${path}`, import.meta.url));
-      existingPaths.add(path);
-    } catch {
-      // The pure validator reports every missing path together.
-    }
-  }),
-);
+/**
+ * @param {readonly string[]} paths
+ * @param {Set<string>} into
+ */
+async function collectExistingPaths(paths, into) {
+  await Promise.all(
+    paths.map(async (path) => {
+      try {
+        await access(new URL(`../../${path}`, import.meta.url));
+        into.add(path);
+      } catch {
+        // The pure validators report every missing path together.
+      }
+    }),
+  );
+}
 
-await Promise.all(
-  Object.keys(REQUIRED_WORKFLOW_SNIPPETS).map(async (path) => {
-    try {
-      const content = await readFile(
-        new URL(`../../${path}`, import.meta.url),
-        'utf8',
-      );
-      fileContents.set(path, content);
-    } catch {
-      // Missing workflow paths and content are reported by the pure validator.
-    }
-  }),
-);
+/**
+ * Required policy documents must be repository files, never symlinks or other
+ * filesystem entry types that disappear or resolve differently in an archive.
+ *
+ * @param {readonly string[]} paths
+ * @param {Set<string>} into
+ */
+async function collectRegularFilePaths(paths, into) {
+  await Promise.all(
+    paths.map(async (path) => {
+      try {
+        const stats = await lstat(new URL(`../../${path}`, import.meta.url));
+        if (stats.isFile()) into.add(path);
+      } catch {
+        // The pure validator reports every missing/non-file path together.
+      }
+    }),
+  );
+}
 
-const issues = validateFoundation({
-  packageJson,
-  existingPaths,
+/**
+ * @param {readonly string[]} paths
+ * @param {Map<string, string>} into
+ */
+async function collectFileContents(paths, into) {
+  await Promise.all(
+    paths.map(async (path) => {
+      try {
+        into.set(
+          path,
+          await readFile(new URL(`../../${path}`, import.meta.url), 'utf8'),
+        );
+      } catch {
+        // Missing paths and content are reported by the pure validators.
+      }
+    }),
+  );
+}
+
+await collectExistingPaths(REQUIRED_PATHS, existingPaths);
+await collectRegularFilePaths(REQUIRED_OPERATING_PATHS, operatingPaths);
+await collectFileContents(
+  Object.keys(REQUIRED_WORKFLOW_SNIPPETS),
   fileContents,
-});
+);
+await collectFileContents(
+  [
+    ...new Set([
+      ...REQUIRED_OPERATING_PATHS,
+      ...Object.keys(REQUIRED_DOC_SNIPPETS),
+      ...Object.keys(FORBIDDEN_DOC_SNIPPETS),
+    ]),
+  ],
+  operatingContents,
+);
+
+const issues = [
+  ...validateFoundation({ packageJson, existingPaths, fileContents }),
+  ...validateOperatingModel({
+    existingPaths: operatingPaths,
+    fileContents: operatingContents,
+  }),
+];
 
 if (issues.length > 0) {
   console.error('Foundation contract failed:');

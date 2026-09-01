@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "authority": {
+    "merge": "codex",
+    "staleClaimClearance": "codex",
+    "contentPromotion": "codex"
+  },
+  "lifecycle": {
+    "builderClaimCloses": "immutable-handoff-commit",
+    "reviewClaimRecordedBy": "codex",
+    "reviewClaimScope": "exact-append-only-report-path",
+    "restrictedRoleDiffBase": "reviewed-artifact-commit",
+    "claimRecordLocation": "codex-coordination-branch",
+    "reviewClaimCloses": "immutable-review-report-commit",
+    "failedReviewOpens": "bounded-remediation-claim"
+  },
+  "roleIdentity": {
+    "claudeResearchAccount": "A",
+    "claudeReviewAccount": "B",
+    "requiresDistinctClaudeTeamAccounts": true,
+    "sameAccountSessionSatisfiesReview": false
+  },
+  "writeBoundaries": {
+    "codex": null,
+    "claude-research": ["research/", "content-drafts/"],
+    "claude-review": ["reviews/"]
+  }
+}
