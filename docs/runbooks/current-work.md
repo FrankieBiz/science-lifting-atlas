@@ -29,8 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task | Role | Branch | Worktree | Base commit | Started | Expected handoff | Paths owned |
-| ---- | ---- | ------ | -------- | ----------- | ------- | ---------------- | ----------- |
+| Task                      | Role  | Branch                             | Worktree                                | Base commit                                | Started              | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                                                           |
+| ------------------------- | ----- | ---------------------------------- | --------------------------------------- | ------------------------------------------ | -------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-003 spec remediation | Codex | `codex/SBLA-003-architecture-adrs` | `.worktrees/sbla-003-architecture-adrs` | `e8fe598a5899656db1c816bef4b8a996c1546383` | 2026-09-01 19:25 EDT | `reviews/releases/SBLA-003-handoff.md` | `docs/runbooks/current-work.md`; `docs/product/master-plan.md` (§11.8 clarification only); `docs/adr/0003-hosting-and-asset-delivery.md`; `docs/adr/0004-analytics.md`; `docs/adr/0005-zero-cost-infrastructure-model.md`; `docs/adr/provider-quotas.json`; `docs/adr/README.md`; `reviews/releases/SBLA-003-handoff.md`; `README.md` |
 
 ## Closed claims
 
