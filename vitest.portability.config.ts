@@ -8,7 +8,10 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     environment: 'node',
-    include: ['tests/integration/**/*.test.ts'],
+    include: [
+      'tests/integration/portability.test.ts',
+      'tests/integration/portability/**/*.test.ts',
+    ],
     passWithNoTests: false,
   },
 });
