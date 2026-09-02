@@ -2,12 +2,13 @@
 
 ## Status
 
-The bounded spec remediation is complete and ready for another compliance
-check, followed by independent Claude Review. Candidate `e8fe598...` failed its
-first compliance check with four Important and two Minor findings; every finding
-and repair is preserved below. All five ADRs remain **Proposed**. The
-owner-authorized §11.8 queue-staging clarification is not final approval of any
-provider, analytics choice, or ADR.
+The bounded spec remediation and its compliance re-review passed. The subsequent
+code-quality review at `16fda3b...` found two Important and four Minor harness
+and documentation issues; the bounded fix is implemented at `eed479e...` and is
+ready for code-quality re-review. Every finding and repair is preserved below.
+Independent Claude Review and owner approval remain pending. All five ADRs
+remain **Proposed**. The owner-authorized §11.8 queue-staging clarification is
+not final approval of any provider, analytics choice, or ADR.
 
 ## Objective
 
@@ -40,12 +41,20 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
   `e8fe598a5899656db1c816bef4b8a996c1546383`
 - Spec-remediation claim commit:
   `6ca365c0665480db19e15406290dfe38341f08f6`
+- Spec-remediation implementation/handoff commit:
+  `627f8360d02d05050872f3615ea98345eb33f1c1`
+- Spec-remediation claim closure and code-quality review candidate:
+  `16fda3b24b5f9905ded03cec4da7b86391ef00ab`
+- Code-quality remediation claim commit:
+  `da9eb913dd5c25249396a21792f24da41fe66514`
+- Code-quality remediation implementation commit:
+  `eed479e7b28bafdfeeea534fa868e67ce34474bb`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
-- Spec-remediation claim: `docs/runbooks/current-work.md`, committed before the
-  seven bounded documentation files were edited. The earlier portability claim
-  was separately expanded before `astro.config.mjs` and `src/pages/index.astro`
-  were edited.
+- The spec-remediation and code-quality-remediation claims were each committed
+  in `docs/runbooks/current-work.md` before their bounded files were edited. The
+  earlier portability claim was separately expanded before `astro.config.mjs`
+  and `src/pages/index.astro` were edited.
 
 The remediation preserves the accepted SBLA-002 operating model. It does not
 define the SBLA-007 schemas, select SBLA-004–006 assets, or build later product
@@ -104,6 +113,27 @@ Proposed provider direction or waive Claude Review and final owner approval.
 | Important: Web Analytics facts lacked exact source mapping                      | Added the official privacy-first product page, current Limits page, FAQ, data-collection page, and per-fact URL/access-date mapping                                                                      |
 | Minor: ADR 0005 lacked Consequences                                             | Added the required section                                                                                                                                                                               |
 | Minor: README stage was stale                                                   | Now states SBLA-002 accepted and SBLA-003 Proposed under remediation/review                                                                                                                              |
+
+The compliance re-review of those six repairs passed at `16fda3b...`; that is
+not an independent Claude Review or final ADR approval.
+
+### Code-quality remediation
+
+| Finding at `16fda3b...`                                      | Repair                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Important: request parsing and filesystem escape hazards     | Malformed request encoding returns 400 without terminating the handler; encoded `..` segments return 403; lexical and resolved-real-path containment blocks escaping symlinks; expected filesystem outcomes map to 403/404 and unexpected faults remain visible as 500 |
+| Important: resource discovery ignored non-`/assets/` paths   | Added one typed collector for same-origin resource-bearing `href`, `src`, and `srcset`; the root and project-mount checks now test every discovered current-homepage resource for mount containment and HTTP 200                                                       |
+| Minor: setup/teardown could leak or hang                     | Server variables are optional; the shared close helper resolves when absent and rejects close errors; partial startup closes the first server; fixture teardown aggregates cleanup failures                                                                            |
+| Minor: README misstated direct command behavior              | README now states that `pnpm test:portability` consumes existing `dist/`, documents `pnpm build && pnpm test:portability` for direct use, and notes that `pnpm verify` already builds first                                                                            |
+| Minor: Vitest include was broader than the portability suite | The portability config now includes only `tests/integration/portability.test.ts` and focused tests below `tests/integration/portability/`                                                                                                                              |
+| Minor: status prose was stale                                | README and this handoff now state that spec remediation/re-review passed, the code-quality fix is implemented with re-review pending, and independent Claude Review/owner approval remain                                                                              |
+
+The resource fixture proves the former false-negative path directly: a valid
+relative stylesheet does not mask root-absolute `/favicon.svg`, `/poster.webp`,
+`/app.js`, or a root-absolute `srcset` candidate. Navigation anchors,
+`data:`/`blob:`/`mailto:` values, external origins, and non-resource
+`data-src` attributes are excluded from this byte-fetch check; same-origin
+navigation remains covered by its separate test.
 
 ### Current provider evidence
 
@@ -192,8 +222,35 @@ TDD cycles on 2026-09-01:
 6. **RED:** the new navigation contract failed because `/` was outside
    `/science-lifting-atlas/`.
 7. **GREEN:** the minimum application change used the standard
-   document-relative `href="./"`. All five tests pass for the current homepage
-   and its current HTML references/anchors at a root and project subpath.
+   document-relative `href="./"`. The five-test spec-remediation suite passed
+   for the current homepage and its current HTML references/anchors at a root
+   and project subpath.
+
+Code-quality TDD cycles on 2026-09-01 and 2026-09-02:
+
+1. **RED — request safety:** one focused file ran four cases: malformed `%ZZ`
+   timed out with an unhandled `URIError`, one encoded traversal returned 404
+   instead of the asserted explicit 403, and an escaping directory symlink
+   returned 200 with the outside file body. The other encoded traversal case
+   already returned 403. Result: three failed, one passed, one unhandled error.
+2. **GREEN — request safety:** guarded URL/percent decoding, raw decoded-segment
+   rejection, lexical containment, and `realpath` containment made all focused
+   cases pass. Added checks prove a normal file remains 200, a missing file is
+   404, and an unexpected `ENAMETOOLONG` filesystem fault is 500 rather than a
+   disguised 404.
+3. **RED — resource discovery:** the focused fixture could not import the
+   not-yet-created collector, so the suite failed before running a test. The
+   fixture requires a relative stylesheet plus root-absolute favicon, image,
+   script, and `srcset` resources to be discovered even though the old
+   `/assets/` substring filter would have seen only the stylesheet.
+4. **GREEN — resource discovery:** the typed collector and shared mount helper
+   made the fixture and both real deployment-mount checks pass. A follow-up RED
+   fixture showed that `data-src` was incorrectly captured as `src`; anchoring
+   the attribute matcher to attribute boundaries returned it to GREEN while
+   retaining explicit exclusions for navigation and unsupported/external URLs.
+5. **GREEN — final portability suite:** three files and eleven tests pass. The
+   main four tests cover the current built homepage at both mounts; the seven
+   focused tests cover resource collection and server safety/error behavior.
 
 Astro documents standard anchor navigation and does not rewrite manually
 authored root links for `base`. The current homepage's document-relative link is
@@ -241,6 +298,17 @@ difference before the push. After the Pages run completed:
 The earlier, superseded run `33515952080` proved page/CSS delivery but failed
 the later navigation inspection. It is not the acceptance proof.
 
+The 2026-09-02 code-quality remediation changes only the local portability
+server/tests/configuration and status documentation; it does not change an Astro
+source, build configuration, or generated artifact input. A fresh build
+reproduced content-manifest
+`f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`.
+The live proof was rechecked afterward: page, referenced CSS, `./` navigation,
+and `health.txt` each returned HTTP 200, and downloaded page/CSS bytes still
+matched the rebuilt local files at SHA-256 `bc1ac5107...` and `76a9808cd...`
+respectively. The existing public artifact proof therefore remains valid; no
+redeployment was needed or performed.
+
 ## Verification results
 
 Pinned runtime throughout: Node.js `v24.20.0`, pnpm `11.24.0`.
@@ -248,12 +316,24 @@ Pinned runtime throughout: Node.js `v24.20.0`, pnpm `11.24.0`.
 - Post-mainline baseline before remediation: `pnpm install --frozen-lockfile`
   PASS; `pnpm verify` PASS with 7 unit files/47 tests, 4 portability tests,
   production build, and foundation contract.
-- Final `pnpm verify`: PASS with Prettier, ESLint (0 warnings), Astro diagnostics
-  (0 errors/warnings/hints), 7 unit files/47 tests, foundation-mode
-  content/graph/evidence validation, production build, 5 portability tests,
-  and foundation contract.
+- Spec-remediation `pnpm verify`: PASS with Prettier, ESLint (0 warnings), Astro
+  diagnostics (0 errors/warnings/hints), 7 unit files/47 tests, foundation-mode
+  content/graph/evidence validation, production build, 5 portability tests, and
+  foundation contract.
+- Code-quality-remediation `pnpm verify`: PASS with Prettier, ESLint (0
+  warnings), Astro diagnostics (0 errors/warnings/hints), 7 unit files/47 tests,
+  foundation-mode content/graph/evidence validation, production build, 3
+  portability files/11 tests, and foundation contract.
+- The first focused post-GREEN typecheck exposed one strict-JS
+  `string | undefined` diagnostic in raw-path extraction; tracing it to indexed
+  `split` access and replacing that access with an explicit suffix index made
+  the focused tests, ESLint, and Astro diagnostics all pass on the next run.
 - `pnpm test:e2e`: PASS, 1 Chromium test including the JavaScript-disabled
   static foundation.
+- Fresh-build content-manifest comparison: PASS at
+  `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`.
+- Live proof recheck: PASS with HTTP 200 for page, CSS, navigation, and health;
+  rebuilt-local/downloaded page and CSS SHA-256 values match byte-for-byte.
 - `jq empty docs/adr/provider-quotas.json`: PASS.
 - README/master-plan/ADR/handoff relative-link check: PASS, 19 checked and 0
   broken.
@@ -266,7 +346,7 @@ Pinned runtime throughout: Node.js `v24.20.0`, pnpm `11.24.0`.
   PASS.
 - One-off spec assertions: PASS for all six repairs, all five Proposed statuses,
   and absence of stale one-report totals.
-- `git diff --check`: PASS.
+- Code-quality remediation `git diff --check`: PASS.
 
 ## Files created or modified for SBLA-003
 
@@ -283,6 +363,13 @@ Created in the preliminary candidate:
 - `tests/integration/portability.test.ts`
 - `vitest.portability.config.ts`
 
+Created during code-quality remediation:
+
+- `tests/integration/portability/resource-references.test.ts`
+- `tests/integration/portability/resource-references.ts`
+- `tests/integration/portability/server-lifecycle.ts`
+- `tests/integration/portability/static-server.test.ts`
+
 Modified across the preliminary candidate and remediation:
 
 - `README.md`
@@ -291,8 +378,10 @@ Modified across the preliminary candidate and remediation:
 - `docs/product/master-plan.md` (§11.8 queue-staging clarification only)
 - `docs/runbooks/current-work.md`
 - `package.json`
+- `scripts/portability/static-server.mjs`
 - `src/pages/index.astro`
 - `tests/integration/portability.test.ts`
+- `vitest.portability.config.ts`
 
 ## Self-review
 
@@ -311,6 +400,20 @@ Modified across the preliminary candidate and remediation:
   events, raw logs, and persistent per-user records are zero.
 - Confirmed portability claims stop at the current homepage/output and record
   the recursive expansion gate for future routes and assets.
+- Reviewed the bounded code-quality diff from `16fda3b...`: malformed targets
+  cannot reject outside the request handler, decoded traversal is rejected
+  before filesystem access, resolved paths cannot cross the real served root,
+  and unexpected filesystem faults are observable as 500.
+- Confirmed the resource collector covers each current same-origin
+  resource-bearing `href`, `src`, and `srcset` candidate without conflating
+  navigation, unsupported/external schemes, or `data-src` with static resource
+  fetches. Both mounts enforce containment and HTTP 200 for every collected
+  current-homepage resource.
+- Confirmed startup/teardown closes partial or complete server sets and reports
+  close/cleanup errors rather than hanging or discarding them.
+- Confirmed the stable command contract is unchanged: `pnpm verify` still builds
+  before portability; direct `pnpm test:portability` still intentionally
+  consumes the existing artifact.
 - Confirmed R2 is excluded rather than protected by a non-blocking budget alert.
 - Confirmed the proof repo is non-production, has no custom domain, contains no
   secret/source/workflow, and serves bytes identical to the local artifact.
@@ -319,8 +422,10 @@ The earlier handoff's “no Important defect” statement was invalidated by the
 spec-compliance failure at `e8fe598...`; this handoff supersedes it rather than
 hiding the review result.
 
-After applying every recorded repair and rechecking the six criteria against
-the bounded diff, self-review found no remaining Critical or Important defect.
+After applying every recorded repair and rechecking the spec and code-quality
+findings against their bounded diffs, self-review found no remaining Critical or
+Important defect. Code-quality re-review is still required; this statement does
+not claim that review has passed.
 
 ## Remaining concerns and owner decisions
 
@@ -342,10 +447,15 @@ the bounded diff, self-review found no remaining Critical or Important defect.
 - Owner approval is still required for the proposed provider direction, $0
   model, and optional analytics choice.
 
-## Required independent reviewer action
+## Required next reviewer actions
 
-Review the final branch without repairing it and write the exact append-only
-report `reviews/releases/SBLA-003-r1.md`. Return PASS or FAIL per criterion:
+First, re-review the bounded code-quality remediation from `16fda3b...` through
+the final candidate, including the server-safety and resource-fixture RED/GREEN
+evidence above. That review is pending and is not replaced by self-review.
+
+After code-quality re-review passes, independent Claude Review should review the
+final branch without repairing it and write the exact append-only report
+`reviews/releases/SBLA-003-r1.md`. Return PASS or FAIL per criterion:
 
 1. All five ADR decisions, alternatives, consequences, and reversal costs match
    master plan §§11.1–11.2 and Phase 0 task 0.2, including no runtime AI.
