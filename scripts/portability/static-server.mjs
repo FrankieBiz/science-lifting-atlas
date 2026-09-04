@@ -117,7 +117,11 @@ async function serveRequest(request, response, base, prefix) {
   try {
     const info = await stat(resolvedTarget);
     if (info.isDirectory()) {
-      response.writeHead(404).end('Not Found');
+      response
+        .writeHead(308, {
+          location: `${parsedUrl.pathname}/${parsedUrl.search}`,
+        })
+        .end();
       return;
     }
 

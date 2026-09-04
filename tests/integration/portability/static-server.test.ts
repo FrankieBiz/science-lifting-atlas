@@ -9,6 +9,7 @@ import { closeServer } from './server-lifecycle';
 
 interface TestResponse {
   body: string;
+  location: string | undefined;
   status: number;
 }
 
@@ -31,6 +32,7 @@ function requestPath(server: Server, path: string): Promise<TestResponse> {
         response.on('end', () => {
           resolve({
             body: Buffer.concat(chunks).toString('utf8'),
+            location: response.headers.location,
             status: response.statusCode ?? 0,
           });
         });
@@ -62,6 +64,11 @@ describe('portability static server request safety', () => {
         writeFile(join(servedRoot, 'index.html'), 'safe home'),
         writeFile(join(outsideRoot, 'secret.txt'), 'must not escape'),
       ]);
+      await mkdir(join(servedRoot, 'sub'));
+      await writeFile(
+        join(servedRoot, 'sub', 'index.html'),
+        'safe nested page',
+      );
       await symlink(outsideRoot, join(servedRoot, 'escape'), 'dir');
       server = await serveStaticDirectory(servedRoot);
     } catch (setupError) {
@@ -105,6 +112,20 @@ describe('portability static server request safety', () => {
     expect((await requestPath(server!, '/%ZZ')).status).toBe(400);
     expect(await requestPath(server!, '/')).toEqual({
       body: 'safe home',
+      location: undefined,
+      status: 200,
+    });
+  });
+
+  it('redirects a directory request to its trailing-slash URL', async () => {
+    expect(await requestPath(server!, '/sub')).toEqual({
+      body: '',
+      location: '/sub/',
+      status: 308,
+    });
+    expect(await requestPath(server!, '/sub/')).toEqual({
+      body: 'safe nested page',
+      location: undefined,
       status: 200,
     });
   });

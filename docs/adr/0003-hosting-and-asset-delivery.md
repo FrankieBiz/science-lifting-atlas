@@ -3,7 +3,8 @@
 - Status: Proposed
 - Date: 2026-08-30
 - Task: SBLA-003
-- Reverified: 2026-09-01
+- Reverified: 2026-09-02
+- Round 1 remediation: 2026-09-03
 - Related: [ADR 0001](0001-static-first-architecture.md), [ADR 0005](0005-zero-cost-infrastructure-model.md)
 
 ## Context
@@ -17,7 +18,9 @@ Provider facts were re-read from official documentation on 2026-09-01 and are
 recorded in [`provider-quotas.json`](provider-quotas.json). Cloudflare documents
 500 Free-plan Pages builds/month, 20,000 files/site, 25 MiB/file, and free,
 unlimited static requests. R2 has a free allowance but then charges metered
-overage; Cloudflare budget alerts are informational and do not cap usage.
+overage; Cloudflare budget alerts are informational and do not cap usage. The
+independent Account-B reviewer reverified every decision-relevant provider fact
+from the cited official sources on 2026-09-02.
 
 ## Decision
 
@@ -42,8 +45,12 @@ overage; Cloudflare budget alerts are informational and do not cap usage.
    relative, and `build.assets: 'assets'` avoids a host-reserved underscore
    directory. No post-build rewrite or host-specific build is permitted. The
    current homepage wordmark uses `href="./"`, which is correct only because the
-   homepage sits at the deployment mount root; it is not a general solution for
-   nested future routes.
+   homepage sits at the deployment mount root. Both choices are
+   **mount-root-only**: on a nested route, `./assets/...` resolves below that
+   route and `./` navigates back to that route instead of the site home. Before
+   adding a nested route, its owning task must replace these choices with a
+   deterministic route-depth-aware URL strategy that still lets one unchanged
+   artifact pass both deployment mounts.
 
 ## Same-artifact deployment proof
 
@@ -66,8 +73,8 @@ On 2026-09-01 the positive subpath test was written before configuration:
   navigated to the GitHub host root. A new same-origin navigation test was
   written first and failed on that escaped path.
 - **GREEN:** changing only the current homepage wordmark to `href="./"`
-  retained the deployment mount at both a root and project subpath. All five
-  portability tests then passed against that one-page artifact.
+  retained the deployment mount at both a root and project subpath. The
+  five-test suite at that point passed against that one-page artifact.
 
 [Vite documents relative bases for unknown deployment paths](https://vite.dev/guide/build#relative-base),
 and [Astro documents `build.assets` and `build.assetsPrefix`](https://docs.astro.build/en/reference/configuration-reference/#buildassets).
@@ -112,11 +119,24 @@ domain, or billing configuration.
 | Downloaded page SHA-256                  | `bc1ac51076b718db0343aa69136f25e9248360c3675fbe65da27333ae5187110`, identical to local |
 | Downloaded CSS SHA-256                   | `76a9808cd41f62deae3f4c609fa4fd58d28a57f083b414a137e48aa20d271d5e`, identical to local |
 
+The content-manifest digest is defined, from inside `dist/`, as the SHA-256 of
+the lexicographically sorted per-file SHA-256 lines, including each command's
+leading `./` pathname:
+
+```bash
+find . -type f | LC_ALL=C sort | xargs shasum -a 256 | shasum -a 256
+```
+
+The current artifact contains no whitespace or newline in a filename. A future
+task that permits either must first replace this recipe with a null-delimited
+manifest format and record the resulting new digest; silently changing the
+recipe would invalidate the acceptance artifact.
+
 This satisfies “export and deploy to a second static host from the same build
 artifact” for the current one-page shell only. The current tests inspect the
-built homepage and its present HTML `href`/`src` references and anchors. They do
-not recursively inspect future routes, CSS `url()` values, JSON, Pagefind, fonts,
-or GLB dependencies.
+built homepage and its present HTML `href`, `src`, and `srcset` resource
+references plus navigation anchors. They do not recursively inspect future
+routes, CSS `url()` values, JSON, Pagefind, fonts, or GLB dependencies.
 
 Before a task adds or nests a route or introduces a new asset class, that task
 must extend the portability suite to recursively enumerate every
@@ -151,9 +171,15 @@ alerts.
 - The current homepage, current stylesheet, health file, and current wordmark
   are portable to a domain root or project subpath. No claim is made for routes
   or asset classes that do not yet exist.
+- `build.assetsPrefix: '.'` and the homepage `href="./"` fail on nested routes.
+  A future route task must replace both with a route-depth-aware strategy before
+  it may add or nest a route; the recursive dual-mount gate must prove the
+  replacement against one unchanged artifact.
 - Every task that expands routes or asset classes inherits the recursive
-  portability-suite extension gate above; the current five tests alone are
-  insufficient evidence for that future output.
+  portability-suite extension gate above; the current twelve tests alone are
+  insufficient evidence for that future output. The local harness now returns
+  a 308 trailing-slash redirect for a directory request, matching the ordinary
+  static-host behavior that those future route tests must exercise.
 - GitHub Pages is non-production proof infrastructure. If the project becomes
   commercial, its deployment must be removed or replaced.
 
@@ -163,7 +189,7 @@ alerts.
   metered overage and automatic billing violate the no-charge rule.
 - **Netlify Free as primary or portability target.** Its hard free limit is safe
   from charges, but 300 monthly credits provide at most 15 GB before requests
-  and deploys. It cannot carry the 100k or 1M scenarios.
+  and deploys. Even the 10k hard-capacity scenario exceeds that ceiling.
 - **GitHub Pages as primary.** Rejected on the 1 GB site cap, 100 GB soft
   bandwidth limit, and terms restricting commercial hosting.
 - **A CDN in front of a runtime origin.** Rejected by §11.1; Release 1 has no

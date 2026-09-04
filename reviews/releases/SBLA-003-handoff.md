@@ -1,14 +1,10 @@
 # Handoff: SBLA-003 — Architecture, hosting, analytics, and $0 infrastructure ADRs
 
-## Status
-
-The bounded spec remediation and its compliance re-review passed. The subsequent
-code-quality review at `16fda3b...` found two Important and four Minor harness
-and documentation issues; the bounded fix is implemented at `eed479e...` and is
-ready for code-quality re-review. Every finding and repair is preserved below.
-Independent Claude Review and owner approval remain pending. All five ADRs
-remain **Proposed**. The owner-authorized §11.8 queue-staging clarification is
-not final approval of any provider, analytics choice, or ADR.
+**Status:** Account-B Claude Review Round 1 at `c9c9fbe...` returned FAIL with
+five Important and six Minor findings. The immutable report is preserved at
+`reviews/releases/SBLA-003-r1.md`; the bounded remediation is implemented and
+freshly verified. All five ADRs remain **Proposed**; Account-B Round 2 and owner
+approval remain pending.
 
 ## Objective
 
@@ -23,7 +19,7 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
 - build once, deploy that unchanged artifact to a second static host, and test
   the real deployment.
 
-## Inputs and repository state
+## Inputs and exact paths
 
 - Canonical plan: `docs/product/master-plan.md` (§4.1, §10, §11.1, §11.2,
   §11.7, §11.8, §11.9, §12.2, §18)
@@ -49,6 +45,15 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
   `da9eb913dd5c25249396a21792f24da41fe66514`
 - Code-quality remediation implementation commit:
   `eed479e7b28bafdfeeea534fa868e67ce34474bb`
+- Code-quality remediation handoff and closed-claim candidate:
+  `c9c9fbe96c2af2ae2a0f57b22c647b6bf6073203`
+- Account-B Round 1 report commit/integration:
+  `4e1c0b8182beb20a97ade4c5f7ddca5aaedb2c59` /
+  `95d3ac3de9f352b5d79b0f506d188d110ee180a2`
+- Round 1 remediation claim and exact-path expansions:
+  `f221d728f85022a6ed133bcc57a6ea07a75a8fc5` /
+  `107266ac6f51d597797aa5e2e4caf53b9ae59695` /
+  `d2fdea2`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
 - The spec-remediation and code-quality-remediation claims were each committed
@@ -59,6 +64,21 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
 The remediation preserves the accepted SBLA-002 operating model. It does not
 define the SBLA-007 schemas, select SBLA-004–006 assets, or build later product
 surfaces.
+
+## Constraints
+
+- Codex owns only the bounded remediation paths recorded in
+  `docs/runbooks/current-work.md`; the Account-B review report is immutable.
+- Do not back-date the two omitted internal review reports. Record the process
+  omission in the recovery log and require exact claims plus append-only reports
+  for every future review round.
+- Do not approve a provider, create a production project, attach a domain,
+  enable a paid or metered service, or activate analytics in this task.
+- Keep the current one-page portability proof honest. Nested routes, Pagefind,
+  fonts, JSON, CSS `url()`, and GLB coverage remain later-task gates.
+- Preserve the stable command contract and the accepted SBLA-002 role model.
+- No runtime AI, scientific content, evidence schema, or anatomy asset is in
+  scope.
 
 ## Work completed
 
@@ -74,14 +94,16 @@ surfaces.
   static delivery, keeps Release 1 assets under its 25 MiB/file boundary,
   excludes metered R2, and records the current-shell GitHub Pages portability
   proof and the required future expansion gate.
-- `docs/adr/0004-analytics.md` proposes Cloudflare Web Analytics only as an
-  optional, launch-nonblocking aggregate pageview direction. It permits no raw
-  queries/free text, persistent per-user ID, raw log export, or unsupported
-  custom events.
+- `docs/adr/0004-analytics.md` selects no analytics for launch and retains
+  Cloudflare Web Analytics only as an optional post-launch candidate through
+  automatic injection with an observed SRI attribute. It prohibits manual
+  embedding, raw queries/free text, persistent per-user IDs, raw log export,
+  and unsupported custom events.
 - `docs/adr/0005-zero-cost-infrastructure-model.md` separates measured
-  foundation output from Phase 0 budget-derived capacity inputs, includes a
-  Consequences section, and covers every required dimension at all three
-  traffic scenarios.
+  foundation output from the Phase 0 hard-capacity envelope, labels every
+  remaining target/assumption, separates the zero-analytics launch baseline
+  from the optional sensitivity, and covers every required dimension at all
+  three traffic scenarios.
 - Every ADR or the package records alternatives and reversal cost, including
   the high reversal cost of introducing runtime AI.
 
@@ -135,9 +157,40 @@ relative stylesheet does not mask root-absolute `/favicon.svg`, `/poster.webp`,
 `data-src` attributes are excluded from this byte-fetch check; same-origin
 navigation remains covered by its separate test.
 
+### Account-B Round 1 remediation
+
+The immutable Account-B report `reviews/releases/SBLA-003-r1.md` reviewed
+`c9c9fbe...` and returned FAIL with no Critical, five Important, and six Minor
+findings. Each finding was checked against the repository before remediation.
+
+| Finding                                                          | Verified repair                                                                                                                                                                           |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| R1-I-1: ADRs 0003/0005 contradicted each other on Netlify        | ADR 0003 now agrees that the 15 GB maximum cannot carry even the 10k hard-capacity scenario.                                                                                              |
+| R1-I-2: `assetsPrefix: '.'` nested-route failure was undisclosed | ADR 0003 now marks both the asset prefix and `href="./"` mount-root-only and requires a route-depth-aware dual-mount replacement before any nested route.                                 |
+| R1-I-3: the optional beacon ignored §11.7 SRI                    | ADR 0004 and the machine record select no analytics at launch, prohibit manual embedding, and allow optional automatic activation only after actual production HTML contains `integrity`. |
+| R1-I-4: this handoff violated §13.6                              | The handoff now contains the ten mandatory headings exactly once and in order, with explicit Constraints, Decisions, and Acceptance criteria.                                             |
+| R1-I-5: two internal reviews left no reports/claims              | The recovery log records the omission without fabricating retrospective reports and requires every future review to be pre-claimed and append-only.                                       |
+| R1-m-1: portability count/reference coverage was stale           | ADR 0003 now states twelve tests and `href`/`src`/`srcset` plus navigation coverage.                                                                                                      |
+| R1-m-2: targets were called ceilings                             | ADR 0005 now uses the 160 KB non-3D JS, 3 MB loop, and 10 MB 3D hard ceilings; remaining targets/allowances are labelled.                                                                 |
+| R1-m-3: volatile beacon bytes carried false precision            | The 2026-09-03 30,294 raw / 10,125 gzip measurement and earlier drift are recorded; displayed scenario totals are rounded.                                                                |
+| R1-m-4: manifest digest recipe was missing                       | ADR 0003 and this handoff define the exact sorted per-file SHA-256 recipe.                                                                                                                |
+| R1-m-5: the harness returned 404 instead of a directory redirect | A focused RED test observed 404 for `/sub`; the minimal server change returns 308 to `/sub/`, and the focused suite is GREEN.                                                             |
+| R1-m-6: 8.1% of diagnostic gzip was called immaterial            | ADR 0005 reports the exact 214-byte contribution and percentage.                                                                                                                          |
+
+The content-manifest acceptance digest is reproduced from inside `dist/` with:
+
+```bash
+find . -type f | LC_ALL=C sort | xargs shasum -a 256 | shasum -a 256
+```
+
+The current artifact has no whitespace or newline in a filename. A future
+filename-policy change must introduce and record a null-delimited manifest
+format rather than silently changing this digest definition.
+
 ### Current provider evidence
 
-`docs/adr/provider-quotas.json` was reverified on **2026-09-01** from official
+`docs/adr/provider-quotas.json` records the 2026-09-01 provider verification and
+the analytics/SRI decision re-verification on **2026-09-03**, from official
 provider documentation only. It distinguishes provider facts from project
 inference and records a 2026-12-01 re-verification date.
 
@@ -155,10 +208,12 @@ Decision-relevant findings:
 - Cloudflare Web Analytics: free; no cookie/local-storage state or analytics
   fingerprinting; every received report recorded; seven days unsampled then
   aggregated; query sampling; no query-string logging; and custom events not
-  supported. The exact official source for each fact and its 2026-09-01 access
-  date is mapped in `provider-quotas.json`. The current official Limits page
-  lists site/rule limits but no ingestion quota; that is a sourced absence, not
-  an unlimited-capacity claim.
+  supported. Cloudflare also says automatic injection adds `integrity`, while a
+  manual embed cannot safely use SRI because the script is not version-pinned;
+  the manual path is rejected. The exact source/access date for each fact is
+  mapped in `provider-quotas.json`. The current official Limits page lists
+  site/rule limits but no ingestion quota; that is a sourced absence, not an
+  unlimited-capacity claim.
 
 No provider was credited with an unsupported 70%/85% alert. Cloudflare's
 reviewed documentation does not expose configurable Free Pages build-count
@@ -175,30 +230,32 @@ The final foundation artifact contains nine files and measures:
 | HTML          |     1,595 |                 733 |
 | CSS           |     4,214 |               1,693 |
 | JS/images/3D  |         0 |                   0 |
-| Other files   |         9 |        not material |
+| Other files   |         9 |                 214 |
 | Complete dist |     5,818 |               2,640 |
 
 Those are measurements of the current shell only. The Phase 0 capacity model
-measures every existing artifact/payload and uses explicit budget-derived
-ceilings for future HTML/JS/image/model/Pagefind components, without cache
-credit. It is not a forecast. It records builds, Pages object GETs, actual zero
-R2 operations, hypothetical R2 sensitivity, two RUM reports per completed
-pageview, zero custom events, zero raw logs, and zero persistent user records at
-10k/100k/1M views.
+measures every existing artifact/payload, uses master-plan hard ceilings where
+they exist, and labels remaining targets or planning ceilings for future
+HTML/JS/image/model/Pagefind components, without cache credit. It is not a
+forecast. It records builds, Pages object GETs, actual zero R2 operations,
+hypothetical R2 sensitivity, zero launch analytics, and a separate optional
+two-report sensitivity with zero custom events, raw logs, or persistent user
+records at 10k/100k/1M views.
 
-The two-report capacity input produces 20k/200k/2M reports and
-20 MB/200 MB/2 GB of unmeasured ceiling payload at the three scenarios. Weighted
-transfer is 3.274509 MB per completed pageview, yielding 32.75 GB, 327.45 GB,
-and 3,274.51 GB. SBLA-012/015/016 must replace all future-component inputs with
-representative measurements and rerun every scenario before production provider
-activation.
+The launch envelope is 5.067 MB per completed pageview, yielding
+50.67/506.70/5,067.00 GB. The optional analytics sensitivity adds the currently
+measured 10.125 KB gzip beacon plus two 1 KB reports per completed view, yielding
+50.79/507.91/5,079.13 GB and 20 MB/200 MB/2 GB of unmeasured report payload.
+SBLA-012/015/016 must replace all future-component inputs with representative
+measurements and rerun every scenario before production provider activation.
 
 The $0 result depends on a hard product boundary, not on staying within a
-metered free allowance: use only Cloudflare Pages Free static delivery and the
-optional free analytics service; do not activate R2, Functions, Workers Paid,
-or another metered product.
+metered free allowance: use only Cloudflare Pages Free static delivery, launch
+without analytics, and do not activate R2, Functions, Workers Paid, or another
+metered product. Optional free analytics remains outside the launch baseline
+until its automatic-injection integrity gate passes.
 
-## Portability implementation and TDD evidence
+### Portability implementation and TDD evidence
 
 The preliminary candidate added a bare `node:http` static server, a dedicated
 Vitest integration config, and `pnpm test:portability` inside the stable
@@ -222,8 +279,8 @@ TDD cycles on 2026-09-01:
 6. **RED:** the new navigation contract failed because `/` was outside
    `/science-lifting-atlas/`.
 7. **GREEN:** the minimum application change used the standard
-   document-relative `href="./"`. The five-test spec-remediation suite passed
-   for the current homepage and its current HTML references/anchors at a root
+   document-relative `href="./"`. The five-test suite at that point passed for
+   the current homepage and its then-current HTML references/anchors at a root
    and project subpath.
 
 Code-quality TDD cycles on 2026-09-01 and 2026-09-02:
@@ -248,9 +305,18 @@ Code-quality TDD cycles on 2026-09-01 and 2026-09-02:
    fixture showed that `data-src` was incorrectly captured as `src`; anchoring
    the attribute matcher to attribute boundaries returned it to GREEN while
    retaining explicit exclusions for navigation and unsupported/external URLs.
-5. **GREEN — final portability suite:** three files and eleven tests pass. The
-   main four tests cover the current built homepage at both mounts; the seven
-   focused tests cover resource collection and server safety/error behavior.
+5. **GREEN — pre-R1 portability suite:** three files and eleven tests passed.
+   The main four tests covered the current built homepage at both mounts; the
+   seven focused tests covered resource collection and server safety/error
+   behavior.
+
+Round 1 directory-behavior TDD on 2026-09-03:
+
+1. **RED:** the focused real-server test requested `/sub` for a fixture
+   containing `sub/index.html` and received 404 instead of the required redirect.
+2. **GREEN:** the server now returns 308 with `Location: /sub/`; the redirected
+   page returns 200 with the expected bytes. The full portability suite now has
+   three files and twelve tests.
 
 Astro documents standard anchor navigation and does not rewrite manually
 authored root links for `base`. The current homepage's document-relative link is
@@ -264,7 +330,7 @@ asset class, it must extend the suite to recursively enumerate every
 HTML references/anchors and relevant CSS/JSON/Pagefind/font/GLB references, and
 verify route-aware home navigation from the same unchanged artifact.
 
-## Exact current-shell second-host deployment evidence
+### Exact current-shell second-host deployment evidence
 
 Deployment date: **2026-09-01**. The owner-authorized proof used the existing
 authenticated GitHub account and made no billing, paid-plan, secret, custom
@@ -309,9 +375,33 @@ matched the rebuilt local files at SHA-256 `bc1ac5107...` and `76a9808cd...`
 respectively. The existing public artifact proof therefore remains valid; no
 redeployment was needed or performed.
 
-## Verification results
+## Decisions made
 
-Pinned runtime throughout: Node.js `v24.20.0`, pnpm `11.24.0`.
+- Retain Cloudflare Pages Free static delivery as the proposed host and keep R2,
+  Functions, Workers Paid, and every metered product disabled.
+- Launch without analytics. Cloudflare Web Analytics remains an optional
+  post-launch candidate only through automatic injection after the actual
+  production HTML is verified to contain an `integrity` attribute; manual
+  embedding is prohibited because the beacon is not version-pinned.
+- Use master-plan hard ceilings in the capacity envelope wherever they exist.
+  Keep targets or task-local planning ceilings only where the plan defines no
+  hard ceiling, and label them accordingly.
+- Keep `build.assetsPrefix: '.'` for the current mount-root-only shell, while
+  recording that it and `href="./"` fail for nested routes. The first task that
+  adds a nested route must implement and prove a deterministic route-depth-aware
+  replacement against both mounts from one unchanged artifact.
+- Make the local portability harness redirect directory requests without a
+  trailing slash so it does not diverge from ordinary static-host behavior.
+- Define the exact content-manifest digest recipe in the ADR and this handoff so
+  the live-artifact identity can be independently reproduced.
+- Preserve the two missing internal-review records as a recovery-log omission;
+  do not fabricate retrospective reports.
+
+## Tests/checks run and results
+
+The repository command contract was freshly verified with Node.js `v24.20.0`
+and pnpm `11.24.0`. The official Node distribution checksum passed before the
+temporary pinned runtime was used.
 
 - Post-mainline baseline before remediation: `pnpm install --frozen-lockfile`
   PASS; `pnpm verify` PASS with 7 unit files/47 tests, 4 portability tests,
@@ -324,66 +414,40 @@ Pinned runtime throughout: Node.js `v24.20.0`, pnpm `11.24.0`.
   warnings), Astro diagnostics (0 errors/warnings/hints), 7 unit files/47 tests,
   foundation-mode content/graph/evidence validation, production build, 3
   portability files/11 tests, and foundation contract.
+- Round 1 remediation `pnpm install --frozen-lockfile`: PASS; `pnpm verify`:
+  PASS with Prettier, ESLint (0 warnings), Astro diagnostics across 37 files (0
+  errors/warnings/hints), 7 unit files/47 tests, foundation-mode
+  content/graph/evidence validation, production build, 3 portability files/12
+  tests, and foundation contract.
 - The first focused post-GREEN typecheck exposed one strict-JS
   `string | undefined` diagnostic in raw-path extraction; tracing it to indexed
   `split` access and replacing that access with an explicit suffix index made
   the focused tests, ESLint, and Astro diagnostics all pass on the next run.
-- `pnpm test:e2e`: PASS, 1 Chromium test including the JavaScript-disabled
-  static foundation.
+- Round 1 remediation `pnpm test:e2e`: PASS, 1 Chromium test including the
+  JavaScript-disabled static foundation.
 - Fresh-build content-manifest comparison: PASS at
   `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`.
-- Live proof recheck: PASS with HTTP 200 for page, CSS, navigation, and health;
-  rebuilt-local/downloaded page and CSS SHA-256 values match byte-for-byte.
+- Independent capacity arithmetic: PASS at 5.067 MB launch and 5.079125 MB
+  optional per completed view; all transfer/report scenario values reproduce.
+- Exact §13.6 heading assertion: PASS for all ten headings, once and in order.
+- Live proof recheck on 2026-09-03: PASS with HTTP 200 for page, CSS,
+  document-relative navigation, and health; rebuilt-local/downloaded page, CSS,
+  and health SHA-256 values match byte-for-byte.
 - `jq empty docs/adr/provider-quotas.json`: PASS.
 - README/master-plan/ADR/handoff relative-link check: PASS, 19 checked and 0
   broken.
-- All 17 unique URLs in `provider-quotas.json`: HTTP 200 on 2026-09-01; the
-  privacy, limits, FAQ, and data-collection pages were also read directly.
-- Beacon transfer remeasurement: PASS, 28,467 identity bytes and 9,509 gzip
-  body bytes; `cache-control: public, max-age=86400`.
-- Independent integer-byte arithmetic: PASS at 3,274,509 B/completed view, two
-  reports/view, and 32.75/327.45/3,274.51 GB; object-operation arithmetic also
-  PASS.
-- One-off spec assertions: PASS for all six repairs, all five Proposed statuses,
-  and absence of stale one-report totals.
-- Code-quality remediation `git diff --check`: PASS.
+- All 18 unique URLs in `provider-quotas.json`: reachable on 2026-09-03; the
+  decision-relevant analytics FAQ, setup, and overview pages were also read
+  directly.
+- Beacon transfer remeasurement on 2026-09-03: PASS, 30,294 identity bytes and
+  10,125 gzip body bytes; `cache-control: public, max-age=86400`; ETag
+  `W/"2026.9.1"`.
+- Round 1 finding assertions: PASS for all eleven repairs, all five Proposed
+  statuses, launch/optional model separation, current reference/test counts, and
+  absence of stale scenario totals.
+- Round 1 remediation `git diff --check`: PASS.
 
-## Files created or modified for SBLA-003
-
-Created in the preliminary candidate:
-
-- `docs/adr/0001-static-first-architecture.md`
-- `docs/adr/0002-content-data-and-graph.md`
-- `docs/adr/0003-hosting-and-asset-delivery.md`
-- `docs/adr/0004-analytics.md`
-- `docs/adr/0005-zero-cost-infrastructure-model.md`
-- `docs/adr/provider-quotas.json`
-- `reviews/releases/SBLA-003-handoff.md`
-- `scripts/portability/static-server.mjs`
-- `tests/integration/portability.test.ts`
-- `vitest.portability.config.ts`
-
-Created during code-quality remediation:
-
-- `tests/integration/portability/resource-references.test.ts`
-- `tests/integration/portability/resource-references.ts`
-- `tests/integration/portability/server-lifecycle.ts`
-- `tests/integration/portability/static-server.test.ts`
-
-Modified across the preliminary candidate and remediation:
-
-- `README.md`
-- `astro.config.mjs`
-- `docs/adr/README.md`
-- `docs/product/master-plan.md` (§11.8 queue-staging clarification only)
-- `docs/runbooks/current-work.md`
-- `package.json`
-- `scripts/portability/static-server.mjs`
-- `src/pages/index.astro`
-- `tests/integration/portability.test.ts`
-- `vitest.portability.config.ts`
-
-## Self-review
+### Self-review
 
 - Reviewed the full SBLA-003 diff from its exact SBLA-001 dependency and the
   bounded remediation diff from `84c3e06...`.
@@ -393,13 +457,15 @@ Modified across the preliminary candidate and remediation:
 - Confirmed the owner-authorized master-plan clarification is limited to queue
   staging and does not approve the Proposed ADRs.
 - Confirmed provider facts are dated and mapped to exact sources; inference,
-  measured shell bytes, and budget-derived capacity inputs are labelled
-  separately.
-- Confirmed the analytics and cost ADRs agree: optional pageview analytics is
-  included as one script plus two reports per completed view, while custom
-  events, raw logs, and persistent per-user records are zero.
+  measured shell bytes, master-plan hard ceilings, and remaining planning
+  inputs are labelled separately.
+- Confirmed the analytics and cost ADRs agree: the launch baseline has no
+  analytics transfer, while the optional integrity-gated sensitivity includes
+  one script plus two reports per completed view; custom events, raw logs, and
+  persistent per-user records are zero in both modes.
 - Confirmed portability claims stop at the current homepage/output and record
-  the recursive expansion gate for future routes and assets.
+  the recursive expansion gate for future routes and assets, including the
+  disclosed mount-root-only asset prefix/home link.
 - Reviewed the bounded code-quality diff from `16fda3b...`: malformed targets
   cannot reject outside the request handler, decoded traversal is rejected
   before filesystem access, resolved paths cannot cross the real served root,
@@ -422,12 +488,10 @@ The earlier handoff's “no Important defect” statement was invalidated by the
 spec-compliance failure at `e8fe598...`; this handoff supersedes it rather than
 hiding the review result.
 
-After applying every recorded repair and rechecking the spec and code-quality
-findings against their bounded diffs, self-review found no remaining Critical or
-Important defect. Code-quality re-review is still required; this statement does
-not claim that review has passed.
+Round 1 remediation is still under verification and independent review. This
+handoff does not claim acceptance or a passing Round 2 verdict.
 
-## Remaining concerns and owner decisions
+## Known uncertainties
 
 - Provider quotas and terms are time-unstable; reverify by 2026-12-01 and before
   production provider activation.
@@ -436,43 +500,110 @@ not claim that review has passed.
   measurements or a forecast. Replace them at SBLA-012/015/016 and rerun all
   scenarios before production provider activation.
 - No Cloudflare account/project was authenticated here. The production Pages
-  project, CSP/privacy integration, optional analytics beacon, and weekly quota
-  review remain future implementation; none is falsely claimed configured.
+  project, CSP/privacy integration, optional automatically injected analytics,
+  and weekly quota review remain future implementation; none is falsely claimed
+  configured. Manual beacon embedding is prohibited.
 - The official Cloudflare Web Analytics Limits page documents no ingestion
   quota, and the FAQ says custom events are not supported. Analytics must remain
-  optional, pageviews-only, and launch-nonblocking until reverified.
+  disabled at launch, optional, pageviews-only, and launch-nonblocking. Optional
+  activation also requires an observed `integrity` attribute in production HTML.
 - GitHub Pages is a public non-production proof, not a commercial fallback for
   the full atlas. Its repository should be removed or replaced if its proof
   purpose ends or commercial restrictions become relevant.
 - Owner approval is still required for the proposed provider direction, $0
-  model, and optional analytics choice.
+  model, no-analytics launch baseline, and optional post-launch analytics gate.
 
-## Required next reviewer actions
+## Files created or modified
 
-First, re-review the bounded code-quality remediation from `16fda3b...` through
-the final candidate, including the server-safety and resource-fixture RED/GREEN
-evidence above. That review is pending and is not replaced by self-review.
+Created in the preliminary candidate:
 
-After code-quality re-review passes, independent Claude Review should review the
-final branch without repairing it and write the exact append-only report
-`reviews/releases/SBLA-003-r1.md`. Return PASS or FAIL per criterion:
+- `docs/adr/0001-static-first-architecture.md`
+- `docs/adr/0002-content-data-and-graph.md`
+- `docs/adr/0003-hosting-and-asset-delivery.md`
+- `docs/adr/0004-analytics.md`
+- `docs/adr/0005-zero-cost-infrastructure-model.md`
+- `docs/adr/provider-quotas.json`
+- `reviews/releases/SBLA-003-handoff.md`
+- `scripts/portability/static-server.mjs`
+- `tests/integration/portability.test.ts`
+- `vitest.portability.config.ts`
+
+Created during code-quality remediation:
+
+- `tests/integration/portability/resource-references.test.ts`
+- `tests/integration/portability/resource-references.ts`
+- `tests/integration/portability/server-lifecycle.ts`
+- `tests/integration/portability/static-server.test.ts`
+
+Created by the independent Account-B review:
+
+- `reviews/releases/SBLA-003-r1.md`
+
+Modified during Round 1 remediation:
+
+- `docs/adr/0003-hosting-and-asset-delivery.md`
+- `docs/adr/0004-analytics.md`
+- `docs/adr/0005-zero-cost-infrastructure-model.md`
+- `docs/adr/provider-quotas.json`
+- `docs/runbooks/current-work.md`
+- `reviews/releases/SBLA-003-handoff.md`
+- `scripts/portability/static-server.mjs`
+- `tests/integration/portability/static-server.test.ts`
+
+## Required reviewer action
+
+Independently review the Round 1 remediation from
+`95d3ac3de9f352b5d79b0f506d188d110ee180a2` through the new immutable candidate.
+Do not repair it. Write the exact append-only report
+`reviews/releases/SBLA-003-r2.md` only after Codex commits its exact-path claim.
+Return PASS or FAIL per criterion:
 
 1. All five ADR decisions, alternatives, consequences, and reversal costs match
    master plan §§11.1–11.2 and Phase 0 task 0.2, including no runtime AI.
 2. Every decision-relevant provider fact is supported by its dated official
    source and no inference is presented as a provider guarantee.
-3. The three-scenario Phase 0 capacity model measures all current output,
-   labels every future-component ceiling without calling it measured or a
-   forecast, models two reports per completed view, and preserves the mandatory
+3. The three-scenario Phase 0 capacity model measures all current output, uses
+   hard ceilings where the master plan defines them, labels every remaining
+   target or planning ceiling, separates the no-analytics launch baseline from
+   the two-report optional sensitivity, and preserves the mandatory
    SBLA-012/015/016 pre-activation measurement rerun.
 4. The no-auto-charge rule is satisfied by excluding metered services, and the
    70%/85% alert limitation and fallback are honest.
-5. The optional analytics decision obeys the privacy/event/log restrictions and
-   is represented consistently in the cost model.
+5. The no-analytics launch baseline and optional automatic-injection gate obey
+   §11.7 SRI plus the privacy/event/log restrictions and are represented
+   consistently in the machine record and capacity model.
 6. One unchanged current-shell artifact actually deploys and works at a second
    static host, while the prose makes no future-route/asset coverage claim and
    imposes the recursive expansion gate before those outputs are added.
 7. ADR 0002 stays clear of SBLA-007 schema ownership and no later-task scope is
    pre-empted.
-8. The accepted SBLA-002 operating model, stable command contract, claim ledger,
-   and owner-approval boundary remain intact.
+8. The accepted SBLA-002 operating model, exact handoff format, recovery log,
+   stable command contract, claim ledger, and owner-approval boundary remain
+   intact.
+9. All five Important and six Minor Round 1 findings are closed with evidence,
+   including the trailing-slash RED/GREEN test and reproducible manifest recipe.
+
+## Acceptance criteria
+
+- ADRs 0003 and 0005 agree that Netlify's 15 GB maximum cannot carry even the
+  10,000-view hard-capacity scenario.
+- ADR 0003 states that `assetsPrefix: '.'` and `href="./"` are mount-root-only,
+  defines the future route-depth-aware gate, names all current HTML reference
+  coverage, and records the twelve-test suite accurately.
+- ADR 0004 and `provider-quotas.json` prohibit manual beacon embedding, select
+  no analytics for launch, and require verified automatic-injection SRI before
+  optional activation.
+- ADR 0005 uses plan hard ceilings where available, exposes the remaining
+  targets/assumptions, reports exact non-HTML/CSS gzip bytes, and gives both the
+  zero-analytics launch model and optional sensitivity at 10k/100k/1M views.
+- The content-manifest recipe reproduces
+  `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`.
+- The generic static server returns a tested trailing-slash redirect for a
+  directory request without weakening traversal or symlink containment.
+- This handoff contains the ten mandatory §13.6 headings exactly once and in
+  order; the two missing internal-review reports are recorded as omissions, not
+  fabricated retrospectively.
+- The pinned `pnpm verify`, `pnpm test:e2e`, manifest comparison, live proof
+  recheck, JSON parse, link check, and role/scope checks all pass with a clean
+  worktree.
+- Independent Account-B Round 2 returns PASS before the owner gate is applied.

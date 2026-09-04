@@ -116,11 +116,12 @@
     },
     {
       "id": "cloudflare-web-analytics",
-      "role": "proposed optional Release 1 aggregate pageview analytics; owner approval pending",
+      "role": "optional post-launch aggregate pageview analytics candidate; launch baseline is no analytics and owner approval remains pending",
       "plan": "Free",
       "source": "https://developers.cloudflare.com/web-analytics/about/",
       "additionalSources": [
         "https://www.cloudflare.com/web-analytics/",
+        "https://developers.cloudflare.com/web-analytics/get-started/",
         "https://developers.cloudflare.com/web-analytics/faq/",
         "https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/",
         "https://developers.cloudflare.com/web-analytics/data-metrics/core-web-vitals/",
@@ -128,6 +129,7 @@
         "https://static.cloudflareinsights.com/beacon.min.js"
       ],
       "accessedOn": "2026-09-01",
+      "decisionReverifiedOn": "2026-09-03",
       "factSources": {
         "costPrivacyAndPersonalData": {
           "fact": "Cloudflare describes Web Analytics as free and privacy-first and says it does not collect or use visitors' personal data.",
@@ -147,6 +149,15 @@
           ],
           "accessedOn": "2026-09-01",
           "capacityInference": "Model two reports per completed traditional pageview and take no credit for report loss."
+        },
+        "subresourceIntegrity": {
+          "fact": "Cloudflare says automatic injection includes an integrity attribute, while the manually embedded beacon cannot safely use an integrity attribute because the beacon is not version-pinned. Pages can automatically add the snippet on the next deployment when Web Analytics is enabled for the project.",
+          "sources": [
+            "https://developers.cloudflare.com/web-analytics/faq/",
+            "https://developers.cloudflare.com/web-analytics/get-started/"
+          ],
+          "accessedOn": "2026-09-03",
+          "projectDecision": "Launch without analytics. Permit optional activation only through automatic injection after the emitted production HTML is verified to contain an integrity attribute; never use the manual embed."
         },
         "samplingRetentionQueriesAndEvents": {
           "fact": "Every received beacon is recorded without ingestion sampling; unsampled data is retained for 7 days then aggregated to around 10%; query sampling ranges from 0.0001% to 100%; query strings are not logged; custom events are not supported.",
@@ -174,19 +185,22 @@
         "documentedIngestionQuota": "not stated on the official Web Analytics Limits page; this sourced absence is not unlimited capacity"
       },
       "capacityModel": {
-        "reportsPerCompletedTraditionalPageview": 2,
+        "launchBaselineReportsPerCompletedTraditionalPageview": 0,
+        "optionalActivatedSensitivityReportsPerCompletedTraditionalPageview": 2,
         "reportTypes": ["load", "Web Vitals/leave"],
         "reportPayloadBytesEach": "1 KB unmeasured planning ceiling",
+        "activationGate": "Automatic injection only, with the emitted production script tag verified to contain an integrity attribute; otherwise analytics remains disabled.",
         "customEvents": 0,
         "rawLogs": 0,
         "persistentPerUserIdentifiers": 0
       },
       "measuredTransfer": {
-        "beaconScriptRawBytes": 28467,
-        "beaconScriptGzipBodyBytes": 9509,
-        "measurement": "curl response from static.cloudflareinsights.com with Accept-Encoding: gzip on 2026-09-01; cache-control max-age=86400",
+        "beaconScriptRawBytes": 30294,
+        "beaconScriptGzipBodyBytes": 10125,
+        "measurement": "curl response from static.cloudflareinsights.com with identity and gzip Accept-Encoding on 2026-09-03; cache-control max-age=86400; etag W/\"2026.9.1\"",
+        "priorMeasurement": "28,467 raw bytes and 9,509 gzip bytes on 2026-09-01; the change demonstrates that the unversioned script is volatile and must not be presented with false precision.",
         "source": "https://static.cloudflareinsights.com/beacon.min.js",
-        "accessedOn": "2026-09-01",
+        "accessedOn": "2026-09-03",
         "reportPayloadBytes": "not measured because no production analytics site/token exists"
       }
     }
