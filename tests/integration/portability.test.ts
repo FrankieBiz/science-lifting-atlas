@@ -5,6 +5,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { serveStaticDirectory } from '../../scripts/portability/static-server.mjs';
 import {
+  collectSameOriginNavigationReferences,
   collectSameOriginResourceReferences,
   isPathInsideMount,
 } from './portability/resource-references';
@@ -129,23 +130,19 @@ describe('build artifact portability', () => {
 
     for (const deployment of deployments) {
       const page = await fetch(deployment.pageUrl);
-      const html = await page.text();
-      const hrefs = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(
-        (match) => match[1],
+      const references = collectSameOriginNavigationReferences(
+        await page.text(),
+        page.url,
       );
 
-      expect(hrefs.length).toBeGreaterThan(0);
+      expect(references.length).toBeGreaterThan(0);
 
-      for (const href of hrefs) {
-        if (!href) continue;
-        const target = new URL(href, page.url);
-        if (target.origin !== new URL(page.url).origin) continue;
-
+      for (const reference of references) {
         expect(
-          isPathInsideMount(target.pathname, deployment.mount),
-          `navigation ${href} must remain inside ${deployment.mount}`,
+          isPathInsideMount(reference.url.pathname, deployment.mount),
+          `navigation ${reference.raw} must remain inside ${deployment.mount}`,
         ).toBe(true);
-        expect((await fetch(target)).status).toBe(200);
+        expect((await fetch(reference.url)).status).toBe(200);
       }
     }
   });

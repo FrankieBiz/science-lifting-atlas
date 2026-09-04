@@ -1,12 +1,14 @@
 # Handoff: SBLA-003 — Architecture, hosting, analytics, and $0 infrastructure ADRs
 
 **Status:** Account-B Claude Review Round 1 at `c9c9fbe...` returned FAIL with
-five Important and six Minor findings. The immutable report is preserved at
-`reviews/releases/SBLA-003-r1.md`; the bounded remediation is implemented and
-freshly verified. Internal review returned With fixes for one ledger-lifecycle
-defect and one inventory omission; both are repaired in a bounded follow-up.
-All five ADRs remain **Proposed**; Account-B Round 2 and owner approval remain
-pending.
+five Important and six Minor findings, and a late addendum from that same review
+added one Important parser finding. The immutable artifacts are preserved at
+`reviews/releases/SBLA-003-r1.md` and
+`reviews/releases/SBLA-003-r1-addendum.md`. All twelve combined findings are
+implemented and freshly verified; fresh independent review remains pending.
+Internal review returned With fixes for one ledger-lifecycle defect and one
+inventory omission; both are repaired in a bounded follow-up. All five ADRs
+remain **Proposed**; Account-B Round 2 and owner approval remain pending.
 
 ## Objective
 
@@ -63,6 +65,15 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
   `8155f5abad2e915d4fe21998da611dbca500b9cd`
 - Internal-review remediation claim commit:
   `fc04180ce83656322b44b18e672271df12cd17c6`
+- Internal-review remediation closure candidate:
+  `21ef3f8ddd1080536ce3b9ba0a4d14727750292b`
+- First Round 2 coordination claim, canceled before dispatch after the late
+  addendum was discovered:
+  `6732db34efa4bfaa93fa330822bafaee6c139715`
+- Late Account-B Round 1 addendum preservation commit:
+  `07eccccd5977b0223473b2aa69d350462708b683`
+- R1-I-6 remediation claim commit:
+  `bf8522d7f5eeca8c215f80e49ceeb0abda04eaa1`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
 - The spec-remediation and code-quality-remediation claims were each committed
@@ -170,36 +181,66 @@ navigation remains covered by its separate test.
 
 The immutable Account-B report `reviews/releases/SBLA-003-r1.md` reviewed
 `c9c9fbe...` and returned FAIL with no Critical, five Important, and six Minor
-findings. Each finding was checked against the repository before remediation.
+findings. A late artifact from the same review session is preserved independently
+at `reviews/releases/SBLA-003-r1-addendum.md`; it adds one Important finding and
+does not rewrite the original report. Each combined finding was checked against
+the repository before remediation.
 
-| Finding                                                          | Verified repair                                                                                                                                                                           |
-| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| R1-I-1: ADRs 0003/0005 contradicted each other on Netlify        | ADR 0003 now agrees that the 15 GB maximum cannot carry even the 10k hard-capacity scenario.                                                                                              |
-| R1-I-2: `assetsPrefix: '.'` nested-route failure was undisclosed | ADR 0003 now marks both the asset prefix and `href="./"` mount-root-only and requires a route-depth-aware dual-mount replacement before any nested route.                                 |
-| R1-I-3: the optional beacon ignored §11.7 SRI                    | ADR 0004 and the machine record select no analytics at launch, prohibit manual embedding, and allow optional automatic activation only after actual production HTML contains `integrity`. |
-| R1-I-4: this handoff violated §13.6                              | The handoff now contains the ten mandatory headings exactly once and in order, with explicit Constraints, Decisions, and Acceptance criteria.                                             |
-| R1-I-5: two internal reviews left no reports/claims              | The recovery log records the omission without fabricating retrospective reports and requires every future review to be pre-claimed and append-only.                                       |
-| R1-m-1: portability count/reference coverage was stale           | ADR 0003 now states twelve tests and `href`/`src`/`srcset` plus navigation coverage.                                                                                                      |
-| R1-m-2: targets were called ceilings                             | ADR 0005 now uses the 160 KB non-3D JS, 3 MB loop, and 10 MB 3D hard ceilings; remaining targets/allowances are labelled.                                                                 |
-| R1-m-3: volatile beacon bytes carried false precision            | The 2026-09-03 30,294 raw / 10,125 gzip measurement and earlier drift are recorded; displayed scenario totals are rounded.                                                                |
-| R1-m-4: manifest digest recipe was missing                       | ADR 0003 and this handoff define the exact sorted per-file SHA-256 recipe.                                                                                                                |
-| R1-m-5: the harness returned 404 instead of a directory redirect | A focused RED test observed 404 for `/sub`; the minimal server change returns 308 to `/sub/`, and the focused suite is GREEN.                                                             |
-| R1-m-6: 8.1% of diagnostic gzip was called immaterial            | ADR 0005 reports the exact 214-byte contribution and percentage.                                                                                                                          |
+| Finding                                                          | Verified repair                                                                                                                                                                                                                       |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| R1-I-1: ADRs 0003/0005 contradicted each other on Netlify        | ADR 0003 now agrees that the 15 GB maximum cannot carry even the 10k hard-capacity scenario.                                                                                                                                          |
+| R1-I-2: `assetsPrefix: '.'` nested-route failure was undisclosed | ADR 0003 now marks both the asset prefix and `href="./"` mount-root-only and requires a route-depth-aware dual-mount replacement before any nested route.                                                                             |
+| R1-I-3: the optional beacon ignored §11.7 SRI                    | ADR 0004 and the machine record select no analytics at launch, prohibit manual embedding, and allow optional automatic activation only after actual production HTML contains `integrity`.                                             |
+| R1-I-4: this handoff violated §13.6                              | The handoff now contains the ten mandatory headings exactly once and in order, with explicit Constraints, Decisions, and Acceptance criteria.                                                                                         |
+| R1-I-5: two internal reviews left no reports/claims              | The recovery log records the omission without fabricating retrospective reports and requires every future review to be pre-claimed and append-only.                                                                                   |
+| R1-I-6: regex HTML parsing silently missed valid references      | The resource and navigation collectors now walk a standards-aware HTML parse tree, including quoted `>` characters, unquoted attributes, `<area href>`, responsive images, media posters, object data, and recognized image metadata. |
+| R1-m-1: portability count/reference coverage was stale           | The original repair recorded twelve tests and `href`/`src`/`srcset` plus navigation coverage; the late parser remediation expands and records the current fifteen-test scope.                                                         |
+| R1-m-2: targets were called ceilings                             | ADR 0005 now uses the 160 KB non-3D JS, 3 MB loop, and 10 MB 3D hard ceilings; remaining targets/allowances are labelled.                                                                                                             |
+| R1-m-3: volatile beacon bytes carried false precision            | The 2026-09-03 30,294 raw / 10,125 gzip measurement and earlier drift are recorded; displayed scenario totals are rounded.                                                                                                            |
+| R1-m-4: manifest digest recipe was missing                       | ADR 0003 and this handoff define the exact sorted per-file SHA-256 recipe.                                                                                                                                                            |
+| R1-m-5: the harness returned 404 instead of a directory redirect | A focused RED test observed 404 for `/sub`; the minimal server change returns 308 to `/sub/`, and the focused suite is GREEN.                                                                                                         |
+| R1-m-6: 8.1% of diagnostic gzip was called immaterial            | ADR 0005 reports the exact 214-byte contribution and percentage.                                                                                                                                                                      |
 
 ### Internal review follow-up
 
 The claimed append-only internal report
 `reviews/releases/SBLA-003-internal-r1.md` reviewed exact candidate
 `618af60...` and returned **With fixes** with zero Critical, one Important, and
-one Minor finding. Its substantive review passed all eleven Account-B Round 1
-repairs, exact arithmetic, SRI decision, portability/security behavior, and
-scope. The bounded follow-up closes both new findings:
+one Minor finding. Its substantive review passed the original eleven Account-B
+Round 1 repairs, exact arithmetic, SRI decision, portability/security behavior,
+and scope. That review preceded discovery of the late R1-I-6 addendum and did not
+review the parser repair. The bounded follow-up closes both internal findings:
 
 - **IR1-I-1:** the completed `SBLA-003 remediation R1` claim and the internal
   review claim are now closed in the ledger; only this exact two-path follow-up
   claim remains active until its corrected handoff is committed.
 - **IR1-m-1:** `README.md` is now present in the complete Round 1 modified-file
   inventory below.
+
+### Late Account-B addendum and parser remediation
+
+The addendum was found in the still-open Account-B Round 1 session before Round
+2 was dispatched. Its exact bytes are preserved at
+`reviews/releases/SBLA-003-r1-addendum.md`: 10,368 bytes, 195 lines, SHA-256
+`4d756a1935ffedca92f9ce7f502ec30c41f122a2dd88355ce05a3a8e20a91df3`.
+The first Round 2 claim was canceled before any prompt or report was created, so
+the parser defect could be repaired and independently reviewed with the rest of
+the candidate.
+
+The original regex split an HTML start tag at a `>` inside a quoted attribute.
+The exact valid input `<img alt="Squat > Deadlift" src="/health.txt">` therefore
+returned no resource, and `<area href>` was excluded from both resource and
+navigation paths. Additional direct probes confirmed false negatives for
+`poster`, `imagesrcset`, `<object data>`, recognized image metadata, and unquoted
+attributes.
+
+The bounded repair uses exact development dependency `parse5@8.0.1` to walk the
+HTML tree. Resource collection is now an explicit element/attribute allow-list:
+same-origin `href` on `<image>`/`<use>`, `src` on the supported media/embed/image/
+script elements, `srcset`, `<link imagesrcset>`, `<video poster>`, `<object
+data>`, and recognized image metadata. Navigation collection uses the same
+parser for `<a href>` and `<area href>`. Generic metadata, lazy-load `data-src`,
+fragments, external origins, and non-HTTP schemes remain intentionally excluded.
 
 The content-manifest acceptance digest is reproduced from inside `dist/` with:
 
@@ -342,17 +383,37 @@ Round 1 directory-behavior TDD on 2026-09-03:
    page returns 200 with the expected bytes. The full portability suite now has
    three files and twelve tests.
 
+Late Round 1 parser-remediation TDD on 2026-09-04:
+
+1. **RED — resources:** the focused suite returned no `/health.txt` for an
+   `<img>` whose earlier quoted attribute contained `>`, and discovered only the
+   video source from a fixture that also required poster, unquoted image,
+   `imagesrcset`, object-data, and metadata references. Result: two failed, one
+   passed.
+2. **GREEN — resources:** the parse-tree collector made all three focused tests
+   pass. The first strict typecheck exposed an unchecked `content` access; an
+   explicit property guard made lint and typecheck pass.
+3. **RED — navigation:** the new quoted-`>` anchor and `<area href>` test failed
+   because the shared navigation collector did not yet exist. Result: one
+   failed, three passed.
+4. **GREEN — navigation and complete focused scope:** the parser-backed
+   navigation collector made all four focused tests pass. The full portability
+   suite passed three files and fifteen tests, including a mixed data/network
+   `srcset` case that still discovers the network candidate.
+
 Astro documents standard anchor navigation and does not rewrite manually
 authored root links for `base`. The current homepage's document-relative link is
 correct because that page sits at the mount root; it is not a general nested
 route solution.
 
-The suite does not recursively inspect future routes or CSS `url()`, JSON,
-Pagefind, font, or GLB dependencies. Before any task adds/nests routes or adds an
-asset class, it must extend the suite to recursively enumerate every
-`dist/**/*.html`, exercise every route at root and subpath, check all same-origin
-HTML references/anchors and relevant CSS/JSON/Pagefind/font/GLB references, and
-verify route-aware home navigation from the same unchanged artifact.
+The suite covers current HTML navigation plus the explicit HTML resource
+allow-list above with standards-aware quoted/unquoted parsing. It does not
+recursively inspect future routes or CSS `url()`, JSON, Pagefind, font, or GLB
+dependencies. Before any task adds/nests routes or adds an asset class, it must
+extend the suite to recursively enumerate every `dist/**/*.html`, exercise every
+route at root and subpath, check all same-origin HTML references/anchors and
+relevant CSS/JSON/Pagefind/font/GLB references, and verify route-aware home
+navigation from the same unchanged artifact.
 
 ### Exact current-shell second-host deployment evidence
 
@@ -416,6 +477,9 @@ redeployment was needed or performed.
   replacement against both mounts from one unchanged artifact.
 - Make the local portability harness redirect directory requests without a
   trailing slash so it does not diverge from ordinary static-host behavior.
+- Parse HTML with `parse5@8.0.1` and explicit element/attribute allow-lists for
+  both resources and navigation; do not use start-tag regular expressions for
+  security- or acceptance-relevant discovery.
 - Define the exact content-manifest digest recipe in the ADR and this handoff so
   the live-artifact identity can be independently reproduced.
 - Preserve the two missing internal-review records as a recovery-log omission;
@@ -466,10 +530,32 @@ temporary pinned runtime was used.
 - Beacon transfer remeasurement on 2026-09-03: PASS, 30,294 identity bytes and
   10,125 gzip body bytes; `cache-control: public, max-age=86400`; ETag
   `W/"2026.9.1"`.
-- Round 1 finding assertions: PASS for all eleven repairs, all five Proposed
-  statuses, launch/optional model separation, current reference/test counts, and
-  absence of stale scenario totals.
+- Original Round 1 finding assertions: PASS for all eleven original repairs, all
+  five Proposed statuses, launch/optional model separation, then-current
+  reference/test counts, and absence of stale scenario totals.
 - Round 1 remediation `git diff --check`: PASS.
+- R1-I-6 first focused RED: expected quote-safe and expanded resource discovery;
+  two tests failed and one passed.
+- R1-I-6 resource GREEN: three focused tests passed; the subsequent strict
+  typecheck diagnostic was repaired with explicit property narrowing.
+- R1-I-6 navigation RED/GREEN: the missing collector produced one failed/three
+  passed, then the shared parser-backed implementation produced four/four.
+- R1-I-6 current portability check: PASS, 3 files/15 tests; ESLint and Astro
+  diagnostics also PASS with 0 errors, warnings, or hints.
+- Combined Round 1 remediation `pnpm install --frozen-lockfile`: PASS with the
+  pinned lockfile and existing pnpm store.
+- Combined Round 1 remediation `pnpm verify`: PASS with Prettier, ESLint (0
+  warnings), Astro diagnostics across 37 files (0 errors/warnings/hints), 7 unit
+  files/47 tests, foundation-mode content/graph/evidence validation, production
+  build, 3 portability files/15 tests, and the foundation contract.
+- Combined Round 1 remediation `pnpm test:e2e`: PASS, 1 Chromium test including
+  the JavaScript-disabled static foundation.
+- Combined Round 1 remediation `pnpm audit --audit-level high`: PASS with no
+  known vulnerabilities. `parse5@8.0.1` is MIT-licensed and its lockfile
+  integrity is recorded.
+- Post-remediation content-manifest comparison: PASS at
+  `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`;
+  the parser/test dependency does not change the built artifact.
 
 ### Self-review
 
@@ -494,11 +580,13 @@ temporary pinned runtime was used.
   cannot reject outside the request handler, decoded traversal is rejected
   before filesystem access, resolved paths cannot cross the real served root,
   and unexpected filesystem faults are observable as 500.
-- Confirmed the resource collector covers each current same-origin
-  resource-bearing `href`, `src`, and `srcset` candidate without conflating
-  navigation, unsupported/external schemes, or `data-src` with static resource
-  fetches. Both mounts enforce containment and HTTP 200 for every collected
-  current-homepage resource.
+- Confirmed the parse-tree collectors preserve quoted `>` and unquoted
+  attributes; cover the explicit same-origin `href`, `src`, `srcset`,
+  `imagesrcset`, `poster`, `data`, and recognized metadata allow-list; and
+  include both `<a>` and `<area>` navigation without conflating unsupported/
+  external schemes or lazy-load `data-src` with static resource fetches. Both
+  mounts enforce containment and HTTP 200 for every collected current-homepage
+  resource.
 - Confirmed startup/teardown closes partial or complete server sets and reports
   close/cleanup errors rather than hanging or discarding them.
 - Confirmed the stable command contract is unchanged: `pnpm verify` still builds
@@ -512,8 +600,9 @@ The earlier handoff's “no Important defect” statement was invalidated by the
 spec-compliance failure at `e8fe598...`; this handoff supersedes it rather than
 hiding the review result.
 
-Round 1 remediation is still under verification and independent review. This
-handoff does not claim acceptance or a passing Round 2 verdict.
+The combined Round 1 remediation is freshly verified but still requires fresh
+independent review. This handoff does not claim acceptance or a passing Round 2
+verdict.
 
 ## Known uncertainties
 
@@ -562,6 +651,7 @@ Created during code-quality remediation:
 Created by the independent Account-B review:
 
 - `reviews/releases/SBLA-003-r1.md`
+- `reviews/releases/SBLA-003-r1-addendum.md`
 
 Created by the independent internal review:
 
@@ -578,6 +668,18 @@ Modified during Round 1 remediation:
 - `reviews/releases/SBLA-003-handoff.md`
 - `scripts/portability/static-server.mjs`
 - `tests/integration/portability/static-server.test.ts`
+
+Modified during late R1-I-6 remediation:
+
+- `README.md`
+- `docs/adr/0003-hosting-and-asset-delivery.md`
+- `docs/runbooks/current-work.md`
+- `package.json`
+- `pnpm-lock.yaml`
+- `reviews/releases/SBLA-003-handoff.md`
+- `tests/integration/portability.test.ts`
+- `tests/integration/portability/resource-references.test.ts`
+- `tests/integration/portability/resource-references.ts`
 
 ## Required reviewer action
 
@@ -609,8 +711,9 @@ Return PASS or FAIL per criterion:
 8. The accepted SBLA-002 operating model, exact handoff format, recovery log,
    stable command contract, claim ledger, and owner-approval boundary remain
    intact.
-9. All five Important and six Minor Round 1 findings are closed with evidence,
-   including the trailing-slash RED/GREEN test and reproducible manifest recipe.
+9. All six Important and six Minor combined Round 1 findings are closed with
+   evidence, including the quote-safe parser and `<area>` coverage, the
+   trailing-slash RED/GREEN test, and reproducible manifest recipe.
 
 ## Acceptance criteria
 
@@ -618,7 +721,11 @@ Return PASS or FAIL per criterion:
   10,000-view hard-capacity scenario.
 - ADR 0003 states that `assetsPrefix: '.'` and `href="./"` are mount-root-only,
   defines the future route-depth-aware gate, names all current HTML reference
-  coverage, and records the twelve-test suite accurately.
+  coverage, and records the fifteen-test suite accurately.
+- The exact late addendum digest is preserved, and parser tests prove quoted and
+  unquoted attributes, `<area>` navigation, responsive-image sources, media
+  posters, object data, recognized image metadata, and mixed data/network
+  `srcset` handling.
 - ADR 0004 and `provider-quotas.json` prohibit manual beacon embedding, select
   no analytics for launch, and require verified automatic-injection SRI before
   optional activation.

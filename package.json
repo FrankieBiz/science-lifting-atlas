@@ -38,6 +38,7 @@
     "eslint-plugin-astro": "1.6.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "globals": "17.11.0",
+    "parse5": "8.0.1",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "typescript": "6.0.3",

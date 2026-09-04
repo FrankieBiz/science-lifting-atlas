@@ -5,6 +5,7 @@
 - Task: SBLA-003
 - Reverified: 2026-09-02
 - Round 1 remediation: 2026-09-03
+- Late Round 1 addendum remediation: 2026-09-04
 - Related: [ADR 0001](0001-static-first-architecture.md), [ADR 0005](0005-zero-cost-infrastructure-model.md)
 
 ## Context
@@ -133,10 +134,23 @@ manifest format and record the resulting new digest; silently changing the
 recipe would invalidate the acceptance artifact.
 
 This satisfies “export and deploy to a second static host from the same build
-artifact” for the current one-page shell only. The current tests inspect the
-built homepage and its present HTML `href`, `src`, and `srcset` resource
-references plus navigation anchors. They do not recursively inspect future
-routes, CSS `url()` values, JSON, Pagefind, fonts, or GLB dependencies.
+artifact” for the current one-page shell only. The current quote-aware HTML
+parser inspects same-origin:
+
+- `href` on `<link>`, SVG `<image>`/`<use>`, and navigation `<a>`/`<area>`;
+- `src` on `<audio>`, `<embed>`, `<iframe>`, `<img>`, `<input>`, `<script>`,
+  `<source>`, `<track>`, and `<video>`;
+- `srcset` on `<img>`/`<source>` and `imagesrcset` on `<link>`;
+- `poster` on `<video>` and `data` on `<object>`; and
+- `content` on recognized Open Graph, Twitter, itemprop image, and Microsoft
+  tile-image metadata.
+
+The parser accepts valid quoted and unquoted attributes, including `>` inside a
+quoted value. Generic metadata, custom lazy-load attributes such as `data-src`,
+fragments, and external or non-HTTP(S) URLs are intentionally outside this
+same-origin static-file fetch check. The current suite has three files and
+fifteen tests. It does not recursively inspect future routes, CSS `url()`
+values, JSON, Pagefind, fonts, or GLB dependencies.
 
 Before a task adds or nests a route or introduces a new asset class, that task
 must extend the portability suite to recursively enumerate every
@@ -176,7 +190,7 @@ alerts.
   it may add or nest a route; the recursive dual-mount gate must prove the
   replacement against one unchanged artifact.
 - Every task that expands routes or asset classes inherits the recursive
-  portability-suite extension gate above; the current twelve tests alone are
+  portability-suite extension gate above; the current fifteen tests alone are
   insufficient evidence for that future output. The local harness now returns
   a 308 trailing-slash redirect for a directory request, matching the ordinary
   static-host behavior that those future route tests must exercise.
