@@ -3,8 +3,10 @@
 **Status:** Account-B Claude Review Round 1 at `c9c9fbe...` returned FAIL with
 five Important and six Minor findings. The immutable report is preserved at
 `reviews/releases/SBLA-003-r1.md`; the bounded remediation is implemented and
-freshly verified. All five ADRs remain **Proposed**; Account-B Round 2 and owner
-approval remain pending.
+freshly verified. Internal review returned With fixes for one ledger-lifecycle
+defect and one inventory omission; both are repaired in a bounded follow-up.
+All five ADRs remain **Proposed**; Account-B Round 2 and owner approval remain
+pending.
 
 ## Objective
 
@@ -53,7 +55,14 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
 - Round 1 remediation claim and exact-path expansions:
   `f221d728f85022a6ed133bcc57a6ea07a75a8fc5` /
   `107266ac6f51d597797aa5e2e4caf53b9ae59695` /
-  `d2fdea2`
+  `d2fdea27af071de043b1e72596a536a7d6bf3152`
+- Round 1 remediation implementation/handoff candidate:
+  `618af60fea08b0c47f1435761e503b35d3e9f4b6`
+- Internal review report commit/integration:
+  `53645c87ea426f5d9d9f37af7bcf87fcbafe4b45` /
+  `8155f5abad2e915d4fe21998da611dbca500b9cd`
+- Internal-review remediation claim commit:
+  `fc04180ce83656322b44b18e672271df12cd17c6`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
 - The spec-remediation and code-quality-remediation claims were each committed
@@ -176,6 +185,21 @@ findings. Each finding was checked against the repository before remediation.
 | R1-m-4: manifest digest recipe was missing                       | ADR 0003 and this handoff define the exact sorted per-file SHA-256 recipe.                                                                                                                |
 | R1-m-5: the harness returned 404 instead of a directory redirect | A focused RED test observed 404 for `/sub`; the minimal server change returns 308 to `/sub/`, and the focused suite is GREEN.                                                             |
 | R1-m-6: 8.1% of diagnostic gzip was called immaterial            | ADR 0005 reports the exact 214-byte contribution and percentage.                                                                                                                          |
+
+### Internal review follow-up
+
+The claimed append-only internal report
+`reviews/releases/SBLA-003-internal-r1.md` reviewed exact candidate
+`618af60...` and returned **With fixes** with zero Critical, one Important, and
+one Minor finding. Its substantive review passed all eleven Account-B Round 1
+repairs, exact arithmetic, SRI decision, portability/security behavior, and
+scope. The bounded follow-up closes both new findings:
+
+- **IR1-I-1:** the completed `SBLA-003 remediation R1` claim and the internal
+  review claim are now closed in the ledger; only this exact two-path follow-up
+  claim remains active until its corrected handoff is committed.
+- **IR1-m-1:** `README.md` is now present in the complete Round 1 modified-file
+  inventory below.
 
 The content-manifest acceptance digest is reproduced from inside `dist/` with:
 
@@ -539,8 +563,13 @@ Created by the independent Account-B review:
 
 - `reviews/releases/SBLA-003-r1.md`
 
+Created by the independent internal review:
+
+- `reviews/releases/SBLA-003-internal-r1.md`
+
 Modified during Round 1 remediation:
 
+- `README.md`
 - `docs/adr/0003-hosting-and-asset-delivery.md`
 - `docs/adr/0004-analytics.md`
 - `docs/adr/0005-zero-cost-infrastructure-model.md`
