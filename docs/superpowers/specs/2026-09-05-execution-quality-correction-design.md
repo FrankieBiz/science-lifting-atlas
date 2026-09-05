@@ -1,6 +1,6 @@
 # Execution Quality Correction Design
 
-**Status:** Owner-approved direction on 2026-09-05; independent review pending
+**Status:** Accepted on 2026-09-05 after independent Account-B review
 
 **Decision record:** [`ADR 0006`](../../adr/0006-execution-quality-and-validation-gates.md)
 

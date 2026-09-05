@@ -1,6 +1,6 @@
 # ADR 0006 — Execution quality and validation gates
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-09-05
 - Task: PLAN-001
 - Supersedes: none
