@@ -1,19 +1,43 @@
 # BodyParts3D — sample acquisition manifest and coverage observation
 
-Accessed **2026-08-30**. Download index:
+Metadata accessed **2026-08-30**; license and mesh archive re-verified
+**2026-09-05**. Download index:
 <https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html>
 
-This closes part of the §18 SBLA-004 "sample files" deliverable: it records
-exactly what lawful samples exist, where, at what size, and with what checksum,
-so SBLA-005 can acquire them without re-deriving any of it.
+This closes the §18 SBLA-004 "sample files" deliverable with a real unchanged
+mesh, exact provenance, and a repeatable browser measurement. The complete
+archive remains outside the repository; the smallest relevant mesh needed to
+exercise the real parsing and WebGL path is checked in.
 
-**No BodyParts3D file is committed to this repository.** The licence permits
-redistribution, so §8.4's exception would allow it — but CC BY-SA 2.1 Japan
-attaches share-alike to derivative works, and the share-alike boundary between an
-asset package and this application is one of the unresolved legal questions
-recorded in [`anatomy-assets.md`](anatomy-assets.md). Committing licensed geometry
-before that is resolved could create obligations the owner has not agreed to.
-Acquisition is therefore a deliberate owner decision, not a blocked one.
+The current DBCLS license page grants CC BY 4.0. The sample itself retains an
+older CC BY-SA 2.1 Japan header; both permit redistribution with attribution.
+The repository preserves the header and includes the current and historical
+notices in `assets/samples/bodyparts3d/LICENSE.md`.
+
+## Acquired real mesh sample
+
+| Field              | Value                                                              |
+| ------------------ | ------------------------------------------------------------------ |
+| Repository path    | `assets/samples/bodyparts3d/FJ1446.obj`                            |
+| Source archive     | `partof_BP3D_4.0_obj_99.zip`                                       |
+| Path in archive    | `partof_BP3D_4.0_obj_99/FJ1446.obj`                                |
+| Concept            | FMA45874 — abdominal part of right pectoralis major                |
+| Bytes              | 105,005                                                            |
+| Lines              | 3,590                                                              |
+| Vertices / normals | 1,019 / 1,019                                                      |
+| Faces / triangles  | 1,536 / 1,536                                                      |
+| SHA-256            | `964ab8e287e7f44f14b07d8c7694ec70eee63bc9d7b1eeb3c5dc79e80460336d` |
+| Modifications      | None; byte-identical ZIP extraction                                |
+
+The 64,888,505-byte source archive was downloaded from the official current
+endpoint and checksummed as
+`9fbc713fffeee924a5a657d9813d84d7eb957bded63adb854931dd5e3eb61c97`.
+It is not checked in.
+
+`pnpm assets:benchmark` verifies the sample's byte size and SHA-256 before
+opening Chromium, then performs one warmup plus five uncached trials that fetch,
+parse, upload, and draw the real geometry. The recorded run is in
+[`bodyparts3d-browser-benchmark.json`](bodyparts3d-browser-benchmark.json).
 
 ## Published files
 
@@ -56,15 +80,16 @@ three missed files (`isa_parts_list.txt`, `partof_parts_list.txt`,
 `isa_inclusion_relation_list.txt`) have now been fetched and searched; they did
 not change the finding below, but the earlier "complete set" claim was wrong.
 
-### Mesh archives — NOT fetched
+### Mesh archives
 
-| File                         |   Size | Note                                 |
-| ---------------------------- | -----: | ------------------------------------ |
-| `isa_BP3D_4.0_obj_99.zip`    | 136 MB | Wavefront OBJ, 99% polygon reduction |
-| `partof_BP3D_4.0_obj_99.zip` |  62 MB | Wavefront OBJ, 99% polygon reduction |
+| File                         |   Size | Note                                  |
+| ---------------------------- | -----: | ------------------------------------- |
+| `isa_BP3D_4.0_obj_99.zip`    | 136 MB | Wavefront OBJ, 99% polygon reduction  |
+| `partof_BP3D_4.0_obj_99.zip` |  62 MB | Fetched and checksummed on 2026-09-05 |
 
-Sizes are as published on the download index; checksums are unknown because the
-archives were not downloaded.
+Sizes are as published on the download index. The larger IS-A archive remains
+unfetched because the PART-OF archive supplied the smallest relevant sample
+needed for this milestone.
 
 ## Coverage observation against master plan §4.3
 

@@ -27,7 +27,8 @@
     "verify:foundation": "node scripts/foundation/verify.mjs",
     "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:graph && pnpm evidence:status && pnpm build && pnpm test:portability && pnpm verify:foundation && pnpm assets:spike",
     "test:portability": "vitest run --config vitest.portability.config.ts",
-    "assets:spike": "node scripts/assets/spike.mjs"
+    "assets:spike": "node scripts/assets/spike.mjs",
+    "assets:benchmark": "node scripts/assets/benchmark.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

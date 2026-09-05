@@ -1,0 +1,67 @@
+{
+  "$comment": "Observed local browser measurements for the real licensed FJ1446 OBJ sample. This is acquisition proof and a repeatability baseline, not the final SBLA-005 browser-performance score.",
+  "recordedOn": "2026-09-05",
+  "command": "npx --yes --package=node@24.20.0 --call 'pnpm assets:benchmark'",
+  "schemaVersion": 1,
+  "sample": {
+    "sourceArchive": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/partof_BP3D_4.0_obj_99.zip",
+    "archivePath": "partof_BP3D_4.0_obj_99/FJ1446.obj",
+    "bytes": 105005,
+    "sha256": "964ab8e287e7f44f14b07d8c7694ec70eee63bc9d7b1eeb3c5dc79e80460336d",
+    "vertices": 1019,
+    "normals": 1019,
+    "textureCoordinates": 0,
+    "faces": 1536,
+    "triangles": 1536
+  },
+  "environment": {
+    "node": "v24.20.0",
+    "playwrightChromium": "HeadlessChrome/151.0.7922.34",
+    "platform": "darwin-arm64",
+    "headless": true
+  },
+  "protocol": {
+    "warmupTrials": 1,
+    "measuredTrials": 5,
+    "cache": "no-store",
+    "canvas": "320x320 WebGL"
+  },
+  "mediansMs": {
+    "fetch": 0.9,
+    "parse": 1.3,
+    "uploadAndDraw": 2,
+    "total": 5.2
+  },
+  "trials": [
+    {
+      "fetchMs": 1,
+      "parseMs": 1.3,
+      "uploadAndDrawMs": 3.9,
+      "totalMs": 6.2
+    },
+    {
+      "fetchMs": 0.8,
+      "parseMs": 1.9,
+      "uploadAndDrawMs": 2.5,
+      "totalMs": 5.2
+    },
+    {
+      "fetchMs": 0.8,
+      "parseMs": 1,
+      "uploadAndDrawMs": 1.9,
+      "totalMs": 3.7
+    },
+    {
+      "fetchMs": 0.9,
+      "parseMs": 2.6,
+      "uploadAndDrawMs": 2,
+      "totalMs": 5.5
+    },
+    {
+      "fetchMs": 0.9,
+      "parseMs": 1.1,
+      "uploadAndDrawMs": 2,
+      "totalMs": 4
+    }
+  ]
+}

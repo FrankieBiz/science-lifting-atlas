@@ -1,6 +1,6 @@
 {
   "$comment": "SBLA-004 candidate license inventory. Every licence field was read from the cited primary source on the cited date; none is recalled. Technical scores are deliberately null: master plan §18 assigns measurement to SBLA-005, and inventing a score here would defeat the spike gate.",
-  "recordedOn": "2026-08-30",
+  "recordedOn": "2026-09-05",
   "recordedBy": "SBLA-004",
   "reverifyBy": "2026-11-30",
   "scoringNote": "Scores are 0-5. license_clarity below 4 rejects a candidate outright regardless of total, per master plan §8.3.",
@@ -58,7 +58,7 @@
         "webDistribution": "permitted",
         "aiProcessingPermitted": "not restricted by the licence text",
         "shareAlikeQuote": "ShareAlike: Derivative works must be shared under CC-BY-SA 4.0.",
-        "notes": "The cited GitHub LICENSE file licenses the APP and on its second line defers model licensing to a separate document. That document states all Z-Anatomy content is CC-BY-SA 4.0 including commercial use, but its ATTRIBUTIONS/HUMAN MODEL section lists reference models under CC-BY-NC-SA 4.0 (inner ear) and CC-BY-NC 4.0 (kidney). Whether those NonCommercial models ship as geometry or were used only as modelling reference is NOT established. Separately, Z-Anatomy attributes BodyParts3D as CC-BY 4.0 while DBCLS itself states CC-BY-SA 2.1 Japan - an unresolved conflict between two primary sources. Share-alike boundary between the asset package and the application also remains open per master plan 8.2.",
+        "notes": "The cited GitHub LICENSE file licenses the APP and on its second line defers model licensing to a separate document. That document states all Z-Anatomy content is CC-BY-SA 4.0 including commercial use, but its ATTRIBUTIONS/HUMAN MODEL section lists reference models under CC-BY-NC-SA 4.0 (inner ear) and CC-BY-NC 4.0 (kidney). Whether those NonCommercial models ship as geometry or were used only as modelling reference is NOT established. The earlier BodyParts3D attribution disagreement is resolved because DBCLS's current license page now also states CC BY 4.0. The share-alike boundary between the Z-Anatomy asset package and the application remains open per master plan 8.2.",
         "sourceChain": [
           "https://raw.githubusercontent.com/LluisV/Z-Anatomy/PC-Version/LICENSE (licenses the APP; defers models)",
           "https://docs.google.com/document/d/1peWW_7IiVgTTAwcI_auv38YSJ6qGWRuTMxzzhkRpXIk/edit (the model licence document)"
@@ -104,7 +104,7 @@
         "license_clarity": "3, below the 8.3 floor. Revised down from an earlier 4 after following the referral the LICENSE file gives on its own second line: the picture is mixed, not blanket CC BY-SA 4.0."
       },
       "selectionEligible": false,
-      "ineligibleReason": "Mixed licensing: two NonCommercial reference models are listed inside the human model and their redistribution status is unestablished, and two primary sources disagree on the BodyParts3D component licence. Ineligible under master plan 8.3 until a lawyer resolves both."
+      "ineligibleReason": "Mixed licensing: two NonCommercial reference models are listed inside the human model and their redistribution status is unestablished. Ineligible under master plan 8.3 until the component boundary is resolved."
     },
     {
       "id": "path-c-bodyparts3d",
@@ -112,24 +112,24 @@
       "path": "C",
       "name": "BodyParts3D / Anatomography",
       "kind": "3d-anatomy",
-      "acquired": false,
+      "acquired": true,
       "license": {
-        "name": "Creative Commons Attribution-Share Alike 2.1 Japan",
-        "version": "2.1",
-        "jurisdiction": "Japan",
-        "source": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/20110915/README_e.html",
-        "accessedOn": "2026-08-30",
+        "name": "Creative Commons Attribution 4.0 International",
+        "version": "4.0",
+        "jurisdiction": "International",
+        "source": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+        "accessedOn": "2026-09-05",
         "commercialUse": "permitted",
-        "shareAlike": "required",
+        "shareAlike": "not required by the current license page; the acquired OBJ retains a historical CC BY-SA 2.1 Japan header",
         "modification": "permitted",
         "attributionRequired": true,
-        "attributionString": "BodyParts3D, Copyright© The Database Center for Life Science licensed by CC Attribution-Share Alike 2.1 Japan",
+        "attributionString": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
         "webDistribution": "permitted",
         "aiProcessingPermitted": "not restricted by the licence text",
         "formats": ["Wavefront OBJ", "tab-delimited text"],
         "meshVariants": "95% and 99% polygon reduction rates, distributed as ZIP archives",
-        "notes": "The licence is not stated on the bp3d-dev.dbcls.jp landing page named in master plan §20; it was found on the DBCLS data-archive README, which is the primary source cited here. CC BY-SA 2.1 Japan is an unported-era national licence and is not the same instrument as 4.0; compatibility with a 4.0 asset package must be checked before mixing sources.",
-        "licenceConflict": "Z-Anatomy attributes BodyParts3D as CC-BY 4.0, while the DBCLS README cited here states CC-BY-SA 2.1 Japan. Two primary sources disagree; DBCLS is the originator and is treated as authoritative."
+        "notes": "The current DBCLS license page was updated 2025-02-27 and now states CC BY 4.0 International, resolving the earlier disagreement with Z-Anatomy's attribution. The acquired FJ1446 OBJ still embeds the archive's historical CC BY-SA 2.1 Japan notice, so the sample preserves that notice and is conservatively handled under both sets of terms.",
+        "historicalNotice": "The extracted FJ1446 OBJ header states CC BY-SA 2.1 Japan. It is preserved verbatim even though the current licensor page states CC BY 4.0 International."
       },
       "scores": {
         "coverage_naming": null,
@@ -141,9 +141,10 @@
         "presentation_options": null
       },
       "scoreRationale": {
-        "license_clarity": "4, not 5: terms and the exact attribution string are explicit at the primary source, but the licence is absent from the project's public landing page and the 2.1-Japan/4.0 compatibility question is open."
+        "license_clarity": "4, not 5: the current terms and attribution are explicit and commercially flexible, but the acquired OBJ retains an older CC BY-SA 2.1 Japan header. Conservatively preserving both notices avoids an unsupported relicensing assumption."
       },
       "sampleManifest": "docs/licenses/bodyparts3d-sample-manifest.md",
+      "browserBenchmark": "docs/licenses/bodyparts3d-browser-benchmark.json",
       "coverageObservation": {
         "accessedOn": "2026-08-30",
         "method": "case-insensitive substring search for each master plan 4.3 structure across all eight published text metadata files (60,317 lines); labels only, meshes not inspected",

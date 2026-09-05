@@ -1,12 +1,14 @@
 # Anatomy asset license inventory
 
-**Status: no anatomy asset has been selected, purchased, downloaded, or
-approved.** Master plan §8 forbids purchasing anything until the technical spike
-is complete. This file is the §8.4 licence record; the machine-readable source of
+**Status: no anatomy asset has been selected, purchased, or approved.** One
+unchanged BodyParts3D mesh sample has been lawfully acquired for the technical
+spike. Master plan §8 still forbids a purchase or selection until that spike is
+complete. This file is the §8.4 licence record; the machine-readable source of
 truth is [`asset-candidates.json`](asset-candidates.json).
 
-Every licence fact below was read from a primary source on **2026-08-30**. None
-is recalled. Re-verify by **2026-11-30**.
+Every licence fact below was read from a primary source. The BodyParts3D license
+and download were re-verified on **2026-09-05**; the other sources were read on
+**2026-08-30**. None is recalled. Re-verify by **2026-11-30**.
 
 ## Candidates
 
@@ -14,7 +16,7 @@ is recalled. Re-verify by **2026-11-30**.
 | ---- | --------------------------- | ---------------------------------------------- | -------------- | ---------: | ----------- |
 | A    | Purchased commercial asset  | vendor-specific                                | —              | not scored | placeholder |
 | B    | Z-Anatomy                   | CC BY-SA 4.0 **with NonCommercial components** | mixed          |        3/5 | **No**      |
-| C    | BodyParts3D / Anatomography | CC BY-SA 2.1 Japan                             | permitted      |        4/5 | Yes         |
+| C    | BodyParts3D / Anatomography | CC BY 4.0; sample retains historical SA notice | permitted      |        4/5 | Yes         |
 | ref  | OpenStax A&P 2e             | CC BY-NC-SA 4.0                                | **prohibited** |        5/5 | **No**      |
 
 Only **one** candidate is currently eligible to proceed. That is a material
@@ -49,15 +51,16 @@ licences, including two NonCommercial ones:
 | **Kidney — Lissie Cowley**                                             | **CC-BY-NC 4.0**                         |
 | Brainder / White matter — University of Washington                     | not stated                               |
 
-**Three unresolved problems**, any one of which blocks selection:
+**Two unresolved problems**, either of which blocks selection:
 
 1. Two reference models are NonCommercial. Whether their geometry ships in the
    distributed model or was used only as modelling reference is **not
    established** from the source.
-2. Z-Anatomy attributes BodyParts3D as **CC-BY 4.0**, while DBCLS — the
-   originator — states **CC-BY-SA 2.1 Japan**. Two primary sources disagree.
-3. The share-alike boundary between an optimised derived mesh and the
+2. The share-alike boundary between an optimised derived mesh and the
    surrounding application remains open, exactly as §8.2 warns.
+
+The earlier BodyParts3D license disagreement is resolved for current downloads:
+DBCLS's license page was updated on 2025-02-27 and now also states CC BY 4.0.
 
 Scored **3/5** for clarity — below the §8.3 floor — and recorded
 `selectionEligible: false`. An earlier draft of this file scored it 4/5 on the
@@ -66,24 +69,23 @@ that file gives on its own second line. That was wrong and is corrected here.
 
 ### Path C — BodyParts3D / Anatomography
 
-Source: <https://dbarchive.biosciencedbc.jp/data/bodyparts3d/20110915/README_e.html>
+Current source: <https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html>
 
-Creative Commons Attribution-Share Alike 2.1 Japan. Access, redistribution, and
-derivative works are permitted under attribution and share-alike. Required
-attribution string, verbatim:
+Creative Commons Attribution 4.0 International. The current license page was
+last updated 2025-02-27 and permits access, redistribution, and derivative works
+with attribution. Required attribution string, verbatim:
 
-> BodyParts3D, Copyright© The Database Center for Life Science licensed by CC
-> Attribution-Share Alike 2.1 Japan
+> BodyParts3D, © The Database Center for Life Science licensed under CC
+> Attribution 4.0 International
 
 Distributed as Wavefront OBJ meshes plus tab-delimited text, in 95% and 99%
 polygon-reduction variants.
 
-**Caveats.** The licence is _not_ stated on the `bp3d-dev.dbcls.jp` landing page
-that master plan §20 links; it had to be read from the DBCLS data archive. CC
-BY-SA 2.1 Japan is a national, unported-era instrument, not 4.0, so compatibility
-must be checked before mixing sources. And per Path B above, Z-Anatomy attributes
-this same data as CC-BY 4.0 — DBCLS is the originator and is treated as
-authoritative here.
+**Historical notice.** The unchanged `FJ1446.obj` sample extracted from the
+current archive still embeds the older CC BY-SA 2.1 Japan notice. The repository
+preserves that notice and conservatively treats the sample as subject to both
+notices rather than assuming the current page retroactively changes its embedded
+terms. This is why clarity remains 4/5 rather than 5/5.
 
 ### Reference — OpenStax Anatomy & Physiology 2e — INELIGIBLE
 
@@ -122,9 +124,10 @@ must not be used to fabricate anatomical structures presented as accurate anatom
 ## Handling rules in force
 
 - §8.4: "Store original purchased/open assets outside the public repository
-  **unless their license permits repository distribution.**" Both CC BY-SA
-  candidates _do_ permit redistribution, so lawful samples are permitted — see
-  the samples note in the SBLA-004 handoff.
+  **unless their license permits repository distribution.**" BodyParts3D's
+  current CC BY 4.0 license and the sample's historical CC BY-SA 2.1 Japan notice
+  both permit redistribution with attribution, so the unchanged sample and its
+  full notice are checked in.
 - Only authorised derivatives and required attribution notices are checked in.
 - A purchased asset requires a written licence archive and a checksum of the
   delivered files before it can be scored (§8.2).
@@ -133,7 +136,9 @@ must not be used to fabricate anatomical structures presented as accurate anatom
 
 ## What has not been done
 
-- No asset has been downloaded.
-- No technical criterion has been scored. SBLA-005 owns measurement.
+- No complete candidate asset has been selected or purchased. Only the 105,005
+  byte FJ1446 sample has been checked in.
+- No technical criterion has been scored. The repeatable browser benchmark is an
+  observed baseline; SBLA-005 owns candidate-level scoring.
 - No legal advice has been obtained on the Z-Anatomy NonCommercial components,
-  the BodyParts3D licence conflict, or the share-alike boundary.
+  its unclear reference-model boundary, or the share-alike boundary.
