@@ -29,7 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-_None._
+| Task                    | Role  | Branch                                        | Worktree                                           | Base commit                                | Started    | Expected handoff                       | Paths owned                                                                                                                                                                                                                                                                                                     |
+| ----------------------- | ----- | --------------------------------------------- | -------------------------------------------------- | ------------------------------------------ | ---------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SBLA-004 reconciliation | Codex | `codex/SBLA-004-asset-license-reconciliation` | `.worktrees/sbla-004-asset-license-reconciliation` | `78e21065793ef567889398b4f3e54d05df744662` | 2026-09-05 | `reviews/releases/SBLA-004-handoff.md` | `docs/licenses/anatomy-assets.md`; `docs/licenses/asset-candidates.json`; `docs/licenses/bodyparts3d-sample-manifest.md`; `docs/runbooks/current-work.md`; `package.json`; `reviews/releases/SBLA-004-handoff.md`; `scripts/assets/scorecard.mjs`; `scripts/assets/spike.mjs`; `tests/unit/asset-spike.test.ts` |
 
 ## Closed claims
 
