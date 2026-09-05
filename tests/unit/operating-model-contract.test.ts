@@ -45,7 +45,8 @@ function completeDocFileContents() {
         additionalPreReviewRequiresNamedMaterialRisk: true,
         failedReviewAction: 'bounded-remediation-then-full-artifact-recheck',
         progressUnit: 'accepted-capabilities-and-user-journey-proof',
-        overallPercentAllowedAfter: 'SBLA-017-observed-throughput',
+        overallPercentAllowedAfter:
+          'SBLA-017-observed-throughput-and-owner-approved-estimate',
       },
       roleIdentity: {
         claudeResearchAccount: 'A',
@@ -65,7 +66,7 @@ function completeDocFileContents() {
 }
 
 describe('agent operating-model contract', () => {
-  it('requires every SBLA-002 operating artifact named by master plan section 18', () => {
+  it('requires every load-bearing operating artifact', () => {
     expect(REQUIRED_OPERATING_PATHS).toEqual(
       expect.arrayContaining([
         'AGENTS.md',
@@ -75,6 +76,8 @@ describe('agent operating-model contract', () => {
         'docs/runbooks/branch-and-worktree.md',
         'docs/runbooks/claude-environments.md',
         'docs/runbooks/operating-policy.json',
+        'docs/product/master-plan.md',
+        'docs/adr/0006-execution-quality-and-validation-gates.md',
       ]),
     );
   });
@@ -271,9 +274,52 @@ describe('agent operating-model contract', () => {
     ).toEqual(
       expect.arrayContaining([
         'operating policy qualityControl.defaultIndependentReviewCount must equal 1',
-        'operating policy qualityControl.overallPercentAllowedAfter must equal SBLA-017-observed-throughput',
+        'operating policy qualityControl.overallPercentAllowedAfter must equal SBLA-017-observed-throughput-and-owner-approved-estimate',
       ]),
     );
+  });
+
+  it('rejects pass-threshold drift in every canonical prose contract', () => {
+    const threshold = 'zero unresolved Critical and Important findings';
+    const fileContents = completeDocFileContents();
+    fileContents.set(
+      'AGENTS.md',
+      `One independent acceptance review is the default\nSBLA-017\n${threshold}`,
+    );
+    fileContents.set(
+      'CLAUDE.md',
+      `one independent acceptance review\n${threshold}`,
+    );
+    fileContents.set('docs/product/master-plan.md', threshold);
+    fileContents.set(
+      'docs/adr/0006-execution-quality-and-validation-gates.md',
+      threshold,
+    );
+
+    for (const filePath of [
+      'AGENTS.md',
+      'CLAUDE.md',
+      'docs/product/master-plan.md',
+      'docs/adr/0006-execution-quality-and-validation-gates.md',
+    ]) {
+      const mutated = new Map(fileContents);
+      mutated.set(
+        filePath,
+        (mutated.get(filePath) ?? '').replace(
+          threshold,
+          'zero unresolved Critical findings',
+        ),
+      );
+
+      expect(
+        validateOperatingModel({
+          existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+          fileContents: mutated,
+        }),
+      ).toContain(
+        `operating document missing required content: ${filePath} -> ${threshold}`,
+      );
+    }
   });
 
   it('requires handoff headings exactly once and in canonical order', () => {

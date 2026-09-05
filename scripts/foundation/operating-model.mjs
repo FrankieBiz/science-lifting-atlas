@@ -6,6 +6,8 @@ export const REQUIRED_OPERATING_PATHS = Object.freeze([
   'docs/runbooks/branch-and-worktree.md',
   'docs/runbooks/claude-environments.md',
   'docs/runbooks/operating-policy.json',
+  'docs/product/master-plan.md',
+  'docs/adr/0006-execution-quality-and-validation-gates.md',
 ]);
 
 const OPERATING_POLICY_PATH = 'docs/runbooks/operating-policy.json';
@@ -40,6 +42,11 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'reviews/',
     'docs/runbooks/operating-policy.json',
     'One independent acceptance review is the default',
+    'zero unresolved Critical and Important findings',
+    'their impact and follow-up destination are recorded',
+    'new named material risk',
+    'one bounded remediation',
+    'recheck the complete artifact once',
     'SBLA-017',
   ]),
   'CLAUDE.md': Object.freeze([
@@ -50,7 +57,13 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'content-drafts/',
     'reviews/',
     'Codex records the exact-path claim on',
-    'one independent acceptance review',
+    'one independent milestone acceptance review',
+    'zero unresolved Critical and Important findings',
+    'their impact and follow-up destination are recorded',
+    'named material risk',
+    'claim-level review',
+    'one bounded remediation',
+    'one complete-artifact recheck',
   ]),
   'docs/runbooks/current-work.md': Object.freeze([
     'Base commit',
@@ -77,6 +90,22 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'Readiness result',
     'Fallback',
     'SBLA-008',
+  ]),
+  'docs/product/master-plan.md': Object.freeze([
+    'one independent acceptance review',
+    'zero unresolved Critical and Important findings',
+    'their impact and follow-up destination are recorded',
+    'one bounded remediation followed by one complete-artifact recheck',
+    'SBLA-017 measures vertical-slice throughput',
+    'owner approves the revised effort estimate',
+  ]),
+  'docs/adr/0006-execution-quality-and-validation-gates.md': Object.freeze([
+    'one independent acceptance review',
+    'zero unresolved Critical and Important findings',
+    'their impact and follow-up destination are recorded',
+    'one bounded remediation followed by one full-artifact recheck',
+    'SBLA-017 records observed throughput',
+    'approves the revised estimate',
   ]),
 });
 
@@ -125,7 +154,8 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'qualityControl.failedReviewAction':
     'bounded-remediation-then-full-artifact-recheck',
   'qualityControl.progressUnit': 'accepted-capabilities-and-user-journey-proof',
-  'qualityControl.overallPercentAllowedAfter': 'SBLA-017-observed-throughput',
+  'qualityControl.overallPercentAllowedAfter':
+    'SBLA-017-observed-throughput-and-owner-approved-estimate',
   'roleIdentity.claudeResearchAccount': 'A',
   'roleIdentity.claudeReviewAccount': 'B',
   'roleIdentity.requiresDistinctClaudeTeamAccounts': true,

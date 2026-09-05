@@ -5,3 +5,5 @@ playwright-report/
 test-results/
 pnpm-lock.yaml
 docs/product/master-plan.md
+# Immutable Account-B report preserved at its reviewer-authored checksum.
+reviews/releases/PLAN-001-r1.md

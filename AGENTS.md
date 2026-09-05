@@ -65,9 +65,10 @@ One independent acceptance review is the default for each milestone. Builder
 self-checks and automated verification happen before that review. An additional
 internal pre-review is allowed only when the handoff names a material risk that
 the required reviewer cannot reasonably cover. A candidate passes when it has
-zero unresolved Critical or Important findings; nonblocking Minor findings may
-be recorded for follow-up. After a failed review, open one bounded remediation,
-then recheck the complete artifact once. Do not add review layers after PASS.
+zero unresolved Critical and Important findings. Nonblocking Minor findings may
+be recorded for follow-up only when their impact and follow-up destination are recorded.
+After a failed review, open one bounded remediation, then recheck the complete artifact once.
+Do not add review layers after PASS unless a new named material risk changes the acceptance scope.
 
 Report progress through accepted queue gates, demonstrated user journeys,
 current shippable capability, blockers, and the next proof. Do not report an

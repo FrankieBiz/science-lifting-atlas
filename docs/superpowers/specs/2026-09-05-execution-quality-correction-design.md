@@ -1,7 +1,9 @@
 # Execution Quality Correction Design
 
-**Status:** Owner-approved direction on 2026-09-05; independent review pending  
-**Decision record:** [`ADR 0006`](../../adr/0006-execution-quality-and-validation-gates.md)  
+**Status:** Owner-approved direction on 2026-09-05; independent review pending
+
+**Decision record:** [`ADR 0006`](../../adr/0006-execution-quality-and-validation-gates.md)
+
 **Applies from:** SBLA-004 onward
 
 ## Context
@@ -81,12 +83,15 @@ release rubric.
 
 ### SBLA-004 reconciliation
 
-The existing SBLA-004 branch began before SBLA-003 was accepted. Its commits are
-inputs, not an integration candidate. A new SBLA-004 reconciliation branch must
-start at the accepted SBLA-003 commit. Codex ports only the bounded SBLA-004
-changes, resolves them against the accepted operating contract, and replaces
-placeholder-only evidence with lawful real sample files plus repeatable browser
-measurements before review.
+The existing branch `codex/SBLA-004-asset-license-inventory`, worktree
+`.worktrees/sbla-004-asset-license-inventory`, and tip
+`01ffe0aa007b9bf4172881bb0b823bc08f517e09` began from merge-base
+`0df3e9d7c20c8401004ef0a82177471f2a0c65cf`, before SBLA-003 was accepted.
+Its commits are preserved inputs, not an integration candidate. A new SBLA-004
+reconciliation branch must start at the accepted SBLA-003/main commit. Codex
+ports only the bounded SBLA-004 changes, resolves them against the accepted
+operating contract, and replaces placeholder-only evidence with lawful real
+sample files plus repeatable browser measurements before review.
 
 ## Alternatives considered
 
@@ -121,6 +126,10 @@ retains the full 3D owner gate.
 - If a Minor finding becomes blocking in context, reclassify it before PASS.
 - If user testing exposes a Critical journey blocker, fix and rerun the affected
   tasks before owner approval.
+- If 3–5 representative participants cannot be recruited after a documented
+  reasonable effort, mark SBLA-012 blocked and return the decision to the owner.
+  A smaller convenience check may inform design but does not satisfy the gate
+  without a new owner-approved ADR.
 - If lawful SBLA-004 samples cannot be obtained, record the candidate as blocked
   or select a documented 2D fallback; do not substitute an unlicensed asset.
 - If observed SBLA-017 throughput invalidates the Release 1 scope, reduce catalog
@@ -129,13 +138,16 @@ retains the full 3D owner gate.
 ## Verification
 
 The operating policy is machine-readable and validated by the foundation
-contract. The master plan, repository instructions, Claude instructions, ADR,
-and policy must state the same thresholds. `pnpm verify` must reject drift.
+contract. Required load-bearing threshold sentences in the master plan,
+repository instructions, Claude instructions, ADR, and structured policy are
+all inputs to that validator. `pnpm verify` must reject removal or contradiction
+of those sentinels; independent review still judges semantic changes that retain
+the exact words while altering their context.
 
 ## Approval record
 
-After reviewing a candid direction assessment, owner Francis Bisignano asked
-Codex on 2026-09-05 to understand the response, edit the project as needed, and
-continue the work. That instruction approves this correction's direction. The
-repository change still requires the normal independent review before
-integration.
+After reviewing a candid direction assessment, owner Francis Bisignano wrote:
+"based on this response understand it edit things if you need continue your
+work on the project" and later "continue where you left off." Those instructions
+approve this correction's direction. The repository change still requires the
+normal independent review before integration.

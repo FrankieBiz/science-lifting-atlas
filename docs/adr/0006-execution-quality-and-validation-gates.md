@@ -25,11 +25,12 @@ Adopt the execution-quality design in
 - builder self-checks, automated gates, and one independent acceptance review
   are the default milestone quality layers;
 - PASS requires zero unresolved Critical and Important findings;
-- nonblocking Minor findings may be recorded for later hardening;
+- nonblocking Minor findings may be recorded for later hardening only when their impact and follow-up destination are recorded;
 - an extra pre-review requires a named material risk;
 - FAIL opens one bounded remediation followed by one full-artifact recheck;
 - progress is reported as accepted capabilities and user-journey proof, not one
-  overall percentage before SBLA-017 observes throughput; and
+  overall percentage before SBLA-017 records observed throughput and the owner
+  approves the revised estimate; and
 - SBLA-012 adds a 3–5 participant formative usability check for
   find/understand/verify/share tasks before owner direction approval.
 
@@ -40,6 +41,11 @@ but internal review is risk-triggered rather than habitual. Project updates are
 more honest about the gap between foundation work and user value. SBLA-012 gains
 a small coordination cost in exchange for detecting costly UX mistakes before
 3D production.
+
+If the required 3–5 participants cannot be recruited after a documented
+reasonable effort, SBLA-012 is blocked and the owner decides whether to delay or
+supersede this requirement through a new ADR. A smaller convenience check may
+inform design but does not satisfy the gate.
 
 The policy does not reduce claim-level review, final release audit, owner
 approval, or any mandatory scientific, licensing, accessibility, performance,

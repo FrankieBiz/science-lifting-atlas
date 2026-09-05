@@ -22,7 +22,7 @@
     "additionalPreReviewRequiresNamedMaterialRisk": true,
     "failedReviewAction": "bounded-remediation-then-full-artifact-recheck",
     "progressUnit": "accepted-capabilities-and-user-journey-proof",
-    "overallPercentAllowedAfter": "SBLA-017-observed-throughput"
+    "overallPercentAllowedAfter": "SBLA-017-observed-throughput-and-owner-approved-estimate"
   },
   "roleIdentity": {
     "claudeResearchAccount": "A",

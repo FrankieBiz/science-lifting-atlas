@@ -102,7 +102,14 @@ Expected: zero Critical/Important findings are required for acceptance.
 
 ### Task 6: Accept and begin SBLA-004 reconciliation
 
-**Files:** determined by the review result and the existing SBLA-004 handoff.
+**Preserved inputs:** branch `codex/SBLA-004-asset-license-inventory`, worktree
+`.worktrees/sbla-004-asset-license-inventory`, tip
+`01ffe0aa007b9bf4172881bb0b823bc08f517e09`, fork point
+`0df3e9d7c20c8401004ef0a82177471f2a0c65cf`, and
+`reviews/releases/SBLA-004-handoff.md` on that branch.
+
+**Files:** determined by the accepted review result and the bounded SBLA-004
+claim created from main.
 
 - [ ] If FAIL, open one bounded remediation and request one complete-artifact
       recheck. If PASS, do not add another review layer.
@@ -112,3 +119,7 @@ Expected: zero Critical/Important findings are required for acceptance.
       SBLA-004 commits as inputs, not as a merge candidate.
 - [ ] Port only bounded inventory/spike work, then add lawful real samples and
       repeatable browser measurements before SBLA-004 review.
+- [ ] If the SBLA-012 participant pool cannot be recruited after documented
+      reasonable effort, mark SBLA-012 blocked and return the decision to the
+      owner; do not silently replace the 3–5 participant gate with a smaller
+      convenience sample.

@@ -54,11 +54,16 @@ review, and the random pre-release claim audit.
 Writes only to `reviews/`. Never repairs the artifact under review — findings go
 back to its author, who repairs, after which you recheck the complete artifact.
 
-The project uses one independent acceptance review by default. PASS requires
-zero unresolved Critical and Important findings; nonblocking Minor findings may
-be recorded for later hardening. After FAIL, review the complete repaired
-artifact once. Do not request or create extra review layers after PASS unless a
-new named material risk changes the acceptance scope.
+The project uses one independent milestone acceptance review by default. PASS
+requires zero unresolved Critical and Important findings. Nonblocking Minor
+findings may be recorded for later hardening only when their impact and follow-up destination are recorded.
+An additional internal pre-review requires a named material risk that this
+required reviewer cannot reasonably cover.
+After FAIL, one bounded remediation is followed by one complete-artifact recheck.
+Do not request or create extra review layers after PASS unless a new named material risk changes the acceptance scope.
+This stop rule does not reduce claim-level review, the random
+release audit, or any second pass that the master plan explicitly requires for
+high-impact comparative claims.
 
 ## Evidence rules that override fluency
 

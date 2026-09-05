@@ -1315,22 +1315,28 @@ No handoff may rely on hidden chat context. The repository artifact must be suff
 - If two outputs conflict, create a decision note with evidence; do not blend them silently.
 - Every milestone ends with a clean, tested commit and a reviewer report.
 
-**Review stop rule (owner-approved 2026-09-05):** Each milestone receives
-builder self-checks, the required automated gates, and one independent
-acceptance review. An additional internal pre-review is optional only when the
+**Review stop rule (owner-approved direction 2026-09-05):** Each milestone receives
+builder self-checks, the required automated gates, and one independent acceptance review.
+An additional internal pre-review is optional only when the
 handoff names a material risk that the required reviewer cannot reasonably
-cover. PASS means zero unresolved Critical and Important findings; nonblocking
-Minor findings may be recorded for later hardening. FAIL opens one bounded
-remediation followed by one complete-artifact recheck. Once that required review
-passes, do not add review layers unless a newly discovered material risk changes
-the acceptance scope.
+cover. PASS means zero unresolved Critical and Important findings.
+Nonblocking Minor findings may be recorded for later hardening only when their impact and follow-up destination are recorded.
+FAIL opens one bounded remediation followed by one complete-artifact recheck.
+Once that required review passes, do not add
+review layers unless a newly discovered material risk changes the acceptance
+scope.
 
-**Progress protocol (owner-approved 2026-09-05):** Report accepted §18 queue
+**Progress protocol (owner-approved direction 2026-09-05):** Report accepted §18 queue
 gates, the demonstrated state of the central user journey, the current shippable
 capability, blockers, and the next proof. Do not report a single overall product
 completion percentage before SBLA-017 measures vertical-slice throughput and
 the owner approves the revised effort estimate. Until then, queue counts are
 process progress, not a proxy for delivered product value.
+
+If 3–5 representative SBLA-012 participants cannot be recruited after a
+documented reasonable effort, mark the task blocked and return the recruitment
+decision to the owner. A smaller convenience check may inform design but does
+not satisfy the queue gate unless a new owner-approved ADR changes it.
 
 Every task uses these repository commands after Task SBLA-001 defines them:
 
