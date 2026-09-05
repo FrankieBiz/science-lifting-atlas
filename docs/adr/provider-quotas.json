@@ -116,7 +116,7 @@
     },
     {
       "id": "cloudflare-web-analytics",
-      "role": "optional post-launch aggregate pageview analytics candidate; launch baseline is no analytics and owner approval remains pending",
+      "role": "optional post-launch aggregate pageview analytics candidate; launch baseline is no analytics and the accepted policy still requires the separate integrity and production-activation gates",
       "plan": "Free",
       "source": "https://developers.cloudflare.com/web-analytics/about/",
       "additionalSources": [

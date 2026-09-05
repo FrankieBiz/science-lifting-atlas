@@ -18,11 +18,11 @@ copying assumed limits from model memory.
 
 | ADR                                            | Title                                                    | Status   |
 | ---------------------------------------------- | -------------------------------------------------------- | -------- |
-| [0001](0001-static-first-architecture.md)      | Static-first application architecture                    | Proposed |
-| [0002](0002-content-data-and-graph.md)         | Content data model and graph generation                  | Proposed |
-| [0003](0003-hosting-and-asset-delivery.md)     | Hosting and asset delivery                               | Proposed |
-| [0004](0004-analytics.md)                      | Analytics in Release 1                                   | Proposed |
-| [0005](0005-zero-cost-infrastructure-model.md) | $0/month infrastructure model at three traffic scenarios | Proposed |
+| [0001](0001-static-first-architecture.md)      | Static-first application architecture                    | Accepted |
+| [0002](0002-content-data-and-graph.md)         | Content data model and graph generation                  | Accepted |
+| [0003](0003-hosting-and-asset-delivery.md)     | Hosting and asset delivery                               | Accepted |
+| [0004](0004-analytics.md)                      | Analytics in Release 1                                   | Accepted |
+| [0005](0005-zero-cost-infrastructure-model.md) | $0/month infrastructure model at three traffic scenarios | Accepted |
 
 ## Recorded external facts
 

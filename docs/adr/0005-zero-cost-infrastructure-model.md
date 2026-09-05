@@ -1,6 +1,6 @@
 # ADR 0005 — $0/month infrastructure model at three traffic scenarios
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-08-30
 - Task: SBLA-003
 - Reverified: 2026-09-03
@@ -179,8 +179,8 @@ stricter “may not incur usage charges” rule.
 
 ## Decision
 
-1. Propose Cloudflare Pages Free static delivery for site and Release 1 assets;
-   owner approval remains pending.
+1. Use Cloudflare Pages Free static delivery for the site and Release 1 assets;
+   owner approval was recorded on 2026-09-05 after independent review passed.
 2. Do not enable Pages Functions, Workers Paid, R2, a paid plan, or another
    metered add-on.
 3. Enforce the 25 MiB per-file boundary. Compress/split/omit oversized assets or

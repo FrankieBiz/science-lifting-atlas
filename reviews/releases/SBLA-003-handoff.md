@@ -1,17 +1,14 @@
 # Handoff: SBLA-003 — Architecture, hosting, analytics, and $0 infrastructure ADRs
 
-**Status:** Account-B Claude Review Round 1 at `c9c9fbe...` returned FAIL with
-five Important and six Minor findings, and a late addendum from that same review
-added one Important parser finding. The immutable artifacts are preserved at
-`reviews/releases/SBLA-003-r1.md` and
-`reviews/releases/SBLA-003-r1-addendum.md`. All twelve combined findings are
-implemented. A final pre-review probe found that default parser settings missed
-`<noscript>` fallback resources and walked inert `<template>` contents; that
-bounded follow-up is implemented and freshly verified. Fresh independent review
-remains pending.
-Internal review returned With fixes for one ledger-lifecycle defect and one
-inventory omission; both are repaired in a bounded follow-up. All five ADRs
-remain **Proposed**; Account-B Round 2 and owner approval remain pending.
+**Status:** **Accepted on 2026-09-05.** Account-B Claude Review Round 2 passed
+the exact candidate `5bd35e320aa74bfcdbf839849c5fadc7c52292fe` with zero
+Critical, zero Important, and four nonblocking Minor findings. Its immutable
+report is `reviews/releases/SBLA-003-r2.md`. Human owner Francis Bisignano then
+approved all five ADR decisions, including Cloudflare Pages Free as the static
+host direction, the $0 capacity model, the no-analytics launch baseline, and
+the integrity-gated optional post-launch analytics policy. All five ADRs are
+**Accepted**. No provider account, paid plan, analytics site, custom domain, or
+production deployment was activated by this approval.
 
 ## Objective
 
@@ -82,6 +79,13 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
   `41a2b017a56b3b127e4b65957fb336170badd289`
 - No-JavaScript fallback remediation claim commit:
   `c42b17ded508e90058d67cf986fc862fb6f2ac62`
+- Final reviewed candidate:
+  `5bd35e320aa74bfcdbf839849c5fadc7c52292fe`
+- Account-B Round 2 report role commit/integration:
+  `bb91d91dceb38a0bf330e112feaf406a33e8b09e` /
+  `8f8334cc0ba65bc83a2b3f0030dbbaaf5647ebb7`
+- Owner-acceptance claim commit:
+  `242e6b036eff5eb329acb7170fb798326c0b03d3`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
 - The spec-remediation and code-quality-remediation claims were each committed
@@ -176,7 +180,7 @@ not an independent Claude Review or final ADR approval.
 | Minor: setup/teardown could leak or hang                     | Server variables are optional; the shared close helper resolves when absent and rejects close errors; partial startup closes the first server; fixture teardown aggregates cleanup failures                                                                            |
 | Minor: README misstated direct command behavior              | README now states that `pnpm test:portability` consumes existing `dist/`, documents `pnpm build && pnpm test:portability` for direct use, and notes that `pnpm verify` already builds first                                                                            |
 | Minor: Vitest include was broader than the portability suite | The portability config now includes only `tests/integration/portability.test.ts` and focused tests below `tests/integration/portability/`                                                                                                                              |
-| Minor: status prose was stale                                | README and this handoff now state that spec remediation/re-review passed, the code-quality fix is implemented with re-review pending, and independent Claude Review/owner approval remain                                                                              |
+| Minor: status prose was stale                                | At that checkpoint, README and this handoff were synchronized to the then-current spec-remediation and code-quality-review state; this accepted handoff now supersedes that historical status                                                                          |
 
 The resource fixture proves the former false-negative path directly: a valid
 relative stylesheet does not mask root-absolute `/favicon.svg`, `/poster.webp`,
@@ -492,8 +496,8 @@ redeployment was needed or performed.
 
 ## Decisions made
 
-- Retain Cloudflare Pages Free static delivery as the proposed host and keep R2,
-  Functions, Workers Paid, and every metered product disabled.
+- Accept Cloudflare Pages Free static delivery as the Release 1 host direction
+  while keeping R2, Functions, Workers Paid, and every metered product disabled.
 - Launch without analytics. Cloudflare Web Analytics remains an optional
   post-launch candidate only through automatic injection after the actual
   production HTML is verified to contain an `integrity` attribute; manual
@@ -517,6 +521,11 @@ redeployment was needed or performed.
   the live-artifact identity can be independently reproduced.
 - Preserve the two missing internal-review records as a recovery-log omission;
   do not fabricate retrospective reports.
+- Accept the four Round 2 Minor findings as explicit, nonblocking follow-up
+  hardening: account for `<base href>` if adopted later, replace the current
+  `> 0` reference floors when the artifact grows, state the capacity model's
+  midpoint rounding convention when next revised, and normalize navigation
+  name comparisons if parser assumptions change.
 
 ## Tests/checks run and results
 
@@ -602,6 +611,20 @@ temporary pinned runtime was used.
   disabled.
 - Final content-manifest comparison: PASS and unchanged at
   `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`.
+- Account-B Round 2 review: **PASS** on all nine numbered reviewer criteria and
+  all ten acceptance bullets, with zero Critical, zero Important, and four
+  nonblocking Minor findings. The report independently ran the underlying
+  repository gates, 17 portability tests, 71 additional parser probes, provider
+  URL checks, capacity recomputation, live-artifact checks, and append-only
+  integrity checks. Its sandbox limitation on the pinned runner and Chromium
+  E2E is recorded as an environment caveat, not a candidate defect; Codex's
+  pinned candidate run supplies those two checks.
+- Trusted role-path check on report commit `bb91d91`: PASS for exactly one new
+  regular `100644` file at `reviews/releases/SBLA-003-r2.md` from base
+  `5bd35e3`.
+- Owner acceptance: Francis Bisignano approved all five ADR decisions on
+  2026-09-05 after the Account-B PASS. This changes decision status only and
+  does not activate a provider, analytics, billing, or production deployment.
 
 ### Self-review
 
@@ -609,9 +632,11 @@ temporary pinned runtime was used.
   bounded remediation diff from `84c3e06...`.
 - Confirmed no stable command/gate was renamed, removed, weakened, or reordered
   around its prerequisites.
-- Confirmed all ADR statuses remain Proposed and no owner approval is implied.
-- Confirmed the owner-authorized master-plan clarification is limited to queue
-  staging and does not approve the Proposed ADRs.
+- Confirmed all five ADR statuses changed from Proposed to Accepted only after
+  the exact candidate received the independent Account-B PASS and explicit
+  owner approval.
+- Confirmed the earlier owner-authorized master-plan clarification remained
+  limited to queue staging until this separate 2026-09-05 approval.
 - Confirmed provider facts are dated and mapped to exact sources; inference,
   measured shell bytes, master-plan hard ceilings, and remaining planning
   inputs are labelled separately.
@@ -649,9 +674,8 @@ The earlier handoff's “no Important defect” statement was invalidated by the
 spec-compliance failure at `e8fe598...`; this handoff supersedes it rather than
 hiding the review result.
 
-The final fallback-parser follow-up is freshly verified and still requires fresh
-independent review. This handoff does not claim acceptance or a passing Round 2
-verdict.
+The final fallback-parser follow-up was independently verified in Round 2. This
+handoff now records the resulting PASS and the separate owner acceptance.
 
 ## Known uncertainties
 
@@ -672,8 +696,9 @@ verdict.
 - GitHub Pages is a public non-production proof, not a commercial fallback for
   the full atlas. Its repository should be removed or replaced if its proof
   purpose ends or commercial restrictions become relevant.
-- Owner approval is still required for the proposed provider direction, $0
-  model, no-analytics launch baseline, and optional post-launch analytics gate.
+- Owner approval accepts the provider direction and policy decisions; it does
+  not authorize a paid plan, production provider activation, optional analytics
+  activation, custom domain, or any action that can incur charges.
 
 ## Files created or modified
 
@@ -701,6 +726,7 @@ Created by the independent Account-B review:
 
 - `reviews/releases/SBLA-003-r1.md`
 - `reviews/releases/SBLA-003-r1-addendum.md`
+- `reviews/releases/SBLA-003-r2.md`
 
 Created by the independent internal review:
 
@@ -741,38 +767,16 @@ Modified during the pre-review fallback-parser follow-up:
 
 ## Required reviewer action
 
-Independently review the Round 1 remediation from
-`95d3ac3de9f352b5d79b0f506d188d110ee180a2` through the new immutable candidate.
-Do not repair it. Write the exact append-only report
-`reviews/releases/SBLA-003-r2.md` only after Codex commits its exact-path claim.
-Return PASS or FAIL per criterion:
+Completed by distinct Claude Review account B in a fresh acceptance session.
+The immutable report `reviews/releases/SBLA-003-r2.md` returns PASS on every
+criterion with zero Critical and zero Important findings. Codex verified its
+byte identity, committed it with Claude attribution after the reviewer sandbox
+could not create the Git index lock, and passed the trusted exact-path role
+boundary.
 
-1. All five ADR decisions, alternatives, consequences, and reversal costs match
-   master plan §§11.1–11.2 and Phase 0 task 0.2, including no runtime AI.
-2. Every decision-relevant provider fact is supported by its dated official
-   source and no inference is presented as a provider guarantee.
-3. The three-scenario Phase 0 capacity model measures all current output, uses
-   hard ceilings where the master plan defines them, labels every remaining
-   target or planning ceiling, separates the no-analytics launch baseline from
-   the two-report optional sensitivity, and preserves the mandatory
-   SBLA-012/015/016 pre-activation measurement rerun.
-4. The no-auto-charge rule is satisfied by excluding metered services, and the
-   70%/85% alert limitation and fallback are honest.
-5. The no-analytics launch baseline and optional automatic-injection gate obey
-   §11.7 SRI plus the privacy/event/log restrictions and are represented
-   consistently in the machine record and capacity model.
-6. One unchanged current-shell artifact actually deploys and works at a second
-   static host, while the prose makes no future-route/asset coverage claim and
-   imposes the recursive expansion gate before those outputs are added.
-7. ADR 0002 stays clear of SBLA-007 schema ownership and no later-task scope is
-   pre-empted.
-8. The accepted SBLA-002 operating model, exact handoff format, recovery log,
-   stable command contract, claim ledger, and owner-approval boundary remain
-   intact.
-9. All six Important and six Minor combined Round 1 findings are closed with
-   evidence, including the quote-safe parser, `<area>` and `<noscript>` coverage,
-   inert-template exclusion, the trailing-slash RED/GREEN test, and reproducible
-   manifest recipe.
+No further SBLA-003 review is required. Preserve every prior report unchanged.
+Any future regression creates a new append-only review round rather than editing
+the accepted reports or this acceptance history.
 
 ## Acceptance criteria
 

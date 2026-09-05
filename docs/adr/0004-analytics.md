@@ -1,6 +1,6 @@
 # ADR 0004 — Analytics in Release 1
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-08-30
 - Task: SBLA-003
 - Reverified: 2026-09-03
