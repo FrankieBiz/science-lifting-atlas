@@ -32,6 +32,32 @@ describe('homepage resource reference discovery', () => {
     ).toEqual(['/health.txt']);
   });
 
+  it('collects fallback resources that a JavaScript-disabled browser loads from noscript', () => {
+    const pageUrl = 'https://example.test/science-lifting-atlas/';
+    const html = `
+      <noscript>
+        <img src="/fallback-poster.webp" alt="Anatomy poster">
+      </noscript>
+    `;
+
+    expect(
+      collectSameOriginResourceReferences(html, pageUrl).map(({ raw }) => raw),
+    ).toEqual(['/fallback-poster.webp']);
+  });
+
+  it('does not collect inert template resources before client code instantiates them', () => {
+    const pageUrl = 'https://example.test/science-lifting-atlas/';
+    const html = `
+      <template id="future-card">
+        <img src="/inert-template.webp" alt="">
+      </template>
+    `;
+
+    expect(
+      collectSameOriginResourceReferences(html, pageUrl).map(({ raw }) => raw),
+    ).toEqual([]);
+  });
+
   it('covers the explicitly supported resource-bearing HTML attributes', () => {
     const pageUrl = 'https://example.test/science-lifting-atlas/';
     const html = `

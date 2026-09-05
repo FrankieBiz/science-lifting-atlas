@@ -54,7 +54,7 @@ export function collectSameOriginResourceReferences(
   const page = new URL(pageUrl);
   const references: ResourceReference[] = [];
 
-  walkElements(parse(html), (element) => {
+  walkElements(parse(html, { scriptingEnabled: false }), (element) => {
     const tagName = element.tagName.toLowerCase();
     const supportedAttributes = RESOURCE_ATTRIBUTES_BY_ELEMENT.get(tagName);
     if (!supportedAttributes) return;
@@ -87,7 +87,7 @@ export function collectSameOriginNavigationReferences(
   const page = new URL(pageUrl);
   const references: NavigationReference[] = [];
 
-  walkElements(parse(html), (element) => {
+  walkElements(parse(html, { scriptingEnabled: false }), (element) => {
     if (element.tagName !== 'a' && element.tagName !== 'area') return;
     const href = element.attrs.find(({ name }) => name === 'href')?.value;
     if (href === undefined) return;
@@ -141,9 +141,6 @@ function walkElements(
   if (isElement(node)) visit(node);
   if ('childNodes' in node) {
     for (const child of node.childNodes) walkElements(child, visit);
-  }
-  if (isElement(node) && 'content' in node) {
-    walkElements(node.content, visit);
   }
 }
 

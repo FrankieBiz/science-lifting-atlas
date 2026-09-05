@@ -2,7 +2,7 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-**SBLA-002 is accepted; the combined SBLA-003 Account-B Round 1 remediation is implemented and freshly verified.** All five SBLA-003 ADRs remain Proposed; fresh independent review, Account-B Round 2, and owner approval are pending. The repository contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
+**SBLA-002 is accepted; the complete SBLA-003 remediation is implemented and freshly verified.** All five SBLA-003 ADRs remain Proposed; Account-B Round 2 and owner approval are pending. The repository contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
 
@@ -51,8 +51,9 @@ pnpm exec playwright install --with-deps chromium
   same-artifact second-host portability proof. Account-B Round 1 is preserved at
   `reviews/releases/SBLA-003-r1.md`, with its same-session late finding preserved
   separately at `reviews/releases/SBLA-003-r1-addendum.md`. The combined six
-  Important and six Minor findings have bounded, freshly verified repairs. Fresh
-  independent review, Round 2, and owner approval remain pending.
+  Important and six Minor findings have bounded, freshly verified repairs. The
+  final pre-review `<noscript>` fallback observation is also repaired and
+  verified; Round 2 and owner approval remain pending.
 - SBLA-004 through SBLA-006 own anatomy and exercise-media license selection.
 - SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
 

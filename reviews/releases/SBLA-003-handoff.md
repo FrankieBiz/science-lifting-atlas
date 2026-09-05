@@ -5,7 +5,10 @@ five Important and six Minor findings, and a late addendum from that same review
 added one Important parser finding. The immutable artifacts are preserved at
 `reviews/releases/SBLA-003-r1.md` and
 `reviews/releases/SBLA-003-r1-addendum.md`. All twelve combined findings are
-implemented and freshly verified; fresh independent review remains pending.
+implemented. A final pre-review probe found that default parser settings missed
+`<noscript>` fallback resources and walked inert `<template>` contents; that
+bounded follow-up is implemented and freshly verified. Fresh independent review
+remains pending.
 Internal review returned With fixes for one ledger-lifecycle defect and one
 inventory omission; both are repaired in a bounded follow-up. All five ADRs
 remain **Proposed**; Account-B Round 2 and owner approval remain pending.
@@ -74,6 +77,11 @@ Deliver master plan §18 task SBLA-003 and Phase 0 task 0.2:
   `07eccccd5977b0223473b2aa69d350462708b683`
 - R1-I-6 remediation claim commit:
   `bf8522d7f5eeca8c215f80e49ceeb0abda04eaa1`
+- First post-remediation Round 2 claim, canceled before dispatch when the
+  pre-claim fallback probe arrived:
+  `41a2b017a56b3b127e4b65957fb336170badd289`
+- No-JavaScript fallback remediation claim commit:
+  `c42b17ded508e90058d67cf986fc862fb6f2ac62`
 - Branch: `codex/SBLA-003-architecture-adrs`
 - Worktree: `.worktrees/sbla-003-architecture-adrs`
 - The spec-remediation and code-quality-remediation claims were each committed
@@ -242,6 +250,18 @@ data>`, and recognized image metadata. Navigation collection uses the same
 parser for `<a href>` and `<area href>`. Generic metadata, lazy-load `data-src`,
 fragments, external origins, and non-HTTP schemes remain intentionally excluded.
 
+Before the formal Round 2 prompt was sent, Account B's still-open Round 1
+session probed the repair and found two parser-mode behaviors. The observation
+memo remains outside the repository and is explicitly not a review report: 124
+lines, 7,611 bytes, SHA-256
+`fd6f51b953e12902b8e04bdf8f51b7df024ba0c3fc266d7aef277b93f14843c3`.
+Default parse5 scripting mode represented `<noscript>` children as raw text, so
+the collector missed fallback resources loaded by a JavaScript-disabled
+browser. The walker also descended into inert `<template>` content that a
+browser does not fetch. The formal review claim was canceled before dispatch.
+The repair parses static HTML with scripting disabled and no longer descends
+into template document fragments.
+
 The content-manifest acceptance digest is reproduced from inside `dist/` with:
 
 ```bash
@@ -401,6 +421,16 @@ Late Round 1 parser-remediation TDD on 2026-09-04:
    suite passed three files and fifteen tests, including a mixed data/network
    `srcset` case that still discovers the network candidate.
 
+Pre-review fallback-parser TDD on 2026-09-04:
+
+1. **RED:** the focused suite expected a `<noscript>` poster to be collected and
+   an inert `<template>` image to be ignored. Both tests failed exactly: the
+   poster result was empty and the template result contained its image.
+2. **GREEN:** parsing with `scriptingEnabled: false` exposed no-JavaScript
+   fallback elements; stopping at template document fragments removed the inert
+   false positive. All six focused parser tests passed, followed by clean ESLint
+   and Astro diagnostics.
+
 Astro documents standard anchor navigation and does not rewrite manually
 authored root links for `base`. The current homepage's document-relative link is
 correct because that page sits at the mount root; it is not a general nested
@@ -480,6 +510,9 @@ redeployment was needed or performed.
 - Parse HTML with `parse5@8.0.1` and explicit element/attribute allow-lists for
   both resources and navigation; do not use start-tag regular expressions for
   security- or acceptance-relevant discovery.
+- Parse static output with scripting disabled to inspect `<noscript>` fallbacks,
+  and exclude inert `<template>` document fragments until application code
+  instantiates them.
 - Define the exact content-manifest digest recipe in the ADR and this handoff so
   the live-artifact identity can be independently reproduced.
 - Preserve the two missing internal-review records as a recovery-log omission;
@@ -556,6 +589,19 @@ temporary pinned runtime was used.
 - Post-remediation content-manifest comparison: PASS at
   `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`;
   the parser/test dependency does not change the built artifact.
+- Pre-review fallback parser RED: PASS as a diagnostic, with both new tests
+  failing for the expected `<noscript>` false negative and `<template>` false
+  positive.
+- Pre-review fallback parser focused GREEN: PASS, 1 file/6 tests; ESLint and
+  Astro diagnostics also PASS with 0 errors, warnings, or hints.
+- Final fallback-parser `pnpm verify`: PASS with Prettier, ESLint (0 warnings),
+  Astro diagnostics across 37 files (0 errors/warnings/hints), 7 unit files/47
+  tests, foundation-mode content/graph/evidence validation, production build, 3
+  portability files/17 tests, and the foundation contract.
+- Final fallback-parser `pnpm test:e2e`: PASS, 1 Chromium test with JavaScript
+  disabled.
+- Final content-manifest comparison: PASS and unchanged at
+  `f73ea5056c48dfda96e2b83735ae8adb1b4c02d1665213041bcfb69ca2592cdc`.
 
 ### Self-review
 
@@ -587,6 +633,9 @@ temporary pinned runtime was used.
   external schemes or lazy-load `data-src` with static resource fetches. Both
   mounts enforce containment and HTTP 200 for every collected current-homepage
   resource.
+- Confirmed static parsing exposes resources loaded only in the no-JavaScript
+  `<noscript>` path and does not require inert template resources to exist
+  before client code instantiates them.
 - Confirmed startup/teardown closes partial or complete server sets and reports
   close/cleanup errors rather than hanging or discarding them.
 - Confirmed the stable command contract is unchanged: `pnpm verify` still builds
@@ -600,7 +649,7 @@ The earlier handoff's “no Important defect” statement was invalidated by the
 spec-compliance failure at `e8fe598...`; this handoff supersedes it rather than
 hiding the review result.
 
-The combined Round 1 remediation is freshly verified but still requires fresh
+The final fallback-parser follow-up is freshly verified and still requires fresh
 independent review. This handoff does not claim acceptance or a passing Round 2
 verdict.
 
@@ -681,6 +730,15 @@ Modified during late R1-I-6 remediation:
 - `tests/integration/portability/resource-references.test.ts`
 - `tests/integration/portability/resource-references.ts`
 
+Modified during the pre-review fallback-parser follow-up:
+
+- `README.md`
+- `docs/adr/0003-hosting-and-asset-delivery.md`
+- `docs/runbooks/current-work.md`
+- `reviews/releases/SBLA-003-handoff.md`
+- `tests/integration/portability/resource-references.test.ts`
+- `tests/integration/portability/resource-references.ts`
+
 ## Required reviewer action
 
 Independently review the Round 1 remediation from
@@ -712,8 +770,9 @@ Return PASS or FAIL per criterion:
    stable command contract, claim ledger, and owner-approval boundary remain
    intact.
 9. All six Important and six Minor combined Round 1 findings are closed with
-   evidence, including the quote-safe parser and `<area>` coverage, the
-   trailing-slash RED/GREEN test, and reproducible manifest recipe.
+   evidence, including the quote-safe parser, `<area>` and `<noscript>` coverage,
+   inert-template exclusion, the trailing-slash RED/GREEN test, and reproducible
+   manifest recipe.
 
 ## Acceptance criteria
 
@@ -721,7 +780,7 @@ Return PASS or FAIL per criterion:
   10,000-view hard-capacity scenario.
 - ADR 0003 states that `assetsPrefix: '.'` and `href="./"` are mount-root-only,
   defines the future route-depth-aware gate, names all current HTML reference
-  coverage, and records the fifteen-test suite accurately.
+  coverage, and records the seventeen-test suite accurately.
 - The exact late addendum digest is preserved, and parser tests prove quoted and
   unquoted attributes, `<area>` navigation, responsive-image sources, media
   posters, object data, recognized image metadata, and mixed data/network

@@ -146,11 +146,14 @@ parser inspects same-origin:
   tile-image metadata.
 
 The parser accepts valid quoted and unquoted attributes, including `>` inside a
-quoted value. Generic metadata, custom lazy-load attributes such as `data-src`,
-fragments, and external or non-HTTP(S) URLs are intentionally outside this
-same-origin static-file fetch check. The current suite has three files and
-fifteen tests. It does not recursively inspect future routes, CSS `url()`
-values, JSON, Pagefind, fonts, or GLB dependencies.
+quoted value. It parses with scripting disabled so resources inside `<noscript>`
+fallbacks are checked, matching the required no-JavaScript path. Inert
+`<template>` contents are not fetched by a browser and are not walked. Generic
+metadata, custom lazy-load attributes such as `data-src`, fragments, and
+external or non-HTTP(S) URLs are intentionally outside this same-origin
+static-file fetch check. The current suite has three files and seventeen tests.
+It does not recursively inspect future routes, CSS `url()` values, JSON,
+Pagefind, fonts, or GLB dependencies.
 
 Before a task adds or nests a route or introduces a new asset class, that task
 must extend the portability suite to recursively enumerate every
@@ -190,7 +193,7 @@ alerts.
   it may add or nest a route; the recursive dual-mount gate must prove the
   replacement against one unchanged artifact.
 - Every task that expands routes or asset classes inherits the recursive
-  portability-suite extension gate above; the current fifteen tests alone are
+  portability-suite extension gate above; the current seventeen tests alone are
   insufficient evidence for that future output. The local harness now returns
   a 308 trailing-slash redirect for a directory request, matching the ordinary
   static-host behavior that those future route tests must exercise.
