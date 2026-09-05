@@ -9,11 +9,22 @@ complete license fields, repeatable browser evidence, and `pnpm verify` green.
 - Accepted dependency: SBLA-003 on `main`
 - Fresh reconciliation base:
   `78e21065793ef567889398b4f3e54d05df744662`
-- Implementation candidate:
-  `8482a29a460fbe3dd9759ee213f1d24a2e0b74fa`
+- Round 1 reviewed candidate:
+  `098be6201987552c0ed789f3ada8a64e39472aab`
+- Round 1 report commit:
+  `9faa74ec94080b2dda708011fe4ea5b82e567268`
+- Round 1 integration / remediation base:
+  `6332ab23843f6616fb805ecc7bb0d221ce550ae6`
+- Remediation implementation:
+  `9b350c4c2e7462a80f9a1fcc29a5048617fc9ed5`
 - Branch: `codex/SBLA-004-asset-license-reconciliation`
 - Worktree: `.worktrees/sbla-004-asset-license-reconciliation`
-- Expected independent report: `reviews/releases/SBLA-004-r1.md`
+- Expected independent recheck report: `reviews/releases/SBLA-004-r2.md`
+
+The exact complete-artifact recheck candidate, including this handoff, is
+recorded in the active R2 claim in `docs/runbooks/current-work.md`. That ledger
+entry is the canonical review identity because a Git commit cannot contain its
+own hash. Account B must record that exact hash and tree in the R2 report.
 
 The stale branch `codex/SBLA-004-asset-license-inventory` was not merged. Its
 four bounded task commits were treated as inputs and replayed onto accepted
@@ -32,6 +43,8 @@ SBLA-004 now supplies:
   and attribution;
 - a deterministic scorecard that fails closed on malformed or incomplete
   inventory data;
+- an explicit, component-aware 28-target coverage evaluator with regression
+  tests;
 - a repeatable headless-Chromium/WebGL benchmark that validates the sample
   checksum, fetches and parses the OBJ, uploads it, draws it, and reports
   per-trial and median timings; and
@@ -99,10 +112,11 @@ the real OBJ into typed arrays, creates a 320×320 WebGL canvas, uploads the
 geometry, draws it, calls `gl.finish()`, and reports timings. Node and browser
 parsers must return identical geometry counts.
 
-The recorded darwin-arm64 / HeadlessChrome 151 run has median times of 0.9 ms
-fetch, 1.3 ms parse, 2.0 ms upload-and-draw, and 5.2 ms total. A later repeat
-returned 0.9 / 1.3 / 2.1 / 4.6 ms despite one 28.7 ms draw outlier; using the
-median keeps one scheduling outlier from being mistaken for the baseline.
+The recorded darwin-arm64 / HeadlessChrome 151 run has median times of 1.0 ms
+fetch, 1.3 ms parse, 2.0 ms upload-and-draw, and 5.1 ms total. It explicitly
+records `Google Inc. (Google)` as the vendor and ANGLE/SwiftShader as the WebGL
+renderer, so these values are not presented as physical-GPU measurements. A
+later repeat returned 0.8 / 1.2 / 2.1 / 4.3 ms.
 
 These measurements prove the sample and procedure are real and repeatable. They
 are not a BodyParts3D candidate performance score: a single 1,536-triangle mesh
@@ -114,20 +128,26 @@ the complete representative scene and assign the §8.3 technical scores.
 `pnpm assets:spike` validates the inventory and reports eligibility without
 inventing technical values. Six technical criteria remain `null` until SBLA-005.
 The runner refuses malformed, missing, non-array, empty, duplicated, or
-incompletely licensed candidate data. It also rejects unacknowledged sub-floor
-license scores and refuses to compute a weighted total until every criterion is
-measured.
+incompletely licensed candidate data. Null, undefined, and primitive candidate
+entries become reported errors rather than uncaught exceptions. A commercial
+placeholder must set `acquired:false`, must keep all scores null, can never be
+complete, and can never receive a weighted total. It also rejects
+unacknowledged sub-floor license scores and refuses to compute a weighted total
+until every criterion is measured.
 
 The accepted verification sequence was preserved verbatim, including the
 portability gate; `pnpm assets:spike` is appended as an additional final step.
 
 ## Coverage observation for SBLA-005
 
-The eight published BodyParts3D metadata files contain 60,317 lines. A
-case-insensitive label search found 24 of the 28 master plan §4.3 structures and
-did not find latissimus dorsi, rectus abdominis, erector spinae, or multifidus.
-Only 96 distinct names contain “muscle,” and many labels are group- or
-compartment-level.
+The eight published BodyParts3D metadata files contain 60,317 lines. The
+versioned evaluator names all 28 master plan §4.3 targets and the exact label or
+component groups used for each. It finds 23 of 28 targets and does not find
+latissimus dorsi, rectus abdominis, internal oblique, transversus abdominis, or
+multifidus. The spinal erector grouping is present through its iliocostalis,
+longissimus, and spinalis mesh-mapped components; Round 1 correctly identified
+the old `erector spinae` absence as a terminology error. Only 96 distinct names
+contain “muscle,” and many labels are group- or compartment-level.
 
 This is a material risk because BodyParts3D is the only currently
 license-eligible open 3D candidate. It is still an observation, not a score:
@@ -139,14 +159,13 @@ viable route.
 
 Pinned runtime: Node.js 24.20.0, pnpm 11.24.0.
 
-- Test-driven benchmark support: expected RED for missing module, then 4/4 and
-  finally 5/5 focused tests PASS.
-- Focused asset suite: 21/21 tests PASS.
+- Test-driven remediation: focused RED reproduced both Important findings and
+  the missing WebGL identity; focused asset tests then passed 29/29.
 - `pnpm verify`: PASS.
   - Prettier PASS.
   - ESLint PASS with zero warnings.
-  - Astro check: 42 files, zero errors, warnings, or hints.
-  - Unit tests: 9 files, 70 tests PASS.
+  - Astro check: 44 files, zero errors, warnings, or hints.
+  - Unit tests: 10 files, 78 tests PASS.
   - Content, graph, and evidence adapters PASS.
   - Production build PASS: one static page.
   - Portability: 3 files, 17 tests PASS.
@@ -168,9 +187,11 @@ Created:
 - `docs/licenses/bodyparts3d-browser-benchmark.json`
 - `docs/licenses/bodyparts3d-sample-manifest.md`
 - `scripts/assets/benchmark.mjs`
+- `scripts/assets/coverage.mjs`
 - `scripts/assets/scorecard.mjs`
 - `scripts/assets/spike.mjs`
 - `tests/unit/asset-benchmark.test.ts`
+- `tests/unit/asset-coverage.test.ts`
 - `tests/unit/asset-spike.test.ts`
 - `reviews/releases/SBLA-004-handoff.md`
 
@@ -194,10 +215,25 @@ and the stale-branch recovery.
 - The metadata coverage gap must be confirmed against the actual meshes.
 - License facts must be re-verified by 2026-11-30.
 
-## Independent review request
+## Round 1 remediation map
+
+| Finding | Closure                                                                                                                                                               |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| I-1     | Placeholder invariant and malformed-entry tests now prevent scoring, completion, acquisition, or uncaught failure.                                                    |
+| I-2     | Component-aware evaluator returns the corrected 23/28 result and exact five-target absent set.                                                                        |
+| M-1     | `COVERAGE_TARGETS` records all 28 targets and term groups; unit tests pin the list and compound behavior.                                                             |
+| M-2     | Null, undefined, array, and primitive candidate entries report validation issues without throwing.                                                                    |
+| M-3     | The sample notice now links the current CC BY 4.0 deed as well as both primary notices.                                                                               |
+| M-4     | The benchmark records unmasked WebGL vendor and renderer and checks they remain stable across trials.                                                                 |
+| M-5     | This handoff identifies the exact R1 chain and remediation commit; the canonical exact R2 candidate is pinned in the ledger claim and must be copied into the report. |
+
+## Independent complete-artifact recheck request
 
 Review the complete candidate and return PASS only with zero unresolved Critical
 or Important findings. Specifically verify:
+
+0. the exact recheck candidate and tree against the active R2 ledger claim, and
+   closure of I-1, I-2, and M-1 through M-5 from Round 1;
 
 1. every license field against its cited current primary source;
 2. whether distributing the unchanged FJ1446 sample with both notices is lawful
