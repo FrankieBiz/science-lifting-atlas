@@ -37,6 +37,16 @@ function completeDocFileContents() {
         reviewClaimCloses: 'immutable-review-report-commit',
         failedReviewOpens: 'bounded-remediation-claim',
       },
+      qualityControl: {
+        defaultIndependentReviewCount: 1,
+        passRequiresZeroCritical: true,
+        passRequiresZeroImportant: true,
+        minorFindingsMayBeDeferredWhenNonblocking: true,
+        additionalPreReviewRequiresNamedMaterialRisk: true,
+        failedReviewAction: 'bounded-remediation-then-full-artifact-recheck',
+        progressUnit: 'accepted-capabilities-and-user-journey-proof',
+        overallPercentAllowedAfter: 'SBLA-017-observed-throughput',
+      },
       roleIdentity: {
         claudeResearchAccount: 'A',
         claudeReviewAccount: 'B',
@@ -238,6 +248,31 @@ describe('agent operating-model contract', () => {
       }),
     ).toContain(
       'operating policy roleIdentity.sameAccountSessionSatisfiesReview must equal false',
+    );
+  });
+
+  it('enforces the one-review stop rule and evidence-based progress reporting', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.qualityControl.defaultIndependentReviewCount = 2;
+    policy.qualityControl.overallPercentAllowedAfter = 'immediately';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toEqual(
+      expect.arrayContaining([
+        'operating policy qualityControl.defaultIndependentReviewCount must equal 1',
+        'operating policy qualityControl.overallPercentAllowedAfter must equal SBLA-017-observed-throughput',
+      ]),
     );
   });
 

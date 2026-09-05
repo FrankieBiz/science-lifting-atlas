@@ -1315,6 +1315,23 @@ No handoff may rely on hidden chat context. The repository artifact must be suff
 - If two outputs conflict, create a decision note with evidence; do not blend them silently.
 - Every milestone ends with a clean, tested commit and a reviewer report.
 
+**Review stop rule (owner-approved 2026-09-05):** Each milestone receives
+builder self-checks, the required automated gates, and one independent
+acceptance review. An additional internal pre-review is optional only when the
+handoff names a material risk that the required reviewer cannot reasonably
+cover. PASS means zero unresolved Critical and Important findings; nonblocking
+Minor findings may be recorded for later hardening. FAIL opens one bounded
+remediation followed by one complete-artifact recheck. Once that required review
+passes, do not add review layers unless a newly discovered material risk changes
+the acceptance scope.
+
+**Progress protocol (owner-approved 2026-09-05):** Report accepted §18 queue
+gates, the demonstrated state of the central user journey, the current shippable
+capability, blockers, and the next proof. Do not report a single overall product
+completion percentage before SBLA-017 measures vertical-slice throughput and
+the owner approves the revised effort estimate. Until then, queue counts are
+process progress, not a proxy for delivered product value.
+
 Every task uses these repository commands after Task SBLA-001 defines them:
 
 - `pnpm verify` — format check, lint, type-check, unit/integration tests, schema/graph/evidence validation, and production build.
@@ -1758,7 +1775,7 @@ This manifest is the authoritative operational queue and resolves any ambiguity 
 | SBLA-009 | Claude Research → Claude Review | 008 | Search, screening, extraction, appraisal, synthesis, and draft claims for one muscle/two exercises | Artifacts complete; no memory-only evidence; exact locators present |
 | SBLA-010 | Claude Review → Claude Research remediation | 009 | Full citation-entailment and adversarial review for every claim | All criteria PASS; disputed/unsupported claims removed or remain blocked |
 | SBLA-011 | Codex → Claude Review | 007,010 | Approved vertical-slice content, graph compiler, MDX claim components, AST lint, status checks | `pnpm evidence:status && pnpm verify`; no uncited factual prose or broken refs |
-| SBLA-012 | Codex → Claude Review → Owner | 011 | Design tokens and realistic home/muscle/exercise/source/methodology archetypes | `pnpm test:a11y && pnpm test:visual && pnpm verify`; owner approves direction |
+| SBLA-012 | Codex → Claude Review → Owner | 011 | Design tokens and realistic home/muscle/exercise/source/methodology archetypes; small formative usability report for the first realistic static vertical slice | `pnpm test:a11y && pnpm test:visual && pnpm verify`; 3–5 representative lifters/coaches attempt find/understand/verify/share tasks; Critical journey blockers are fixed before owner approval; owner approves direction |
 | SBLA-013 | Codex → Claude Review | 006,012 | Production Blender/glTF/media pipeline and versioned manifests | Deterministic checksums/mapping; budgets pass; `pnpm test:performance` |
 | SBLA-014 | Codex → Claude Review | 013 | Anatomy-engine reducer/state tests, scene, selection, layers, URL state, semantic tree | Unit/E2E tests pass; mouse/touch/keyboard parity; `pnpm verify` |
 | SBLA-015 | Codex → Claude Review → Owner | 014 | Complete accessible 3D vertical slice plus no-WebGL/low-power fallbacks | Full journey passes E2E, AA matrix, visual and performance gates; owner approves |

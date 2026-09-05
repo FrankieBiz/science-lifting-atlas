@@ -14,6 +14,16 @@
     "reviewClaimCloses": "immutable-review-report-commit",
     "failedReviewOpens": "bounded-remediation-claim"
   },
+  "qualityControl": {
+    "defaultIndependentReviewCount": 1,
+    "passRequiresZeroCritical": true,
+    "passRequiresZeroImportant": true,
+    "minorFindingsMayBeDeferredWhenNonblocking": true,
+    "additionalPreReviewRequiresNamedMaterialRisk": true,
+    "failedReviewAction": "bounded-remediation-then-full-artifact-recheck",
+    "progressUnit": "accepted-capabilities-and-user-journey-proof",
+    "overallPercentAllowedAfter": "SBLA-017-observed-throughput"
+  },
   "roleIdentity": {
     "claudeResearchAccount": "A",
     "claudeReviewAccount": "B",

@@ -59,6 +59,21 @@ merge concurrent edits without reading the diff.
    [`docs/runbooks/handoff-template.md`](docs/runbooks/handoff-template.md).
 6. Stop at the review gate. Do not self-accept.
 
+## Review stop rule and progress reporting
+
+One independent acceptance review is the default for each milestone. Builder
+self-checks and automated verification happen before that review. An additional
+internal pre-review is allowed only when the handoff names a material risk that
+the required reviewer cannot reasonably cover. A candidate passes when it has
+zero unresolved Critical or Important findings; nonblocking Minor findings may
+be recorded for follow-up. After a failed review, open one bounded remediation,
+then recheck the complete artifact once. Do not add review layers after PASS.
+
+Report progress through accepted queue gates, demonstrated user journeys,
+current shippable capability, blockers, and the next proof. Do not report an
+overall product-completion percentage before SBLA-017 records observed vertical-
+slice throughput and the owner approves the revised estimate.
+
 Handoff destinations:
 
 - Builder tasks end in `reviews/releases/<task-id>-handoff.md`.
@@ -105,7 +120,8 @@ runtime, not the default.
 - Never discard another agent's work.
 - If two outputs conflict, write a decision note with evidence. Do not blend
   them silently.
-- Every milestone ends with a clean, tested commit and a reviewer report.
+- Every milestone ends with a clean, tested commit and its required independent
+  reviewer report.
 
 ## Publication guardrails
 

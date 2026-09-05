@@ -39,6 +39,8 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'content-drafts/',
     'reviews/',
     'docs/runbooks/operating-policy.json',
+    'One independent acceptance review is the default',
+    'SBLA-017',
   ]),
   'CLAUDE.md': Object.freeze([
     'docs/product/master-plan.md',
@@ -48,6 +50,7 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'content-drafts/',
     'reviews/',
     'Codex records the exact-path claim on',
+    'one independent acceptance review',
   ]),
   'docs/runbooks/current-work.md': Object.freeze([
     'Base commit',
@@ -114,6 +117,15 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'lifecycle.claimRecordLocation': 'codex-coordination-branch',
   'lifecycle.reviewClaimCloses': 'immutable-review-report-commit',
   'lifecycle.failedReviewOpens': 'bounded-remediation-claim',
+  'qualityControl.defaultIndependentReviewCount': 1,
+  'qualityControl.passRequiresZeroCritical': true,
+  'qualityControl.passRequiresZeroImportant': true,
+  'qualityControl.minorFindingsMayBeDeferredWhenNonblocking': true,
+  'qualityControl.additionalPreReviewRequiresNamedMaterialRisk': true,
+  'qualityControl.failedReviewAction':
+    'bounded-remediation-then-full-artifact-recheck',
+  'qualityControl.progressUnit': 'accepted-capabilities-and-user-journey-proof',
+  'qualityControl.overallPercentAllowedAfter': 'SBLA-017-observed-throughput',
   'roleIdentity.claudeResearchAccount': 'A',
   'roleIdentity.claudeReviewAccount': 'B',
   'roleIdentity.requiresDistinctClaudeTeamAccounts': true,
@@ -126,6 +138,7 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'authority',
     'lifecycle',
     'roleIdentity',
+    'qualityControl',
     'writeBoundaries',
   ]),
   authority: Object.freeze([
@@ -147,6 +160,16 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'claudeReviewAccount',
     'requiresDistinctClaudeTeamAccounts',
     'sameAccountSessionSatisfiesReview',
+  ]),
+  qualityControl: Object.freeze([
+    'defaultIndependentReviewCount',
+    'passRequiresZeroCritical',
+    'passRequiresZeroImportant',
+    'minorFindingsMayBeDeferredWhenNonblocking',
+    'additionalPreReviewRequiresNamedMaterialRisk',
+    'failedReviewAction',
+    'progressUnit',
+    'overallPercentAllowedAfter',
   ]),
   writeBoundaries: Object.freeze(['codex', 'claude-research', 'claude-review']),
 });
@@ -203,6 +226,11 @@ function validateStructuredPolicy(policy) {
       'roleIdentity',
       valueAtPath(policy, 'roleIdentity'),
       REQUIRED_POLICY_KEYS.roleIdentity,
+    ],
+    [
+      'qualityControl',
+      valueAtPath(policy, 'qualityControl'),
+      REQUIRED_POLICY_KEYS.qualityControl,
     ],
     [
       'writeBoundaries',

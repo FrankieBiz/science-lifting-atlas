@@ -54,6 +54,12 @@ review, and the random pre-release claim audit.
 Writes only to `reviews/`. Never repairs the artifact under review — findings go
 back to its author, who repairs, after which you recheck the complete artifact.
 
+The project uses one independent acceptance review by default. PASS requires
+zero unresolved Critical and Important findings; nonblocking Minor findings may
+be recorded for later hardening. After FAIL, review the complete repaired
+artifact once. Do not request or create extra review layers after PASS unless a
+new named material risk changes the acceptance scope.
+
 ## Evidence rules that override fluency
 
 - Model memory is not evidence. If you cannot cite an exact locator in a lawful
