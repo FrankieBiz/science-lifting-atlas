@@ -31,6 +31,7 @@ Expected handoff, and Paths owned.
 
 | Task | Role | Branch | Worktree | Base commit | Started | Expected handoff | Paths owned |
 | ---- | ---- | ------ | -------- | ----------- | ------- | ---------------- | ----------- |
+| PLAN-001 execution-quality correction | Codex | `codex/execution-quality-correction` | `.worktrees/sbla-execution-quality-correction` | `f674fb70e6f30f2f6bf979766e46c4b6e98483b2` | 2026-09-05 | `reviews/releases/PLAN-001-handoff.md` | `AGENTS.md`; `docs/adr/0006-execution-quality-and-validation-gates.md`; `docs/adr/README.md`; `docs/product/master-plan.md`; `docs/runbooks/current-work.md`; `docs/superpowers/specs/2026-09-05-execution-quality-correction-design.md`; `docs/superpowers/plans/2026-09-05-execution-quality-correction.md`; `reviews/releases/PLAN-001-handoff.md` |
 
 ## Closed claims
 
