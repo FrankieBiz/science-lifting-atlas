@@ -16,6 +16,8 @@ The [current BodyParts3D license page](https://dbarchive.biosciencedbc.jp/en/bod
 last updated 2025-02-27 and read 2026-09-05, licenses the database under
 Creative Commons Attribution 4.0 International and requires this attribution:
 
+[CC BY 4.0 deed](https://creativecommons.org/licenses/by/4.0/)
+
 > BodyParts3D, © The Database Center for Life Science licensed under CC
 > Attribution 4.0 International
 

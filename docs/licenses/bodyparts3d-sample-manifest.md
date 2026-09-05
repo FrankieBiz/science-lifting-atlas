@@ -97,20 +97,46 @@ needed for this milestone.
 SBLA-005 owns scoring `coverage_naming`, and should confirm this by inspecting
 meshes, not labels.
 
-Method: case-insensitive substring search for each §4.3 structure across all
-**eight** metadata files above (60,317 lines total).
+Method: `scripts/assets/coverage.mjs` evaluates an explicit 28-target list from
+§4.3 across all **eight** metadata files above (60,317 lines total). Each simple
+target has a recorded case-insensitive label term. Each compound target requires
+every recorded component group, so a literal umbrella label is not required.
+This makes the observation repeatable and prevents inconsistent treatment of
+groups such as hamstrings and spinal erectors.
 
-**24 of 28 structures present. 4 absent:**
+After downloading the eight files into one directory, reproduce with:
 
-| Absent structure     | §4.3 requirement                                                      |
-| -------------------- | --------------------------------------------------------------------- |
-| **latissimus dorsi** | "Latissimus dorsi; teres major; trapezius regions; rhomboids."        |
-| **rectus abdominis** | "Rectus abdominis, external/internal oblique, transversus abdominis…" |
-| **erector spinae**   | "…spinal erector/multifidus groupings with careful claims."           |
-| **multifidus**       | "…spinal erector/multifidus groupings with careful claims."           |
+```sh
+pnpm assets:coverage /path/to/bodyparts3d-metadata/*.txt
+```
+
+**23 of 28 structures present. 5 absent:**
+
+| Absent structure          | §4.3 requirement                                                      |
+| ------------------------- | --------------------------------------------------------------------- |
+| **latissimus dorsi**      | "Latissimus dorsi; teres major; trapezius regions; rhomboids."        |
+| **rectus abdominis**      | "Rectus abdominis, external/internal oblique, transversus abdominis…" |
+| **internal oblique**      | "Rectus abdominis, external/internal oblique, transversus abdominis…" |
+| **transversus abdominis** | "Rectus abdominis, external/internal oblique, transversus abdominis…" |
+| **multifidus**            | "…spinal erector/multifidus groupings with careful claims."           |
 
 Loose substring counts across all 60,317 lines: `latissimus` **0**, `abdominis`
-**0**, `erector` **0**, `spinae` **0**, `multifid` **0**, `hamstring` **0**.
+**0**, `multifid` **0**, and `hamstring` **0**. The zero `hamstring` hit does
+not create an absence because biceps femoris, semitendinosus, and
+semimembranosus are all present.
+
+The explicit target ids and exact term groups are versioned in
+`COVERAGE_TARGETS`. Important compound rules include all four rotator-cuff
+muscles; anterior and posterior forearm compartments; all four quadriceps
+components; all three hamstring components; iliacus plus psoas major; both
+gastrocnemius heads; and iliocostalis plus longissimus plus spinalis for the
+spinal erector grouping.
+
+The spinal erector group is present even though the literal strings `erector`
+and `spinae` are absent. BodyParts3D/FMA publishes the group as “superficial
+postvertebral muscle” and maps its iliocostalis, longissimus, and spinalis
+components to meshes (for example FJ1527 and FJ1535). This correction applies
+the same component-aware rule already used for hamstrings.
 
 The contrast is what makes this credible rather than a search artefact — the
 _neighbouring_ back muscles are all present: `pectoralis major` 72, `deltoid` 69,
@@ -129,12 +155,12 @@ Two further observations:
 
 ## Why this matters now
 
-Latissimus dorsi, rectus abdominis, and the spinal erectors are among the most
-trained muscles in the sport this atlas is about. Their absence from the
-published naming metadata is a **material coverage risk for the only candidate
-that currently passes the licence gate**.
+Latissimus dorsi, rectus abdominis, the internal oblique, transversus
+abdominis, and multifidus are important trained structures. Their absence from
+the published naming metadata is a **material coverage risk for the only
+candidate that currently passes the licence gate**.
 
-Caveat, stated plainly: this is a search of labels in the ontology metadata, not
+Caveat, stated plainly: this is an evaluation of labels in the ontology metadata, not
 an inspection of the 198 MB of meshes. A mesh could still exist under an FMA
 concept whose label differs from every term searched. Three things make that
 unlikely — zero hits across 60,317 lines, the Japanese-label file adding no

@@ -118,6 +118,7 @@ export async function runBenchmark({ trials = 5 } = {}) {
      *   parseMs: number,
      *   uploadAndDrawMs: number,
      *   totalMs: number,
+     *   webgl: {vendor: string, renderer: string},
      *   stats: ReturnType<typeof parseObjStats>
      * }>}
      */
@@ -175,6 +176,19 @@ export async function runBenchmark({ trials = 5 } = {}) {
         canvas.height = 320;
         const gl = canvas.getContext('webgl');
         if (!gl) throw new Error('WebGL is unavailable');
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        const webgl = {
+          vendor: String(
+            debugInfo
+              ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL)
+              : gl.getParameter(gl.VENDOR),
+          ),
+          renderer: String(
+            debugInfo
+              ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
+              : gl.getParameter(gl.RENDERER),
+          ),
+        };
 
         /** @param {number} type @param {string} source */
         const compile = (type, source) => {
@@ -240,6 +254,7 @@ export async function runBenchmark({ trials = 5 } = {}) {
           parseMs: parseEnd - parseStart,
           uploadAndDrawMs: gpuEnd - gpuStart,
           totalMs: gpuEnd - fetchStart,
+          webgl,
           stats: {
             vertices: positions.length / 3,
             normals,
@@ -256,6 +271,20 @@ export async function runBenchmark({ trials = 5 } = {}) {
         );
       }
       if (index > 0) measurements.push(measurement);
+    }
+
+    const webgl = measurements[0]?.webgl;
+    if (!webgl?.vendor || !webgl.renderer) {
+      throw new Error('WebGL vendor and renderer were not reported');
+    }
+    if (
+      measurements.some(
+        (measurement) =>
+          measurement.webgl.vendor !== webgl.vendor ||
+          measurement.webgl.renderer !== webgl.renderer,
+      )
+    ) {
+      throw new Error('WebGL vendor or renderer changed between trials');
     }
 
     /** @param {'fetchMs'|'parseMs'|'uploadAndDrawMs'|'totalMs'} key */
@@ -276,6 +305,7 @@ export async function runBenchmark({ trials = 5 } = {}) {
         playwrightChromium: userAgent,
         platform: `${process.platform}-${process.arch}`,
         headless: true,
+        webgl,
       },
       protocol: {
         warmupTrials: 1,

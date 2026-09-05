@@ -125,6 +125,64 @@ describe('asset spike scorecard', () => {
     expect(VALID_STATUSES).toEqual(['inventoried', 'placeholder']);
   });
 
+  it('keeps an unselected commercial placeholder unscored and incomplete', () => {
+    const result = evaluateCandidate(
+      candidate({
+        status: 'placeholder',
+        acquired: false,
+        scores: scored(null),
+      }),
+    );
+
+    expect(result.issues).toEqual([]);
+    expect(result.licenceIssues).toEqual([]);
+    expect(result.complete).toBe(false);
+    expect(result.weightedTotal).toBeNull();
+  });
+
+  it('rejects a placeholder that is acquired or has any measured score', () => {
+    const acquired = evaluateCandidate(
+      candidate({
+        status: 'placeholder',
+        acquired: true,
+        scores: scored(null),
+      }),
+    );
+    expect(
+      acquired.issues.some((i: string) => i.includes('acquired:false')),
+    ).toBe(true);
+
+    const scoredPlaceholder = evaluateCandidate(
+      candidate({
+        status: 'placeholder',
+        acquired: false,
+        scores: { ...scored(null), license_clarity: 5 },
+      }),
+    );
+    expect(
+      scoredPlaceholder.issues.some((i: string) =>
+        i.includes('all scores null'),
+      ),
+    ).toBe(true);
+    expect(scoredPlaceholder.complete).toBe(false);
+    expect(scoredPlaceholder.weightedTotal).toBeNull();
+  });
+
+  it('reports null and non-object candidate entries instead of throwing', () => {
+    expect(() =>
+      evaluateInventory({ candidates: [null, undefined, 'broken'] }),
+    ).not.toThrow();
+
+    const { issues, results } = evaluateInventory({
+      candidates: [null, undefined, 'broken'],
+    });
+    expect(results).toHaveLength(3);
+    expect(issues).toHaveLength(3);
+    expect(issues.every((issue) => issue.includes('must be an object'))).toBe(
+      true,
+    );
+  });
+
   it('flags duplicate candidate ids', () => {
     const { issues } = evaluateInventory({
       candidates: [candidate(), candidate()],

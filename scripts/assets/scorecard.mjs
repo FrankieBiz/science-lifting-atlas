@@ -70,6 +70,7 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
  * @property {string} [id]
  * @property {string} [name]
  * @property {string} [status]
+ * @property {boolean} [acquired]
  * @property {boolean} [selectionEligible]
  * @property {string} [ineligibleReason]
  * @property {Record<string, unknown>} [license]
@@ -118,6 +119,26 @@ export function validateLicenseFields(candidate) {
  * @param {SpikeCandidate} candidate
  */
 export function evaluateCandidate(candidate) {
+  if (
+    candidate === null ||
+    typeof candidate !== 'object' ||
+    Array.isArray(candidate)
+  ) {
+    return {
+      id: '<invalid>',
+      name: '<invalid>',
+      status: '<invalid>',
+      licenceIssues: [],
+      issues: ['candidate must be an object'],
+      unmeasured: [],
+      complete: false,
+      weightedTotal: null,
+      rejected: false,
+      rejectionReason: null,
+      malformed: true,
+    };
+  }
+
   const id = candidate.id ?? '<unidentified>';
   const status = candidate.status ?? 'inventoried';
   const scores = candidate.scores ?? {};
@@ -131,11 +152,21 @@ export function evaluateCandidate(candidate) {
     );
   }
 
+  const isPlaceholder = status === 'placeholder';
+  if (isPlaceholder && candidate.acquired !== false) {
+    issues.push(`${id}: placeholder candidates must set acquired:false`);
+  }
+
   for (const criterion of SPIKE_CRITERIA) {
     const value = scores[criterion.key];
 
     if (value === undefined || value === null) {
       unmeasured.push(criterion.key);
+      continue;
+    }
+
+    if (isPlaceholder) {
+      issues.push(`${id}: placeholder candidates must keep all scores null`);
       continue;
     }
 
@@ -174,14 +205,23 @@ export function evaluateCandidate(candidate) {
     issues.push(`${id}: selectionEligible:false requires an ineligibleReason`);
   }
 
-  const complete = unmeasured.length === 0 && issues.length === 0;
+  const complete =
+    !isPlaceholder && unmeasured.length === 0 && issues.length === 0;
+  const validUnselectedPlaceholder =
+    isPlaceholder &&
+    candidate.acquired === false &&
+    SPIKE_CRITERIA.every(
+      (criterion) =>
+        scores[criterion.key] === undefined || scores[criterion.key] === null,
+    );
 
   return {
     id,
     name: candidate.name ?? id,
     status,
-    licenceIssues:
-      status === 'placeholder' ? [] : validateLicenseFields(candidate),
+    licenceIssues: validUnselectedPlaceholder
+      ? []
+      : validateLicenseFields(candidate),
     issues,
     unmeasured,
     complete,
@@ -228,9 +268,9 @@ export function evaluateInventory(inventory) {
   const seen = new Set();
 
   for (const result of results) {
-    if (seen.has(result.id))
+    if (!result.malformed && seen.has(result.id))
       issues.push(`duplicate candidate id: ${result.id}`);
-    seen.add(result.id);
+    if (!result.malformed) seen.add(result.id);
     issues.push(...result.licenceIssues, ...result.issues);
   }
 

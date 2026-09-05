@@ -16,9 +16,13 @@
   },
   "environment": {
     "node": "v24.20.0",
-    "playwrightChromium": "HeadlessChrome/151.0.7922.34",
+    "playwrightChromium": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
     "platform": "darwin-arm64",
-    "headless": true
+    "headless": true,
+    "webgl": {
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+    }
   },
   "protocol": {
     "warmupTrials": 1,
@@ -27,41 +31,41 @@
     "canvas": "320x320 WebGL"
   },
   "mediansMs": {
-    "fetch": 0.9,
+    "fetch": 1,
     "parse": 1.3,
     "uploadAndDraw": 2,
-    "total": 5.2
+    "total": 5.1
   },
   "trials": [
     {
       "fetchMs": 1,
       "parseMs": 1.3,
-      "uploadAndDrawMs": 3.9,
-      "totalMs": 6.2
+      "uploadAndDrawMs": 6.1,
+      "totalMs": 8.4
     },
     {
-      "fetchMs": 0.8,
-      "parseMs": 1.9,
-      "uploadAndDrawMs": 2.5,
+      "fetchMs": 1.3,
+      "parseMs": 1.7,
+      "uploadAndDrawMs": 2.2,
       "totalMs": 5.2
     },
     {
-      "fetchMs": 0.8,
+      "fetchMs": 0.9,
       "parseMs": 1,
-      "uploadAndDrawMs": 1.9,
-      "totalMs": 3.7
+      "uploadAndDrawMs": 2,
+      "totalMs": 3.9
     },
     {
-      "fetchMs": 0.9,
-      "parseMs": 2.6,
+      "fetchMs": 0.6,
+      "parseMs": 2.5,
       "uploadAndDrawMs": 2,
-      "totalMs": 5.5
+      "totalMs": 5.1
     },
     {
-      "fetchMs": 0.9,
-      "parseMs": 1.1,
-      "uploadAndDrawMs": 2,
-      "totalMs": 4
+      "fetchMs": 1.2,
+      "parseMs": 1.2,
+      "uploadAndDrawMs": 1.8,
+      "totalMs": 4.2
     }
   ]
 }

@@ -88,6 +88,12 @@ describe('real asset browser benchmark support', () => {
       cache: 'no-store',
       canvas: '320x320 WebGL',
     });
+    expect(report.environment.webgl).toEqual({
+      vendor: expect.any(String),
+      renderer: expect.any(String),
+    });
+    expect(report.environment.webgl.vendor.length).toBeGreaterThan(0);
+    expect(report.environment.webgl.renderer.length).toBeGreaterThan(0);
     expect(report.trials).toHaveLength(5);
   });
 });
