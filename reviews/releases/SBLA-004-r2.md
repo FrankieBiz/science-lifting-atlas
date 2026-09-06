@@ -209,20 +209,20 @@ recorded metric arrays.
 
 ## Acceptance summary
 
-| Dimension | Result |
-| --- | --- |
-| Exact candidate and tree | PASS |
-| Round 1 I-1 and I-2 | CLOSED |
-| Round 1 M-1 through M-5 | CLOSED |
-| Malformed and placeholder behavior | PASS, fail-closed |
-| 28-target result | PASS, 23 present / 5 absent |
-| Current license facts and lawful sample | PASS |
-| Archive/sample provenance and tamper guard | PASS |
-| Scorecard weights and license floor | PASS |
-| Recorded benchmark evidence | PASS on all non-browser checks |
-| Accepted verification and portability gates | PASS |
-| Browser E2E and live benchmark in reviewer sandbox | NOT RUN — sandbox denial |
-| Critical / Important / Minor | 0 / 0 / 4 |
+| Dimension                                          | Result                         |
+| -------------------------------------------------- | ------------------------------ |
+| Exact candidate and tree                           | PASS                           |
+| Round 1 I-1 and I-2                                | CLOSED                         |
+| Round 1 M-1 through M-5                            | CLOSED                         |
+| Malformed and placeholder behavior                 | PASS, fail-closed              |
+| 28-target result                                   | PASS, 23 present / 5 absent    |
+| Current license facts and lawful sample            | PASS                           |
+| Archive/sample provenance and tamper guard         | PASS                           |
+| Scorecard weights and license floor                | PASS                           |
+| Recorded benchmark evidence                        | PASS on all non-browser checks |
+| Accepted verification and portability gates        | PASS                           |
+| Browser E2E and live benchmark in reviewer sandbox | NOT RUN — sandbox denial       |
+| Critical / Important / Minor                       | 0 / 0 / 4                      |
 
 ## Required next step
 
