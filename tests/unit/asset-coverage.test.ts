@@ -74,6 +74,50 @@ describe('BodyParts3D coverage observation', () => {
     expect(complete.byId.quadriceps!.present).toBe(true);
   });
 
+  it('requires all named deltoid, trapezius, and triceps components', () => {
+    const bareParents = evaluateCoverage('deltoid\ntrapezius\ntriceps brachii');
+    expect(bareParents.byId['deltoid-regions']!.present).toBe(false);
+    expect(bareParents.byId['trapezius-regions']!.present).toBe(false);
+    expect(bareParents.byId['triceps-brachii']!.present).toBe(false);
+
+    const compoundTargets = [
+      {
+        id: 'deltoid-regions',
+        components: ['anterior deltoid', 'middle deltoid', 'posterior deltoid'],
+      },
+      {
+        id: 'trapezius-regions',
+        components: [
+          'ascending trapezius',
+          'descending trapezius',
+          'transverse trapezius',
+        ],
+      },
+      {
+        id: 'triceps-brachii',
+        components: [
+          'long head of triceps brachii',
+          'lateral head of triceps brachii',
+          'medial head of triceps brachii',
+        ],
+      },
+    ] as const;
+
+    for (const { id, components } of compoundTargets) {
+      expect(evaluateCoverage(components.join('\n')).byId[id]!.present).toBe(
+        true,
+      );
+      components.forEach((_, omittedIndex) => {
+        const incomplete = components.filter(
+          (__, componentIndex) => componentIndex !== omittedIndex,
+        );
+        expect(evaluateCoverage(incomplete.join('\n')).byId[id]!.present).toBe(
+          false,
+        );
+      });
+    }
+  });
+
   it('does not confuse thoracic transversus with transversus abdominis', () => {
     const result = evaluateCoverage(
       'transversus thoracis\nexternal oblique\nsuperficial postvertebral muscle',

@@ -94,6 +94,18 @@ describe('real asset browser benchmark support', () => {
     });
     expect(report.environment.webgl.vendor.length).toBeGreaterThan(0);
     expect(report.environment.webgl.renderer.length).toBeGreaterThan(0);
-    expect(report.trials).toHaveLength(5);
+    const trials = report.trials as Array<{
+      fetchMs: number;
+      parseMs: number;
+      uploadAndDrawMs: number;
+      totalMs: number;
+    }>;
+    expect(trials).toHaveLength(5);
+    expect(report.mediansMs).toEqual({
+      fetch: median(trials.map((trial) => trial.fetchMs)),
+      parse: median(trials.map((trial) => trial.parseMs)),
+      uploadAndDraw: median(trials.map((trial) => trial.uploadAndDrawMs)),
+      total: median(trials.map((trial) => trial.totalMs)),
+    });
   });
 });

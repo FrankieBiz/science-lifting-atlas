@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import {
   LICENSE_CLARITY_FLOOR,
@@ -6,10 +8,9 @@ import {
   evaluateInventory,
 } from './scorecard.mjs';
 
-const inventoryUrl = new URL(
-  '../../docs/licenses/asset-candidates.json',
-  import.meta.url,
-);
+const inventoryUrl = process.argv[2]
+  ? pathToFileURL(resolve(process.argv[2]))
+  : new URL('../../docs/licenses/asset-candidates.json', import.meta.url);
 
 /** @type {{recordedOn?: string, reverifyBy?: string, candidates?: unknown}} */
 let inventory;
@@ -32,16 +33,22 @@ console.log(
 console.log('');
 
 for (const result of results) {
-  if (result.status === 'placeholder') {
+  if (result.malformed || result.issues.length > 0) {
+    console.log(`- ${result.name}: INVALID — ${result.issues.join('; ')}`);
+  } else if (result.status === 'placeholder') {
     console.log(
       `- ${result.name}: PLACEHOLDER — no vendor selected; not scored.`,
     );
+  } else if (!result.complete) {
+    if (result.licenceIssues.length > 0) {
+      console.log(`- ${result.name}: INCOMPLETE — licence record invalid`);
+    } else {
+      console.log(
+        `- ${result.name}: INCOMPLETE — licence recorded; ${result.unmeasured.length} criteria awaiting SBLA-005 measurement (${result.unmeasured.join(', ')})`,
+      );
+    }
   } else if (result.rejected) {
     console.log(`- ${result.name}: INELIGIBLE — ${result.rejectionReason}`);
-  } else if (!result.complete) {
-    console.log(
-      `- ${result.name}: licence recorded; ${result.unmeasured.length} criteria awaiting SBLA-005 measurement (${result.unmeasured.join(', ')})`,
-    );
   } else {
     console.log(`- ${result.name}: weighted total ${result.weightedTotal}/100`);
   }

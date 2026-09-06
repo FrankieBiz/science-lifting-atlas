@@ -1,3 +1,10 @@
+import { execFile } from 'node:child_process';
+import { writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -10,6 +17,44 @@ import {
   evaluateInventory,
   validateLicenseFields,
 } from '../../scripts/assets/scorecard.mjs';
+
+const execFileAsync = promisify(execFile);
+
+async function runSpike(candidates: unknown[]) {
+  const fixtureRoot = await mkdtemp(join(tmpdir(), 'sbla-asset-spike-'));
+  const inventoryPath = join(fixtureRoot, 'inventory.json');
+  await writeFile(
+    inventoryPath,
+    JSON.stringify({ recordedOn: '2026-09-05', candidates }),
+  );
+
+  try {
+    const result = await execFileAsync(
+      process.execPath,
+      [
+        fileURLToPath(
+          new URL('../../scripts/assets/spike.mjs', import.meta.url),
+        ),
+        inventoryPath,
+      ],
+      { encoding: 'utf8' },
+    );
+    return { exitCode: 0, stdout: result.stdout, stderr: result.stderr };
+  } catch (error) {
+    const failure = error as Error & {
+      code?: number;
+      stdout?: string;
+      stderr?: string;
+    };
+    return {
+      exitCode: failure.code,
+      stdout: failure.stdout ?? '',
+      stderr: failure.stderr ?? '',
+    };
+  } finally {
+    await rm(fixtureRoot, { recursive: true, force: true });
+  }
+}
 
 /**
  * Expectations below are LITERALS transcribed from master plan §8.3, not values
@@ -183,6 +228,44 @@ describe('asset spike scorecard', () => {
     );
   });
 
+  it('prints an explicit invalid outcome for a malformed record', async () => {
+    const result = await runSpike([null]);
+
+    expect(result.exitCode).toBe(1);
+    expect(result.stdout).toContain(
+      '- <invalid>: INVALID — candidate must be an object',
+    );
+  });
+
+  it('prints an explicit invalid outcome for a scored placeholder', async () => {
+    const invalidPlaceholder = candidate({
+      status: 'placeholder',
+      acquired: false,
+      scores: { ...scored(null), visual_quality: 4 },
+    });
+    const result = await runSpike([invalidPlaceholder]);
+
+    expect(result.exitCode).toBe(1);
+    expect(result.stdout).toContain(
+      '- Test candidate: INVALID — test: placeholder candidates must keep all scores null',
+    );
+    expect(result.stdout).not.toContain('PLACEHOLDER');
+  });
+
+  it('prints an explicit incomplete outcome for an unlicensed fully scored record', async () => {
+    const unlicensed = candidate({
+      license: { ...candidate().license, source: 'TODO' },
+      scores: scored(5),
+    });
+    const result = await runSpike([unlicensed]);
+
+    expect(result.exitCode).toBe(1);
+    expect(result.stdout).toContain(
+      '- Test candidate: INCOMPLETE — licence record invalid',
+    );
+    expect(result.stdout).not.toContain('weighted total 100/100');
+  });
+
   it('flags duplicate candidate ids', () => {
     const { issues } = evaluateInventory({
       candidates: [candidate(), candidate()],
@@ -244,6 +327,22 @@ describe('asset spike scorecard', () => {
     expect(result.complete).toBe(false);
     expect(result.weightedTotal).toBeNull();
     expect(result.unmeasured).toContain('browser_performance');
+  });
+
+  it('refuses to complete or total a fully scored candidate with licence issues', () => {
+    const result = evaluateCandidate(
+      candidate({
+        license: {
+          ...candidate().license,
+          source: 'TODO',
+        },
+        scores: scored(5),
+      }),
+    );
+
+    expect(result.licenceIssues.length).toBeGreaterThan(0);
+    expect(result.complete).toBe(false);
+    expect(result.weightedTotal).toBeNull();
   });
 
   it('computes a weighted total only when every criterion is measured', () => {

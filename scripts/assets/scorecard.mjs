@@ -205,8 +205,6 @@ export function evaluateCandidate(candidate) {
     issues.push(`${id}: selectionEligible:false requires an ineligibleReason`);
   }
 
-  const complete =
-    !isPlaceholder && unmeasured.length === 0 && issues.length === 0;
   const validUnselectedPlaceholder =
     isPlaceholder &&
     candidate.acquired === false &&
@@ -214,14 +212,20 @@ export function evaluateCandidate(candidate) {
       (criterion) =>
         scores[criterion.key] === undefined || scores[criterion.key] === null,
     );
+  const licenceIssues = validUnselectedPlaceholder
+    ? []
+    : validateLicenseFields(candidate);
+  const complete =
+    !isPlaceholder &&
+    unmeasured.length === 0 &&
+    issues.length === 0 &&
+    licenceIssues.length === 0;
 
   return {
     id,
     name: candidate.name ?? id,
     status,
-    licenceIssues: validUnselectedPlaceholder
-      ? []
-      : validateLicenseFields(candidate),
+    licenceIssues,
     issues,
     unmeasured,
     complete,

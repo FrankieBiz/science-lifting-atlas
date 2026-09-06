@@ -9,10 +9,18 @@ import { pathToFileURL } from 'node:url';
  */
 export const COVERAGE_TARGETS = Object.freeze([
   target('pectoralis-major', 'pectoralis major', [['pectoralis major']]),
-  target('deltoid-regions', 'deltoid regions', [['deltoid']]),
+  target('deltoid-regions', 'deltoid regions', [
+    ['anterior deltoid', 'clavicular part of deltoid'],
+    ['middle deltoid', 'acromial part of deltoid'],
+    ['posterior deltoid', 'spinal part of deltoid'],
+  ]),
   target('latissimus-dorsi', 'latissimus dorsi', [['latissimus dorsi']]),
   target('teres-major', 'teres major', [['teres major']]),
-  target('trapezius-regions', 'trapezius regions', [['trapezius']]),
+  target('trapezius-regions', 'trapezius regions', [
+    ['ascending trapezius', 'ascending part of trapezius'],
+    ['descending trapezius', 'descending part of trapezius'],
+    ['transverse trapezius', 'transverse part of trapezius'],
+  ]),
   target('rhomboids', 'rhomboids', [['rhomboid']]),
   target('rotator-cuff', 'rotator cuff muscles', [
     ['supraspinatus'],
@@ -23,7 +31,11 @@ export const COVERAGE_TARGETS = Object.freeze([
   target('biceps-brachii', 'biceps brachii', [['biceps brachii']]),
   target('brachialis', 'brachialis', [['brachialis']]),
   target('brachioradialis', 'brachioradialis', [['brachioradialis']]),
-  target('triceps-brachii', 'triceps brachii', [['triceps brachii']]),
+  target('triceps-brachii', 'triceps brachii', [
+    ['long head of triceps brachii'],
+    ['lateral head of triceps brachii'],
+    ['medial head of triceps brachii'],
+  ]),
   target('forearm-flexors-extensors', 'forearm flexor/extensor groupings', [
     ['muscle of anterior compartment of forearm'],
     ['muscle of posterior compartment of forearm'],
