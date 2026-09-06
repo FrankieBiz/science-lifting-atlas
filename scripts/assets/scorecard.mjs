@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 /**
@@ -132,6 +133,29 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   lowPowerSimulationGracefulMedianFrameMs: 33.33,
 });
 
+/** @type {Readonly<Record<string, string>>} */
+const CRITERION_CONTRACT_SHA256 = Object.freeze({
+  coverage_naming:
+    'a5dbc45ccda3938e9b63c3f5380459d4fc7b65aaaf18ae7b954b1ab05b15797f',
+  mesh_separability:
+    '3e0f7d378e9417f10fd7bf3e688a4fce1f6d9a2b4daa1e95c9ac5a377f59f388',
+  visual_quality:
+    '2a34613a60160579afebdb553d16dc05b876364010e7cc09ac1758df1849f29b',
+  browser_performance:
+    '45652ffe8b1fda29d49000e3985d438b034f1fa1662d364ce305207d0d397470',
+  license_clarity:
+    '982334bb66c4c25c2d0e0e455bdad545dfee515773a99f747ffd45384e0c0699',
+  pipeline_ease:
+    'c8e1cb13489046e870d33f5a58dd21fa95f4d754ae503be129a890f539ad2bd3',
+  presentation_options:
+    'bd0eea88fc2670c200a071fb2dec257d22c1fbe63cdb7e9e740b51f7c4bed43a',
+});
+
+/** @param {unknown} value */
+function sha256(value) {
+  return createHash('sha256').update(JSON.stringify(value)).digest('hex');
+}
+
 /** @param {unknown} actual @param {unknown} expected */
 function sameValue(actual, expected) {
   return JSON.stringify(actual) === JSON.stringify(expected);
@@ -256,6 +280,11 @@ export function validateAssetScoreRubric(rubric) {
         issues.push(`${expected.id} score ${band.score} requires conditions`);
       }
     }
+    if (sha256(criterion) !== CRITERION_CONTRACT_SHA256[expected.id]) {
+      issues.push(
+        `${expected.id} exact criterion contract does not match the frozen rubric`,
+      );
+    }
   }
 
   const actualIds = criteria.map(({ id }) => id);
@@ -327,6 +356,470 @@ export const LICENSE_CLARITY_FLOOR =
 
 export const MAX_SCORE = ASSET_SCORE_RUBRIC.scoreScale.maximum;
 
+const VISUAL_CHECKS = Object.freeze([
+  'noHoles',
+  'outwardNormals',
+  'materialsSurvive',
+  'componentsNotOccluded',
+  'usableProportions',
+]);
+
+const PRESENTATION_PARITY_CHECKS = Object.freeze([
+  'requiredCoverage',
+  'mapping',
+  'separability',
+  'artifactChecks',
+]);
+
+/** @param {unknown} value @returns {value is Record<string, unknown>} */
+function isRecord(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+/** @param {unknown} value */
+function isNonNegativeNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0;
+}
+
+/** @param {unknown} value */
+function isNonNegativeInteger(value) {
+  return isNonNegativeNumber(value) && Number.isInteger(value);
+}
+
+/** @param {number} rate */
+function rateBand(rate) {
+  if (rate < 0.5) return 0;
+  if (rate < 0.6) return 1;
+  if (rate < 0.75) return 2;
+  if (rate < 0.9) return 3;
+  if (rate < 1) return 4;
+  return 5;
+}
+
+/**
+ * Derive a rubric score solely from structured evidence. Invalid or absent
+ * evidence returns null: zero is reserved for a completed failed measurement.
+ *
+ * @param {string} criterionId
+ * @param {unknown} evidence
+ * @returns {{issues:string[], score:number|null}}
+ */
+export function deriveCriterionScore(criterionId, evidence) {
+  const criterion = ASSET_SCORE_RUBRIC.criteria.find(
+    ({ id }) => id === criterionId,
+  );
+  if (!criterion) {
+    return {
+      issues: [`unknown rubric criterion: ${criterionId}`],
+      score: null,
+    };
+  }
+  if (!isRecord(evidence)) {
+    return {
+      issues: [`${criterionId}: measurement evidence is missing`],
+      score: null,
+    };
+  }
+
+  const issues = [];
+  for (const field of criterion.evidenceFields) {
+    if (!Object.hasOwn(evidence, field) || evidence[field] === undefined) {
+      issues.push(`${criterionId}: missing evidence field: ${field}`);
+    }
+  }
+  if (issues.length > 0) return { issues, score: null };
+
+  switch (criterionId) {
+    case 'coverage_naming':
+      return deriveCoverageScore(evidence);
+    case 'mesh_separability':
+      return deriveSeparabilityScore(evidence);
+    case 'visual_quality':
+      return deriveVisualScore(evidence);
+    case 'browser_performance':
+      return derivePerformanceScore(evidence);
+    case 'license_clarity':
+      return deriveLicenseScore(evidence);
+    case 'pipeline_ease':
+      return derivePipelineScore(evidence);
+    case 'presentation_options':
+      return derivePresentationScore(evidence);
+    default:
+      return {
+        issues: [`unknown rubric criterion: ${criterionId}`],
+        score: null,
+      };
+  }
+}
+
+/** @param {Record<string, unknown>} evidence */
+function deriveCoverageScore(evidence) {
+  const issues = [];
+  const requiredValue = evidence.requiredTargetCount;
+  const mappedValue = evidence.mappedTargetCount;
+  const defectValue = evidence.materialMappingDefectCount;
+  if (!isNonNegativeInteger(requiredValue) || requiredValue === 0)
+    issues.push(
+      'coverage_naming: requiredTargetCount must be a positive integer',
+    );
+  if (!isNonNegativeInteger(mappedValue))
+    issues.push(
+      'coverage_naming: mappedTargetCount must be a non-negative integer',
+    );
+  if (!isNonNegativeInteger(defectValue))
+    issues.push(
+      'coverage_naming: materialMappingDefectCount must be a non-negative integer',
+    );
+  if (
+    isNonNegativeInteger(requiredValue) &&
+    isNonNegativeInteger(mappedValue) &&
+    Number(mappedValue) > Number(requiredValue)
+  ) {
+    issues.push(
+      'coverage_naming: mappedTargetCount cannot exceed requiredTargetCount',
+    );
+  }
+  if (typeof evidence.mappingManifest !== 'string' || !evidence.mappingManifest)
+    issues.push('coverage_naming: mappingManifest must be a non-empty path');
+  if (issues.length > 0) return { issues, score: null };
+  const required = Number(requiredValue);
+  const mapped = Number(mappedValue);
+  const defects = Number(defectValue);
+  if (defects > 0) return { issues: [], score: 0 };
+  return { issues: [], score: rateBand(mapped / required) };
+}
+
+/** @param {Record<string, unknown>} evidence */
+function deriveSeparabilityScore(evidence) {
+  const issues = [];
+  for (const field of ['expectedSelectableMeshCount', 'expectedMappingCount']) {
+    if (!isNonNegativeInteger(evidence[field]) || evidence[field] === 0) {
+      issues.push(`mesh_separability: ${field} must be a positive integer`);
+    }
+  }
+  for (const field of [
+    'selectableMeshCount',
+    'validMappingCount',
+    'duplicateMappingCount',
+  ]) {
+    if (!isNonNegativeInteger(evidence[field])) {
+      issues.push(`mesh_separability: ${field} must be a non-negative integer`);
+    }
+  }
+  if (
+    isNonNegativeInteger(evidence.selectableMeshCount) &&
+    isNonNegativeInteger(evidence.expectedSelectableMeshCount) &&
+    Number(evidence.selectableMeshCount) >
+      Number(evidence.expectedSelectableMeshCount)
+  ) {
+    issues.push(
+      'mesh_separability: selectableMeshCount cannot exceed expectedSelectableMeshCount',
+    );
+  }
+  if (
+    isNonNegativeInteger(evidence.validMappingCount) &&
+    isNonNegativeInteger(evidence.expectedMappingCount) &&
+    Number(evidence.validMappingCount) > Number(evidence.expectedMappingCount)
+  ) {
+    issues.push(
+      'mesh_separability: validMappingCount cannot exceed expectedMappingCount',
+    );
+  }
+  if (typeof evidence.mappingManifest !== 'string' || !evidence.mappingManifest)
+    issues.push('mesh_separability: mappingManifest must be a non-empty path');
+  if (issues.length > 0) return { issues, score: null };
+  const selectable = Number(evidence.selectableMeshCount);
+  const expectedSelectable = Number(evidence.expectedSelectableMeshCount);
+  const validMappings = Number(evidence.validMappingCount);
+  const expectedMappings = Number(evidence.expectedMappingCount);
+  const duplicates = Number(evidence.duplicateMappingCount);
+  if (duplicates > 0) return { issues: [], score: 0 };
+  const rate = Math.min(
+    selectable / expectedSelectable,
+    validMappings / expectedMappings,
+  );
+  return { issues: [], score: rateBand(rate) };
+}
+
+/** @param {Record<string, unknown>} evidence */
+function deriveVisualScore(evidence) {
+  const issues = [];
+  const artifactChecks = isRecord(evidence.artifactChecks)
+    ? evidence.artifactChecks
+    : {};
+  if (typeof evidence.deterministicNormalization !== 'boolean') {
+    issues.push(
+      'visual_quality: deterministicNormalization must be a boolean measurement',
+    );
+  }
+  if (!isRecord(evidence.artifactChecks)) {
+    issues.push('visual_quality: artifactChecks must be an object');
+  } else {
+    for (const check of VISUAL_CHECKS) {
+      if (typeof artifactChecks[check] !== 'boolean') {
+        issues.push(`visual_quality: artifactChecks.${check} must be boolean`);
+      }
+    }
+  }
+  for (const field of ['conversionManifest', 'posterArtifact']) {
+    if (typeof evidence[field] !== 'string' || !evidence[field])
+      issues.push(`visual_quality: ${field} must be a non-empty path`);
+  }
+  if (issues.length > 0) return { issues, score: null };
+  if (!evidence.deterministicNormalization) return { issues: [], score: 0 };
+  const passed = VISUAL_CHECKS.filter(
+    (check) => artifactChecks[check] === true,
+  ).length;
+  return { issues: [], score: passed };
+}
+
+/** @param {Record<string, unknown>} evidence */
+function derivePerformanceScore(evidence) {
+  const issues = [];
+  const nativeProfile = isRecord(evidence.nativeProfile)
+    ? evidence.nativeProfile
+    : {};
+  const lowPowerSimulation = isRecord(evidence.lowPowerSimulation)
+    ? evidence.lowPowerSimulation
+    : {};
+  for (const field of ['optimizedGlbBytes', 'geometryBufferBytes']) {
+    if (!isNonNegativeInteger(evidence[field])) {
+      issues.push(
+        `browser_performance: ${field} must be a non-negative integer`,
+      );
+    }
+  }
+  if (!isRecord(evidence.nativeProfile)) {
+    issues.push('browser_performance: nativeProfile must be an object');
+  } else {
+    if (nativeProfile.hardwareBacked !== true) {
+      issues.push('browser_performance: nativeProfile must be hardware-backed');
+    }
+    if (!isNonNegativeNumber(nativeProfile.medianFrameMs)) {
+      issues.push(
+        'browser_performance: nativeProfile.medianFrameMs must be non-negative',
+      );
+    }
+  }
+  if (!isRecord(evidence.lowPowerSimulation)) {
+    issues.push('browser_performance: lowPowerSimulation must be an object');
+  } else {
+    if (lowPowerSimulation.profileKind !== 'simulation') {
+      issues.push(
+        'browser_performance: lowPowerSimulation must be labelled simulation',
+      );
+    }
+    for (const field of [
+      'reducedLod',
+      'cpuThrottlingDocumented',
+      'swiftShader',
+    ]) {
+      if (lowPowerSimulation[field] !== true) {
+        issues.push(
+          `browser_performance: lowPowerSimulation.${field} must be true`,
+        );
+      }
+    }
+    if (!isNonNegativeNumber(lowPowerSimulation.medianFrameMs)) {
+      issues.push(
+        'browser_performance: lowPowerSimulation.medianFrameMs must be non-negative',
+      );
+    }
+  }
+  if (
+    evidence.observedJsHeapBytes !== null &&
+    !isNonNegativeInteger(evidence.observedJsHeapBytes)
+  ) {
+    issues.push(
+      'browser_performance: observedJsHeapBytes must be null or a non-negative integer',
+    );
+  }
+  if (
+    evidence.observedJsHeapBytes === null &&
+    (typeof evidence.observedJsHeapUnavailableReason !== 'string' ||
+      !evidence.observedJsHeapUnavailableReason)
+  ) {
+    issues.push(
+      'browser_performance: null observedJsHeapBytes requires an unavailable reason',
+    );
+  }
+  if (
+    typeof evidence.performanceRecord !== 'string' ||
+    !evidence.performanceRecord
+  ) {
+    issues.push(
+      'browser_performance: performanceRecord must be a non-empty path',
+    );
+  }
+  if (issues.length > 0) return { issues, score: null };
+
+  const bytes = Number(evidence.optimizedGlbBytes);
+  const geometry = Number(evidence.geometryBufferBytes);
+  const nativeMs = Number(nativeProfile.medianFrameMs);
+  const simulationMs = Number(lowPowerSimulation.medianFrameMs);
+  if (
+    bytes > PERFORMANCE_BUDGETS.desktopHardCeilingBytes ||
+    geometry > PERFORMANCE_BUDGETS.geometryBufferHardCeilingBytes ||
+    nativeMs > 33.33 ||
+    simulationMs > 50
+  ) {
+    return { issues: [], score: 0 };
+  }
+  if (
+    bytes <= 6_000_000 &&
+    bytes <= 3_000_000 &&
+    geometry <= 67_108_864 &&
+    nativeMs <= 16.67 &&
+    simulationMs <= 33.33
+  ) {
+    return { issues: [], score: 5 };
+  }
+  if (
+    bytes <= 6_000_000 &&
+    geometry <= 100_663_296 &&
+    nativeMs <= 18.18 &&
+    simulationMs <= 33.33
+  ) {
+    return { issues: [], score: 4 };
+  }
+  if (geometry <= 134_217_728 && nativeMs <= 18.18 && simulationMs <= 33.33) {
+    return { issues: [], score: 3 };
+  }
+  if (geometry <= 201_326_592 && nativeMs <= 25 && simulationMs <= 40) {
+    return { issues: [], score: 2 };
+  }
+  return { issues: [], score: 1 };
+}
+
+/** @param {Record<string, unknown>} evidence */
+function deriveLicenseScore(evidence) {
+  const issues = [];
+  for (const field of [
+    'primarySourceUrl',
+    'accessedOn',
+    'commercialUse',
+    'modification',
+    'webDistribution',
+    'attributionRequirements',
+    'aiProcessingTerms',
+    'licenseRecord',
+  ]) {
+    if (typeof evidence[field] !== 'string' || !evidence[field]) {
+      issues.push(`license_clarity: ${field} must be a non-empty string`);
+    }
+  }
+  /** @type {Record<string, number>} */
+  const scoreByConflict = {
+    'no-authoritative-terms': 0,
+    'three-plus-unknown': 1,
+    'one-or-two-unknown': 2,
+    'unresolved-mixed': 3,
+    'conservatively-handled': 4,
+    none: 5,
+  };
+  const conflictStatus =
+    typeof evidence.conflictStatus === 'string'
+      ? evidence.conflictStatus
+      : '<invalid>';
+  if (!Object.hasOwn(scoreByConflict, conflictStatus)) {
+    issues.push(
+      'license_clarity: conflictStatus is not a recognized rubric state',
+    );
+  }
+  if (issues.length > 0) return { issues, score: null };
+  const score = scoreByConflict[conflictStatus];
+  return score === undefined
+    ? {
+        issues: [
+          'license_clarity: conflictStatus is not a recognized rubric state',
+        ],
+        score: null,
+      }
+    : { issues: [], score };
+}
+
+/** @param {Record<string, unknown>} evidence */
+function derivePipelineScore(evidence) {
+  const issues = [];
+  if (evidence.pinnedToolVersions !== true)
+    issues.push('pipeline_ease: pinnedToolVersions must be true');
+  for (const field of [
+    'scriptedStepCount',
+    'manualStepCount',
+    'repeatedRunCount',
+  ]) {
+    if (!isNonNegativeInteger(evidence[field]))
+      issues.push(`pipeline_ease: ${field} must be a non-negative integer`);
+  }
+  if (typeof evidence.structureParity !== 'boolean')
+    issues.push('pipeline_ease: structureParity must be boolean');
+  if (
+    typeof evidence.conversionManifest !== 'string' ||
+    !evidence.conversionManifest
+  ) {
+    issues.push('pipeline_ease: conversionManifest must be a non-empty path');
+  }
+  if (issues.length > 0) return { issues, score: null };
+  const manualSteps = Number(evidence.manualStepCount);
+  const repeatedRuns = Number(evidence.repeatedRunCount);
+  if (evidence.acceptedGlbProduced === false) return { issues: [], score: 0 };
+  if (manualSteps >= 4) return { issues: [], score: 1 };
+  if (manualSteps >= 2) return { issues: [], score: 2 };
+  if (repeatedRuns < 2 || !evidence.structureParity)
+    return { issues: [], score: 2 };
+  if (manualSteps === 0) {
+    if (evidence.authorizedOutputsByteIdentical === true)
+      return { issues: [], score: 5 };
+    if (evidence.nondeterminismExplained === true)
+      return { issues: [], score: 4 };
+  }
+  return { issues: [], score: 3 };
+}
+
+/** @param {Record<string, unknown>} evidence */
+function derivePresentationScore(evidence) {
+  const issues = [];
+  const options = Array.isArray(evidence.adultPresentationOptions)
+    ? evidence.adultPresentationOptions
+    : [];
+  const parityChecks = isRecord(evidence.optionParityChecks)
+    ? evidence.optionParityChecks
+    : {};
+  if (!Array.isArray(evidence.adultPresentationOptions)) {
+    issues.push(
+      'presentation_options: adultPresentationOptions must be an array',
+    );
+  }
+  if (!isRecord(evidence.optionParityChecks)) {
+    issues.push('presentation_options: optionParityChecks must be an object');
+  } else {
+    for (const check of PRESENTATION_PARITY_CHECKS) {
+      if (typeof parityChecks[check] !== 'boolean') {
+        issues.push(
+          `presentation_options: optionParityChecks.${check} must be boolean`,
+        );
+      }
+    }
+  }
+  if (
+    typeof evidence.feasibilityRecord !== 'string' ||
+    !evidence.feasibilityRecord
+  ) {
+    issues.push(
+      'presentation_options: feasibilityRecord must be a non-empty path',
+    );
+  }
+  if (issues.length > 0) return { issues, score: null };
+  const count = options.length;
+  const parity = PRESENTATION_PARITY_CHECKS.every(
+    (check) => parityChecks[check] === true,
+  );
+  if (count === 0) return { issues: [], score: 0 };
+  if (count === 1) return { issues: [], score: parity ? 2 : 1 };
+  if (!parity) return { issues: [], score: 3 };
+  return { issues: [], score: count === 2 ? 4 : 5 };
+}
+
 /** Only these statuses gate behaviour. Anything else is an inventory defect. */
 export const VALID_STATUSES = Object.freeze(['inventoried', 'placeholder']);
 
@@ -360,6 +853,7 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
  * @property {string} [ineligibleReason]
  * @property {Record<string, unknown>} [license]
  * @property {Record<string, number|null>} [scores]
+ * @property {Record<string, Record<string, unknown>|null>} [measurements]
  */
 
 /**
@@ -397,6 +891,40 @@ export function validateLicenseFields(candidate) {
 }
 
 /**
+ * SBLA-004 license records predate the general measurement envelope. Normalize
+ * those already structured primary-source facts into the frozen license rubric
+ * without trusting prose scores or candidate identities.
+ *
+ * @param {SpikeCandidate} candidate
+ */
+function normalizeLicenseMeasurement(candidate) {
+  const license = isRecord(candidate.license) ? candidate.license : {};
+  const componentLicences = Array.isArray(license.componentLicences)
+    ? license.componentLicences
+    : [];
+  const hasMixedComponents = componentLicences.length > 0;
+  const hasHistoricalNotice =
+    typeof license.historicalNotice === 'string' &&
+    license.historicalNotice.length > 0;
+
+  return {
+    primarySourceUrl: license.source,
+    accessedOn: license.accessedOn,
+    commercialUse: String(license.commercialUse ?? ''),
+    modification: String(license.modification ?? ''),
+    webDistribution: String(license.webDistribution ?? ''),
+    attributionRequirements: String(license.attributionRequired ?? ''),
+    aiProcessingTerms: String(license.aiProcessingPermitted ?? 'not stated'),
+    conflictStatus: hasMixedComponents
+      ? 'unresolved-mixed'
+      : hasHistoricalNotice
+        ? 'conservatively-handled'
+        : 'none',
+    licenseRecord: 'docs/licenses/asset-candidates.json',
+  };
+}
+
+/**
  * Evaluate one candidate deterministically. Never throws on bad data: a
  * malformed score becomes a reported issue so a multi-candidate inventory
  * surfaces every problem in one run.
@@ -427,6 +955,9 @@ export function evaluateCandidate(candidate) {
   const id = candidate.id ?? '<unidentified>';
   const status = candidate.status ?? 'inventoried';
   const scores = candidate.scores ?? {};
+  const measurements = isRecord(candidate.measurements)
+    ? candidate.measurements
+    : {};
   const issues = [];
   const unmeasured = [];
   let weighted = 0;
@@ -472,6 +1003,21 @@ export function evaluateCandidate(candidate) {
     if (!ASSET_SCORE_RUBRIC.scoreScale.allowedScores.includes(value)) {
       issues.push(
         `${id}: ${criterion.key} must match a rubric score band (integer 0-${MAX_SCORE}); received ${String(value)}`,
+      );
+      continue;
+    }
+
+    const evidence =
+      measurements[criterion.key] ??
+      (criterion.key === 'license_clarity'
+        ? normalizeLicenseMeasurement(candidate)
+        : null);
+    const derived = deriveCriterionScore(criterion.key, evidence);
+    issues.push(...derived.issues.map((issue) => `${id}: ${issue}`));
+    if (derived.score === null) continue;
+    if (derived.score !== value) {
+      issues.push(
+        `${id}: ${criterion.key} score ${value} does not match evidence-derived score ${derived.score}`,
       );
       continue;
     }
