@@ -111,6 +111,7 @@ const PLAN_EVIDENCE_FIELDS: Record<string, string[]> = {
     'nativeProfile',
     'lowPowerSimulation',
     'geometryBufferBytes',
+    'mobileFallbackPermitted',
     'observedJsHeapBytes',
     'observedJsHeapUnavailableReason',
     'performanceRecord',
@@ -118,20 +119,31 @@ const PLAN_EVIDENCE_FIELDS: Record<string, string[]> = {
   license_clarity: [
     'primarySourceUrl',
     'accessedOn',
+    'completedLicenseReview',
+    'authoritativePrimaryTerms',
+    'componentTermsReviewed',
     'commercialUse',
     'modification',
     'webDistribution',
     'attributionRequirements',
     'aiProcessingTerms',
+    'materialContradictionCount',
+    'mixedComponentTermsUnresolved',
+    'historicalNoticeStatus',
     'conflictStatus',
     'licenseRecord',
   ],
   pipeline_ease: [
     'pinnedToolVersions',
+    'sourceInputsPinned',
+    'completedAttempt',
+    'acceptedGlbProduced',
     'scriptedStepCount',
     'manualStepCount',
     'repeatedRunCount',
     'structureParity',
+    'nondeterminismExplained',
+    'authorizedOutputsByteIdentical',
     'conversionManifest',
   ],
   presentation_options: [
@@ -149,11 +161,11 @@ const PLAN_CRITERION_SHA256: Record<string, string> = {
   visual_quality:
     '2a34613a60160579afebdb553d16dc05b876364010e7cc09ac1758df1849f29b',
   browser_performance:
-    '45652ffe8b1fda29d49000e3985d438b034f1fa1662d364ce305207d0d397470',
+    '6e2b1d4853c42125ec4d2df2f2ab52756a800c77a7de6382883e9d3415274f39',
   license_clarity:
-    '982334bb66c4c25c2d0e0e455bdad545dfee515773a99f747ffd45384e0c0699',
+    '66d5b4c0a7f336badf245d2339eb74bad33558d086070cca42f9b7244555037b',
   pipeline_ease:
-    'c8e1cb13489046e870d33f5a58dd21fa95f4d754ae503be129a890f539ad2bd3',
+    '940ebcf5fb3e3571729a5208617bc318d2966313fb65b16d2b1da22a880e7624',
   presentation_options:
     'bd0eea88fc2670c200a071fb2dec257d22c1fbe63cdb7e9e740b51f7c4bed43a',
 };
@@ -222,6 +234,7 @@ function measurementsForScoreFour() {
         medianFrameMs: 33,
       },
       geometryBufferBytes: 96_000_000,
+      mobileFallbackPermitted: true,
       observedJsHeapBytes: null,
       observedJsHeapUnavailableReason: 'not exposed by this browser',
       performanceRecord: 'performance.json',
@@ -229,16 +242,25 @@ function measurementsForScoreFour() {
     license_clarity: {
       primarySourceUrl: 'https://example.invalid/license',
       accessedOn: '2026-08-30',
+      completedLicenseReview: true,
+      authoritativePrimaryTerms: true,
+      componentTermsReviewed: true,
       commercialUse: 'permitted',
       modification: 'permitted',
       webDistribution: 'permitted',
       attributionRequirements: 'required',
       aiProcessingTerms: 'not restricted',
+      materialContradictionCount: 0,
+      mixedComponentTermsUnresolved: false,
+      historicalNoticeStatus: 'conservatively-handled',
       conflictStatus: 'conservatively-handled',
       licenseRecord: 'inventory.json',
     },
     pipeline_ease: {
       pinnedToolVersions: true,
+      sourceInputsPinned: true,
+      completedAttempt: true,
+      acceptedGlbProduced: true,
       scriptedStepCount: 5,
       manualStepCount: 0,
       repeatedRunCount: 2,
@@ -270,6 +292,7 @@ function measurementsForScoreFive() {
   measurements.browser_performance.nativeProfile.medianFrameMs = 16;
   measurements.browser_performance.geometryBufferBytes = 64_000_000;
   measurements.license_clarity.conflictStatus = 'none';
+  measurements.license_clarity.historicalNoticeStatus = 'none';
   measurements.pipeline_ease.authorizedOutputsByteIdentical = true;
   measurements.presentation_options.adultPresentationOptions.push('adult-c');
   return measurements;
@@ -577,6 +600,119 @@ describe('asset spike scorecard', () => {
     );
   });
 
+  it('does not grant license clarity from unknown rights or a claimed conflict state', () => {
+    const license = measurementsForScoreFive().license_clarity as Record<
+      string,
+      unknown
+    >;
+    license.commercialUse = 'unknown';
+    license.conflictStatus = 'none';
+    license.completedLicenseReview = true;
+    license.authoritativePrimaryTerms = true;
+    license.componentTermsReviewed = true;
+    license.materialContradictionCount = 0;
+    license.mixedComponentTermsUnresolved = true;
+    license.historicalNoticeStatus = 'none';
+
+    const derived = deriveCriterionScore('license_clarity', license);
+    expect(derived.score).toBeNull();
+    expect(derived.issues).toContain(
+      'license_clarity: commercialUse must be an explicit reviewed fact',
+    );
+    expect(derived.issues).toContain(
+      'license_clarity: conflictStatus none contradicts the structured license facts',
+    );
+  });
+
+  it('requires an authoritative URL, ISO access date, and completed license review', () => {
+    const license = measurementsForScoreFive().license_clarity as Record<
+      string,
+      unknown
+    >;
+    license.primarySourceUrl = 'TODO';
+    license.accessedOn = 'someday';
+    license.completedLicenseReview = false;
+    license.authoritativePrimaryTerms = true;
+    license.componentTermsReviewed = true;
+    license.materialContradictionCount = 0;
+    license.mixedComponentTermsUnresolved = false;
+    license.historicalNoticeStatus = 'none';
+
+    const derived = deriveCriterionScore('license_clarity', license);
+    expect(derived.score).toBeNull();
+    expect(derived.issues).toEqual(
+      expect.arrayContaining([
+        'license_clarity: primarySourceUrl must be an authoritative http(s) URL',
+        'license_clarity: accessedOn must be an ISO date (YYYY-MM-DD)',
+        'license_clarity: completedLicenseReview must be true',
+      ]),
+    );
+  });
+
+  it('requires mobile fallback evidence for browser bands 3 and 4', () => {
+    const performance = measurementsForScoreFour()
+      .browser_performance as Record<string, unknown>;
+    delete performance.mobileFallbackPermitted;
+    expect(deriveCriterionScore('browser_performance', performance).score).toBe(
+      null,
+    );
+    expect(
+      deriveCriterionScore('browser_performance', performance).issues,
+    ).toContain(
+      'browser_performance: missing evidence field: mobileFallbackPermitted',
+    );
+
+    performance.mobileFallbackPermitted = false;
+    expect(deriveCriterionScore('browser_performance', performance).score).toBe(
+      2,
+    );
+  });
+
+  it('requires the complete pipeline contract and returns no nearest band', () => {
+    const incomplete = measurementsForScoreFour().pipeline_ease as Record<
+      string,
+      unknown
+    >;
+    delete incomplete.sourceInputsPinned;
+    delete incomplete.completedAttempt;
+    delete incomplete.acceptedGlbProduced;
+    expect(deriveCriterionScore('pipeline_ease', incomplete).score).toBeNull();
+    expect(deriveCriterionScore('pipeline_ease', incomplete).issues).toEqual(
+      expect.arrayContaining([
+        'pipeline_ease: missing evidence field: sourceInputsPinned',
+        'pipeline_ease: missing evidence field: completedAttempt',
+        'pipeline_ease: missing evidence field: acceptedGlbProduced',
+      ]),
+    );
+
+    const noBand = {
+      ...incomplete,
+      sourceInputsPinned: false,
+      completedAttempt: true,
+      acceptedGlbProduced: true,
+      manualStepCount: 2,
+    };
+    const derived = deriveCriterionScore('pipeline_ease', noBand);
+    expect(derived.score).toBeNull();
+    expect(derived.issues).toContain(
+      'pipeline_ease: completed evidence does not satisfy any frozen score band',
+    );
+  });
+
+  it('consolidates malformed band issues instead of throwing', () => {
+    const malformed = structuredClone(ASSET_SCORE_RUBRIC);
+    malformed.criteria[0]!.bands = [null as never, { score: 5 } as never];
+
+    expect(() => validateAssetScoreRubric(malformed)).not.toThrow();
+    expect(validateAssetScoreRubric(malformed)).toEqual(
+      expect.arrayContaining([
+        'coverage_naming band at index 0 must be an object',
+        'coverage_naming score bands must contain complete objects for 0-5',
+        'coverage_naming exact criterion contract does not match the frozen rubric',
+      ]),
+    );
+  });
+
   it('reports a malformed criterion instead of crashing rubric validation', () => {
     const malformed = structuredClone(ASSET_SCORE_RUBRIC);
     malformed.criteria[2] = null as never;
@@ -765,6 +901,8 @@ describe('asset spike scorecard', () => {
   it('allows a sub-floor candidate only when it is explicitly acknowledged with a reason', () => {
     const measurements = measurementsForScoreFour();
     measurements.license_clarity.conflictStatus = 'unresolved-mixed';
+    measurements.license_clarity.mixedComponentTermsUnresolved = true;
+    measurements.license_clarity.historicalNoticeStatus = 'none';
     const ok = evaluateCandidate(
       candidate({
         scores: { ...scored(), license_clarity: 3 },
@@ -791,6 +929,7 @@ describe('asset spike scorecard', () => {
   it('honours selectionEligible:false even when clarity is above the floor', () => {
     const measurements = measurementsForScoreFour();
     measurements.license_clarity.conflictStatus = 'none';
+    measurements.license_clarity.historicalNoticeStatus = 'none';
     const result = evaluateCandidate(
       candidate({
         scores: { ...scored(), license_clarity: 5 },

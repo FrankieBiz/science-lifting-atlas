@@ -243,6 +243,7 @@
         "nativeProfile",
         "lowPowerSimulation",
         "geometryBufferBytes",
+        "mobileFallbackPermitted",
         "observedJsHeapBytes",
         "observedJsHeapUnavailableReason",
         "performanceRecord"
@@ -271,13 +272,14 @@
       "bands": [
         {
           "score": 0,
-          "rule": "A completed benchmark exceeds a hard payload or geometry-memory ceiling, or misses the 30 fps native minimum.",
+          "rule": "A completed benchmark exceeds a hard payload or geometry-memory ceiling, misses the 30 fps native minimum, or misses 20 fps in simulation.",
           "conditions": {
             "completedRequiredProfiles": true,
             "any": [
               { "optimizedGlbBytesAbove": 10000000 },
               { "geometryBufferBytesAbove": 268435456 },
-              { "nativeMedianFrameMsAbove": 33.33 }
+              { "nativeMedianFrameMsAbove": 33.33 },
+              { "simulationMedianFrameMsAbove": 50 }
             ]
           }
         },
@@ -343,11 +345,17 @@
       "evidenceFields": [
         "primarySourceUrl",
         "accessedOn",
+        "completedLicenseReview",
+        "authoritativePrimaryTerms",
+        "componentTermsReviewed",
         "commercialUse",
         "modification",
         "webDistribution",
         "attributionRequirements",
         "aiProcessingTerms",
+        "materialContradictionCount",
+        "mixedComponentTermsUnresolved",
+        "historicalNoticeStatus",
         "conflictStatus",
         "licenseRecord"
       ],
@@ -369,29 +377,38 @@
         },
         {
           "score": 1,
-          "rule": "Authoritative terms exist, but three or more required rights or obligations remain unstated or contradictory.",
-          "conditions": { "materialUnknownOrContradictoryFieldCountMinimum": 3 }
+          "rule": "Authoritative reviewed terms contain three or more explicit material contradictions between primary sources.",
+          "conditions": {
+            "authoritativePrimaryTerms": true,
+            "materialContradictionCountMinimum": 3
+          }
         },
         {
           "score": 2,
-          "rule": "Authoritative terms exist, but one or two required rights or obligations remain unstated or contradictory.",
+          "rule": "Authoritative reviewed terms contain one or two explicit material contradictions between primary sources.",
           "conditions": {
-            "materialUnknownOrContradictoryFieldCountMinimum": 1,
-            "materialUnknownOrContradictoryFieldCountMaximum": 2
+            "authoritativePrimaryTerms": true,
+            "materialContradictionCountMinimum": 1,
+            "materialContradictionCountMaximum": 2
           }
         },
         {
           "score": 3,
           "rule": "Top-level terms are explicit, but mixed component licenses or their redistribution boundaries remain unresolved.",
-          "conditions": { "unresolvedMixedComponentTerms": true }
+          "conditions": {
+            "authoritativePrimaryTerms": true,
+            "componentTermsReviewed": true,
+            "mixedComponentTermsUnresolved": true
+          }
         },
         {
           "score": 4,
-          "rule": "All required terms are explicit and commercially flexible; a historical notice or similar conflict is conservatively honored and documented.",
+          "rule": "All required terms are explicit; a historical notice or similar conflict is conservatively honored and documented, with suitability evaluated separately.",
           "conditions": {
             "allRequiredTermsExplicit": true,
-            "commerciallyFlexible": true,
-            "conflictStatus": "conservatively-handled"
+            "materialContradictionCount": 0,
+            "mixedComponentTermsUnresolved": false,
+            "historicalNoticeStatus": "conservatively-handled"
           }
         },
         {
@@ -399,7 +416,9 @@
           "rule": "All required terms are explicit in authoritative primary sources with no unresolved or historical conflict; suitability is evaluated separately.",
           "conditions": {
             "allRequiredTermsExplicit": true,
-            "conflictStatus": "none"
+            "materialContradictionCount": 0,
+            "mixedComponentTermsUnresolved": false,
+            "historicalNoticeStatus": "none"
           }
         }
       ]
@@ -410,10 +429,15 @@
       "weight": 10,
       "evidenceFields": [
         "pinnedToolVersions",
+        "sourceInputsPinned",
+        "completedAttempt",
+        "acceptedGlbProduced",
         "scriptedStepCount",
         "manualStepCount",
         "repeatedRunCount",
         "structureParity",
+        "nondeterminismExplained",
+        "authorizedOutputsByteIdentical",
         "conversionManifest"
       ],
       "measurement": {
@@ -423,7 +447,7 @@
       "bands": [
         {
           "score": 0,
-          "rule": "A completed attempt cannot produce an accepted GLB, or requires undocumented manual edits.",
+          "rule": "A completed pipeline attempt cannot produce an accepted GLB from the recorded source inputs.",
           "conditions": {
             "completedAttempt": true,
             "acceptedGlbProduced": false
@@ -432,7 +456,11 @@
         {
           "score": 1,
           "rule": "The pipeline produces an artifact but requires more than three documented manual steps per run.",
-          "conditions": { "manualStepCountMinimum": 4 }
+          "conditions": {
+            "completedAttempt": true,
+            "acceptedGlbProduced": true,
+            "manualStepCountMinimum": 4
+          }
         },
         {
           "score": 2,
@@ -440,7 +468,8 @@
           "conditions": {
             "manualStepCountMinimum": 2,
             "manualStepCountMaximum": 3,
-            "sourceInputsPinned": true
+            "sourceInputsPinned": true,
+            "acceptedGlbProduced": true
           }
         },
         {
@@ -448,6 +477,8 @@
           "rule": "The pipeline uses pinned tools and no more than one manual step, and two clean runs preserve scene structure.",
           "conditions": {
             "pinnedToolVersions": true,
+            "sourceInputsPinned": true,
+            "acceptedGlbProduced": true,
             "manualStepCountMaximum": 1,
             "repeatedRunCountMinimum": 2,
             "structureParity": true
@@ -458,6 +489,8 @@
           "rule": "The pipeline is fully scripted with pinned tools; two clean runs preserve structure and any byte nondeterminism is isolated and explained.",
           "conditions": {
             "pinnedToolVersions": true,
+            "sourceInputsPinned": true,
+            "acceptedGlbProduced": true,
             "manualStepCount": 0,
             "repeatedRunCountMinimum": 2,
             "structureParity": true,
@@ -469,6 +502,8 @@
           "rule": "The fully scripted pinned pipeline reproduces byte-identical authorized outputs in at least two clean runs.",
           "conditions": {
             "pinnedToolVersions": true,
+            "sourceInputsPinned": true,
+            "acceptedGlbProduced": true,
             "manualStepCount": 0,
             "repeatedRunCountMinimum": 2,
             "structureParity": true,

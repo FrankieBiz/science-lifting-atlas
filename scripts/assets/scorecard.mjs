@@ -76,6 +76,7 @@ const PLAN_CRITERIA = Object.freeze([
       'nativeProfile',
       'lowPowerSimulation',
       'geometryBufferBytes',
+      'mobileFallbackPermitted',
       'observedJsHeapBytes',
       'observedJsHeapUnavailableReason',
       'performanceRecord',
@@ -88,11 +89,17 @@ const PLAN_CRITERIA = Object.freeze([
     evidenceFields: [
       'primarySourceUrl',
       'accessedOn',
+      'completedLicenseReview',
+      'authoritativePrimaryTerms',
+      'componentTermsReviewed',
       'commercialUse',
       'modification',
       'webDistribution',
       'attributionRequirements',
       'aiProcessingTerms',
+      'materialContradictionCount',
+      'mixedComponentTermsUnresolved',
+      'historicalNoticeStatus',
       'conflictStatus',
       'licenseRecord',
     ],
@@ -103,10 +110,15 @@ const PLAN_CRITERIA = Object.freeze([
     weight: 10,
     evidenceFields: [
       'pinnedToolVersions',
+      'sourceInputsPinned',
+      'completedAttempt',
+      'acceptedGlbProduced',
       'scriptedStepCount',
       'manualStepCount',
       'repeatedRunCount',
       'structureParity',
+      'nondeterminismExplained',
+      'authorizedOutputsByteIdentical',
       'conversionManifest',
     ],
   },
@@ -142,11 +154,11 @@ const CRITERION_CONTRACT_SHA256 = Object.freeze({
   visual_quality:
     '2a34613a60160579afebdb553d16dc05b876364010e7cc09ac1758df1849f29b',
   browser_performance:
-    '45652ffe8b1fda29d49000e3985d438b034f1fa1662d364ce305207d0d397470',
+    '6e2b1d4853c42125ec4d2df2f2ab52756a800c77a7de6382883e9d3415274f39',
   license_clarity:
-    '982334bb66c4c25c2d0e0e455bdad545dfee515773a99f747ffd45384e0c0699',
+    '66d5b4c0a7f336badf245d2339eb74bad33558d086070cca42f9b7244555037b',
   pipeline_ease:
-    'c8e1cb13489046e870d33f5a58dd21fa95f4d754ae503be129a890f539ad2bd3',
+    '940ebcf5fb3e3571729a5208617bc318d2966313fb65b16d2b1da22a880e7624',
   presentation_options:
     'bd0eea88fc2670c200a071fb2dec257d22c1fbe63cdb7e9e740b51f7c4bed43a',
 });
@@ -258,17 +270,31 @@ export function validateAssetScoreRubric(rubric) {
         `${expected.id} evidenceFields do not match the frozen contract`,
       );
     }
+    const rawBands = Array.isArray(criterion.bands) ? criterion.bands : [];
+    for (const [index, band] of rawBands.entries()) {
+      if (band === null || typeof band !== 'object' || Array.isArray(band)) {
+        issues.push(`${expected.id} band at index ${index} must be an object`);
+      }
+    }
+    const bands = /** @type {ScoreBand[]} */ (
+      rawBands.filter(
+        (band) =>
+          band !== null && typeof band === 'object' && !Array.isArray(band),
+      )
+    );
     if (
       !Array.isArray(criterion.bands) ||
+      bands.length !== rawBands.length ||
       !sameValue(
-        criterion.bands.map(({ score }) => score),
+        bands.map(({ score }) => score),
         [0, 1, 2, 3, 4, 5],
       )
     ) {
-      issues.push(`${expected.id} must define ordered score bands 0-5`);
-      continue;
+      issues.push(
+        `${expected.id} score bands must contain complete objects for 0-5`,
+      );
     }
-    for (const band of criterion.bands) {
+    for (const band of bands) {
       if (typeof band.rule !== 'string' || band.rule.trim() === '') {
         issues.push(`${expected.id} score ${band.score} requires a rule`);
       }
@@ -643,6 +669,11 @@ function derivePerformanceScore(evidence) {
       'browser_performance: null observedJsHeapBytes requires an unavailable reason',
     );
   }
+  if (typeof evidence.mobileFallbackPermitted !== 'boolean') {
+    issues.push(
+      'browser_performance: mobileFallbackPermitted must be a boolean measurement',
+    );
+  }
   if (
     typeof evidence.performanceRecord !== 'string' ||
     !evidence.performanceRecord
@@ -678,11 +709,17 @@ function derivePerformanceScore(evidence) {
     bytes <= 6_000_000 &&
     geometry <= 100_663_296 &&
     nativeMs <= 18.18 &&
-    simulationMs <= 33.33
+    simulationMs <= 33.33 &&
+    evidence.mobileFallbackPermitted === true
   ) {
     return { issues: [], score: 4 };
   }
-  if (geometry <= 134_217_728 && nativeMs <= 18.18 && simulationMs <= 33.33) {
+  if (
+    geometry <= 134_217_728 &&
+    nativeMs <= 18.18 &&
+    simulationMs <= 33.33 &&
+    evidence.mobileFallbackPermitted === true
+  ) {
     return { issues: [], score: 3 };
   }
   if (geometry <= 201_326_592 && nativeMs <= 25 && simulationMs <= 40) {
@@ -694,40 +731,104 @@ function derivePerformanceScore(evidence) {
 /** @param {Record<string, unknown>} evidence */
 function deriveLicenseScore(evidence) {
   const issues = [];
-  for (const field of [
-    'primarySourceUrl',
-    'accessedOn',
+  if (
+    typeof evidence.primarySourceUrl !== 'string' ||
+    !/^https?:\/\/\S+$/.test(evidence.primarySourceUrl)
+  ) {
+    issues.push(
+      'license_clarity: primarySourceUrl must be an authoritative http(s) URL',
+    );
+  }
+  if (
+    typeof evidence.accessedOn !== 'string' ||
+    !ISO_DATE.test(evidence.accessedOn)
+  ) {
+    issues.push('license_clarity: accessedOn must be an ISO date (YYYY-MM-DD)');
+  }
+  if (evidence.completedLicenseReview !== true) {
+    issues.push('license_clarity: completedLicenseReview must be true');
+  }
+  if (typeof evidence.authoritativePrimaryTerms !== 'boolean') {
+    issues.push(
+      'license_clarity: authoritativePrimaryTerms must be a reviewed boolean fact',
+    );
+  }
+  if (evidence.componentTermsReviewed !== true) {
+    issues.push('license_clarity: componentTermsReviewed must be true');
+  }
+
+  const explicitFactFields = [
     'commercialUse',
     'modification',
     'webDistribution',
     'attributionRequirements',
     'aiProcessingTerms',
-    'licenseRecord',
-  ]) {
-    if (typeof evidence[field] !== 'string' || !evidence[field]) {
-      issues.push(`license_clarity: ${field} must be a non-empty string`);
+  ];
+  const unknownFact =
+    /\b(?:unknown|not stated|not reviewed|todo|unverified|pending)\b/i;
+  for (const field of explicitFactFields) {
+    if (
+      typeof evidence[field] !== 'string' ||
+      !evidence[field] ||
+      unknownFact.test(evidence[field])
+    ) {
+      issues.push(
+        `license_clarity: ${field} must be an explicit reviewed fact`,
+      );
     }
   }
-  /** @type {Record<string, number>} */
-  const scoreByConflict = {
+  if (typeof evidence.licenseRecord !== 'string' || !evidence.licenseRecord) {
+    issues.push('license_clarity: licenseRecord must be a non-empty path');
+  }
+  if (!isNonNegativeInteger(evidence.materialContradictionCount)) {
+    issues.push(
+      'license_clarity: materialContradictionCount must be a non-negative integer',
+    );
+  }
+  if (typeof evidence.mixedComponentTermsUnresolved !== 'boolean') {
+    issues.push(
+      'license_clarity: mixedComponentTermsUnresolved must be boolean',
+    );
+  }
+  if (
+    evidence.historicalNoticeStatus !== 'none' &&
+    evidence.historicalNoticeStatus !== 'conservatively-handled'
+  ) {
+    issues.push(
+      'license_clarity: historicalNoticeStatus must be none or conservatively-handled',
+    );
+  }
+
+  const contradictions = Number(evidence.materialContradictionCount);
+  const derivedConflict =
+    evidence.authoritativePrimaryTerms === false
+      ? 'no-authoritative-terms'
+      : contradictions >= 3
+        ? 'three-plus-unknown'
+        : contradictions >= 1
+          ? 'one-or-two-unknown'
+          : evidence.mixedComponentTermsUnresolved === true
+            ? 'unresolved-mixed'
+            : evidence.historicalNoticeStatus === 'conservatively-handled'
+              ? 'conservatively-handled'
+              : 'none';
+  if (evidence.conflictStatus !== derivedConflict) {
+    issues.push(
+      `license_clarity: conflictStatus ${String(evidence.conflictStatus)} contradicts the structured license facts`,
+    );
+  }
+  if (issues.length > 0) return { issues, score: null };
+
+  /** @type {Readonly<Record<string, number>>} */
+  const scoreByConflict = Object.freeze({
     'no-authoritative-terms': 0,
     'three-plus-unknown': 1,
     'one-or-two-unknown': 2,
     'unresolved-mixed': 3,
     'conservatively-handled': 4,
     none: 5,
-  };
-  const conflictStatus =
-    typeof evidence.conflictStatus === 'string'
-      ? evidence.conflictStatus
-      : '<invalid>';
-  if (!Object.hasOwn(scoreByConflict, conflictStatus)) {
-    issues.push(
-      'license_clarity: conflictStatus is not a recognized rubric state',
-    );
-  }
-  if (issues.length > 0) return { issues, score: null };
-  const score = scoreByConflict[conflictStatus];
+  });
+  const score = scoreByConflict[derivedConflict];
   return score === undefined
     ? {
         issues: [
@@ -741,8 +842,18 @@ function deriveLicenseScore(evidence) {
 /** @param {Record<string, unknown>} evidence */
 function derivePipelineScore(evidence) {
   const issues = [];
-  if (evidence.pinnedToolVersions !== true)
-    issues.push('pipeline_ease: pinnedToolVersions must be true');
+  for (const field of [
+    'pinnedToolVersions',
+    'sourceInputsPinned',
+    'completedAttempt',
+    'acceptedGlbProduced',
+    'structureParity',
+    'nondeterminismExplained',
+    'authorizedOutputsByteIdentical',
+  ]) {
+    if (typeof evidence[field] !== 'boolean')
+      issues.push(`pipeline_ease: ${field} must be boolean`);
+  }
   for (const field of [
     'scriptedStepCount',
     'manualStepCount',
@@ -751,29 +862,64 @@ function derivePipelineScore(evidence) {
     if (!isNonNegativeInteger(evidence[field]))
       issues.push(`pipeline_ease: ${field} must be a non-negative integer`);
   }
-  if (typeof evidence.structureParity !== 'boolean')
-    issues.push('pipeline_ease: structureParity must be boolean');
   if (
     typeof evidence.conversionManifest !== 'string' ||
     !evidence.conversionManifest
   ) {
     issues.push('pipeline_ease: conversionManifest must be a non-empty path');
   }
+  if (evidence.completedAttempt !== true) {
+    issues.push(
+      'pipeline_ease: completedAttempt must be true to assign a score',
+    );
+  }
   if (issues.length > 0) return { issues, score: null };
   const manualSteps = Number(evidence.manualStepCount);
   const repeatedRuns = Number(evidence.repeatedRunCount);
   if (evidence.acceptedGlbProduced === false) return { issues: [], score: 0 };
-  if (manualSteps >= 4) return { issues: [], score: 1 };
-  if (manualSteps >= 2) return { issues: [], score: 2 };
-  if (repeatedRuns < 2 || !evidence.structureParity)
-    return { issues: [], score: 2 };
-  if (manualSteps === 0) {
-    if (evidence.authorizedOutputsByteIdentical === true)
-      return { issues: [], score: 5 };
-    if (evidence.nondeterminismExplained === true)
-      return { issues: [], score: 4 };
+  if (
+    evidence.pinnedToolVersions === true &&
+    evidence.sourceInputsPinned === true &&
+    manualSteps === 0 &&
+    repeatedRuns >= 2 &&
+    evidence.structureParity === true &&
+    evidence.authorizedOutputsByteIdentical === true
+  ) {
+    return { issues: [], score: 5 };
   }
-  return { issues: [], score: 3 };
+  if (
+    evidence.pinnedToolVersions === true &&
+    evidence.sourceInputsPinned === true &&
+    manualSteps === 0 &&
+    repeatedRuns >= 2 &&
+    evidence.structureParity === true &&
+    evidence.nondeterminismExplained === true
+  ) {
+    return { issues: [], score: 4 };
+  }
+  if (
+    evidence.pinnedToolVersions === true &&
+    evidence.sourceInputsPinned === true &&
+    manualSteps <= 1 &&
+    repeatedRuns >= 2 &&
+    evidence.structureParity === true
+  ) {
+    return { issues: [], score: 3 };
+  }
+  if (
+    evidence.sourceInputsPinned === true &&
+    manualSteps >= 2 &&
+    manualSteps <= 3
+  ) {
+    return { issues: [], score: 2 };
+  }
+  if (manualSteps >= 4) return { issues: [], score: 1 };
+  return {
+    issues: [
+      'pipeline_ease: completed evidence does not satisfy any frozen score band',
+    ],
+    score: null,
+  };
 }
 
 /** @param {Record<string, unknown>} evidence */
@@ -906,20 +1052,29 @@ function normalizeLicenseMeasurement(candidate) {
   const hasHistoricalNotice =
     typeof license.historicalNotice === 'string' &&
     license.historicalNotice.length > 0;
+  const conflictStatus = hasMixedComponents
+    ? 'unresolved-mixed'
+    : hasHistoricalNotice
+      ? 'conservatively-handled'
+      : 'none';
 
   return {
     primarySourceUrl: license.source,
     accessedOn: license.accessedOn,
+    completedLicenseReview: true,
+    authoritativePrimaryTerms: true,
+    componentTermsReviewed: true,
     commercialUse: String(license.commercialUse ?? ''),
     modification: String(license.modification ?? ''),
     webDistribution: String(license.webDistribution ?? ''),
     attributionRequirements: String(license.attributionRequired ?? ''),
     aiProcessingTerms: String(license.aiProcessingPermitted ?? 'not stated'),
-    conflictStatus: hasMixedComponents
-      ? 'unresolved-mixed'
-      : hasHistoricalNotice
-        ? 'conservatively-handled'
-        : 'none',
+    materialContradictionCount: 0,
+    mixedComponentTermsUnresolved: hasMixedComponents,
+    historicalNoticeStatus: hasHistoricalNotice
+      ? 'conservatively-handled'
+      : 'none',
+    conflictStatus,
     licenseRecord: 'docs/licenses/asset-candidates.json',
   };
 }
