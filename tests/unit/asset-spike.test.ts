@@ -1,5 +1,5 @@
 import { execFile } from 'node:child_process';
-import { writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +8,7 @@ import { promisify } from 'node:util';
 import { describe, expect, it } from 'vitest';
 
 import {
+  ASSET_SCORE_RUBRIC,
   LICENSE_CLARITY_FLOOR,
   MAX_SCORE,
   REQUIRED_LICENSE_FIELDS,
@@ -15,6 +16,7 @@ import {
   VALID_STATUSES,
   evaluateCandidate,
   evaluateInventory,
+  validateAssetScoreRubric,
   validateLicenseFields,
 } from '../../scripts/assets/scorecard.mjs';
 
@@ -71,6 +73,72 @@ const PLAN_WEIGHTS: ReadonlyArray<readonly [string, number]> = [
   ['presentation_options', 5],
 ];
 
+const PLAN_LABELS: ReadonlyArray<readonly [string, string]> = [
+  ['coverage_naming', 'Anatomical coverage and naming accuracy'],
+  ['mesh_separability', 'Mesh separability and mapping'],
+  ['visual_quality', 'Visual quality after optimization'],
+  ['browser_performance', 'Browser performance'],
+  ['license_clarity', 'License clarity and future flexibility'],
+  ['pipeline_ease', 'Ease of scripted Blender/glTF pipeline'],
+  ['presentation_options', 'Male/female or inclusive presentation options'],
+];
+
+const PLAN_EVIDENCE_FIELDS: Record<string, string[]> = {
+  coverage_naming: [
+    'requiredTargetCount',
+    'mappedTargetCount',
+    'materialMappingDefectCount',
+    'mappingManifest',
+  ],
+  mesh_separability: [
+    'expectedSelectableMeshCount',
+    'selectableMeshCount',
+    'expectedMappingCount',
+    'validMappingCount',
+    'duplicateMappingCount',
+    'mappingManifest',
+  ],
+  visual_quality: [
+    'deterministicNormalization',
+    'artifactChecks',
+    'conversionManifest',
+    'posterArtifact',
+  ],
+  browser_performance: [
+    'optimizedGlbBytes',
+    'nativeProfile',
+    'lowPowerSimulation',
+    'geometryBufferBytes',
+    'observedJsHeapBytes',
+    'observedJsHeapUnavailableReason',
+    'performanceRecord',
+  ],
+  license_clarity: [
+    'primarySourceUrl',
+    'accessedOn',
+    'commercialUse',
+    'modification',
+    'webDistribution',
+    'attributionRequirements',
+    'aiProcessingTerms',
+    'conflictStatus',
+    'licenseRecord',
+  ],
+  pipeline_ease: [
+    'pinnedToolVersions',
+    'scriptedStepCount',
+    'manualStepCount',
+    'repeatedRunCount',
+    'structureParity',
+    'conversionManifest',
+  ],
+  presentation_options: [
+    'adultPresentationOptions',
+    'optionParityChecks',
+    'feasibilityRecord',
+  ],
+};
+
 const PLAN_REQUIRED_LICENSE_FIELDS = [
   'name',
   'version',
@@ -111,6 +179,171 @@ function candidate(overrides: Record<string, unknown> = {}) {
 }
 
 describe('asset spike scorecard', () => {
+  it('loads the checked-in JSON rubric as the validated scorecard contract', async () => {
+    const onDisk = JSON.parse(
+      await readFile(
+        new URL('../../docs/licenses/asset-score-rubric.json', import.meta.url),
+        'utf8',
+      ),
+    );
+
+    expect(ASSET_SCORE_RUBRIC).toEqual(onDisk);
+    expect(validateAssetScoreRubric(onDisk)).toEqual([]);
+    expect(onDisk.frozenBeforeCandidateMeasurement).toBe(true);
+  });
+
+  it('pins exactly the seven section 8.3 ids, labels, and weights', () => {
+    expect(
+      ASSET_SCORE_RUBRIC.criteria.map(
+        ({
+          id,
+          label,
+          weight,
+        }: {
+          id: string;
+          label: string;
+          weight: number;
+        }) => [id, label, weight],
+      ),
+    ).toEqual(
+      PLAN_WEIGHTS.map(([id, weight]) => [
+        id,
+        PLAN_LABELS.find(([labelId]) => labelId === id)?.[1],
+        weight,
+      ]),
+    );
+  });
+
+  it('requires deterministic 0-5 bands and criterion-specific evidence', () => {
+    for (const criterion of ASSET_SCORE_RUBRIC.criteria) {
+      expect(criterion.evidenceFields).toEqual(
+        PLAN_EVIDENCE_FIELDS[criterion.id],
+      );
+      expect(
+        criterion.bands.map(({ score }: { score: number }) => score),
+      ).toEqual([0, 1, 2, 3, 4, 5]);
+      for (const band of criterion.bands) {
+        expect(band.rule).toEqual(expect.any(String));
+        expect(band.rule.length).toBeGreaterThan(20);
+        expect(band.conditions).toEqual(expect.any(Object));
+      }
+    }
+  });
+
+  it('freezes the coverage, separability, and normalized visual measurement rules', () => {
+    const criterion = (id: string) =>
+      ASSET_SCORE_RUBRIC.criteria.find(
+        ({ id: candidateId }: { id: string }) => candidateId === id,
+      );
+
+    expect(criterion('coverage_naming')?.measurement).toEqual({
+      rate: 'mappedTargetCount / requiredTargetCount',
+      positiveScoreRequires: { materialMappingDefectCount: 0 },
+    });
+    expect(criterion('mesh_separability')?.measurement).toEqual({
+      rate: 'min(selectableMeshCount / expectedSelectableMeshCount, validMappingCount / expectedMappingCount)',
+      positiveScoreRequires: { duplicateMappingCount: 0 },
+    });
+    expect(criterion('visual_quality')?.measurement).toEqual({
+      prerequisite: { deterministicNormalization: true },
+      score: 'count of passed required artifactChecks',
+      requiredArtifactChecks: [
+        'noHoles',
+        'outwardNormals',
+        'materialsSurvive',
+        'componentsNotOccluded',
+        'usableProportions',
+      ],
+    });
+  });
+
+  it('freezes browser payload, frame, memory, and profile requirements before measurement', () => {
+    const performance = ASSET_SCORE_RUBRIC.criteria.find(
+      ({ id }: { id: string }) => id === 'browser_performance',
+    );
+
+    expect(performance?.budgets).toEqual({
+      desktopTargetBytes: 6_000_000,
+      desktopHardCeilingBytes: 10_000_000,
+      mobileInteractiveTargetBytes: 3_000_000,
+      geometryBufferTargetBytes: 134_217_728,
+      geometryBufferHardCeilingBytes: 268_435_456,
+      nativeTargetMedianFrameMs: 18.18,
+      nativeTopBandMedianFrameMs: 16.67,
+      lowPowerSimulationGracefulMedianFrameMs: 33.33,
+    });
+    expect(performance?.measurementRequirements).toEqual({
+      nativeProfileMustBeHardwareBacked: true,
+      lowPowerProfileKind: 'simulation',
+      lowPowerSimulationRequires: [
+        'reduced LOD',
+        'documented CPU throttling',
+        'SwiftShader software rendering',
+      ],
+      physicalLowTierDeviceClaimPermitted: false,
+      missingNativeOrSimulationScore: null,
+    });
+  });
+
+  it('preserves accepted license-clarity semantics and the 4-of-5 floor', () => {
+    expect(ASSET_SCORE_RUBRIC.rejectionFloor).toEqual({
+      criterionId: 'license_clarity',
+      minimumScore: 4,
+    });
+    const license = ASSET_SCORE_RUBRIC.criteria.find(
+      ({ id }: { id: string }) => id === 'license_clarity',
+    );
+    expect(license?.clarityRules).toEqual({
+      suitabilityIsSeparateFromClarity: true,
+      explicitRestrictionCanStillBeClear: true,
+      unresolvedMixedComponentTermsMaximumScore: 3,
+      explicitCurrentTermsWithConservativelyHandledHistoricalNoticeScore: 4,
+      explicitUnconflictedPrimaryTermsScore: 5,
+    });
+  });
+
+  it('states that missing evidence is null, never zero, and blocks completeness', () => {
+    expect(ASSET_SCORE_RUBRIC.missingMeasurementPolicy).toEqual({
+      score: null,
+      zeroRequiresCompletedMeasurement: true,
+      blocksCandidateCompleteness: true,
+    });
+  });
+
+  it('rejects rubric mutations instead of accepting moved goalposts', () => {
+    const mutated = structuredClone(ASSET_SCORE_RUBRIC);
+    mutated.criteria.find(({ id }) => id === 'coverage_naming')!.weight = 19;
+    mutated.criteria.find(
+      ({ id }) => id === 'browser_performance',
+    )!.budgets!.desktopHardCeilingBytes = 25 * 1024 * 1024;
+    mutated.criteria.find(
+      ({ id }) => id === 'presentation_options',
+    )!.evidenceFields = [];
+
+    const issues = validateAssetScoreRubric(mutated);
+    expect(
+      issues.some((issue: string) => issue.includes('coverage_naming weight')),
+    ).toBe(true);
+    expect(
+      issues.some((issue: string) => issue.includes('desktopHardCeilingBytes')),
+    ).toBe(true);
+    expect(
+      issues.some((issue: string) =>
+        issue.includes('presentation_options evidenceFields'),
+      ),
+    ).toBe(true);
+  });
+
+  it('reports a malformed criterion instead of crashing rubric validation', () => {
+    const malformed = structuredClone(ASSET_SCORE_RUBRIC);
+    malformed.criteria[2] = null as never;
+
+    expect(() => validateAssetScoreRubric(malformed)).not.toThrow();
+    expect(validateAssetScoreRubric(malformed)).toContain(
+      'rubric criterion at index 2 must be an object',
+    );
+  });
+
   it('pins each master plan section 8.3 weight, not merely their sum', () => {
     expect(SPIKE_CRITERIA.map((c) => [c.key, c.weight])).toEqual(
       PLAN_WEIGHTS.map(([k, w]) => [k, w]),
@@ -358,6 +591,31 @@ describe('asset spike scorecard', () => {
     expect(
       result.issues.some((i: string) => i.includes('visual_quality')),
     ).toBe(true);
+    expect(result.weightedTotal).toBeNull();
+  });
+
+  it('validates candidate score keys and values against rubric bands', () => {
+    const result = evaluateCandidate(
+      candidate({
+        scores: {
+          ...scored(),
+          visual_quality: 4.5,
+          invented_criterion: 5,
+        },
+      }),
+    );
+
+    expect(
+      result.issues.some((issue: string) =>
+        issue.includes('visual_quality must match a rubric score band'),
+      ),
+    ).toBe(true);
+    expect(
+      result.issues.some((issue: string) =>
+        issue.includes('unknown score criterion: invented_criterion'),
+      ),
+    ).toBe(true);
+    expect(result.complete).toBe(false);
     expect(result.weightedTotal).toBeNull();
   });
 

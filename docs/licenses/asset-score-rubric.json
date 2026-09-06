@@ -1,0 +1,545 @@
+{
+  "schemaVersion": 1,
+  "source": "docs/product/master-plan.md#83-asset-spike-scorecard",
+  "frozenBy": "SBLA-005 Task 2",
+  "frozenBeforeCandidateMeasurement": true,
+  "evaluationRule": "For each criterion, use the highest score band whose conditions are all satisfied by the required evidence. Evidence must come from the named checked-in records; absent evidence is not a failed measurement.",
+  "scoreScale": {
+    "minimum": 0,
+    "maximum": 5,
+    "allowedScores": [0, 1, 2, 3, 4, 5]
+  },
+  "missingMeasurementPolicy": {
+    "score": null,
+    "zeroRequiresCompletedMeasurement": true,
+    "blocksCandidateCompleteness": true
+  },
+  "rejectionFloor": {
+    "criterionId": "license_clarity",
+    "minimumScore": 4
+  },
+  "criteria": [
+    {
+      "id": "coverage_naming",
+      "label": "Anatomical coverage and naming accuracy",
+      "weight": 20,
+      "evidenceFields": [
+        "requiredTargetCount",
+        "mappedTargetCount",
+        "materialMappingDefectCount",
+        "mappingManifest"
+      ],
+      "measurement": {
+        "rate": "mappedTargetCount / requiredTargetCount",
+        "positiveScoreRequires": { "materialMappingDefectCount": 0 }
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "A completed measurement maps less than 50% of required targets, or has one or more material mapping defects.",
+          "conditions": {
+            "completedMeasurement": true,
+            "any": [
+              { "rateBelow": 0.5 },
+              { "materialMappingDefectCountMinimum": 1 }
+            ]
+          }
+        },
+        {
+          "score": 1,
+          "rule": "At least 50% but less than 60% of required targets map, with zero material mapping defects.",
+          "conditions": {
+            "rateMinimumInclusive": 0.5,
+            "rateMaximumExclusive": 0.6,
+            "materialMappingDefectCount": 0
+          }
+        },
+        {
+          "score": 2,
+          "rule": "At least 60% but less than 75% of required targets map, with zero material mapping defects.",
+          "conditions": {
+            "rateMinimumInclusive": 0.6,
+            "rateMaximumExclusive": 0.75,
+            "materialMappingDefectCount": 0
+          }
+        },
+        {
+          "score": 3,
+          "rule": "At least 75% but less than 90% of required targets map, with zero material mapping defects.",
+          "conditions": {
+            "rateMinimumInclusive": 0.75,
+            "rateMaximumExclusive": 0.9,
+            "materialMappingDefectCount": 0
+          }
+        },
+        {
+          "score": 4,
+          "rule": "At least 90% but less than 100% of required targets map, with zero material mapping defects.",
+          "conditions": {
+            "rateMinimumInclusive": 0.9,
+            "rateMaximumExclusive": 1,
+            "materialMappingDefectCount": 0
+          }
+        },
+        {
+          "score": 5,
+          "rule": "Every required target maps to an accepted anatomical name, with zero material mapping defects.",
+          "conditions": {
+            "rateEquals": 1,
+            "materialMappingDefectCount": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "mesh_separability",
+      "label": "Mesh separability and mapping",
+      "weight": 15,
+      "evidenceFields": [
+        "expectedSelectableMeshCount",
+        "selectableMeshCount",
+        "expectedMappingCount",
+        "validMappingCount",
+        "duplicateMappingCount",
+        "mappingManifest"
+      ],
+      "measurement": {
+        "rate": "min(selectableMeshCount / expectedSelectableMeshCount, validMappingCount / expectedMappingCount)",
+        "positiveScoreRequires": { "duplicateMappingCount": 0 }
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "A completed measurement has a separability rate below 50% or contains duplicate mappings.",
+          "conditions": {
+            "completedMeasurement": true,
+            "any": [{ "rateBelow": 0.5 }, { "duplicateMappingCountMinimum": 1 }]
+          }
+        },
+        {
+          "score": 1,
+          "rule": "The separability and valid-mapping rate is at least 50% but below 60%, with no duplicate mappings.",
+          "conditions": {
+            "rateMinimumInclusive": 0.5,
+            "rateMaximumExclusive": 0.6,
+            "duplicateMappingCount": 0
+          }
+        },
+        {
+          "score": 2,
+          "rule": "The separability and valid-mapping rate is at least 60% but below 75%, with no duplicate mappings.",
+          "conditions": {
+            "rateMinimumInclusive": 0.6,
+            "rateMaximumExclusive": 0.75,
+            "duplicateMappingCount": 0
+          }
+        },
+        {
+          "score": 3,
+          "rule": "The separability and valid-mapping rate is at least 75% but below 90%, with no duplicate mappings.",
+          "conditions": {
+            "rateMinimumInclusive": 0.75,
+            "rateMaximumExclusive": 0.9,
+            "duplicateMappingCount": 0
+          }
+        },
+        {
+          "score": 4,
+          "rule": "The separability and valid-mapping rate is at least 90% but below 100%, with no duplicate mappings.",
+          "conditions": {
+            "rateMinimumInclusive": 0.9,
+            "rateMaximumExclusive": 1,
+            "duplicateMappingCount": 0
+          }
+        },
+        {
+          "score": 5,
+          "rule": "Every expected mesh is separately selectable and every expected mapping is valid, with no duplicates.",
+          "conditions": {
+            "rateEquals": 1,
+            "duplicateMappingCount": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "visual_quality",
+      "label": "Visual quality after optimization",
+      "weight": 15,
+      "evidenceFields": [
+        "deterministicNormalization",
+        "artifactChecks",
+        "conversionManifest",
+        "posterArtifact"
+      ],
+      "measurement": {
+        "prerequisite": { "deterministicNormalization": true },
+        "score": "count of passed required artifactChecks",
+        "requiredArtifactChecks": [
+          "noHoles",
+          "outwardNormals",
+          "materialsSurvive",
+          "componentsNotOccluded",
+          "usableProportions"
+        ]
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "Deterministic normalization is proved and none of the five required artifact checks pass, or normalization fails.",
+          "conditions": {
+            "completedArtifactInspection": true,
+            "passedRequiredArtifactChecks": 0
+          }
+        },
+        {
+          "score": 1,
+          "rule": "Deterministic normalization is proved and exactly one of five required artifact checks passes.",
+          "conditions": {
+            "deterministicNormalization": true,
+            "passedRequiredArtifactChecks": 1
+          }
+        },
+        {
+          "score": 2,
+          "rule": "Deterministic normalization is proved and exactly two of five required artifact checks pass.",
+          "conditions": {
+            "deterministicNormalization": true,
+            "passedRequiredArtifactChecks": 2
+          }
+        },
+        {
+          "score": 3,
+          "rule": "Deterministic normalization is proved and exactly three of five required artifact checks pass.",
+          "conditions": {
+            "deterministicNormalization": true,
+            "passedRequiredArtifactChecks": 3
+          }
+        },
+        {
+          "score": 4,
+          "rule": "Deterministic normalization is proved and exactly four of five required artifact checks pass.",
+          "conditions": {
+            "deterministicNormalization": true,
+            "passedRequiredArtifactChecks": 4
+          }
+        },
+        {
+          "score": 5,
+          "rule": "Deterministic normalization is proved and all five required artifact checks pass on the optimized artifact.",
+          "conditions": {
+            "deterministicNormalization": true,
+            "passedRequiredArtifactChecks": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "browser_performance",
+      "label": "Browser performance",
+      "weight": 15,
+      "evidenceFields": [
+        "optimizedGlbBytes",
+        "nativeProfile",
+        "lowPowerSimulation",
+        "geometryBufferBytes",
+        "observedJsHeapBytes",
+        "observedJsHeapUnavailableReason",
+        "performanceRecord"
+      ],
+      "budgets": {
+        "desktopTargetBytes": 6000000,
+        "desktopHardCeilingBytes": 10000000,
+        "mobileInteractiveTargetBytes": 3000000,
+        "geometryBufferTargetBytes": 134217728,
+        "geometryBufferHardCeilingBytes": 268435456,
+        "nativeTargetMedianFrameMs": 18.18,
+        "nativeTopBandMedianFrameMs": 16.67,
+        "lowPowerSimulationGracefulMedianFrameMs": 33.33
+      },
+      "measurementRequirements": {
+        "nativeProfileMustBeHardwareBacked": true,
+        "lowPowerProfileKind": "simulation",
+        "lowPowerSimulationRequires": [
+          "reduced LOD",
+          "documented CPU throttling",
+          "SwiftShader software rendering"
+        ],
+        "physicalLowTierDeviceClaimPermitted": false,
+        "missingNativeOrSimulationScore": null
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "A completed benchmark exceeds a hard payload or geometry-memory ceiling, or misses the 30 fps native minimum.",
+          "conditions": {
+            "completedRequiredProfiles": true,
+            "any": [
+              { "optimizedGlbBytesAbove": 10000000 },
+              { "geometryBufferBytesAbove": 268435456 },
+              { "nativeMedianFrameMsAbove": 33.33 }
+            ]
+          }
+        },
+        {
+          "score": 1,
+          "rule": "Both required profiles exist; payload and geometry memory meet hard ceilings; native reaches 30 fps and simulation reaches 20 fps.",
+          "conditions": {
+            "desktopMaximumBytes": 10000000,
+            "geometryBufferMaximumBytes": 268435456,
+            "nativeMedianFrameMsMaximum": 33.33,
+            "simulationMedianFrameMsMaximum": 50
+          }
+        },
+        {
+          "score": 2,
+          "rule": "Both required profiles exist; native reaches 40 fps, simulation reaches 25 fps, and geometry memory is at most 192 MiB.",
+          "conditions": {
+            "desktopMaximumBytes": 10000000,
+            "geometryBufferMaximumBytes": 201326592,
+            "nativeMedianFrameMsMaximum": 25,
+            "simulationMedianFrameMsMaximum": 40
+          }
+        },
+        {
+          "score": 3,
+          "rule": "Native reaches the 55 fps target and the reduced-LOD simulation reaches graceful 30 fps within hard ceilings.",
+          "conditions": {
+            "desktopMaximumBytes": 10000000,
+            "geometryBufferMaximumBytes": 134217728,
+            "nativeMedianFrameMsMaximum": 18.18,
+            "simulationMedianFrameMsMaximum": 33.33,
+            "mobileFallbackPermitted": true
+          }
+        },
+        {
+          "score": 4,
+          "rule": "Native reaches 55 fps, simulation reaches graceful 30 fps, and the desktop payload meets the 6 MB target.",
+          "conditions": {
+            "desktopMaximumBytes": 6000000,
+            "geometryBufferMaximumBytes": 100663296,
+            "nativeMedianFrameMsMaximum": 18.18,
+            "simulationMedianFrameMsMaximum": 33.33,
+            "mobileFallbackPermitted": true
+          }
+        },
+        {
+          "score": 5,
+          "rule": "Native reaches 60 fps, simulation reaches graceful 30 fps, payload meets desktop and mobile targets, and geometry memory is at most 64 MiB.",
+          "conditions": {
+            "desktopMaximumBytes": 6000000,
+            "mobileInteractiveMaximumBytes": 3000000,
+            "geometryBufferMaximumBytes": 67108864,
+            "nativeMedianFrameMsMaximum": 16.67,
+            "simulationMedianFrameMsMaximum": 33.33
+          }
+        }
+      ]
+    },
+    {
+      "id": "license_clarity",
+      "label": "License clarity and future flexibility",
+      "weight": 20,
+      "evidenceFields": [
+        "primarySourceUrl",
+        "accessedOn",
+        "commercialUse",
+        "modification",
+        "webDistribution",
+        "attributionRequirements",
+        "aiProcessingTerms",
+        "conflictStatus",
+        "licenseRecord"
+      ],
+      "clarityRules": {
+        "suitabilityIsSeparateFromClarity": true,
+        "explicitRestrictionCanStillBeClear": true,
+        "unresolvedMixedComponentTermsMaximumScore": 3,
+        "explicitCurrentTermsWithConservativelyHandledHistoricalNoticeScore": 4,
+        "explicitUnconflictedPrimaryTermsScore": 5
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "No authoritative primary license terms can be identified after a completed license review.",
+          "conditions": {
+            "completedLicenseReview": true,
+            "authoritativePrimaryTerms": false
+          }
+        },
+        {
+          "score": 1,
+          "rule": "Authoritative terms exist, but three or more required rights or obligations remain unstated or contradictory.",
+          "conditions": { "materialUnknownOrContradictoryFieldCountMinimum": 3 }
+        },
+        {
+          "score": 2,
+          "rule": "Authoritative terms exist, but one or two required rights or obligations remain unstated or contradictory.",
+          "conditions": {
+            "materialUnknownOrContradictoryFieldCountMinimum": 1,
+            "materialUnknownOrContradictoryFieldCountMaximum": 2
+          }
+        },
+        {
+          "score": 3,
+          "rule": "Top-level terms are explicit, but mixed component licenses or their redistribution boundaries remain unresolved.",
+          "conditions": { "unresolvedMixedComponentTerms": true }
+        },
+        {
+          "score": 4,
+          "rule": "All required terms are explicit and commercially flexible; a historical notice or similar conflict is conservatively honored and documented.",
+          "conditions": {
+            "allRequiredTermsExplicit": true,
+            "commerciallyFlexible": true,
+            "conflictStatus": "conservatively-handled"
+          }
+        },
+        {
+          "score": 5,
+          "rule": "All required terms are explicit in authoritative primary sources with no unresolved or historical conflict; suitability is evaluated separately.",
+          "conditions": {
+            "allRequiredTermsExplicit": true,
+            "conflictStatus": "none"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pipeline_ease",
+      "label": "Ease of scripted Blender/glTF pipeline",
+      "weight": 10,
+      "evidenceFields": [
+        "pinnedToolVersions",
+        "scriptedStepCount",
+        "manualStepCount",
+        "repeatedRunCount",
+        "structureParity",
+        "conversionManifest"
+      ],
+      "measurement": {
+        "prerequisite": "A completed conversion from pinned source inputs",
+        "repeatable": "At least two clean runs using pinned tools and the same scripted steps"
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "A completed attempt cannot produce an accepted GLB, or requires undocumented manual edits.",
+          "conditions": {
+            "completedAttempt": true,
+            "acceptedGlbProduced": false
+          }
+        },
+        {
+          "score": 1,
+          "rule": "The pipeline produces an artifact but requires more than three documented manual steps per run.",
+          "conditions": { "manualStepCountMinimum": 4 }
+        },
+        {
+          "score": 2,
+          "rule": "The pipeline produces an artifact with two or three documented manual steps and pinned source inputs.",
+          "conditions": {
+            "manualStepCountMinimum": 2,
+            "manualStepCountMaximum": 3,
+            "sourceInputsPinned": true
+          }
+        },
+        {
+          "score": 3,
+          "rule": "The pipeline uses pinned tools and no more than one manual step, and two clean runs preserve scene structure.",
+          "conditions": {
+            "pinnedToolVersions": true,
+            "manualStepCountMaximum": 1,
+            "repeatedRunCountMinimum": 2,
+            "structureParity": true
+          }
+        },
+        {
+          "score": 4,
+          "rule": "The pipeline is fully scripted with pinned tools; two clean runs preserve structure and any byte nondeterminism is isolated and explained.",
+          "conditions": {
+            "pinnedToolVersions": true,
+            "manualStepCount": 0,
+            "repeatedRunCountMinimum": 2,
+            "structureParity": true,
+            "nondeterminismExplained": true
+          }
+        },
+        {
+          "score": 5,
+          "rule": "The fully scripted pinned pipeline reproduces byte-identical authorized outputs in at least two clean runs.",
+          "conditions": {
+            "pinnedToolVersions": true,
+            "manualStepCount": 0,
+            "repeatedRunCountMinimum": 2,
+            "structureParity": true,
+            "authorizedOutputsByteIdentical": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "presentation_options",
+      "label": "Male/female or inclusive presentation options",
+      "weight": 5,
+      "evidenceFields": [
+        "adultPresentationOptions",
+        "optionParityChecks",
+        "feasibilityRecord"
+      ],
+      "measurement": {
+        "scope": "adult presentation options present in the acquired source or deterministically derived artifact",
+        "parity": "each option must preserve required target coverage, mapping, separability, and artifact checks"
+      },
+      "bands": [
+        {
+          "score": 0,
+          "rule": "A completed inspection finds no usable adult presentation option in the source or derived artifact.",
+          "conditions": {
+            "completedPresentationInspection": true,
+            "usableAdultPresentationOptionCount": 0
+          }
+        },
+        {
+          "score": 1,
+          "rule": "One adult presentation option exists but fails one or more required parity checks.",
+          "conditions": {
+            "usableAdultPresentationOptionCount": 1,
+            "allParityChecksPass": false
+          }
+        },
+        {
+          "score": 2,
+          "rule": "One complete adult presentation option exists and passes all required parity checks.",
+          "conditions": {
+            "usableAdultPresentationOptionCount": 1,
+            "allParityChecksPass": true
+          }
+        },
+        {
+          "score": 3,
+          "rule": "Two adult presentation options exist, but one or more required parity checks differ or fail.",
+          "conditions": {
+            "usableAdultPresentationOptionCountMinimum": 2,
+            "allParityChecksPass": false
+          }
+        },
+        {
+          "score": 4,
+          "rule": "Two adult presentation options, including male/female or equivalent inclusive choices, pass all required parity checks.",
+          "conditions": {
+            "usableAdultPresentationOptionCount": 2,
+            "allParityChecksPass": true
+          }
+        },
+        {
+          "score": 5,
+          "rule": "At least three inclusive adult presentation options pass all required parity checks without capability loss.",
+          "conditions": {
+            "usableAdultPresentationOptionCountMinimum": 3,
+            "allParityChecksPass": true
+          }
+        }
+      ]
+    }
+  ]
+}

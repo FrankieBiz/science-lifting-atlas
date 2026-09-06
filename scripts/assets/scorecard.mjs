@@ -1,46 +1,331 @@
+import { readFileSync } from 'node:fs';
+
 /**
- * Master plan §8.3 fixes these criteria and weights. Both the individual
- * weights and their sum are pinned by unit tests against literals, so neither a
- * redistribution nor an unbalancing can pass silently.
+ * @typedef {object} ScoreBand
+ * @property {number} score
+ * @property {string} rule
+ * @property {Record<string, unknown>} conditions
  */
-export const SPIKE_CRITERIA = Object.freeze([
+
+/**
+ * @typedef {object} RubricCriterion
+ * @property {string} id
+ * @property {string} label
+ * @property {number} weight
+ * @property {string[]} evidenceFields
+ * @property {ScoreBand[]} bands
+ * @property {Record<string, number>} [budgets]
+ * @property {Record<string, unknown>} [measurement]
+ * @property {Record<string, unknown>} [measurementRequirements]
+ * @property {Record<string, unknown>} [clarityRules]
+ */
+
+/**
+ * @typedef {object} AssetScoreRubric
+ * @property {number} schemaVersion
+ * @property {boolean} frozenBeforeCandidateMeasurement
+ * @property {{minimum:number, maximum:number, allowedScores:number[]}} scoreScale
+ * @property {{score:null, zeroRequiresCompletedMeasurement:boolean, blocksCandidateCompleteness:boolean}} missingMeasurementPolicy
+ * @property {{criterionId:string, minimumScore:number}} rejectionFloor
+ * @property {RubricCriterion[]} criteria
+ */
+
+const PLAN_CRITERIA = Object.freeze([
   {
-    key: 'coverage_naming',
+    id: 'coverage_naming',
     label: 'Anatomical coverage and naming accuracy',
     weight: 20,
+    evidenceFields: [
+      'requiredTargetCount',
+      'mappedTargetCount',
+      'materialMappingDefectCount',
+      'mappingManifest',
+    ],
   },
   {
-    key: 'mesh_separability',
+    id: 'mesh_separability',
     label: 'Mesh separability and mapping',
     weight: 15,
+    evidenceFields: [
+      'expectedSelectableMeshCount',
+      'selectableMeshCount',
+      'expectedMappingCount',
+      'validMappingCount',
+      'duplicateMappingCount',
+      'mappingManifest',
+    ],
   },
   {
-    key: 'visual_quality',
+    id: 'visual_quality',
     label: 'Visual quality after optimization',
     weight: 15,
+    evidenceFields: [
+      'deterministicNormalization',
+      'artifactChecks',
+      'conversionManifest',
+      'posterArtifact',
+    ],
   },
-  { key: 'browser_performance', label: 'Browser performance', weight: 15 },
   {
-    key: 'license_clarity',
+    id: 'browser_performance',
+    label: 'Browser performance',
+    weight: 15,
+    evidenceFields: [
+      'optimizedGlbBytes',
+      'nativeProfile',
+      'lowPowerSimulation',
+      'geometryBufferBytes',
+      'observedJsHeapBytes',
+      'observedJsHeapUnavailableReason',
+      'performanceRecord',
+    ],
+  },
+  {
+    id: 'license_clarity',
     label: 'License clarity and future flexibility',
     weight: 20,
+    evidenceFields: [
+      'primarySourceUrl',
+      'accessedOn',
+      'commercialUse',
+      'modification',
+      'webDistribution',
+      'attributionRequirements',
+      'aiProcessingTerms',
+      'conflictStatus',
+      'licenseRecord',
+    ],
   },
   {
-    key: 'pipeline_ease',
+    id: 'pipeline_ease',
     label: 'Ease of scripted Blender/glTF pipeline',
     weight: 10,
+    evidenceFields: [
+      'pinnedToolVersions',
+      'scriptedStepCount',
+      'manualStepCount',
+      'repeatedRunCount',
+      'structureParity',
+      'conversionManifest',
+    ],
   },
   {
-    key: 'presentation_options',
+    id: 'presentation_options',
     label: 'Male/female or inclusive presentation options',
     weight: 5,
+    evidenceFields: [
+      'adultPresentationOptions',
+      'optionParityChecks',
+      'feasibilityRecord',
+    ],
   },
 ]);
 
-/** §8.3: reject any candidate scoring below this on licence clarity. */
-export const LICENSE_CLARITY_FLOOR = 4;
+const PERFORMANCE_BUDGETS = Object.freeze({
+  desktopTargetBytes: 6_000_000,
+  desktopHardCeilingBytes: 10_000_000,
+  mobileInteractiveTargetBytes: 3_000_000,
+  geometryBufferTargetBytes: 134_217_728,
+  geometryBufferHardCeilingBytes: 268_435_456,
+  nativeTargetMedianFrameMs: 18.18,
+  nativeTopBandMedianFrameMs: 16.67,
+  lowPowerSimulationGracefulMedianFrameMs: 33.33,
+});
 
-export const MAX_SCORE = 5;
+/** @param {unknown} actual @param {unknown} expected */
+function sameValue(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
+}
+
+/**
+ * Validate the checked-in rubric against plan literals. The application reads
+ * its scoring contract from JSON, while these guards prevent that contract
+ * from drifting away from master-plan §8.3 or the approved SBLA-005 plan.
+ *
+ * @param {unknown} rubric
+ * @returns {string[]}
+ */
+export function validateAssetScoreRubric(rubric) {
+  const issues = [];
+  if (rubric === null || typeof rubric !== 'object' || Array.isArray(rubric)) {
+    return ['asset score rubric must be an object'];
+  }
+
+  const candidateRubric = /** @type {Partial<AssetScoreRubric>} */ (rubric);
+
+  if (candidateRubric.schemaVersion !== 1)
+    issues.push('rubric schemaVersion must be 1');
+  if (candidateRubric.frozenBeforeCandidateMeasurement !== true) {
+    issues.push('rubric must be frozen before candidate measurement');
+  }
+  if (
+    !sameValue(candidateRubric.scoreScale, {
+      minimum: 0,
+      maximum: 5,
+      allowedScores: [0, 1, 2, 3, 4, 5],
+    })
+  ) {
+    issues.push('rubric scoreScale must contain only integer bands 0-5');
+  }
+  if (
+    !sameValue(candidateRubric.missingMeasurementPolicy, {
+      score: null,
+      zeroRequiresCompletedMeasurement: true,
+      blocksCandidateCompleteness: true,
+    })
+  ) {
+    issues.push(
+      'rubric missingMeasurementPolicy must use null and block completeness',
+    );
+  }
+  if (
+    !sameValue(candidateRubric.rejectionFloor, {
+      criterionId: 'license_clarity',
+      minimumScore: 4,
+    })
+  ) {
+    issues.push('rubric license_clarity rejection floor must be 4');
+  }
+
+  if (!Array.isArray(candidateRubric.criteria)) {
+    issues.push('rubric criteria must be an array');
+    return issues;
+  }
+  const rawCriteria = /** @type {unknown[]} */ (candidateRubric.criteria);
+  for (const [index, criterion] of rawCriteria.entries()) {
+    if (
+      criterion === null ||
+      typeof criterion !== 'object' ||
+      Array.isArray(criterion)
+    ) {
+      issues.push(`rubric criterion at index ${index} must be an object`);
+    }
+  }
+  const criteria = /** @type {RubricCriterion[]} */ (
+    rawCriteria.filter(
+      (criterion) =>
+        criterion !== null &&
+        typeof criterion === 'object' &&
+        !Array.isArray(criterion),
+    )
+  );
+  if (rawCriteria.length !== PLAN_CRITERIA.length) {
+    issues.push(
+      `rubric must contain exactly ${PLAN_CRITERIA.length} criteria; received ${rawCriteria.length}`,
+    );
+  }
+
+  for (const expected of PLAN_CRITERIA) {
+    const criterion = criteria.find(({ id }) => id === expected.id);
+    if (!criterion) {
+      issues.push(`rubric missing criterion: ${expected.id}`);
+      continue;
+    }
+    if (criterion.label !== expected.label) {
+      issues.push(`${expected.id} label does not match master plan §8.3`);
+    }
+    if (criterion.weight !== expected.weight) {
+      issues.push(
+        `${expected.id} weight must be ${expected.weight}; received ${String(criterion.weight)}`,
+      );
+    }
+    if (!sameValue(criterion.evidenceFields, expected.evidenceFields)) {
+      issues.push(
+        `${expected.id} evidenceFields do not match the frozen contract`,
+      );
+    }
+    if (
+      !Array.isArray(criterion.bands) ||
+      !sameValue(
+        criterion.bands.map(({ score }) => score),
+        [0, 1, 2, 3, 4, 5],
+      )
+    ) {
+      issues.push(`${expected.id} must define ordered score bands 0-5`);
+      continue;
+    }
+    for (const band of criterion.bands) {
+      if (typeof band.rule !== 'string' || band.rule.trim() === '') {
+        issues.push(`${expected.id} score ${band.score} requires a rule`);
+      }
+      if (
+        band.conditions === null ||
+        typeof band.conditions !== 'object' ||
+        Array.isArray(band.conditions)
+      ) {
+        issues.push(`${expected.id} score ${band.score} requires conditions`);
+      }
+    }
+  }
+
+  const actualIds = criteria.map(({ id }) => id);
+  const expectedIds = PLAN_CRITERIA.map(({ id }) => id);
+  if (!sameValue(actualIds, expectedIds)) {
+    issues.push(
+      'rubric criterion ids and ordering must match master plan §8.3',
+    );
+  }
+  if (
+    criteria.reduce(
+      (sum, criterion) => sum + Number(criterion.weight || 0),
+      0,
+    ) !== 100
+  ) {
+    issues.push('rubric criterion weights must total 100');
+  }
+
+  const performance = criteria.find(({ id }) => id === 'browser_performance');
+  if (performance && !sameValue(performance.budgets, PERFORMANCE_BUDGETS)) {
+    issues.push(
+      'browser_performance desktopHardCeilingBytes and related frozen budgets do not match the approved plan',
+    );
+  }
+
+  return issues;
+}
+
+/** @param {unknown} value @returns {unknown} */
+function deepFreeze(value) {
+  if (value && typeof value === 'object' && !Object.isFrozen(value)) {
+    Object.freeze(value);
+    for (const child of Object.values(value)) deepFreeze(child);
+  }
+  return value;
+}
+
+const rubricPath = new URL(
+  '../../docs/licenses/asset-score-rubric.json',
+  import.meta.url,
+);
+const loadedRubric = /** @type {unknown} */ (
+  JSON.parse(readFileSync(rubricPath, 'utf8'))
+);
+const rubricIssues = validateAssetScoreRubric(loadedRubric);
+if (rubricIssues.length > 0) {
+  throw new Error(`Invalid asset score rubric:\n${rubricIssues.join('\n')}`);
+}
+
+export const ASSET_SCORE_RUBRIC = /** @type {Readonly<AssetScoreRubric>} */ (
+  deepFreeze(loadedRubric)
+);
+
+/**
+ * Master plan §8.3 fixes these criteria and weights. Both the individual
+ * weights and their sum are pinned by unit tests against literals. Runtime
+ * criteria are derived from the validated JSON rubric, its single source of
+ * truth, so neither a redistribution nor an unbalancing can pass silently.
+ */
+export const SPIKE_CRITERIA = Object.freeze(
+  ASSET_SCORE_RUBRIC.criteria.map(({ id, label, weight }) =>
+    Object.freeze({ key: id, label, weight }),
+  ),
+);
+
+/** §8.3: reject any candidate scoring below this on licence clarity. */
+export const LICENSE_CLARITY_FLOOR =
+  ASSET_SCORE_RUBRIC.rejectionFloor.minimumScore;
+
+export const MAX_SCORE = ASSET_SCORE_RUBRIC.scoreScale.maximum;
 
 /** Only these statuses gate behaviour. Anything else is an inventory defect. */
 export const VALID_STATUSES = Object.freeze(['inventoried', 'placeholder']);
@@ -146,6 +431,20 @@ export function evaluateCandidate(candidate) {
   const unmeasured = [];
   let weighted = 0;
 
+  const knownCriteria = new Set(SPIKE_CRITERIA.map(({ key }) => key));
+  const suppliedScoreKeys =
+    scores !== null && typeof scores === 'object' && !Array.isArray(scores)
+      ? Object.keys(scores)
+      : [];
+  if (scores === null || typeof scores !== 'object' || Array.isArray(scores)) {
+    issues.push(`${id}: scores must be an object`);
+  }
+  for (const key of suppliedScoreKeys) {
+    if (!knownCriteria.has(key)) {
+      issues.push(`${id}: unknown score criterion: ${key}`);
+    }
+  }
+
   if (!VALID_STATUSES.includes(status)) {
     issues.push(
       `${id}: unknown status "${status}"; expected one of ${VALID_STATUSES.join(', ')}`,
@@ -170,14 +469,9 @@ export function evaluateCandidate(candidate) {
       continue;
     }
 
-    if (
-      typeof value !== 'number' ||
-      !Number.isFinite(value) ||
-      value < 0 ||
-      value > MAX_SCORE
-    ) {
+    if (!ASSET_SCORE_RUBRIC.scoreScale.allowedScores.includes(value)) {
       issues.push(
-        `${id}: ${criterion.key} must be a number between 0 and ${MAX_SCORE}; received ${String(value)}`,
+        `${id}: ${criterion.key} must match a rubric score band (integer 0-${MAX_SCORE}); received ${String(value)}`,
       );
       continue;
     }
