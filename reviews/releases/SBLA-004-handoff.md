@@ -1,5 +1,12 @@
 # Handoff: SBLA-004 — asset license inventory and real-sample spike
 
+**Status:** **Accepted on 2026-09-05.** Account-B Claude Review Round 2
+passed the exact candidate `213af29cc4c6713d41f133fdbc8acbecb0a5ab15`
+with zero Critical, zero Important, and four nonblocking Minor findings. Codex
+independently reconfirmed the Chromium E2E and real benchmark checks that the
+reviewer's macOS sandbox could not launch. The four Minor findings are accepted
+as explicit SBLA-005 hardening work; none defeats the SBLA-004 gate.
+
 ## Objective and candidate
 
 Deliver master plan §18 task SBLA-004: an anatomy/exercise-media candidate
@@ -17,14 +24,24 @@ complete license fields, repeatable browser evidence, and `pnpm verify` green.
   `6332ab23843f6616fb805ecc7bb0d221ce550ae6`
 - Remediation implementation:
   `9b350c4c2e7462a80f9a1fcc29a5048617fc9ed5`
+- Final reviewed candidate:
+  `213af29cc4c6713d41f133fdbc8acbecb0a5ab15`
+- Candidate tree: `f65909c52d7220003d122ddf42b93f32ce02fbcf`
+- Account-B Round 2 report role commit:
+  `a896914e3581dd9bc73a9aeb20618403cdff1267`
+- Report integration / closed-review commit:
+  `fafdc36597d5ca90d4330c3214aa1ee7ec8fddf2`
+- Owner-acceptance claim commit:
+  `3c5c398926f77494af5cc5be0c2057008be69354`
 - Branch: `codex/SBLA-004-asset-license-reconciliation`
 - Worktree: `.worktrees/sbla-004-asset-license-reconciliation`
-- Expected independent recheck report: `reviews/releases/SBLA-004-r2.md`
+- Independent recheck report: `reviews/releases/SBLA-004-r2.md`
 
-The exact complete-artifact recheck candidate, including this handoff, is
-recorded in the active R2 claim in `docs/runbooks/current-work.md`. That ledger
-entry is the canonical review identity because a Git commit cannot contain its
-own hash. Account B must record that exact hash and tree in the R2 report.
+The exact complete-artifact candidate and tree were recorded in the R2 claim
+before dispatch and reproduced by Account B. The report is preserved as an
+append-only artifact. Claude's sandbox could not write it to disk, so Codex
+transcribed the completed review response into the sole claimed path and
+recorded that recovery honestly in the ledger.
 
 The stale branch `codex/SBLA-004-asset-license-inventory` was not merged. Its
 four bounded task commits were treated as inputs and replayed onto accepted
@@ -214,6 +231,13 @@ and the stale-branch recovery.
   and presentation options remain SBLA-005 work.
 - The metadata coverage gap must be confirmed against the actual meshes.
 - License facts must be re-verified by 2026-11-30.
+- Before assigning SBLA-005 scores, make per-candidate completeness require no
+  license issues and clarify the valid unselected-placeholder exception.
+- Make spike summary lines reflect the actual result state so malformed or
+  failing records cannot print reassuring diagnostic text.
+- Give deltoid regions, trapezius regions, and triceps-brachii heads explicit
+  component groups before using the evaluator on another candidate.
+- Make the benchmark test recompute all four medians from the recorded trials.
 
 ## Round 1 remediation map
 
@@ -227,23 +251,23 @@ and the stale-branch recovery.
 | M-4     | The benchmark records unmasked WebGL vendor and renderer and checks they remain stable across trials.                                                                 |
 | M-5     | This handoff identifies the exact R1 chain and remediation commit; the canonical exact R2 candidate is pinned in the ledger claim and must be copied into the report. |
 
-## Independent complete-artifact recheck request
+## Independent complete-artifact recheck
 
-Review the complete candidate and return PASS only with zero unresolved Critical
-or Important findings. Specifically verify:
+Completed by distinct Claude Review Account B. The append-only Round 2 report
+returns PASS with zero Critical and zero Important findings and explicitly
+closes I-1, I-2, and M-1 through M-5. It independently reproduced the license
+facts, archive and sample hashes, geometry, 23/28 coverage observation,
+scorecard determinism, weights, license floor, accepted command chain, and
+scope boundary.
 
-0. the exact recheck candidate and tree against the active R2 ledger claim, and
-   closure of I-1, I-2, and M-1 through M-5 from Round 1;
+The reviewer sandbox could not launch Chromium. Codex therefore reran both
+commands under the pinned Node 24.20.0 and pnpm 11.24.0 runtime before owner
+acceptance:
 
-1. every license field against its cited current primary source;
-2. whether distributing the unchanged FJ1446 sample with both notices is lawful
-   and fully attributed;
-3. the archive/sample provenance, hashes, geometry counts, and absence of
-   modification;
-4. that the benchmark is genuine, repeatable, and does not overstate a
-   candidate-level performance result;
-5. that the scorecard is deterministic and fails closed without moving the
-   master plan's weights or license floor;
-6. that the accepted `pnpm verify` and portability gates were preserved; and
-7. that the remaining SBLA-005/SBLA-006 work and coverage risk are stated
-   honestly.
+- `pnpm test:e2e`: PASS, 1/1 Chromium test.
+- `pnpm assets:benchmark`: PASS on the checksum-pinned sample; the repeat run
+  reported SwiftShader explicitly and remained a non-candidate baseline.
+
+No further SBLA-004 review is required. Preserve both review rounds unchanged.
+Any future regression creates a new append-only round instead of modifying the
+accepted history.

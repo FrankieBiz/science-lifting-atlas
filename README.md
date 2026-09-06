@@ -2,7 +2,14 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-**SBLA-001 through SBLA-003 are accepted.** Distinct Account-B Claude Review passed the exact SBLA-003 candidate with zero Critical and zero Important findings, and the owner approved all five architecture/provider ADRs on 2026-09-05. The repository contains the verified static shell and stable command contract, but no scientific content, anatomy asset, production schema, or public evidence claim. The canonical product and execution requirements live in [`docs/product/master-plan.md`](docs/product/master-plan.md).
+**SBLA-001 through SBLA-004 are accepted.** Distinct Account-B Claude Review
+passed the exact SBLA-004 candidate with zero Critical and zero Important
+findings on 2026-09-05. The repository now contains the verified static shell,
+stable command contract, license inventory, lawful checksum-pinned anatomy
+sample, and deterministic asset spike, but no scientific content, selected
+production anatomy asset, production schema, or public evidence claim. The
+canonical product and execution requirements live in
+[`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
 
@@ -56,7 +63,12 @@ pnpm exec playwright install --with-deps chromium
   verified. Round 2 is preserved at `reviews/releases/SBLA-003-r2.md` and
   returned PASS with zero Critical and zero Important findings; owner approval
   was recorded on 2026-09-05.
-- SBLA-004 through SBLA-006 own anatomy and exercise-media license selection.
+- SBLA-004's accepted license inventory, lawful sample, coverage evaluator, and
+  deterministic spike are recorded in `reviews/releases/SBLA-004-handoff.md`.
+  Account-B Round 2 is preserved at `reviews/releases/SBLA-004-r2.md` and
+  returned PASS with zero Critical and zero Important findings. SBLA-005 now
+  owns representative candidate benchmarking and scorecard measurement;
+  SBLA-006 owns the final asset decision and acquisition record.
 - SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
 
 Work follows the authoritative SBLA-001–SBLA-020 queue in master plan §18.
