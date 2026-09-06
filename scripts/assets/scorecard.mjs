@@ -122,7 +122,11 @@ const PLAN_CRITERIA = Object.freeze([
     id: 'presentation_options',
     label: 'Male/female or inclusive presentation options',
     weight: 5,
-    evidenceFields: ['adultPresentationOptions', 'feasibilityRecord'],
+    evidenceFields: [
+      'completedPresentationInspection',
+      'adultPresentationOptions',
+      'feasibilityRecord',
+    ],
   },
 ]);
 
@@ -152,7 +156,7 @@ const CRITERION_CONTRACT_SHA256 = Object.freeze({
   pipeline_ease:
     '940ebcf5fb3e3571729a5208617bc318d2966313fb65b16d2b1da22a880e7624',
   presentation_options:
-    'f362b23fc03c1f2516cd3aef6edc0c132da8cd0bb95a7aca02c473dbc9601196',
+    '7c753ed0a07b9684cfa489a221253b1bd5442264139ec8b36231d12d5f8daf2b',
 });
 
 /** @param {unknown} value */
@@ -966,6 +970,11 @@ function derivePipelineScore(evidence) {
 /** @param {Record<string, unknown>} evidence */
 function derivePresentationScore(evidence) {
   const issues = [];
+  if (evidence.completedPresentationInspection !== true) {
+    issues.push(
+      'presentation_options: completedPresentationInspection must be true',
+    );
+  }
   const rawOptions = Array.isArray(evidence.adultPresentationOptions)
     ? evidence.adultPresentationOptions
     : [];

@@ -535,8 +535,13 @@
       "id": "presentation_options",
       "label": "Male/female or inclusive presentation options",
       "weight": 5,
-      "evidenceFields": ["adultPresentationOptions", "feasibilityRecord"],
+      "evidenceFields": [
+        "completedPresentationInspection",
+        "adultPresentationOptions",
+        "feasibilityRecord"
+      ],
       "measurement": {
+        "prerequisite": { "completedPresentationInspection": true },
         "scope": "unique structured adult presentation options present in the acquired source or deterministically derived artifact",
         "optionFields": ["id", "label", "evidenceRef", "parity"],
         "perOptionParityFields": [

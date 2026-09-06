@@ -142,7 +142,11 @@ const PLAN_EVIDENCE_FIELDS: Record<string, string[]> = {
     'authorizedOutputsByteIdentical',
     'conversionManifest',
   ],
-  presentation_options: ['adultPresentationOptions', 'feasibilityRecord'],
+  presentation_options: [
+    'completedPresentationInspection',
+    'adultPresentationOptions',
+    'feasibilityRecord',
+  ],
 };
 
 const PLAN_CRITERION_SHA256: Record<string, string> = {
@@ -159,7 +163,7 @@ const PLAN_CRITERION_SHA256: Record<string, string> = {
   pipeline_ease:
     '940ebcf5fb3e3571729a5208617bc318d2966313fb65b16d2b1da22a880e7624',
   presentation_options:
-    'f362b23fc03c1f2516cd3aef6edc0c132da8cd0bb95a7aca02c473dbc9601196',
+    '7c753ed0a07b9684cfa489a221253b1bd5442264139ec8b36231d12d5f8daf2b',
 };
 
 type MutableCriterionContract = {
@@ -287,6 +291,7 @@ function measurementsForScoreFour() {
       authorizedOutputsByteIdentical: false,
     },
     presentation_options: {
+      completedPresentationInspection: true,
       adultPresentationOptions: [
         presentationOption('adult-a'),
         presentationOption('adult-b'),
@@ -829,6 +834,38 @@ describe('asset spike scorecard', () => {
         'presentation_options: option <index 2> parity is missing or incomplete',
       ]),
     );
+  });
+
+  it('requires completed presentation inspection proof before any score', () => {
+    const unproved = {
+      adultPresentationOptions: [],
+      feasibilityRecord: 'feasibility.json',
+    };
+    expect(deriveCriterionScore('presentation_options', unproved)).toEqual({
+      issues: [
+        'presentation_options: missing evidence field: completedPresentationInspection',
+      ],
+      score: null,
+    });
+
+    expect(
+      deriveCriterionScore('presentation_options', {
+        ...unproved,
+        completedPresentationInspection: false,
+      }),
+    ).toEqual({
+      issues: [
+        'presentation_options: completedPresentationInspection must be true',
+      ],
+      score: null,
+    });
+
+    expect(
+      deriveCriterionScore('presentation_options', {
+        ...unproved,
+        completedPresentationInspection: true,
+      }),
+    ).toEqual({ issues: [], score: 0 });
   });
 
   it('reports a malformed criterion instead of crashing rubric validation', () => {
