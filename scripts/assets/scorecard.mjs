@@ -92,11 +92,7 @@ const PLAN_CRITERIA = Object.freeze([
       'completedLicenseReview',
       'authoritativePrimaryTerms',
       'componentTermsReviewed',
-      'commercialUse',
-      'modification',
-      'webDistribution',
-      'attributionRequirements',
-      'aiProcessingTerms',
+      'reviewedTerms',
       'materialContradictionCount',
       'mixedComponentTermsUnresolved',
       'historicalNoticeStatus',
@@ -126,11 +122,7 @@ const PLAN_CRITERIA = Object.freeze([
     id: 'presentation_options',
     label: 'Male/female or inclusive presentation options',
     weight: 5,
-    evidenceFields: [
-      'adultPresentationOptions',
-      'optionParityChecks',
-      'feasibilityRecord',
-    ],
+    evidenceFields: ['adultPresentationOptions', 'feasibilityRecord'],
   },
 ]);
 
@@ -156,11 +148,11 @@ const CRITERION_CONTRACT_SHA256 = Object.freeze({
   browser_performance:
     '6e2b1d4853c42125ec4d2df2f2ab52756a800c77a7de6382883e9d3415274f39',
   license_clarity:
-    '66d5b4c0a7f336badf245d2339eb74bad33558d086070cca42f9b7244555037b',
+    '792990aa38c4a60bfa257c269521ffe6015ab5259de0ae444b5e1834cd470d59',
   pipeline_ease:
     '940ebcf5fb3e3571729a5208617bc318d2966313fb65b16d2b1da22a880e7624',
   presentation_options:
-    'bd0eea88fc2670c200a071fb2dec257d22c1fbe63cdb7e9e740b51f7c4bed43a',
+    'f362b23fc03c1f2516cd3aef6edc0c132da8cd0bb95a7aca02c473dbc9601196',
 });
 
 /** @param {unknown} value */
@@ -396,6 +388,39 @@ const PRESENTATION_PARITY_CHECKS = Object.freeze([
   'separability',
   'artifactChecks',
 ]);
+
+/** @type {Readonly<Record<string, readonly string[]>>} */
+const LICENSE_TERM_STATUSES = Object.freeze({
+  commercialUse: Object.freeze(['permitted', 'prohibited', 'conditional']),
+  modification: Object.freeze(['permitted', 'prohibited', 'conditional']),
+  webDistribution: Object.freeze(['permitted', 'prohibited', 'conditional']),
+  attributionRequired: Object.freeze([
+    'required',
+    'not-required',
+    'conditional',
+  ]),
+  aiProcessing: Object.freeze([
+    'permitted',
+    'prohibited',
+    'not-restricted',
+    'conditional',
+  ]),
+});
+
+/**
+ * Only these exact SBLA-004 records may use the one-time normalization path.
+ * Any edited or newly invented free-text record must provide the structured
+ * SBLA-005 measurement contract instead.
+ * @type {Readonly<Record<string, string>>}
+ */
+const ACCEPTED_LEGACY_LICENSE_SHA256 = Object.freeze({
+  'path-b-z-anatomy':
+    '704facfbc69c029fea4ddcd5fe3bb9a657b72197d76ae9dbd97b8cd56c223696',
+  'path-c-bodyparts3d':
+    'a8a196ca9de8053646cc2c18a9ed9d670e1d4958c12bc85dcec5d648f292c5d5',
+  'reference-openstax-ap2e':
+    '1e74c1064c4424373c891578ea2563ddcf043f970eda2e4219caf9f40955a4f9',
+});
 
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isRecord(value) {
@@ -757,23 +782,39 @@ function deriveLicenseScore(evidence) {
     issues.push('license_clarity: componentTermsReviewed must be true');
   }
 
-  const explicitFactFields = [
-    'commercialUse',
-    'modification',
-    'webDistribution',
-    'attributionRequirements',
-    'aiProcessingTerms',
-  ];
-  const unknownFact =
-    /\b(?:unknown|not stated|not reviewed|todo|unverified|pending)\b/i;
-  for (const field of explicitFactFields) {
+  const reviewedTerms = isRecord(evidence.reviewedTerms)
+    ? evidence.reviewedTerms
+    : {};
+  if (!isRecord(evidence.reviewedTerms)) {
+    issues.push('license_clarity: reviewedTerms must be an object');
+  }
+  const expectedTermKeys = Object.keys(LICENSE_TERM_STATUSES);
+  for (const key of Object.keys(reviewedTerms)) {
+    if (!Object.hasOwn(LICENSE_TERM_STATUSES, key)) {
+      issues.push(`license_clarity: unknown reviewed term: ${key}`);
+    }
+  }
+  for (const termKey of expectedTermKeys) {
+    const term = reviewedTerms[termKey];
+    if (!isRecord(term)) {
+      issues.push(`license_clarity: missing reviewed term: ${termKey}`);
+      continue;
+    }
+    const acceptedStatuses = LICENSE_TERM_STATUSES[termKey] ?? [];
+    if (!acceptedStatuses.includes(String(term.status))) {
+      issues.push(
+        `license_clarity: reviewedTerms.${termKey} status is not recognized`,
+      );
+    }
     if (
-      typeof evidence[field] !== 'string' ||
-      !evidence[field] ||
-      unknownFact.test(evidence[field])
+      typeof term.sourceUrl !== 'string' ||
+      !/^https?:\/\/\S+$/.test(term.sourceUrl) ||
+      typeof term.accessedOn !== 'string' ||
+      !ISO_DATE.test(term.accessedOn) ||
+      term.reviewed !== true
     ) {
       issues.push(
-        `license_clarity: ${field} must be an explicit reviewed fact`,
+        `license_clarity: reviewedTerms.${termKey} requires sourceUrl, accessedOn, and reviewed:true`,
       );
     }
   }
@@ -804,9 +845,9 @@ function deriveLicenseScore(evidence) {
     evidence.authoritativePrimaryTerms === false
       ? 'no-authoritative-terms'
       : contradictions >= 3
-        ? 'three-plus-unknown'
+        ? 'three-plus-contradictions'
         : contradictions >= 1
-          ? 'one-or-two-unknown'
+          ? 'one-or-two-contradictions'
           : evidence.mixedComponentTermsUnresolved === true
             ? 'unresolved-mixed'
             : evidence.historicalNoticeStatus === 'conservatively-handled'
@@ -822,8 +863,8 @@ function deriveLicenseScore(evidence) {
   /** @type {Readonly<Record<string, number>>} */
   const scoreByConflict = Object.freeze({
     'no-authoritative-terms': 0,
-    'three-plus-unknown': 1,
-    'one-or-two-unknown': 2,
+    'three-plus-contradictions': 1,
+    'one-or-two-contradictions': 2,
     'unresolved-mixed': 3,
     'conservatively-handled': 4,
     none: 5,
@@ -925,27 +966,13 @@ function derivePipelineScore(evidence) {
 /** @param {Record<string, unknown>} evidence */
 function derivePresentationScore(evidence) {
   const issues = [];
-  const options = Array.isArray(evidence.adultPresentationOptions)
+  const rawOptions = Array.isArray(evidence.adultPresentationOptions)
     ? evidence.adultPresentationOptions
     : [];
-  const parityChecks = isRecord(evidence.optionParityChecks)
-    ? evidence.optionParityChecks
-    : {};
   if (!Array.isArray(evidence.adultPresentationOptions)) {
     issues.push(
       'presentation_options: adultPresentationOptions must be an array',
     );
-  }
-  if (!isRecord(evidence.optionParityChecks)) {
-    issues.push('presentation_options: optionParityChecks must be an object');
-  } else {
-    for (const check of PRESENTATION_PARITY_CHECKS) {
-      if (typeof parityChecks[check] !== 'boolean') {
-        issues.push(
-          `presentation_options: optionParityChecks.${check} must be boolean`,
-        );
-      }
-    }
   }
   if (
     typeof evidence.feasibilityRecord !== 'string' ||
@@ -955,10 +982,54 @@ function derivePresentationScore(evidence) {
       'presentation_options: feasibilityRecord must be a non-empty path',
     );
   }
+  const options = [];
+  const ids = new Set();
+  for (const [index, value] of rawOptions.entries()) {
+    if (!isRecord(value)) {
+      issues.push(
+        `presentation_options: option at index ${index} must be an object`,
+      );
+      continue;
+    }
+    const rawId = typeof value.id === 'string' ? value.id.trim() : '';
+    const optionName = rawId || `<index ${index}>`;
+    if (!rawId) {
+      issues.push(
+        `presentation_options: option at index ${index} requires a non-empty id`,
+      );
+    } else if (ids.has(rawId)) {
+      issues.push(`presentation_options: duplicate option id: ${rawId}`);
+    } else {
+      ids.add(rawId);
+    }
+    if (typeof value.label !== 'string' || !value.label.trim()) {
+      issues.push(
+        `presentation_options: option ${optionName} requires a label`,
+      );
+    }
+    if (typeof value.evidenceRef !== 'string' || !value.evidenceRef.trim()) {
+      issues.push(
+        `presentation_options: option ${optionName} requires an evidenceRef`,
+      );
+    }
+    const parity = isRecord(value.parity) ? value.parity : null;
+    if (
+      parity === null ||
+      !PRESENTATION_PARITY_CHECKS.every(
+        (check) => typeof parity[check] === 'boolean',
+      )
+    ) {
+      issues.push(
+        `presentation_options: option ${optionName} parity is missing or incomplete`,
+      );
+      continue;
+    }
+    options.push({ id: rawId, parity });
+  }
   if (issues.length > 0) return { issues, score: null };
   const count = options.length;
-  const parity = PRESENTATION_PARITY_CHECKS.every(
-    (check) => parityChecks[check] === true,
+  const parity = options.every((option) =>
+    PRESENTATION_PARITY_CHECKS.every((check) => option.parity[check] === true),
   );
   if (count === 0) return { issues: [], score: 0 };
   if (count === 1) return { issues: [], score: parity ? 2 : 1 };
@@ -1045,6 +1116,10 @@ export function validateLicenseFields(candidate) {
  */
 function normalizeLicenseMeasurement(candidate) {
   const license = isRecord(candidate.license) ? candidate.license : {};
+  const acceptedHash = ACCEPTED_LEGACY_LICENSE_SHA256[candidate.id ?? ''];
+  if (acceptedHash === undefined || sha256(license) !== acceptedHash) {
+    return null;
+  }
   const componentLicences = Array.isArray(license.componentLicences)
     ? license.componentLicences
     : [];
@@ -1057,6 +1132,54 @@ function normalizeLicenseMeasurement(candidate) {
     : hasHistoricalNotice
       ? 'conservatively-handled'
       : 'none';
+  const sourceUrl = license.source;
+  const accessedOn = license.accessedOn;
+  /** @param {string|null} status */
+  const reviewedTerm = (status) => ({
+    status: status ?? 'unreviewed',
+    sourceUrl,
+    accessedOn,
+    reviewed: status !== null,
+  });
+
+  const commercialUse = String(license.commercialUse ?? '');
+  const modification = String(license.modification ?? '');
+  const webDistribution = String(license.webDistribution ?? '');
+  const aiProcessing = String(license.aiProcessingPermitted ?? '');
+  const commercialStatus = commercialUse.startsWith('PROHIBITED')
+    ? 'prohibited'
+    : commercialUse === 'permitted'
+      ? 'permitted'
+      : commercialUse.startsWith('permitted for')
+        ? 'conditional'
+        : null;
+  const modificationStatus =
+    modification === 'permitted'
+      ? 'permitted'
+      : modification === 'permitted non-commercially'
+        ? 'conditional'
+        : modification.startsWith('PROHIBITED')
+          ? 'prohibited'
+          : null;
+  const webDistributionStatus =
+    webDistribution === 'permitted'
+      ? 'permitted'
+      : webDistribution === 'permitted non-commercially'
+        ? 'conditional'
+        : webDistribution.startsWith('PROHIBITED')
+          ? 'prohibited'
+          : null;
+  const attributionStatus =
+    license.attributionRequired === true
+      ? 'required'
+      : license.attributionRequired === false
+        ? 'not-required'
+        : null;
+  const aiProcessingStatus = aiProcessing.startsWith('PROHIBITED')
+    ? 'prohibited'
+    : aiProcessing === 'not restricted by the licence text'
+      ? 'not-restricted'
+      : null;
 
   return {
     primarySourceUrl: license.source,
@@ -1064,11 +1187,13 @@ function normalizeLicenseMeasurement(candidate) {
     completedLicenseReview: true,
     authoritativePrimaryTerms: true,
     componentTermsReviewed: true,
-    commercialUse: String(license.commercialUse ?? ''),
-    modification: String(license.modification ?? ''),
-    webDistribution: String(license.webDistribution ?? ''),
-    attributionRequirements: String(license.attributionRequired ?? ''),
-    aiProcessingTerms: String(license.aiProcessingPermitted ?? 'not stated'),
+    reviewedTerms: {
+      commercialUse: reviewedTerm(commercialStatus),
+      modification: reviewedTerm(modificationStatus),
+      webDistribution: reviewedTerm(webDistributionStatus),
+      attributionRequired: reviewedTerm(attributionStatus),
+      aiProcessing: reviewedTerm(aiProcessingStatus),
+    },
     materialContradictionCount: 0,
     mixedComponentTermsUnresolved: hasMixedComponents,
     historicalNoticeStatus: hasHistoricalNotice

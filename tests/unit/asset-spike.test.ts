@@ -122,11 +122,7 @@ const PLAN_EVIDENCE_FIELDS: Record<string, string[]> = {
     'completedLicenseReview',
     'authoritativePrimaryTerms',
     'componentTermsReviewed',
-    'commercialUse',
-    'modification',
-    'webDistribution',
-    'attributionRequirements',
-    'aiProcessingTerms',
+    'reviewedTerms',
     'materialContradictionCount',
     'mixedComponentTermsUnresolved',
     'historicalNoticeStatus',
@@ -146,11 +142,7 @@ const PLAN_EVIDENCE_FIELDS: Record<string, string[]> = {
     'authorizedOutputsByteIdentical',
     'conversionManifest',
   ],
-  presentation_options: [
-    'adultPresentationOptions',
-    'optionParityChecks',
-    'feasibilityRecord',
-  ],
+  presentation_options: ['adultPresentationOptions', 'feasibilityRecord'],
 };
 
 const PLAN_CRITERION_SHA256: Record<string, string> = {
@@ -163,11 +155,11 @@ const PLAN_CRITERION_SHA256: Record<string, string> = {
   browser_performance:
     '6e2b1d4853c42125ec4d2df2f2ab52756a800c77a7de6382883e9d3415274f39',
   license_clarity:
-    '66d5b4c0a7f336badf245d2339eb74bad33558d086070cca42f9b7244555037b',
+    '792990aa38c4a60bfa257c269521ffe6015ab5259de0ae444b5e1834cd470d59',
   pipeline_ease:
     '940ebcf5fb3e3571729a5208617bc318d2966313fb65b16d2b1da22a880e7624',
   presentation_options:
-    'bd0eea88fc2670c200a071fb2dec257d22c1fbe63cdb7e9e740b51f7c4bed43a',
+    'f362b23fc03c1f2516cd3aef6edc0c132da8cd0bb95a7aca02c473dbc9601196',
 };
 
 type MutableCriterionContract = {
@@ -193,6 +185,35 @@ function scored(value: number | null = 4) {
   return Object.fromEntries(
     SPIKE_CRITERIA.map((c) => [c.key, value]),
   ) as Record<string, number | null>;
+}
+
+function reviewedLicenseTerms() {
+  const evidence = {
+    sourceUrl: 'https://example.invalid/license',
+    accessedOn: '2026-08-30',
+    reviewed: true,
+  };
+  return {
+    commercialUse: { ...evidence, status: 'permitted' },
+    modification: { ...evidence, status: 'permitted' },
+    webDistribution: { ...evidence, status: 'permitted' },
+    attributionRequired: { ...evidence, status: 'required' },
+    aiProcessing: { ...evidence, status: 'not-restricted' },
+  };
+}
+
+function presentationOption(id: string) {
+  return {
+    id,
+    label: `Adult option ${id}`,
+    evidenceRef: `feasibility.json#${id}`,
+    parity: {
+      requiredCoverage: true,
+      mapping: true,
+      separability: true,
+      artifactChecks: true,
+    },
+  };
 }
 
 function measurementsForScoreFour() {
@@ -245,11 +266,7 @@ function measurementsForScoreFour() {
       completedLicenseReview: true,
       authoritativePrimaryTerms: true,
       componentTermsReviewed: true,
-      commercialUse: 'permitted',
-      modification: 'permitted',
-      webDistribution: 'permitted',
-      attributionRequirements: 'required',
-      aiProcessingTerms: 'not restricted',
+      reviewedTerms: reviewedLicenseTerms(),
       materialContradictionCount: 0,
       mixedComponentTermsUnresolved: false,
       historicalNoticeStatus: 'conservatively-handled',
@@ -270,13 +287,10 @@ function measurementsForScoreFour() {
       authorizedOutputsByteIdentical: false,
     },
     presentation_options: {
-      adultPresentationOptions: ['adult-a', 'adult-b'],
-      optionParityChecks: {
-        requiredCoverage: true,
-        mapping: true,
-        separability: true,
-        artifactChecks: true,
-      },
+      adultPresentationOptions: [
+        presentationOption('adult-a'),
+        presentationOption('adult-b'),
+      ],
       feasibilityRecord: 'feasibility.json',
     },
   };
@@ -294,7 +308,9 @@ function measurementsForScoreFive() {
   measurements.license_clarity.conflictStatus = 'none';
   measurements.license_clarity.historicalNoticeStatus = 'none';
   measurements.pipeline_ease.authorizedOutputsByteIdentical = true;
-  measurements.presentation_options.adultPresentationOptions.push('adult-c');
+  measurements.presentation_options.adultPresentationOptions.push(
+    presentationOption('adult-c'),
+  );
   return measurements;
 }
 
@@ -605,7 +621,11 @@ describe('asset spike scorecard', () => {
       string,
       unknown
     >;
-    license.commercialUse = 'unknown';
+    const reviewedTerms = license.reviewedTerms as Record<
+      string,
+      Record<string, unknown>
+    >;
+    reviewedTerms.commercialUse!.status = 'unknown';
     license.conflictStatus = 'none';
     license.completedLicenseReview = true;
     license.authoritativePrimaryTerms = true;
@@ -617,11 +637,53 @@ describe('asset spike scorecard', () => {
     const derived = deriveCriterionScore('license_clarity', license);
     expect(derived.score).toBeNull();
     expect(derived.issues).toContain(
-      'license_clarity: commercialUse must be an explicit reviewed fact',
+      'license_clarity: reviewedTerms.commercialUse status is not recognized',
     );
     expect(derived.issues).toContain(
       'license_clarity: conflictStatus none contradicts the structured license facts',
     );
+  });
+
+  it('rejects semantic uncertainty synonyms without structured reviewed terms', () => {
+    const license = measurementsForScoreFive().license_clarity as Record<
+      string,
+      unknown
+    >;
+    license.commercialUse = 'unclear';
+    license.modification = 'not known';
+    license.webDistribution = 'indeterminate';
+    license.attributionRequirements = 'unsure';
+    license.aiProcessingTerms = 'not established';
+    license.reviewedTerms = {
+      commercialUse: { status: 'unclear' },
+      modification: { status: 'not known' },
+    };
+
+    const derived = deriveCriterionScore('license_clarity', license);
+    expect(derived.score).toBeNull();
+    expect(derived.issues).toEqual(
+      expect.arrayContaining([
+        'license_clarity: reviewedTerms.commercialUse status is not recognized',
+        'license_clarity: reviewedTerms.commercialUse requires sourceUrl, accessedOn, and reviewed:true',
+        'license_clarity: missing reviewed term: webDistribution',
+      ]),
+    );
+  });
+
+  it('does not treat an arbitrary free-text license record as accepted legacy evidence', () => {
+    const measurements = measurementsForScoreFour();
+    delete (measurements as Partial<typeof measurements>).license_clarity;
+    const result = evaluateCandidate(
+      candidate({
+        scores: { ...scored(), license_clarity: 5 },
+        measurements,
+      }),
+    );
+
+    expect(result.issues).toContain(
+      'test: license_clarity: measurement evidence is missing',
+    );
+    expect(result.complete).toBe(false);
   });
 
   it('requires an authoritative URL, ISO access date, and completed license review', () => {
@@ -709,6 +771,62 @@ describe('asset spike scorecard', () => {
         'coverage_naming band at index 0 must be an object',
         'coverage_naming score bands must contain complete objects for 0-5',
         'coverage_naming exact criterion contract does not match the frozen rubric',
+      ]),
+    );
+  });
+
+  it('rejects null presentation options instead of scoring their array length', () => {
+    const presentation = measurementsForScoreFive()
+      .presentation_options as Record<string, unknown>;
+    presentation.adultPresentationOptions = [null, null, null];
+
+    const derived = deriveCriterionScore('presentation_options', presentation);
+    expect(derived.score).toBeNull();
+    expect(derived.issues).toEqual(
+      expect.arrayContaining([
+        'presentation_options: option at index 0 must be an object',
+        'presentation_options: option at index 1 must be an object',
+        'presentation_options: option at index 2 must be an object',
+      ]),
+    );
+  });
+
+  it('rejects duplicate or blank presentation ids and missing per-option parity', () => {
+    const presentation = measurementsForScoreFive()
+      .presentation_options as Record<string, unknown>;
+    presentation.adultPresentationOptions = [
+      {
+        id: 'adult-a',
+        label: 'Adult A',
+        evidenceRef: 'feasibility.json#adult-a',
+        parity: {
+          requiredCoverage: true,
+          mapping: true,
+          separability: true,
+          artifactChecks: true,
+        },
+      },
+      {
+        id: 'adult-a',
+        label: 'Duplicate',
+        evidenceRef: 'feasibility.json#duplicate',
+        parity: {
+          requiredCoverage: true,
+          mapping: true,
+          separability: true,
+          artifactChecks: true,
+        },
+      },
+      { id: '  ', label: '', evidenceRef: '', parity: null },
+    ];
+
+    const derived = deriveCriterionScore('presentation_options', presentation);
+    expect(derived.score).toBeNull();
+    expect(derived.issues).toEqual(
+      expect.arrayContaining([
+        'presentation_options: duplicate option id: adult-a',
+        'presentation_options: option at index 2 requires a non-empty id',
+        'presentation_options: option <index 2> parity is missing or incomplete',
       ]),
     );
   });

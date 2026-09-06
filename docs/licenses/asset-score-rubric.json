@@ -348,17 +348,36 @@
         "completedLicenseReview",
         "authoritativePrimaryTerms",
         "componentTermsReviewed",
-        "commercialUse",
-        "modification",
-        "webDistribution",
-        "attributionRequirements",
-        "aiProcessingTerms",
+        "reviewedTerms",
         "materialContradictionCount",
         "mixedComponentTermsUnresolved",
         "historicalNoticeStatus",
         "conflictStatus",
         "licenseRecord"
       ],
+      "measurement": {
+        "reviewedTermKeys": [
+          "commercialUse",
+          "modification",
+          "webDistribution",
+          "attributionRequired",
+          "aiProcessing"
+        ],
+        "eachTermRequires": ["status", "sourceUrl", "accessedOn", "reviewed"],
+        "statusEnums": {
+          "commercialUse": ["permitted", "prohibited", "conditional"],
+          "modification": ["permitted", "prohibited", "conditional"],
+          "webDistribution": ["permitted", "prohibited", "conditional"],
+          "attributionRequired": ["required", "not-required", "conditional"],
+          "aiProcessing": [
+            "permitted",
+            "prohibited",
+            "not-restricted",
+            "conditional"
+          ]
+        },
+        "humanNotesAffectScore": false
+      },
       "clarityRules": {
         "suitabilityIsSeparateFromClarity": true,
         "explicitRestrictionCanStillBeClear": true,
@@ -516,14 +535,17 @@
       "id": "presentation_options",
       "label": "Male/female or inclusive presentation options",
       "weight": 5,
-      "evidenceFields": [
-        "adultPresentationOptions",
-        "optionParityChecks",
-        "feasibilityRecord"
-      ],
+      "evidenceFields": ["adultPresentationOptions", "feasibilityRecord"],
       "measurement": {
-        "scope": "adult presentation options present in the acquired source or deterministically derived artifact",
-        "parity": "each option must preserve required target coverage, mapping, separability, and artifact checks"
+        "scope": "unique structured adult presentation options present in the acquired source or deterministically derived artifact",
+        "optionFields": ["id", "label", "evidenceRef", "parity"],
+        "perOptionParityFields": [
+          "requiredCoverage",
+          "mapping",
+          "separability",
+          "artifactChecks"
+        ],
+        "parity": "each individual option must preserve required target coverage, mapping, separability, and artifact checks"
       },
       "bands": [
         {
