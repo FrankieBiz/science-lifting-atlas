@@ -29,7 +29,8 @@
     "test:portability": "vitest run --config vitest.portability.config.ts",
     "assets:spike": "node scripts/assets/spike.mjs",
     "assets:benchmark": "node scripts/assets/benchmark.mjs",
-    "assets:coverage": "node scripts/assets/coverage.mjs"
+    "assets:coverage": "node scripts/assets/coverage.mjs",
+    "assets:mesh-map": "node scripts/assets/mesh-map.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

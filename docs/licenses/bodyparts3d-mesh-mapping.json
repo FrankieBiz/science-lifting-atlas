@@ -1,0 +1,3073 @@
+{
+  "candidate": "path-c-bodyparts3d",
+  "coverage": {
+    "absent": 5,
+    "absentIds": [
+      "latissimus-dorsi",
+      "rectus-abdominis",
+      "internal-oblique",
+      "transversus-abdominis",
+      "multifidus"
+    ],
+    "conclusion": "Full mesh/header inspection confirms the five prior label gaps; none is recoverable under another represented FMA term.",
+    "present": 23,
+    "required": 28,
+    "reusedMeshes": [
+      {
+        "fileId": "FJ1487",
+        "placements": [
+          "brachioradialis/brachioradialis",
+          "forearm-flexors-extensors/posterior-compartment"
+        ]
+      },
+      {
+        "fileId": "FJ1487M",
+        "placements": [
+          "brachioradialis/brachioradialis",
+          "forearm-flexors-extensors/posterior-compartment"
+        ]
+      }
+    ],
+    "selectedMeshes": 139,
+    "targets": [
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "long-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-135.2676, -67.8089, 1339.5753],
+                  "min": [-229.86, -109.5556, 994.0718]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 105386,
+                "conceptId": "FMA37686",
+                "faces": 1426,
+                "fileId": "FJ1478",
+                "name": "Long head of right biceps brachii",
+                "representationId": "BP5566",
+                "sha256": "2442d2b5ac30c5da42e72eeff83d143df51c7617001cbc6552096a504f29bc07",
+                "triangles": 1426,
+                "vertices": 1053
+              },
+              {
+                "bounds": {
+                  "max": [229.86, -67.8089, 1339.42],
+                  "min": [135.268, -109.293, 994.072]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 103260,
+                "conceptId": "FMA37687",
+                "faces": 1426,
+                "fileId": "FJ1478M",
+                "name": "Long head of left biceps brachii",
+                "representationId": "BP8816",
+                "sha256": "10189f1d7b5220df3baef2b259ae9855ed301c1afaadfc2de25af3222c5a08fc",
+                "triangles": 1426,
+                "vertices": 1039
+              }
+            ],
+            "name": "long head of biceps brachii",
+            "rootConceptId": "FMA37683"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "short-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-135.2369, -75.8709, 1327.7644],
+                  "min": [-212.4365, -109.1433, 1065.2196]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 161507,
+                "conceptId": "FMA37684",
+                "faces": 1856,
+                "fileId": "FJ1512",
+                "name": "Short head of right biceps brachii",
+                "representationId": "BP5558",
+                "sha256": "2173b7cce29f11036907b80e068e9bd6c16f22359d6e7994af9684454b99b4d5",
+                "triangles": 1856,
+                "vertices": 1739
+              },
+              {
+                "bounds": {
+                  "max": [212.39, -75.9581, 1327.76],
+                  "min": [135.237, -109.102, 1065.22]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 159783,
+                "conceptId": "FMA37685",
+                "faces": 1856,
+                "fileId": "FJ1512M",
+                "name": "Short head of left biceps brachii",
+                "representationId": "BP9153",
+                "sha256": "6b0ed7b70973b3a2e08de4ea5ce59c05a4ddce2b90212ff734326be2726d1293",
+                "triangles": 1856,
+                "vertices": 1743
+              }
+            ],
+            "name": "short head of biceps brachii",
+            "rootConceptId": "FMA37682"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "biceps-brachii",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "biceps brachii",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "brachialis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-176.3848, -60.2695, 1220.1991],
+                  "min": [-235.1631, -86.4916, 995.3615]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 127901,
+                "conceptId": "FMA37668",
+                "faces": 1746,
+                "fileId": "FJ1486",
+                "name": "Right brachialis",
+                "representationId": "BP4807",
+                "sha256": "be5f40b153fd6ce0c8c274eb4c26be8d1a29b4bbe75dd0e4a0dfe5c4d251fa03",
+                "triangles": 1746,
+                "vertices": 1266
+              },
+              {
+                "bounds": {
+                  "max": [235.121, -60.5697, 1220.2],
+                  "min": [176.385, -86.3959, 995.361]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 126069,
+                "conceptId": "FMA37669",
+                "faces": 1746,
+                "fileId": "FJ1486M",
+                "name": "Left brachialis",
+                "representationId": "BP8684",
+                "sha256": "cedf106a4917deab99f86f077dde7d34d0672dbbb74f30652a4f81f75d7ef180",
+                "triangles": 1746,
+                "vertices": 1256
+              }
+            ],
+            "name": "brachialis",
+            "rootConceptId": "FMA37667"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "brachialis",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "brachialis",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "brachioradialis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-208.1588, -55.8057, 1147.609],
+                  "min": [-280.5859, -122.8784, 809.7123]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 359055,
+                "conceptId": "FMA38486",
+                "faces": 4874,
+                "fileId": "FJ1487",
+                "name": "Right brachioradialis",
+                "representationId": "BP4833",
+                "sha256": "0ff651a5417f240c6a5205bef5218336a61fe3474752cca1b483d02aae0b92ad",
+                "triangles": 4874,
+                "vertices": 3270
+              },
+              {
+                "bounds": {
+                  "max": [280.586, -55.8244, 1147.61],
+                  "min": [208.159, -122.878, 809.712]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 356074,
+                "conceptId": "FMA38487",
+                "faces": 4874,
+                "fileId": "FJ1487M",
+                "name": "Left brachioradialis",
+                "representationId": "BP8244",
+                "sha256": "04555d88efe99e68a2b07441c4deffa4d1e7ebafb8d3f60995dd28c0ff42f147",
+                "triangles": 4874,
+                "vertices": 3272
+              }
+            ],
+            "name": "brachioradialis",
+            "rootConceptId": "FMA38485"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "brachioradialis",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "brachioradialis",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "acromial",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-146.5569, -40.6889, 1349.6547],
+                  "min": [-227.4322, -103.8038, 1205.0864]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 92591,
+                "conceptId": "FMA34682",
+                "faces": 1300,
+                "fileId": "FJ1467",
+                "name": "Acromial part of right deltoid",
+                "representationId": "BP7571",
+                "sha256": "2f69f1a13c836539abca85d9b77f55f96319ad3fdd75c62f498eabe49b266bfe",
+                "triangles": 1300,
+                "vertices": 916
+              },
+              {
+                "bounds": {
+                  "max": [227.228, -40.8371, 1349.22],
+                  "min": [146.586, -103.337, 1205.09]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 91869,
+                "conceptId": "FMA34683",
+                "faces": 1300,
+                "fileId": "FJ1467M",
+                "name": "Acromial part of left deltoid",
+                "representationId": "BP9075",
+                "sha256": "a523b5f2ab862ad6505787f4936098fbcfe3f28a3742b57aac34307fe752f8eb",
+                "triangles": 1300,
+                "vertices": 918
+              }
+            ],
+            "name": "acromial part of deltoid",
+            "rootConceptId": "FMA34678"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "clavicular",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-88.555, -75.1252, 1355.4122],
+                  "min": [-203.7212, -121.3312, 1203.8544]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 223657,
+                "conceptId": "FMA34680",
+                "faces": 2206,
+                "fileId": "FJ1468",
+                "name": "Clavicular part of right deltoid",
+                "representationId": "BP7573",
+                "sha256": "09eebb4a8d72c91936b0bfde7f35829a58f56103ac158f559186698458bcc616",
+                "triangles": 2206,
+                "vertices": 2592
+              },
+              {
+                "bounds": {
+                  "max": [203.619, -75.1252, 1355.39],
+                  "min": [88.555, -121.331, 1203.85]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 222006,
+                "conceptId": "FMA34681",
+                "faces": 2206,
+                "fileId": "FJ1468M",
+                "name": "Clavicular part of left deltoid",
+                "representationId": "BP8259",
+                "sha256": "75340ac9157ea6c64baaa74c0bbfd6173114dcff0d30ea814702c288b002f104",
+                "triangles": 2206,
+                "vertices": 2604
+              }
+            ],
+            "name": "clavicular part of deltoid",
+            "rootConceptId": "FMA34677"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "spinal",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-82.8341, -2.7251, 1339.8445],
+                  "min": [-219.4958, -79.253, 1187.7498]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 157136,
+                "conceptId": "FMA34684",
+                "faces": 1900,
+                "fileId": "FJ1513",
+                "name": "Spinal part of right deltoid",
+                "representationId": "BP5607",
+                "sha256": "ef8308c92fd0d01d8c0d7ffd9238305eefc2f28710d7bb58f451512abdc08e99",
+                "triangles": 1900,
+                "vertices": 1665
+              },
+              {
+                "bounds": {
+                  "max": [219.171, -2.7251, 1339.84],
+                  "min": [82.8341, -79.253, 1187.75]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 156732,
+                "conceptId": "FMA34685",
+                "faces": 1900,
+                "fileId": "FJ1513M",
+                "name": "Spinal part of left deltoid",
+                "representationId": "BP8151",
+                "sha256": "a806a9a20b68009f0071c22411b009f4baef3de118f00a37cc4a3be8cdf7ce2e",
+                "triangles": 1900,
+                "vertices": 1678
+              }
+            ],
+            "name": "spinal part of deltoid",
+            "rootConceptId": "FMA34679"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "deltoid-regions",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "deltoid regions",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "external-oblique",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-3.4234, -36.9672, 1211.5841],
+                  "min": [-140.8516, -218.8, 793.5842]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 8308376,
+                "conceptId": "FMA13336",
+                "faces": 111826,
+                "fileId": "FJ1452",
+                "name": "Right external oblique",
+                "representationId": "BP4967",
+                "sha256": "8fb254f196b1e249b1aea667d195f00c355f901f5fa89e37f586a8316c2fcdcd",
+                "triangles": 111826,
+                "vertices": 63907
+              },
+              {
+                "bounds": {
+                  "max": [140.823, -37.0208, 1211.58],
+                  "min": [3.4486, -218.766, 793.625]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 8250599,
+                "conceptId": "FMA13337",
+                "faces": 111826,
+                "fileId": "FJ1452M",
+                "name": "Left external oblique",
+                "representationId": "BP8154",
+                "sha256": "2f0ba9782cf27bd57446c6f9f44a399bfb98e88a67136c7304e47098838fce1f",
+                "triangles": 111826,
+                "vertices": 63893
+              }
+            ],
+            "name": "external oblique",
+            "rootConceptId": "FMA13335"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "external-oblique",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "external oblique",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "anterior-compartment",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-178.0972, -67.579, 1053.078],
+                  "min": [-305.9112, -167.8943, 675.8137]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 664548,
+                "conceptId": "FMA38470",
+                "faces": 8698,
+                "fileId": "FJ1475",
+                "name": "Right flexor digitorum superficialis",
+                "representationId": "BP4837",
+                "sha256": "9b3877dcb9838ac4e37f2a1fbf0542fca888a32650285bb07278d6ba9fa968e1",
+                "triangles": 8698,
+                "vertices": 6109
+              },
+              {
+                "bounds": {
+                  "max": [305.869, -67.579, 1053.08],
+                  "min": [178.113, -167.848, 675.814]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 657945,
+                "conceptId": "FMA38471",
+                "faces": 8698,
+                "fileId": "FJ1475M",
+                "name": "Left flexor digitorum superficialis",
+                "representationId": "BP8284",
+                "sha256": "9174a210f8b7ce149355545208551a4d001f6c78570256a8596d3410023fb1ec",
+                "triangles": 8698,
+                "vertices": 6106
+              },
+              {
+                "bounds": {
+                  "max": [-184.3599, -70.8677, 1057.479],
+                  "min": [-272.1109, -136.5136, 780.6971]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 82751,
+                "conceptId": "FMA38460",
+                "faces": 1148,
+                "fileId": "FJ1496",
+                "name": "Right flexor carpi radialis",
+                "representationId": "BP4841",
+                "sha256": "8e83c638e2353bb8ba65547f4b846d89a1f393c4761806faf8e09970c9b6b6bf",
+                "triangles": 1148,
+                "vertices": 819
+              },
+              {
+                "bounds": {
+                  "max": [272.111, -70.8677, 1057.48],
+                  "min": [184.36, -136.407, 780.697]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 82024,
+                "conceptId": "FMA38461",
+                "faces": 1148,
+                "fileId": "FJ1496M",
+                "name": "Left flexor carpi radialis",
+                "representationId": "BP8940",
+                "sha256": "3ee91fd59707361cb9fd6c55fa51c677df1744a779965c987e789e2be52758a2",
+                "triangles": 1148,
+                "vertices": 819
+              },
+              {
+                "bounds": {
+                  "max": [-203.8767, -68.7141, 1018.8649],
+                  "min": [-306.9319, -186.8782, 665.4832]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 392489,
+                "conceptId": "FMA38479",
+                "faces": 4838,
+                "fileId": "FJ1497",
+                "name": "Right flexor digitorum profundus",
+                "representationId": "BP4848",
+                "sha256": "e62f8adfa454bee523974952500aa32a16f086b249a434b4bbeabc333878ac39",
+                "triangles": 4838,
+                "vertices": 3857
+              },
+              {
+                "bounds": {
+                  "max": [306.932, -68.7278, 1018.86],
+                  "min": [203.877, -186.878, 665.536]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 387918,
+                "conceptId": "FMA38480",
+                "faces": 4838,
+                "fileId": "FJ1497M",
+                "name": "Left flexor digitorum profundus",
+                "representationId": "BP7826",
+                "sha256": "c3d1710b4b9465ab35cd53d18a3f00f38b37340d084c57fed2cb011d585a5013",
+                "triangles": 4838,
+                "vertices": 3852
+              },
+              {
+                "bounds": {
+                  "max": [-238.4947, -87.6318, 965.9094],
+                  "min": [-314.051, -165.8833, 735.2164]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 151641,
+                "conceptId": "FMA38482",
+                "faces": 1442,
+                "fileId": "FJ1498",
+                "name": "Right flexor pollicis longus",
+                "representationId": "BP4844",
+                "sha256": "e0fc87382350f38acb2a5197e83dabb450ba6d823222388c8e169e30c0bbfb94",
+                "triangles": 1442,
+                "vertices": 1781
+              },
+              {
+                "bounds": {
+                  "max": [314.051, -87.6318, 965.909],
+                  "min": [238.495, -165.883, 735.216]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 149795,
+                "conceptId": "FMA38484",
+                "faces": 1442,
+                "fileId": "FJ1498M",
+                "name": "Left flexor pollicis longus",
+                "representationId": "BP9106",
+                "sha256": "bca0645db90f8718edda9562da5ef5432d6df06dd4fdf7d5f5ef042d31ed8ca9",
+                "triangles": 1442,
+                "vertices": 1783
+              },
+              {
+                "bounds": {
+                  "max": [-225.8015, -81.2776, 992.4374],
+                  "min": [-253.9559, -133.245, 813.33]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 63323,
+                "conceptId": "FMA38470",
+                "faces": 866,
+                "fileId": "FJ1499",
+                "name": "Right flexor digitorum superficialis",
+                "representationId": "BP4837",
+                "sha256": "7f148f7db90d9723dcfe6742c55afc2100b712c00992d83356373ca27a2b0dc0",
+                "triangles": 866,
+                "vertices": 636
+              },
+              {
+                "bounds": {
+                  "max": [253.914, -81.2776, 992.437],
+                  "min": [225.825, -133.245, 813.33]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 62744,
+                "conceptId": "FMA38471",
+                "faces": 866,
+                "fileId": "FJ1499M",
+                "name": "Left flexor digitorum superficialis",
+                "representationId": "BP8284",
+                "sha256": "471bfecbbe7dc3b66fc843daddcac42cd12e76e4df9f982d6b779a516433c083",
+                "triangles": 866,
+                "vertices": 636
+              },
+              {
+                "bounds": {
+                  "max": [-179.2673, -71.6094, 1053.7996],
+                  "min": [-290.6199, -149.6921, 733.0074]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 435055,
+                "conceptId": "FMA38463",
+                "faces": 4968,
+                "fileId": "FJ1502",
+                "name": "Right palmaris longus",
+                "representationId": "BP4839",
+                "sha256": "2e033c8fbc77aa1922179eeae6d90075df9360d00882beb9b45b148074f91f8a",
+                "triangles": 4968,
+                "vertices": 4471
+              },
+              {
+                "bounds": {
+                  "max": [290.62, -71.6094, 1053.8001],
+                  "min": [179.427, -149.692, 733.007]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 430061,
+                "conceptId": "FMA38464",
+                "faces": 4968,
+                "fileId": "FJ1502M",
+                "name": "Left palmaris longus",
+                "representationId": "BP7781",
+                "sha256": "0a10cb9a85663e719c4ae3536e7d514a1d09c66115656427bad5348da7fe13a8",
+                "triangles": 4968,
+                "vertices": 4469
+              },
+              {
+                "bounds": {
+                  "max": [-226.0946, -102.2435, 870.571],
+                  "min": [-271.7676, -126.1806, 820.4553]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 192602,
+                "conceptId": "FMA38454",
+                "faces": 1838,
+                "fileId": "FJ1503",
+                "name": "Right pronator quadratus",
+                "representationId": "BP4846",
+                "sha256": "04adea4b7060a08c9d734ea78156525b3d3983fc1da0601ac151198985e78cfd",
+                "triangles": 1838,
+                "vertices": 2257
+              },
+              {
+                "bounds": {
+                  "max": [271.768, -102.551, 870.571],
+                  "min": [226.095, -126.181, 820.455]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 190457,
+                "conceptId": "FMA38455",
+                "faces": 1838,
+                "fileId": "FJ1503M",
+                "name": "Left pronator quadratus",
+                "representationId": "BP7957",
+                "sha256": "906e88ed35688a080946d565f157c89fcc50dd6fb0c4304c473cfc1800132266",
+                "triangles": 1838,
+                "vertices": 2259
+              }
+            ],
+            "name": "muscle of anterior compartment of forearm",
+            "rootConceptId": "FMA38456"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "posterior-compartment",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-219.4764, -49.6848, 1058.8724],
+                  "min": [-237.4304, -126.8748, 771.1657]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 248132,
+                "conceptId": "FMA38507",
+                "faces": 2186,
+                "fileId": "FJ1472",
+                "name": "Right extensor carpi ulnaris",
+                "representationId": "BP4829",
+                "sha256": "f6aadd5b1df9440ec0c4fabf21641f72447d5190bcaf58f357e8b5a76b3f5889",
+                "triangles": 2186,
+                "vertices": 2975
+              },
+              {
+                "bounds": {
+                  "max": [237.43, -49.6848, 1058.87],
+                  "min": [219.476, -126.799, 771.166]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 245801,
+                "conceptId": "FMA38508",
+                "faces": 2186,
+                "fileId": "FJ1472M",
+                "name": "Left extensor carpi ulnaris",
+                "representationId": "BP7970",
+                "sha256": "6c47a0290d3c5952e858227ed655b6ef1caac88661a13d15618a8364d0af765f",
+                "triangles": 2186,
+                "vertices": 2983
+              },
+              {
+                "bounds": {
+                  "max": [-227.4747, -69.9998, 970.7753],
+                  "min": [-289.4623, -131.7766, 788.7495]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 143120,
+                "conceptId": "FMA38516",
+                "faces": 1874,
+                "fileId": "FJ1484",
+                "name": "Right abductor pollicis longus",
+                "representationId": "BP4820",
+                "sha256": "35a1077de93e2bdcaaa68e688f4f31a371c3c61e35d629314507e549e5241d14",
+                "triangles": 1874,
+                "vertices": 1439
+              },
+              {
+                "bounds": {
+                  "max": [289.429, -70.0494, 970.775],
+                  "min": [227.545, -131.777, 788.749]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 141889,
+                "conceptId": "FMA38517",
+                "faces": 1874,
+                "fileId": "FJ1484M",
+                "name": "Left abductor pollicis longus",
+                "representationId": "BP9144",
+                "sha256": "330a078635dd13630811d8725ab5919c0fae5b001071a6cb3b7282bcf955fc4e",
+                "triangles": 1874,
+                "vertices": 1439
+              },
+              {
+                "bounds": {
+                  "max": [-208.1588, -55.8057, 1147.609],
+                  "min": [-280.5859, -122.8784, 809.7123]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 359055,
+                "conceptId": "FMA38486",
+                "faces": 4874,
+                "fileId": "FJ1487",
+                "name": "Right brachioradialis",
+                "representationId": "BP4833",
+                "sha256": "0ff651a5417f240c6a5205bef5218336a61fe3474752cca1b483d02aae0b92ad",
+                "triangles": 4874,
+                "vertices": 3270
+              },
+              {
+                "bounds": {
+                  "max": [280.586, -55.8244, 1147.61],
+                  "min": [208.159, -122.878, 809.712]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 356074,
+                "conceptId": "FMA38487",
+                "faces": 4874,
+                "fileId": "FJ1487M",
+                "name": "Left brachioradialis",
+                "representationId": "BP8244",
+                "sha256": "04555d88efe99e68a2b07441c4deffa4d1e7ebafb8d3f60995dd28c0ff42f147",
+                "triangles": 4874,
+                "vertices": 3272
+              },
+              {
+                "bounds": {
+                  "max": [-228.3637, -50.1629, 1078.7104],
+                  "min": [-272.7311, -115.7807, 776.042]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 158039,
+                "conceptId": "FMA38498",
+                "faces": 2098,
+                "fileId": "FJ1489",
+                "name": "Right extensor carpi radialis brevis",
+                "representationId": "BP4823",
+                "sha256": "31ccd9ec738252ec2eae88cf68068679d0663425c98b8d90dcbca18b3cbd1988",
+                "triangles": 2098,
+                "vertices": 1564
+              },
+              {
+                "bounds": {
+                  "max": [272.638, -50.2609, 1078.71],
+                  "min": [228.364, -115.743, 776.055]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 156376,
+                "conceptId": "FMA38499",
+                "faces": 2098,
+                "fileId": "FJ1489M",
+                "name": "Left extensor carpi radialis brevis",
+                "representationId": "BP9287",
+                "sha256": "8c6a0274a546389ad6a4f615379ff0e9a020a7fb054cfd5e1e20401d4ecb06f7",
+                "triangles": 2098,
+                "vertices": 1564
+              },
+              {
+                "bounds": {
+                  "max": [-220.0681, -52.9625, 1101.6099],
+                  "min": [-277.863, -120.9785, 779.1439]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 179061,
+                "conceptId": "FMA38495",
+                "faces": 2474,
+                "fileId": "FJ1490",
+                "name": "Right extensor carpi radialis longus",
+                "representationId": "BP4831",
+                "sha256": "8b6ec821491a2eafaee8c813cfad4532beae94c354595cc3e922d8cdbb36fb32",
+                "triangles": 2474,
+                "vertices": 1696
+              },
+              {
+                "bounds": {
+                  "max": [277.863, -53.2059, 1101.61],
+                  "min": [220.068, -120.979, 779.144]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 177891,
+                "conceptId": "FMA38496",
+                "faces": 2474,
+                "fileId": "FJ1490M",
+                "name": "Left extensor carpi radialis longus",
+                "representationId": "BP9280",
+                "sha256": "f0ed6a659b2a1fd0d9138d2b7ca91535f62b70b9bc16f862173fdd85f69372d2",
+                "triangles": 2474,
+                "vertices": 1702
+              },
+              {
+                "bounds": {
+                  "max": [-226.9875, -53.727, 1049.6195],
+                  "min": [-243.2222, -143.2978, 724.6047]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 102700,
+                "conceptId": "FMA38504",
+                "faces": 1434,
+                "fileId": "FJ1491",
+                "name": "Right extensor digiti minimi",
+                "representationId": "BP4825",
+                "sha256": "2717a761854ba7fe50d12f5ec4eca0f0728795777ae9a7ec87e019f01e3b8267",
+                "triangles": 1434,
+                "vertices": 1014
+              },
+              {
+                "bounds": {
+                  "max": [243.222, -53.9249, 1049.62],
+                  "min": [226.988, -143.255, 724.668]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 102082,
+                "conceptId": "FMA38505",
+                "faces": 1434,
+                "fileId": "FJ1491M",
+                "name": "Left extensor digiti minimi",
+                "representationId": "BP8489",
+                "sha256": "f4126e4115bf25e98e13d5e646304ab526d500f5de28aef9167c72f7360fe702",
+                "triangles": 1434,
+                "vertices": 1017
+              },
+              {
+                "bounds": {
+                  "max": [-222.4578, -45.2683, 1059.9575],
+                  "min": [-305.054, -162.5285, 677.9808]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 342296,
+                "conceptId": "FMA38501",
+                "faces": 4294,
+                "fileId": "FJ1492",
+                "name": "Right extensor digitorum",
+                "representationId": "BP4827",
+                "sha256": "31f528b3ba6a8fb26177c9f1455692be3acfbb173b4c4cbf9dc3d597acb5c5ff",
+                "triangles": 4294,
+                "vertices": 3355
+              },
+              {
+                "bounds": {
+                  "max": [305.054, -45.3127, 1059.96],
+                  "min": [222.477, -162.529, 677.981]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 338663,
+                "conceptId": "FMA38502",
+                "faces": 4294,
+                "fileId": "FJ1492M",
+                "name": "Left extensor digitorum",
+                "representationId": "BP8560",
+                "sha256": "c2fa9cb48e9d70d9a180553623df0e8be92c507f323074b8b5bed41b266f47f2",
+                "triangles": 4294,
+                "vertices": 3350
+              },
+              {
+                "bounds": {
+                  "max": [-229.502, -95.2799, 868.257],
+                  "min": [-307.6474, -173.595, 668.7079]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 62068,
+                "conceptId": "FMA38525",
+                "faces": 720,
+                "fileId": "FJ1493",
+                "name": "Right extensor indicis",
+                "representationId": "BP4812",
+                "sha256": "b23d7087dbe581fa03e316dfed18f73ba4ccb54b16091d442ac057f9aa9c7b60",
+                "triangles": 720,
+                "vertices": 690
+              },
+              {
+                "bounds": {
+                  "max": [307.647, -95.2863, 868.257],
+                  "min": [229.502, -173.595, 668.708]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 61518,
+                "conceptId": "FMA38526",
+                "faces": 720,
+                "fileId": "FJ1493M",
+                "name": "Left extensor indicis",
+                "representationId": "BP8779",
+                "sha256": "67cc3af9eeaf1eecc32d6816dc86f2b7343fdec0be413a9e32313ca49b846d75",
+                "triangles": 720,
+                "vertices": 692
+              },
+              {
+                "bounds": {
+                  "max": [-234.9232, -90.9047, 893.9954],
+                  "min": [-311.4018, -147.6532, 758.4376]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 79961,
+                "conceptId": "FMA38519",
+                "faces": 998,
+                "fileId": "FJ1494",
+                "name": "Right extensor pollicis brevis",
+                "representationId": "BP4818",
+                "sha256": "61cfb7481e1f7dea291cf59208719b08c27191156e38ffd25e744918836d957b",
+                "triangles": 998,
+                "vertices": 846
+              },
+              {
+                "bounds": {
+                  "max": [311.402, -90.9047, 893.995],
+                  "min": [234.923, -147.653, 758.438]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 79160,
+                "conceptId": "FMA38520",
+                "faces": 998,
+                "fileId": "FJ1494M",
+                "name": "Left extensor pollicis brevis",
+                "representationId": "BP9253",
+                "sha256": "13f92c6f30687f4b796bb9f449903d20f46b05a09418005baa8ce730cfd76352",
+                "triangles": 998,
+                "vertices": 846
+              },
+              {
+                "bounds": {
+                  "max": [-224.6277, -75.6649, 935.0895],
+                  "min": [-319.4259, -163.3753, 733.0375]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 110183,
+                "conceptId": "FMA38522",
+                "faces": 1326,
+                "fileId": "FJ1495",
+                "name": "Right extensor pollicis longus",
+                "representationId": "BP4816",
+                "sha256": "99a201417061edb3b2adc54fcd2b41eefa81c0e9e31027b43c41c328d1ade4f5",
+                "triangles": 1326,
+                "vertices": 1177
+              },
+              {
+                "bounds": {
+                  "max": [319.379, -75.6899, 935.089],
+                  "min": [224.628, -163.375, 733.037]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 109022,
+                "conceptId": "FMA38523",
+                "faces": 1326,
+                "fileId": "FJ1495M",
+                "name": "Left extensor pollicis longus",
+                "representationId": "BP8191",
+                "sha256": "b60c5e22a80aaab2f77c88357babc1ae22bdec2d51ee7a4eef8413ffd73b0a8e",
+                "triangles": 1326,
+                "vertices": 1178
+              },
+              {
+                "bounds": {
+                  "max": [-222.2974, -56.0641, 1056.3843],
+                  "min": [-254.1557, -90.5488, 932.5342]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 241649,
+                "conceptId": "FMA38513",
+                "faces": 3110,
+                "fileId": "FJ1505",
+                "name": "Right supinator",
+                "representationId": "BP4814",
+                "sha256": "83c5940f2c6516ecf5b0eb69de5dc0a056177b29f7bc046b94cc20c85460ae46",
+                "triangles": 3110,
+                "vertices": 2368
+              },
+              {
+                "bounds": {
+                  "max": [254.095, -56.2606, 1056.38],
+                  "min": [222.361, -90.5488, 932.534]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 240547,
+                "conceptId": "FMA38514",
+                "faces": 3110,
+                "fileId": "FJ1505M",
+                "name": "Left supinator",
+                "representationId": "BP8499",
+                "sha256": "bfc240c7d0db047b5defe13bad862115bfcd7ec3cb426c40630ed1738c3cd3d5",
+                "triangles": 3110,
+                "vertices": 2379
+              },
+              {
+                "bounds": {
+                  "max": [-220.3059, -65.959, 959.5225],
+                  "min": [-237.2061, -124.1021, 776.7098]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 102287,
+                "conceptId": "FMA38507",
+                "faces": 1208,
+                "fileId": "FJ1517",
+                "name": "Right extensor carpi ulnaris",
+                "representationId": "BP4829",
+                "sha256": "e6a4cec704d3601a33704b40ee1f3f7bce484017dd563d1f4d2da43331b3ffce",
+                "triangles": 1208,
+                "vertices": 1114
+              },
+              {
+                "bounds": {
+                  "max": [237.151, -65.9683, 959.523],
+                  "min": [220.306, -124.102, 776.71]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 101397,
+                "conceptId": "FMA38508",
+                "faces": 1208,
+                "fileId": "FJ1517M",
+                "name": "Left extensor carpi ulnaris",
+                "representationId": "BP7970",
+                "sha256": "dad2acf99146ad290d327a6d3e9e0c8fa214c26880d9f85292d4c4eb4554500f",
+                "triangles": 1208,
+                "vertices": 1116
+              }
+            ],
+            "name": "muscle of posterior compartment of forearm",
+            "rootConceptId": "FMA38488"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "forearm-flexors-extensors",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "forearm flexor/extensor groupings",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "lateral-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-61.1287, -5.7653, 423.3556],
+                  "min": [-117.1885, -80.6506, 132.8006]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 201640,
+                "conceptId": "FMA45960",
+                "faces": 3052,
+                "fileId": "FJ1394",
+                "name": "Lateral head of right gastrocnemius",
+                "representationId": "BP5541",
+                "sha256": "621dc10e974bcc1c53a8843bf1db3a1c322c8327d279010c58533bd28952bf08",
+                "triangles": 3052,
+                "vertices": 1748
+              },
+              {
+                "bounds": {
+                  "max": [116.992, -5.8091, 423.261],
+                  "min": [61.167, -80.6506, 132.801]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 200155,
+                "conceptId": "FMA45961",
+                "faces": 3052,
+                "fileId": "FJ1394M",
+                "name": "Lateral head of left gastrocnemius",
+                "representationId": "BP7939",
+                "sha256": "18df6c6fe718aa0d60f4a98ad9ed3dab7d95c1da0aacd641a498b97ddf31ceb6",
+                "triangles": 3052,
+                "vertices": 1746
+              }
+            ],
+            "name": "lateral head of gastrocnemius",
+            "rootConceptId": "FMA45959"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "medial-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-21.508, -13.5901, 432.1017],
+                  "min": [-74.2964, -92.6934, 122.8331]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 260975,
+                "conceptId": "FMA45957",
+                "faces": 3842,
+                "fileId": "FJ1397",
+                "name": "Medial head of right gastrocnemius",
+                "representationId": "BP5539",
+                "sha256": "d7f3aa44801171baade1a59c40a8f8bda72097bec07047f93f24ebaac4546cb4",
+                "triangles": 3842,
+                "vertices": 2263
+              },
+              {
+                "bounds": {
+                  "max": [74.2358, -13.6614, 432.102],
+                  "min": [21.7597, -92.6934, 122.833]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 258641,
+                "conceptId": "FMA45958",
+                "faces": 3842,
+                "fileId": "FJ1397M",
+                "name": "Medial head of left gastrocnemius",
+                "representationId": "BP9217",
+                "sha256": "43545b226adb517579273570e6bcb30943c5f22a1687aba6e11d6e1634175f05",
+                "triangles": 3842,
+                "vertices": 2264
+              }
+            ],
+            "name": "medial head of gastrocnemius",
+            "rootConceptId": "FMA45956"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "gastrocnemius-heads",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "gastrocnemius heads",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "gluteus-maximus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [1.7242, 20.1995, 932.5571],
+                  "min": [-145.4008, -78.0115, 667.7446]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 197385,
+                "conceptId": "FMA22328",
+                "faces": 2376,
+                "fileId": "FJ1418",
+                "name": "Right gluteus maximus",
+                "representationId": "BP5065",
+                "sha256": "e576dd907b8bb9b373beda7ba9cb14cce4c958def4b782ad6563b6e2fbe71d46",
+                "triangles": 2376,
+                "vertices": 2053
+              },
+              {
+                "bounds": {
+                  "max": [145.401, 19.8663, 932.557],
+                  "min": [-1.5209, -78.0115, 667.745]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 195419,
+                "conceptId": "FMA22329",
+                "faces": 2376,
+                "fileId": "FJ1418M",
+                "name": "Left gluteus maximus",
+                "representationId": "BP8401",
+                "sha256": "abde060eaa4c4e1b3da0a865a804a2c8b7790d2994cc1fe8c133dd541c92d90e",
+                "triangles": 2376,
+                "vertices": 2053
+              }
+            ],
+            "name": "gluteus maximus",
+            "rootConceptId": "FMA22314"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "gluteus-maximus",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "gluteus maximus",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "gluteus-medius",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-59.5963, -16.7289, 950.903],
+                  "min": [-149.9244, -102.2781, 788.7433]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 246651,
+                "conceptId": "FMA22330",
+                "faces": 3356,
+                "fileId": "FJ1419",
+                "name": "Right gluteus medius",
+                "representationId": "BP5063",
+                "sha256": "e2e06899b8a61640b32086432ec4b577b2bf2db6f044d469c01bdceb38bd3831",
+                "triangles": 3356,
+                "vertices": 2312
+              },
+              {
+                "bounds": {
+                  "max": [149.735, -16.9342, 950.903],
+                  "min": [59.5963, -101.998, 788.743]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 244392,
+                "conceptId": "FMA22331",
+                "faces": 3356,
+                "fileId": "FJ1419M",
+                "name": "Left gluteus medius",
+                "representationId": "BP9213",
+                "sha256": "37f92300b952b93099dd8dd417b154b1af7484fd28780d990ff21e0e7684af84",
+                "triangles": 3356,
+                "vertices": 2308
+              }
+            ],
+            "name": "gluteus medius",
+            "rootConceptId": "FMA22315"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "gluteus-medius",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "gluteus medius",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "gluteus-minimus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-67.7084, -46.3236, 923.2551],
+                  "min": [-145.197, -102.2768, 783.2797]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 321500,
+                "conceptId": "FMA22332",
+                "faces": 4208,
+                "fileId": "FJ1420",
+                "name": "Right gluteus minimus",
+                "representationId": "BP5083",
+                "sha256": "61ebd1c4cd97adb69324aa74325c05425dbf37f83862a34c6a2f7400c3c017cd",
+                "triangles": 4208,
+                "vertices": 3066
+              },
+              {
+                "bounds": {
+                  "max": [145.137, -46.3719, 923.255],
+                  "min": [67.7084, -102.277, 783.28]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 318764,
+                "conceptId": "FMA22333",
+                "faces": 4208,
+                "fileId": "FJ1420M",
+                "name": "Left gluteus minimus",
+                "representationId": "BP8623",
+                "sha256": "d4fd7a31338758607094164c2d8e3a39f8cd1f5baee7624a0391a7ddd8168272",
+                "triangles": 4208,
+                "vertices": 3066
+              }
+            ],
+            "name": "gluteus minimus",
+            "rootConceptId": "FMA22317"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "gluteus-minimus",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "gluteus minimus",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "biceps-femoris-long",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-48.6306, -18.2259, 764.7527],
+                  "min": [-126.7175, -72.1878, 327.9048]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 341489,
+                "conceptId": "FMA45888",
+                "faces": 5110,
+                "fileId": "FJ1395",
+                "name": "Long head of right biceps femoris",
+                "representationId": "BP5575",
+                "sha256": "0c22806bfd2a0f8745023a7d438250411f9d013f3d966c5c75335f5b57f8e142",
+                "triangles": 5110,
+                "vertices": 2838
+              },
+              {
+                "bounds": {
+                  "max": [126.642, -18.3095, 764.753],
+                  "min": [48.6927, -72.1878, 327.905]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 338042,
+                "conceptId": "FMA45889",
+                "faces": 5110,
+                "fileId": "FJ1395M",
+                "name": "Long head of left biceps femoris",
+                "representationId": "BP8331",
+                "sha256": "f9b7a8bc5db9ff1c7a6dc25fb15cdac175c96d4a52ec9304709dff5468e8a11b",
+                "triangles": 5110,
+                "vertices": 2837
+              }
+            ],
+            "name": "long head of biceps femoris",
+            "rootConceptId": "FMA45887"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "biceps-femoris-short",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-80.6712, -50.822, 646.6197],
+                  "min": [-117.5783, -87.5258, 328.1896]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 124350,
+                "conceptId": "FMA45891",
+                "faces": 1728,
+                "fileId": "FJ1444",
+                "name": "Short head of right biceps femoris",
+                "representationId": "BP5573",
+                "sha256": "c071097501796cee5ff2a011b3d84c7bea4cb153241fce0f8b0a73d070bd990f",
+                "triangles": 1728,
+                "vertices": 1211
+              },
+              {
+                "bounds": {
+                  "max": [117.409, -50.8818, 646.62],
+                  "min": [80.6712, -87.4787, 328.19]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 123463,
+                "conceptId": "FMA45892",
+                "faces": 1728,
+                "fileId": "FJ1444M",
+                "name": "Short head of left biceps femoris",
+                "representationId": "BP8616",
+                "sha256": "2794a3899545d9b66f61fb9de3459132b577939c63b527fae101d497e28b154e",
+                "triangles": 1728,
+                "vertices": 1215
+              }
+            ],
+            "name": "short head of biceps femoris",
+            "rootConceptId": "FMA45890"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "semimembranosus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-13.024, -37.1625, 754.4864],
+                  "min": [-71.1368, -103.5967, 315.866]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 307942,
+                "conceptId": "FMA22448",
+                "faces": 4612,
+                "fileId": "FJ1435",
+                "name": "Right semimembranosus",
+                "representationId": "BP4989",
+                "sha256": "1fdce0f7db538e4731207af06a293e41037c2474192f61ca2cb5b0d663b16894",
+                "triangles": 4612,
+                "vertices": 2588
+              },
+              {
+                "bounds": {
+                  "max": [70.9991, -37.3296, 754.438],
+                  "min": [13.1749, -103.495, 315.926]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 305370,
+                "conceptId": "FMA22449",
+                "faces": 4612,
+                "fileId": "FJ1435M",
+                "name": "Left semimembranosus",
+                "representationId": "BP7829",
+                "sha256": "27c6f7bdf85a103b4247153f4ca08c846ef0037b92d5032af542496822647cad",
+                "triangles": 4612,
+                "vertices": 2588
+              }
+            ],
+            "name": "semimembranosus",
+            "rootConceptId": "FMA22438"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "semitendinosus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-26.7838, -24.7199, 763.7029],
+                  "min": [-68.2937, -98.5865, 283.1248]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 195220,
+                "conceptId": "FMA22358",
+                "faces": 2712,
+                "fileId": "FJ1436",
+                "name": "Right semitendinosus",
+                "representationId": "BP4991",
+                "sha256": "a9351992df5093e761784b73ca3f4a7d09d0c997e3cef2f840a45b863eb7097d",
+                "triangles": 2712,
+                "vertices": 1812
+              },
+              {
+                "bounds": {
+                  "max": [68.2937, -24.7803, 763.703],
+                  "min": [26.9357, -98.5865, 283.125]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 192790,
+                "conceptId": "FMA22359",
+                "faces": 2712,
+                "fileId": "FJ1436M",
+                "name": "Left semitendinosus",
+                "representationId": "BP9066",
+                "sha256": "e97560023348e6d7aa6d1586862a9717b6ae6ffb72f8ceee8ecf43f3f63c567f",
+                "triangles": 2712,
+                "vertices": 1808
+              }
+            ],
+            "name": "semitendinosus",
+            "rootConceptId": "FMA22357"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "hamstrings",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "hamstring components",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "adductor-brevis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-23.0081, -79.6507, 798.6393],
+                  "min": [-98.4602, -126.5201, 601.7214]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 109236,
+                "conceptId": "FMA22452",
+                "faces": 1464,
+                "fileId": "FJ1401",
+                "name": "Right adductor brevis",
+                "representationId": "BP4986",
+                "sha256": "388e7598162d73b22c18d198b9fa4abb5359eb95ffbbfbf0941740df85e0a4f6",
+                "triangles": 1464,
+                "vertices": 1091
+              },
+              {
+                "bounds": {
+                  "max": [98.4602, -79.7089, 798.552],
+                  "min": [23.0962, -126.52, 601.721]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 107666,
+                "conceptId": "FMA22454",
+                "faces": 1464,
+                "fileId": "FJ1401M",
+                "name": "Left adductor brevis",
+                "representationId": "BP9099",
+                "sha256": "0d4bbe6e641e42b29c32bee8e8e9ad627ff8ed52c1eb6daf805e4661aab3c14f",
+                "triangles": 1464,
+                "vertices": 1089
+              }
+            ],
+            "name": "adductor brevis",
+            "rootConceptId": "FMA22442"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "adductor-longus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-16.9058, -89.3758, 799.6647],
+                  "min": [-94.499, -137.0085, 510.2039]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 174040,
+                "conceptId": "FMA22456",
+                "faces": 2616,
+                "fileId": "FJ1402",
+                "name": "Right adductor longus",
+                "representationId": "BP4984",
+                "sha256": "f5165be945dbae2a81a1261b5f5c169c9ba677e80c70af263a08efc2f57f3f53",
+                "triangles": 2616,
+                "vertices": 1536
+              },
+              {
+                "bounds": {
+                  "max": [94.1022, -89.3758, 799.665],
+                  "min": [17.0402, -136.971, 510.204]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 172318,
+                "conceptId": "FMA22457",
+                "faces": 2616,
+                "fileId": "FJ1402M",
+                "name": "Left adductor longus",
+                "representationId": "BP8604",
+                "sha256": "6b2f97b45dddd3045655cd1495f09db6baa4d3b9c19a84af5e00f0745c193d88",
+                "triangles": 2616,
+                "vertices": 1536
+              }
+            ],
+            "name": "adductor longus",
+            "rootConceptId": "FMA22441"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "adductor-magnus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-13.3939, -54.2239, 777.3289],
+                  "min": [-112.2364, -113.1994, 379.9645]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 478061,
+                "conceptId": "FMA22459",
+                "faces": 5972,
+                "fileId": "FJ1403",
+                "name": "Right adductor magnus",
+                "representationId": "BP4982",
+                "sha256": "e9a3ed2907b10d8f4d93c78f04eb0c4b3b96a44230958b90979a0d7142695fdd",
+                "triangles": 5972,
+                "vertices": 4560
+              },
+              {
+                "bounds": {
+                  "max": [112.213, -54.441, 777.329],
+                  "min": [13.6994, -113.02, 379.965]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 471924,
+                "conceptId": "FMA22460",
+                "faces": 5972,
+                "fileId": "FJ1403M",
+                "name": "Left adductor magnus",
+                "representationId": "BP8972",
+                "sha256": "e4c650b3ce2ede4c4a4203a90bd553c1bcc82b0c7931180ec54251d744142759",
+                "triangles": 5972,
+                "vertices": 4562
+              }
+            ],
+            "name": "adductor magnus",
+            "rootConceptId": "FMA22443"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "hip-adductors",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "hip adductor group",
+        "present": true
+      },
+      {
+        "components": [],
+        "exclusionReason": "No matching FMA concept or mesh exists in the checksum-pinned IS-A or PART-OF releases.",
+        "id": "internal-oblique",
+        "inclusionReason": null,
+        "label": "internal oblique",
+        "present": false
+      },
+      {
+        "components": [],
+        "exclusionReason": "No matching FMA concept or mesh exists in the checksum-pinned IS-A or PART-OF releases.",
+        "id": "latissimus-dorsi",
+        "inclusionReason": null,
+        "label": "latissimus dorsi",
+        "present": false
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "iliacus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-72.6444, -46.2388, 957.9915],
+                  "min": [-127.2538, -129.4488, 733.8221]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 238318,
+                "conceptId": "FMA22322",
+                "faces": 2862,
+                "fileId": "FJ1422",
+                "name": "Right iliacus",
+                "representationId": "BP5085",
+                "sha256": "e7201ed4264a06a3689592625a20abcc9aed26435f0797a1e8e41b68335d1e24",
+                "triangles": 2862,
+                "vertices": 2447
+              },
+              {
+                "bounds": {
+                  "max": [127.254, -46.3534, 957.991],
+                  "min": [72.7491, -129.449, 733.822]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 236600,
+                "conceptId": "FMA22323",
+                "faces": 2862,
+                "fileId": "FJ1422M",
+                "name": "Left iliacus",
+                "representationId": "BP8312",
+                "sha256": "0f8dc9b412a3f0095a86db8aeca0bd80edf0a80b75d92f5edb5e0c4e1186e164",
+                "triangles": 2862,
+                "vertices": 2452
+              }
+            ],
+            "name": "iliacus",
+            "rootConceptId": "FMA22310"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "psoas-major",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-7.4752, -53.1349, 1098.7407],
+                  "min": [-113.8045, -119.9172, 735.1077]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 379043,
+                "conceptId": "FMA22342",
+                "faces": 4900,
+                "fileId": "FJ1431",
+                "name": "Right psoas major",
+                "representationId": "BP4701",
+                "sha256": "b66009da13d6241d66de3c0242288abfe0c90ce1c76b38000f9a92b02e2f1e0f",
+                "triangles": 4900,
+                "vertices": 3632
+              },
+              {
+                "bounds": {
+                  "max": [113.757, -53.1349, 1098.74],
+                  "min": [7.4752, -119.566, 735.215]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 376391,
+                "conceptId": "FMA22343",
+                "faces": 4900,
+                "fileId": "FJ1431M",
+                "name": "Left psoas major",
+                "representationId": "BP8373",
+                "sha256": "6ab42a645723e66a32b2c64e72be87e0a13fb497cbbf2ff29d26bc827fbaa0ce",
+                "triangles": 4900,
+                "vertices": 3634
+              }
+            ],
+            "name": "psoas major",
+            "rootConceptId": "FMA18060"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "major-hip-flexors",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "major hip flexors",
+        "present": true
+      },
+      {
+        "components": [],
+        "exclusionReason": "No matching FMA concept or mesh exists in the checksum-pinned IS-A or PART-OF releases.",
+        "id": "multifidus",
+        "inclusionReason": null,
+        "label": "multifidus grouping",
+        "present": false
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "abdominal",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-48, -81.6289, 1277.9364],
+                  "min": [-180.8963, -213.7461, 1104.7821]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 105002,
+                "conceptId": "FMA45874",
+                "faces": 1536,
+                "fileId": "FJ1446",
+                "name": "Abdominal part of right pectoralis major",
+                "representationId": "BP5615",
+                "sha256": "7a0d77a63b06d4212998bec86f84853287c3a21696ec7afc92c7767c987a726d",
+                "triangles": 1536,
+                "vertices": 1019
+              },
+              {
+                "bounds": {
+                  "max": [180.896, -81.7564, 1277.9399],
+                  "min": [48, -213.628, 1104.78]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 103977,
+                "conceptId": "FMA45875",
+                "faces": 1536,
+                "fileId": "FJ1446M",
+                "name": "Abdominal part of left pectoralis major",
+                "representationId": "BP7862",
+                "sha256": "3f9dbd5c3f6fdf043454f251d69ea96547dca4bc1efbf7bffd85315fc1a9fd34",
+                "triangles": 1536,
+                "vertices": 1019
+              }
+            ],
+            "name": "abdominal part of pectoralis major",
+            "rootConceptId": "FMA34699"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "clavicular",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-26.4139, -82, 1335.8962],
+                  "min": [-194.2617, -145.1914, 1234.5129]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 141480,
+                "conceptId": "FMA34690",
+                "faces": 1846,
+                "fileId": "FJ1447",
+                "name": "Clavicular part of right pectoralis major",
+                "representationId": "BP5582",
+                "sha256": "e239a63adf99dfc094ece7efcd91ec7cd9ac802e9d7581141b311a7842fbbbe6",
+                "triangles": 1846,
+                "vertices": 1492
+              },
+              {
+                "bounds": {
+                  "max": [194.262, -82, 1335.9],
+                  "min": [26.4139, -145.096, 1234.51]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 140158,
+                "conceptId": "FMA34691",
+                "faces": 1846,
+                "fileId": "FJ1447M",
+                "name": "Clavicular part of left pectoralis major",
+                "representationId": "BP9095",
+                "sha256": "aab8ea03eed46a79b3f765ef539df785deb333e5079c21f8c7bec14444768a18",
+                "triangles": 1846,
+                "vertices": 1495
+              }
+            ],
+            "name": "clavicular part of pectoralis major",
+            "rootConceptId": "FMA34687"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "sternocostal",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-4.8156, -81, 1313.9423],
+                  "min": [-187.8484, -219.582, 1140.6141]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 556794,
+                "conceptId": "FMA79979",
+                "faces": 7114,
+                "fileId": "FJ1464",
+                "name": "Sternocostal part of right pectoralis major",
+                "representationId": "BP5613",
+                "sha256": "f446df845d19385cdbd5b86457c8690981cbc914f8f9595b50bdc4a44505aab7",
+                "triangles": 7114,
+                "vertices": 5480
+              },
+              {
+                "bounds": {
+                  "max": [187.848, -81, 1313.8001],
+                  "min": [4.8156, -219.353, 1140.61]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 551361,
+                "conceptId": "FMA79980",
+                "faces": 7114,
+                "fileId": "FJ1464M",
+                "name": "Sternocostal part of left pectoralis major",
+                "representationId": "BP8323",
+                "sha256": "a2ffa047e9cff27df3ed7cb5f305491ce921f236cfe60ee90334cc5fead271c3",
+                "triangles": 7114,
+                "vertices": 5466
+              }
+            ],
+            "name": "sternocostal part of pectoralis major",
+            "rootConceptId": "FMA34696"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "pectoralis-major",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "pectoralis major",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "rectus-femoris",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-62.8828, -83.8998, 871.104],
+                  "min": [-154.4494, -152.6659, 314.6398]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 389745,
+                "conceptId": "FMA38928",
+                "faces": 5688,
+                "fileId": "FJ1433",
+                "name": "Right rectus femoris",
+                "representationId": "BP5598",
+                "sha256": "a5f75907d784dd2a44d7efa96cb31009aba2afe43465336b105561751b19f8ef",
+                "triangles": 5688,
+                "vertices": 3326
+              },
+              {
+                "bounds": {
+                  "max": [154.449, -83.8998, 871.104],
+                  "min": [62.9145, -152.466, 314.708]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 386385,
+                "conceptId": "FMA38929",
+                "faces": 5688,
+                "fileId": "FJ1433M",
+                "name": "Left rectus femoris",
+                "representationId": "BP8094",
+                "sha256": "3871310f1c1f76ca55cfa4fe043d2e3a25488903fe695674a87c7c893cdc99ae",
+                "triangles": 5688,
+                "vertices": 3326
+              }
+            ],
+            "name": "rectus femoris",
+            "rootConceptId": "FMA22430"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "vastus-intermedius",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-76.2071, -76.2608, 769.7438],
+                  "min": [-133.2139, -135.232, 342.4849]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 305079,
+                "conceptId": "FMA38934",
+                "faces": 4260,
+                "fileId": "FJ1441",
+                "name": "Right vastus intermedius",
+                "representationId": "BP5604",
+                "sha256": "c609da3e64f0fc6c295b66b575503e61cacc8bfd9a5e5ec9b79e4eb476da5bab",
+                "triangles": 4260,
+                "vertices": 2748
+              },
+              {
+                "bounds": {
+                  "max": [133.096, -76.2608, 769.744],
+                  "min": [76.2071, -135.139, 342.485]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 302163,
+                "conceptId": "FMA38935",
+                "faces": 4260,
+                "fileId": "FJ1441M",
+                "name": "Left vastus intermedius",
+                "representationId": "BP9207",
+                "sha256": "5245d285eb09ba0364a1b4ad8a21a6621183310c544c412bb39542e1517815db",
+                "triangles": 4260,
+                "vertices": 2744
+              }
+            ],
+            "name": "vastus intermedius",
+            "rootConceptId": "FMA22433"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "vastus-lateralis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-84.0565, -57.3671, 788.1671],
+                  "min": [-159.7767, -137.0514, 317.932]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 464679,
+                "conceptId": "FMA38930",
+                "faces": 6688,
+                "fileId": "FJ1442",
+                "name": "Right vastus lateralis",
+                "representationId": "BP5602",
+                "sha256": "f67be78d7d0ddc6e78c0683ce4bd5be7492e4137f8661bc54039cbf535a88880",
+                "triangles": 6688,
+                "vertices": 3975
+              },
+              {
+                "bounds": {
+                  "max": [159.633, -57.5032, 788.167],
+                  "min": [84.0565, -137.051, 317.932]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 460942,
+                "conceptId": "FMA38931",
+                "faces": 6688,
+                "fileId": "FJ1442M",
+                "name": "Left vastus lateralis",
+                "representationId": "BP8754",
+                "sha256": "507caa464730c508c2fd2f6958f9a5660fb6ca188bc38fafb5c9b5556ac6732b",
+                "triangles": 6688,
+                "vertices": 3974
+              }
+            ],
+            "name": "vastus lateralis",
+            "rootConceptId": "FMA22431"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "vastus-medialis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-34.827, -89.132, 738.1791],
+                  "min": [-105.6012, -146.9768, 340.5477]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 317804,
+                "conceptId": "FMA38932",
+                "faces": 4552,
+                "fileId": "FJ1443",
+                "name": "Right vastus medialis",
+                "representationId": "BP5600",
+                "sha256": "5bdb79f52849241e20ff2280332f20efd38f1b4bda1fb1337e10a5c3e466002b",
+                "triangles": 4552,
+                "vertices": 2773
+              },
+              {
+                "bounds": {
+                  "max": [105.601, -89.132, 738.179],
+                  "min": [34.9393, -146.901, 340.548]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 315070,
+                "conceptId": "FMA38933",
+                "faces": 4552,
+                "fileId": "FJ1443M",
+                "name": "Left vastus medialis",
+                "representationId": "BP9128",
+                "sha256": "8ca4d66734150402401722e8a82f52ada8af9d6973592e127431b742dfe46ad4",
+                "triangles": 4552,
+                "vertices": 2772
+              }
+            ],
+            "name": "vastus medialis",
+            "rootConceptId": "FMA22432"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "quadriceps",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "quadriceps components",
+        "present": true
+      },
+      {
+        "components": [],
+        "exclusionReason": "No matching FMA concept or mesh exists in the checksum-pinned IS-A or PART-OF releases.",
+        "id": "rectus-abdominis",
+        "inclusionReason": null,
+        "label": "rectus abdominis",
+        "present": false
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "major",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [0.8199, 6.0922, 1361.6567],
+                  "min": [-89.5036, -22.0981, 1188.1918]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 549548,
+                "conceptId": "FMA13381",
+                "faces": 7202,
+                "fileId": "FJ1536",
+                "name": "Right rhomboid major",
+                "representationId": "BP4780",
+                "sha256": "81b84d6d2e7c859004ee2d71f8fef2768ec422fbace3967d54e3f3b2965bdb89",
+                "triangles": 7202,
+                "vertices": 5057
+              },
+              {
+                "bounds": {
+                  "max": [89.5036, 6.0922, 1361.66],
+                  "min": [-0.7768, -22.0981, 1188.1899]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 544456,
+                "conceptId": "FMA13382",
+                "faces": 7202,
+                "fileId": "FJ1536M",
+                "name": "Left rhomboid major",
+                "representationId": "BP9245",
+                "sha256": "89601e72c95415990585118c08e0fb1b9c388f5bfa2b45ac1de116759f663701",
+                "triangles": 7202,
+                "vertices": 5063
+              }
+            ],
+            "name": "rhomboid major",
+            "rootConceptId": "FMA13379"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "minor",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [0.9161, -4.7702, 1387.5121],
+                  "min": [-61.7606, -36.0764, 1280.8032]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 157909,
+                "conceptId": "FMA13383",
+                "faces": 2206,
+                "fileId": "FJ1537",
+                "name": "Right rhomboid minor",
+                "representationId": "BP4784",
+                "sha256": "acbd2dcd51879085bb2ec7d12b45c0ba2514ce3a2a1bb680bcf78732a1f688ff",
+                "triangles": 2206,
+                "vertices": 1506
+              },
+              {
+                "bounds": {
+                  "max": [61.7054, -4.816, 1387.51],
+                  "min": [-0.916, -36.0764, 1280.8001]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 156319,
+                "conceptId": "FMA13384",
+                "faces": 2206,
+                "fileId": "FJ1537M",
+                "name": "Left rhomboid minor",
+                "representationId": "BP8585",
+                "sha256": "c1708ef88207aef30c32673af54b7c3b8cad2863a29a17f1f7a54859f96232a4",
+                "triangles": 2206,
+                "vertices": 1505
+              }
+            ],
+            "name": "rhomboid minor",
+            "rootConceptId": "FMA13380"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "rhomboids",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "rhomboids",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "infraspinatus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-60.2584, 4.0817, 1331.084],
+                  "min": [-189.1577, -77.087, 1206.532]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 69844,
+                "conceptId": "FMA32547",
+                "faces": 866,
+                "fileId": "FJ1500",
+                "name": "Right infraspinatus muscle",
+                "representationId": "BP4797",
+                "sha256": "28f61376a3a88a28d14c44e1c20e9b7a34129772c130afa003daceac801455b1",
+                "triangles": 866,
+                "vertices": 743
+              },
+              {
+                "bounds": {
+                  "max": [189.05, 3.6661, 1330.98],
+                  "min": [60.2584, -77.087, 1206.53]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 69046,
+                "conceptId": "FMA32548",
+                "faces": 866,
+                "fileId": "FJ1500M",
+                "name": "Left infraspinatus muscle",
+                "representationId": "BP8965",
+                "sha256": "9013158a3c598eb6dbf95dcaf72da439721dec4d3ebc37f660db9c2748f1e42e",
+                "triangles": 866,
+                "vertices": 738
+              }
+            ],
+            "name": "infraspinatus",
+            "rootConceptId": "FMA32546"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "subscapularis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-63.1822, -2.7578, 1324.8041],
+                  "min": [-166.1167, -100.0486, 1195.1649]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 231733,
+                "conceptId": "FMA13414",
+                "faces": 2092,
+                "fileId": "FJ1504",
+                "name": "Right subscapularis",
+                "representationId": "BP4795",
+                "sha256": "fdcbfd01f93e2d24bd73f5cb259a311c9f9e90de08c41573439844eef5f605dd",
+                "triangles": 2092,
+                "vertices": 2775
+              },
+              {
+                "bounds": {
+                  "max": [166.117, -2.7578, 1324.8001],
+                  "min": [63.1822, -99.955, 1195.16]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 228104,
+                "conceptId": "FMA13415",
+                "faces": 2092,
+                "fileId": "FJ1504M",
+                "name": "Left subscapularis",
+                "representationId": "BP8214",
+                "sha256": "926fe07c8cf1056aa3aedda2f3a02a5027f4ef24cc5d41ba1359c53eedce1bc6",
+                "triangles": 2092,
+                "vertices": 2759
+              }
+            ],
+            "name": "subscapularis",
+            "rootConceptId": "FMA13413"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "supraspinatus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-63.876, -12.9613, 1342.7391],
+                  "min": [-188.6518, -91.9013, 1307.3385]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 76172,
+                "conceptId": "FMA32544",
+                "faces": 878,
+                "fileId": "FJ1506",
+                "name": "Right supraspinatus",
+                "representationId": "BP4791",
+                "sha256": "793771eceb64385269ddeeb09245e8c53b67499194f6fa98049b5e17aafa8e0c",
+                "triangles": 878,
+                "vertices": 843
+              },
+              {
+                "bounds": {
+                  "max": [188.443, -12.9613, 1342.37],
+                  "min": [63.876, -91.9013, 1307.34]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 75068,
+                "conceptId": "FMA32545",
+                "faces": 878,
+                "fileId": "FJ1506M",
+                "name": "Left supraspinatus",
+                "representationId": "BP8376",
+                "sha256": "6d6741ab840272a59d50c59cd87ccfa676e1f72fa9b600bba06bf9c24d1e01fe",
+                "triangles": 878,
+                "vertices": 842
+              }
+            ],
+            "name": "supraspinatus",
+            "rootConceptId": "FMA9629"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "teres-minor",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-105.4089, -12.2812, 1316.9154],
+                  "min": [-190.8236, -80.3424, 1220.5625]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 38012,
+                "conceptId": "FMA32553",
+                "faces": 506,
+                "fileId": "FJ1508",
+                "name": "Right teres minor",
+                "representationId": "BP4793",
+                "sha256": "f56e595b86cea659891664706cd4443acddd8dc69e4e5bb3855445eef302641a",
+                "triangles": 506,
+                "vertices": 392
+              },
+              {
+                "bounds": {
+                  "max": [190.555, -12.4062, 1316.92],
+                  "min": [105.409, -80.3106, 1220.5601]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 37682,
+                "conceptId": "FMA32554",
+                "faces": 506,
+                "fileId": "FJ1508M",
+                "name": "Left teres minor",
+                "representationId": "BP9197",
+                "sha256": "4b07345bef6658a27bac6b2c7c2c52307bc769a804a80e7e657ce40e03427a17",
+                "triangles": 506,
+                "vertices": 391
+              }
+            ],
+            "name": "teres minor",
+            "rootConceptId": "FMA32550"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "rotator-cuff",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "rotator cuff muscles",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "soleus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-35.543, -32.0264, 358.6165],
+                  "min": [-115.7854, -91.2801, 32.4308]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 307036,
+                "conceptId": "FMA22558",
+                "faces": 4418,
+                "fileId": "FJ1437",
+                "name": "Right soleus",
+                "representationId": "BP4999",
+                "sha256": "c9c62b720ffe375a8eddf390608684a796f1ea54880a5c34fa440404addc399e",
+                "triangles": 4418,
+                "vertices": 2674
+              },
+              {
+                "bounds": {
+                  "max": [115.785, -32.1986, 358.617],
+                  "min": [35.6001, -91.1189, 32.464]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 303662,
+                "conceptId": "FMA22559",
+                "faces": 4418,
+                "fileId": "FJ1437M",
+                "name": "Left soleus",
+                "representationId": "BP8819",
+                "sha256": "66d10b2e0d114158a9b2aa8751b5967ca24f1231f2e2905ebde4755cab62902c",
+                "triangles": 4418,
+                "vertices": 2674
+              }
+            ],
+            "name": "soleus",
+            "rootConceptId": "FMA22542"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "soleus",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "soleus",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "iliocostalis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-22.3597, -5.938, 1419.7065],
+                  "min": [-73.5213, -80.8972, 1239.7733]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 237546,
+                "conceptId": "FMA22744",
+                "faces": 3072,
+                "fileId": "FJ1526",
+                "name": "Right iliocostalis cervicis",
+                "representationId": "BP4755",
+                "sha256": "0d2b4b780dd191b9e6518dc3a71ad8c032da0db3631a2a582969faf7dfdbb96b",
+                "triangles": 3072,
+                "vertices": 2315
+              },
+              {
+                "bounds": {
+                  "max": [73.506, -5.9855, 1419.71],
+                  "min": [22.3597, -80.8834, 1239.77]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 235971,
+                "conceptId": "FMA22745",
+                "faces": 3072,
+                "fileId": "FJ1526M",
+                "name": "Left iliocostalis cervicis",
+                "representationId": "BP8048",
+                "sha256": "edb4c7f871b6cee0ab8de9d31ad428b779a087a7b66dccf4421a806bfb11812d",
+                "triangles": 3072,
+                "vertices": 2326
+              },
+              {
+                "bounds": {
+                  "max": [-5.0456, 9.2097, 1238.8984],
+                  "min": [-102.3348, -35.5677, 830.0609]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 1189971,
+                "conceptId": "FMA22740",
+                "faces": 15872,
+                "fileId": "FJ1527",
+                "name": "Right iliocostalis lumborum",
+                "representationId": "BP4753",
+                "sha256": "8a15295f08faac150ee5f16fe1035398dcfa60d3cba8b42b504b53764032b718",
+                "triangles": 15872,
+                "vertices": 10585
+              },
+              {
+                "bounds": {
+                  "max": [102.321, 9.152, 1238.9],
+                  "min": [5.0771, -35.5677, 830.061]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 1178614,
+                "conceptId": "FMA22741",
+                "faces": 15872,
+                "fileId": "FJ1527M",
+                "name": "Left iliocostalis lumborum",
+                "representationId": "BP8937",
+                "sha256": "1c7f20b34a9639d1996e3ec18873beb6dc114169ae1d310e88e2c3d8b1ff2133",
+                "triangles": 15872,
+                "vertices": 10581
+              },
+              {
+                "bounds": {
+                  "max": [-41.7962, 0.7068, 1361.0127],
+                  "min": [-92.016, -75.3633, 1056.623]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 618808,
+                "conceptId": "FMA22742",
+                "faces": 8386,
+                "fileId": "FJ1528",
+                "name": "Right iliocostalis thoracis",
+                "representationId": "BP4751",
+                "sha256": "0ee5ad819949cd4197dd96b00373547b42f7e1831b2add6baea4baf3661f38fa",
+                "triangles": 8386,
+                "vertices": 5508
+              },
+              {
+                "bounds": {
+                  "max": [92.016, 0.6964, 1361.01],
+                  "min": [41.8522, -75.3633, 1056.62]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 613804,
+                "conceptId": "FMA22743",
+                "faces": 8386,
+                "fileId": "FJ1528M",
+                "name": "Left iliocostalis thoracis",
+                "representationId": "BP8748",
+                "sha256": "02a7addd5329689094506095570a458982b6dfc2f9509392bf310807183e3df7",
+                "triangles": 8386,
+                "vertices": 5509
+              }
+            ],
+            "name": "iliocostalis",
+            "rootConceptId": "FMA77177"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "longissimus",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-24.0834, -35.1513, 1499.8983],
+                  "min": [-60.4982, -79.0256, 1334.6425]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 179817,
+                "conceptId": "FMA22754",
+                "faces": 2260,
+                "fileId": "FJ1533",
+                "name": "Right longissimus capitis",
+                "representationId": "BP4748",
+                "sha256": "845e65ab735bc49c5026fab485f8dd2eb9624ac7c2519927578d7d7508e644cd",
+                "triangles": 2260,
+                "vertices": 1821
+              },
+              {
+                "bounds": {
+                  "max": [60.4982, -35.1513, 1499.9],
+                  "min": [24.0834, -78.9706, 1334.64]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 178291,
+                "conceptId": "FMA22756",
+                "faces": 2260,
+                "fileId": "FJ1533M",
+                "name": "Left longissimus capitis",
+                "representationId": "BP9081",
+                "sha256": "900be066826b7ac1f38f92a243b28474694c42a1fafa2934d55db020820c7178",
+                "triangles": 2260,
+                "vertices": 1824
+              },
+              {
+                "bounds": {
+                  "max": [-19.884, -12.9148, 1447.6241],
+                  "min": [-40.0135, -79.7243, 1251.8744]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 229177,
+                "conceptId": "FMA22757",
+                "faces": 2816,
+                "fileId": "FJ1534",
+                "name": "Right longissimus cervicis",
+                "representationId": "BP4746",
+                "sha256": "d89596561e6d76dc5d5e6895711d598201056b1c7a834ee0c593702ef9382608",
+                "triangles": 2816,
+                "vertices": 2325
+              },
+              {
+                "bounds": {
+                  "max": [39.7896, -13.1, 1447.62],
+                  "min": [19.884, -79.7243, 1251.87]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 227947,
+                "conceptId": "FMA22758",
+                "faces": 2816,
+                "fileId": "FJ1534M",
+                "name": "Left longissimus cervicis",
+                "representationId": "BP9126",
+                "sha256": "4d8e49d6e29673284fc79376aafb0baec2cc1999b6440b19a5310c550828a8ac",
+                "triangles": 2816,
+                "vertices": 2330
+              },
+              {
+                "bounds": {
+                  "max": [0.6631, 3.4703, 1370.4088],
+                  "min": [-68.7416, -70.6564, 849.0388]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 1319188,
+                "conceptId": "FMA22751",
+                "faces": 15068,
+                "fileId": "FJ1535",
+                "name": "Right longissimus thoracis",
+                "representationId": "BP4744",
+                "sha256": "b555761d298a4bea88a05d2067b0cfff507522546bfc0dcb9b3bad576a3449fa",
+                "triangles": 15068,
+                "vertices": 13066
+              },
+              {
+                "bounds": {
+                  "max": [68.7416, 3.4552, 1370.41],
+                  "min": [-0.663, -70.6564, 849.039]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 1306680,
+                "conceptId": "FMA22753",
+                "faces": 15068,
+                "fileId": "FJ1535M",
+                "name": "Left longissimus thoracis",
+                "representationId": "BP8985",
+                "sha256": "d238f10400abb5754b2ef1e920eacc720b69835cd31a229ef3d68468f4064a57",
+                "triangles": 15068,
+                "vertices": 13072
+              }
+            ],
+            "name": "longissimus",
+            "rootConceptId": "FMA77178"
+          },
+          {
+            "excludedMeshes": [
+              {
+                "bytes": 103745,
+                "fileId": "FJ1543",
+                "reason": "Official OBJ header has blank Representation ID, Concept ID, and English name; excluded because exact identity cannot be proven.",
+                "sha256": "3dc2e6367ead09b94da4551212a36692ecf56586be7c27d8b5e834d4c32e1fcb"
+              }
+            ],
+            "id": "spinalis",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [7.9614, -12.2537, 1435.42],
+                  "min": [0.0773, -43.4525, 1329.21]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 102979,
+                "conceptId": "FMA77179",
+                "faces": 1192,
+                "fileId": "FJ1543M",
+                "name": "Spinalis",
+                "representationId": "BP8423",
+                "sha256": "44647555062b70a3535586a83fae2cfc38441870a29e6b8f95bd5ffdd1af2af9",
+                "triangles": 1192,
+                "vertices": 1146
+              },
+              {
+                "bounds": {
+                  "max": [2.3039, 2.8865, 1334.7968],
+                  "min": [-12.114, -43.8988, 974.2387]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 598901,
+                "conceptId": "FMA22779",
+                "faces": 7422,
+                "fileId": "FJ1544",
+                "name": "Right spinalis thoracis",
+                "representationId": "BP4763",
+                "sha256": "d269ffdde57349435a3cfcc3c53c3b2532acf4ddaabfc7fdc8b0e3df66b15232",
+                "triangles": 7422,
+                "vertices": 5758
+              },
+              {
+                "bounds": {
+                  "max": [12.0499, 2.807, 1334.8001],
+                  "min": [-2.3039, -43.8988, 974.239]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 594041,
+                "conceptId": "FMA22780",
+                "faces": 7422,
+                "fileId": "FJ1544M",
+                "name": "Left spinalis thoracis",
+                "representationId": "BP8979",
+                "sha256": "b9a3a13c4b797eb8f3115dac3e80b5a83b03b9b34c25f7f2ef721810fa0c52d2",
+                "triangles": 7422,
+                "vertices": 5756
+              }
+            ],
+            "name": "spinalis",
+            "rootConceptId": "FMA77179"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "spinal-erectors",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "spinal erector grouping",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "teres-major",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-86.1425, 1.6568, 1285.3506],
+                  "min": [-172.2095, -79.5569, 1189.6538]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 93150,
+                "conceptId": "FMA32551",
+                "faces": 1042,
+                "fileId": "FJ1507",
+                "name": "Right teres major",
+                "representationId": "BP4789",
+                "sha256": "217aa2d39fdaa682998c8a1a1ffe9c8b37fed881edbbeb8ed5c633fa1541eaac",
+                "triangles": 1042,
+                "vertices": 1044
+              },
+              {
+                "bounds": {
+                  "max": [172.209, 1.5557, 1285.35],
+                  "min": [86.1425, -79.5569, 1189.65]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 92508,
+                "conceptId": "FMA32552",
+                "faces": 1042,
+                "fileId": "FJ1507M",
+                "name": "Left teres major",
+                "representationId": "BP8287",
+                "sha256": "967a771f0d2e0950adfe251ac14b4878f9b12a3aacb16cbf472dac94db38519d",
+                "triangles": 1042,
+                "vertices": 1052
+              }
+            ],
+            "name": "teres major",
+            "rootConceptId": "FMA32549"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "teres-major",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "teres major",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "tibialis-anterior",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-66.967, -72.6236, 355.2686],
+                  "min": [-116.9737, -149.5999, -38.8064]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 213354,
+                "conceptId": "FMA22544",
+                "faces": 2510,
+                "fileId": "FJ1439",
+                "name": "Right tibialis anterior",
+                "representationId": "BP5018",
+                "sha256": "b03d2f54644969d153d3dfe4025ee629858e72c1e5ee3b0e7d5f16f54dc505b3",
+                "triangles": 2510,
+                "vertices": 2204
+              },
+              {
+                "bounds": {
+                  "max": [116.779, -72.8246, 355.269],
+                  "min": [66.967, -149.6, -38.8064]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 211659,
+                "conceptId": "FMA22545",
+                "faces": 2510,
+                "fileId": "FJ1439M",
+                "name": "Left tibialis anterior",
+                "representationId": "BP8720",
+                "sha256": "948b094bcc119ddbfcfeec4cd27cf21125f27d2d3c25c5344091fbc05833e971",
+                "triangles": 2510,
+                "vertices": 2206
+              }
+            ],
+            "name": "tibialis anterior",
+            "rootConceptId": "FMA22532"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "tibialis-anterior",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "tibialis anterior",
+        "present": true
+      },
+      {
+        "components": [],
+        "exclusionReason": "No matching FMA concept or mesh exists in the checksum-pinned IS-A or PART-OF releases.",
+        "id": "transversus-abdominis",
+        "inclusionReason": null,
+        "label": "transversus abdominis",
+        "present": false
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "ascending",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [3.321, 24.6253, 1343.0248],
+                  "min": [-148.5859, -46.9637, 1054.006]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 812371,
+                "conceptId": "FMA33581",
+                "faces": 10530,
+                "fileId": "FJ1520",
+                "name": "Ascending part of right trapezius",
+                "representationId": "BP5638",
+                "sha256": "6bb3d13198991bda4d0aae27561976b9ba53b0d21d817f180098307c7b99deb1",
+                "triangles": 10530,
+                "vertices": 7533
+              },
+              {
+                "bounds": {
+                  "max": [148.586, 24.5466, 1342.97],
+                  "min": [-3.2544, -46.9637, 1054.01]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 807078,
+                "conceptId": "FMA33583",
+                "faces": 10530,
+                "fileId": "FJ1520M",
+                "name": "Ascending part of left trapezius",
+                "representationId": "BP8225",
+                "sha256": "5ca485d5bfe97fd5a9e17d76d2a77077577e13f19584f5634a8eb1bbc6d7da3d",
+                "triangles": 10530,
+                "vertices": 7507
+              }
+            ],
+            "name": "ascending part of trapezius",
+            "rootConceptId": "FMA32555"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "descending",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [3.5107, -7.6041, 1506.2427],
+                  "min": [-130.8405, -100.6604, 1340.5887]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 537515,
+                "conceptId": "FMA33586",
+                "faces": 7108,
+                "fileId": "FJ1521",
+                "name": "Descending part of right trapezius",
+                "representationId": "BP5636",
+                "sha256": "19bd9d1cbbb84e10826eb770068f6e271cd79dde960bca62ac71da24120fc354",
+                "triangles": 7108,
+                "vertices": 5023
+              },
+              {
+                "bounds": {
+                  "max": [130.84, -7.6135, 1506.24],
+                  "min": [-3.4884, -100.66, 1340.59]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 532693,
+                "conceptId": "FMA33587",
+                "faces": 7108,
+                "fileId": "FJ1521M",
+                "name": "Descending part of left trapezius",
+                "representationId": "BP8267",
+                "sha256": "fe756252f820a47e9c757f67de4ca37adf44837dbe0d10c6d2e5df3a5a6a0751",
+                "triangles": 7108,
+                "vertices": 4999
+              }
+            ],
+            "name": "descending part of trapezius",
+            "rootConceptId": "FMA32557"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "transverse",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [3.9492, 10.7742, 1382.1543],
+                  "min": [-163.2418, -69.6539, 1303.5778]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 351869,
+                "conceptId": "FMA33584",
+                "faces": 4460,
+                "fileId": "FJ1554",
+                "name": "Transverse part of right trapezius",
+                "representationId": "BP5610",
+                "sha256": "f7683d77a5bfe9ac6d07fdc913c46cf41db20298c087e71df73fab18192e90a4",
+                "triangles": 4460,
+                "vertices": 3535
+              },
+              {
+                "bounds": {
+                  "max": [163.242, 10.7009, 1382.11],
+                  "min": [-3.8727, -69.6539, 1303.63]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 348493,
+                "conceptId": "FMA33585",
+                "faces": 4460,
+                "fileId": "FJ1554M",
+                "name": "Transverse part of left trapezius",
+                "representationId": "BP8252",
+                "sha256": "a08a23c17d20a120eebe96a9c8db1bb86672529fb8f34868d5f7cd28f5df98d5",
+                "triangles": 4460,
+                "vertices": 3535
+              }
+            ],
+            "name": "transverse part of trapezius",
+            "rootConceptId": "FMA32556"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "trapezius-regions",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "trapezius regions",
+        "present": true
+      },
+      {
+        "components": [
+          {
+            "excludedMeshes": [],
+            "id": "lateral-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-174.4556, -20.0473, 1292.2262],
+                  "min": [-228.3113, -69.01, 1035.9373]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 182250,
+                "conceptId": "FMA37697",
+                "faces": 2606,
+                "fileId": "FJ1477",
+                "name": "Lateral head of right triceps brachii",
+                "representationId": "BP5550",
+                "sha256": "1d1c3b42eec0dffe696bd25cffa81784c87c15f16c9605050fdf1cb2f47698dd",
+                "triangles": 2606,
+                "vertices": 1678
+              },
+              {
+                "bounds": {
+                  "max": [228.005, -20.0842, 1292.13],
+                  "min": [174.456, -68.7968, 1035.97]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 180451,
+                "conceptId": "FMA37698",
+                "faces": 2606,
+                "fileId": "FJ1477M",
+                "name": "Lateral head of left triceps brachii",
+                "representationId": "BP8525",
+                "sha256": "96d9859e983736f53864e53fa0579b8f6a18006067967df42e4fe7ea2d2b9e6f",
+                "triangles": 2606,
+                "vertices": 1676
+              }
+            ],
+            "name": "lateral head of triceps brachii",
+            "rootConceptId": "FMA37694"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "long-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-134.1845, -18.5477, 1300.7478],
+                  "min": [-216.4615, -64.1021, 1035.2449]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 113287,
+                "conceptId": "FMA37699",
+                "faces": 1588,
+                "fileId": "FJ1479",
+                "name": "Long head of right triceps brachii",
+                "representationId": "BP5564",
+                "sha256": "acc48f746bd07a117357a9c49a1a9850c96b85d7c63cf90a662a45717875a315",
+                "triangles": 1588,
+                "vertices": 1105
+              },
+              {
+                "bounds": {
+                  "max": [216.462, -18.7596, 1300.75],
+                  "min": [134.691, -64.1021, 1035.24]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 112468,
+                "conceptId": "FMA37700",
+                "faces": 1588,
+                "fileId": "FJ1479M",
+                "name": "Long head of left triceps brachii",
+                "representationId": "BP8344",
+                "sha256": "4b8315f9134a213f45c3af830270f4526e705d0a149894516d3f5fba98878f15",
+                "triangles": 1588,
+                "vertices": 1109
+              }
+            ],
+            "name": "long head of triceps brachii",
+            "rootConceptId": "FMA37692"
+          },
+          {
+            "excludedMeshes": [],
+            "id": "medial-head",
+            "meshes": [
+              {
+                "bounds": {
+                  "max": [-167.0341, -46.1893, 1256.036],
+                  "min": [-226.9635, -71.8799, 1029.3177]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 61608,
+                "conceptId": "FMA37695",
+                "faces": 832,
+                "fileId": "FJ1480",
+                "name": "Medial head of right triceps brachii",
+                "representationId": "BP5562",
+                "sha256": "1ea653667afa5ff0bf0e01d71ac648819655241c130e8dd1778ed2f9561c34c5",
+                "triangles": 832,
+                "vertices": 620
+              },
+              {
+                "bounds": {
+                  "max": [226.963, -46.3172, 1256.04],
+                  "min": [167.374, -71.8799, 1029.35]
+                },
+                "buildLogic": "FMA 3.0 is_a",
+                "bytes": 60584,
+                "conceptId": "FMA37696",
+                "faces": 832,
+                "fileId": "FJ1480M",
+                "name": "Medial head of left triceps brachii",
+                "representationId": "BP8257",
+                "sha256": "fc35854102a057ca85a201eeff4c18f03722b1ceab52c311ce1b87abf4fa2ff8",
+                "triangles": 832,
+                "vertices": 617
+              }
+            ],
+            "name": "medial head of triceps brachii",
+            "rootConceptId": "FMA37693"
+          }
+        ],
+        "exclusionReason": null,
+        "id": "triceps-brachii",
+        "inclusionReason": "Every required component resolves to checksum-verified meshes with exact metadata/header identity.",
+        "label": "triceps brachii",
+        "present": true
+      }
+    ]
+  },
+  "datasetVersion": "BodyParts3D 4.0 / FMA 3.0 / 99% polygon reduction",
+  "generatedBy": "SBLA-005 deterministic mesh-map.mjs",
+  "reproduction": {
+    "command": "pnpm assets:mesh-map --metadata-dir <metadata-dir> --isa-archive <isa-archive.zip> --partof-archive <partof-archive.zip> --isa-mesh-dir <extracted-isa-dir> --partof-mesh-dir <extracted-partof-dir> --out <output.json>",
+    "note": "Source archives and extracted OBJ trees remain external to Git."
+  },
+  "schemaVersion": 1,
+  "source": {
+    "archives": {
+      "isa_BP3D_4.0_obj_99.zip": {
+        "bytes": 142903898,
+        "sha256": "40665852c49f218326590e204db91064a1ecfc3c6f8cbd7bbbcaac62c7cd409e"
+      },
+      "partof_BP3D_4.0_obj_99.zip": {
+        "bytes": 64888505,
+        "sha256": "9fbc713fffeee924a5a657d9813d84d7eb957bded63adb854931dd5e3eb61c97"
+      }
+    },
+    "baseUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/",
+    "extractedArchiveInspection": {
+      "isa": {
+        "completeIdentityHeaders": 2217,
+        "incompleteIdentityHeaders": [
+          "FJ1450",
+          "FJ1451",
+          "FJ1454",
+          "FJ1455",
+          "FJ1465",
+          "FJ1525",
+          "FJ1543",
+          "FJ1547",
+          "FJ1548",
+          "FJ1549",
+          "FJ1550",
+          "FJ1552",
+          "FJ1553",
+          "FJ1656",
+          "FJ1664",
+          "FJ1665",
+          "FJ1719"
+        ],
+        "metadataIdentityConflicts": [
+          "FJ1654",
+          "FJ1659",
+          "FJ1660",
+          "FJ1662",
+          "FJ1663",
+          "FJ1693",
+          "FJ1694",
+          "FJ1717",
+          "FJ1718",
+          "FJ1867",
+          "FJ2208"
+        ],
+        "objFiles": 2234,
+        "priorGapTermHeaderMatches": {
+          "internal oblique": 0,
+          "latissimus": 0,
+          "multifid": 0,
+          "rectus abdominis": 0,
+          "transversus abdominis": 0
+        }
+      },
+      "partof": {
+        "completeIdentityHeaders": 1256,
+        "incompleteIdentityHeaders": ["FJ1450", "FJ1656"],
+        "metadataIdentityConflicts": [
+          "FJ1654",
+          "FJ1662",
+          "FJ1663",
+          "FJ1672",
+          "FJ1682",
+          "FJ1725",
+          "FJ1844",
+          "FJ1846",
+          "FJ1853",
+          "FJ1893",
+          "FJ1895",
+          "FJ1913",
+          "FJ1928",
+          "FJ2011",
+          "FJ2013",
+          "FJ2038",
+          "FJ2041",
+          "FJ2044",
+          "FJ2046",
+          "FJ2074",
+          "FJ2143",
+          "FJ2404",
+          "FJ2405"
+        ],
+        "objFiles": 1258,
+        "priorGapTermHeaderMatches": {
+          "internal oblique": 0,
+          "latissimus": 0,
+          "multifid": 0,
+          "rectus abdominis": 0,
+          "transversus abdominis": 0
+        }
+      }
+    },
+    "metadata": {
+      "isa_element_parts.txt": {
+        "bytes": 1142159,
+        "sha256": "a3de74423f943b0d724ae8f59b3a817f87c423a544f8db98113b1980817cbeaf"
+      },
+      "isa_inclusion_relation_list.txt": {
+        "bytes": 207664,
+        "sha256": "26e7d818e03a8c909fe09c561f38d0d513423c87681f9450a803bc38f5b07564"
+      },
+      "isa_parts_list_e.txt": {
+        "bytes": 128086,
+        "sha256": "ab7796deedd49205e77f3609a1cb8c53e2bbee14ecb5c9a6ca05227469780513"
+      },
+      "isa_parts_list.txt": {
+        "bytes": 302828,
+        "sha256": "e5f32398b916e259b88b8aabadac347fe4e0d6bcb2b6535a45ec66b5e60b32b5"
+      },
+      "partof_element_parts.txt": {
+        "bytes": 651179,
+        "sha256": "3f5f6df1028eb122b30de77c711597b6bb8e5541658e5985859fd228adbf88ea"
+      },
+      "partof_inclusion_relation_list.txt": {
+        "bytes": 91241,
+        "sha256": "1b40738270931e3c1d955ce34e0fce0d8d10d8c5ad543463e40b4b4c0243007c"
+      },
+      "partof_parts_list_e.txt": {
+        "bytes": 59351,
+        "sha256": "9224080557053e6f1322f1e13ab27f0ecde0db19bb3b505f0631afad230eeebd"
+      },
+      "partof_parts_list.txt": {
+        "bytes": 142590,
+        "sha256": "dd29cceba270ffaa5d5f53003b1c3284f70a15fba7137bb81f26f176f4bdb5e3"
+      }
+    }
+  }
+}
