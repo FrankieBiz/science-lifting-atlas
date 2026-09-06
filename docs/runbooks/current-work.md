@@ -29,8 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task | Role | Branch | Worktree | Base commit | Started | Expected handoff | Paths owned |
-| ---- | ---- | ------ | -------- | ----------- | ------- | ---------------- | ----------- |
+| Task                      | Role  | Branch                                        | Worktree                                           | Base commit                                | Started    | Expected handoff                       | Paths owned                                                             |
+| ------------------------- | ----- | --------------------------------------------- | -------------------------------------------------- | ------------------------------------------ | ---------- | -------------------------------------- | ----------------------------------------------------------------------- |
+| SBLA-004 owner acceptance | Codex | `codex/SBLA-004-asset-license-reconciliation` | `.worktrees/sbla-004-asset-license-reconciliation` | `fafdc36597d5ca90d4330c3214aa1ee7ec8fddf2` | 2026-09-05 | `reviews/releases/SBLA-004-handoff.md` | `reviews/releases/SBLA-004-handoff.md`, `docs/runbooks/current-work.md` |
 
 ## Closed claims
 
