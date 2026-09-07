@@ -38,9 +38,16 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(manifest.normalization).toEqual({
       sourceUnits: 'millimetres',
       outputUnits: 'metres',
-      scale: 0.001,
       origin: 'world-origin-preserved',
-      axisTransform: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+      sourceToBlender: {
+        scale: 0.001,
+        axisTransform: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+        space: 'Blender [x, y, z]',
+      },
+      blenderToBrowserGltf: {
+        transform: '[x, z, -y]',
+        space: 'glTF browser Y-up',
+      },
     });
     expect(manifest.material).toMatchObject({ name: 'SBLA_Neutral_Review' });
     expect(manifest.lod).toMatchObject({ method: 'fixed-ratio-decimation' });
@@ -71,15 +78,15 @@ describe('BodyParts3D deterministic conversion contract', () => {
     const manifestNames = manifest.objects.map(
       (entry: { name: string }) => entry.name,
     );
-    const decoded = manifest.determinism.structure.decodedGeometry;
+    const decoded = manifest.rawGltfEvidence.objectsEvidence;
     const decodedNames = decoded.map((entry: { name: string }) => entry.name);
     expect(new Set(manifestNames).size).toBe(139);
     expect(new Set(decodedNames).size).toBe(139);
     expect(manifestNames.sort()).toEqual(decodedNames.sort());
     const decodedByName = new Map(
-      decoded.map((entry: { name: string; bounds: unknown }) => [
+      decoded.map((entry: { name: string; browserBoundsMetres: unknown }) => [
         entry.name,
-        entry.bounds,
+        entry.browserBoundsMetres,
       ]),
     );
     for (const entry of manifest.objects) {

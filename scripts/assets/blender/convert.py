@@ -12,6 +12,7 @@ import json
 import os
 import sys
 import time
+import struct
 from pathlib import Path
 
 import bpy
@@ -151,6 +152,55 @@ def decoded_glb_structure(path):
             "meshHealth": mesh_health(objects), "normalWinding": normal_winding_health(objects)}
 
 
+def raw_glb_evidence(path, object_records):
+    """Read GLB JSON/accessors directly; do not use Blender re-import as proof."""
+    blob = path.read_bytes()
+    if blob[:4] != b"glTF" or struct.unpack_from("<I", blob, 4)[0] != 2:
+        raise RuntimeError("invalid GLB header")
+    json_length, json_kind = struct.unpack_from("<II", blob, 12)
+    if json_kind != 0x4E4F534A:
+        raise RuntimeError("GLB JSON chunk is missing")
+    document = json.loads(blob[20:20 + json_length].decode("utf-8").rstrip(" "))
+    expected = {record["name"]: record for record in object_records}
+    nodes = document.get("nodes", [])
+    if len(nodes) != 139 or len(expected) != 139:
+        raise RuntimeError("raw GLB node count does not match required mapped object count")
+    material = document.get("materials", [{}])[0]
+    pbr = material.get("pbrMetallicRoughness", {})
+    if material.get("name") != NEUTRAL_MATERIAL or material.get("doubleSided") is not True or pbr.get("metallicFactor") != 0 or abs(pbr.get("roughnessFactor", -1) - 0.62) > 1e-5:
+        raise RuntimeError("raw GLB neutral material linkage does not match conversion contract")
+    evidence = []
+    transform_max_delta = 0.0
+    seen = set()
+    for node in nodes:
+        name, extras = node.get("name"), node.get("extras", {})
+        if name in seen or name not in expected or "mesh" not in node:
+            raise RuntimeError("raw GLB has missing, duplicate, or unexpected mapped node")
+        seen.add(name)
+        record = expected[name]
+        if extras.get("sbla_source_file_id") != record["source"]["fileId"] or extras.get("sbla_source_sha256") != record["source"]["sha256"] or extras.get("sbla_entity_id") != record["normalized"]["entityId"] or extras.get("sbla_lod_ratio") != LOD_RATIO:
+            raise RuntimeError("raw GLB node extras do not bind to source mapping")
+        mesh = document["meshes"][node["mesh"]]
+        primitives = mesh.get("primitives", [])
+        if mesh.get("name") != name + "_LOD15" or len(primitives) != 1 or primitives[0].get("material") != 0:
+            raise RuntimeError("raw GLB mesh or primitive material linkage is invalid")
+        accessor = document["accessors"][primitives[0]["attributes"]["POSITION"]]
+        browser_bounds = {"min": [round(value, 9) for value in accessor["min"]], "max": [round(value, 9) for value in accessor["max"]]}
+        blender_bounds = record["normalized"]["preExportBoundsMetres"]
+        transformed = {"min": [blender_bounds["min"][0], blender_bounds["min"][2], -blender_bounds["max"][1]], "max": [blender_bounds["max"][0], blender_bounds["max"][2], -blender_bounds["min"][1]]}
+        delta = max(abs(actual - expected) for key in ("min", "max") for actual, expected in zip(browser_bounds[key], transformed[key]))
+        transform_max_delta = max(transform_max_delta, delta)
+        if delta > 0.01:
+            raise RuntimeError("raw GLB POSITION accessor bounds do not match Blender-to-browser transform for " + name + ": " + str(browser_bounds) + " != " + str(transformed))
+        evidence.append({"name": name, "mesh": mesh["name"], "browserBoundsMetres": browser_bounds,
+                         "blenderBoundsMetres": blender_bounds, "positionAccessor": primitives[0]["attributes"]["POSITION"],
+                         "material": material["name"], "extras": extras})
+    if seen != set(expected):
+        raise RuntimeError("raw GLB omitted an expected mapped node")
+    return {"coordinateSpace": "glTF browser Y-up: [x, z, -y] from Blender [x, y, z]", "browserTransformMaxDeltaMetres": round(transform_max_delta, 9), "objects": 139,
+            "names": sorted(seen), "objectsEvidence": sorted(evidence, key=lambda item: item["name"])}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mapping", required=True)
@@ -287,11 +337,13 @@ def main():
 
     other = json.loads(Path(options.compare_manifest).read_text()) if options.compare_manifest else None
     structure = decoded_glb_structure(glb_path)
-    decoded_by_name = {item["name"]: item["bounds"] for item in structure["decodedGeometry"]}
-    if len(object_records) != 139 or len(decoded_by_name) != 139 or set(object_by_name) != set(decoded_by_name):
+    raw_evidence = raw_glb_evidence(glb_path, object_records)
+    raw_by_name = {item["name"]: item["browserBoundsMetres"] for item in raw_evidence["objectsEvidence"]}
+    if len(object_records) != 139 or len(raw_by_name) != 139 or set(object_by_name) != set(raw_by_name):
         raise RuntimeError("exported GLB object mapping is incomplete, duplicated, or contains an unexpected name")
     for name, record in object_by_name.items():
-        record["normalized"]["boundsMetres"] = decoded_by_name[name]
+        record["normalized"]["coordinateSpace"] = raw_evidence["coordinateSpace"]
+        record["normalized"]["boundsMetres"] = raw_by_name[name]
     comparison = {"cleanRuns": 2 if other else 1, "sceneStructureEqual": None, "decodedGeometryEqual": None, "boundsEqual": None,
                   "glbBytesEqual": None, "priorArtifactAuthenticated": False,
                   "note": "Second clean-run comparison is required before acceptance."}
@@ -316,10 +368,11 @@ def main():
     manifest = {"schemaVersion": 1, "candidate": "path-c-bodyparts3d",
       "tool": {"officialDistribution": {"format": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"}, "runtime": {"version": list(bpy.app.version), "versionString": bpy.app.version_string}},
       "source": {"mappingManifest": {"path": "docs/licenses/bodyparts3d-mesh-mapping.json", "sha256": MAPPING_SHA256}, "archiveInputsStoredInGit": False},
-      "normalization": {"sourceUnits": "millimetres", "outputUnits": "metres", "scale": 0.001, "origin": "world-origin-preserved", "axisTransform": [1,0,0,0,1,0,0,0,1]},
+      "normalization": {"sourceUnits": "millimetres", "outputUnits": "metres", "origin": "world-origin-preserved", "sourceToBlender": {"scale": 0.001, "axisTransform": [1,0,0,0,1,0,0,0,1], "space": "Blender [x, y, z]"}, "blenderToBrowserGltf": {"transform": "[x, z, -y]", "space": "glTF browser Y-up"}},
       "material": {"name": NEUTRAL_MATERIAL, "baseColorRgba": [0.58,0.24,0.16,1.0], "metallic": 0.0, "roughness": 0.62},
       "lod": {"method": "fixed-ratio-decimation", "ratio": LOD_RATIO, "export": "LOD15 only; later reduced mode must be separately benchmarked"},
       "objects": object_records,
+      "rawGltfEvidence": raw_evidence,
       "determinism": {**comparison, "structure": structure},
       "artifacts": {"hostPerFileCeilingBytes": 26214400,
         "glb": {"path": "assets/derived/bodyparts3d/sbla005-representative.glb", "bytes": glb_path.stat().st_size, "sha256": digest(glb_path), "desktopTargetBytes": 6000000, "hardCeilingBytes": 10000000, "mobileInteractiveBytes": 3000000},
