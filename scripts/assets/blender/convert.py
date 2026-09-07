@@ -1,0 +1,257 @@
+"""Deterministic, non-interactive BodyParts3D OBJ-to-GLB conversion.
+
+Run with the pinned Blender distribution, for example:
+Blender --background --python scripts/assets/blender/convert.py -- --mapping ...
+The official archive inputs remain external; every imported byte is checked against
+the committed mesh mapping before Blender is allowed to read it.
+"""
+
+import argparse
+import hashlib
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+import bpy
+from mathutils import Vector
+
+BLENDER_VERSION = "4.5.13"
+MAPPING_SHA256 = "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196"
+NEUTRAL_MATERIAL = "SBLA_Neutral_Review"
+LOD_RATIO = 0.15
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def stable_json(value):
+    return json.dumps(value, indent=2, sort_keys=True) + "\n"
+
+
+def args_after_double_dash():
+    return sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else []
+
+
+def selected_meshes(mapping):
+    """Return checksum-bound representative meshes in stable file-ID order."""
+    selected = {}
+    for target in mapping["coverage"]["targets"]:
+        for component in target["components"]:
+            for mesh in component["meshes"]:
+                prior = selected.get(mesh["fileId"])
+                if prior and prior["sha256"] != mesh["sha256"]:
+                    raise RuntimeError("conflicting source identity for " + mesh["fileId"])
+                selected[mesh["fileId"]] = mesh
+    return [selected[key] for key in sorted(selected)]
+
+
+def external_source(mesh, isa_dir, partof_dir):
+    """Resolve only an OBJ whose bytes exactly match the mapping identity."""
+    filename = mesh["fileId"] + ".obj"
+    candidates = [isa_dir / filename, partof_dir / filename]
+    matches = [path for path in candidates if path.is_file() and digest(path) == mesh["sha256"]]
+    if len(matches) != 1:
+        raise RuntimeError("expected one checksum-valid external OBJ for " + mesh["fileId"])
+    if matches[0].stat().st_size != mesh["bytes"]:
+        raise RuntimeError("source byte count differs for " + mesh["fileId"])
+    return matches[0]
+
+
+def scene_bounds(objects):
+    points = [obj.matrix_world @ Vector(corner) for obj in objects for corner in obj.bound_box]
+    return {
+        "min": [round(min(point[i] for point in points), 9) for i in range(3)],
+        "max": [round(max(point[i] for point in points), 9) for i in range(3)],
+    }
+
+
+def geometry_fingerprint(objects):
+    """Stable decoded geometry identity independent of GLB JSON/container metadata."""
+    payload = []
+    for obj in sorted(objects, key=lambda item: item.name):
+        mesh = obj.data
+        payload.append({
+            "name": obj.name,
+            "vertices": len(mesh.vertices),
+            "polygons": len(mesh.polygons),
+            "triangles": sum(len(poly.vertices) - 2 for poly in mesh.polygons),
+            "bounds": {
+                "min": [round(min(v.co[i] for v in mesh.vertices), 9) for i in range(3)],
+                "max": [round(max(v.co[i] for v in mesh.vertices), 9) for i in range(3)],
+            },
+        })
+    return payload
+
+
+def mesh_health(objects):
+    """Conservative structural checks; boundary edges are not automatically defects."""
+    boundary_edges = non_manifold_edges = degenerate_faces = 0
+    for obj in objects:
+        mesh = obj.data
+        mesh.update(calc_edges=True)
+        incidence = {}
+        for polygon in mesh.polygons:
+            vertices = list(polygon.vertices)
+            for index, vertex in enumerate(vertices):
+                edge = tuple(sorted((vertex, vertices[(index + 1) % len(vertices)])))
+                incidence[edge] = incidence.get(edge, 0) + 1
+        boundary_edges += sum(1 for count in incidence.values() if count == 1)
+        non_manifold_edges += sum(1 for count in incidence.values() if count > 2)
+        degenerate_faces += sum(1 for polygon in mesh.polygons if polygon.area <= 1e-12)
+    return {"boundaryEdges": boundary_edges, "nonManifoldEdges": non_manifold_edges,
+            "degenerateFaces": degenerate_faces}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mapping", required=True)
+    parser.add_argument("--isa-dir", required=True)
+    parser.add_argument("--partof-dir", required=True)
+    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--compare-manifest")
+    options = parser.parse_args(args_after_double_dash())
+    started = time.perf_counter()
+    mapping_path = Path(options.mapping).resolve()
+    if digest(mapping_path) != MAPPING_SHA256:
+        raise RuntimeError("mapping manifest SHA-256 does not match accepted SBLA-005 identity")
+    mapping = json.loads(mapping_path.read_text())
+    isa_dir, partof_dir = Path(options.isa_dir), Path(options.partof_dir)
+    output_dir, manifest_path = Path(options.output_dir), Path(options.manifest)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+    bpy.ops.object.select_all(action="SELECT")
+    bpy.ops.object.delete(use_global=False)
+    for collection in list(bpy.data.collections):
+        bpy.data.collections.remove(collection)
+    collection = bpy.data.collections.new("SBLA005_Selectable_Anatomy")
+    bpy.context.scene.collection.children.link(collection)
+    material = bpy.data.materials.new(NEUTRAL_MATERIAL)
+    material.diffuse_color = (0.58, 0.24, 0.16, 1.0)
+    material.metallic = 0.0
+    material.roughness = 0.62
+
+    objects, object_records = [], []
+    for mesh in selected_meshes(mapping):
+        source = external_source(mesh, isa_dir, partof_dir)
+        before = set(bpy.data.objects)
+        bpy.ops.wm.obj_import(filepath=str(source), validate_meshes=True)
+        created = [item for item in bpy.data.objects if item not in before and item.type == "MESH"]
+        if len(created) != 1:
+            raise RuntimeError("expected one imported mesh object for " + mesh["fileId"])
+        obj = created[0]
+        obj.name = "BP3D_" + mesh["fileId"]
+        obj.data.name = obj.name + "_LOD15"
+        for linked in list(obj.users_collection):
+            linked.objects.unlink(obj)
+        collection.objects.link(obj)
+        bpy.context.view_layer.objects.active = obj
+        obj.select_set(True)
+        bpy.context.scene.cursor.location = (0.0, 0.0, 0.0)
+        bpy.ops.object.origin_set(type="ORIGIN_CURSOR")
+        # Blender's OBJ importer creates a conversion rotation.  Clear it so the
+        # published world axes remain source X/Y/Z after millimetre-to-metre scaling.
+        obj.rotation_euler = (0.0, 0.0, 0.0)
+        obj.scale = (0.001, 0.001, 0.001)
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        modifier = obj.modifiers.new("SBLA005_FixedLOD15", "DECIMATE")
+        modifier.decimate_type = "COLLAPSE"
+        modifier.ratio = LOD_RATIO
+        modifier.use_collapse_triangulate = True
+        bpy.ops.object.modifier_apply(modifier=modifier.name)
+        obj.data.materials.clear()
+        obj.data.materials.append(material)
+        obj["sbla_source_file_id"] = mesh["fileId"]
+        obj["sbla_source_sha256"] = mesh["sha256"]
+        obj["sbla_entity_id"] = mesh["conceptId"]
+        obj["sbla_lod_ratio"] = LOD_RATIO
+        obj.select_set(False)
+        objects.append(obj)
+        object_records.append({
+            "name": obj.name,
+            "source": {"fileId": mesh["fileId"], "sha256": mesh["sha256"], "bytes": mesh["bytes"]},
+            "normalized": {"entityId": mesh["conceptId"], "material": NEUTRAL_MATERIAL,
+                           "boundsMetres": {"min": [round(v, 9) for v in mesh["geometryBounds"]["min"]],
+                                             "max": [round(v, 9) for v in mesh["geometryBounds"]["max"]]}},
+            "lod": {"name": "LOD15", "method": "fixed-ratio-decimation", "ratio": LOD_RATIO},
+        })
+
+    # The mapping coordinates are millimetres.  Records above intentionally retain
+    # source-space bounds; this block records output-space bounds from Blender.
+    decoded_geometry = geometry_fingerprint(objects)
+    health = mesh_health(objects)
+    object_by_name = {item["name"]: item for item in object_records}
+    for item in decoded_geometry:
+        object_by_name[item["name"]]["normalized"]["boundsMetres"] = item["bounds"]
+
+    bpy.ops.object.select_all(action="DESELECT")
+    for obj in objects:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = objects[0]
+    glb_path = output_dir / "sbla005-representative.glb"
+    bpy.ops.export_scene.gltf(filepath=str(glb_path), export_format="GLB", use_selection=True,
+                              export_materials="EXPORT", export_apply=True, export_cameras=False,
+                              export_lights=False, export_extras=True, export_yup=True)
+
+    bpy.ops.object.select_all(action="DESELECT")
+    camera_data = bpy.data.cameras.new("SBLA005_FixedCamera")
+    camera_data.type = "ORTHO"
+    camera_data.ortho_scale = 2.4
+    camera = bpy.data.objects.new("SBLA005_FixedCamera", camera_data)
+    bpy.context.scene.collection.objects.link(camera)
+    camera.location = (2.6, -4.2, 1.7)
+    camera.rotation_euler = (Vector((0.0, 0.0, 0.72)) - camera.location).to_track_quat('-Z', 'Y').to_euler()
+    bpy.context.scene.camera = camera
+    for name, location, energy in [("SBLA005_Key", (3.0, -4.0, 5.0), 1100), ("SBLA005_Fill", (-3.0, -2.0, 2.0), 550)]:
+        light_data = bpy.data.lights.new(name, "AREA")
+        light_data.energy, light_data.shape, light_data.size = energy, "DISK", 5.0
+        light = bpy.data.objects.new(name, light_data)
+        bpy.context.scene.collection.objects.link(light)
+        light.location = location
+    scene = bpy.context.scene
+    scene.render.engine = "BLENDER_EEVEE_NEXT"
+    scene.render.resolution_x, scene.render.resolution_y, scene.render.resolution_percentage = 800, 1000, 100
+    scene.render.image_settings.file_format='WEBP'
+    scene.render.image_settings.color_mode = "RGBA"
+    scene.render.image_settings.quality = 80
+    scene.render.film_transparent = False
+    scene.world.color = (0.035, 0.035, 0.035)
+    poster_path = output_dir / "sbla005-poster.webp"
+    scene.render.filepath = str(poster_path)
+    bpy.ops.render.render(write_still=True)
+
+    other = json.loads(Path(options.compare_manifest).read_text()) if options.compare_manifest else None
+    structure = {"objects": len(objects), "meshObjects": len(objects), "sceneBoundsMetres": scene_bounds(objects), "decodedGeometry": decoded_geometry}
+    comparison = {"cleanRuns": 2 if other else 1, "sceneStructureEqual": None, "decodedGeometryEqual": None, "boundsEqual": None,
+                  "glbBytesEqual": None, "note": "Second clean-run comparison is required before acceptance."}
+    if other:
+        previous = other["determinism"]["structure"]
+        comparison.update({"cleanRuns": 2, "sceneStructureEqual": previous["objects"] == structure["objects"] and previous["meshObjects"] == structure["meshObjects"],
+                           "decodedGeometryEqual": previous["decodedGeometry"] == decoded_geometry,
+                           "boundsEqual": previous["sceneBoundsMetres"] == structure["sceneBoundsMetres"],
+                           "glbBytesEqual": other["artifacts"]["glb"]["sha256"] == digest(glb_path),
+                           "note": "GLB bytes are compared separately from decoded geometry because container metadata may vary."})
+    elapsed = round(time.perf_counter() - started, 3)
+    manifest = {"schemaVersion": 1, "candidate": "path-c-bodyparts3d",
+      "tool": {"name": "Blender", "version": "4.5.13 LTS", "distribution": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"},
+      "source": {"mappingManifest": {"path": "docs/licenses/bodyparts3d-mesh-mapping.json", "sha256": MAPPING_SHA256}, "archiveInputsStoredInGit": False},
+      "normalization": {"sourceUnits": "millimetres", "outputUnits": "metres", "scale": 0.001, "origin": "world-origin-preserved", "axisTransform": [1,0,0,0,1,0,0,0,1]},
+      "material": {"name": NEUTRAL_MATERIAL, "baseColorRgba": [0.58,0.24,0.16,1.0], "metallic": 0.0, "roughness": 0.62},
+      "lod": {"method": "fixed-ratio-decimation", "ratio": LOD_RATIO, "export": "LOD15 only; later reduced mode must be separately benchmarked"},
+      "objects": object_records,
+      "determinism": {**comparison, "structure": structure},
+      "artifacts": {"hostPerFileCeilingBytes": 26214400,
+        "glb": {"path": "assets/derived/bodyparts3d/sbla005-representative.glb", "bytes": glb_path.stat().st_size, "sha256": digest(glb_path), "desktopTargetBytes": 6000000, "hardCeilingBytes": 10000000, "mobileInteractiveBytes": 3000000},
+        "poster": {"path": "assets/derived/bodyparts3d/sbla005-poster.webp", "bytes": poster_path.stat().st_size, "sha256": digest(poster_path), "ceilingBytes": 200000}},
+      "poster": {"camera": {"type": "ORTHO", "location": [2.6,-4.2,1.7], "target": [0.0,0.0,0.72], "rotationEuler": [round(value,9) for value in camera.rotation_euler], "orthoScale": 2.4, "resolution": [800,1000]}, "light": [{"name":"SBLA005_Key","type":"AREA","energy":1100},{"name":"SBLA005_Fill","type":"AREA","energy":550}]},
+      "timing": {"conversionSeconds": elapsed, "objectCount": len(objects)},
+      "visualInspection": {"programmatic": health, "holes": "Boundary edges are recorded programmatically and are not automatically holes; no mesh-repair operation was applied.", "invertedNormals": "No normal-flip operation is performed; a rendered-winding check remains required in the browser stage.", "lostComponents": "All 139 checksum-mapped source meshes imported as one selectable object each. The fixed poster visibly lacks a head and complete distal limbs because this representative scene contains only mapped muscle meshes, not a full-body skin or skeleton layer.", "material": "One neutral opaque review material assigned to every exported object.", "occlusion": "Fixed whole-body poster necessarily has anatomical overlap; interactive selection is required for concealed meshes.", "proportions": "Uniform 0.001 mm-to-m scale only; no coordinate deformation applied."}}
+    manifest_path.write_text(stable_json(manifest))
+
+
+if __name__ == "__main__":
+    main()
