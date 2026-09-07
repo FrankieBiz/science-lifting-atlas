@@ -18,6 +18,10 @@ const conversionPath = resolve(
   'docs/licenses/bodyparts3d-conversion-manifest.json',
 );
 const scriptPath = resolve('scripts/assets/blender/convert.py');
+const receiptPath = resolve(
+  'docs/licenses/bodyparts3d-conversion-baseline-receipt.json',
+);
+const receiptCommit = '0f118314ae602777752370ec6d0a5bd69bfa5a54';
 type ArtifactFinals = { glb: string; poster: string; manifest: string };
 type MutableGlbDocument = {
   nodes: Array<{ translation?: number[] }>;
@@ -25,9 +29,16 @@ type MutableGlbDocument = {
     pbrMetallicRoughness: { baseColorFactor: number[] };
   }>;
   meshes: Array<{
-    primitives: Array<{ attributes: { POSITION: number } }>;
+    primitives: Array<{ attributes: { POSITION: number }; indices: number }>;
   }>;
-  accessors: Array<{ max: number[] }>;
+  accessors: Array<{
+    max: number[];
+    count: number;
+    normalized?: boolean;
+    sparse?: object;
+    type?: string;
+    componentType?: number;
+  }>;
 };
 
 async function conversionManifest() {
@@ -105,6 +116,19 @@ function runRawGlbProbe(glb: string) {
     [scriptPath, '--raw-glb-probe', '--glb', glb, '--manifest', conversionPath],
     { encoding: 'utf8' },
   );
+}
+
+function runReceiptProbe(commit: string, workingBytes?: string) {
+  const args = [
+    scriptPath,
+    '--receipt-probe',
+    '--baseline-receipt',
+    receiptPath,
+    '--baseline-receipt-commit',
+    commit,
+  ];
+  if (workingBytes) args.push('--working-bytes-override', workingBytes);
+  return spawnSync('python3', args, { encoding: 'utf8' });
 }
 
 async function mutateGlb(
@@ -359,6 +383,13 @@ describe('BodyParts3D deterministic conversion contract', () => {
       manifestSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       runId: expect.stringMatching(/^[a-f0-9-]{36}$/),
       createdAt: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
+      receipt: {
+        commit: receiptCommit,
+        blob: expect.stringMatching(/^[a-f0-9]{40}$/),
+        sha256: expect.stringMatching(/^[a-f0-9]{64}$/),
+      },
+      snapshotFlow:
+        'Manifest, GLB, and poster were each read once; authentication and comparison used those same private snapshot bytes.',
     });
     expect(manifest.rawGltfEvidence.boundsComparison).toMatchObject({
       semantics: 'triangle-referenced POSITION vertices only',
@@ -368,6 +399,21 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(
       manifest.rawGltfEvidence.boundsComparison.toleranceMetres,
     ).toBeLessThan(0.00001);
+    expect(manifest.tool.runtimeProvenance).toEqual({
+      platform: 'macOS arm64',
+      executableSha256:
+        '49fa4d4694f55b37b58b18d99a71bdc8228d30545caa2e16c9f99952f4c76f55',
+      codeSignature: {
+        identifier: 'org.blenderfoundation.blender',
+        teamIdentifier: '68UA947AUU',
+        authority:
+          'Developer ID Application: Stichting Blender Foundation (68UA947AUU)',
+        cdHashFullSha256:
+          'e1603c3bd5b6af74898ea9f53fc668eb02a3979c3f1ceb5b708687c42e7fd8fd',
+      },
+      limitation:
+        'Pinned and publisher-authenticated only for the verified macOS arm64 pipeline.',
+    });
   });
 
   it('keeps the conversion command fully scripted with no manual steps', async () => {
@@ -378,9 +424,10 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(script).toContain('--compare-glb');
     expect(script).toContain('--compare-poster');
     expect(script).toContain('--compare-manifest-sha256');
-    expect(script).toContain('distinct artifact paths and directories');
-    expect(script).toContain('prior poster does not match');
-    expect(script).toContain('prior GLB SHA-256 does not match');
+    expect(script).toContain('--baseline-receipt');
+    expect(script).toContain('--baseline-receipt-commit');
+    expect(script).toContain('strict ancestor');
+    expect(script).toContain('same private snapshot bytes');
     expect(script).toContain('decoded_glb_structure');
     expect(script).toContain('closed-signed-volume');
     expect(script).toContain('deterministic conversion comparison failed');
@@ -610,5 +657,101 @@ describe('BodyParts3D deterministic conversion contract', () => {
       'raw GLB POSITION bounds differ from triangle-referenced geometry',
     );
     await rm(root, { recursive: true });
+  });
+
+  it('rejects a triangle index count that is not divisible by three', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const mutated = resolve(root, 'index-count.glb');
+    await mutateGlb(
+      resolve('assets/derived/bodyparts3d/sbla005-representative.glb'),
+      mutated,
+      (document) => {
+        const primitive = document.meshes[0]!.primitives[0]!;
+        document.accessors[primitive.indices]!.count = 1370;
+      },
+    );
+    const result = runRawGlbProbe(mutated);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'triangle index accessor count must be positive and divisible by three',
+    );
+    await rm(root, { recursive: true });
+  });
+
+  it('rejects malformed triangle index accessor declarations', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const source = resolve(
+      'assets/derived/bodyparts3d/sbla005-representative.glb',
+    );
+    const cases: Array<{
+      name: string;
+      mutate: (accessor: MutableGlbDocument['accessors'][number]) => void;
+      message: string;
+    }> = [
+      {
+        name: 'normalized',
+        mutate: (accessor) => {
+          accessor.normalized = true;
+        },
+        message: 'triangle index accessor must be non-normalized SCALAR',
+      },
+      {
+        name: 'vector',
+        mutate: (accessor) => {
+          accessor.type = 'VEC3';
+        },
+        message: 'triangle index accessor must be non-normalized SCALAR',
+      },
+      {
+        name: 'signed',
+        mutate: (accessor) => {
+          accessor.componentType = 5122;
+        },
+        message:
+          'triangle index accessor component type must be unsigned integer',
+      },
+      {
+        name: 'sparse',
+        mutate: (accessor) => {
+          accessor.sparse = {};
+        },
+        message: 'triangle index accessor must not be sparse',
+      },
+    ];
+    for (const malformed of cases) {
+      const mutated = resolve(root, `${malformed.name}.glb`);
+      await mutateGlb(source, mutated, (document) => {
+        const primitive = document.meshes[0]!.primitives[0]!;
+        malformed.mutate(document.accessors[primitive.indices]!);
+      });
+      const result = runRawGlbProbe(mutated);
+      expect(result.status).toBe(1);
+      expect(result.stderr).toContain(malformed.message);
+    }
+    await rm(root, { recursive: true });
+  });
+
+  it('requires a genuine strict-ancestor baseline receipt', async () => {
+    expect(runReceiptProbe('0'.repeat(40)).status).toBe(1);
+    const currentHead = spawnSync('git', ['rev-parse', 'HEAD'], {
+      encoding: 'utf8',
+    }).stdout.trim();
+    const nonAncestor = runReceiptProbe(currentHead);
+    expect(nonAncestor.status).toBe(1);
+    expect(nonAncestor.stderr).toContain('strict ancestor');
+
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-receipt-'));
+    const tampered = resolve(root, 'tampered.json');
+    await writeFile(tampered, '{"tampered":true}\n');
+    const changed = runReceiptProbe(receiptCommit, tampered);
+    expect(changed.status).toBe(1);
+    expect(changed.stderr).toContain(
+      'receipt bytes differ from the committed Git blob',
+    );
+    await rm(root, { recursive: true });
+
+    const genuine = runReceiptProbe(receiptCommit);
+    expect(genuine.status).toBe(0);
+    expect(genuine.stdout).toContain('pre-release-commitment');
   });
 });

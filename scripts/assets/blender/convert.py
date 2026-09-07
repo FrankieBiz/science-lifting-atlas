@@ -11,8 +11,10 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import platform
 import shutil
 import struct
+import subprocess
 import sys
 import tempfile
 import time
@@ -23,7 +25,8 @@ TRANSACTION_PROBE = "--transaction-probe" in sys.argv
 POLICY_PROBE = "--publication-policy-probe" in sys.argv
 BASELINE_AUTH_PROBE = "--baseline-auth-probe" in sys.argv
 RAW_GLB_PROBE = "--raw-glb-probe" in sys.argv
-if not any((TRANSACTION_PROBE, POLICY_PROBE, BASELINE_AUTH_PROBE, RAW_GLB_PROBE)):
+RECEIPT_PROBE = "--receipt-probe" in sys.argv
+if not any((TRANSACTION_PROBE, POLICY_PROBE, BASELINE_AUTH_PROBE, RAW_GLB_PROBE, RECEIPT_PROBE)):
     import bpy
     from mathutils import Vector
 
@@ -51,6 +54,13 @@ MATERIAL_CLAIM = {"name": NEUTRAL_MATERIAL, "baseColorRgba": [0.58, 0.24, 0.16, 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 ACCEPTED_OUTPUT_DIR = (REPOSITORY_ROOT / "assets/derived/bodyparts3d").resolve()
 ACCEPTED_MANIFEST = (REPOSITORY_ROOT / "docs/licenses/bodyparts3d-conversion-manifest.json").resolve()
+RECEIPT_RELATIVE_PATH = "docs/licenses/bodyparts3d-conversion-baseline-receipt.json"
+ACCEPTED_RECEIPT = (REPOSITORY_ROOT / RECEIPT_RELATIVE_PATH).resolve()
+EXECUTABLE_SHA256 = "49fa4d4694f55b37b58b18d99a71bdc8228d30545caa2e16c9f99952f4c76f55"
+CODESIGN_ID = "org.blenderfoundation.blender"
+CODESIGN_TEAM = "68UA947AUU"
+CODESIGN_AUTHORITY = "Developer ID Application: Stichting Blender Foundation (68UA947AUU)"
+CODESIGN_FULL_SHA256 = "e1603c3bd5b6af74898ea9f53fc668eb02a3979c3f1ceb5b708687c42e7fd8fd"
 
 
 def outside_repository(path):
@@ -68,10 +78,47 @@ def publication_policy(baseline_only, compare_values, output_dir, manifest_path)
             raise RuntimeError("baseline-only outputs must remain outside the repository")
         return "baseline-unpublished"
     if not all(supplied):
-        raise RuntimeError("release publication requires prior manifest, GLB, and poster comparison inputs plus the expected manifest SHA-256")
+        raise RuntimeError("release publication requires prior manifest, GLB, and poster comparison inputs, the expected manifest SHA-256, and a strict-ancestor baseline receipt")
     if output_dir != ACCEPTED_OUTPUT_DIR or manifest_path != ACCEPTED_MANIFEST:
         raise RuntimeError("release publication must target the accepted repository artifact paths")
     return "published-release"
+
+
+def digest_bytes(value):
+    return hashlib.sha256(value).hexdigest()
+
+
+def git_command(arguments):
+    return subprocess.run(["git", *arguments], cwd=REPOSITORY_ROOT, check=True,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
+def load_committed_receipt(receipt_path, receipt_commit, working_bytes_override=None):
+    receipt_path = Path(receipt_path).resolve()
+    if receipt_path != ACCEPTED_RECEIPT:
+        raise RuntimeError("baseline receipt must use the accepted repository path")
+    try:
+        resolved = git_command(["rev-parse", "--verify", receipt_commit + "^{commit}"]).stdout.decode().strip()
+        head = git_command(["rev-parse", "HEAD"]).stdout.decode().strip()
+        ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", resolved, head],
+                                  cwd=REPOSITORY_ROOT).returncode == 0
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError("baseline receipt commit is not a valid Git commit") from error
+    if not ancestor or resolved == head:
+        raise RuntimeError("baseline receipt commit must be a strict ancestor of current HEAD")
+    try:
+        committed_bytes = git_command(["show", resolved + ":" + RECEIPT_RELATIVE_PATH]).stdout
+        blob = git_command(["rev-parse", resolved + ":" + RECEIPT_RELATIVE_PATH]).stdout.decode().strip()
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError("baseline receipt is absent from the supplied ancestor commit") from error
+    working_bytes = (Path(working_bytes_override).read_bytes() if working_bytes_override
+                     else receipt_path.read_bytes())
+    if working_bytes != committed_bytes:
+        raise RuntimeError("receipt bytes differ from the committed Git blob")
+    receipt = json.loads(committed_bytes)
+    if receipt.get("status") != "pre-release-commitment":
+        raise RuntimeError("baseline receipt is not a pre-release commitment")
+    return receipt, {"commit": resolved, "blob": blob, "sha256": digest_bytes(committed_bytes)}
 
 
 def run_identity(status):
@@ -85,15 +132,51 @@ def run_identity(status):
     }
 
 
-def load_authenticated_baseline(manifest_path, expected_sha256, glb_path, poster_path, current_output_dir):
-    """Authenticate an independently pinned baseline before parsing its claims."""
+def verify_blender_runtime_provenance():
+    """Bind this pinned macOS arm64 run to the signed Blender executable."""
+    if sys.platform != "darwin" or platform.machine() != "arm64":
+        raise RuntimeError("pinned Blender conversion is verified only on macOS arm64")
+    executable = Path(bpy.app.binary_path).resolve()
+    if digest(executable) != EXECUTABLE_SHA256:
+        raise RuntimeError("running Blender executable SHA-256 is not the pinned identity")
+    try:
+        subprocess.run(["codesign", "--verify", "--strict", str(executable)], check=True,
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        detail = subprocess.run(["codesign", "-d", "--verbose=6", str(executable)], check=True,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stderr
+    except (FileNotFoundError, subprocess.CalledProcessError) as error:
+        raise RuntimeError("running Blender executable failed strict macOS code-signature verification") from error
+    lines = detail.splitlines()
+    value = lambda prefix: next((line.split("=", 1)[1] for line in lines if line.startswith(prefix)), None)
+    authority = next((line.split("=", 1)[1] for line in lines if line.startswith("Authority=")), None)
+    observed = {"identifier": value("Identifier="), "teamIdentifier": value("TeamIdentifier="),
+                "authority": authority, "cdHashFullSha256": value("CandidateCDHashFull sha256=")}
+    expected = {"identifier": CODESIGN_ID, "teamIdentifier": CODESIGN_TEAM,
+                "authority": CODESIGN_AUTHORITY, "cdHashFullSha256": CODESIGN_FULL_SHA256}
+    if observed != expected:
+        raise RuntimeError("running Blender code signature does not match the pinned official publisher identity")
+    return {"platform": "macOS arm64", "executableSha256": EXECUTABLE_SHA256,
+            "codeSignature": observed,
+            "limitation": "Pinned and publisher-authenticated only for the verified macOS arm64 pipeline."}
+
+
+def load_authenticated_baseline(manifest_path, expected_sha256, glb_path, poster_path, current_output_dir,
+                                receipt_path=None, receipt_commit=None):
+    """Read each input once, then authenticate and compare only those bytes."""
     manifest_path, glb_path, poster_path = map(lambda value: Path(value).resolve(),
                                                (manifest_path, glb_path, poster_path))
+    receipt = receipt_git = None
+    if receipt_path or receipt_commit:
+        if not receipt_path or not receipt_commit:
+            raise RuntimeError("baseline receipt path and commit must both be supplied")
+        receipt, receipt_git = load_committed_receipt(receipt_path, receipt_commit)
+    snapshots = {"manifest": manifest_path.read_bytes(), "glb": glb_path.read_bytes(),
+                 "poster": poster_path.read_bytes()}
     if len(expected_sha256) != 64 or any(character not in "0123456789abcdef" for character in expected_sha256):
         raise RuntimeError("baseline manifest SHA-256 trust anchor must be 64 lowercase hexadecimal characters")
-    if digest(manifest_path) != expected_sha256:
+    if digest_bytes(snapshots["manifest"]) != expected_sha256:
         raise RuntimeError("baseline manifest does not match the caller-supplied SHA-256 trust anchor")
-    baseline = json.loads(manifest_path.read_text())
+    baseline = json.loads(snapshots["manifest"])
     publication, identity = baseline.get("publication", {}), baseline.get("runIdentity", {})
     if publication.get("status") != "baseline-unpublished" or publication.get("commitMarker") is not None:
         raise RuntimeError("authenticated comparison manifest is not an unpublished baseline")
@@ -125,10 +208,38 @@ def load_authenticated_baseline(manifest_path, expected_sha256, glb_path, poster
         record = baseline.get("artifacts", {}).get(name, {})
         if Path(record.get("path", "")).resolve() != path:
             raise RuntimeError("baseline " + name + " path does not match its authenticated manifest")
-        if not path.is_file() or digest(path) != record.get("sha256") or path.stat().st_size != record.get("bytes"):
+        if digest_bytes(snapshots[name]) != record.get("sha256") or len(snapshots[name]) != record.get("bytes"):
             raise RuntimeError("baseline " + name + " does not match its authenticated manifest")
-    return baseline, {"manifestSha256": expected_sha256, "runId": identity["runId"],
-                      "createdAt": identity["createdAt"], "trustAnchor": "caller-supplied SHA-256 verified before JSON parsing"}
+    if receipt:
+        committed = receipt.get("baseline", {})
+        if (committed.get("manifestSha256") != expected_sha256
+                or committed.get("runId") != identity["runId"]
+                or committed.get("createdAt") != identity["createdAt"]):
+            raise RuntimeError("ancestor receipt does not bind the authenticated baseline manifest")
+        for name in ("glb", "poster"):
+            committed_artifact = committed.get("artifacts", {}).get(name, {})
+            record = baseline["artifacts"][name]
+            if (committed_artifact.get("name") != Path(record["path"]).name
+                    or committed_artifact.get("sha256") != record["sha256"]
+                    or committed_artifact.get("bytes") != record["bytes"]):
+                raise RuntimeError("ancestor receipt does not bind the authenticated baseline " + name)
+        if (receipt.get("source", {}).get("mappingSha256") != MAPPING_SHA256
+                or receipt.get("tool", {}).get("versionString") != EXPECTED_BLENDER_VERSION_STRING
+                or receipt.get("tool", {}).get("distributionSha256") != expected_identity["tool"]["distributionSha256"]):
+            raise RuntimeError("ancestor receipt does not bind the pinned source and tool")
+        receipt_signature = receipt.get("tool", {}).get("macosCodeSignature", {})
+        if (receipt.get("tool", {}).get("executableSha256") != EXECUTABLE_SHA256
+                or receipt_signature != {"identifier": CODESIGN_ID, "teamIdentifier": CODESIGN_TEAM,
+                                         "authority": CODESIGN_AUTHORITY,
+                                         "cdHashFullSha256": CODESIGN_FULL_SHA256}):
+            raise RuntimeError("ancestor receipt does not bind the signed Blender executable")
+    authenticated = {"manifestSha256": expected_sha256, "runId": identity["runId"],
+                     "createdAt": identity["createdAt"],
+                     "trustAnchor": "caller-supplied SHA-256 verified before JSON parsing",
+                     "snapshotFlow": "Manifest, GLB, and poster were each read once; authentication and comparison used those same private snapshot bytes."}
+    if receipt_git:
+        authenticated["receipt"] = receipt_git
+    return baseline, authenticated, snapshots
 
 
 def transaction_paths(output_dir, manifest_path):
@@ -449,13 +560,24 @@ def raw_glb_evidence(path, object_records, material_claim=MATERIAL_CLAIM):
         primitive = primitives[0]
         if primitive.get("mode", 4) != 4:
             raise RuntimeError("raw GLB primitive is not a triangle list")
+        if "indices" not in primitive:
+            raise RuntimeError("raw GLB triangle primitive lacks an index accessor")
+        index_accessor = document["accessors"][primitive["indices"]]
+        if index_accessor.get("type") != "SCALAR" or index_accessor.get("normalized", False):
+            raise RuntimeError("triangle index accessor must be non-normalized SCALAR")
+        if index_accessor.get("componentType") not in (5121, 5123, 5125):
+            raise RuntimeError("triangle index accessor component type must be unsigned integer")
+        if index_accessor.get("sparse") is not None:
+            raise RuntimeError("triangle index accessor must not be sparse")
+        if index_accessor.get("count", 0) <= 0 or index_accessor["count"] % 3:
+            raise RuntimeError("triangle index accessor count must be positive and divisible by three")
         position_index = primitive["attributes"]["POSITION"]
         position_accessor = document["accessors"][position_index]
         if position_accessor["componentType"] != 5126 or position_accessor["type"] != "VEC3" or "indices" not in primitive:
             raise RuntimeError("raw GLB primitive lacks indexed float32 POSITION geometry")
         positions = accessor_values(document, binary, position_index)
         indices = accessor_values(document, binary, primitive["indices"])
-        if not indices or max(indices) >= len(positions):
+        if not indices or any(not isinstance(index, int) for index in indices) or max(indices) >= len(positions):
             raise RuntimeError("raw GLB primitive indices are invalid")
         referenced = [positions[index] for index in set(indices)]
         browser_bounds = {"min": [min(point[i] for point in referenced) for i in range(3)],
@@ -499,6 +621,15 @@ def validate_staged_release(staged, expected_status):
     manifest = json.loads(staged["manifest"].read_text())
     if manifest["tool"]["runtime"] != {"version": [4, 5, 13], "versionString": "4.5.13 LTS"}:
         raise RuntimeError("staged manifest Blender runtime is not pinned")
+    expected_runtime_provenance = {
+        "platform": "macOS arm64", "executableSha256": EXECUTABLE_SHA256,
+        "codeSignature": {"identifier": CODESIGN_ID, "teamIdentifier": CODESIGN_TEAM,
+                          "authority": CODESIGN_AUTHORITY,
+                          "cdHashFullSha256": CODESIGN_FULL_SHA256},
+        "limitation": "Pinned and publisher-authenticated only for the verified macOS arm64 pipeline.",
+    }
+    if manifest["tool"].get("runtimeProvenance") != expected_runtime_provenance:
+        raise RuntimeError("staged manifest lacks signed Blender runtime provenance")
     if manifest["source"]["mappingManifest"]["sha256"] != MAPPING_SHA256:
         raise RuntimeError("staged manifest mapping identity is invalid")
     identity = manifest.get("runIdentity", {})
@@ -523,7 +654,13 @@ def validate_staged_release(staged, expected_status):
         if deterministic["cleanRuns"] != 2 or not all(deterministic.get(key) is True for key in required):
             raise RuntimeError("staged release lacks an authenticated distinct-run comparison")
         authenticated = manifest.get("authenticatedBaseline", {})
-        if len(authenticated.get("manifestSha256", "")) != 64 or authenticated.get("runId") is None:
+        receipt = authenticated.get("receipt", {})
+        if (len(authenticated.get("manifestSha256", "")) != 64
+                or authenticated.get("runId") is None
+                or authenticated.get("snapshotFlow") != "Manifest, GLB, and poster were each read once; authentication and comparison used those same private snapshot bytes."
+                or len(receipt.get("commit", "")) != 40
+                or len(receipt.get("blob", "")) != 40
+                or len(receipt.get("sha256", "")) != 64):
             raise RuntimeError("staged release lacks its authenticated baseline trust anchor")
     publication = manifest.get("publication", {})
     if publication.get("status") != expected_status:
@@ -546,29 +683,40 @@ def main():
     parser.add_argument("--compare-manifest-sha256")
     parser.add_argument("--compare-glb")
     parser.add_argument("--compare-poster")
+    parser.add_argument("--baseline-receipt")
+    parser.add_argument("--baseline-receipt-commit")
     parser.add_argument("--baseline-only", action="store_true")
     options = parser.parse_args(args_after_double_dash())
     started = time.perf_counter()
     compare_values = (options.compare_manifest, options.compare_manifest_sha256,
-                      options.compare_glb, options.compare_poster)
+                      options.compare_glb, options.compare_poster,
+                      options.baseline_receipt, options.baseline_receipt_commit)
     publication_status = publication_policy(options.baseline_only, compare_values,
                                             options.output_dir, options.manifest)
     if bpy.app.version != EXPECTED_BLENDER_VERSION or bpy.app.version_string != EXPECTED_BLENDER_VERSION_STRING:
         raise RuntimeError("pinned Blender runtime mismatch: expected 4.5.13 LTS")
+    runtime_provenance = verify_blender_runtime_provenance()
     mapping_path = Path(options.mapping).resolve()
     if digest(mapping_path) != MAPPING_SHA256:
         raise RuntimeError("mapping manifest SHA-256 does not match accepted SBLA-005 identity")
     mapping = json.loads(mapping_path.read_text())
     isa_dir, partof_dir = Path(options.isa_dir), Path(options.partof_dir)
     final_output_dir, final_manifest_path = Path(options.output_dir), Path(options.manifest)
-    other = authenticated_baseline = None
+    other = authenticated_baseline = baseline_snapshots = None
     if publication_status == "published-release":
-        other, authenticated_baseline = load_authenticated_baseline(
+        other, authenticated_baseline, baseline_snapshots = load_authenticated_baseline(
             options.compare_manifest, options.compare_manifest_sha256,
-            options.compare_glb, options.compare_poster, final_output_dir)
+            options.compare_glb, options.compare_poster, final_output_dir,
+            options.baseline_receipt, options.baseline_receipt_commit)
     stage, staged, finals = transaction_paths(final_output_dir, final_manifest_path)
     ACTIVE_STAGE = stage
     output_dir, manifest_path = stage, staged["manifest"]
+    baseline_glb_snapshot = baseline_poster_snapshot = None
+    if baseline_snapshots:
+        baseline_glb_snapshot = stage / ".authenticated-baseline.glb"
+        baseline_poster_snapshot = stage / ".authenticated-baseline.webp"
+        baseline_glb_snapshot.write_bytes(baseline_snapshots["glb"])
+        baseline_poster_snapshot.write_bytes(baseline_snapshots["poster"])
 
     clear_scene()
     collection = bpy.data.collections.new("SBLA005_Selectable_Anatomy")
@@ -694,25 +842,13 @@ def main():
                   "glbBytesEqual": None, "priorArtifactAuthenticated": False,
                   "note": "Second clean-run comparison is required before acceptance."}
     if other:
-        prior_glb = Path(options.compare_glb)
-        prior_poster = Path(options.compare_poster)
-        if not prior_glb.is_file() or not prior_poster.is_file():
-            raise RuntimeError("prior GLB or poster is unavailable")
-        if prior_glb.resolve() == glb_path.resolve() or prior_poster.resolve() == poster_path.resolve() or prior_glb.resolve().parent == glb_path.resolve().parent or prior_poster.resolve().parent == poster_path.resolve().parent:
-            raise RuntimeError("prior and current runs must use distinct artifact paths and directories")
-        if digest(prior_glb) != other["artifacts"]["glb"]["sha256"]:
-            raise RuntimeError("prior GLB SHA-256 does not match authenticated prior manifest")
-        if prior_glb.stat().st_size != other["artifacts"]["glb"]["bytes"]:
-            raise RuntimeError("prior GLB byte count does not match authenticated prior manifest")
-        if digest(prior_poster) != other["artifacts"]["poster"]["sha256"] or prior_poster.stat().st_size != other["artifacts"]["poster"]["bytes"]:
-            raise RuntimeError("prior poster does not match authenticated prior manifest")
-        previous = decoded_glb_structure(prior_glb)
+        previous = decoded_glb_structure(baseline_glb_snapshot)
         comparison.update({"cleanRuns": 2, "sceneStructureEqual": previous["objects"] == structure["objects"] and previous["meshObjects"] == structure["meshObjects"] and previous["names"] == structure["names"],
                            "decodedGeometryEqual": previous["decodedGeometry"] == structure["decodedGeometry"],
                            "boundsEqual": previous["sceneBoundsMetres"] == structure["sceneBoundsMetres"],
-                           "glbBytesEqual": digest(prior_glb) == digest(glb_path), "priorArtifactAuthenticated": True,
-                           "posterBytesEqual": digest(prior_poster) == digest(poster_path),
-                           "priorGlbSha256": digest(prior_glb),
+                           "glbBytesEqual": digest_bytes(baseline_snapshots["glb"]) == digest(glb_path), "priorArtifactAuthenticated": True,
+                           "posterBytesEqual": digest_bytes(baseline_snapshots["poster"]) == digest(poster_path),
+                           "priorGlbSha256": digest_bytes(baseline_snapshots["glb"]),
                            "note": "Prior GLB hash/bytes were authenticated against its manifest; both GLBs were independently decoded in Blender."})
         if not all(comparison[key] for key in ("sceneStructureEqual", "decodedGeometryEqual", "boundsEqual", "glbBytesEqual", "posterBytesEqual", "priorArtifactAuthenticated")):
             raise RuntimeError("deterministic conversion comparison failed")
@@ -720,7 +856,7 @@ def main():
     manifest = {"schemaVersion": 1, "candidate": "path-c-bodyparts3d",
       "runIdentity": run_identity(publication_status),
       "authenticatedBaseline": authenticated_baseline,
-      "tool": {"officialDistribution": {"format": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"}, "runtime": {"version": list(bpy.app.version), "versionString": bpy.app.version_string}},
+      "tool": {"officialDistribution": {"format": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"}, "runtime": {"version": list(bpy.app.version), "versionString": bpy.app.version_string}, "runtimeProvenance": runtime_provenance},
       "source": {"mappingManifest": {"path": "docs/licenses/bodyparts3d-mesh-mapping.json", "sha256": MAPPING_SHA256}, "archiveInputsStoredInGit": False},
       "normalization": {"sourceUnits": "millimetres", "outputUnits": "metres", "origin": "world-origin-preserved", "sourceToBlender": {"scale": 0.001, "axisTransform": [1,0,0,0,1,0,0,0,1], "space": "Blender [x, y, z]"}, "blenderToBrowserGltf": {"transform": "[x, z, -y]", "space": "glTF browser Y-up"}},
       "material": MATERIAL_CLAIM,
@@ -775,11 +911,14 @@ def publication_policy_probe():
     parser.add_argument("--compare-manifest-sha256")
     parser.add_argument("--compare-glb")
     parser.add_argument("--compare-poster")
+    parser.add_argument("--baseline-receipt")
+    parser.add_argument("--baseline-receipt-commit")
     parser.add_argument("--baseline-only", action="store_true")
     options = parser.parse_args()
     status = publication_policy(options.baseline_only,
                                 (options.compare_manifest, options.compare_manifest_sha256,
-                                 options.compare_glb, options.compare_poster),
+                                 options.compare_glb, options.compare_poster,
+                                 options.baseline_receipt, options.baseline_receipt_commit),
                                 options.output_dir, options.manifest)
     print(status)
 
@@ -793,10 +932,24 @@ def baseline_auth_probe():
     parser.add_argument("--compare-poster", required=True)
     parser.add_argument("--current-output-dir", required=True)
     options = parser.parse_args()
-    _, authenticated = load_authenticated_baseline(
+    _, authenticated, _ = load_authenticated_baseline(
         options.compare_manifest, options.compare_manifest_sha256,
         options.compare_glb, options.compare_poster, options.current_output_dir)
     print(stable_json(authenticated), end="")
+
+
+def receipt_probe():
+    """Exercise the Git-backed pre-release commitment without loading Blender."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--receipt-probe", action="store_true")
+    parser.add_argument("--baseline-receipt", required=True)
+    parser.add_argument("--baseline-receipt-commit", required=True)
+    parser.add_argument("--working-bytes-override")
+    options = parser.parse_args()
+    receipt, git_identity = load_committed_receipt(
+        options.baseline_receipt, options.baseline_receipt_commit,
+        options.working_bytes_override)
+    print(stable_json({"receipt": receipt, "git": git_identity}), end="")
 
 
 def raw_glb_probe():
@@ -819,6 +972,8 @@ if __name__ == "__main__":
             baseline_auth_probe()
         elif RAW_GLB_PROBE:
             raw_glb_probe()
+        elif RECEIPT_PROBE:
+            receipt_probe()
         else:
             main()
     except Exception as error:
