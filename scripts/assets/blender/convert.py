@@ -10,6 +10,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 import os
 import platform
 import shutil
@@ -61,6 +62,17 @@ CODESIGN_ID = "org.blenderfoundation.blender"
 CODESIGN_TEAM = "68UA947AUU"
 CODESIGN_AUTHORITY = "Developer ID Application: Stichting Blender Foundation (68UA947AUU)"
 CODESIGN_FULL_SHA256 = "e1603c3bd5b6af74898ea9f53fc668eb02a3979c3f1ceb5b708687c42e7fd8fd"
+
+
+def finite_number(value):
+    """Accept real JSON numbers only; bool and non-finite floats fail closed."""
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def finite_vector(value, length, label):
+    if not isinstance(value, (list, tuple)) or len(value) != length or not all(finite_number(item) for item in value):
+        raise RuntimeError(f"{label} must contain exactly {length} finite numbers")
+    return list(value)
 
 
 def outside_repository(path):
@@ -508,16 +520,22 @@ def accessor_values(document, binary, accessor_index):
         if offset + packed_bytes > len(binary) or offset + packed_bytes > view_end:
             raise RuntimeError("raw GLB accessor exceeds its binary buffer")
         value = struct.unpack_from("<" + code * width, binary, offset)
+        if code == "f" and not all(math.isfinite(component) for component in value):
+            raise RuntimeError("raw GLB accessor contains a non-finite numeric value")
         values.append(value[0] if width == 1 else value)
     return values
 
 
 def identity_node_transform(node):
     identity_matrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-    return (node.get("translation", [0, 0, 0]) == [0, 0, 0]
-            and node.get("rotation", [0, 0, 0, 1]) == [0, 0, 0, 1]
-            and node.get("scale", [1, 1, 1]) == [1, 1, 1]
-            and node.get("matrix", identity_matrix) == identity_matrix)
+    translation = finite_vector(node.get("translation", [0, 0, 0]), 3, "node translation")
+    rotation = finite_vector(node.get("rotation", [0, 0, 0, 1]), 4, "node rotation")
+    scale = finite_vector(node.get("scale", [1, 1, 1]), 3, "node scale")
+    matrix = finite_vector(node.get("matrix", identity_matrix), 16, "node matrix")
+    return (translation == [0, 0, 0]
+            and rotation == [0, 0, 0, 1]
+            and scale == [1, 1, 1]
+            and matrix == identity_matrix)
 
 
 def raw_glb_evidence(path, object_records, material_claim=MATERIAL_CLAIM):
@@ -532,12 +550,19 @@ def raw_glb_evidence(path, object_records, material_claim=MATERIAL_CLAIM):
     actual_material = {"name": material.get("name"), "baseColorRgba": pbr.get("baseColorFactor", [1, 1, 1, 1]),
                        "metallic": pbr.get("metallicFactor", 1), "roughness": pbr.get("roughnessFactor", 1),
                        "alphaMode": material.get("alphaMode", "OPAQUE"), "doubleSided": material.get("doubleSided", False)}
+    actual_color = finite_vector(actual_material["baseColorRgba"], 4, "raw GLB baseColorFactor")
+    declared_color = finite_vector(material_claim["baseColorRgba"], 4, "declared baseColorRgba")
     scalar_keys = ("metallic", "roughness")
+    for key in scalar_keys:
+        if not finite_number(actual_material[key]) or not finite_number(material_claim[key]):
+            raise RuntimeError(f"raw GLB material {key} must be a finite number")
+    if not isinstance(actual_material["doubleSided"], bool) or not isinstance(material_claim["doubleSided"], bool):
+        raise RuntimeError("raw GLB material doubleSided must be boolean")
     if (actual_material["name"] != material_claim["name"]
             or actual_material["alphaMode"] != material_claim["alphaMode"]
             or actual_material["doubleSided"] != material_claim["doubleSided"]
             or any(abs(actual_material[key] - material_claim[key]) > 0.000001 for key in scalar_keys)
-            or any(abs(actual - declared) > 0.000001 for actual, declared in zip(actual_material["baseColorRgba"], material_claim["baseColorRgba"]))):
+            or any(abs(actual_color[index] - declared_color[index]) > 0.000001 for index in range(4))):
         raise RuntimeError("raw GLB material does not match every declared material property")
     evidence = []
     transform_max_delta = 0.0
@@ -583,15 +608,22 @@ def raw_glb_evidence(path, object_records, material_claim=MATERIAL_CLAIM):
         browser_bounds = {"min": [min(point[i] for point in referenced) for i in range(3)],
                           "max": [max(point[i] for point in referenced) for i in range(3)]}
         declared_bounds = {"min": position_accessor.get("min", []), "max": position_accessor.get("max", [])}
-        if any(len(declared_bounds[key]) != 3 for key in ("min", "max")):
-            raise RuntimeError("raw GLB POSITION accessor bounds are missing")
+        for key in ("min", "max"):
+            declared_bounds[key] = finite_vector(
+                declared_bounds[key], 3, f"raw GLB POSITION accessor {key} bounds"
+            )
+            finite_vector(browser_bounds[key], 3, f"calculated browser {key} bounds")
         accessor_delta = max(abs(actual - declared) for key in ("min", "max")
                              for actual, declared in zip(browser_bounds[key], declared_bounds[key]))
         accessor_max_delta = max(accessor_max_delta, accessor_delta)
         if accessor_delta > FLOAT32_BOUND_TOLERANCE_METRES:
             raise RuntimeError("raw GLB POSITION bounds differ from triangle-referenced geometry for " + name)
         blender_bounds = record["normalized"]["preExportReferencedBoundsMetres"]
+        for key in ("min", "max"):
+            finite_vector(blender_bounds.get(key), 3, f"Blender triangle-referenced {key} bounds")
         transformed = {"min": [blender_bounds["min"][0], blender_bounds["min"][2], -blender_bounds["max"][1]], "max": [blender_bounds["max"][0], blender_bounds["max"][2], -blender_bounds["min"][1]]}
+        for key in ("min", "max"):
+            finite_vector(transformed[key], 3, f"transformed browser {key} bounds")
         delta = max(abs(actual - expected) for key in ("min", "max") for actual, expected in zip(browser_bounds[key], transformed[key]))
         transform_max_delta = max(transform_max_delta, delta)
         if delta > FLOAT32_BOUND_TOLERANCE_METRES:

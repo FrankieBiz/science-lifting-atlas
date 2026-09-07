@@ -32,6 +32,9 @@ type MutableGlbDocument = {
     primitives: Array<{ attributes: { POSITION: number }; indices: number }>;
   }>;
   accessors: Array<{
+    bufferView: number;
+    byteOffset?: number;
+    min?: number[];
     max: number[];
     count: number;
     normalized?: boolean;
@@ -39,6 +42,7 @@ type MutableGlbDocument = {
     type?: string;
     componentType?: number;
   }>;
+  bufferViews: Array<{ byteOffset?: number; byteLength: number }>;
 };
 
 async function conversionManifest() {
@@ -158,6 +162,30 @@ async function mutateGlb(
   jsonChunk.copy(rebuilt, 20);
   remainder.copy(rebuilt, 20 + paddedLength);
   await writeFile(destination, rebuilt);
+}
+
+async function mutateFirstPositionFloat(
+  source: string,
+  destination: string,
+  value: number,
+) {
+  const bytes = Buffer.from(await readFile(source));
+  const jsonLength = bytes.readUInt32LE(12);
+  const document = JSON.parse(
+    bytes
+      .subarray(20, 20 + jsonLength)
+      .toString('utf8')
+      .trimEnd(),
+  ) as MutableGlbDocument;
+  const primitive = document.meshes[0]!.primitives[0]!;
+  const accessor = document.accessors[primitive.attributes.POSITION]!;
+  const view = document.bufferViews[accessor.bufferView]!;
+  const binaryChunkHeader = 20 + jsonLength;
+  const binaryStart = binaryChunkHeader + 8;
+  const offset =
+    binaryStart + (view.byteOffset ?? 0) + (accessor.byteOffset ?? 0);
+  bytes.writeFloatLE(value, offset);
+  await writeFile(destination, bytes);
 }
 
 async function baselineFixture() {
@@ -636,6 +664,69 @@ describe('BodyParts3D deterministic conversion contract', () => {
     const result = runRawGlbProbe(mutated);
     expect(result.status).toBe(1);
     expect(result.stderr).toContain('raw GLB material does not match');
+    await rm(root, { recursive: true });
+  });
+
+  it('rejects malformed or non-finite raw GLB material values', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const source = resolve(
+      'assets/derived/bodyparts3d/sbla005-representative.glb',
+    );
+    const cases = [
+      {
+        name: 'short-rgba',
+        mutate: (document: MutableGlbDocument) => {
+          document.materials[0]!.pbrMetallicRoughness.baseColorFactor = [
+            0.58, 0.24, 0.16,
+          ];
+        },
+        message: 'baseColorFactor must contain exactly 4 finite numbers',
+      },
+      {
+        name: 'nonfinite-roughness',
+        mutate: (document: MutableGlbDocument) => {
+          (
+            document.materials[0]!.pbrMetallicRoughness as unknown as {
+              roughnessFactor: unknown;
+            }
+          ).roughnessFactor = null;
+        },
+        message: 'material roughness must be a finite number',
+      },
+    ];
+    for (const testCase of cases) {
+      const mutated = resolve(root, `${testCase.name}.glb`);
+      await mutateGlb(source, mutated, testCase.mutate);
+      const result = runRawGlbProbe(mutated);
+      expect(result.status).toBe(1);
+      expect(result.stderr).toContain(testCase.message);
+    }
+    await rm(root, { recursive: true });
+  });
+
+  it('rejects non-finite POSITION data and malformed accessor bounds', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const source = resolve(
+      'assets/derived/bodyparts3d/sbla005-representative.glb',
+    );
+    const nonfinite = resolve(root, 'nan-position.glb');
+    await mutateFirstPositionFloat(source, nonfinite, Number.NaN);
+    const nonfiniteResult = runRawGlbProbe(nonfinite);
+    expect(nonfiniteResult.status).toBe(1);
+    expect(nonfiniteResult.stderr).toContain(
+      'raw GLB accessor contains a non-finite numeric value',
+    );
+
+    const malformedBounds = resolve(root, 'malformed-bounds.glb');
+    await mutateGlb(source, malformedBounds, (document) => {
+      const position = document.meshes[0]!.primitives[0]!.attributes.POSITION;
+      document.accessors[position]!.max = [0, 1, null as unknown as number];
+    });
+    const boundsResult = runRawGlbProbe(malformedBounds);
+    expect(boundsResult.status).toBe(1);
+    expect(boundsResult.stderr).toContain(
+      'POSITION accessor max bounds must contain exactly 3 finite numbers',
+    );
     await rm(root, { recursive: true });
   });
 
