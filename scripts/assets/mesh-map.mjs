@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { inflateRawSync } from 'node:zlib';
 
 import prettier from 'prettier';
 
@@ -312,16 +313,41 @@ export function parseObj(bytes) {
   if (!boundsMatch) throw new Error('OBJ missing or malformed Bounds(mm)');
   /** @param {string} value */
   const vector = (value) => value.split(',').map(Number);
-  const min = vector(/** @type {string} */ (boundsMatch[1]));
-  const max = vector(/** @type {string} */ (boundsMatch[2]));
-  if ([...min, ...max].some((value) => !Number.isFinite(value)))
+  const headerMin = vector(/** @type {string} */ (boundsMatch[1]));
+  const headerMax = vector(/** @type {string} */ (boundsMatch[2]));
+  if (
+    headerMin.length !== 3 ||
+    headerMax.length !== 3 ||
+    [...headerMin, ...headerMax].some((value) => !Number.isFinite(value))
+  )
     throw new Error('OBJ contains invalid bounds');
 
   let vertices = 0;
   let faces = 0;
   let triangles = 0;
+  const geometryMin = [Infinity, Infinity, Infinity];
+  const geometryMax = [-Infinity, -Infinity, -Infinity];
   for (const line of text.split('\n')) {
-    if (line.startsWith('v ')) vertices += 1;
+    if (line.startsWith('v ')) {
+      const coordinates = line.trim().split(/\s+/).slice(1).map(Number);
+      if (
+        coordinates.length < 3 ||
+        coordinates.slice(0, 3).some((value) => !Number.isFinite(value))
+      )
+        throw new Error('OBJ contains a non-finite or malformed vertex');
+      vertices += 1;
+      for (let axis = 0; axis < 3; axis += 1) {
+        const coordinate = /** @type {number} */ (coordinates[axis]);
+        geometryMin[axis] = Math.min(
+          /** @type {number} */ (geometryMin[axis]),
+          coordinate,
+        );
+        geometryMax[axis] = Math.max(
+          /** @type {number} */ (geometryMax[axis]),
+          coordinate,
+        );
+      }
+    }
     if (line.startsWith('f ')) {
       faces += 1;
       const corners = line.trim().split(/\s+/).length - 1;
@@ -332,6 +358,16 @@ export function parseObj(bytes) {
   }
   if (vertices === 0 || faces === 0)
     throw new Error('OBJ contains no geometry');
+  const boundsMaxAbsoluteDeltaMm = Number(
+    Math.max(
+      ...geometryMin.map((value, axis) =>
+        Math.abs(value - /** @type {number} */ (headerMin[axis])),
+      ),
+      ...geometryMax.map((value, axis) =>
+        Math.abs(value - /** @type {number} */ (headerMax[axis])),
+      ),
+    ).toFixed(6),
+  );
   return {
     fileId: field('File ID'),
     representationId: field('Representation ID'),
@@ -342,7 +378,9 @@ export function parseObj(bytes) {
     vertices,
     faces,
     triangles,
-    bounds: { min, max },
+    geometryBounds: { min: geometryMin, max: geometryMax },
+    sourceHeaderBounds: { min: headerMin, max: headerMax },
+    boundsMaxAbsoluteDeltaMm,
     sha256: sha256(bytes),
   };
 }
@@ -514,9 +552,11 @@ export async function buildMeshMapping({
     });
   }
   const placements = new Map();
+  const uniqueMeshes = new Map();
   for (const mappedTarget of mappedTargets)
     for (const mappedComponent of mappedTarget.components)
       for (const mesh of mappedComponent.meshes) {
+        uniqueMeshes.set(mesh.fileId, mesh);
         const meshPlacements = placements.get(mesh.fileId) ?? [];
         meshPlacements.push(`${mappedTarget.id}/${mappedComponent.id}`);
         placements.set(mesh.fileId, meshPlacements);
@@ -525,13 +565,26 @@ export async function buildMeshMapping({
     required: mappedTargets.length,
     present: mappedTargets.filter((entry) => entry.present).length,
     absent: mappedTargets.filter((entry) => !entry.present).length,
-    selectedMeshes: new Set(
-      mappedTargets.flatMap((entry) =>
-        entry.components.flatMap((entryComponent) =>
-          entryComponent.meshes.map((mesh) => mesh.fileId),
+    selectedMeshes: uniqueMeshes.size,
+    boundsComparison: {
+      comparedUniqueMeshes: uniqueMeshes.size,
+      differentFromSourceHeader: [...uniqueMeshes.values()].filter(
+        (mesh) => mesh.boundsMaxAbsoluteDeltaMm > 0,
+      ).length,
+      greaterThanPointOneMm: [...uniqueMeshes.values()].filter(
+        (mesh) => mesh.boundsMaxAbsoluteDeltaMm > 0.1,
+      ).length,
+      maximumAbsoluteDeltaMm: Math.max(
+        ...[...uniqueMeshes.values()].map(
+          (mesh) => mesh.boundsMaxAbsoluteDeltaMm,
         ),
       ),
-    ).size,
+      maximumDeltaFileId: [...uniqueMeshes.values()].sort(
+        (left, right) =>
+          right.boundsMaxAbsoluteDeltaMm - left.boundsMaxAbsoluteDeltaMm,
+      )[0]?.fileId,
+      note: 'geometryBounds are computed from vertices; sourceHeaderBounds are recorded metadata and are not used as geometry extrema.',
+    },
     reusedMeshes: [...placements]
       .filter(([, meshPlacements]) => meshPlacements.length > 1)
       .map(([fileId, meshPlacements]) => ({
@@ -600,6 +653,137 @@ export function validateBytes(bytes, label, expectedBytes, expectedHash) {
     throw new Error(
       `${label}: SHA-256 ${actualHash}, expected ${expectedHash}`,
     );
+}
+
+/**
+ * @param {Buffer} archive
+ * @returns {Map<string, Buffer>}
+ */
+function readZipEntries(archive) {
+  let eocd = -1;
+  const lowerBound = Math.max(0, archive.length - 65_557);
+  for (let offset = archive.length - 22; offset >= lowerBound; offset -= 1) {
+    if (archive.readUInt32LE(offset) === 0x06054b50) {
+      eocd = offset;
+      break;
+    }
+  }
+  if (eocd < 0)
+    throw new Error('ZIP end-of-central-directory record is absent');
+  const entryCount = archive.readUInt16LE(eocd + 10);
+  const centralOffset = archive.readUInt32LE(eocd + 16);
+  if (entryCount === 0xffff || centralOffset === 0xffffffff)
+    throw new Error('Zip64 archives are not supported');
+
+  const result = new Map();
+  let cursor = centralOffset;
+  for (let index = 0; index < entryCount; index += 1) {
+    if (archive.readUInt32LE(cursor) !== 0x02014b50)
+      throw new Error(`ZIP central directory entry ${index} is malformed`);
+    const flags = archive.readUInt16LE(cursor + 8);
+    const method = archive.readUInt16LE(cursor + 10);
+    const compressedSize = archive.readUInt32LE(cursor + 20);
+    const uncompressedSize = archive.readUInt32LE(cursor + 24);
+    const filenameLength = archive.readUInt16LE(cursor + 28);
+    const extraLength = archive.readUInt16LE(cursor + 30);
+    const commentLength = archive.readUInt16LE(cursor + 32);
+    const localOffset = archive.readUInt32LE(cursor + 42);
+    const filename = archive
+      .subarray(cursor + 46, cursor + 46 + filenameLength)
+      .toString('utf8');
+    if (flags & 1)
+      throw new Error(`${filename}: encrypted ZIP entry is unsupported`);
+    if (
+      compressedSize === 0xffffffff ||
+      uncompressedSize === 0xffffffff ||
+      localOffset === 0xffffffff
+    )
+      throw new Error(`${filename}: Zip64 entry is unsupported`);
+    if (archive.readUInt32LE(localOffset) !== 0x04034b50)
+      throw new Error(`${filename}: local ZIP header is malformed`);
+    const localFilenameLength = archive.readUInt16LE(localOffset + 26);
+    const localExtraLength = archive.readUInt16LE(localOffset + 28);
+    const dataOffset =
+      localOffset + 30 + localFilenameLength + localExtraLength;
+    const compressed = archive.subarray(
+      dataOffset,
+      dataOffset + compressedSize,
+    );
+    let bytes;
+    if (method === 0) bytes = Buffer.from(compressed);
+    else if (method === 8) bytes = inflateRawSync(compressed);
+    else
+      throw new Error(
+        `${filename}: unsupported ZIP compression method ${method}`,
+      );
+    if (bytes.byteLength !== uncompressedSize)
+      throw new Error(`${filename}: uncompressed ZIP size mismatch`);
+    if (result.has(filename))
+      throw new Error(`duplicate ZIP entry ${filename}`);
+    result.set(filename, bytes);
+    cursor += 46 + filenameLength + extraLength + commentLength;
+  }
+  return result;
+}
+
+/**
+ * @param {Buffer} archive
+ * @param {string} meshDir
+ * @param {{entryPrefix: string, expectedObjFiles: number}} options
+ */
+export async function verifyExtractedAgainstArchive(
+  archive,
+  meshDir,
+  { entryPrefix, expectedObjFiles },
+) {
+  const entries = readZipEntries(archive);
+  const archiveObjs = [...entries]
+    .filter(([name]) => name.startsWith(entryPrefix) && name.endsWith('.obj'))
+    .sort(([left], [right]) => left.localeCompare(right, 'en-US'));
+  if (archiveObjs.length !== expectedObjFiles)
+    throw new Error(
+      `ZIP contains ${archiveObjs.length} OBJ files under ${entryPrefix}, expected ${expectedObjFiles}`,
+    );
+  const extractedNames = (await readdir(meshDir))
+    .filter((name) => name.endsWith('.obj'))
+    .sort((left, right) => left.localeCompare(right, 'en-US'));
+  if (extractedNames.length !== expectedObjFiles)
+    throw new Error(
+      `${basename(meshDir)} contains ${extractedNames.length} OBJ files, expected ${expectedObjFiles}`,
+    );
+  const archiveBasenames = new Set();
+  for (const [entryName, archivedBytes] of archiveObjs) {
+    const extractedName = basename(entryName);
+    if (archiveBasenames.has(extractedName))
+      throw new Error(`duplicate ZIP OBJ basename ${extractedName}`);
+    archiveBasenames.add(extractedName);
+    let extractedBytes;
+    try {
+      extractedBytes = await readFile(join(meshDir, extractedName));
+    } catch (error) {
+      if (
+        error &&
+        typeof error === 'object' &&
+        'code' in error &&
+        error.code === 'ENOENT'
+      )
+        throw new Error(`${extractedName}: extracted OBJ is absent`);
+      throw error;
+    }
+    if (!archivedBytes.equals(extractedBytes))
+      throw new Error(
+        `${extractedName}: extracted bytes do not match verified ZIP entry`,
+      );
+  }
+  for (const extractedName of extractedNames)
+    if (!archiveBasenames.has(extractedName))
+      throw new Error(
+        `${extractedName}: extracted OBJ is absent from verified ZIP`,
+      );
+  return {
+    verifiedObjFiles: archiveObjs.length,
+    binding: 'byte-identical to entries in whole-file SHA-256-verified ZIP',
+  };
 }
 
 /**
@@ -709,6 +893,48 @@ function argumentsFrom(argv) {
 }
 
 /** @param {string[]} argv */
+async function runExtractionBindingCli(argv) {
+  const values = new Map();
+  for (let index = 0; index < argv.length; index += 2) {
+    const flag = argv[index];
+    const value = argv[index + 1];
+    if (!flag?.startsWith('--') || !value)
+      throw new Error('invalid extraction-verification arguments');
+    values.set(flag.slice(2), value);
+  }
+  const required = [
+    'archive',
+    'expected-bytes',
+    'expected-sha256',
+    'mesh-dir',
+    'entry-prefix',
+    'expected-obj-files',
+  ];
+  for (const name of required)
+    if (!values.has(name)) throw new Error(`missing --${name}`);
+  /** @param {string} name @returns {string} */
+  const get = (name) => /** @type {string} */ (values.get(name));
+  const expectedBytes = Number(get('expected-bytes'));
+  const expectedObjFiles = Number(get('expected-obj-files'));
+  if (
+    !Number.isSafeInteger(expectedBytes) ||
+    !Number.isSafeInteger(expectedObjFiles)
+  )
+    throw new Error('expected byte and OBJ counts must be integers');
+  const archive = await verifiedFile(
+    resolve(get('archive')),
+    expectedBytes,
+    get('expected-sha256'),
+  );
+  const result = await verifyExtractedAgainstArchive(
+    archive,
+    resolve(get('mesh-dir')),
+    { entryPrefix: get('entry-prefix'), expectedObjFiles },
+  );
+  console.log(JSON.stringify(result));
+}
+
+/** @param {string[]} argv */
 async function runCli(argv) {
   const args = argumentsFrom(argv);
   /** @param {string} name @returns {string} */
@@ -720,6 +946,8 @@ async function runCli(argv) {
       await verifiedFile(join(getArg('metadata-dir'), name), size, hash),
     );
   }
+  /** @type {Map<string, Buffer>} */
+  const archiveBytes = new Map();
   for (const [flag, name] of /** @type {[string, string][]} */ ([
     ['isa-archive', 'isa_BP3D_4.0_obj_99.zip'],
     ['partof-archive', 'partof_BP3D_4.0_obj_99.zip'],
@@ -729,7 +957,10 @@ async function runCli(argv) {
     const archiveIdentity = /** @type {readonly [number, string]} */ (
       ARCHIVES[name]
     );
-    await verifiedFile(getArg(flag), archiveIdentity[0], archiveIdentity[1]);
+    archiveBytes.set(
+      name,
+      await verifiedFile(getArg(flag), archiveIdentity[0], archiveIdentity[1]),
+    );
   }
   // Both extracted trees are required, even though §4.3 muscle geometry is in IS-A.
   await stat(getArg('isa-mesh-dir'));
@@ -766,6 +997,24 @@ async function runCli(argv) {
       `${prefix}_parts_list.txt`,
     );
   validateUniqueIds(partofParts);
+  const extractedArchiveBinding = {
+    isa: await verifyExtractedAgainstArchive(
+      /** @type {Buffer} */ (archiveBytes.get('isa_BP3D_4.0_obj_99.zip')),
+      getArg('isa-mesh-dir'),
+      {
+        entryPrefix: 'isa_BP3D_4.0_obj_99/',
+        expectedObjFiles: 2_234,
+      },
+    ),
+    partof: await verifyExtractedAgainstArchive(
+      /** @type {Buffer} */ (archiveBytes.get('partof_BP3D_4.0_obj_99.zip')),
+      getArg('partof-mesh-dir'),
+      {
+        entryPrefix: 'partof_BP3D_4.0_obj_99/',
+        expectedObjFiles: 1_258,
+      },
+    ),
+  };
   const extractedArchiveInspection = {
     isa: await inspectExtractedArchive({
       meshDir: getArg('isa-mesh-dir'),
@@ -809,6 +1058,7 @@ async function runCli(argv) {
           { bytes, sha256: digest },
         ]),
       ),
+      extractedArchiveBinding,
       extractedArchiveInspection,
     },
     reproduction: {
@@ -833,7 +1083,12 @@ const isMain =
   pathToFileURL(resolve(process.argv[1])).href === import.meta.url;
 
 if (isMain) {
-  await runCli(process.argv.slice(2)).catch((error) => {
+  const argv = process.argv.slice(2);
+  const operation =
+    argv[0] === '--verify-extraction-only'
+      ? runExtractionBindingCli(argv.slice(1))
+      : runCli(argv);
+  await operation.catch((error) => {
     console.error(error.message);
     process.exitCode = 1;
   });

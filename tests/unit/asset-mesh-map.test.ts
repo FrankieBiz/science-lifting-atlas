@@ -1,6 +1,9 @@
+import { createHash } from 'node:crypto';
+import { execFile } from 'node:child_process';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import { promisify } from 'node:util';
 
 import { describe, expect, it } from 'vitest';
 
@@ -94,14 +97,14 @@ describe('BodyParts3D mesh mapping', () => {
     );
   });
 
-  it('parses OBJ identity, geometry, triangulation, bounds, bytes, and digest', () => {
+  it('computes exact vertex bounds separately from rounded source header bounds', () => {
     const text = [
       '# File ID : FJ1',
       '# Representation ID : BP2',
       '# Build-up logic : FMA 3.0 is_a',
       '# Concept ID : FMA2',
       '# English name : Right muscle one',
-      '# Bounds(mm): (-1.000000,-2.000000,-3.000000)-(4.000000,5.000000,6.000000)',
+      '# Bounds(mm): (-1.500000,-2.500000,-3.500000)-(10.000000,11.000000,12.000000)',
       'v -1 -2 -3',
       'v 4 5 6',
       'v 0 0 0',
@@ -119,10 +122,53 @@ describe('BodyParts3D mesh mapping', () => {
       vertices: 4,
       faces: 1,
       triangles: 2,
-      bounds: { min: [-1, -2, -3], max: [4, 5, 6] },
+      geometryBounds: { min: [-1, -2, -3], max: [4, 5, 6] },
+      sourceHeaderBounds: {
+        min: [-1.5, -2.5, -3.5],
+        max: [10, 11, 12],
+      },
+      boundsMaxAbsoluteDeltaMm: 6,
       bytes: Buffer.byteLength(text),
     });
     expect(parsed.sha256).toMatch(/^[a-f0-9]{64}$/);
+  });
+
+  it('makes the CLI reject an extracted OBJ changed after ZIP verification', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'sbla-zip-binding-'));
+    const meshDir = join(root, 'extracted');
+    await import('node:fs/promises').then(({ mkdir }) => mkdir(meshDir));
+    const original = Buffer.from('v 0 0 0\nv 1 0 0\nv 0 1 0\nf 1 2 3\n');
+    const archive = storedZip('fixture/FJ1.obj', original);
+    const archivePath = join(root, 'fixture.zip');
+    await writeFile(archivePath, archive);
+    await writeFile(join(meshDir, 'FJ1.obj'), original);
+    const args = [
+      resolve('scripts/assets/mesh-map.mjs'),
+      '--verify-extraction-only',
+      '--archive',
+      archivePath,
+      '--expected-bytes',
+      String(archive.byteLength),
+      '--expected-sha256',
+      createHash('sha256').update(archive).digest('hex'),
+      '--mesh-dir',
+      meshDir,
+      '--entry-prefix',
+      'fixture/',
+      '--expected-obj-files',
+      '1',
+    ];
+    const execute = promisify(execFile);
+    await expect(execute(process.execPath, args)).resolves.toMatchObject({
+      stdout: expect.stringContaining('"verifiedObjFiles":1'),
+    });
+
+    const tampered = Buffer.from(original);
+    tampered[tampered.indexOf('1 0 0')] = '2'.charCodeAt(0);
+    await writeFile(join(meshDir, 'FJ1.obj'), tampered);
+    await expect(execute(process.execPath, args)).rejects.toMatchObject({
+      stderr: expect.stringMatching(/FJ1.*do not match.*ZIP/i),
+    });
   });
 
   it('maps a target through descendants to exact mesh identities', async () => {
@@ -292,3 +338,47 @@ describe('BodyParts3D mesh mapping', () => {
     }
   });
 });
+
+function storedZip(name: string, data: Buffer) {
+  const filename = Buffer.from(name);
+  const checksum = crc32(data);
+  const local = Buffer.alloc(30);
+  local.writeUInt32LE(0x04034b50, 0);
+  local.writeUInt16LE(20, 4);
+  local.writeUInt16LE(0, 6);
+  local.writeUInt16LE(0, 8);
+  local.writeUInt32LE(checksum, 14);
+  local.writeUInt32LE(data.length, 18);
+  local.writeUInt32LE(data.length, 22);
+  local.writeUInt16LE(filename.length, 26);
+
+  const central = Buffer.alloc(46);
+  central.writeUInt32LE(0x02014b50, 0);
+  central.writeUInt16LE(20, 4);
+  central.writeUInt16LE(20, 6);
+  central.writeUInt16LE(0, 8);
+  central.writeUInt16LE(0, 10);
+  central.writeUInt32LE(checksum, 16);
+  central.writeUInt32LE(data.length, 20);
+  central.writeUInt32LE(data.length, 24);
+  central.writeUInt16LE(filename.length, 28);
+
+  const centralOffset = local.length + filename.length + data.length;
+  const end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0);
+  end.writeUInt16LE(1, 8);
+  end.writeUInt16LE(1, 10);
+  end.writeUInt32LE(central.length + filename.length, 12);
+  end.writeUInt32LE(centralOffset, 16);
+  return Buffer.concat([local, filename, data, central, filename, end]);
+}
+
+function crc32(data: Buffer) {
+  let crc = 0xffffffff;
+  for (const byte of data) {
+    crc ^= byte;
+    for (let bit = 0; bit < 8; bit += 1)
+      crc = (crc >>> 1) ^ (0xedb88320 & -(crc & 1));
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
