@@ -68,6 +68,16 @@ function runTransactionProbe(
   );
 }
 
+function runPolicyProbe(args: string[]) {
+  return spawnSync(
+    'python3',
+    [scriptPath, '--publication-policy-probe', ...args],
+    {
+      encoding: 'utf8',
+    },
+  );
+}
+
 async function expectOldFinals(finals: ArtifactFinals) {
   await expect(readFile(finals.glb, 'utf8')).resolves.toBe('old-glb');
   await expect(readFile(finals.poster, 'utf8')).resolves.toBe('old-poster');
@@ -221,6 +231,7 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(manifest.visualInspection.normalWinding.openInconclusive).toBe(139);
     expect(manifest.visualInspection.normalWinding.closedInward).toBe(0);
     expect(manifest.publication).toEqual({
+      status: 'published-release',
       semantics:
         'Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories.',
       commitMarker: 'docs/licenses/bodyparts3d-conversion-manifest.json',
@@ -309,6 +320,48 @@ describe('BodyParts3D deterministic conversion contract', () => {
       'conversion promotion lock is already held',
     );
     await expectOldFinals(fixture.finals);
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('refuses a normal publication without all authenticated comparison inputs', async () => {
+    const fixture = await transactionFixture();
+    const result = runPolicyProbe([
+      '--output-dir',
+      fixture.outputDir,
+      '--manifest',
+      fixture.manifestPath,
+    ]);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'release publication requires prior manifest, GLB, and poster',
+    );
+    await expectOldFinals(fixture.finals);
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('permits an external baseline but rejects accepted release locations', async () => {
+    const fixture = await transactionFixture();
+    const external = runPolicyProbe([
+      '--baseline-only',
+      '--output-dir',
+      fixture.outputDir,
+      '--manifest',
+      fixture.manifestPath,
+    ]);
+    expect(external.status).toBe(0);
+    expect(external.stdout).toContain('baseline-unpublished');
+
+    const accepted = runPolicyProbe([
+      '--baseline-only',
+      '--output-dir',
+      resolve('assets/derived/bodyparts3d'),
+      '--manifest',
+      conversionPath,
+    ]);
+    expect(accepted.status).toBe(1);
+    expect(accepted.stderr).toContain(
+      'baseline-only outputs must remain outside the repository',
+    );
     await rm(fixture.root, { recursive: true });
   });
 });

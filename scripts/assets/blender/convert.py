@@ -18,7 +18,8 @@ import time
 from pathlib import Path
 
 TRANSACTION_PROBE = "--transaction-probe" in sys.argv
-if not TRANSACTION_PROBE:
+POLICY_PROBE = "--publication-policy-probe" in sys.argv
+if not TRANSACTION_PROBE and not POLICY_PROBE:
     import bpy
     from mathutils import Vector
 
@@ -40,6 +41,30 @@ ARTIFACT_NAMES = {
     "manifest": "bodyparts3d-conversion-manifest.json",
 }
 ACTIVE_STAGE = None
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+ACCEPTED_OUTPUT_DIR = (REPOSITORY_ROOT / "assets/derived/bodyparts3d").resolve()
+ACCEPTED_MANIFEST = (REPOSITORY_ROOT / "docs/licenses/bodyparts3d-conversion-manifest.json").resolve()
+
+
+def outside_repository(path):
+    return not Path(path).resolve().is_relative_to(REPOSITORY_ROOT)
+
+
+def publication_policy(baseline_only, compare_values, output_dir, manifest_path):
+    """Fail closed before generation chooses a baseline or accepted release."""
+    supplied = [bool(value) for value in compare_values]
+    output_dir, manifest_path = Path(output_dir).resolve(), Path(manifest_path).resolve()
+    if baseline_only:
+        if any(supplied):
+            raise RuntimeError("baseline-only generation cannot consume comparison inputs")
+        if not outside_repository(output_dir) or not outside_repository(manifest_path):
+            raise RuntimeError("baseline-only outputs must remain outside the repository")
+        return "baseline-unpublished"
+    if not all(supplied):
+        raise RuntimeError("release publication requires prior manifest, GLB, and poster comparison inputs")
+    if output_dir != ACCEPTED_OUTPUT_DIR or manifest_path != ACCEPTED_MANIFEST:
+        raise RuntimeError("release publication must target the accepted repository artifact paths")
+    return "published-release"
 
 
 def transaction_paths(output_dir, manifest_path):
@@ -308,7 +333,7 @@ def raw_glb_evidence(path, object_records):
             "names": sorted(seen), "objectsEvidence": sorted(evidence, key=lambda item: item["name"])}
 
 
-def validate_staged_release(staged, comparison_required):
+def validate_staged_release(staged, expected_status):
     """Fail closed on the staged release before any accepted final is replaced."""
     for path in staged.values():
         if not path.is_file():
@@ -330,15 +355,19 @@ def validate_staged_release(staged, comparison_required):
     normal = manifest["visualInspection"]["normalWinding"]
     if normal["result"] != "local-consistency-pass" or normal["zeroAreaFaces"] != 0 or normal["sameDirectionSharedEdges"] != 0 or normal["closedInward"] != 0:
         raise RuntimeError("staged decoded GLB normal evidence failed")
-    if comparison_required:
+    if expected_status == "published-release":
         deterministic = manifest["determinism"]
         required = ("sceneStructureEqual", "decodedGeometryEqual", "boundsEqual", "glbBytesEqual",
                     "posterBytesEqual", "priorArtifactAuthenticated")
         if deterministic["cleanRuns"] != 2 or not all(deterministic.get(key) is True for key in required):
             raise RuntimeError("staged release lacks an authenticated distinct-run comparison")
     publication = manifest.get("publication", {})
-    if publication.get("commitMarker") != "docs/licenses/bodyparts3d-conversion-manifest.json":
-        raise RuntimeError("staged manifest-last publication contract is missing")
+    if publication.get("status") != expected_status:
+        raise RuntimeError("staged publication status does not match the requested mode")
+    if expected_status == "published-release" and publication.get("commitMarker") != "docs/licenses/bodyparts3d-conversion-manifest.json":
+        raise RuntimeError("staged release manifest-last publication contract is missing")
+    if expected_status == "baseline-unpublished" and publication.get("commitMarker") is not None:
+        raise RuntimeError("staged baseline must not claim a release commit marker")
 
 
 def main():
@@ -352,13 +381,14 @@ def main():
     parser.add_argument("--compare-manifest")
     parser.add_argument("--compare-glb")
     parser.add_argument("--compare-poster")
+    parser.add_argument("--baseline-only", action="store_true")
     options = parser.parse_args(args_after_double_dash())
     started = time.perf_counter()
+    compare_values = (options.compare_manifest, options.compare_glb, options.compare_poster)
+    publication_status = publication_policy(options.baseline_only, compare_values,
+                                            options.output_dir, options.manifest)
     if bpy.app.version != EXPECTED_BLENDER_VERSION or bpy.app.version_string != EXPECTED_BLENDER_VERSION_STRING:
         raise RuntimeError("pinned Blender runtime mismatch: expected 4.5.13 LTS")
-    compare_values = (options.compare_manifest, options.compare_glb, options.compare_poster)
-    if any(compare_values) and not all(compare_values):
-        raise RuntimeError("comparison requires prior manifest, GLB, and poster")
     mapping_path = Path(options.mapping).resolve()
     if digest(mapping_path) != MAPPING_SHA256:
         raise RuntimeError("mapping manifest SHA-256 does not match accepted SBLA-005 identity")
@@ -479,7 +509,7 @@ def main():
     scene.render.filepath = str(poster_path)
     bpy.ops.render.render(write_still=True)
 
-    other = json.loads(Path(options.compare_manifest).read_text()) if options.compare_manifest else None
+    other = json.loads(Path(options.compare_manifest).read_text()) if publication_status == "published-release" else None
     structure = decoded_glb_structure(glb_path)
     raw_evidence = raw_glb_evidence(glb_path, object_records)
     raw_by_name = {item["name"]: item["browserBoundsMetres"] for item in raw_evidence["objectsEvidence"]}
@@ -525,17 +555,18 @@ def main():
       "rawGltfEvidence": raw_evidence,
       "determinism": {**comparison, "structure": structure},
       "artifacts": {"hostPerFileCeilingBytes": 26214400,
-        "glb": {"path": "assets/derived/bodyparts3d/sbla005-representative.glb", "bytes": glb_path.stat().st_size, "sha256": digest(glb_path), "desktopTargetBytes": 6000000, "hardCeilingBytes": 10000000, "mobileInteractiveBytes": 3000000},
-        "poster": {"path": "assets/derived/bodyparts3d/sbla005-poster.webp", "bytes": poster_path.stat().st_size, "sha256": digest(poster_path), "ceilingBytes": 200000}},
+        "glb": {"path": "assets/derived/bodyparts3d/sbla005-representative.glb" if publication_status == "published-release" else str(finals["glb"]), "bytes": glb_path.stat().st_size, "sha256": digest(glb_path), "desktopTargetBytes": 6000000, "hardCeilingBytes": 10000000, "mobileInteractiveBytes": 3000000},
+        "poster": {"path": "assets/derived/bodyparts3d/sbla005-poster.webp" if publication_status == "published-release" else str(finals["poster"]), "bytes": poster_path.stat().st_size, "sha256": digest(poster_path), "ceilingBytes": 200000}},
       "poster": {"camera": camera_record, "light": lights},
-      "publication": {"semantics": "Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories.",
-        "commitMarker": "docs/licenses/bodyparts3d-conversion-manifest.json",
-        "consumerAcceptance": "Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest."},
+      "publication": {"status": publication_status,
+        "semantics": "Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories." if publication_status == "published-release" else "External first-run baseline only; unpublished and ineligible for consumer acceptance.",
+        "commitMarker": "docs/licenses/bodyparts3d-conversion-manifest.json" if publication_status == "published-release" else None,
+        "consumerAcceptance": "Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest." if publication_status == "published-release" else "Consumers must not accept baseline-only artifacts."},
       "timing": {"conversionSeconds": elapsed, "objectCount": len(objects)},
       "visualInspection": {"programmatic": structure["meshHealth"], "normalWinding": structure["normalWinding"], "holes": "Boundary edges are recorded programmatically and are not automatically holes; no mesh-repair operation was applied.", "invertedNormals": "Decoded GLB directed-edge consistency found no same-direction shared edges and no zero-area faces.", "lostComponents": "All 139 checksum-mapped source meshes imported as one selectable object each. The fixed poster visibly lacks a head and complete distal limbs because this representative scene contains only mapped muscle meshes, not a full-body skin or skeleton layer.", "material": "One neutral opaque review material assigned to every exported object.", "occlusion": "Fixed whole-body poster necessarily has anatomical overlap; interactive selection is required for concealed meshes.", "proportions": "Uniform 0.001 mm-to-m scale only; no coordinate deformation applied."}}
     manifest_path.write_text(stable_json(manifest))
     publish_staged_artifacts(stage, staged, finals,
-                             lambda paths: validate_staged_release(paths, bool(options.compare_manifest)))
+                             lambda paths: validate_staged_release(paths, publication_status))
     ACTIVE_STAGE = None
 
 
@@ -560,9 +591,31 @@ def transaction_probe():
     publish_staged_artifacts(stage, staged, finals, validate, failure_after=failure_after)
 
 
+def publication_policy_probe():
+    """Exercise the production publication gate without loading Blender."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--publication-policy-probe", action="store_true")
+    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--compare-manifest")
+    parser.add_argument("--compare-glb")
+    parser.add_argument("--compare-poster")
+    parser.add_argument("--baseline-only", action="store_true")
+    options = parser.parse_args()
+    status = publication_policy(options.baseline_only,
+                                (options.compare_manifest, options.compare_glb, options.compare_poster),
+                                options.output_dir, options.manifest)
+    print(status)
+
+
 if __name__ == "__main__":
     try:
-        transaction_probe() if TRANSACTION_PROBE else main()
+        if TRANSACTION_PROBE:
+            transaction_probe()
+        elif POLICY_PROBE:
+            publication_policy_probe()
+        else:
+            main()
     except Exception as error:
         print("SBLA005 conversion failed: " + str(error), file=sys.stderr)
         sys.exit(1)

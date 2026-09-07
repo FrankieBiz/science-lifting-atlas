@@ -6240,7 +6240,8 @@
   "publication": {
     "commitMarker": "docs/licenses/bodyparts3d-conversion-manifest.json",
     "consumerAcceptance": "Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest.",
-    "semantics": "Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories."
+    "semantics": "Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories.",
+    "status": "published-release"
   },
   "rawGltfEvidence": {
     "browserTransformMaxDeltaMetres": 0.005470589,
@@ -9179,7 +9180,7 @@
     }
   },
   "timing": {
-    "conversionSeconds": 6.267,
+    "conversionSeconds": 7.167,
     "objectCount": 139
   },
   "tool": {
