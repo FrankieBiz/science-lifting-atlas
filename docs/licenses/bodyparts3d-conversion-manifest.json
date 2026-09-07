@@ -19,7 +19,13 @@
   "authenticatedBaseline": {
     "createdAt": "2026-09-07T16:35:14Z",
     "manifestSha256": "b36b336f1e1d8f88e598bd312b61b15536d63a82cf30907a12795a610f484e75",
+    "receipt": {
+      "blob": "81a99163f9a9923723ec5e82ad2d922db6edc620",
+      "commit": "0f118314ae602777752370ec6d0a5bd69bfa5a54",
+      "sha256": "240cd01045b6bc7d8ef4bcad0f71c2de2f1c85c9ad58a56621e7de9194c12895"
+    },
     "runId": "413a6eba-f0c8-4ed1-ac7b-165a2888f55a",
+    "snapshotFlow": "Manifest, GLB, and poster were each read once; authentication and comparison used those same private snapshot bytes.",
     "trustAnchor": "caller-supplied SHA-256 verified before JSON parsing"
   },
   "candidate": "path-c-bodyparts3d",
@@ -11879,9 +11885,9 @@
     ]
   },
   "runIdentity": {
-    "createdAt": "2026-09-07T16:35:41Z",
+    "createdAt": "2026-09-07T17:05:15Z",
     "mode": "published-release",
-    "runId": "26c6b3ee-2c06-4659-ac1a-de47c3b9aeba",
+    "runId": "e5bc60f3-8c04-45c5-a1ff-8b376890c1c3",
     "source": {
       "mappingSha256": "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196"
     },
@@ -11899,7 +11905,7 @@
     }
   },
   "timing": {
-    "conversionSeconds": 6.329,
+    "conversionSeconds": 9.434,
     "objectCount": 139
   },
   "tool": {
@@ -11910,6 +11916,17 @@
     "runtime": {
       "version": [4, 5, 13],
       "versionString": "4.5.13 LTS"
+    },
+    "runtimeProvenance": {
+      "codeSignature": {
+        "authority": "Developer ID Application: Stichting Blender Foundation (68UA947AUU)",
+        "cdHashFullSha256": "e1603c3bd5b6af74898ea9f53fc668eb02a3979c3f1ceb5b708687c42e7fd8fd",
+        "identifier": "org.blenderfoundation.blender",
+        "teamIdentifier": "68UA947AUU"
+      },
+      "executableSha256": "49fa4d4694f55b37b58b18d99a71bdc8228d30545caa2e16c9f99952f4c76f55",
+      "limitation": "Pinned and publisher-authenticated only for the verified macOS arm64 pipeline.",
+      "platform": "macOS arm64"
     }
   },
   "visualInspection": {
