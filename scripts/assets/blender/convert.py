@@ -230,12 +230,14 @@ def main():
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--compare-manifest")
     parser.add_argument("--compare-glb")
+    parser.add_argument("--compare-poster")
     options = parser.parse_args(args_after_double_dash())
     started = time.perf_counter()
     if bpy.app.version != EXPECTED_BLENDER_VERSION or bpy.app.version_string != EXPECTED_BLENDER_VERSION_STRING:
         raise RuntimeError("pinned Blender runtime mismatch: expected 4.5.13 LTS")
-    if bool(options.compare_manifest) != bool(options.compare_glb):
-        raise RuntimeError("comparison requires both --compare-manifest and --compare-glb")
+    compare_values = (options.compare_manifest, options.compare_glb, options.compare_poster)
+    if any(compare_values) and not all(compare_values):
+        raise RuntimeError("comparison requires prior manifest, GLB, and poster")
     mapping_path = Path(options.mapping).resolve()
     if digest(mapping_path) != MAPPING_SHA256:
         raise RuntimeError("mapping manifest SHA-256 does not match accepted SBLA-005 identity")
@@ -369,20 +371,26 @@ def main():
                   "note": "Second clean-run comparison is required before acceptance."}
     if other:
         prior_glb = Path(options.compare_glb)
-        if not prior_glb.is_file():
-            raise RuntimeError("prior GLB is unavailable")
+        prior_poster = Path(options.compare_poster)
+        if not prior_glb.is_file() or not prior_poster.is_file():
+            raise RuntimeError("prior GLB or poster is unavailable")
+        if prior_glb.resolve() == glb_path.resolve() or prior_poster.resolve() == poster_path.resolve() or prior_glb.resolve().parent == glb_path.resolve().parent or prior_poster.resolve().parent == poster_path.resolve().parent:
+            raise RuntimeError("prior and current runs must use distinct artifact paths and directories")
         if digest(prior_glb) != other["artifacts"]["glb"]["sha256"]:
             raise RuntimeError("prior GLB SHA-256 does not match authenticated prior manifest")
         if prior_glb.stat().st_size != other["artifacts"]["glb"]["bytes"]:
             raise RuntimeError("prior GLB byte count does not match authenticated prior manifest")
+        if digest(prior_poster) != other["artifacts"]["poster"]["sha256"] or prior_poster.stat().st_size != other["artifacts"]["poster"]["bytes"]:
+            raise RuntimeError("prior poster does not match authenticated prior manifest")
         previous = decoded_glb_structure(prior_glb)
         comparison.update({"cleanRuns": 2, "sceneStructureEqual": previous["objects"] == structure["objects"] and previous["meshObjects"] == structure["meshObjects"] and previous["names"] == structure["names"],
                            "decodedGeometryEqual": previous["decodedGeometry"] == structure["decodedGeometry"],
                            "boundsEqual": previous["sceneBoundsMetres"] == structure["sceneBoundsMetres"],
                            "glbBytesEqual": digest(prior_glb) == digest(glb_path), "priorArtifactAuthenticated": True,
+                           "posterBytesEqual": digest(prior_poster) == digest(poster_path),
                            "priorGlbSha256": digest(prior_glb),
                            "note": "Prior GLB hash/bytes were authenticated against its manifest; both GLBs were independently decoded in Blender."})
-        if not all(comparison[key] for key in ("sceneStructureEqual", "decodedGeometryEqual", "boundsEqual", "glbBytesEqual", "priorArtifactAuthenticated")):
+        if not all(comparison[key] for key in ("sceneStructureEqual", "decodedGeometryEqual", "boundsEqual", "glbBytesEqual", "posterBytesEqual", "priorArtifactAuthenticated")):
             raise RuntimeError("deterministic conversion comparison failed")
     elapsed = round(time.perf_counter() - started, 3)
     manifest = {"schemaVersion": 1, "candidate": "path-c-bodyparts3d",

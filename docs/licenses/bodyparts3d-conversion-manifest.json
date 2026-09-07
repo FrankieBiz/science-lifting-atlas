@@ -23,6 +23,7 @@
     "decodedGeometryEqual": true,
     "glbBytesEqual": true,
     "note": "Prior GLB hash/bytes were authenticated against its manifest; both GLBs were independently decoded in Blender.",
+    "posterBytesEqual": true,
     "priorArtifactAuthenticated": true,
     "priorGlbSha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
     "sceneStructureEqual": true,
@@ -9173,7 +9174,7 @@
     }
   },
   "timing": {
-    "conversionSeconds": 6.287,
+    "conversionSeconds": 6.336,
     "objectCount": 139
   },
   "tool": {

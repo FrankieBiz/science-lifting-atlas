@@ -117,6 +117,7 @@ describe('BodyParts3D deterministic conversion contract', () => {
       decodedGeometryEqual: true,
       boundsEqual: true,
       glbBytesEqual: true,
+      posterBytesEqual: true,
       priorArtifactAuthenticated: true,
     });
     expect(manifest.artifacts.glb).toMatchObject({
@@ -153,6 +154,9 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(script).toContain('bpy.app.version');
     expect(script).toContain('bpy.app.version_string');
     expect(script).toContain('--compare-glb');
+    expect(script).toContain('--compare-poster');
+    expect(script).toContain('distinct artifact paths and directories');
+    expect(script).toContain('prior poster does not match');
     expect(script).toContain('prior GLB SHA-256 does not match');
     expect(script).toContain('decoded_glb_structure');
     expect(script).toContain('closed-signed-volume');
