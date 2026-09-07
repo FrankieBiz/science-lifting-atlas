@@ -1,6 +1,15 @@
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  readdir,
+  rm,
+  writeFile,
+} from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 import { describe, expect, it } from 'vitest';
 
@@ -8,9 +17,74 @@ const conversionPath = resolve(
   'docs/licenses/bodyparts3d-conversion-manifest.json',
 );
 const scriptPath = resolve('scripts/assets/blender/convert.py');
+type ArtifactFinals = { glb: string; poster: string; manifest: string };
 
 async function conversionManifest() {
   return JSON.parse(await readFile(conversionPath, 'utf8'));
+}
+
+async function transactionFixture() {
+  const root = await mkdtemp(resolve(tmpdir(), 'sbla005-transaction-'));
+  const outputDir = resolve(root, 'assets', 'derived', 'bodyparts3d');
+  const manifestPath = resolve(
+    root,
+    'docs',
+    'licenses',
+    'bodyparts3d-conversion-manifest.json',
+  );
+  await mkdir(outputDir, { recursive: true });
+  await mkdir(resolve(root, 'docs', 'licenses'), { recursive: true });
+  const finals = {
+    glb: resolve(outputDir, 'sbla005-representative.glb'),
+    poster: resolve(outputDir, 'sbla005-poster.webp'),
+    manifest: manifestPath,
+  };
+  await Promise.all([
+    writeFile(finals.glb, 'old-glb'),
+    writeFile(finals.poster, 'old-poster'),
+    writeFile(finals.manifest, 'old-manifest'),
+  ]);
+  return { root, outputDir, manifestPath, finals };
+}
+
+function runTransactionProbe(
+  outputDir: string,
+  manifestPath: string,
+  failure: string,
+) {
+  return spawnSync(
+    'python3',
+    [
+      scriptPath,
+      '--transaction-probe',
+      '--output-dir',
+      outputDir,
+      '--manifest',
+      manifestPath,
+      '--failure',
+      failure,
+    ],
+    { encoding: 'utf8' },
+  );
+}
+
+async function expectOldFinals(finals: ArtifactFinals) {
+  await expect(readFile(finals.glb, 'utf8')).resolves.toBe('old-glb');
+  await expect(readFile(finals.poster, 'utf8')).resolves.toBe('old-poster');
+  await expect(readFile(finals.manifest, 'utf8')).resolves.toBe('old-manifest');
+}
+
+async function expectNoTransactionDebris(root: string, outputDir: string) {
+  expect(
+    (await readdir(resolve(outputDir, '..'))).filter((entry) =>
+      entry.startsWith('.sbla005-conversion-stage-'),
+    ),
+  ).toEqual([]);
+  expect(
+    (await readdir(resolve(root, 'docs', 'licenses'))).filter((entry) =>
+      entry.startsWith('.bodyparts3d-conversion.lock'),
+    ),
+  ).toEqual([]);
 }
 
 describe('BodyParts3D deterministic conversion contract', () => {
@@ -146,6 +220,13 @@ describe('BodyParts3D deterministic conversion contract', () => {
     });
     expect(manifest.visualInspection.normalWinding.openInconclusive).toBe(139);
     expect(manifest.visualInspection.normalWinding.closedInward).toBe(0);
+    expect(manifest.publication).toEqual({
+      semantics:
+        'Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories.',
+      commitMarker: 'docs/licenses/bodyparts3d-conversion-manifest.json',
+      consumerAcceptance:
+        'Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest.',
+    });
   });
 
   it('keeps the conversion command fully scripted with no manual steps', async () => {
@@ -183,5 +264,51 @@ describe('BodyParts3D deterministic conversion contract', () => {
         artifact.ceilingBytes ?? artifact.hardCeilingBytes,
       );
     }
+  });
+
+  it('leaves all existing finals byte-identical when staged validation fails', async () => {
+    const fixture = await transactionFixture();
+    const result = runTransactionProbe(
+      fixture.outputDir,
+      fixture.manifestPath,
+      'validation',
+    );
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('forced staged validation failure');
+    await expectOldFinals(fixture.finals);
+    await expectNoTransactionDebris(fixture.root, fixture.outputDir);
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('rolls back every final and removes debris after a mid-promotion failure', async () => {
+    const fixture = await transactionFixture();
+    const result = runTransactionProbe(
+      fixture.outputDir,
+      fixture.manifestPath,
+      'after-glb',
+    );
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('forced promotion failure after GLB');
+    await expectOldFinals(fixture.finals);
+    await expectNoTransactionDebris(fixture.root, fixture.outputDir);
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('rejects lock contention without altering accepted finals', async () => {
+    const fixture = await transactionFixture();
+    await mkdir(
+      resolve(fixture.root, 'docs', 'licenses', '.bodyparts3d-conversion.lock'),
+    );
+    const result = runTransactionProbe(
+      fixture.outputDir,
+      fixture.manifestPath,
+      'none',
+    );
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'conversion promotion lock is already held',
+    );
+    await expectOldFinals(fixture.finals);
+    await rm(fixture.root, { recursive: true });
   });
 });

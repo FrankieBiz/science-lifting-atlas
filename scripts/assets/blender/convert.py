@@ -10,13 +10,17 @@ import argparse
 import hashlib
 import json
 import os
-import sys
-import time
+import shutil
 import struct
+import sys
+import tempfile
+import time
 from pathlib import Path
 
-import bpy
-from mathutils import Vector
+TRANSACTION_PROBE = "--transaction-probe" in sys.argv
+if not TRANSACTION_PROBE:
+    import bpy
+    from mathutils import Vector
 
 BLENDER_VERSION = "4.5.13"
 MAPPING_SHA256 = "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196"
@@ -28,6 +32,89 @@ LIGHTS = (
     ("SBLA005_Key", (3.0, -4.0, 5.0), 1100),
     ("SBLA005_Fill", (-3.0, -2.0, 2.0), 550),
 )
+STAGE_PREFIX = ".sbla005-conversion-stage-"
+LOCK_NAME = ".bodyparts3d-conversion.lock"
+ARTIFACT_NAMES = {
+    "glb": "sbla005-representative.glb",
+    "poster": "sbla005-poster.webp",
+    "manifest": "bodyparts3d-conversion-manifest.json",
+}
+ACTIVE_STAGE = None
+
+
+def transaction_paths(output_dir, manifest_path):
+    """Create one unique staging sibling for every would-be final artifact."""
+    output_dir = Path(output_dir).resolve()
+    manifest_path = Path(manifest_path).resolve()
+    output_dir.parent.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    stage = Path(tempfile.mkdtemp(prefix=STAGE_PREFIX, dir=output_dir.parent))
+    staged = {name: stage / filename for name, filename in ARTIFACT_NAMES.items()}
+    finals = {
+        "glb": output_dir / ARTIFACT_NAMES["glb"],
+        "poster": output_dir / ARTIFACT_NAMES["poster"],
+        "manifest": manifest_path,
+    }
+    return stage, staged, finals
+
+
+def promote_staged_artifacts(staged, finals, failure_after=None):
+    """Manifest-last transaction-style promotion with complete rollback.
+
+    Three cross-directory renames cannot be kernel-atomic. The manifest is the
+    commit marker: consumers must accept the GLB and poster only when their
+    hashes match it. A scoped directory lock serializes promotion, while local
+    snapshots restore every previous final after any promotion exception.
+    """
+    lock = finals["manifest"].parent / LOCK_NAME
+    try:
+        lock.mkdir()
+    except FileExistsError as error:
+        raise RuntimeError("conversion promotion lock is already held: " + str(lock)) from error
+    existed = {}
+    snapshots_complete = False
+    backup_dir = staged["manifest"].parent / ".rollback"
+    try:
+        backup_dir.mkdir()
+        for name, final in finals.items():
+            existed[name] = final.is_file()
+            if existed[name]:
+                shutil.copy2(final, backup_dir / name)
+        snapshots_complete = True
+        for name in ("glb", "poster", "manifest"):
+            os.replace(staged[name], finals[name])
+            if failure_after == name:
+                label = "GLB" if name == "glb" else name
+                raise RuntimeError("forced promotion failure after " + label)
+    except Exception:
+        if snapshots_complete:
+            # Restore the old commit marker first. During rollback, consumers
+            # either see the old valid release or reject a hash mismatch.
+            for name in ("manifest", "poster", "glb"):
+                final = finals[name]
+                if existed[name]:
+                    restore = backup_dir / (name + ".restore")
+                    shutil.copy2(backup_dir / name, restore)
+                    os.replace(restore, final)
+                elif final.exists():
+                    final.unlink()
+        raise
+    finally:
+        shutil.rmtree(backup_dir, ignore_errors=True)
+        try:
+            lock.rmdir()
+        except FileNotFoundError:
+            pass
+
+
+def publish_staged_artifacts(stage, staged, finals, validator, failure_after=None):
+    """Validate only staged bytes, then promote or leave accepted finals intact."""
+    try:
+        validator(staged)
+        promote_staged_artifacts(staged, finals, failure_after=failure_after)
+    finally:
+        shutil.rmtree(stage, ignore_errors=True)
 
 
 def digest(path):
@@ -221,7 +308,41 @@ def raw_glb_evidence(path, object_records):
             "names": sorted(seen), "objectsEvidence": sorted(evidence, key=lambda item: item["name"])}
 
 
+def validate_staged_release(staged, comparison_required):
+    """Fail closed on the staged release before any accepted final is replaced."""
+    for path in staged.values():
+        if not path.is_file():
+            raise RuntimeError("staged release is missing " + str(path))
+    manifest = json.loads(staged["manifest"].read_text())
+    if manifest["tool"]["runtime"] != {"version": [4, 5, 13], "versionString": "4.5.13 LTS"}:
+        raise RuntimeError("staged manifest Blender runtime is not pinned")
+    if manifest["source"]["mappingManifest"]["sha256"] != MAPPING_SHA256:
+        raise RuntimeError("staged manifest mapping identity is invalid")
+    glb, poster = manifest["artifacts"]["glb"], manifest["artifacts"]["poster"]
+    for name, record in (("glb", glb), ("poster", poster)):
+        if staged[name].stat().st_size != record["bytes"] or digest(staged[name]) != record["sha256"]:
+            raise RuntimeError("staged " + name + " does not match its manifest identity")
+    if glb["bytes"] > glb["hardCeilingBytes"] or poster["bytes"] > poster["ceilingBytes"]:
+        raise RuntimeError("staged release exceeds an artifact budget")
+    raw = manifest["rawGltfEvidence"]
+    if raw["coordinateSpace"] != "glTF browser Y-up: [x, z, -y] from Blender [x, y, z]" or raw["objects"] != 139 or len(raw["objectsEvidence"]) != 139:
+        raise RuntimeError("staged raw GLB coordinate or object metadata is incomplete")
+    normal = manifest["visualInspection"]["normalWinding"]
+    if normal["result"] != "local-consistency-pass" or normal["zeroAreaFaces"] != 0 or normal["sameDirectionSharedEdges"] != 0 or normal["closedInward"] != 0:
+        raise RuntimeError("staged decoded GLB normal evidence failed")
+    if comparison_required:
+        deterministic = manifest["determinism"]
+        required = ("sceneStructureEqual", "decodedGeometryEqual", "boundsEqual", "glbBytesEqual",
+                    "posterBytesEqual", "priorArtifactAuthenticated")
+        if deterministic["cleanRuns"] != 2 or not all(deterministic.get(key) is True for key in required):
+            raise RuntimeError("staged release lacks an authenticated distinct-run comparison")
+    publication = manifest.get("publication", {})
+    if publication.get("commitMarker") != "docs/licenses/bodyparts3d-conversion-manifest.json":
+        raise RuntimeError("staged manifest-last publication contract is missing")
+
+
 def main():
+    global ACTIVE_STAGE
     parser = argparse.ArgumentParser()
     parser.add_argument("--mapping", required=True)
     parser.add_argument("--isa-dir", required=True)
@@ -243,9 +364,10 @@ def main():
         raise RuntimeError("mapping manifest SHA-256 does not match accepted SBLA-005 identity")
     mapping = json.loads(mapping_path.read_text())
     isa_dir, partof_dir = Path(options.isa_dir), Path(options.partof_dir)
-    output_dir, manifest_path = Path(options.output_dir), Path(options.manifest)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    final_output_dir, final_manifest_path = Path(options.output_dir), Path(options.manifest)
+    stage, staged, finals = transaction_paths(final_output_dir, final_manifest_path)
+    ACTIVE_STAGE = stage
+    output_dir, manifest_path = stage, staged["manifest"]
 
     clear_scene()
     collection = bpy.data.collections.new("SBLA005_Selectable_Anatomy")
@@ -406,14 +528,44 @@ def main():
         "glb": {"path": "assets/derived/bodyparts3d/sbla005-representative.glb", "bytes": glb_path.stat().st_size, "sha256": digest(glb_path), "desktopTargetBytes": 6000000, "hardCeilingBytes": 10000000, "mobileInteractiveBytes": 3000000},
         "poster": {"path": "assets/derived/bodyparts3d/sbla005-poster.webp", "bytes": poster_path.stat().st_size, "sha256": digest(poster_path), "ceilingBytes": 200000}},
       "poster": {"camera": camera_record, "light": lights},
+      "publication": {"semantics": "Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories.",
+        "commitMarker": "docs/licenses/bodyparts3d-conversion-manifest.json",
+        "consumerAcceptance": "Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest."},
       "timing": {"conversionSeconds": elapsed, "objectCount": len(objects)},
       "visualInspection": {"programmatic": structure["meshHealth"], "normalWinding": structure["normalWinding"], "holes": "Boundary edges are recorded programmatically and are not automatically holes; no mesh-repair operation was applied.", "invertedNormals": "Decoded GLB directed-edge consistency found no same-direction shared edges and no zero-area faces.", "lostComponents": "All 139 checksum-mapped source meshes imported as one selectable object each. The fixed poster visibly lacks a head and complete distal limbs because this representative scene contains only mapped muscle meshes, not a full-body skin or skeleton layer.", "material": "One neutral opaque review material assigned to every exported object.", "occlusion": "Fixed whole-body poster necessarily has anatomical overlap; interactive selection is required for concealed meshes.", "proportions": "Uniform 0.001 mm-to-m scale only; no coordinate deformation applied."}}
     manifest_path.write_text(stable_json(manifest))
+    publish_staged_artifacts(stage, staged, finals,
+                             lambda paths: validate_staged_release(paths, bool(options.compare_manifest)))
+    ACTIVE_STAGE = None
+
+
+def transaction_probe():
+    """Exercise the real publication transaction without requiring Blender."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--transaction-probe", action="store_true")
+    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--failure", choices=("none", "validation", "after-glb", "after-poster", "after-manifest"), required=True)
+    options = parser.parse_args()
+    stage, staged, finals = transaction_paths(options.output_dir, options.manifest)
+    staged["glb"].write_bytes(b"new-glb")
+    staged["poster"].write_bytes(b"new-poster")
+    staged["manifest"].write_bytes(b"new-manifest")
+
+    def validate(_paths):
+        if options.failure == "validation":
+            raise RuntimeError("forced staged validation failure")
+
+    failure_after = options.failure.removeprefix("after-") if options.failure.startswith("after-") else None
+    publish_staged_artifacts(stage, staged, finals, validate, failure_after=failure_after)
 
 
 if __name__ == "__main__":
     try:
-        main()
+        transaction_probe() if TRANSACTION_PROBE else main()
     except Exception as error:
         print("SBLA005 conversion failed: " + str(error), file=sys.stderr)
         sys.exit(1)
+    finally:
+        if ACTIVE_STAGE is not None:
+            shutil.rmtree(ACTIVE_STAGE, ignore_errors=True)

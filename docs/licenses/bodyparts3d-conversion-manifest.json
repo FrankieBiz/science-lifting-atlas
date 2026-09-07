@@ -6237,6 +6237,11 @@
       }
     ]
   },
+  "publication": {
+    "commitMarker": "docs/licenses/bodyparts3d-conversion-manifest.json",
+    "consumerAcceptance": "Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest.",
+    "semantics": "Transaction-style manifest-last promotion with rollback; not kernel-atomic across directories."
+  },
   "rawGltfEvidence": {
     "browserTransformMaxDeltaMetres": 0.005470589,
     "coordinateSpace": "glTF browser Y-up: [x, z, -y] from Blender [x, y, z]",
@@ -9174,7 +9179,7 @@
     }
   },
   "timing": {
-    "conversionSeconds": 6.336,
+    "conversionSeconds": 6.267,
     "objectCount": 139
   },
   "tool": {
