@@ -7,6 +7,7 @@ the committed mesh mapping before Blender is allowed to read it.
 """
 
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -15,11 +16,14 @@ import struct
 import sys
 import tempfile
 import time
+import uuid
 from pathlib import Path
 
 TRANSACTION_PROBE = "--transaction-probe" in sys.argv
 POLICY_PROBE = "--publication-policy-probe" in sys.argv
-if not TRANSACTION_PROBE and not POLICY_PROBE:
+BASELINE_AUTH_PROBE = "--baseline-auth-probe" in sys.argv
+RAW_GLB_PROBE = "--raw-glb-probe" in sys.argv
+if not any((TRANSACTION_PROBE, POLICY_PROBE, BASELINE_AUTH_PROBE, RAW_GLB_PROBE)):
     import bpy
     from mathutils import Vector
 
@@ -41,6 +45,9 @@ ARTIFACT_NAMES = {
     "manifest": "bodyparts3d-conversion-manifest.json",
 }
 ACTIVE_STAGE = None
+FLOAT32_BOUND_TOLERANCE_METRES = 0.0000005
+MATERIAL_CLAIM = {"name": NEUTRAL_MATERIAL, "baseColorRgba": [0.58, 0.24, 0.16, 1.0],
+                  "metallic": 0.0, "roughness": 0.62, "alphaMode": "OPAQUE", "doubleSided": True}
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 ACCEPTED_OUTPUT_DIR = (REPOSITORY_ROOT / "assets/derived/bodyparts3d").resolve()
 ACCEPTED_MANIFEST = (REPOSITORY_ROOT / "docs/licenses/bodyparts3d-conversion-manifest.json").resolve()
@@ -61,10 +68,67 @@ def publication_policy(baseline_only, compare_values, output_dir, manifest_path)
             raise RuntimeError("baseline-only outputs must remain outside the repository")
         return "baseline-unpublished"
     if not all(supplied):
-        raise RuntimeError("release publication requires prior manifest, GLB, and poster comparison inputs")
+        raise RuntimeError("release publication requires prior manifest, GLB, and poster comparison inputs plus the expected manifest SHA-256")
     if output_dir != ACCEPTED_OUTPUT_DIR or manifest_path != ACCEPTED_MANIFEST:
         raise RuntimeError("release publication must target the accepted repository artifact paths")
     return "published-release"
+
+
+def run_identity(status):
+    return {
+        "runId": str(uuid.uuid4()),
+        "createdAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+        "mode": status,
+        "tool": {"versionString": EXPECTED_BLENDER_VERSION_STRING,
+                 "distributionSha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"},
+        "source": {"mappingSha256": MAPPING_SHA256},
+    }
+
+
+def load_authenticated_baseline(manifest_path, expected_sha256, glb_path, poster_path, current_output_dir):
+    """Authenticate an independently pinned baseline before parsing its claims."""
+    manifest_path, glb_path, poster_path = map(lambda value: Path(value).resolve(),
+                                               (manifest_path, glb_path, poster_path))
+    if len(expected_sha256) != 64 or any(character not in "0123456789abcdef" for character in expected_sha256):
+        raise RuntimeError("baseline manifest SHA-256 trust anchor must be 64 lowercase hexadecimal characters")
+    if digest(manifest_path) != expected_sha256:
+        raise RuntimeError("baseline manifest does not match the caller-supplied SHA-256 trust anchor")
+    baseline = json.loads(manifest_path.read_text())
+    publication, identity = baseline.get("publication", {}), baseline.get("runIdentity", {})
+    if publication.get("status") != "baseline-unpublished" or publication.get("commitMarker") is not None:
+        raise RuntimeError("authenticated comparison manifest is not an unpublished baseline")
+    try:
+        uuid.UUID(identity["runId"])
+        datetime.fromisoformat(identity["createdAt"].replace("Z", "+00:00"))
+    except (KeyError, ValueError) as error:
+        raise RuntimeError("baseline run identity is invalid") from error
+    expected_identity = {
+        "mode": "baseline-unpublished",
+        "tool": {"versionString": EXPECTED_BLENDER_VERSION_STRING,
+                 "distributionSha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"},
+        "source": {"mappingSha256": MAPPING_SHA256},
+    }
+    if any(identity.get(key) != value for key, value in expected_identity.items()):
+        raise RuntimeError("baseline run provenance does not match the pinned tool and source identities")
+    if baseline.get("tool", {}).get("runtime") != {"version": [4, 5, 13], "versionString": EXPECTED_BLENDER_VERSION_STRING}:
+        raise RuntimeError("baseline manifest runtime identity is invalid")
+    if baseline.get("tool", {}).get("officialDistribution", {}).get("sha256") != expected_identity["tool"]["distributionSha256"]:
+        raise RuntimeError("baseline manifest distribution identity is invalid")
+    if baseline.get("source", {}).get("mappingManifest", {}).get("sha256") != MAPPING_SHA256:
+        raise RuntimeError("baseline manifest source mapping identity is invalid")
+    if not all(outside_repository(path) for path in (manifest_path, glb_path, poster_path)):
+        raise RuntimeError("authenticated baseline manifest and artifacts must remain outside the repository")
+    current_output_dir = Path(current_output_dir).resolve()
+    if glb_path.parent == current_output_dir or poster_path.parent == current_output_dir:
+        raise RuntimeError("baseline and current runs must use distinct artifact directories")
+    for name, path in (("glb", glb_path), ("poster", poster_path)):
+        record = baseline.get("artifacts", {}).get(name, {})
+        if Path(record.get("path", "")).resolve() != path:
+            raise RuntimeError("baseline " + name + " path does not match its authenticated manifest")
+        if not path.is_file() or digest(path) != record.get("sha256") or path.stat().st_size != record.get("bytes"):
+            raise RuntimeError("baseline " + name + " does not match its authenticated manifest")
+    return baseline, {"manifestSha256": expected_sha256, "runId": identity["runId"],
+                      "createdAt": identity["createdAt"], "trustAnchor": "caller-supplied SHA-256 verified before JSON parsing"}
 
 
 def transaction_paths(output_dir, manifest_path):
@@ -205,6 +269,16 @@ def geometry_fingerprint(objects):
     return payload
 
 
+def triangle_referenced_bounds(mesh):
+    """Bounds of vertices actually referenced by exported polygon triangles."""
+    referenced = {vertex for polygon in mesh.polygons for vertex in polygon.vertices}
+    if not referenced:
+        raise RuntimeError("mesh has no triangle-referenced vertices")
+    points = [mesh.vertices[index].co for index in referenced]
+    return {"min": [round(min(point[i] for point in points), 9) for i in range(3)],
+            "max": [round(max(point[i] for point in points), 9) for i in range(3)]}
+
+
 def mesh_health(objects):
     """Conservative structural checks; boundary edges are not automatically defects."""
     boundary_edges = non_manifold_edges = degenerate_faces = 0
@@ -284,8 +358,7 @@ def decoded_glb_structure(path):
             "meshHealth": mesh_health(objects), "normalWinding": normal_winding_health(objects)}
 
 
-def raw_glb_evidence(path, object_records):
-    """Read GLB JSON/accessors directly; do not use Blender re-import as proof."""
+def glb_document_and_binary(path):
     blob = path.read_bytes()
     if blob[:4] != b"glTF" or struct.unpack_from("<I", blob, 4)[0] != 2:
         raise RuntimeError("invalid GLB header")
@@ -293,21 +366,78 @@ def raw_glb_evidence(path, object_records):
     if json_kind != 0x4E4F534A:
         raise RuntimeError("GLB JSON chunk is missing")
     document = json.loads(blob[20:20 + json_length].decode("utf-8").rstrip(" "))
+    binary_header = 20 + json_length
+    binary_length, binary_kind = struct.unpack_from("<II", blob, binary_header)
+    if binary_kind != 0x004E4942:
+        raise RuntimeError("GLB binary chunk is missing")
+    binary = blob[binary_header + 8:binary_header + 8 + binary_length]
+    return document, binary
+
+
+def accessor_values(document, binary, accessor_index):
+    accessor = document["accessors"][accessor_index]
+    view = document["bufferViews"][accessor["bufferView"]]
+    formats = {5121: ("B", 1), 5123: ("H", 2), 5125: ("I", 4), 5126: ("f", 4)}
+    widths = {"SCALAR": 1, "VEC3": 3}
+    if accessor["componentType"] not in formats or accessor["type"] not in widths:
+        raise RuntimeError("unsupported raw GLB accessor representation")
+    if accessor.get("sparse") is not None or view.get("buffer", 0) != 0:
+        raise RuntimeError("unsupported sparse or external raw GLB accessor")
+    code, component_bytes = formats[accessor["componentType"]]
+    width = widths[accessor["type"]]
+    packed_bytes = component_bytes * width
+    stride = view.get("byteStride", packed_bytes)
+    if stride < packed_bytes:
+        raise RuntimeError("raw GLB accessor stride is invalid")
+    start = view.get("byteOffset", 0) + accessor.get("byteOffset", 0)
+    view_end = view.get("byteOffset", 0) + view["byteLength"]
+    values = []
+    for index in range(accessor["count"]):
+        offset = start + index * stride
+        if offset + packed_bytes > len(binary) or offset + packed_bytes > view_end:
+            raise RuntimeError("raw GLB accessor exceeds its binary buffer")
+        value = struct.unpack_from("<" + code * width, binary, offset)
+        values.append(value[0] if width == 1 else value)
+    return values
+
+
+def identity_node_transform(node):
+    identity_matrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+    return (node.get("translation", [0, 0, 0]) == [0, 0, 0]
+            and node.get("rotation", [0, 0, 0, 1]) == [0, 0, 0, 1]
+            and node.get("scale", [1, 1, 1]) == [1, 1, 1]
+            and node.get("matrix", identity_matrix) == identity_matrix)
+
+
+def raw_glb_evidence(path, object_records, material_claim=MATERIAL_CLAIM):
+    """Decode GLB JSON and binary accessors without Blender re-import."""
+    document, binary = glb_document_and_binary(path)
     expected = {record["name"]: record for record in object_records}
     nodes = document.get("nodes", [])
     if len(nodes) != 139 or len(expected) != 139:
         raise RuntimeError("raw GLB node count does not match required mapped object count")
     material = document.get("materials", [{}])[0]
     pbr = material.get("pbrMetallicRoughness", {})
-    if material.get("name") != NEUTRAL_MATERIAL or material.get("doubleSided") is not True or pbr.get("metallicFactor") != 0 or abs(pbr.get("roughnessFactor", -1) - 0.62) > 1e-5:
-        raise RuntimeError("raw GLB neutral material linkage does not match conversion contract")
+    actual_material = {"name": material.get("name"), "baseColorRgba": pbr.get("baseColorFactor", [1, 1, 1, 1]),
+                       "metallic": pbr.get("metallicFactor", 1), "roughness": pbr.get("roughnessFactor", 1),
+                       "alphaMode": material.get("alphaMode", "OPAQUE"), "doubleSided": material.get("doubleSided", False)}
+    scalar_keys = ("metallic", "roughness")
+    if (actual_material["name"] != material_claim["name"]
+            or actual_material["alphaMode"] != material_claim["alphaMode"]
+            or actual_material["doubleSided"] != material_claim["doubleSided"]
+            or any(abs(actual_material[key] - material_claim[key]) > 0.000001 for key in scalar_keys)
+            or any(abs(actual - declared) > 0.000001 for actual, declared in zip(actual_material["baseColorRgba"], material_claim["baseColorRgba"]))):
+        raise RuntimeError("raw GLB material does not match every declared material property")
     evidence = []
     transform_max_delta = 0.0
+    accessor_max_delta = 0.0
     seen = set()
     for node in nodes:
         name, extras = node.get("name"), node.get("extras", {})
         if name in seen or name not in expected or "mesh" not in node:
             raise RuntimeError("raw GLB has missing, duplicate, or unexpected mapped node")
+        if not identity_node_transform(node):
+            raise RuntimeError("selectable node transform must be identity for " + str(name))
         seen.add(name)
         record = expected[name]
         if extras.get("sbla_source_file_id") != record["source"]["fileId"] or extras.get("sbla_source_sha256") != record["source"]["sha256"] or extras.get("sbla_entity_id") != record["normalized"]["entityId"] or extras.get("sbla_lod_ratio") != LOD_RATIO:
@@ -316,20 +446,48 @@ def raw_glb_evidence(path, object_records):
         primitives = mesh.get("primitives", [])
         if mesh.get("name") != name + "_LOD15" or len(primitives) != 1 or primitives[0].get("material") != 0:
             raise RuntimeError("raw GLB mesh or primitive material linkage is invalid")
-        accessor = document["accessors"][primitives[0]["attributes"]["POSITION"]]
-        browser_bounds = {"min": [round(value, 9) for value in accessor["min"]], "max": [round(value, 9) for value in accessor["max"]]}
-        blender_bounds = record["normalized"]["preExportBoundsMetres"]
+        primitive = primitives[0]
+        if primitive.get("mode", 4) != 4:
+            raise RuntimeError("raw GLB primitive is not a triangle list")
+        position_index = primitive["attributes"]["POSITION"]
+        position_accessor = document["accessors"][position_index]
+        if position_accessor["componentType"] != 5126 or position_accessor["type"] != "VEC3" or "indices" not in primitive:
+            raise RuntimeError("raw GLB primitive lacks indexed float32 POSITION geometry")
+        positions = accessor_values(document, binary, position_index)
+        indices = accessor_values(document, binary, primitive["indices"])
+        if not indices or max(indices) >= len(positions):
+            raise RuntimeError("raw GLB primitive indices are invalid")
+        referenced = [positions[index] for index in set(indices)]
+        browser_bounds = {"min": [min(point[i] for point in referenced) for i in range(3)],
+                          "max": [max(point[i] for point in referenced) for i in range(3)]}
+        declared_bounds = {"min": position_accessor.get("min", []), "max": position_accessor.get("max", [])}
+        if any(len(declared_bounds[key]) != 3 for key in ("min", "max")):
+            raise RuntimeError("raw GLB POSITION accessor bounds are missing")
+        accessor_delta = max(abs(actual - declared) for key in ("min", "max")
+                             for actual, declared in zip(browser_bounds[key], declared_bounds[key]))
+        accessor_max_delta = max(accessor_max_delta, accessor_delta)
+        if accessor_delta > FLOAT32_BOUND_TOLERANCE_METRES:
+            raise RuntimeError("raw GLB POSITION bounds differ from triangle-referenced geometry for " + name)
+        blender_bounds = record["normalized"]["preExportReferencedBoundsMetres"]
         transformed = {"min": [blender_bounds["min"][0], blender_bounds["min"][2], -blender_bounds["max"][1]], "max": [blender_bounds["max"][0], blender_bounds["max"][2], -blender_bounds["min"][1]]}
         delta = max(abs(actual - expected) for key in ("min", "max") for actual, expected in zip(browser_bounds[key], transformed[key]))
         transform_max_delta = max(transform_max_delta, delta)
-        if delta > 0.01:
-            raise RuntimeError("raw GLB POSITION accessor bounds do not match Blender-to-browser transform for " + name + ": " + str(browser_bounds) + " != " + str(transformed))
-        evidence.append({"name": name, "mesh": mesh["name"], "browserBoundsMetres": browser_bounds,
-                         "blenderBoundsMetres": blender_bounds, "positionAccessor": primitives[0]["attributes"]["POSITION"],
-                         "material": material["name"], "extras": extras})
+        if delta > FLOAT32_BOUND_TOLERANCE_METRES:
+            raise RuntimeError("raw GLB POSITION bounds differ from triangle-referenced geometry after Blender-to-browser transform for " + name)
+        evidence.append({"name": name, "mesh": mesh["name"],
+                         "browserBoundsMetres": {key: [round(value, 9) for value in values] for key, values in browser_bounds.items()},
+                         "accessorDeclaredBoundsMetres": declared_bounds,
+                         "blenderTriangleReferencedBoundsMetres": blender_bounds, "positionAccessor": position_index,
+                         "nodeTransform": "identity", "material": actual_material, "extras": extras})
     if seen != set(expected):
         raise RuntimeError("raw GLB omitted an expected mapped node")
-    return {"coordinateSpace": "glTF browser Y-up: [x, z, -y] from Blender [x, y, z]", "browserTransformMaxDeltaMetres": round(transform_max_delta, 9), "objects": 139,
+    return {"coordinateSpace": "glTF browser Y-up: [x, z, -y] from Blender [x, y, z]",
+            "boundsComparison": {"semantics": "triangle-referenced POSITION vertices only",
+                                 "toleranceMetres": FLOAT32_BOUND_TOLERANCE_METRES,
+                                 "toleranceBasis": "two float32 ULPs at the documented scene magnitude below 2 metres",
+                                 "maximumObservedDeltaMetres": round(transform_max_delta, 12),
+                                 "maximumAccessorMetadataDeltaMetres": round(accessor_max_delta, 12)},
+            "browserTransformMaxDeltaMetres": round(transform_max_delta, 12), "material": actual_material, "objects": 139,
             "names": sorted(seen), "objectsEvidence": sorted(evidence, key=lambda item: item["name"])}
 
 
@@ -343,6 +501,9 @@ def validate_staged_release(staged, expected_status):
         raise RuntimeError("staged manifest Blender runtime is not pinned")
     if manifest["source"]["mappingManifest"]["sha256"] != MAPPING_SHA256:
         raise RuntimeError("staged manifest mapping identity is invalid")
+    identity = manifest.get("runIdentity", {})
+    if identity.get("mode") != expected_status or identity.get("tool", {}).get("versionString") != EXPECTED_BLENDER_VERSION_STRING or identity.get("source", {}).get("mappingSha256") != MAPPING_SHA256:
+        raise RuntimeError("staged run identity does not bind the requested mode, tool, and source")
     glb, poster = manifest["artifacts"]["glb"], manifest["artifacts"]["poster"]
     for name, record in (("glb", glb), ("poster", poster)):
         if staged[name].stat().st_size != record["bytes"] or digest(staged[name]) != record["sha256"]:
@@ -361,6 +522,9 @@ def validate_staged_release(staged, expected_status):
                     "posterBytesEqual", "priorArtifactAuthenticated")
         if deterministic["cleanRuns"] != 2 or not all(deterministic.get(key) is True for key in required):
             raise RuntimeError("staged release lacks an authenticated distinct-run comparison")
+        authenticated = manifest.get("authenticatedBaseline", {})
+        if len(authenticated.get("manifestSha256", "")) != 64 or authenticated.get("runId") is None:
+            raise RuntimeError("staged release lacks its authenticated baseline trust anchor")
     publication = manifest.get("publication", {})
     if publication.get("status") != expected_status:
         raise RuntimeError("staged publication status does not match the requested mode")
@@ -379,12 +543,14 @@ def main():
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--compare-manifest")
+    parser.add_argument("--compare-manifest-sha256")
     parser.add_argument("--compare-glb")
     parser.add_argument("--compare-poster")
     parser.add_argument("--baseline-only", action="store_true")
     options = parser.parse_args(args_after_double_dash())
     started = time.perf_counter()
-    compare_values = (options.compare_manifest, options.compare_glb, options.compare_poster)
+    compare_values = (options.compare_manifest, options.compare_manifest_sha256,
+                      options.compare_glb, options.compare_poster)
     publication_status = publication_policy(options.baseline_only, compare_values,
                                             options.output_dir, options.manifest)
     if bpy.app.version != EXPECTED_BLENDER_VERSION or bpy.app.version_string != EXPECTED_BLENDER_VERSION_STRING:
@@ -395,6 +561,11 @@ def main():
     mapping = json.loads(mapping_path.read_text())
     isa_dir, partof_dir = Path(options.isa_dir), Path(options.partof_dir)
     final_output_dir, final_manifest_path = Path(options.output_dir), Path(options.manifest)
+    other = authenticated_baseline = None
+    if publication_status == "published-release":
+        other, authenticated_baseline = load_authenticated_baseline(
+            options.compare_manifest, options.compare_manifest_sha256,
+            options.compare_glb, options.compare_poster, final_output_dir)
     stage, staged, finals = transaction_paths(final_output_dir, final_manifest_path)
     ACTIVE_STAGE = stage
     output_dir, manifest_path = stage, staged["manifest"]
@@ -459,6 +630,8 @@ def main():
     object_by_name = {item["name"]: item for item in object_records}
     for item in decoded_geometry:
         object_by_name[item["name"]]["normalized"]["preExportBoundsMetres"] = item["bounds"]
+    for obj in objects:
+        object_by_name[obj.name]["normalized"]["preExportReferencedBoundsMetres"] = triangle_referenced_bounds(obj.data)
 
     bpy.ops.object.select_all(action="DESELECT")
     for obj in objects:
@@ -509,7 +682,6 @@ def main():
     scene.render.filepath = str(poster_path)
     bpy.ops.render.render(write_still=True)
 
-    other = json.loads(Path(options.compare_manifest).read_text()) if publication_status == "published-release" else None
     structure = decoded_glb_structure(glb_path)
     raw_evidence = raw_glb_evidence(glb_path, object_records)
     raw_by_name = {item["name"]: item["browserBoundsMetres"] for item in raw_evidence["objectsEvidence"]}
@@ -546,10 +718,12 @@ def main():
             raise RuntimeError("deterministic conversion comparison failed")
     elapsed = round(time.perf_counter() - started, 3)
     manifest = {"schemaVersion": 1, "candidate": "path-c-bodyparts3d",
+      "runIdentity": run_identity(publication_status),
+      "authenticatedBaseline": authenticated_baseline,
       "tool": {"officialDistribution": {"format": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"}, "runtime": {"version": list(bpy.app.version), "versionString": bpy.app.version_string}},
       "source": {"mappingManifest": {"path": "docs/licenses/bodyparts3d-mesh-mapping.json", "sha256": MAPPING_SHA256}, "archiveInputsStoredInGit": False},
       "normalization": {"sourceUnits": "millimetres", "outputUnits": "metres", "origin": "world-origin-preserved", "sourceToBlender": {"scale": 0.001, "axisTransform": [1,0,0,0,1,0,0,0,1], "space": "Blender [x, y, z]"}, "blenderToBrowserGltf": {"transform": "[x, z, -y]", "space": "glTF browser Y-up"}},
-      "material": {"name": NEUTRAL_MATERIAL, "baseColorRgba": [0.58,0.24,0.16,1.0], "metallic": 0.0, "roughness": 0.62},
+      "material": MATERIAL_CLAIM,
       "lod": {"method": "fixed-ratio-decimation", "ratio": LOD_RATIO, "export": "LOD15 only; later reduced mode must be separately benchmarked"},
       "objects": object_records,
       "rawGltfEvidence": raw_evidence,
@@ -598,14 +772,41 @@ def publication_policy_probe():
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--compare-manifest")
+    parser.add_argument("--compare-manifest-sha256")
     parser.add_argument("--compare-glb")
     parser.add_argument("--compare-poster")
     parser.add_argument("--baseline-only", action="store_true")
     options = parser.parse_args()
     status = publication_policy(options.baseline_only,
-                                (options.compare_manifest, options.compare_glb, options.compare_poster),
+                                (options.compare_manifest, options.compare_manifest_sha256,
+                                 options.compare_glb, options.compare_poster),
                                 options.output_dir, options.manifest)
     print(status)
+
+
+def baseline_auth_probe():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--baseline-auth-probe", action="store_true")
+    parser.add_argument("--compare-manifest", required=True)
+    parser.add_argument("--compare-manifest-sha256", required=True)
+    parser.add_argument("--compare-glb", required=True)
+    parser.add_argument("--compare-poster", required=True)
+    parser.add_argument("--current-output-dir", required=True)
+    options = parser.parse_args()
+    _, authenticated = load_authenticated_baseline(
+        options.compare_manifest, options.compare_manifest_sha256,
+        options.compare_glb, options.compare_poster, options.current_output_dir)
+    print(stable_json(authenticated), end="")
+
+
+def raw_glb_probe():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--raw-glb-probe", action="store_true")
+    parser.add_argument("--glb", required=True)
+    parser.add_argument("--manifest", required=True)
+    options = parser.parse_args()
+    manifest = json.loads(Path(options.manifest).read_text())
+    print(stable_json(raw_glb_evidence(Path(options.glb), manifest["objects"], manifest["material"])), end="")
 
 
 if __name__ == "__main__":
@@ -614,6 +815,10 @@ if __name__ == "__main__":
             transaction_probe()
         elif POLICY_PROBE:
             publication_policy_probe()
+        elif BASELINE_AUTH_PROBE:
+            baseline_auth_probe()
+        elif RAW_GLB_PROBE:
+            raw_glb_probe()
         else:
             main()
     except Exception as error:

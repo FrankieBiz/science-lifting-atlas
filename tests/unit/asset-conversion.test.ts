@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import {
+  copyFile,
   mkdtemp,
   mkdir,
   readFile,
@@ -18,6 +19,16 @@ const conversionPath = resolve(
 );
 const scriptPath = resolve('scripts/assets/blender/convert.py');
 type ArtifactFinals = { glb: string; poster: string; manifest: string };
+type MutableGlbDocument = {
+  nodes: Array<{ translation?: number[] }>;
+  materials: Array<{
+    pbrMetallicRoughness: { baseColorFactor: number[] };
+  }>;
+  meshes: Array<{
+    primitives: Array<{ attributes: { POSITION: number } }>;
+  }>;
+  accessors: Array<{ max: number[] }>;
+};
 
 async function conversionManifest() {
   return JSON.parse(await readFile(conversionPath, 'utf8'));
@@ -76,6 +87,112 @@ function runPolicyProbe(args: string[]) {
       encoding: 'utf8',
     },
   );
+}
+
+function sha256(bytes: Buffer | string) {
+  return createHash('sha256').update(bytes).digest('hex');
+}
+
+function runBaselineAuthProbe(args: string[]) {
+  return spawnSync('python3', [scriptPath, '--baseline-auth-probe', ...args], {
+    encoding: 'utf8',
+  });
+}
+
+function runRawGlbProbe(glb: string) {
+  return spawnSync(
+    'python3',
+    [scriptPath, '--raw-glb-probe', '--glb', glb, '--manifest', conversionPath],
+    { encoding: 'utf8' },
+  );
+}
+
+async function mutateGlb(
+  source: string,
+  destination: string,
+  mutate: (document: MutableGlbDocument) => void,
+) {
+  const original = await readFile(source);
+  const jsonLength = original.readUInt32LE(12);
+  const document = JSON.parse(
+    original
+      .subarray(20, 20 + jsonLength)
+      .toString('utf8')
+      .trimEnd(),
+  ) as MutableGlbDocument;
+  mutate(document);
+  const encoded = Buffer.from(JSON.stringify(document), 'utf8');
+  const paddedLength = Math.ceil(encoded.length / 4) * 4;
+  const jsonChunk = Buffer.alloc(paddedLength, 0x20);
+  encoded.copy(jsonChunk);
+  const remainder = original.subarray(20 + jsonLength);
+  const rebuilt = Buffer.alloc(20 + paddedLength + remainder.length);
+  original.copy(rebuilt, 0, 0, 12);
+  rebuilt.writeUInt32LE(rebuilt.length, 8);
+  rebuilt.writeUInt32LE(paddedLength, 12);
+  rebuilt.writeUInt32LE(0x4e4f534a, 16);
+  jsonChunk.copy(rebuilt, 20);
+  remainder.copy(rebuilt, 20 + paddedLength);
+  await writeFile(destination, rebuilt);
+}
+
+async function baselineFixture() {
+  const fixture = await transactionFixture();
+  await copyFile(
+    resolve('assets/derived/bodyparts3d/sbla005-representative.glb'),
+    fixture.finals.glb,
+  );
+  await copyFile(
+    resolve('assets/derived/bodyparts3d/sbla005-poster.webp'),
+    fixture.finals.poster,
+  );
+  const glb = await readFile(fixture.finals.glb);
+  const poster = await readFile(fixture.finals.poster);
+  const manifest = {
+    publication: { status: 'baseline-unpublished', commitMarker: null },
+    runIdentity: {
+      runId: '4c6426ea-7971-4c6d-9042-cac0483bcf9e',
+      createdAt: '2026-09-07T12:00:00Z',
+      mode: 'baseline-unpublished',
+      tool: {
+        versionString: '4.5.13 LTS',
+        distributionSha256:
+          '663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53',
+      },
+      source: {
+        mappingSha256:
+          'b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196',
+      },
+    },
+    tool: {
+      officialDistribution: {
+        sha256:
+          '663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53',
+      },
+      runtime: { version: [4, 5, 13], versionString: '4.5.13 LTS' },
+    },
+    source: {
+      mappingManifest: {
+        sha256:
+          'b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196',
+      },
+    },
+    artifacts: {
+      glb: {
+        path: fixture.finals.glb,
+        bytes: glb.length,
+        sha256: sha256(glb),
+      },
+      poster: {
+        path: fixture.finals.poster,
+        bytes: poster.length,
+        sha256: sha256(poster),
+      },
+    },
+  };
+  const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
+  await writeFile(fixture.finals.manifest, serialized);
+  return { ...fixture, expectedHash: sha256(serialized) };
 }
 
 async function expectOldFinals(finals: ArtifactFinals) {
@@ -238,6 +355,19 @@ describe('BodyParts3D deterministic conversion contract', () => {
       consumerAcceptance:
         'Consumers accept the GLB and poster only when their bytes match the SHA-256 identities in the committed manifest.',
     });
+    expect(manifest.authenticatedBaseline).toMatchObject({
+      manifestSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
+      runId: expect.stringMatching(/^[a-f0-9-]{36}$/),
+      createdAt: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
+    });
+    expect(manifest.rawGltfEvidence.boundsComparison).toMatchObject({
+      semantics: 'triangle-referenced POSITION vertices only',
+      toleranceMetres: expect.any(Number),
+      maximumObservedDeltaMetres: expect.any(Number),
+    });
+    expect(
+      manifest.rawGltfEvidence.boundsComparison.toleranceMetres,
+    ).toBeLessThan(0.00001);
   });
 
   it('keeps the conversion command fully scripted with no manual steps', async () => {
@@ -247,6 +377,7 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(script).toContain('bpy.app.version_string');
     expect(script).toContain('--compare-glb');
     expect(script).toContain('--compare-poster');
+    expect(script).toContain('--compare-manifest-sha256');
     expect(script).toContain('distinct artifact paths and directories');
     expect(script).toContain('prior poster does not match');
     expect(script).toContain('prior GLB SHA-256 does not match');
@@ -363,5 +494,121 @@ describe('BodyParts3D deterministic conversion contract', () => {
       'baseline-only outputs must remain outside the repository',
     );
     await rm(fixture.root, { recursive: true });
+  });
+
+  it('rejects copied artifacts paired with a freshly forged baseline manifest', async () => {
+    const fixture = await baselineFixture();
+    const result = runBaselineAuthProbe([
+      '--compare-manifest',
+      fixture.finals.manifest,
+      '--compare-manifest-sha256',
+      '0'.repeat(64),
+      '--compare-glb',
+      fixture.finals.glb,
+      '--compare-poster',
+      fixture.finals.poster,
+      '--current-output-dir',
+      resolve('assets/derived/bodyparts3d'),
+    ]);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'baseline manifest does not match the caller-supplied SHA-256 trust anchor',
+    );
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('rejects a baseline manifest changed after its trust anchor was recorded', async () => {
+    const fixture = await baselineFixture();
+    await writeFile(fixture.finals.manifest, '{"tampered":true}\n');
+    const result = runBaselineAuthProbe([
+      '--compare-manifest',
+      fixture.finals.manifest,
+      '--compare-manifest-sha256',
+      fixture.expectedHash,
+      '--compare-glb',
+      fixture.finals.glb,
+      '--compare-poster',
+      fixture.finals.poster,
+      '--current-output-dir',
+      resolve('assets/derived/bodyparts3d'),
+    ]);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'baseline manifest does not match the caller-supplied SHA-256 trust anchor',
+    );
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('authenticates an intact independently identified baseline', async () => {
+    const fixture = await baselineFixture();
+    const result = runBaselineAuthProbe([
+      '--compare-manifest',
+      fixture.finals.manifest,
+      '--compare-manifest-sha256',
+      fixture.expectedHash,
+      '--compare-glb',
+      fixture.finals.glb,
+      '--compare-poster',
+      fixture.finals.poster,
+      '--current-output-dir',
+      resolve('assets/derived/bodyparts3d'),
+    ]);
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain('4c6426ea-7971-4c6d-9042-cac0483bcf9e');
+    await rm(fixture.root, { recursive: true });
+  });
+
+  it('rejects non-identity selectable-node transforms in raw GLB metadata', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const mutated = resolve(root, 'translated.glb');
+    await mutateGlb(
+      resolve('assets/derived/bodyparts3d/sbla005-representative.glb'),
+      mutated,
+      (document) => {
+        document.nodes[0]!.translation = [0.005, 0, 0];
+      },
+    );
+    const result = runRawGlbProbe(mutated);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'selectable node transform must be identity',
+    );
+    await rm(root, { recursive: true });
+  });
+
+  it('rejects a raw GLB material color that differs from the declared material', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const mutated = resolve(root, 'material.glb');
+    await mutateGlb(
+      resolve('assets/derived/bodyparts3d/sbla005-representative.glb'),
+      mutated,
+      (document) => {
+        document.materials[0]!.pbrMetallicRoughness.baseColorFactor[0] = 0.42;
+      },
+    );
+    const result = runRawGlbProbe(mutated);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('raw GLB material does not match');
+    await rm(root, { recursive: true });
+  });
+
+  it('rejects five-millimetre accessor-bound drift', async () => {
+    const root = await mkdtemp(resolve(tmpdir(), 'sbla005-glb-'));
+    const mutated = resolve(root, 'bounds.glb');
+    await mutateGlb(
+      resolve('assets/derived/bodyparts3d/sbla005-representative.glb'),
+      mutated,
+      (document) => {
+        const position = document.meshes[0]!.primitives[0]!.attributes.POSITION;
+        const accessor = document.accessors[position]!;
+        accessor.max[0] = accessor.max[0]! + 0.005;
+      },
+    );
+    const result = runRawGlbProbe(mutated);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      'raw GLB POSITION bounds differ from triangle-referenced geometry',
+    );
+    await rm(root, { recursive: true });
   });
 });
