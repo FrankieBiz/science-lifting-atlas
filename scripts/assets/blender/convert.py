@@ -113,11 +113,13 @@ def mesh_health(objects):
 
 
 def normal_winding_health(objects):
-    """Validate decoded GLB triangle winding using directed shared-edge consistency."""
-    same_direction = zero_area = 0
+    """Distinguish local winding consistency from provable closed-mesh orientation."""
+    same_direction = zero_area = closed_outward = closed_inward = open_inconclusive = 0
+    classifications = []
     for obj in objects:
         mesh = obj.data
         directed = {}
+        signed_volume = 0.0
         for polygon in mesh.polygons:
             if polygon.area <= 1e-12 or polygon.normal.length <= 1e-12:
                 zero_area += 1
@@ -127,12 +129,30 @@ def normal_winding_health(objects):
                 key = tuple(sorted((vertex, following)))
                 direction = (vertex, following)
                 directed.setdefault(key, []).append(direction)
+            anchor = mesh.vertices[vertices[0]].co
+            for index in range(1, len(vertices) - 1):
+                first, second = mesh.vertices[vertices[index]].co, mesh.vertices[vertices[index + 1]].co
+                signed_volume += anchor.dot(first.cross(second)) / 6.0
+        boundary = sum(1 for edges in directed.values() if len(edges) == 1)
+        conflicts = sum(1 for edges in directed.values() if len(edges) == 2 and edges[0] == edges[1])
+        if boundary:
+            orientation = "inconclusive-open"
+            open_inconclusive += 1
+        elif signed_volume < 0:
+            orientation = "inward-closed"
+            closed_inward += 1
+        else:
+            orientation = "outward-closed"
+            closed_outward += 1
+        classifications.append({"name": obj.name, "boundaryEdges": boundary, "signedVolumeMetresCubed": round(signed_volume, 12), "globalOrientation": orientation, "localSameDirectionSharedEdges": conflicts})
         for edges in directed.values():
             if len(edges) == 2 and edges[0] == edges[1]:
                 same_direction += 1
-    return {"method": "decoded-glb-directed-edge-consistency", "zeroAreaFaces": zero_area,
+    return {"method": "decoded-glb-local-winding-plus-closed-signed-volume", "zeroAreaFaces": zero_area,
             "sameDirectionSharedEdges": same_direction,
-            "result": "pass" if zero_area == 0 and same_direction == 0 else "fail"}
+            "closedOutward": closed_outward, "closedInward": closed_inward, "openInconclusive": open_inconclusive,
+            "perMesh": classifications,
+            "result": "local-consistency-pass" if zero_area == 0 and same_direction == 0 else "local-consistency-fail"}
 
 
 def clear_scene():

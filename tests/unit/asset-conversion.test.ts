@@ -139,10 +139,12 @@ describe('BodyParts3D deterministic conversion contract', () => {
       proportions: expect.any(String),
     });
     expect(manifest.visualInspection.normalWinding).toMatchObject({
-      method: 'decoded-glb-directed-edge-consistency',
+      method: 'decoded-glb-local-winding-plus-closed-signed-volume',
       zeroAreaFaces: 0,
       sameDirectionSharedEdges: 0,
     });
+    expect(manifest.visualInspection.normalWinding.openInconclusive).toBe(139);
+    expect(manifest.visualInspection.normalWinding.closedInward).toBe(0);
   });
 
   it('keeps the conversion command fully scripted with no manual steps', async () => {
@@ -153,7 +155,7 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(script).toContain('--compare-glb');
     expect(script).toContain('prior GLB SHA-256 does not match');
     expect(script).toContain('decoded_glb_structure');
-    expect(script).toContain('directed-edge-consistency');
+    expect(script).toContain('closed-signed-volume');
     expect(script).toContain('deterministic conversion comparison failed');
     expect(script).toContain('sys.exit(1)');
     expect(script).toContain('bodyparts3d-mesh-mapping.json');

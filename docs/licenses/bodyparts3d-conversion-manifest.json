@@ -1567,8 +1567,986 @@
         "BP3D_FJ1554M"
       ],
       "normalWinding": {
-        "method": "decoded-glb-directed-edge-consistency",
-        "result": "pass",
+        "closedInward": 0,
+        "closedOutward": 0,
+        "method": "decoded-glb-local-winding-plus-closed-signed-volume",
+        "openInconclusive": 139,
+        "perMesh": [
+          {
+            "boundaryEdges": 227,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1394",
+            "signedVolumeMetresCubed": 0.000210774236
+          },
+          {
+            "boundaryEdges": 229,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1394M",
+            "signedVolumeMetresCubed": 0.000210699878
+          },
+          {
+            "boundaryEdges": 282,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1395",
+            "signedVolumeMetresCubed": 0.000473675591
+          },
+          {
+            "boundaryEdges": 279,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1395M",
+            "signedVolumeMetresCubed": 0.000473766173
+          },
+          {
+            "boundaryEdges": 290,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1397",
+            "signedVolumeMetresCubed": 0.000303888566
+          },
+          {
+            "boundaryEdges": 294,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1397M",
+            "signedVolumeMetresCubed": 0.00030443623
+          },
+          {
+            "boundaryEdges": 187,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1401",
+            "signedVolumeMetresCubed": 4.5199946e-5
+          },
+          {
+            "boundaryEdges": 189,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1401M",
+            "signedVolumeMetresCubed": 4.5193672e-5
+          },
+          {
+            "boundaryEdges": 201,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1402",
+            "signedVolumeMetresCubed": 0.000139988273
+          },
+          {
+            "boundaryEdges": 201,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1402M",
+            "signedVolumeMetresCubed": 0.000139986614
+          },
+          {
+            "boundaryEdges": 703,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1403",
+            "signedVolumeMetresCubed": 0.00047261778
+          },
+          {
+            "boundaryEdges": 701,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1403M",
+            "signedVolumeMetresCubed": 0.000472695359
+          },
+          {
+            "boundaryEdges": 316,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1418",
+            "signedVolumeMetresCubed": 0.000340373392
+          },
+          {
+            "boundaryEdges": 316,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1418M",
+            "signedVolumeMetresCubed": 0.000340342055
+          },
+          {
+            "boundaryEdges": 385,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1419",
+            "signedVolumeMetresCubed": 0.000207068773
+          },
+          {
+            "boundaryEdges": 385,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1419M",
+            "signedVolumeMetresCubed": 0.000205765655
+          },
+          {
+            "boundaryEdges": 475,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1420",
+            "signedVolumeMetresCubed": 0.000116560953
+          },
+          {
+            "boundaryEdges": 475,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1420M",
+            "signedVolumeMetresCubed": 0.00011655551
+          },
+          {
+            "boundaryEdges": 318,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1422",
+            "signedVolumeMetresCubed": 0.000108451567
+          },
+          {
+            "boundaryEdges": 319,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1422M",
+            "signedVolumeMetresCubed": 0.000105054263
+          },
+          {
+            "boundaryEdges": 660,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1431",
+            "signedVolumeMetresCubed": 0.000170997509
+          },
+          {
+            "boundaryEdges": 653,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1431M",
+            "signedVolumeMetresCubed": 0.000170788664
+          },
+          {
+            "boundaryEdges": 391,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1433",
+            "signedVolumeMetresCubed": 0.000346203934
+          },
+          {
+            "boundaryEdges": 393,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1433M",
+            "signedVolumeMetresCubed": 0.000346507863
+          },
+          {
+            "boundaryEdges": 302,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1435",
+            "signedVolumeMetresCubed": 0.00031707654
+          },
+          {
+            "boundaryEdges": 300,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1435M",
+            "signedVolumeMetresCubed": 0.000317043014
+          },
+          {
+            "boundaryEdges": 220,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1436",
+            "signedVolumeMetresCubed": 0.000128039896
+          },
+          {
+            "boundaryEdges": 220,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1436M",
+            "signedVolumeMetresCubed": 0.000128146101
+          },
+          {
+            "boundaryEdges": 346,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1437",
+            "signedVolumeMetresCubed": 0.00031329381
+          },
+          {
+            "boundaryEdges": 346,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1437M",
+            "signedVolumeMetresCubed": 0.000313287006
+          },
+          {
+            "boundaryEdges": 312,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1439",
+            "signedVolumeMetresCubed": 0.000106798122
+          },
+          {
+            "boundaryEdges": 312,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1439M",
+            "signedVolumeMetresCubed": 0.00010680395
+          },
+          {
+            "boundaryEdges": 404,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1441",
+            "signedVolumeMetresCubed": 0.000248288737
+          },
+          {
+            "boundaryEdges": 401,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1441M",
+            "signedVolumeMetresCubed": 0.000247906239
+          },
+          {
+            "boundaryEdges": 557,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1442",
+            "signedVolumeMetresCubed": 0.00049635384
+          },
+          {
+            "boundaryEdges": 553,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1442M",
+            "signedVolumeMetresCubed": 0.000498471929
+          },
+          {
+            "boundaryEdges": 395,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1443",
+            "signedVolumeMetresCubed": 0.000268974738
+          },
+          {
+            "boundaryEdges": 394,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1443M",
+            "signedVolumeMetresCubed": 0.00026915812
+          },
+          {
+            "boundaryEdges": 182,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1444",
+            "signedVolumeMetresCubed": 6.8746613e-5
+          },
+          {
+            "boundaryEdges": 184,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1444M",
+            "signedVolumeMetresCubed": 6.8632111e-5
+          },
+          {
+            "boundaryEdges": 178,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1446",
+            "signedVolumeMetresCubed": 5.687155e-6
+          },
+          {
+            "boundaryEdges": 178,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1446M",
+            "signedVolumeMetresCubed": 5.383922e-6
+          },
+          {
+            "boundaryEdges": 238,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1447",
+            "signedVolumeMetresCubed": 2.893174e-6
+          },
+          {
+            "boundaryEdges": 240,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1447M",
+            "signedVolumeMetresCubed": 8.12274e-7
+          },
+          {
+            "boundaryEdges": 7410,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1452",
+            "signedVolumeMetresCubed": 0.000261457855
+          },
+          {
+            "boundaryEdges": 7370,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1452M",
+            "signedVolumeMetresCubed": 0.000262784044
+          },
+          {
+            "boundaryEdges": 871,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1464",
+            "signedVolumeMetresCubed": 0.000404001177
+          },
+          {
+            "boundaryEdges": 867,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1464M",
+            "signedVolumeMetresCubed": 0.000399091355
+          },
+          {
+            "boundaryEdges": 151,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1467",
+            "signedVolumeMetresCubed": 0.000102061814
+          },
+          {
+            "boundaryEdges": 149,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1467M",
+            "signedVolumeMetresCubed": 9.6663607e-5
+          },
+          {
+            "boundaryEdges": 336,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1468",
+            "signedVolumeMetresCubed": 3.4383163e-5
+          },
+          {
+            "boundaryEdges": 330,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1468M",
+            "signedVolumeMetresCubed": 2.9829488e-5
+          },
+          {
+            "boundaryEdges": 347,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1472",
+            "signedVolumeMetresCubed": 5.87105e-6
+          },
+          {
+            "boundaryEdges": 347,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1472M",
+            "signedVolumeMetresCubed": 7.93247e-6
+          },
+          {
+            "boundaryEdges": 1112,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1475",
+            "signedVolumeMetresCubed": 4.0537377e-5
+          },
+          {
+            "boundaryEdges": 1110,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1475M",
+            "signedVolumeMetresCubed": 4.3315939e-5
+          },
+          {
+            "boundaryEdges": 292,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1477",
+            "signedVolumeMetresCubed": 0.000133959041
+          },
+          {
+            "boundaryEdges": 297,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1477M",
+            "signedVolumeMetresCubed": 0.000135961266
+          },
+          {
+            "boundaryEdges": 183,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1478",
+            "signedVolumeMetresCubed": 6.6602265e-5
+          },
+          {
+            "boundaryEdges": 185,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1478M",
+            "signedVolumeMetresCubed": 3.5532832e-5
+          },
+          {
+            "boundaryEdges": 186,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1479",
+            "signedVolumeMetresCubed": 0.000146972567
+          },
+          {
+            "boundaryEdges": 186,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1479M",
+            "signedVolumeMetresCubed": 0.000147454888
+          },
+          {
+            "boundaryEdges": 100,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1480",
+            "signedVolumeMetresCubed": 6.4592415e-5
+          },
+          {
+            "boundaryEdges": 100,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1480M",
+            "signedVolumeMetresCubed": 7.0333164e-5
+          },
+          {
+            "boundaryEdges": 246,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1484",
+            "signedVolumeMetresCubed": 7.107751e-6
+          },
+          {
+            "boundaryEdges": 246,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1484M",
+            "signedVolumeMetresCubed": 6.129446e-6
+          },
+          {
+            "boundaryEdges": 231,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1486",
+            "signedVolumeMetresCubed": 7.0011475e-5
+          },
+          {
+            "boundaryEdges": 227,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1486M",
+            "signedVolumeMetresCubed": 6.6934045e-5
+          },
+          {
+            "boundaryEdges": 609,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1487",
+            "signedVolumeMetresCubed": 7.8497067e-5
+          },
+          {
+            "boundaryEdges": 609,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1487M",
+            "signedVolumeMetresCubed": 8.8748833e-5
+          },
+          {
+            "boundaryEdges": 289,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1489",
+            "signedVolumeMetresCubed": 1.0358879e-5
+          },
+          {
+            "boundaryEdges": 288,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1489M",
+            "signedVolumeMetresCubed": 1.1033993e-5
+          },
+          {
+            "boundaryEdges": 261,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1490",
+            "signedVolumeMetresCubed": 2.0025252e-5
+          },
+          {
+            "boundaryEdges": 265,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1490M",
+            "signedVolumeMetresCubed": 2.0985609e-5
+          },
+          {
+            "boundaryEdges": 204,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1491",
+            "signedVolumeMetresCubed": 2.0432224e-5
+          },
+          {
+            "boundaryEdges": 207,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1491M",
+            "signedVolumeMetresCubed": 2.0027307e-5
+          },
+          {
+            "boundaryEdges": 620,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1492",
+            "signedVolumeMetresCubed": 3.7245677e-5
+          },
+          {
+            "boundaryEdges": 621,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1492M",
+            "signedVolumeMetresCubed": 3.611731e-5
+          },
+          {
+            "boundaryEdges": 126,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1493",
+            "signedVolumeMetresCubed": 1.616382e-6
+          },
+          {
+            "boundaryEdges": 126,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1493M",
+            "signedVolumeMetresCubed": 1.681077e-6
+          },
+          {
+            "boundaryEdges": 162,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1494",
+            "signedVolumeMetresCubed": -2.896518e-6
+          },
+          {
+            "boundaryEdges": 161,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1494M",
+            "signedVolumeMetresCubed": -9.56573e-7
+          },
+          {
+            "boundaryEdges": 206,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1495",
+            "signedVolumeMetresCubed": -1.7500494e-5
+          },
+          {
+            "boundaryEdges": 210,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1495M",
+            "signedVolumeMetresCubed": -1.8310779e-5
+          },
+          {
+            "boundaryEdges": 148,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1496",
+            "signedVolumeMetresCubed": 2.6471178e-5
+          },
+          {
+            "boundaryEdges": 148,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1496M",
+            "signedVolumeMetresCubed": 2.6456669e-5
+          },
+          {
+            "boundaryEdges": 743,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1497",
+            "signedVolumeMetresCubed": 4.9592953e-5
+          },
+          {
+            "boundaryEdges": 741,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1497M",
+            "signedVolumeMetresCubed": 4.8521803e-5
+          },
+          {
+            "boundaryEdges": 248,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1498",
+            "signedVolumeMetresCubed": 1.7287998e-5
+          },
+          {
+            "boundaryEdges": 252,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1498M",
+            "signedVolumeMetresCubed": 1.4734831e-5
+          },
+          {
+            "boundaryEdges": 115,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1499",
+            "signedVolumeMetresCubed": 1.1425062e-5
+          },
+          {
+            "boundaryEdges": 115,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1499M",
+            "signedVolumeMetresCubed": 1.1431e-5
+          },
+          {
+            "boundaryEdges": 107,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1500",
+            "signedVolumeMetresCubed": 0.00011782545
+          },
+          {
+            "boundaryEdges": 105,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1500M",
+            "signedVolumeMetresCubed": 0.000120985573
+          },
+          {
+            "boundaryEdges": 801,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1502",
+            "signedVolumeMetresCubed": -4.921967e-6
+          },
+          {
+            "boundaryEdges": 793,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1502M",
+            "signedVolumeMetresCubed": -8.863681e-6
+          },
+          {
+            "boundaryEdges": 301,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1503",
+            "signedVolumeMetresCubed": 3.212181e-6
+          },
+          {
+            "boundaryEdges": 295,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1503M",
+            "signedVolumeMetresCubed": 3.001917e-6
+          },
+          {
+            "boundaryEdges": 339,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1504",
+            "signedVolumeMetresCubed": 6.2158627e-5
+          },
+          {
+            "boundaryEdges": 331,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1504M",
+            "signedVolumeMetresCubed": 6.2207474e-5
+          },
+          {
+            "boundaryEdges": 422,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1505",
+            "signedVolumeMetresCubed": 1.7006668e-5
+          },
+          {
+            "boundaryEdges": 420,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1505M",
+            "signedVolumeMetresCubed": 1.360169e-5
+          },
+          {
+            "boundaryEdges": 113,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1506",
+            "signedVolumeMetresCubed": 2.4313584e-5
+          },
+          {
+            "boundaryEdges": 116,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1506M",
+            "signedVolumeMetresCubed": 2.4623693e-5
+          },
+          {
+            "boundaryEdges": 151,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1507",
+            "signedVolumeMetresCubed": 4.3428629e-5
+          },
+          {
+            "boundaryEdges": 151,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1507M",
+            "signedVolumeMetresCubed": 4.5417328e-5
+          },
+          {
+            "boundaryEdges": 75,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1508",
+            "signedVolumeMetresCubed": 4.8218584e-5
+          },
+          {
+            "boundaryEdges": 73,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1508M",
+            "signedVolumeMetresCubed": 4.3746785e-5
+          },
+          {
+            "boundaryEdges": 280,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1512",
+            "signedVolumeMetresCubed": 9.4223598e-5
+          },
+          {
+            "boundaryEdges": 282,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1512M",
+            "signedVolumeMetresCubed": 9.9595866e-5
+          },
+          {
+            "boundaryEdges": 229,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1513",
+            "signedVolumeMetresCubed": 0.000186773688
+          },
+          {
+            "boundaryEdges": 235,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1513M",
+            "signedVolumeMetresCubed": 0.00017870966
+          },
+          {
+            "boundaryEdges": 193,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1517",
+            "signedVolumeMetresCubed": 1.480944e-5
+          },
+          {
+            "boundaryEdges": 195,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1517M",
+            "signedVolumeMetresCubed": 1.5694379e-5
+          },
+          {
+            "boundaryEdges": 1284,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1520",
+            "signedVolumeMetresCubed": 0.000130826976
+          },
+          {
+            "boundaryEdges": 1270,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1520M",
+            "signedVolumeMetresCubed": 0.000119681327
+          },
+          {
+            "boundaryEdges": 831,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1521",
+            "signedVolumeMetresCubed": 7.380866e-5
+          },
+          {
+            "boundaryEdges": 821,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1521M",
+            "signedVolumeMetresCubed": 7.9069776e-5
+          },
+          {
+            "boundaryEdges": 410,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1526",
+            "signedVolumeMetresCubed": 8.707011e-6
+          },
+          {
+            "boundaryEdges": 408,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1526M",
+            "signedVolumeMetresCubed": 5.539213e-6
+          },
+          {
+            "boundaryEdges": 1872,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1527",
+            "signedVolumeMetresCubed": 4.9083609e-5
+          },
+          {
+            "boundaryEdges": 1876,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1527M",
+            "signedVolumeMetresCubed": 4.9212576e-5
+          },
+          {
+            "boundaryEdges": 964,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1528",
+            "signedVolumeMetresCubed": 2.8550835e-5
+          },
+          {
+            "boundaryEdges": 972,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1528M",
+            "signedVolumeMetresCubed": 3.3831713e-5
+          },
+          {
+            "boundaryEdges": 345,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1533",
+            "signedVolumeMetresCubed": 1.2801729e-5
+          },
+          {
+            "boundaryEdges": 347,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1533M",
+            "signedVolumeMetresCubed": 1.1743652e-5
+          },
+          {
+            "boundaryEdges": 452,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1534",
+            "signedVolumeMetresCubed": 1.7926908e-5
+          },
+          {
+            "boundaryEdges": 455,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1534M",
+            "signedVolumeMetresCubed": 1.8180339e-5
+          },
+          {
+            "boundaryEdges": 2388,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1535",
+            "signedVolumeMetresCubed": 0.000114119124
+          },
+          {
+            "boundaryEdges": 2400,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1535M",
+            "signedVolumeMetresCubed": 0.000116256457
+          },
+          {
+            "boundaryEdges": 896,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1536",
+            "signedVolumeMetresCubed": 1.9585366e-5
+          },
+          {
+            "boundaryEdges": 892,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1536M",
+            "signedVolumeMetresCubed": 1.8397138e-5
+          },
+          {
+            "boundaryEdges": 274,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1537",
+            "signedVolumeMetresCubed": 2.799141e-6
+          },
+          {
+            "boundaryEdges": 274,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1537M",
+            "signedVolumeMetresCubed": 2.40413e-6
+          },
+          {
+            "boundaryEdges": 212,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1543M",
+            "signedVolumeMetresCubed": -6.5011e-8
+          },
+          {
+            "boundaryEdges": 1087,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1544",
+            "signedVolumeMetresCubed": 8.576277e-6
+          },
+          {
+            "boundaryEdges": 1078,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1544M",
+            "signedVolumeMetresCubed": 5.30555e-6
+          },
+          {
+            "boundaryEdges": 610,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1554",
+            "signedVolumeMetresCubed": 2.7670993e-5
+          },
+          {
+            "boundaryEdges": 615,
+            "globalOrientation": "inconclusive-open",
+            "localSameDirectionSharedEdges": 0,
+            "name": "BP3D_FJ1554M",
+            "signedVolumeMetresCubed": 3.1577136e-5
+          }
+        ],
+        "result": "local-consistency-pass",
         "sameDirectionSharedEdges": 0,
         "zeroAreaFaces": 0
       },
@@ -8195,7 +9173,7 @@
     }
   },
   "timing": {
-    "conversionSeconds": 5.93,
+    "conversionSeconds": 6.287,
     "objectCount": 139
   },
   "tool": {
@@ -8214,8 +9192,986 @@
     "lostComponents": "All 139 checksum-mapped source meshes imported as one selectable object each. The fixed poster visibly lacks a head and complete distal limbs because this representative scene contains only mapped muscle meshes, not a full-body skin or skeleton layer.",
     "material": "One neutral opaque review material assigned to every exported object.",
     "normalWinding": {
-      "method": "decoded-glb-directed-edge-consistency",
-      "result": "pass",
+      "closedInward": 0,
+      "closedOutward": 0,
+      "method": "decoded-glb-local-winding-plus-closed-signed-volume",
+      "openInconclusive": 139,
+      "perMesh": [
+        {
+          "boundaryEdges": 227,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1394",
+          "signedVolumeMetresCubed": 0.000210774236
+        },
+        {
+          "boundaryEdges": 229,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1394M",
+          "signedVolumeMetresCubed": 0.000210699878
+        },
+        {
+          "boundaryEdges": 282,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1395",
+          "signedVolumeMetresCubed": 0.000473675591
+        },
+        {
+          "boundaryEdges": 279,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1395M",
+          "signedVolumeMetresCubed": 0.000473766173
+        },
+        {
+          "boundaryEdges": 290,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1397",
+          "signedVolumeMetresCubed": 0.000303888566
+        },
+        {
+          "boundaryEdges": 294,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1397M",
+          "signedVolumeMetresCubed": 0.00030443623
+        },
+        {
+          "boundaryEdges": 187,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1401",
+          "signedVolumeMetresCubed": 4.5199946e-5
+        },
+        {
+          "boundaryEdges": 189,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1401M",
+          "signedVolumeMetresCubed": 4.5193672e-5
+        },
+        {
+          "boundaryEdges": 201,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1402",
+          "signedVolumeMetresCubed": 0.000139988273
+        },
+        {
+          "boundaryEdges": 201,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1402M",
+          "signedVolumeMetresCubed": 0.000139986614
+        },
+        {
+          "boundaryEdges": 703,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1403",
+          "signedVolumeMetresCubed": 0.00047261778
+        },
+        {
+          "boundaryEdges": 701,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1403M",
+          "signedVolumeMetresCubed": 0.000472695359
+        },
+        {
+          "boundaryEdges": 316,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1418",
+          "signedVolumeMetresCubed": 0.000340373392
+        },
+        {
+          "boundaryEdges": 316,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1418M",
+          "signedVolumeMetresCubed": 0.000340342055
+        },
+        {
+          "boundaryEdges": 385,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1419",
+          "signedVolumeMetresCubed": 0.000207068773
+        },
+        {
+          "boundaryEdges": 385,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1419M",
+          "signedVolumeMetresCubed": 0.000205765655
+        },
+        {
+          "boundaryEdges": 475,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1420",
+          "signedVolumeMetresCubed": 0.000116560953
+        },
+        {
+          "boundaryEdges": 475,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1420M",
+          "signedVolumeMetresCubed": 0.00011655551
+        },
+        {
+          "boundaryEdges": 318,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1422",
+          "signedVolumeMetresCubed": 0.000108451567
+        },
+        {
+          "boundaryEdges": 319,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1422M",
+          "signedVolumeMetresCubed": 0.000105054263
+        },
+        {
+          "boundaryEdges": 660,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1431",
+          "signedVolumeMetresCubed": 0.000170997509
+        },
+        {
+          "boundaryEdges": 653,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1431M",
+          "signedVolumeMetresCubed": 0.000170788664
+        },
+        {
+          "boundaryEdges": 391,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1433",
+          "signedVolumeMetresCubed": 0.000346203934
+        },
+        {
+          "boundaryEdges": 393,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1433M",
+          "signedVolumeMetresCubed": 0.000346507863
+        },
+        {
+          "boundaryEdges": 302,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1435",
+          "signedVolumeMetresCubed": 0.00031707654
+        },
+        {
+          "boundaryEdges": 300,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1435M",
+          "signedVolumeMetresCubed": 0.000317043014
+        },
+        {
+          "boundaryEdges": 220,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1436",
+          "signedVolumeMetresCubed": 0.000128039896
+        },
+        {
+          "boundaryEdges": 220,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1436M",
+          "signedVolumeMetresCubed": 0.000128146101
+        },
+        {
+          "boundaryEdges": 346,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1437",
+          "signedVolumeMetresCubed": 0.00031329381
+        },
+        {
+          "boundaryEdges": 346,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1437M",
+          "signedVolumeMetresCubed": 0.000313287006
+        },
+        {
+          "boundaryEdges": 312,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1439",
+          "signedVolumeMetresCubed": 0.000106798122
+        },
+        {
+          "boundaryEdges": 312,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1439M",
+          "signedVolumeMetresCubed": 0.00010680395
+        },
+        {
+          "boundaryEdges": 404,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1441",
+          "signedVolumeMetresCubed": 0.000248288737
+        },
+        {
+          "boundaryEdges": 401,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1441M",
+          "signedVolumeMetresCubed": 0.000247906239
+        },
+        {
+          "boundaryEdges": 557,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1442",
+          "signedVolumeMetresCubed": 0.00049635384
+        },
+        {
+          "boundaryEdges": 553,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1442M",
+          "signedVolumeMetresCubed": 0.000498471929
+        },
+        {
+          "boundaryEdges": 395,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1443",
+          "signedVolumeMetresCubed": 0.000268974738
+        },
+        {
+          "boundaryEdges": 394,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1443M",
+          "signedVolumeMetresCubed": 0.00026915812
+        },
+        {
+          "boundaryEdges": 182,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1444",
+          "signedVolumeMetresCubed": 6.8746613e-5
+        },
+        {
+          "boundaryEdges": 184,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1444M",
+          "signedVolumeMetresCubed": 6.8632111e-5
+        },
+        {
+          "boundaryEdges": 178,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1446",
+          "signedVolumeMetresCubed": 5.687155e-6
+        },
+        {
+          "boundaryEdges": 178,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1446M",
+          "signedVolumeMetresCubed": 5.383922e-6
+        },
+        {
+          "boundaryEdges": 238,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1447",
+          "signedVolumeMetresCubed": 2.893174e-6
+        },
+        {
+          "boundaryEdges": 240,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1447M",
+          "signedVolumeMetresCubed": 8.12274e-7
+        },
+        {
+          "boundaryEdges": 7410,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1452",
+          "signedVolumeMetresCubed": 0.000261457855
+        },
+        {
+          "boundaryEdges": 7370,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1452M",
+          "signedVolumeMetresCubed": 0.000262784044
+        },
+        {
+          "boundaryEdges": 871,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1464",
+          "signedVolumeMetresCubed": 0.000404001177
+        },
+        {
+          "boundaryEdges": 867,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1464M",
+          "signedVolumeMetresCubed": 0.000399091355
+        },
+        {
+          "boundaryEdges": 151,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1467",
+          "signedVolumeMetresCubed": 0.000102061814
+        },
+        {
+          "boundaryEdges": 149,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1467M",
+          "signedVolumeMetresCubed": 9.6663607e-5
+        },
+        {
+          "boundaryEdges": 336,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1468",
+          "signedVolumeMetresCubed": 3.4383163e-5
+        },
+        {
+          "boundaryEdges": 330,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1468M",
+          "signedVolumeMetresCubed": 2.9829488e-5
+        },
+        {
+          "boundaryEdges": 347,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1472",
+          "signedVolumeMetresCubed": 5.87105e-6
+        },
+        {
+          "boundaryEdges": 347,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1472M",
+          "signedVolumeMetresCubed": 7.93247e-6
+        },
+        {
+          "boundaryEdges": 1112,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1475",
+          "signedVolumeMetresCubed": 4.0537377e-5
+        },
+        {
+          "boundaryEdges": 1110,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1475M",
+          "signedVolumeMetresCubed": 4.3315939e-5
+        },
+        {
+          "boundaryEdges": 292,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1477",
+          "signedVolumeMetresCubed": 0.000133959041
+        },
+        {
+          "boundaryEdges": 297,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1477M",
+          "signedVolumeMetresCubed": 0.000135961266
+        },
+        {
+          "boundaryEdges": 183,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1478",
+          "signedVolumeMetresCubed": 6.6602265e-5
+        },
+        {
+          "boundaryEdges": 185,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1478M",
+          "signedVolumeMetresCubed": 3.5532832e-5
+        },
+        {
+          "boundaryEdges": 186,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1479",
+          "signedVolumeMetresCubed": 0.000146972567
+        },
+        {
+          "boundaryEdges": 186,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1479M",
+          "signedVolumeMetresCubed": 0.000147454888
+        },
+        {
+          "boundaryEdges": 100,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1480",
+          "signedVolumeMetresCubed": 6.4592415e-5
+        },
+        {
+          "boundaryEdges": 100,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1480M",
+          "signedVolumeMetresCubed": 7.0333164e-5
+        },
+        {
+          "boundaryEdges": 246,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1484",
+          "signedVolumeMetresCubed": 7.107751e-6
+        },
+        {
+          "boundaryEdges": 246,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1484M",
+          "signedVolumeMetresCubed": 6.129446e-6
+        },
+        {
+          "boundaryEdges": 231,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1486",
+          "signedVolumeMetresCubed": 7.0011475e-5
+        },
+        {
+          "boundaryEdges": 227,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1486M",
+          "signedVolumeMetresCubed": 6.6934045e-5
+        },
+        {
+          "boundaryEdges": 609,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1487",
+          "signedVolumeMetresCubed": 7.8497067e-5
+        },
+        {
+          "boundaryEdges": 609,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1487M",
+          "signedVolumeMetresCubed": 8.8748833e-5
+        },
+        {
+          "boundaryEdges": 289,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1489",
+          "signedVolumeMetresCubed": 1.0358879e-5
+        },
+        {
+          "boundaryEdges": 288,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1489M",
+          "signedVolumeMetresCubed": 1.1033993e-5
+        },
+        {
+          "boundaryEdges": 261,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1490",
+          "signedVolumeMetresCubed": 2.0025252e-5
+        },
+        {
+          "boundaryEdges": 265,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1490M",
+          "signedVolumeMetresCubed": 2.0985609e-5
+        },
+        {
+          "boundaryEdges": 204,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1491",
+          "signedVolumeMetresCubed": 2.0432224e-5
+        },
+        {
+          "boundaryEdges": 207,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1491M",
+          "signedVolumeMetresCubed": 2.0027307e-5
+        },
+        {
+          "boundaryEdges": 620,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1492",
+          "signedVolumeMetresCubed": 3.7245677e-5
+        },
+        {
+          "boundaryEdges": 621,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1492M",
+          "signedVolumeMetresCubed": 3.611731e-5
+        },
+        {
+          "boundaryEdges": 126,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1493",
+          "signedVolumeMetresCubed": 1.616382e-6
+        },
+        {
+          "boundaryEdges": 126,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1493M",
+          "signedVolumeMetresCubed": 1.681077e-6
+        },
+        {
+          "boundaryEdges": 162,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1494",
+          "signedVolumeMetresCubed": -2.896518e-6
+        },
+        {
+          "boundaryEdges": 161,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1494M",
+          "signedVolumeMetresCubed": -9.56573e-7
+        },
+        {
+          "boundaryEdges": 206,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1495",
+          "signedVolumeMetresCubed": -1.7500494e-5
+        },
+        {
+          "boundaryEdges": 210,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1495M",
+          "signedVolumeMetresCubed": -1.8310779e-5
+        },
+        {
+          "boundaryEdges": 148,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1496",
+          "signedVolumeMetresCubed": 2.6471178e-5
+        },
+        {
+          "boundaryEdges": 148,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1496M",
+          "signedVolumeMetresCubed": 2.6456669e-5
+        },
+        {
+          "boundaryEdges": 743,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1497",
+          "signedVolumeMetresCubed": 4.9592953e-5
+        },
+        {
+          "boundaryEdges": 741,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1497M",
+          "signedVolumeMetresCubed": 4.8521803e-5
+        },
+        {
+          "boundaryEdges": 248,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1498",
+          "signedVolumeMetresCubed": 1.7287998e-5
+        },
+        {
+          "boundaryEdges": 252,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1498M",
+          "signedVolumeMetresCubed": 1.4734831e-5
+        },
+        {
+          "boundaryEdges": 115,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1499",
+          "signedVolumeMetresCubed": 1.1425062e-5
+        },
+        {
+          "boundaryEdges": 115,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1499M",
+          "signedVolumeMetresCubed": 1.1431e-5
+        },
+        {
+          "boundaryEdges": 107,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1500",
+          "signedVolumeMetresCubed": 0.00011782545
+        },
+        {
+          "boundaryEdges": 105,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1500M",
+          "signedVolumeMetresCubed": 0.000120985573
+        },
+        {
+          "boundaryEdges": 801,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1502",
+          "signedVolumeMetresCubed": -4.921967e-6
+        },
+        {
+          "boundaryEdges": 793,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1502M",
+          "signedVolumeMetresCubed": -8.863681e-6
+        },
+        {
+          "boundaryEdges": 301,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1503",
+          "signedVolumeMetresCubed": 3.212181e-6
+        },
+        {
+          "boundaryEdges": 295,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1503M",
+          "signedVolumeMetresCubed": 3.001917e-6
+        },
+        {
+          "boundaryEdges": 339,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1504",
+          "signedVolumeMetresCubed": 6.2158627e-5
+        },
+        {
+          "boundaryEdges": 331,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1504M",
+          "signedVolumeMetresCubed": 6.2207474e-5
+        },
+        {
+          "boundaryEdges": 422,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1505",
+          "signedVolumeMetresCubed": 1.7006668e-5
+        },
+        {
+          "boundaryEdges": 420,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1505M",
+          "signedVolumeMetresCubed": 1.360169e-5
+        },
+        {
+          "boundaryEdges": 113,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1506",
+          "signedVolumeMetresCubed": 2.4313584e-5
+        },
+        {
+          "boundaryEdges": 116,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1506M",
+          "signedVolumeMetresCubed": 2.4623693e-5
+        },
+        {
+          "boundaryEdges": 151,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1507",
+          "signedVolumeMetresCubed": 4.3428629e-5
+        },
+        {
+          "boundaryEdges": 151,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1507M",
+          "signedVolumeMetresCubed": 4.5417328e-5
+        },
+        {
+          "boundaryEdges": 75,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1508",
+          "signedVolumeMetresCubed": 4.8218584e-5
+        },
+        {
+          "boundaryEdges": 73,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1508M",
+          "signedVolumeMetresCubed": 4.3746785e-5
+        },
+        {
+          "boundaryEdges": 280,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1512",
+          "signedVolumeMetresCubed": 9.4223598e-5
+        },
+        {
+          "boundaryEdges": 282,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1512M",
+          "signedVolumeMetresCubed": 9.9595866e-5
+        },
+        {
+          "boundaryEdges": 229,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1513",
+          "signedVolumeMetresCubed": 0.000186773688
+        },
+        {
+          "boundaryEdges": 235,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1513M",
+          "signedVolumeMetresCubed": 0.00017870966
+        },
+        {
+          "boundaryEdges": 193,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1517",
+          "signedVolumeMetresCubed": 1.480944e-5
+        },
+        {
+          "boundaryEdges": 195,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1517M",
+          "signedVolumeMetresCubed": 1.5694379e-5
+        },
+        {
+          "boundaryEdges": 1284,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1520",
+          "signedVolumeMetresCubed": 0.000130826976
+        },
+        {
+          "boundaryEdges": 1270,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1520M",
+          "signedVolumeMetresCubed": 0.000119681327
+        },
+        {
+          "boundaryEdges": 831,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1521",
+          "signedVolumeMetresCubed": 7.380866e-5
+        },
+        {
+          "boundaryEdges": 821,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1521M",
+          "signedVolumeMetresCubed": 7.9069776e-5
+        },
+        {
+          "boundaryEdges": 410,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1526",
+          "signedVolumeMetresCubed": 8.707011e-6
+        },
+        {
+          "boundaryEdges": 408,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1526M",
+          "signedVolumeMetresCubed": 5.539213e-6
+        },
+        {
+          "boundaryEdges": 1872,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1527",
+          "signedVolumeMetresCubed": 4.9083609e-5
+        },
+        {
+          "boundaryEdges": 1876,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1527M",
+          "signedVolumeMetresCubed": 4.9212576e-5
+        },
+        {
+          "boundaryEdges": 964,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1528",
+          "signedVolumeMetresCubed": 2.8550835e-5
+        },
+        {
+          "boundaryEdges": 972,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1528M",
+          "signedVolumeMetresCubed": 3.3831713e-5
+        },
+        {
+          "boundaryEdges": 345,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1533",
+          "signedVolumeMetresCubed": 1.2801729e-5
+        },
+        {
+          "boundaryEdges": 347,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1533M",
+          "signedVolumeMetresCubed": 1.1743652e-5
+        },
+        {
+          "boundaryEdges": 452,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1534",
+          "signedVolumeMetresCubed": 1.7926908e-5
+        },
+        {
+          "boundaryEdges": 455,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1534M",
+          "signedVolumeMetresCubed": 1.8180339e-5
+        },
+        {
+          "boundaryEdges": 2388,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1535",
+          "signedVolumeMetresCubed": 0.000114119124
+        },
+        {
+          "boundaryEdges": 2400,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1535M",
+          "signedVolumeMetresCubed": 0.000116256457
+        },
+        {
+          "boundaryEdges": 896,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1536",
+          "signedVolumeMetresCubed": 1.9585366e-5
+        },
+        {
+          "boundaryEdges": 892,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1536M",
+          "signedVolumeMetresCubed": 1.8397138e-5
+        },
+        {
+          "boundaryEdges": 274,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1537",
+          "signedVolumeMetresCubed": 2.799141e-6
+        },
+        {
+          "boundaryEdges": 274,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1537M",
+          "signedVolumeMetresCubed": 2.40413e-6
+        },
+        {
+          "boundaryEdges": 212,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1543M",
+          "signedVolumeMetresCubed": -6.5011e-8
+        },
+        {
+          "boundaryEdges": 1087,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1544",
+          "signedVolumeMetresCubed": 8.576277e-6
+        },
+        {
+          "boundaryEdges": 1078,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1544M",
+          "signedVolumeMetresCubed": 5.30555e-6
+        },
+        {
+          "boundaryEdges": 610,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1554",
+          "signedVolumeMetresCubed": 2.7670993e-5
+        },
+        {
+          "boundaryEdges": 615,
+          "globalOrientation": "inconclusive-open",
+          "localSameDirectionSharedEdges": 0,
+          "name": "BP3D_FJ1554M",
+          "signedVolumeMetresCubed": 3.1577136e-5
+        }
+      ],
+      "result": "local-consistency-pass",
       "sameDirectionSharedEdges": 0,
       "zeroAreaFaces": 0
     },
