@@ -16,12 +16,14 @@ async function conversionManifest() {
 describe('BodyParts3D deterministic conversion contract', () => {
   it('pins the Blender tool and source mapping before conversion', async () => {
     const manifest = await conversionManifest();
-    expect(manifest.tool).toEqual({
-      name: 'Blender',
-      version: '4.5.13 LTS',
-      distribution: 'official macOS DMG',
+    expect(manifest.tool.officialDistribution).toEqual({
+      format: 'official macOS DMG',
       sha256:
         '663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53',
+    });
+    expect(manifest.tool.runtime).toEqual({
+      version: [4, 5, 13],
+      versionString: '4.5.13 LTS',
     });
     expect(manifest.source.mappingManifest).toMatchObject({
       path: 'docs/licenses/bodyparts3d-mesh-mapping.json',
@@ -43,7 +45,28 @@ describe('BodyParts3D deterministic conversion contract', () => {
     expect(manifest.material).toMatchObject({ name: 'SBLA_Neutral_Review' });
     expect(manifest.lod).toMatchObject({ method: 'fixed-ratio-decimation' });
     expect(manifest.poster.camera).toMatchObject({ type: 'ORTHO' });
-    expect(manifest.poster.light).toHaveLength(2);
+    expect(manifest.poster.light).toEqual([
+      expect.objectContaining({
+        name: 'SBLA005_Key',
+        type: 'AREA',
+        location: [3, -4, 5],
+        energy: 1100,
+        shape: 'DISK',
+        size: 5,
+        color: [1, 1, 1],
+        useShadow: true,
+      }),
+      expect.objectContaining({
+        name: 'SBLA005_Fill',
+        type: 'AREA',
+        location: [-3, -2, 2],
+        energy: 550,
+        shape: 'DISK',
+        size: 5,
+        color: [1, 1, 1],
+        useShadow: true,
+      }),
+    ]);
     expect(manifest.objects.length).toBeGreaterThan(0);
     expect(
       new Set(manifest.objects.map((entry: { name: string }) => entry.name))
@@ -73,6 +96,8 @@ describe('BodyParts3D deterministic conversion contract', () => {
       sceneStructureEqual: true,
       decodedGeometryEqual: true,
       boundsEqual: true,
+      glbBytesEqual: true,
+      priorArtifactAuthenticated: true,
     });
     expect(manifest.artifacts.glb).toMatchObject({
       path: 'assets/derived/bodyparts3d/sbla005-representative.glb',
@@ -93,11 +118,24 @@ describe('BodyParts3D deterministic conversion contract', () => {
       occlusion: expect.any(String),
       proportions: expect.any(String),
     });
+    expect(manifest.visualInspection.normalWinding).toMatchObject({
+      method: 'decoded-glb-directed-edge-consistency',
+      zeroAreaFaces: 0,
+      sameDirectionSharedEdges: 0,
+    });
   });
 
   it('keeps the conversion command fully scripted with no manual steps', async () => {
     const script = await readFile(scriptPath, 'utf8');
     expect(script).toContain('BLENDER_VERSION = "4.5.13"');
+    expect(script).toContain('bpy.app.version');
+    expect(script).toContain('bpy.app.version_string');
+    expect(script).toContain('--compare-glb');
+    expect(script).toContain('prior GLB SHA-256 does not match');
+    expect(script).toContain('decoded_glb_structure');
+    expect(script).toContain('directed-edge-consistency');
+    expect(script).toContain('deterministic conversion comparison failed');
+    expect(script).toContain('sys.exit(1)');
     expect(script).toContain('bodyparts3d-mesh-mapping.json');
     expect(script).toContain('export_scene.gltf');
     expect(script).toContain("file_format='WEBP'");

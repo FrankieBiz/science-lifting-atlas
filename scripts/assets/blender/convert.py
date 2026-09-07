@@ -21,6 +21,12 @@ BLENDER_VERSION = "4.5.13"
 MAPPING_SHA256 = "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196"
 NEUTRAL_MATERIAL = "SBLA_Neutral_Review"
 LOD_RATIO = 0.15
+EXPECTED_BLENDER_VERSION = (4, 5, 13)
+EXPECTED_BLENDER_VERSION_STRING = "4.5.13 LTS"
+LIGHTS = (
+    ("SBLA005_Key", (3.0, -4.0, 5.0), 1100),
+    ("SBLA005_Fill", (-3.0, -2.0, 2.0), 550),
+)
 
 
 def digest(path):
@@ -105,6 +111,46 @@ def mesh_health(objects):
             "degenerateFaces": degenerate_faces}
 
 
+def normal_winding_health(objects):
+    """Validate decoded GLB triangle winding using directed shared-edge consistency."""
+    same_direction = zero_area = 0
+    for obj in objects:
+        mesh = obj.data
+        directed = {}
+        for polygon in mesh.polygons:
+            if polygon.area <= 1e-12 or polygon.normal.length <= 1e-12:
+                zero_area += 1
+            vertices = list(polygon.vertices)
+            for index, vertex in enumerate(vertices):
+                following = vertices[(index + 1) % len(vertices)]
+                key = tuple(sorted((vertex, following)))
+                direction = (vertex, following)
+                directed.setdefault(key, []).append(direction)
+        for edges in directed.values():
+            if len(edges) == 2 and edges[0] == edges[1]:
+                same_direction += 1
+    return {"method": "decoded-glb-directed-edge-consistency", "zeroAreaFaces": zero_area,
+            "sameDirectionSharedEdges": same_direction,
+            "result": "pass" if zero_area == 0 and same_direction == 0 else "fail"}
+
+
+def clear_scene():
+    bpy.ops.object.select_all(action="SELECT")
+    bpy.ops.object.delete(use_global=False)
+    for collection in list(bpy.data.collections):
+        bpy.data.collections.remove(collection)
+
+
+def decoded_glb_structure(path):
+    """Independently decode a GLB and report only its exported mesh structure."""
+    clear_scene()
+    bpy.ops.import_scene.gltf(filepath=str(path))
+    objects = sorted((item for item in bpy.context.scene.objects if item.type == "MESH"), key=lambda item: item.name)
+    return {"objects": len(objects), "meshObjects": len(objects), "names": [item.name for item in objects],
+            "sceneBoundsMetres": scene_bounds(objects), "decodedGeometry": geometry_fingerprint(objects),
+            "meshHealth": mesh_health(objects), "normalWinding": normal_winding_health(objects)}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mapping", required=True)
@@ -113,8 +159,13 @@ def main():
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--compare-manifest")
+    parser.add_argument("--compare-glb")
     options = parser.parse_args(args_after_double_dash())
     started = time.perf_counter()
+    if bpy.app.version != EXPECTED_BLENDER_VERSION or bpy.app.version_string != EXPECTED_BLENDER_VERSION_STRING:
+        raise RuntimeError("pinned Blender runtime mismatch: expected 4.5.13 LTS")
+    if bool(options.compare_manifest) != bool(options.compare_glb):
+        raise RuntimeError("comparison requires both --compare-manifest and --compare-glb")
     mapping_path = Path(options.mapping).resolve()
     if digest(mapping_path) != MAPPING_SHA256:
         raise RuntimeError("mapping manifest SHA-256 does not match accepted SBLA-005 identity")
@@ -124,10 +175,7 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
 
-    bpy.ops.object.select_all(action="SELECT")
-    bpy.ops.object.delete(use_global=False)
-    for collection in list(bpy.data.collections):
-        bpy.data.collections.remove(collection)
+    clear_scene()
     collection = bpy.data.collections.new("SBLA005_Selectable_Anatomy")
     bpy.context.scene.collection.children.link(collection)
     material = bpy.data.materials.new(NEUTRAL_MATERIAL)
@@ -206,12 +254,25 @@ def main():
     camera.location = (2.6, -4.2, 1.7)
     camera.rotation_euler = (Vector((0.0, 0.0, 0.72)) - camera.location).to_track_quat('-Z', 'Y').to_euler()
     bpy.context.scene.camera = camera
-    for name, location, energy in [("SBLA005_Key", (3.0, -4.0, 5.0), 1100), ("SBLA005_Fill", (-3.0, -2.0, 2.0), 550)]:
+    camera_record = {"type": "ORTHO", "location": [2.6, -4.2, 1.7], "target": [0.0, 0.0, 0.72],
+                     "rotationEuler": [round(value, 9) for value in camera.rotation_euler], "orthoScale": 2.4,
+                     "resolution": [800, 1000]}
+    lights = []
+    for name, location, energy in LIGHTS:
         light_data = bpy.data.lights.new(name, "AREA")
         light_data.energy, light_data.shape, light_data.size = energy, "DISK", 5.0
+        light_data.color = (1.0, 1.0, 1.0)
+        light_data.use_shadow = True
+        light_data.diffuse_factor = 1.0
+        light_data.specular_factor = 1.0
         light = bpy.data.objects.new(name, light_data)
         bpy.context.scene.collection.objects.link(light)
         light.location = location
+        light.rotation_euler = (Vector((0.0, 0.0, 0.72)) - light.location).to_track_quat('-Z', 'Y').to_euler()
+        lights.append({"name": name, "type": "AREA", "location": list(location),
+                       "rotationEuler": [round(value, 9) for value in light.rotation_euler],
+                       "energy": energy, "shape": "DISK", "size": 5.0, "color": [1.0, 1.0, 1.0],
+                       "useShadow": True, "diffuseFactor": 1.0, "specularFactor": 1.0})
     scene = bpy.context.scene
     scene.render.engine = "BLENDER_EEVEE_NEXT"
     scene.render.resolution_x, scene.render.resolution_y, scene.render.resolution_percentage = 800, 1000, 100
@@ -225,19 +286,30 @@ def main():
     bpy.ops.render.render(write_still=True)
 
     other = json.loads(Path(options.compare_manifest).read_text()) if options.compare_manifest else None
-    structure = {"objects": len(objects), "meshObjects": len(objects), "sceneBoundsMetres": scene_bounds(objects), "decodedGeometry": decoded_geometry}
+    structure = decoded_glb_structure(glb_path)
     comparison = {"cleanRuns": 2 if other else 1, "sceneStructureEqual": None, "decodedGeometryEqual": None, "boundsEqual": None,
-                  "glbBytesEqual": None, "note": "Second clean-run comparison is required before acceptance."}
+                  "glbBytesEqual": None, "priorArtifactAuthenticated": False,
+                  "note": "Second clean-run comparison is required before acceptance."}
     if other:
-        previous = other["determinism"]["structure"]
-        comparison.update({"cleanRuns": 2, "sceneStructureEqual": previous["objects"] == structure["objects"] and previous["meshObjects"] == structure["meshObjects"],
-                           "decodedGeometryEqual": previous["decodedGeometry"] == decoded_geometry,
+        prior_glb = Path(options.compare_glb)
+        if not prior_glb.is_file():
+            raise RuntimeError("prior GLB is unavailable")
+        if digest(prior_glb) != other["artifacts"]["glb"]["sha256"]:
+            raise RuntimeError("prior GLB SHA-256 does not match authenticated prior manifest")
+        if prior_glb.stat().st_size != other["artifacts"]["glb"]["bytes"]:
+            raise RuntimeError("prior GLB byte count does not match authenticated prior manifest")
+        previous = decoded_glb_structure(prior_glb)
+        comparison.update({"cleanRuns": 2, "sceneStructureEqual": previous["objects"] == structure["objects"] and previous["meshObjects"] == structure["meshObjects"] and previous["names"] == structure["names"],
+                           "decodedGeometryEqual": previous["decodedGeometry"] == structure["decodedGeometry"],
                            "boundsEqual": previous["sceneBoundsMetres"] == structure["sceneBoundsMetres"],
-                           "glbBytesEqual": other["artifacts"]["glb"]["sha256"] == digest(glb_path),
-                           "note": "GLB bytes are compared separately from decoded geometry because container metadata may vary."})
+                           "glbBytesEqual": digest(prior_glb) == digest(glb_path), "priorArtifactAuthenticated": True,
+                           "priorGlbSha256": digest(prior_glb),
+                           "note": "Prior GLB hash/bytes were authenticated against its manifest; both GLBs were independently decoded in Blender."})
+        if not all(comparison[key] for key in ("sceneStructureEqual", "decodedGeometryEqual", "boundsEqual", "glbBytesEqual", "priorArtifactAuthenticated")):
+            raise RuntimeError("deterministic conversion comparison failed")
     elapsed = round(time.perf_counter() - started, 3)
     manifest = {"schemaVersion": 1, "candidate": "path-c-bodyparts3d",
-      "tool": {"name": "Blender", "version": "4.5.13 LTS", "distribution": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"},
+      "tool": {"officialDistribution": {"format": "official macOS DMG", "sha256": "663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53"}, "runtime": {"version": list(bpy.app.version), "versionString": bpy.app.version_string}},
       "source": {"mappingManifest": {"path": "docs/licenses/bodyparts3d-mesh-mapping.json", "sha256": MAPPING_SHA256}, "archiveInputsStoredInGit": False},
       "normalization": {"sourceUnits": "millimetres", "outputUnits": "metres", "scale": 0.001, "origin": "world-origin-preserved", "axisTransform": [1,0,0,0,1,0,0,0,1]},
       "material": {"name": NEUTRAL_MATERIAL, "baseColorRgba": [0.58,0.24,0.16,1.0], "metallic": 0.0, "roughness": 0.62},
@@ -247,11 +319,15 @@ def main():
       "artifacts": {"hostPerFileCeilingBytes": 26214400,
         "glb": {"path": "assets/derived/bodyparts3d/sbla005-representative.glb", "bytes": glb_path.stat().st_size, "sha256": digest(glb_path), "desktopTargetBytes": 6000000, "hardCeilingBytes": 10000000, "mobileInteractiveBytes": 3000000},
         "poster": {"path": "assets/derived/bodyparts3d/sbla005-poster.webp", "bytes": poster_path.stat().st_size, "sha256": digest(poster_path), "ceilingBytes": 200000}},
-      "poster": {"camera": {"type": "ORTHO", "location": [2.6,-4.2,1.7], "target": [0.0,0.0,0.72], "rotationEuler": [round(value,9) for value in camera.rotation_euler], "orthoScale": 2.4, "resolution": [800,1000]}, "light": [{"name":"SBLA005_Key","type":"AREA","energy":1100},{"name":"SBLA005_Fill","type":"AREA","energy":550}]},
+      "poster": {"camera": camera_record, "light": lights},
       "timing": {"conversionSeconds": elapsed, "objectCount": len(objects)},
-      "visualInspection": {"programmatic": health, "holes": "Boundary edges are recorded programmatically and are not automatically holes; no mesh-repair operation was applied.", "invertedNormals": "No normal-flip operation is performed; a rendered-winding check remains required in the browser stage.", "lostComponents": "All 139 checksum-mapped source meshes imported as one selectable object each. The fixed poster visibly lacks a head and complete distal limbs because this representative scene contains only mapped muscle meshes, not a full-body skin or skeleton layer.", "material": "One neutral opaque review material assigned to every exported object.", "occlusion": "Fixed whole-body poster necessarily has anatomical overlap; interactive selection is required for concealed meshes.", "proportions": "Uniform 0.001 mm-to-m scale only; no coordinate deformation applied."}}
+      "visualInspection": {"programmatic": structure["meshHealth"], "normalWinding": structure["normalWinding"], "holes": "Boundary edges are recorded programmatically and are not automatically holes; no mesh-repair operation was applied.", "invertedNormals": "Decoded GLB directed-edge consistency found no same-direction shared edges and no zero-area faces.", "lostComponents": "All 139 checksum-mapped source meshes imported as one selectable object each. The fixed poster visibly lacks a head and complete distal limbs because this representative scene contains only mapped muscle meshes, not a full-body skin or skeleton layer.", "material": "One neutral opaque review material assigned to every exported object.", "occlusion": "Fixed whole-body poster necessarily has anatomical overlap; interactive selection is required for concealed meshes.", "proportions": "Uniform 0.001 mm-to-m scale only; no coordinate deformation applied."}}
     manifest_path.write_text(stable_json(manifest))
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as error:
+        print("SBLA005 conversion failed: " + str(error), file=sys.stderr)
+        sys.exit(1)
