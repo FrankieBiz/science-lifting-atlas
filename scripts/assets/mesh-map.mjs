@@ -657,54 +657,150 @@ export function validateBytes(bytes, label, expectedBytes, expectedHash) {
 
 /**
  * @param {Buffer} archive
- * @returns {Map<string, Buffer>}
+ * @returns {Map<string, {bytes: Buffer, method: 0 | 8}>}
  */
 function readZipEntries(archive) {
+  /** @param {number} offset @param {number} length @param {string} context */
+  const requireRange = (offset, length, context) => {
+    if (
+      !Number.isSafeInteger(offset) ||
+      !Number.isSafeInteger(length) ||
+      offset < 0 ||
+      length < 0 ||
+      offset + length > archive.length
+    )
+      throw new Error(`${context}: ZIP record extends outside archive bounds`);
+  };
+  /** @param {number} offset @param {string} context */
+  const uint16 = (offset, context) => {
+    requireRange(offset, 2, context);
+    return archive.readUInt16LE(offset);
+  };
+  /** @param {number} offset @param {string} context */
+  const uint32 = (offset, context) => {
+    requireRange(offset, 4, context);
+    return archive.readUInt32LE(offset);
+  };
   let eocd = -1;
   const lowerBound = Math.max(0, archive.length - 65_557);
   for (let offset = archive.length - 22; offset >= lowerBound; offset -= 1) {
-    if (archive.readUInt32LE(offset) === 0x06054b50) {
+    if (uint32(offset, 'ZIP EOCD search') === 0x06054b50) {
       eocd = offset;
       break;
     }
   }
   if (eocd < 0)
     throw new Error('ZIP end-of-central-directory record is absent');
-  const entryCount = archive.readUInt16LE(eocd + 10);
-  const centralOffset = archive.readUInt32LE(eocd + 16);
-  if (entryCount === 0xffff || centralOffset === 0xffffffff)
+  requireRange(eocd, 22, 'ZIP EOCD');
+  const diskNumber = uint16(eocd + 4, 'ZIP EOCD');
+  const centralDisk = uint16(eocd + 6, 'ZIP EOCD');
+  const diskEntryCount = uint16(eocd + 8, 'ZIP EOCD');
+  const entryCount = uint16(eocd + 10, 'ZIP EOCD');
+  const centralSize = uint32(eocd + 12, 'ZIP EOCD');
+  const centralOffset = uint32(eocd + 16, 'ZIP EOCD');
+  const commentLength = uint16(eocd + 20, 'ZIP EOCD');
+  if (eocd + 22 + commentLength !== archive.length)
+    throw new Error('ZIP EOCD comment length or trailing bytes are invalid');
+  if (diskNumber !== 0 || centralDisk !== 0 || diskEntryCount !== entryCount)
+    throw new Error('multi-disk ZIP archives are unsupported');
+  if (
+    entryCount === 0xffff ||
+    centralOffset === 0xffffffff ||
+    centralSize === 0xffffffff
+  )
     throw new Error('Zip64 archives are not supported');
+  requireRange(centralOffset, centralSize, 'ZIP central directory');
+  if (centralOffset + centralSize !== eocd)
+    throw new Error('ZIP central directory bounds do not meet the EOCD');
 
   const result = new Map();
   let cursor = centralOffset;
   for (let index = 0; index < entryCount; index += 1) {
-    if (archive.readUInt32LE(cursor) !== 0x02014b50)
+    const context = `ZIP central directory entry ${index}`;
+    requireRange(cursor, 46, context);
+    if (uint32(cursor, context) !== 0x02014b50)
       throw new Error(`ZIP central directory entry ${index} is malformed`);
-    const flags = archive.readUInt16LE(cursor + 8);
-    const method = archive.readUInt16LE(cursor + 10);
-    const compressedSize = archive.readUInt32LE(cursor + 20);
-    const uncompressedSize = archive.readUInt32LE(cursor + 24);
-    const filenameLength = archive.readUInt16LE(cursor + 28);
-    const extraLength = archive.readUInt16LE(cursor + 30);
-    const commentLength = archive.readUInt16LE(cursor + 32);
-    const localOffset = archive.readUInt32LE(cursor + 42);
+    const flags = uint16(cursor + 8, context);
+    const method = uint16(cursor + 10, context);
+    const expectedCrc32 = uint32(cursor + 16, context);
+    const compressedSize = uint32(cursor + 20, context);
+    const uncompressedSize = uint32(cursor + 24, context);
+    const filenameLength = uint16(cursor + 28, context);
+    const extraLength = uint16(cursor + 30, context);
+    const entryCommentLength = uint16(cursor + 32, context);
+    const localOffset = uint32(cursor + 42, context);
+    const centralEntryLength =
+      46 + filenameLength + extraLength + entryCommentLength;
+    requireRange(cursor, centralEntryLength, context);
     const filename = archive
       .subarray(cursor + 46, cursor + 46 + filenameLength)
       .toString('utf8');
-    if (flags & 1)
-      throw new Error(`${filename}: encrypted ZIP entry is unsupported`);
+    if (flags & (1 | 64 | 8192))
+      throw new Error(
+        `${filename}: encrypted or masked ZIP entry is unsupported`,
+      );
     if (
       compressedSize === 0xffffffff ||
       uncompressedSize === 0xffffffff ||
       localOffset === 0xffffffff
     )
       throw new Error(`${filename}: Zip64 entry is unsupported`);
-    if (archive.readUInt32LE(localOffset) !== 0x04034b50)
+    requireRange(localOffset, 30, `${filename} local ZIP header`);
+    if (uint32(localOffset, `${filename} local ZIP header`) !== 0x04034b50)
       throw new Error(`${filename}: local ZIP header is malformed`);
-    const localFilenameLength = archive.readUInt16LE(localOffset + 26);
-    const localExtraLength = archive.readUInt16LE(localOffset + 28);
+    const localFlags = uint16(localOffset + 6, `${filename} local ZIP header`);
+    const localMethod = uint16(localOffset + 8, `${filename} local ZIP header`);
+    const localCrc32 = uint32(localOffset + 14, `${filename} local ZIP header`);
+    const localCompressedSize = uint32(
+      localOffset + 18,
+      `${filename} local ZIP header`,
+    );
+    const localUncompressedSize = uint32(
+      localOffset + 22,
+      `${filename} local ZIP header`,
+    );
+    const localFilenameLength = uint16(
+      localOffset + 26,
+      `${filename} local ZIP header`,
+    );
+    const localExtraLength = uint16(
+      localOffset + 28,
+      `${filename} local ZIP header`,
+    );
+    if (localFlags !== flags || localMethod !== method)
+      throw new Error(
+        `${filename}: local and central ZIP flags/method disagree`,
+      );
+    requireRange(
+      localOffset + 30,
+      localFilenameLength + localExtraLength,
+      `${filename} local ZIP name/extra`,
+    );
+    const localFilename = archive.subarray(
+      localOffset + 30,
+      localOffset + 30 + localFilenameLength,
+    );
+    const centralFilename = archive.subarray(
+      cursor + 46,
+      cursor + 46 + filenameLength,
+    );
+    if (!localFilename.equals(centralFilename))
+      throw new Error(`${filename}: local and central ZIP filename disagree`);
+    if (!(flags & 8)) {
+      if (
+        localCrc32 !== expectedCrc32 ||
+        localCompressedSize !== compressedSize ||
+        localUncompressedSize !== uncompressedSize
+      )
+        throw new Error(`${filename}: local and central ZIP size/CRC disagree`);
+    }
     const dataOffset =
       localOffset + 30 + localFilenameLength + localExtraLength;
+    requireRange(dataOffset, compressedSize, `${filename} compressed data`);
+    if (dataOffset + compressedSize > centralOffset)
+      throw new Error(
+        `${filename}: compressed data overlaps central directory`,
+      );
     const compressed = archive.subarray(
       dataOffset,
       dataOffset + compressedSize,
@@ -718,12 +814,35 @@ function readZipEntries(archive) {
       );
     if (bytes.byteLength !== uncompressedSize)
       throw new Error(`${filename}: uncompressed ZIP size mismatch`);
+    if (crc32(bytes) !== expectedCrc32)
+      throw new Error(`${filename}: ZIP entry CRC-32 mismatch`);
     if (result.has(filename))
       throw new Error(`duplicate ZIP entry ${filename}`);
-    result.set(filename, bytes);
-    cursor += 46 + filenameLength + extraLength + commentLength;
+    result.set(filename, {
+      bytes,
+      method: /** @type {0 | 8} */ (method),
+    });
+    cursor += centralEntryLength;
   }
+  if (cursor !== centralOffset + centralSize)
+    throw new Error('ZIP central directory size does not match parsed records');
   return result;
+}
+
+const CRC32_TABLE = Uint32Array.from({ length: 256 }, (_, index) => {
+  let value = index;
+  for (let bit = 0; bit < 8; bit += 1)
+    value = (value >>> 1) ^ (0xedb88320 & -(value & 1));
+  return value >>> 0;
+});
+
+/** @param {Buffer} bytes */
+function crc32(bytes) {
+  let crc = 0xffffffff;
+  for (const byte of bytes)
+    crc =
+      /** @type {number} */ (CRC32_TABLE[(crc ^ byte) & 0xff]) ^ (crc >>> 8);
+  return (crc ^ 0xffffffff) >>> 0;
 }
 
 /**
@@ -736,10 +855,22 @@ export async function verifyExtractedAgainstArchive(
   meshDir,
   { entryPrefix, expectedObjFiles },
 ) {
+  if (
+    !/^[A-Za-z0-9][A-Za-z0-9._-]*\/$/.test(entryPrefix) ||
+    entryPrefix.includes('..')
+  )
+    throw new Error(`unsafe ZIP entry prefix ${entryPrefix}`);
   const entries = readZipEntries(archive);
   const archiveObjs = [...entries]
-    .filter(([name]) => name.startsWith(entryPrefix) && name.endsWith('.obj'))
+    .filter(([name]) => name.toLocaleLowerCase('en-US').endsWith('.obj'))
     .sort(([left], [right]) => left.localeCompare(right, 'en-US'));
+  for (const [name] of archiveObjs) {
+    const suffix = name.startsWith(entryPrefix)
+      ? name.slice(entryPrefix.length)
+      : '';
+    if (!/^FJ\d+M?\.obj$/.test(suffix))
+      throw new Error(`unsafe ZIP OBJ entry path ${name}`);
+  }
   if (archiveObjs.length !== expectedObjFiles)
     throw new Error(
       `ZIP contains ${archiveObjs.length} OBJ files under ${entryPrefix}, expected ${expectedObjFiles}`,
@@ -752,7 +883,11 @@ export async function verifyExtractedAgainstArchive(
       `${basename(meshDir)} contains ${extractedNames.length} OBJ files, expected ${expectedObjFiles}`,
     );
   const archiveBasenames = new Set();
-  for (const [entryName, archivedBytes] of archiveObjs) {
+  const compressionMethods = { stored: 0, deflate: 0 };
+  for (const [entryName, archivedEntry] of archiveObjs) {
+    const { bytes: archivedBytes, method } = archivedEntry;
+    if (method === 0) compressionMethods.stored += 1;
+    else compressionMethods.deflate += 1;
     const extractedName = basename(entryName);
     if (archiveBasenames.has(extractedName))
       throw new Error(`duplicate ZIP OBJ basename ${extractedName}`);
@@ -782,6 +917,7 @@ export async function verifyExtractedAgainstArchive(
       );
   return {
     verifiedObjFiles: archiveObjs.length,
+    compressionMethods,
     binding: 'byte-identical to entries in whole-file SHA-256-verified ZIP',
   };
 }

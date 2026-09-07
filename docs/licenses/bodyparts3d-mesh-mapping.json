@@ -3669,10 +3669,12 @@
     "extractedArchiveBinding": {
       "isa": {
         "binding": "byte-identical to entries in whole-file SHA-256-verified ZIP",
+        "compressionMethods": { "deflate": 2234, "stored": 0 },
         "verifiedObjFiles": 2234
       },
       "partof": {
         "binding": "byte-identical to entries in whole-file SHA-256-verified ZIP",
+        "compressionMethods": { "deflate": 1258, "stored": 0 },
         "verifiedObjFiles": 1258
       }
     },

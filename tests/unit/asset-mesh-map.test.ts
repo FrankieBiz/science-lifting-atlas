@@ -1,9 +1,11 @@
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
+import { writeFileSync } from 'node:fs';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
+import { deflateRawSync } from 'node:zlib';
 
 import { describe, expect, it } from 'vitest';
 
@@ -171,6 +173,74 @@ describe('BodyParts3D mesh mapping', () => {
     });
   });
 
+  it('rejects traversal-shaped OBJ entry names even when their basename matches', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'sbla-zip-traversal-'));
+    const meshDir = join(root, 'extracted');
+    await import('node:fs/promises').then(({ mkdir }) => mkdir(meshDir));
+    const data = Buffer.from('mesh');
+    await writeFile(join(meshDir, 'FJ1.obj'), data);
+    const archive = zipFixture('fixture/../FJ1.obj', data);
+    const args = extractionCliArgs(root, meshDir, archive);
+    await expect(
+      promisify(execFile)(process.execPath, args),
+    ).rejects.toMatchObject({
+      stderr: expect.stringMatching(/unsafe ZIP OBJ entry path/i),
+    });
+  });
+
+  it('validates deflated entry bytes and CRC-32 through the CLI', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'sbla-zip-deflate-'));
+    const meshDir = join(root, 'extracted');
+    await import('node:fs/promises').then(({ mkdir }) => mkdir(meshDir));
+    const data = Buffer.from('deflated mesh bytes'.repeat(20));
+    await writeFile(join(meshDir, 'FJ1.obj'), data);
+    const archive = zipFixture('fixture/FJ1.obj', data, { method: 8 });
+    const args = extractionCliArgs(root, meshDir, archive);
+    await expect(
+      promisify(execFile)(process.execPath, args),
+    ).resolves.toMatchObject({
+      stdout: expect.stringContaining('"deflate":1'),
+    });
+
+    const corruptCrcArchive = zipFixture('fixture/FJ1.obj', data, {
+      method: 8,
+      crcOverride: (crc32(data) + 1) >>> 0,
+    });
+    const corruptArgs = extractionCliArgs(root, meshDir, corruptCrcArchive);
+    await expect(
+      promisify(execFile)(process.execPath, corruptArgs),
+    ).rejects.toMatchObject({ stderr: expect.stringMatching(/CRC-32/i) });
+  });
+
+  it('rejects local/central filename disagreement and truncated ZIP records', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'sbla-zip-malformed-'));
+    const meshDir = join(root, 'extracted');
+    await import('node:fs/promises').then(({ mkdir }) => mkdir(meshDir));
+    const data = Buffer.from('mesh');
+    await writeFile(join(meshDir, 'FJ1.obj'), data);
+
+    const mismatched = zipFixture('fixture/FJ1.obj', data, {
+      localName: 'fixture/FJ2.obj',
+    });
+    await expect(
+      promisify(execFile)(
+        process.execPath,
+        extractionCliArgs(root, meshDir, mismatched),
+      ),
+    ).rejects.toMatchObject({
+      stderr: expect.stringMatching(/local.*central.*filename/i),
+    });
+
+    const valid = zipFixture('fixture/FJ1.obj', data);
+    const truncated = valid.subarray(0, valid.length - 10);
+    await expect(
+      promisify(execFile)(
+        process.execPath,
+        extractionCliArgs(root, meshDir, truncated),
+      ),
+    ).rejects.toMatchObject({ stderr: expect.stringMatching(/ZIP/i) });
+  });
+
   it('maps a target through descendants to exact mesh identities', async () => {
     const meshDir = await mkdtemp(join(tmpdir(), 'sbla-mesh-map-'));
     await writeFile(
@@ -318,6 +388,16 @@ describe('BodyParts3D mesh mapping', () => {
       'transversus-abdominis',
       'multifidus',
     ]);
+    expect(manifest.source.extractedArchiveBinding).toMatchObject({
+      isa: {
+        verifiedObjFiles: 2234,
+        compressionMethods: { deflate: 2234, stored: 0 },
+      },
+      partof: {
+        verifiedObjFiles: 1258,
+        compressionMethods: { deflate: 1258, stored: 0 },
+      },
+    });
     for (const target of manifest.coverage.targets.filter(
       (entry: { present: boolean }) => entry.present,
     )) {
@@ -340,37 +420,76 @@ describe('BodyParts3D mesh mapping', () => {
 });
 
 function storedZip(name: string, data: Buffer) {
+  return zipFixture(name, data);
+}
+
+function zipFixture(
+  name: string,
+  data: Buffer,
+  options: { method?: 0 | 8; localName?: string; crcOverride?: number } = {},
+) {
+  const method = options.method ?? 0;
   const filename = Buffer.from(name);
-  const checksum = crc32(data);
+  const localFilename = Buffer.from(options.localName ?? name);
+  const checksum = options.crcOverride ?? crc32(data);
+  const compressed = method === 8 ? deflateRawSync(data) : data;
   const local = Buffer.alloc(30);
   local.writeUInt32LE(0x04034b50, 0);
   local.writeUInt16LE(20, 4);
   local.writeUInt16LE(0, 6);
-  local.writeUInt16LE(0, 8);
+  local.writeUInt16LE(method, 8);
   local.writeUInt32LE(checksum, 14);
-  local.writeUInt32LE(data.length, 18);
+  local.writeUInt32LE(compressed.length, 18);
   local.writeUInt32LE(data.length, 22);
-  local.writeUInt16LE(filename.length, 26);
+  local.writeUInt16LE(localFilename.length, 26);
 
   const central = Buffer.alloc(46);
   central.writeUInt32LE(0x02014b50, 0);
   central.writeUInt16LE(20, 4);
   central.writeUInt16LE(20, 6);
   central.writeUInt16LE(0, 8);
-  central.writeUInt16LE(0, 10);
+  central.writeUInt16LE(method, 10);
   central.writeUInt32LE(checksum, 16);
-  central.writeUInt32LE(data.length, 20);
+  central.writeUInt32LE(compressed.length, 20);
   central.writeUInt32LE(data.length, 24);
   central.writeUInt16LE(filename.length, 28);
 
-  const centralOffset = local.length + filename.length + data.length;
+  const centralOffset = local.length + localFilename.length + compressed.length;
   const end = Buffer.alloc(22);
   end.writeUInt32LE(0x06054b50, 0);
   end.writeUInt16LE(1, 8);
   end.writeUInt16LE(1, 10);
   end.writeUInt32LE(central.length + filename.length, 12);
   end.writeUInt32LE(centralOffset, 16);
-  return Buffer.concat([local, filename, data, central, filename, end]);
+  return Buffer.concat([
+    local,
+    localFilename,
+    compressed,
+    central,
+    filename,
+    end,
+  ]);
+}
+
+function extractionCliArgs(root: string, meshDir: string, archive: Buffer) {
+  const archivePath = join(root, `fixture-${archive.length}.zip`);
+  writeFileSync(archivePath, archive);
+  return [
+    resolve('scripts/assets/mesh-map.mjs'),
+    '--verify-extraction-only',
+    '--archive',
+    archivePath,
+    '--expected-bytes',
+    String(archive.byteLength),
+    '--expected-sha256',
+    createHash('sha256').update(archive).digest('hex'),
+    '--mesh-dir',
+    meshDir,
+    '--entry-prefix',
+    'fixture/',
+    '--expected-obj-files',
+    '1',
+  ];
 }
 
 function crc32(data: Buffer) {
