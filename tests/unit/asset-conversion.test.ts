@@ -67,11 +67,21 @@ describe('BodyParts3D deterministic conversion contract', () => {
         useShadow: true,
       }),
     ]);
-    expect(manifest.objects.length).toBeGreaterThan(0);
-    expect(
-      new Set(manifest.objects.map((entry: { name: string }) => entry.name))
-        .size,
-    ).toBe(manifest.objects.length);
+    expect(manifest.objects).toHaveLength(139);
+    const manifestNames = manifest.objects.map(
+      (entry: { name: string }) => entry.name,
+    );
+    const decoded = manifest.determinism.structure.decodedGeometry;
+    const decodedNames = decoded.map((entry: { name: string }) => entry.name);
+    expect(new Set(manifestNames).size).toBe(139);
+    expect(new Set(decodedNames).size).toBe(139);
+    expect(manifestNames.sort()).toEqual(decodedNames.sort());
+    const decodedByName = new Map(
+      decoded.map((entry: { name: string; bounds: unknown }) => [
+        entry.name,
+        entry.bounds,
+      ]),
+    );
     for (const entry of manifest.objects) {
       expect(entry).toMatchObject({
         name: expect.stringMatching(/^BP3D_/),
@@ -86,6 +96,9 @@ describe('BodyParts3D deterministic conversion contract', () => {
         },
         lod: expect.objectContaining({ ratio: expect.any(Number) }),
       });
+      expect(entry.normalized.boundsMetres).toEqual(
+        decodedByName.get(entry.name),
+      );
     }
   });
 

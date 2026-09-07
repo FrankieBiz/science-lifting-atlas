@@ -1611,7 +1611,11 @@
           "min": [-0.117240712, -0.080650598, 0.132831022]
         },
         "entityId": "FMA45960",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.060951293, -0.005671847, 0.423350126],
+          "min": [-0.117240712, -0.080650598, 0.132831022]
+        }
       },
       "source": {
         "bytes": 201640,
@@ -1632,7 +1636,11 @@
           "min": [0.060951319, -0.080650598, 0.132831037]
         },
         "entityId": "FMA45961",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.117239945, -0.005671801, 0.423348963],
+          "min": [0.060951319, -0.080650598, 0.132831037]
+        }
       },
       "source": {
         "bytes": 200155,
@@ -1650,10 +1658,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.048692279, -0.018449133, 0.764771581],
-          "min": [-0.127007425, -0.072187804, 0.327905029]
+          "min": [-0.127007425, -0.072187804, 0.32823348]
         },
         "entityId": "FMA45888",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.048692279, -0.018449133, 0.764771581],
+          "min": [-0.127007425, -0.072187804, 0.327905029]
+        }
       },
       "source": {
         "bytes": 341489,
@@ -1671,10 +1683,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.127007484, -0.018449094, 0.764771581],
-          "min": [0.0486922, -0.072187804, 0.327905029]
+          "min": [0.0486922, -0.072187804, 0.32823348]
         },
         "entityId": "FMA45889",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.127007484, -0.018449094, 0.764771581],
+          "min": [0.0486922, -0.072187804, 0.327905029]
+        }
       },
       "source": {
         "bytes": 338042,
@@ -1692,10 +1708,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.021371137, -0.013703098, 0.432386667],
-          "min": [-0.07423494, -0.09273643, 0.12281397]
+          "min": [-0.07423494, -0.092693403, 0.12281397]
         },
         "entityId": "FMA45957",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.021371137, -0.013703098, 0.432386667],
+          "min": [-0.07423494, -0.09273643, 0.12281397]
+        }
       },
       "source": {
         "bytes": 260975,
@@ -1713,10 +1733,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.074235275, -0.013703062, 0.432385921],
-          "min": [0.021371141, -0.09273643, 0.12281394]
+          "min": [0.021371141, -0.092693403, 0.12281394]
         },
         "entityId": "FMA45958",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.074235275, -0.013703062, 0.432385921],
+          "min": [0.021371141, -0.09273643, 0.12281394]
+        }
       },
       "source": {
         "bytes": 258641,
@@ -1734,10 +1758,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.022857562, -0.079727478, 0.798569679],
-          "min": [-0.099531196, -0.126502067, 0.601727545]
+          "min": [-0.098253727, -0.126502067, 0.601727545]
         },
         "entityId": "FMA22452",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.022857562, -0.079727478, 0.798569679],
+          "min": [-0.099531196, -0.126502067, 0.601727545]
+        }
       },
       "source": {
         "bytes": 109236,
@@ -1754,11 +1782,15 @@
       "name": "BP3D_FJ1401M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.099531196, -0.079727508, 0.798569679],
+          "max": [0.09825372, -0.079727508, 0.798569679],
           "min": [0.022857398, -0.126502037, 0.601728499]
         },
         "entityId": "FMA22454",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.099531196, -0.079727508, 0.798569679],
+          "min": [0.022857398, -0.126502037, 0.601728499]
+        }
       },
       "source": {
         "bytes": 107666,
@@ -1779,7 +1811,11 @@
           "min": [-0.094102211, -0.137102827, 0.510157049]
         },
         "entityId": "FMA22456",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.016901216, -0.089320466, 0.799767911],
+          "min": [-0.094102211, -0.137102827, 0.510157049]
+        }
       },
       "source": {
         "bytes": 174040,
@@ -1800,7 +1836,11 @@
           "min": [0.016901182, -0.137102827, 0.510161817]
         },
         "entityId": "FMA22457",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.094102211, -0.089320466, 0.799767792],
+          "min": [0.016901182, -0.137102827, 0.510161817]
+        }
       },
       "source": {
         "bytes": 172318,
@@ -1818,10 +1858,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.014159499, -0.054293264, 0.777611673],
-          "min": [-0.112406731, -0.113293096, 0.379781306]
+          "min": [-0.112406731, -0.113293096, 0.380012333]
         },
         "entityId": "FMA22459",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.014159499, -0.054293264, 0.777611673],
+          "min": [-0.112406731, -0.113293096, 0.379781306]
+        }
       },
       "source": {
         "bytes": 478061,
@@ -1839,10 +1883,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.112406902, -0.054293152, 0.777611792],
-          "min": [0.014159543, -0.113293059, 0.379783452]
+          "min": [0.014159543, -0.113293059, 0.380012453]
         },
         "entityId": "FMA22460",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.112406902, -0.054293152, 0.777611792],
+          "min": [0.014159543, -0.113293059, 0.379783452]
+        }
       },
       "source": {
         "bytes": 471924,
@@ -1860,10 +1908,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.001749849, 0.020746516, 0.93285948],
-          "min": [-0.148514941, -0.077868886, 0.667327642]
+          "min": [-0.144840568, -0.077436939, 0.667327642]
         },
         "entityId": "FMA22328",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.001749849, 0.020746516, 0.93285948],
+          "min": [-0.148514941, -0.077868886, 0.667327642]
+        }
       },
       "source": {
         "bytes": 197385,
@@ -1880,11 +1932,15 @@
       "name": "BP3D_FJ1418M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.148514941, 0.020746436, 0.93285948],
-          "min": [-0.001749803, -0.077868834, 0.667327523]
+          "max": [0.144840568, 0.020746436, 0.93285948],
+          "min": [-0.001749803, -0.077436984, 0.667327523]
         },
         "entityId": "FMA22329",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.148514941, 0.020746436, 0.93285948],
+          "min": [-0.001749803, -0.077868834, 0.667327523]
+        }
       },
       "source": {
         "bytes": 195419,
@@ -1901,11 +1957,15 @@
       "name": "BP3D_FJ1419",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.05854186, -0.016035791, 0.950903058],
-          "min": [-0.150315225, -0.10209699, 0.788743019]
+          "max": [-0.059380714, -0.016035791, 0.950903058],
+          "min": [-0.150315225, -0.10209699, 0.789772928]
         },
         "entityId": "FMA22330",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.05854186, -0.016035791, 0.950903058],
+          "min": [-0.150315225, -0.10209699, 0.788743019]
+        }
       },
       "source": {
         "bytes": 246651,
@@ -1923,10 +1983,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.150315613, -0.01603567, 0.950903058],
-          "min": [0.05854186, -0.102096103, 0.788743019]
+          "min": [0.059380714, -0.102096103, 0.789772868]
         },
         "entityId": "FMA22331",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.150315613, -0.01603567, 0.950903058],
+          "min": [0.05854186, -0.102096103, 0.788743019]
+        }
       },
       "source": {
         "bytes": 244392,
@@ -1947,7 +2011,11 @@
           "min": [-0.145016015, -0.102511302, 0.783246696]
         },
         "entityId": "FMA22332",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.067704819, -0.046451006, 0.923264384],
+          "min": [-0.145016015, -0.102511302, 0.783246696]
+        }
       },
       "source": {
         "bytes": 321500,
@@ -1968,7 +2036,11 @@
           "min": [0.067704909, -0.10251186, 0.783246994]
         },
         "entityId": "FMA22333",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.145016015, -0.046451028, 0.923264325],
+          "min": [0.067704909, -0.10251186, 0.783246994]
+        }
       },
       "source": {
         "bytes": 318764,
@@ -1985,11 +2057,15 @@
       "name": "BP3D_FJ1422",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.071849383, -0.045819398, 0.957983911],
-          "min": [-0.127907753, -0.129249886, 0.733833969]
+          "max": [-0.072742827, -0.045819398, 0.957983911],
+          "min": [-0.127907753, -0.129249886, 0.73463273]
         },
         "entityId": "FMA22322",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.071849383, -0.045819398, 0.957983911],
+          "min": [-0.127907753, -0.129249886, 0.733833969]
+        }
       },
       "source": {
         "bytes": 238318,
@@ -2007,10 +2083,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.127907753, -0.045819398, 0.957983971],
-          "min": [0.071849383, -0.129250094, 0.733833969]
+          "min": [0.072742835, -0.129250094, 0.73463273]
         },
         "entityId": "FMA22323",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.127907753, -0.045819398, 0.957983971],
+          "min": [0.071849383, -0.129250094, 0.733833969]
+        }
       },
       "source": {
         "bytes": 236600,
@@ -2027,11 +2107,15 @@
       "name": "BP3D_FJ1431",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.00747519, -0.053064682, 1.098740101],
+          "max": [-0.00747519, -0.053134903, 1.098740101],
           "min": [-0.113682501, -0.119372636, 0.735265255]
         },
         "entityId": "FMA22342",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.00747519, -0.053064682, 1.098740101],
+          "min": [-0.113682501, -0.119372636, 0.735265255]
+        }
       },
       "source": {
         "bytes": 379043,
@@ -2048,11 +2132,15 @@
       "name": "BP3D_FJ1431M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.113682829, -0.053064685, 1.098740101],
+          "max": [0.113682829, -0.053134903, 1.098740101],
           "min": [0.00747519, -0.119372822, 0.735265255]
         },
         "entityId": "FMA22343",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.113682829, -0.053064685, 1.098740101],
+          "min": [0.00747519, -0.119372822, 0.735265255]
+        }
       },
       "source": {
         "bytes": 376391,
@@ -2073,7 +2161,11 @@
           "min": [-0.154758498, -0.15253219, 0.314688474]
         },
         "entityId": "FMA38928",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.062942013, -0.083872892, 0.871190786],
+          "min": [-0.154758498, -0.15253219, 0.314688474]
+        }
       },
       "source": {
         "bytes": 389745,
@@ -2094,7 +2186,11 @@
           "min": [0.062941872, -0.152532578, 0.314688563]
         },
         "entityId": "FMA38929",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.154758394, -0.083872832, 0.871190429],
+          "min": [0.062941872, -0.152532578, 0.314688563]
+        }
       },
       "source": {
         "bytes": 386385,
@@ -2115,7 +2211,11 @@
           "min": [-0.071156353, -0.103649572, 0.315872759]
         },
         "entityId": "FMA22448",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.012641071, -0.037182759, 0.754447699],
+          "min": [-0.071156353, -0.103649572, 0.315872759]
+        }
       },
       "source": {
         "bytes": 307942,
@@ -2136,7 +2236,11 @@
           "min": [0.012641094, -0.10364978, 0.315872729]
         },
         "entityId": "FMA22449",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.071156383, -0.037182726, 0.754447639],
+          "min": [0.012641094, -0.10364978, 0.315872729]
+        }
       },
       "source": {
         "bytes": 305370,
@@ -2154,10 +2258,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.027032482, -0.02468197, 0.76373142],
-          "min": [-0.068518579, -0.098564044, 0.283211023]
+          "min": [-0.068518579, -0.098564044, 0.283372492]
         },
         "entityId": "FMA22358",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.027032482, -0.02468197, 0.76373142],
+          "min": [-0.068518579, -0.098564044, 0.283211023]
+        }
       },
       "source": {
         "bytes": 195220,
@@ -2175,10 +2283,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.068518579, -0.024681967, 0.763731301],
-          "min": [0.027032424, -0.098564073, 0.283211023]
+          "min": [0.027032424, -0.098564073, 0.283372372]
         },
         "entityId": "FMA22359",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.068518579, -0.024681967, 0.763731301],
+          "min": [0.027032424, -0.098564073, 0.283211023]
+        }
       },
       "source": {
         "bytes": 192790,
@@ -2199,7 +2311,11 @@
           "min": [-0.11578501, -0.091384105, 0.032546729]
         },
         "entityId": "FMA22558",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.035815798, -0.032097854, 0.358777821],
+          "min": [-0.11578501, -0.091384105, 0.032546729]
+        }
       },
       "source": {
         "bytes": 307036,
@@ -2220,7 +2336,11 @@
           "min": [0.03581582, -0.091384068, 0.032546703]
         },
         "entityId": "FMA22559",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.11578501, -0.032097828, 0.358777821],
+          "min": [0.03581582, -0.091384068, 0.032546703]
+        }
       },
       "source": {
         "bytes": 303662,
@@ -2237,11 +2357,15 @@
       "name": "BP3D_FJ1439",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.066677831, -0.0729369, 0.355269015],
-          "min": [-0.117028557, -0.149594516, -0.038804702]
+          "max": [-0.066967003, -0.0729369, 0.354887009],
+          "min": [-0.117028557, -0.144123927, -0.037983414]
         },
         "entityId": "FMA22544",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.066677831, -0.0729369, 0.355269015],
+          "min": [-0.117028557, -0.149594516, -0.038804702]
+        }
       },
       "source": {
         "bytes": 213354,
@@ -2258,11 +2382,15 @@
       "name": "BP3D_FJ1439M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.117028251, -0.0729369, 0.355269015],
-          "min": [0.066675216, -0.149594516, -0.038804702]
+          "max": [0.117028251, -0.0729369, 0.354887009],
+          "min": [0.066967003, -0.144123986, -0.03798325]
         },
         "entityId": "FMA22545",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.117028251, -0.0729369, 0.355269015],
+          "min": [0.066675216, -0.149594516, -0.038804702]
+        }
       },
       "source": {
         "bytes": 211659,
@@ -2280,10 +2408,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.075777516, -0.076317437, 0.769783914],
-          "min": [-0.133061022, -0.135348722, 0.342025757]
+          "min": [-0.132917628, -0.135348722, 0.342025757]
         },
         "entityId": "FMA38934",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.075777516, -0.076317437, 0.769783914],
+          "min": [-0.133061022, -0.135348722, 0.342025757]
+        }
       },
       "source": {
         "bytes": 305079,
@@ -2300,11 +2432,15 @@
       "name": "BP3D_FJ1441M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.133061022, -0.076317579, 0.769783914],
+          "max": [0.132917404, -0.076317579, 0.769783914],
           "min": [0.075777054, -0.135348678, 0.342025936]
         },
         "entityId": "FMA38935",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.133061022, -0.076317579, 0.769783914],
+          "min": [0.075777054, -0.135348678, 0.342025936]
+        }
       },
       "source": {
         "bytes": 302163,
@@ -2325,7 +2461,11 @@
           "min": [-0.159725517, -0.137051001, 0.317836106]
         },
         "entityId": "FMA38930",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.082856819, -0.056970846, 0.788244069],
+          "min": [-0.159725517, -0.137051001, 0.317836106]
+        }
       },
       "source": {
         "bytes": 464679,
@@ -2346,7 +2486,11 @@
           "min": [0.082855769, -0.137051001, 0.317836046]
         },
         "entityId": "FMA38931",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.15972653, -0.056970827, 0.788244009],
+          "min": [0.082855769, -0.137051001, 0.317836046]
+        }
       },
       "source": {
         "bytes": 460942,
@@ -2363,11 +2507,15 @@
       "name": "BP3D_FJ1443",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.035036176, -0.089132011, 0.738179028],
-          "min": [-0.10568545, -0.146906853, 0.340069026]
+          "max": [-0.035036176, -0.089285977, 0.738179028],
+          "min": [-0.105345108, -0.146906853, 0.340069026]
         },
         "entityId": "FMA38932",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.035036176, -0.089132011, 0.738179028],
+          "min": [-0.10568545, -0.146906853, 0.340069026]
+        }
       },
       "source": {
         "bytes": 317804,
@@ -2384,11 +2532,15 @@
       "name": "BP3D_FJ1443M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.105685443, -0.089132011, 0.738179028],
+          "max": [0.105345108, -0.089286, 0.738179028],
           "min": [0.03503703, -0.146907449, 0.340069026]
         },
         "entityId": "FMA38933",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.105685443, -0.089132011, 0.738179028],
+          "min": [0.03503703, -0.146907449, 0.340069026]
+        }
       },
       "source": {
         "bytes": 315070,
@@ -2409,7 +2561,11 @@
           "min": [-0.117070273, -0.087389991, 0.327763468]
         },
         "entityId": "FMA45891",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.079979025, -0.050594728, 0.646712482],
+          "min": [-0.117070273, -0.087389991, 0.327763468]
+        }
       },
       "source": {
         "bytes": 124350,
@@ -2430,7 +2586,11 @@
           "min": [0.079979226, -0.08739002, 0.327763468]
         },
         "entityId": "FMA45892",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.117070176, -0.050617885, 0.646712482],
+          "min": [0.079979226, -0.08739002, 0.327763468]
+        }
       },
       "source": {
         "bytes": 123463,
@@ -2451,7 +2611,11 @@
           "min": [-0.180912569, -0.213645712, 1.104618788]
         },
         "entityId": "FMA45874",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.047989875, -0.081675567, 1.278177142],
+          "min": [-0.180912569, -0.213645712, 1.104618788]
+        }
       },
       "source": {
         "bytes": 105002,
@@ -2472,7 +2636,11 @@
           "min": [0.047989924, -0.213645652, 1.104618788]
         },
         "entityId": "FMA45875",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.180912569, -0.081675701, 1.278177142],
+          "min": [0.047989924, -0.213645652, 1.104618788]
+        }
       },
       "source": {
         "bytes": 103977,
@@ -2489,11 +2657,15 @@
       "name": "BP3D_FJ1447",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.026399987, -0.081785336, 1.335900068],
-          "min": [-0.194261998, -0.145229459, 1.234508991]
+          "max": [-0.026399987, -0.081785336, 1.335710049],
+          "min": [-0.19413358, -0.145229459, 1.234508991]
         },
         "entityId": "FMA34690",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.026399987, -0.081785336, 1.335900068],
+          "min": [-0.194261998, -0.145229459, 1.234508991]
+        }
       },
       "source": {
         "bytes": 141480,
@@ -2510,11 +2682,15 @@
       "name": "BP3D_FJ1447M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.194261998, -0.08178445, 1.335900068],
-          "min": [0.026399989, -0.145051122, 1.234510064]
+          "max": [0.19413358, -0.08178445, 1.335710049],
+          "min": [0.026399989, -0.145051122, 1.234510779]
         },
         "entityId": "FMA34691",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.194261998, -0.08178445, 1.335900068],
+          "min": [0.026399989, -0.145051122, 1.234510064]
+        }
       },
       "source": {
         "bytes": 140158,
@@ -2531,11 +2707,15 @@
       "name": "BP3D_FJ1452",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.003446785, -0.037015308, 1.211580038],
+          "max": [-0.003446785, -0.037015308, 1.211551666],
           "min": [-0.140962362, -0.218674242, 0.793694019]
         },
         "entityId": "FMA13336",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.003446785, -0.037015308, 1.211580038],
+          "min": [-0.140962362, -0.218674242, 0.793694019]
+        }
       },
       "source": {
         "bytes": 8308376,
@@ -2552,11 +2732,15 @@
       "name": "BP3D_FJ1452M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.140962362, -0.037015725, 1.211580038],
+          "max": [0.140962362, -0.037015725, 1.211551666],
           "min": [0.003447511, -0.218674377, 0.793693841]
         },
         "entityId": "FMA13337",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.140962362, -0.037015725, 1.211580038],
+          "min": [0.003447511, -0.218674377, 0.793693841]
+        }
       },
       "source": {
         "bytes": 8250599,
@@ -2577,7 +2761,11 @@
           "min": [-0.18760775, -0.218790546, 1.139997125]
         },
         "entityId": "FMA79979",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.004313815, -0.079849154, 1.313950539],
+          "min": [-0.18760775, -0.218790546, 1.139997125]
+        }
       },
       "source": {
         "bytes": 556794,
@@ -2594,11 +2782,15 @@
       "name": "BP3D_FJ1464M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.187609136, -0.079849154, 1.313950539],
+          "max": [0.187609136, -0.081022605, 1.313950539],
           "min": [0.004313812, -0.218790501, 1.139997125]
         },
         "entityId": "FMA79980",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.187609136, -0.079849154, 1.313950539],
+          "min": [0.004313812, -0.218790501, 1.139997125]
+        }
       },
       "source": {
         "bytes": 551361,
@@ -2615,11 +2807,15 @@
       "name": "BP3D_FJ1467",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.146619096, -0.039487544, 1.348267078],
+          "max": [-0.146945432, -0.039487544, 1.348267078],
           "min": [-0.226667181, -0.104437448, 1.205031514]
         },
         "entityId": "FMA34682",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.146619096, -0.039487544, 1.348267078],
+          "min": [-0.226667181, -0.104437448, 1.205031514]
+        }
       },
       "source": {
         "bytes": 92591,
@@ -2637,10 +2833,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.226667807, -0.039300818, 1.348705411],
-          "min": [0.146619096, -0.104435079, 1.204921126]
+          "min": [0.146946132, -0.104435079, 1.204921126]
         },
         "entityId": "FMA34683",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.226667807, -0.039300818, 1.348705411],
+          "min": [0.146619096, -0.104435079, 1.204921126]
+        }
       },
       "source": {
         "bytes": 91869,
@@ -2658,10 +2858,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.088660941, -0.075054742, 1.356022716],
-          "min": [-0.203619018, -0.121594958, 1.204934835]
+          "min": [-0.203586191, -0.121594958, 1.204934835]
         },
         "entityId": "FMA34680",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.088660941, -0.075054742, 1.356022716],
+          "min": [-0.203619018, -0.121594958, 1.204934835]
+        }
       },
       "source": {
         "bytes": 223657,
@@ -2678,11 +2882,15 @@
       "name": "BP3D_FJ1468M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.203619018, -0.075054765, 1.356022],
+          "max": [0.203585625, -0.075054765, 1.356022],
           "min": [0.088583305, -0.12159501, 1.204933286]
         },
         "entityId": "FMA34681",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.203619018, -0.075054765, 1.356022],
+          "min": [0.088583305, -0.12159501, 1.204933286]
+        }
       },
       "source": {
         "bytes": 222006,
@@ -2703,7 +2911,11 @@
           "min": [-0.237462074, -0.126736835, 0.771166027]
         },
         "entityId": "FMA38507",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.219476014, -0.0496848, 1.058863521],
+          "min": [-0.237462074, -0.126736835, 0.771166027]
+        }
       },
       "source": {
         "bytes": 248132,
@@ -2724,7 +2936,11 @@
           "min": [0.219476014, -0.126740381, 0.771166027]
         },
         "entityId": "FMA38508",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.237462744, -0.0496848, 1.058863521],
+          "min": [0.219476014, -0.126740381, 0.771166027]
+        }
       },
       "source": {
         "bytes": 245801,
@@ -2745,7 +2961,11 @@
           "min": [-0.305808008, -0.168090433, 0.675794423]
         },
         "entityId": "FMA38470",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.178045988, -0.067586295, 1.053183913],
+          "min": [-0.305808008, -0.168090433, 0.675794423]
+        }
       },
       "source": {
         "bytes": 664548,
@@ -2766,7 +2986,11 @@
           "min": [0.178045988, -0.168089569, 0.675794482]
         },
         "entityId": "FMA38471",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.305746138, -0.067602478, 1.053183198],
+          "min": [0.178045988, -0.168089569, 0.675794482]
+        }
       },
       "source": {
         "bytes": 657945,
@@ -2787,7 +3011,11 @@
           "min": [-0.227762312, -0.069136597, 1.03605032]
         },
         "entityId": "FMA37697",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.174456, -0.020323282, 1.292564631],
+          "min": [-0.227762312, -0.069136597, 1.03605032]
+        }
       },
       "source": {
         "bytes": 182250,
@@ -2808,7 +3036,11 @@
           "min": [0.174456, -0.069136523, 1.035944223]
         },
         "entityId": "FMA37698",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.227762252, -0.020315234, 1.292568326],
+          "min": [0.174456, -0.069136523, 1.035944223]
+        }
       },
       "source": {
         "bytes": 180451,
@@ -2829,7 +3061,11 @@
           "min": [-0.230204806, -0.109039068, 0.99406904]
         },
         "entityId": "FMA37686",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.133975193, -0.06752044, 1.339608192],
+          "min": [-0.230204806, -0.109039068, 0.99406904]
+        }
       },
       "source": {
         "bytes": 105386,
@@ -2850,7 +3086,11 @@
           "min": [0.133975193, -0.109040022, 0.994068921]
         },
         "entityId": "FMA37687",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.230200425, -0.065616764, 1.339609385],
+          "min": [0.133975193, -0.109040022, 0.994068921]
+        }
       },
       "source": {
         "bytes": 103260,
@@ -2867,11 +3107,15 @@
       "name": "BP3D_FJ1479",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.133605495, -0.018042857, 1.300937533],
-          "min": [-0.216907069, -0.0640283, 1.035174608]
+          "max": [-0.133605495, -0.018042857, 1.299669385],
+          "min": [-0.216907069, -0.0640283, 1.035272121]
         },
         "entityId": "FMA37699",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.133605495, -0.018042857, 1.300937533],
+          "min": [-0.216907069, -0.0640283, 1.035174608]
+        }
       },
       "source": {
         "bytes": 113287,
@@ -2888,11 +3132,15 @@
       "name": "BP3D_FJ1479M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.216908261, -0.018042922, 1.300937533],
-          "min": [0.133614495, -0.064027868, 1.035174608]
+          "max": [0.216908261, -0.018042922, 1.299669385],
+          "min": [0.133614495, -0.064027868, 1.035271764]
         },
         "entityId": "FMA37700",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.216908261, -0.018042922, 1.300937533],
+          "min": [0.133614495, -0.064027868, 1.035174608]
+        }
       },
       "source": {
         "bytes": 112468,
@@ -2910,10 +3158,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.167394027, -0.046866439, 1.256606579],
-          "min": [-0.226987064, -0.071908936, 1.029321074]
+          "min": [-0.226958886, -0.071908936, 1.029321074]
         },
         "entityId": "FMA37695",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.167394027, -0.046866439, 1.256606579],
+          "min": [-0.226987064, -0.071908936, 1.029321074]
+        }
       },
       "source": {
         "bytes": 61608,
@@ -2930,11 +3182,15 @@
       "name": "BP3D_FJ1480M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.226987034, -0.046865925, 1.256606579],
+          "max": [0.226958841, -0.046865925, 1.256606579],
           "min": [0.167393699, -0.071909554, 1.029310346]
         },
         "entityId": "FMA37696",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.226987034, -0.046865925, 1.256606579],
+          "min": [0.167393699, -0.071909554, 1.029310346]
+        }
       },
       "source": {
         "bytes": 60584,
@@ -2952,10 +3208,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.227422446, -0.069929332, 0.970828831],
-          "min": [-0.289772809, -0.131777003, 0.788703799]
+          "min": [-0.28931883, -0.131739512, 0.788798273]
         },
         "entityId": "FMA38516",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.227422446, -0.069929332, 0.970828831],
+          "min": [-0.289772809, -0.131777003, 0.788703799]
+        }
       },
       "source": {
         "bytes": 143120,
@@ -2972,11 +3232,15 @@
       "name": "BP3D_FJ1484M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.289771199, -0.069932997, 0.970828831],
-          "min": [0.227422133, -0.131777003, 0.788703859]
+          "max": [0.28931886, -0.069932997, 0.970828831],
+          "min": [0.227422133, -0.131739512, 0.788798213]
         },
         "entityId": "FMA38517",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.289771199, -0.069932997, 0.970828831],
+          "min": [0.227422133, -0.131777003, 0.788703859]
+        }
       },
       "source": {
         "bytes": 141889,
@@ -2993,11 +3257,15 @@
       "name": "BP3D_FJ1486",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.176217988, -0.062199019, 1.220200062],
+          "max": [-0.176217988, -0.062199019, 1.22018075],
           "min": [-0.234820992, -0.086494796, 0.995208502]
         },
         "entityId": "FMA37668",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.176217988, -0.062199019, 1.220200062],
+          "min": [-0.234820992, -0.086494796, 0.995208502]
+        }
       },
       "source": {
         "bytes": 127901,
@@ -3014,11 +3282,15 @@
       "name": "BP3D_FJ1486M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.234820962, -0.062198933, 1.220200062],
+          "max": [0.234820962, -0.062198933, 1.22018075],
           "min": [0.176216379, -0.086494759, 0.995208442]
         },
         "entityId": "FMA37669",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.234820962, -0.062198933, 1.220200062],
+          "min": [0.176216379, -0.086494759, 0.995208442]
+        }
       },
       "source": {
         "bytes": 126069,
@@ -3035,11 +3307,15 @@
       "name": "BP3D_FJ1487",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.207872853, -0.055907451, 1.147940874],
+          "max": [-0.20844014, -0.055907451, 1.147940874],
           "min": [-0.280554175, -0.12312185, 0.809521377]
         },
         "entityId": "FMA38486",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.207872853, -0.055907451, 1.147940874],
+          "min": [-0.280554175, -0.12312185, 0.809521377]
+        }
       },
       "source": {
         "bytes": 359055,
@@ -3057,10 +3333,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.280555815, -0.055907533, 1.147941113],
-          "min": [0.207872123, -0.12312112, 0.809521377]
+          "min": [0.20844008, -0.12312112, 0.809521377]
         },
         "entityId": "FMA38487",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.280555815, -0.055907533, 1.147941113],
+          "min": [0.207872123, -0.12312112, 0.809521377]
+        }
       },
       "source": {
         "bytes": 356074,
@@ -3077,11 +3357,15 @@
       "name": "BP3D_FJ1489",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.228280723, -0.050061829, 1.07870996],
-          "min": [-0.272671819, -0.115722008, 0.776053071]
+          "max": [-0.228280723, -0.050061829, 1.078603029],
+          "min": [-0.272671819, -0.11566586, 0.776225567]
         },
         "entityId": "FMA38498",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.228280723, -0.050061829, 1.07870996],
+          "min": [-0.272671819, -0.115722008, 0.776053071]
+        }
       },
       "source": {
         "bytes": 158039,
@@ -3098,11 +3382,15 @@
       "name": "BP3D_FJ1489M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.272670686, -0.050061826, 1.07870996],
-          "min": [0.228280723, -0.115722008, 0.776052237]
+          "max": [0.272670686, -0.050061826, 1.078603029],
+          "min": [0.228280723, -0.115668416, 0.776225567]
         },
         "entityId": "FMA38499",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.272670686, -0.050061826, 1.07870996],
+          "min": [0.228280723, -0.115722008, 0.776052237]
+        }
       },
       "source": {
         "bytes": 156376,
@@ -3119,11 +3407,15 @@
       "name": "BP3D_FJ1490",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.219616115, -0.053077325, 1.101639867],
-          "min": [-0.278447866, -0.12100599, 0.779037774]
+          "max": [-0.220079899, -0.053077325, 1.101639867],
+          "min": [-0.277945399, -0.12100599, 0.779258609]
         },
         "entityId": "FMA38495",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.219616115, -0.053077325, 1.101639867],
+          "min": [-0.278447866, -0.12100599, 0.779037774]
+        }
       },
       "source": {
         "bytes": 179061,
@@ -3140,11 +3432,15 @@
       "name": "BP3D_FJ1490M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.278445035, -0.053074244, 1.101646304],
-          "min": [0.219993547, -0.12100599, 0.779037714]
+          "max": [0.277944922, -0.053074244, 1.101646304],
+          "min": [0.219993547, -0.12100599, 0.779258609]
         },
         "entityId": "FMA38496",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.278445035, -0.053074244, 1.101646304],
+          "min": [0.219993547, -0.12100599, 0.779037714]
+        }
       },
       "source": {
         "bytes": 177891,
@@ -3161,11 +3457,15 @@
       "name": "BP3D_FJ1491",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.226897448, -0.052856494, 1.049620032],
+          "max": [-0.226897448, -0.052856494, 1.049351811],
           "min": [-0.243203878, -0.143311381, 0.724656999]
         },
         "entityId": "FMA38504",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.226897448, -0.052856494, 1.049620032],
+          "min": [-0.243203878, -0.143311381, 0.724656999]
+        }
       },
       "source": {
         "bytes": 102700,
@@ -3182,11 +3482,15 @@
       "name": "BP3D_FJ1491M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.243204013, -0.052857473, 1.049620032],
+          "max": [0.243204013, -0.052857473, 1.049357891],
           "min": [0.226897448, -0.1433108, 0.724657118]
         },
         "entityId": "FMA38505",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.243204013, -0.052857473, 1.049620032],
+          "min": [0.226897448, -0.1433108, 0.724657118]
+        }
       },
       "source": {
         "bytes": 102082,
@@ -3203,11 +3507,15 @@
       "name": "BP3D_FJ1492",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.222431824, -0.045465674, 1.059997797],
-          "min": [-0.305180073, -0.16255109, 0.677741349]
+          "max": [-0.222456172, -0.045465674, 1.059997797],
+          "min": [-0.305180073, -0.162529022, 0.678052068]
         },
         "entityId": "FMA38501",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.222431824, -0.045465674, 1.059997797],
+          "min": [-0.305180073, -0.16255109, 0.677741349]
+        }
       },
       "source": {
         "bytes": 342296,
@@ -3225,10 +3533,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.305180222, -0.045383174, 1.060000658],
-          "min": [0.222432539, -0.162551105, 0.677741349]
+          "min": [0.222458839, -0.162529022, 0.678052068]
         },
         "entityId": "FMA38502",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.305180222, -0.045383174, 1.060000658],
+          "min": [0.222432539, -0.162551105, 0.677741349]
+        }
       },
       "source": {
         "bytes": 338663,
@@ -3245,11 +3557,15 @@
       "name": "BP3D_FJ1493",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.229062483, -0.095286302, 0.86830461],
-          "min": [-0.307935625, -0.175456971, 0.668788254]
+          "max": [-0.229062483, -0.095498823, 0.86830461],
+          "min": [-0.307935625, -0.173723906, 0.669275165]
         },
         "entityId": "FMA38525",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.229062483, -0.095286302, 0.86830461],
+          "min": [-0.307935625, -0.175456971, 0.668788254]
+        }
       },
       "source": {
         "bytes": 62068,
@@ -3266,11 +3582,15 @@
       "name": "BP3D_FJ1493M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.307935327, -0.095286302, 0.86830461],
-          "min": [0.229056105, -0.175456971, 0.668788254]
+          "max": [0.307935327, -0.095498823, 0.86830461],
+          "min": [0.229056105, -0.17372413, 0.669274211]
         },
         "entityId": "FMA38526",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.307935327, -0.095286302, 0.86830461],
+          "min": [0.229056105, -0.175456971, 0.668788254]
+        }
       },
       "source": {
         "bytes": 61518,
@@ -3287,11 +3607,15 @@
       "name": "BP3D_FJ1494",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.234814152, -0.090964206, 0.894010603],
-          "min": [-0.311402023, -0.147653013, 0.758262813]
+          "max": [-0.234814152, -0.090973184, 0.894010603],
+          "min": [-0.311402023, -0.147653013, 0.758550704]
         },
         "entityId": "FMA38519",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.234814152, -0.090964206, 0.894010603],
+          "min": [-0.311402023, -0.147653013, 0.758262813]
+        }
       },
       "source": {
         "bytes": 79961,
@@ -3308,11 +3632,15 @@
       "name": "BP3D_FJ1494M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.311402023, -0.090964206, 0.894010603],
-          "min": [0.234814152, -0.147653013, 0.758262813]
+          "max": [0.311402023, -0.090973169, 0.894010603],
+          "min": [0.234814152, -0.147653013, 0.758550704]
         },
         "entityId": "FMA38520",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.311402023, -0.090964206, 0.894010603],
+          "min": [0.234814152, -0.147653013, 0.758262813]
+        }
       },
       "source": {
         "bytes": 79160,
@@ -3329,11 +3657,15 @@
       "name": "BP3D_FJ1495",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.224624231, -0.075434498, 0.93504405],
-          "min": [-0.320546925, -0.163375005, 0.73274684]
+          "max": [-0.224624231, -0.075933971, 0.935035586],
+          "min": [-0.320546925, -0.162751898, 0.73274684]
         },
         "entityId": "FMA38522",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.224624231, -0.075434498, 0.93504405],
+          "min": [-0.320546925, -0.163375005, 0.73274684]
+        }
       },
       "source": {
         "bytes": 110183,
@@ -3350,11 +3682,15 @@
       "name": "BP3D_FJ1495M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.320547074, -0.075434431, 0.93504405],
-          "min": [0.224590942, -0.163375005, 0.73274684]
+          "max": [0.320547074, -0.075934023, 0.935035527],
+          "min": [0.224590942, -0.162751898, 0.73274684]
         },
         "entityId": "FMA38523",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.320547074, -0.075434431, 0.93504405],
+          "min": [0.224590942, -0.163375005, 0.73274684]
+        }
       },
       "source": {
         "bytes": 109022,
@@ -3371,11 +3707,15 @@
       "name": "BP3D_FJ1496",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.183556423, -0.070754483, 1.057459235],
-          "min": [-0.27314496, -0.136708826, 0.780165493]
+          "max": [-0.183556423, -0.070754483, 1.05715251],
+          "min": [-0.27314496, -0.136708826, 0.780652523]
         },
         "entityId": "FMA38460",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.183556423, -0.070754483, 1.057459235],
+          "min": [-0.27314496, -0.136708826, 0.780165493]
+        }
       },
       "source": {
         "bytes": 82751,
@@ -3392,11 +3732,15 @@
       "name": "BP3D_FJ1496M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.273145109, -0.070754461, 1.057459235],
-          "min": [0.18354778, -0.136710048, 0.780165493]
+          "max": [0.273145109, -0.070754461, 1.05715251],
+          "min": [0.18354778, -0.136710048, 0.780652523]
         },
         "entityId": "FMA38461",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.273145109, -0.070754461, 1.057459235],
+          "min": [0.18354778, -0.136710048, 0.780165493]
+        }
       },
       "source": {
         "bytes": 82024,
@@ -3413,11 +3757,15 @@
       "name": "BP3D_FJ1497",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.204160318, -0.068748198, 1.018859982],
-          "min": [-0.306972444, -0.186878011, 0.66469723]
+          "max": [-0.204160318, -0.069044426, 1.018784046],
+          "min": [-0.306972444, -0.186732218, 0.66469723]
         },
         "entityId": "FMA38479",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.204160318, -0.068748198, 1.018859982],
+          "min": [-0.306972444, -0.186878011, 0.66469723]
+        }
       },
       "source": {
         "bytes": 392489,
@@ -3434,11 +3782,15 @@
       "name": "BP3D_FJ1497M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.306972712, -0.068748184, 1.018859982],
-          "min": [0.204251707, -0.186878011, 0.664696336]
+          "max": [0.306972712, -0.069044352, 1.018784046],
+          "min": [0.204251707, -0.186733559, 0.664696336]
         },
         "entityId": "FMA38480",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.306972712, -0.068748184, 1.018859982],
+          "min": [0.204251707, -0.186878011, 0.664696336]
+        }
       },
       "source": {
         "bytes": 387918,
@@ -3456,10 +3808,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.238165587, -0.087599762, 0.965909064],
-          "min": [-0.314261973, -0.165831462, 0.735198438]
+          "min": [-0.313954711, -0.165681794, 0.735663295]
         },
         "entityId": "FMA38482",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.238165587, -0.087599762, 0.965909064],
+          "min": [-0.314261973, -0.165831462, 0.735198438]
+        }
       },
       "source": {
         "bytes": 151641,
@@ -3476,11 +3832,15 @@
       "name": "BP3D_FJ1498M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.314261973, -0.087597549, 0.965909064],
-          "min": [0.238165632, -0.165831447, 0.735198438]
+          "max": [0.313954711, -0.087597549, 0.965909064],
+          "min": [0.238165632, -0.165681586, 0.735663295]
         },
         "entityId": "FMA38484",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.314261973, -0.087597549, 0.965909064],
+          "min": [0.238165632, -0.165831447, 0.735198438]
+        }
       },
       "source": {
         "bytes": 149795,
@@ -3497,11 +3857,15 @@
       "name": "BP3D_FJ1499",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.225799635, -0.081254788, 0.992361784],
+          "max": [-0.225885659, -0.081382103, 0.992361784],
           "min": [-0.253753394, -0.133408949, 0.812993109]
         },
         "entityId": "FMA38470",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.225799635, -0.081254788, 0.992361784],
+          "min": [-0.253753394, -0.133408949, 0.812993109]
+        }
       },
       "source": {
         "bytes": 63323,
@@ -3518,11 +3882,15 @@
       "name": "BP3D_FJ1499M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.253753394, -0.081254788, 0.992361784],
-          "min": [0.225799635, -0.133408934, 0.812993109]
+          "max": [0.253753394, -0.081382103, 0.992361784],
+          "min": [0.225885853, -0.133408934, 0.812993109]
         },
         "entityId": "FMA38471",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.253753394, -0.081254788, 0.992361784],
+          "min": [0.225799635, -0.133408934, 0.812993109]
+        }
       },
       "source": {
         "bytes": 62744,
@@ -3540,10 +3908,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.059863996, 0.003731307, 1.330775738],
-          "min": [-0.190346092, -0.077231847, 1.206530094]
+          "min": [-0.188821778, -0.077192858, 1.206935167]
         },
         "entityId": "FMA32547",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.059863996, 0.003731307, 1.330775738],
+          "min": [-0.190346092, -0.077231847, 1.206530094]
+        }
       },
       "source": {
         "bytes": 69844,
@@ -3560,11 +3932,15 @@
       "name": "BP3D_FJ1500M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.190346092, 0.003731759, 1.330774546],
-          "min": [0.059864074, -0.077231847, 1.206423521]
+          "max": [0.188821778, 0.003731759, 1.330774546],
+          "min": [0.059864074, -0.077192046, 1.206423521]
         },
         "entityId": "FMA32548",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.190346092, 0.003731759, 1.330774546],
+          "min": [0.059864074, -0.077231847, 1.206423521]
+        }
       },
       "source": {
         "bytes": 69046,
@@ -3581,11 +3957,15 @@
       "name": "BP3D_FJ1502",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.17940101, -0.071695723, 1.053748369],
-          "min": [-0.29058817, -0.150229707, 0.732917368]
+          "max": [-0.17940101, -0.071695723, 1.053480864],
+          "min": [-0.290465862, -0.150229707, 0.732973218]
         },
         "entityId": "FMA38463",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.17940101, -0.071695723, 1.053748369],
+          "min": [-0.29058817, -0.150229707, 0.732917368]
+        }
       },
       "source": {
         "bytes": 435055,
@@ -3602,11 +3982,15 @@
       "name": "BP3D_FJ1502M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.29058817, -0.07169573, 1.053748369],
-          "min": [0.179401338, -0.150230408, 0.732917368]
+          "max": [0.290465862, -0.07169573, 1.053480983],
+          "min": [0.179401338, -0.150230408, 0.732973218]
         },
         "entityId": "FMA38464",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.29058817, -0.07169573, 1.053748369],
+          "min": [0.179401338, -0.150230408, 0.732917368]
+        }
       },
       "source": {
         "bytes": 430061,
@@ -3623,11 +4007,15 @@
       "name": "BP3D_FJ1503",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.226098016, -0.102365039, 0.870567024],
+          "max": [-0.226342633, -0.102365039, 0.870499194],
           "min": [-0.271891534, -0.125239506, 0.820141613]
         },
         "entityId": "FMA38454",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.226098016, -0.102365039, 0.870567024],
+          "min": [-0.271891534, -0.125239506, 0.820141613]
+        }
       },
       "source": {
         "bytes": 192602,
@@ -3644,11 +4032,15 @@
       "name": "BP3D_FJ1503M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.27189368, -0.102364473, 0.870567024],
-          "min": [0.226098016, -0.125239104, 0.820141733]
+          "max": [0.27189368, -0.102364473, 0.870499194],
+          "min": [0.226340875, -0.125239104, 0.820141733]
         },
         "entityId": "FMA38455",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.27189368, -0.102364473, 0.870567024],
+          "min": [0.226098016, -0.125239104, 0.820141733]
+        }
       },
       "source": {
         "bytes": 190457,
@@ -3665,11 +4057,15 @@
       "name": "BP3D_FJ1504",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.063022643, -0.00273245, 1.324783564],
-          "min": [-0.165895998, -0.09967, 1.194816709]
+          "max": [-0.063022643, -0.002860207, 1.324783564],
+          "min": [-0.165895998, -0.09956558, 1.194816709]
         },
         "entityId": "FMA13414",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.063022643, -0.00273245, 1.324783564],
+          "min": [-0.165895998, -0.09967, 1.194816709]
+        }
       },
       "source": {
         "bytes": 231733,
@@ -3686,11 +4082,15 @@
       "name": "BP3D_FJ1504M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.165895998, -0.00273245, 1.325522304],
-          "min": [0.063022643, -0.09967, 1.194816828]
+          "max": [0.165895998, -0.002860207, 1.325522304],
+          "min": [0.063022643, -0.099565119, 1.194816828]
         },
         "entityId": "FMA13415",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.165895998, -0.00273245, 1.325522304],
+          "min": [0.063022643, -0.09967, 1.194816828]
+        }
       },
       "source": {
         "bytes": 228104,
@@ -3708,10 +4108,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.222004458, -0.056260604, 1.056380033],
-          "min": [-0.254116476, -0.092128545, 0.932534039]
+          "min": [-0.254113555, -0.092128545, 0.933027327]
         },
         "entityId": "FMA38513",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.222004458, -0.056260604, 1.056380033],
+          "min": [-0.254116476, -0.092128545, 0.932534039]
+        }
       },
       "source": {
         "bytes": 241649,
@@ -3728,11 +4132,15 @@
       "name": "BP3D_FJ1505M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.254116476, -0.056260604, 1.056380033],
-          "min": [0.222004429, -0.092128545, 0.932534039]
+          "max": [0.254113555, -0.056260604, 1.056380033],
+          "min": [0.222004429, -0.092128545, 0.933027327]
         },
         "entityId": "FMA38514",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.254116476, -0.056260604, 1.056380033],
+          "min": [0.222004429, -0.092128545, 0.932534039]
+        }
       },
       "source": {
         "bytes": 240547,
@@ -3749,11 +4157,15 @@
       "name": "BP3D_FJ1506",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.063547023, -0.011973459, 1.342041135],
+          "max": [-0.063983984, -0.011973459, 1.342041135],
           "min": [-0.188608631, -0.092645951, 1.306749344]
         },
         "entityId": "FMA32544",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.063547023, -0.011973459, 1.342041135],
+          "min": [-0.188608631, -0.092645951, 1.306749344]
+        }
       },
       "source": {
         "bytes": 76172,
@@ -3770,11 +4182,15 @@
       "name": "BP3D_FJ1506M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.188611537, -0.013001493, 1.342229843],
-          "min": [0.063547023, -0.092644893, 1.306749344]
+          "max": [0.188611537, -0.013040624, 1.342229843],
+          "min": [0.063983969, -0.092644893, 1.306749344]
         },
         "entityId": "FMA32545",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.188611537, -0.013001493, 1.342229843],
+          "min": [0.063547023, -0.092644893, 1.306749344]
+        }
       },
       "source": {
         "bytes": 75068,
@@ -3791,11 +4207,15 @@
       "name": "BP3D_FJ1507",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.085906453, 0.001672763, 1.285350084],
-          "min": [-0.172687247, -0.080103606, 1.189740062]
+          "max": [-0.085906453, 0.001672763, 1.285178423],
+          "min": [-0.172687247, -0.079684697, 1.189868689]
         },
         "entityId": "FMA32551",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.085906453, 0.001672763, 1.285350084],
+          "min": [-0.172687247, -0.080103606, 1.189740062]
+        }
       },
       "source": {
         "bytes": 93150,
@@ -3812,11 +4232,15 @@
       "name": "BP3D_FJ1507M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.172687247, 0.001672728, 1.285350084],
-          "min": [0.085906506, -0.080103412, 1.189740062]
+          "max": [0.172687247, 0.001672728, 1.285178423],
+          "min": [0.085906506, -0.079684675, 1.189869046]
         },
         "entityId": "FMA32552",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.172687247, 0.001672728, 1.285350084],
+          "min": [0.085906506, -0.080103412, 1.189740062]
+        }
       },
       "source": {
         "bytes": 92508,
@@ -3833,11 +4257,15 @@
       "name": "BP3D_FJ1508",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.105452426, -0.012392578, 1.316362143],
-          "min": [-0.192951843, -0.081760734, 1.220560074]
+          "max": [-0.10547661, -0.012392578, 1.316110015],
+          "min": [-0.192951843, -0.080408849, 1.220595121]
         },
         "entityId": "FMA32553",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.105452426, -0.012392578, 1.316362143],
+          "min": [-0.192951843, -0.081760734, 1.220560074]
+        }
       },
       "source": {
         "bytes": 38012,
@@ -3854,11 +4282,15 @@
       "name": "BP3D_FJ1508M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.19075866, -0.012392301, 1.316519976],
-          "min": [0.105452441, -0.081747741, 1.220560074]
+          "max": [0.19075866, -0.012392301, 1.316110015],
+          "min": [0.10547661, -0.080408812, 1.220595479]
         },
         "entityId": "FMA32554",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.19075866, -0.012392301, 1.316519976],
+          "min": [0.105452441, -0.081747741, 1.220560074]
+        }
       },
       "source": {
         "bytes": 37682,
@@ -3875,11 +4307,15 @@
       "name": "BP3D_FJ1512",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.134767935, -0.075879484, 1.328334808],
-          "min": [-0.212331668, -0.108926155, 1.065217972]
+          "max": [-0.134767935, -0.076092698, 1.328120947],
+          "min": [-0.212331668, -0.108926155, 1.065256834]
         },
         "entityId": "FMA37684",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.134767935, -0.075879484, 1.328334808],
+          "min": [-0.212331668, -0.108926155, 1.065217972]
+        }
       },
       "source": {
         "bytes": 161507,
@@ -3896,11 +4332,15 @@
       "name": "BP3D_FJ1512M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.212331668, -0.075879484, 1.328334808],
-          "min": [0.134767935, -0.108925529, 1.065217972]
+          "max": [0.212331668, -0.076093495, 1.328121066],
+          "min": [0.134767935, -0.108925529, 1.065256834]
         },
         "entityId": "FMA37685",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.212331668, -0.075879484, 1.328334808],
+          "min": [0.134767935, -0.108925529, 1.065217972]
+        }
       },
       "source": {
         "bytes": 159783,
@@ -3917,11 +4357,15 @@
       "name": "BP3D_FJ1513",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.082846731, -0.00272512, 1.339745998],
-          "min": [-0.219351441, -0.079278633, 1.187441707]
+          "max": [-0.083207637, -0.00272512, 1.339745998],
+          "min": [-0.219351441, -0.079278633, 1.187760711]
         },
         "entityId": "FMA34684",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.082846731, -0.00272512, 1.339745998],
+          "min": [-0.219351441, -0.079278633, 1.187441707]
+        }
       },
       "source": {
         "bytes": 157136,
@@ -3939,10 +4383,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.219352096, -0.00272512, 1.339695692],
-          "min": [0.082846731, -0.079278626, 1.187441707]
+          "min": [0.083207637, -0.079278626, 1.187743545]
         },
         "entityId": "FMA34685",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.219352096, -0.00272512, 1.339695692],
+          "min": [0.082846731, -0.079278626, 1.187441707]
+        }
       },
       "source": {
         "bytes": 156732,
@@ -3959,11 +4407,15 @@
       "name": "BP3D_FJ1517",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.220263571, -0.065952145, 0.959752083],
+          "max": [-0.220263571, -0.065952145, 0.959592342],
           "min": [-0.237118661, -0.124269776, 0.776710033]
         },
         "entityId": "FMA38507",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.220263571, -0.065952145, 0.959752083],
+          "min": [-0.237118661, -0.124269776, 0.776710033]
+        }
       },
       "source": {
         "bytes": 102287,
@@ -3980,11 +4432,15 @@
       "name": "BP3D_FJ1517M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.237251207, -0.065951988, 0.959752262],
+          "max": [0.237251207, -0.065951988, 0.959593058],
           "min": [0.220263973, -0.124273941, 0.776710033]
         },
         "entityId": "FMA38508",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.237251207, -0.065951988, 0.959752262],
+          "min": [0.220263973, -0.124273941, 0.776710033]
+        }
       },
       "source": {
         "bytes": 101397,
@@ -4002,10 +4458,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.004039282, 0.024905577, 1.342744231],
-          "min": [-0.148586005, -0.046963703, 1.053806543]
+          "min": [-0.148586005, -0.046903003, 1.053806543]
         },
         "entityId": "FMA33581",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.004039282, 0.024905577, 1.342744231],
+          "min": [-0.148586005, -0.046963703, 1.053806543]
+        }
       },
       "source": {
         "bytes": 812371,
@@ -4022,11 +4482,15 @@
       "name": "BP3D_FJ1520M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.148586005, 0.024142053, 1.342744231],
+          "max": [0.148203924, 0.024142053, 1.342744231],
           "min": [-0.004039257, -0.047604777, 1.053806663]
         },
         "entityId": "FMA33583",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.148586005, 0.024142053, 1.342744231],
+          "min": [-0.004039257, -0.047604777, 1.053806663]
+        }
       },
       "source": {
         "bytes": 807078,
@@ -4044,10 +4508,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.003793287, -0.007419215, 1.506578922],
-          "min": [-0.130840003, -0.100646071, 1.340611815]
+          "min": [-0.130562454, -0.100646071, 1.340745091]
         },
         "entityId": "FMA33586",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.003793287, -0.007419215, 1.506578922],
+          "min": [-0.130840003, -0.100646071, 1.340611815]
+        }
       },
       "source": {
         "bytes": 537515,
@@ -4064,11 +4532,15 @@
       "name": "BP3D_FJ1521M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.130840003, -0.007419221, 1.506578684],
-          "min": [-0.003793287, -0.100646071, 1.340611815]
+          "max": [0.130559072, -0.007419221, 1.506578684],
+          "min": [-0.003793287, -0.100646071, 1.340745449]
         },
         "entityId": "FMA33587",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.130840003, -0.007419221, 1.506578684],
+          "min": [-0.003793287, -0.100646071, 1.340611815]
+        }
       },
       "source": {
         "bytes": 532693,
@@ -4085,11 +4557,15 @@
       "name": "BP3D_FJ1526",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.022342762, -0.005667044, 1.420266628],
-          "min": [-0.073509589, -0.081092879, 1.239770055]
+          "max": [-0.022342762, -0.005667044, 1.419660091],
+          "min": [-0.073509589, -0.080924928, 1.239952683]
         },
         "entityId": "FMA22744",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.022342762, -0.005667044, 1.420266628],
+          "min": [-0.073509589, -0.081092879, 1.239770055]
+        }
       },
       "source": {
         "bytes": 237546,
@@ -4106,11 +4582,15 @@
       "name": "BP3D_FJ1526M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.073509589, -0.005543625, 1.420266867],
-          "min": [0.022344118, -0.081093036, 1.239770055]
+          "max": [0.073509589, -0.005543625, 1.419660091],
+          "min": [0.022344118, -0.080926895, 1.239952922]
         },
         "entityId": "FMA22745",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.073509589, -0.005543625, 1.420266867],
+          "min": [0.022344118, -0.081093036, 1.239770055]
+        }
       },
       "source": {
         "bytes": 235971,
@@ -4128,10 +4608,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [-0.005189343, 0.009096634, 1.239191175],
-          "min": [-0.102250777, -0.03578192, 0.830031455]
+          "min": [-0.102250777, -0.035498131, 0.830031455]
         },
         "entityId": "FMA22740",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.005189343, 0.009096634, 1.239191175],
+          "min": [-0.102250777, -0.03578192, 0.830031455]
+        }
       },
       "source": {
         "bytes": 1189971,
@@ -4148,11 +4632,15 @@
       "name": "BP3D_FJ1527M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.102480419, 0.009096587, 1.239191175],
-          "min": [0.005189348, -0.035776392, 0.830031693]
+          "max": [0.102251425, 0.009096587, 1.239191175],
+          "min": [0.005189348, -0.035498075, 0.830031693]
         },
         "entityId": "FMA22741",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.102480419, 0.009096587, 1.239191175],
+          "min": [0.005189348, -0.035776392, 0.830031693]
+        }
       },
       "source": {
         "bytes": 1178614,
@@ -4169,11 +4657,15 @@
       "name": "BP3D_FJ1528",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.041734423, 0.000655241, 1.361141205],
-          "min": [-0.092301451, -0.075671233, 1.0566113]
+          "max": [-0.041734423, 0.000655241, 1.361058116],
+          "min": [-0.092301451, -0.075308606, 1.0566113]
         },
         "entityId": "FMA22742",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.041734423, 0.000655241, 1.361141205],
+          "min": [-0.092301451, -0.075671233, 1.0566113]
+        }
       },
       "source": {
         "bytes": 618808,
@@ -4190,11 +4682,15 @@
       "name": "BP3D_FJ1528M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.092301793, 0.000655323, 1.361140966],
-          "min": [0.041734423, -0.075671226, 1.056514025]
+          "max": [0.092301793, 0.000655323, 1.361037135],
+          "min": [0.041734423, -0.075308606, 1.056514025]
         },
         "entityId": "FMA22743",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.092301793, 0.000655323, 1.361140966],
+          "min": [0.041734423, -0.075671226, 1.056514025]
+        }
       },
       "source": {
         "bytes": 613804,
@@ -4211,11 +4707,15 @@
       "name": "BP3D_FJ1533",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.023929261, -0.035151299, 1.500238538],
+          "max": [-0.024081068, -0.035151299, 1.500238538],
           "min": [-0.061057888, -0.079292469, 1.334315658]
         },
         "entityId": "FMA22754",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.023929261, -0.035151299, 1.500238538],
+          "min": [-0.061057888, -0.079292469, 1.334315658]
+        }
       },
       "source": {
         "bytes": 179817,
@@ -4236,7 +4736,11 @@
           "min": [0.023919424, -0.079292111, 1.334315658]
         },
         "entityId": "FMA22756",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.061057877, -0.035151299, 1.500237942],
+          "min": [0.023919424, -0.079292111, 1.334315658]
+        }
       },
       "source": {
         "bytes": 178291,
@@ -4253,11 +4757,15 @@
       "name": "BP3D_FJ1534",
       "normalized": {
         "boundsMetres": {
-          "max": [-0.019673675, -0.013673324, 1.447859168],
-          "min": [-0.039853957, -0.079676375, 1.251449227]
+          "max": [-0.02012557, -0.013673324, 1.447676063],
+          "min": [-0.039853957, -0.079673029, 1.251449227]
         },
         "entityId": "FMA22757",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [-0.019673675, -0.013673324, 1.447859168],
+          "min": [-0.039853957, -0.079676375, 1.251449227]
+        }
       },
       "source": {
         "bytes": 229177,
@@ -4274,11 +4782,15 @@
       "name": "BP3D_FJ1534M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.039853979, -0.013673638, 1.447861433],
-          "min": [0.019673675, -0.079676375, 1.251449347]
+          "max": [0.039853979, -0.013673638, 1.447669744],
+          "min": [0.020123793, -0.079673029, 1.251449347]
         },
         "entityId": "FMA22758",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.039853979, -0.013673638, 1.447861433],
+          "min": [0.019673675, -0.079676375, 1.251449347]
+        }
       },
       "source": {
         "bytes": 227947,
@@ -4295,11 +4807,15 @@
       "name": "BP3D_FJ1535",
       "normalized": {
         "boundsMetres": {
-          "max": [0.000824027, 0.003648264, 1.370410085],
-          "min": [-0.068912961, -0.071171209, 0.848988593]
+          "max": [0.000563779, 0.003648264, 1.369516611],
+          "min": [-0.068912961, -0.070699006, 0.848988593]
         },
         "entityId": "FMA22751",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.000824027, 0.003648264, 1.370410085],
+          "min": [-0.068912961, -0.071171209, 0.848988593]
+        }
       },
       "source": {
         "bytes": 1319188,
@@ -4316,11 +4832,15 @@
       "name": "BP3D_FJ1535M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.068912961, 0.003648316, 1.370410085],
-          "min": [-0.000824102, -0.071171209, 0.848988593]
+          "max": [0.068912961, 0.003648316, 1.369516373],
+          "min": [-0.000563778, -0.070699006, 0.848988593]
         },
         "entityId": "FMA22753",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.068912961, 0.003648316, 1.370410085],
+          "min": [-0.000824102, -0.071171209, 0.848988593]
+        }
       },
       "source": {
         "bytes": 1306680,
@@ -4337,11 +4857,15 @@
       "name": "BP3D_FJ1536",
       "normalized": {
         "boundsMetres": {
-          "max": [0.000776102, 0.006337768, 1.361822605],
-          "min": [-0.090167381, -0.022161821, 1.188244104]
+          "max": [0.000776102, 0.00614108, 1.361822605],
+          "min": [-0.089430623, -0.022161821, 1.188244104]
         },
         "entityId": "FMA13381",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.000776102, 0.006337768, 1.361822605],
+          "min": [-0.090167381, -0.022161821, 1.188244104]
+        }
       },
       "source": {
         "bytes": 549548,
@@ -4358,11 +4882,15 @@
       "name": "BP3D_FJ1536M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.090167388, 0.006337783, 1.361822605],
+          "max": [0.089430623, 0.006140969, 1.361822605],
           "min": [-0.000776102, -0.022098102, 1.188244104]
         },
         "entityId": "FMA13382",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.090167388, 0.006337783, 1.361822605],
+          "min": [-0.000776102, -0.022098102, 1.188244104]
+        }
       },
       "source": {
         "bytes": 544456,
@@ -4383,7 +4911,11 @@
           "min": [-0.061722588, -0.03614815, 1.280796409]
         },
         "entityId": "FMA13383",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.000825072, -0.004597123, 1.387727857],
+          "min": [-0.061722588, -0.03614815, 1.280796409]
+        }
       },
       "source": {
         "bytes": 157909,
@@ -4400,11 +4932,15 @@
       "name": "BP3D_FJ1537M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.061688405, -0.004597143, 1.387729049],
-          "min": [-0.000820346, -0.036148153, 1.280800104]
+          "max": [0.061655965, -0.004597143, 1.387729049],
+          "min": [-0.000818776, -0.036148153, 1.280896902]
         },
         "entityId": "FMA13384",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.061688405, -0.004597143, 1.387729049],
+          "min": [-0.000820346, -0.036148153, 1.280800104]
+        }
       },
       "source": {
         "bytes": 156319,
@@ -4422,10 +4958,14 @@
       "normalized": {
         "boundsMetres": {
           "max": [0.008335684, -0.012207475, 1.435622931],
-          "min": [0.000125042, -0.043304596, 1.329158425]
+          "min": [0.00018115, -0.043304596, 1.329289675]
         },
         "entityId": "FMA77179",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.008335684, -0.012207475, 1.435622931],
+          "min": [0.000125042, -0.043304596, 1.329158425]
+        }
       },
       "source": {
         "bytes": 102979,
@@ -4446,7 +4986,11 @@
           "min": [-0.012259475, -0.043898106, 0.974191964]
         },
         "entityId": "FMA22779",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.002592514, 0.002726327, 1.334839821],
+          "min": [-0.012259475, -0.043898106, 0.974191964]
+        }
       },
       "source": {
         "bytes": 598901,
@@ -4467,7 +5011,11 @@
           "min": [-0.002592514, -0.043898012, 0.974191964]
         },
         "entityId": "FMA22780",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.012259505, 0.002725618, 1.334839821],
+          "min": [-0.002592514, -0.043898012, 0.974191964]
+        }
       },
       "source": {
         "bytes": 594041,
@@ -4484,11 +5032,15 @@
       "name": "BP3D_FJ1554",
       "normalized": {
         "boundsMetres": {
-          "max": [0.003970047, 0.01114573, 1.381960034],
-          "min": [-0.16379495, -0.069860607, 1.303426385]
+          "max": [0.003970047, 0.01114573, 1.381918907],
+          "min": [-0.16363433, -0.06961637, 1.303426385]
         },
         "entityId": "FMA33584",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.003970047, 0.01114573, 1.381960034],
+          "min": [-0.16379495, -0.069860607, 1.303426385]
+        }
       },
       "source": {
         "bytes": 351869,
@@ -4505,11 +5057,15 @@
       "name": "BP3D_FJ1554M",
       "normalized": {
         "boundsMetres": {
-          "max": [0.16379346, 0.011145731, 1.381960034],
-          "min": [-0.003978051, -0.069860607, 1.303427339]
+          "max": [0.163626999, 0.011145731, 1.381939411],
+          "min": [-0.003978051, -0.069616377, 1.303427339]
         },
         "entityId": "FMA33585",
-        "material": "SBLA_Neutral_Review"
+        "material": "SBLA_Neutral_Review",
+        "preExportBoundsMetres": {
+          "max": [0.16379346, 0.011145731, 1.381960034],
+          "min": [-0.003978051, -0.069860607, 1.303427339]
+        }
       },
       "source": {
         "bytes": 348493,
@@ -4565,7 +5121,7 @@
     }
   },
   "timing": {
-    "conversionSeconds": 6.276,
+    "conversionSeconds": 6.505,
     "objectCount": 139
   },
   "tool": {

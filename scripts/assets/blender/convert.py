@@ -234,7 +234,7 @@ def main():
     health = mesh_health(objects)
     object_by_name = {item["name"]: item for item in object_records}
     for item in decoded_geometry:
-        object_by_name[item["name"]]["normalized"]["boundsMetres"] = item["bounds"]
+        object_by_name[item["name"]]["normalized"]["preExportBoundsMetres"] = item["bounds"]
 
     bpy.ops.object.select_all(action="DESELECT")
     for obj in objects:
@@ -287,6 +287,11 @@ def main():
 
     other = json.loads(Path(options.compare_manifest).read_text()) if options.compare_manifest else None
     structure = decoded_glb_structure(glb_path)
+    decoded_by_name = {item["name"]: item["bounds"] for item in structure["decodedGeometry"]}
+    if len(object_records) != 139 or len(decoded_by_name) != 139 or set(object_by_name) != set(decoded_by_name):
+        raise RuntimeError("exported GLB object mapping is incomplete, duplicated, or contains an unexpected name")
+    for name, record in object_by_name.items():
+        record["normalized"]["boundsMetres"] = decoded_by_name[name]
     comparison = {"cleanRuns": 2 if other else 1, "sceneStructureEqual": None, "decodedGeometryEqual": None, "boundsEqual": None,
                   "glbBytesEqual": None, "priorArtifactAuthenticated": False,
                   "note": "Second clean-run comparison is required before acceptance."}
