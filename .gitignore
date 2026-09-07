@@ -13,6 +13,7 @@ test-results/
 # Local tooling and caches
 .superpowers/
 .cache/
+.pnpm-store/
 *.tsbuildinfo
 .DS_Store
 

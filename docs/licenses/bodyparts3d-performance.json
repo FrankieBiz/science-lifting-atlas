@@ -1,0 +1,1249 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-08T19:24:18.798Z",
+  "harness": {
+    "path": "scripts/assets/full-benchmark.mjs",
+    "sha256": "4b6ae4e4de8bc158db3ab3204e9484d62ffbfbfbaca35a206513181ffa29fee6"
+  },
+  "source": {
+    "kind": "task4-optimized-glb",
+    "path": "assets/derived/bodyparts3d/sbla005-representative.glb",
+    "bytes": 2874932,
+    "sha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
+    "conversionManifestSha256": "8d2cb6813a49be110c47729da208f3093b74788e7ae479b55e6f8abdef684d5d"
+  },
+  "budgets": {
+    "desktopTargetBytes": 6000000,
+    "hardCeilingBytes": 10000000,
+    "mobileInteractiveBytes": 3000000,
+    "hostPerFileCeilingBytes": 26214400,
+    "nativeTargetFps": [55, 60],
+    "simulatedGracefulFps": 30
+  },
+  "payloadAssessment": {
+    "desktopTarget": true,
+    "hardCeiling": true,
+    "mobileInteractive": true,
+    "hostPerFileCeiling": true
+  },
+  "scene": {
+    "objects": 139,
+    "meshes": 139,
+    "drawCalls": 139,
+    "vertices": 87949,
+    "triangles": 107146,
+    "geometryBufferBytes": 2753652,
+    "positionBytes": 1055388,
+    "normalBytes": 1055388,
+    "indexBytes": 642876,
+    "contextRule": "every Task 4 optimized selectable mapped object; no source OBJ or cherry-picked sample",
+    "cameraFit": {
+      "min": [-0.3205469250679016, -0.03798341378569603, -0.024905577301979065],
+      "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+      "center": [7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147],
+      "clipMargin": 0.9,
+      "scale": 1.1653786694000279,
+      "fullyInsideClipObjectCount": 139,
+      "clipViolationCount": 0
+    },
+    "reducedSimulation": {
+      "objects": 139,
+      "meshes": 139,
+      "drawCalls": 139,
+      "vertices": 73619,
+      "triangles": 53539,
+      "geometryBufferBytes": 2088090,
+      "positionBytes": 883428,
+      "normalBytes": 883428,
+      "indexBytes": 321234,
+      "method": "deterministic browser triangle sampling",
+      "ratio": 0.5,
+      "productFallback": true
+    }
+  },
+  "protocol": {
+    "cache": "no-store",
+    "warmupTrials": 1,
+    "measuredColdTrials": 5,
+    "stabilizedAnimationFrames": 300,
+    "stabilizationFramesDiscarded": 30,
+    "glFinish": true,
+    "coldDefinition": "unique no-store URL; fresh Playwright BrowserContext, page, WebGL2 context, parse, and GPU buffers per measurement"
+  },
+  "machine": {
+    "modelClass": "Mac15,12",
+    "chipModel": "Apple M3",
+    "logicalCpuCount": 8,
+    "ramBytes": 17179869184,
+    "gpuModel": "Apple M3",
+    "gpuCores": 8,
+    "graphicsApi": "Metal 4",
+    "hostVerification": {
+      "status": "matched-frozen-reference",
+      "method": "live sysctl plus selected non-sensitive system_profiler display fields"
+    },
+    "os": "macOS 26.6.2 (darwin arm64)",
+    "browser": "Playwright Chromium 1.62.1",
+    "browserVersion": "151.0.7922.34",
+    "browserRevision": "1234",
+    "browserBinarySha256": "a596b1cfc6353e987fcec8d71a23a28cd6a9e7a6b4e20b908e4c4fcffe51158e",
+    "powerState": {
+      "source": "pmset -g batt",
+      "supply": "Battery Power"
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "pixelRatio": 1
+  },
+  "profiles": {
+    "nativeHardware": {
+      "status": "available",
+      "browserVersion": "151.0.7922.34",
+      "headless": true,
+      "geometryBufferBytes": 2753652,
+      "cameraFit": {
+        "min": [
+          -0.3205469250679016, -0.03798341378569603, -0.024905577301979065
+        ],
+        "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+        "center": [
+          7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147
+        ],
+        "clipMargin": 0.9,
+        "scale": 1.1653786694000279,
+        "fullyInsideClipObjectCount": 139,
+        "clipViolationCount": 0
+      },
+      "renderer": {
+        "vendor": "Google Inc. (Apple)",
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3, Unspecified Version)",
+        "unmasked": true,
+        "evidence": "WEBGL_debug_renderer_info unmasked vendor and renderer"
+      },
+      "jsHeap": {
+        "bytes": 4746452,
+        "unavailableReason": null,
+        "precision": "precise (--enable-precise-memory-info)"
+      },
+      "execution": {
+        "browserLaunchId": "83b8bd37-e9ba-44ad-a6c2-fca20075bd9b",
+        "startedAt": "2026-09-08T19:24:00.424Z",
+        "measurementIsolation": "fresh Playwright BrowserContext, page, and WebGL2 context per measurement",
+        "contexts": [
+          {
+            "id": "a12ffe5f-89a3-4b89-82eb-2e832ec5723f",
+            "role": "warmup",
+            "recordedAt": "2026-09-08T19:24:01.039Z",
+            "digest": "ce0dcf2b7b4bde7cfc8663efc142d9431a799f93b437ddcdbbc3a8555892c677"
+          },
+          {
+            "id": "7f249924-fcb1-4983-9eb0-81d3e22a89a0",
+            "role": "cold-1",
+            "recordedAt": "2026-09-08T19:24:01.607Z",
+            "digest": "a16fbc574a2a0922c7b8583416cd8f38e6b2456105fb19d4aa09aa0fba3fb948"
+          },
+          {
+            "id": "ff6653f5-8b71-432e-a05e-a09c3039ff59",
+            "role": "cold-2",
+            "recordedAt": "2026-09-08T19:24:02.172Z",
+            "digest": "4e7795c566cfa0be106e900e7e9cef5a2c5344c34c40cfc136a15c5ab6a32017"
+          },
+          {
+            "id": "9a90c528-49c3-465b-a6f3-98d2363b00c7",
+            "role": "cold-3",
+            "recordedAt": "2026-09-08T19:24:02.720Z",
+            "digest": "be5bf4ef155feba0898c9bbd96afcac7c7ce6b8eabfced9f545b40f6a2656278"
+          },
+          {
+            "id": "c45ef039-6f06-4534-85de-4c8cf919d324",
+            "role": "cold-4",
+            "recordedAt": "2026-09-08T19:24:03.287Z",
+            "digest": "b1091db843d54a69ffa81966b7b24f0987fc069fb65c06a133799c8d2e6ebfbb"
+          },
+          {
+            "id": "1a8483a7-1eb2-4fb9-82b4-eecc68862878",
+            "role": "cold-5",
+            "recordedAt": "2026-09-08T19:24:03.837Z",
+            "digest": "68e3a3c9bd340d7bca3fb5c428e5aa202bd83043e1c4ae1eef1fcd245423b1d1"
+          },
+          {
+            "id": "ea034bb5-8b78-4bd5-88c8-917f0ba6e863",
+            "role": "animation",
+            "recordedAt": "2026-09-08T19:24:09.409Z",
+            "digest": "082c05482dd9595be57b871a7b3302e262498737296336ddd97bc21a78d31b19"
+          }
+        ]
+      },
+      "executionProtocol": {
+        "launchArgs": ["--use-angle=metal", "--enable-precise-memory-info"],
+        "cpuThrottling": {
+          "method": "none",
+          "rate": 1
+        },
+        "browserEngine": "Chromium",
+        "playwrightVersion": "1.62.1"
+      },
+      "warmups": [
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 4.5,
+          "parseMs": 0.5,
+          "uploadMs": 0.9,
+          "totalMs": 18.1
+        }
+      ],
+      "trials": [
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 4.1,
+          "parseMs": 0.4,
+          "uploadMs": 0.9,
+          "totalMs": 10.8
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 3.9,
+          "parseMs": 0.4,
+          "uploadMs": 1,
+          "totalMs": 11.2
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 4.4,
+          "parseMs": 0.4,
+          "uploadMs": 1.2,
+          "totalMs": 13.2
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 6.2,
+          "parseMs": 0.4,
+          "uploadMs": 1.4,
+          "totalMs": 32.2
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 4.2,
+          "parseMs": 0.3,
+          "uploadMs": 1,
+          "totalMs": 11.5
+        }
+      ],
+      "animationTrial": {
+        "transferredBytes": 2875232,
+        "fetchMs": 4.5,
+        "parseMs": 0.4,
+        "uploadMs": 1,
+        "totalMs": 11.7
+      },
+      "frameTimesMs": [
+        16.7, 16.6, 16.4, 16.6, 17.6, 15.7, 16.8, 16.7, 16.7, 16.5, 16.6, 16.7,
+        16.7, 16.6, 16.7, 16.6, 16.6, 16.7, 16.7, 16.7, 16.5, 16.7, 16.7, 16.8,
+        16.5, 16.7, 16.7, 16.7, 17.5, 15.6, 17, 17.3, 15.8, 17.4, 15.9, 16.9,
+        16.8, 16.1, 17.2, 15.9, 16.9, 16.8, 16.5, 16.6, 16.8, 16.7, 17.4, 15.8,
+        16.6, 16.6, 16.8, 16.5, 17.7, 15, 16.9, 17.4, 16.4, 17, 16.4, 17.5,
+        14.9, 17.5, 16.8, 17.4, 15.7, 16.8, 16.6, 16.8, 16.6, 16.7, 16.6, 16.7,
+        16.6, 16.6, 17.5, 15.9, 16.6, 16.6, 16.8, 16.6, 16.6, 17, 16.5, 16.8,
+        17.3, 15, 16.9, 17.3, 16.7, 16.6, 16.6, 16.6, 16.7, 17.6, 15.8, 17.4,
+        15.7, 16.6, 16.6, 16.7, 16.9, 16.6, 16.8, 16.8, 16.6, 16.8, 16.7, 16.6,
+        16.7, 16.6, 16.6, 16.6, 16.8, 16.7, 16.6, 16.6, 16.7, 16.9, 16.6, 16.7,
+        17.4, 16, 16.6, 16.5, 16.7, 16.6, 16.7, 16.6, 16.6, 17.3, 16, 16.8,
+        17.4, 15, 17.5, 16.6, 16.8, 16.3, 17.7, 15.4, 17, 16.7, 16.6, 16.8,
+        16.6, 16.7, 16.6, 17.4, 14.8, 16.8, 16.9, 17.5, 16.6, 16.9, 16.7, 16.7,
+        16.5, 16.4, 16.7, 17.4, 15.7, 16.7, 17, 16.5, 16.6, 16.7, 16.6, 16.6,
+        16.8, 16.7, 16.8, 16.6, 17.3, 16, 17.5, 15.9, 17.5, 15.7, 16.6, 16.8,
+        16.7, 16.6, 16.6, 16.6, 17, 16.2, 16.5, 16.6, 16.7, 16.6, 16.7, 16.7,
+        16.6, 16.6, 16.8, 16.6, 16.9, 16.9, 16.9, 16.4, 17.7, 15.8, 16.7, 16.8,
+        16.7, 15.6, 17.4, 16.6, 16.7, 16.7, 16.7, 16.4, 16.7, 17.6, 16.1, 16.4,
+        17.5, 15.8, 16.8, 16.7, 16.6, 16.9, 16.4, 17.5, 15.1, 16.5, 17.5, 17.6,
+        15.6, 16.7, 16.8, 16.6, 16.6, 16.6, 16.7, 16.7, 16.8, 16.8, 16.6, 16.6,
+        16.6, 16.7, 17, 16.3, 16.7, 16.7, 16.6, 16.6, 16.8, 16.6, 16.7, 16.6,
+        16.8, 16.6, 16.6, 16.7, 16.7, 16.4, 16.7, 16.6, 16.7, 16.7, 16.5, 16.7,
+        16.6, 16.8, 16.6, 16.6, 16.6, 16.7, 16.5, 16.8, 16.8, 16.7, 16.6, 16.8,
+        16.6, 16.5, 17.8, 15.8, 16.9, 16.4, 17.3, 15.7, 16.7, 16.6, 16.7, 16.7,
+        16.6, 16.7, 17.6, 15.5, 17.1, 16.4, 16.7, 17, 16.3, 16.4, 16.9, 16.7
+      ],
+      "aggregates": {
+        "medianFetchMs": 4.2,
+        "medianParseMs": 0.4,
+        "medianUploadMs": 1,
+        "medianTotalMs": 11.5,
+        "medianFrameMs": 16.7,
+        "p95FrameMs": 17.5
+      },
+      "evidenceDigest": "71375c26a921fb9554cd05277f49e41318b3a6a0b91c8ab3eb280b9463aa09f7"
+    },
+    "lowPowerSimulation": {
+      "status": "available",
+      "browserVersion": "151.0.7922.34",
+      "headless": true,
+      "geometryBufferBytes": 2088090,
+      "cameraFit": {
+        "min": [
+          -0.3205469250679016, -0.03798341378569603, -0.024905577301979065
+        ],
+        "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+        "center": [
+          7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147
+        ],
+        "clipMargin": 0.9,
+        "scale": 1.1653786694000279,
+        "fullyInsideClipObjectCount": 139,
+        "clipViolationCount": 0
+      },
+      "renderer": {
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "unmasked": true,
+        "evidence": "WEBGL_debug_renderer_info unmasked vendor and renderer"
+      },
+      "jsHeap": {
+        "bytes": 9020489,
+        "unavailableReason": null,
+        "precision": "precise (--enable-precise-memory-info)"
+      },
+      "execution": {
+        "browserLaunchId": "5382edd0-ca45-4128-bd16-ce4772a1d8c1",
+        "startedAt": "2026-09-08T19:24:09.434Z",
+        "measurementIsolation": "fresh Playwright BrowserContext, page, and WebGL2 context per measurement",
+        "contexts": [
+          {
+            "id": "4ea28c2c-b6d9-49e4-bdc0-92eb904af802",
+            "role": "warmup",
+            "recordedAt": "2026-09-08T19:24:10.137Z",
+            "digest": "5cd52b4e25858689fff17b614312c49333a3f8aff72abec35a669802b975bfb1"
+          },
+          {
+            "id": "cc4a3fac-0f62-40dd-aadc-d8c7079b2228",
+            "role": "cold-1",
+            "recordedAt": "2026-09-08T19:24:10.737Z",
+            "digest": "fae6aa5ee96dfc8a0f5a9574962ee43bb088fd63a38349f96e0d4466b2af4d79"
+          },
+          {
+            "id": "0eaee00c-d5fe-407a-8cf3-3e552266c494",
+            "role": "cold-2",
+            "recordedAt": "2026-09-08T19:24:11.337Z",
+            "digest": "21721a0367117efc8b2d2fd4d90c57287075641fef606e91b0f28592b6a1640c"
+          },
+          {
+            "id": "993e2d58-d37d-4816-bd9b-0cfbd3c7454a",
+            "role": "cold-3",
+            "recordedAt": "2026-09-08T19:24:11.936Z",
+            "digest": "a7a14f4011ff95226411448dfdaaac3bbb50494103741ef03f7d07ed155f7ebf"
+          },
+          {
+            "id": "3018ede5-052c-40fe-bdc4-a4bd552ced62",
+            "role": "cold-4",
+            "recordedAt": "2026-09-08T19:24:12.536Z",
+            "digest": "794aa89ff159f487ca96e871f7575ad6b567f8442397883aea3ecd8689f24ab8"
+          },
+          {
+            "id": "e746cbcc-78f0-4646-9556-be6a67434de5",
+            "role": "cold-5",
+            "recordedAt": "2026-09-08T19:24:13.138Z",
+            "digest": "befcfe532efbb28cfa94ae50989c14698aae777821afa911aba9a982a2e0d837"
+          },
+          {
+            "id": "97614b27-245e-4ed1-be65-81bdd5ec6868",
+            "role": "animation",
+            "recordedAt": "2026-09-08T19:24:18.776Z",
+            "digest": "8bef00cbe8fdcea8c1400cef6b0e355c08eb7a84a8b56eb244dadf31299de2fd"
+          }
+        ]
+      },
+      "executionProtocol": {
+        "launchArgs": [
+          "--use-gl=angle",
+          "--use-angle=swiftshader",
+          "--enable-unsafe-swiftshader",
+          "--enable-precise-memory-info"
+        ],
+        "cpuThrottling": {
+          "method": "Emulation.setCPUThrottlingRate",
+          "rate": 4
+        },
+        "browserEngine": "Chromium",
+        "playwrightVersion": "1.62.1"
+      },
+      "warmups": [
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 13.2,
+          "parseMs": 2,
+          "uploadMs": 39.9,
+          "totalMs": 69.5
+        }
+      ],
+      "trials": [
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 12.8,
+          "parseMs": 0.9,
+          "uploadMs": 40.7,
+          "totalMs": 66.3
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 12,
+          "parseMs": 1.1,
+          "uploadMs": 39.6,
+          "totalMs": 64.8
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 12.7,
+          "parseMs": 1,
+          "uploadMs": 41.7,
+          "totalMs": 67.4
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 12.7,
+          "parseMs": 1.1,
+          "uploadMs": 45.6,
+          "totalMs": 71.4
+        },
+        {
+          "transferredBytes": 2875232,
+          "fetchMs": 14.3,
+          "parseMs": 0.8,
+          "uploadMs": 40.1,
+          "totalMs": 68.2
+        }
+      ],
+      "animationTrial": {
+        "transferredBytes": 2875232,
+        "fetchMs": 14.7,
+        "parseMs": 1.3,
+        "uploadMs": 47,
+        "totalMs": 77.9
+      },
+      "frameTimesMs": [
+        17.3, 16.4, 16.1, 16.6, 17.2, 16.7, 16, 17, 16.2, 17.7, 15.8, 17, 16.7,
+        16.4, 16.6, 16.6, 17.1, 16.5, 16.7, 16.7, 16.4, 16.5, 17, 16.6, 16.1,
+        17.9, 15.3, 16.8, 16.7, 17.2, 16.6, 17.3, 15.9, 16.8, 16.1, 16.7, 17.4,
+        16, 17.7, 15.6, 16.4, 17.5, 15.5, 17.4, 16.7, 16.3, 18.3, 15.2, 16.7,
+        17.5, 15.7, 16.7, 16.8, 16.8, 16, 16.2, 17.6, 16.5, 15.8, 16.6, 17.2,
+        17.2, 15.8, 17.2, 17.3, 16.6, 17.4, 15.8, 16.7, 15.4, 16.8, 16.8, 17.4,
+        15.8, 17.1, 16.1, 17.6, 17.9, 14.5, 17.8, 16.3, 17, 16.4, 16.4, 17.2,
+        16.2, 17.1, 16.8, 16.8, 16.4, 16.7, 16.7, 17.4, 15.7, 16.1, 16.8, 17.8,
+        15.6, 20.9, 11.8, 17.5, 15.3, 17.8, 17.3, 15.8, 17.2, 16.1, 17.6, 15.8,
+        17, 16.1, 17.1, 15.7, 17.5, 16.3, 15.9, 17.2, 16.8, 17.1, 16.3, 17.1,
+        16.2, 16.7, 17.8, 15.5, 17, 16.4, 17, 16.7, 15.4, 16.5, 16.8, 17.2,
+        16.4, 16.8, 16.2, 17.8, 17, 16.4, 16.9, 16.3, 16, 16.8, 17.2, 16.9,
+        16.9, 16.3, 16.7, 16.8, 16, 17.3, 16.8, 16.2, 17.6, 16.7, 15.8, 17.4,
+        15.2, 17.6, 17, 15.2, 17.5, 16.9, 16.6, 16.8, 16.6, 16.3, 16.8, 17.1,
+        16.4, 19.3, 15, 15.3, 15.9, 17.4, 17.2, 17.2, 16.2, 16.2, 16.4, 17.4,
+        17.2, 16.6, 17.3, 17.9, 12.9, 16.5, 16.9, 17.5, 17.6, 16, 16.6, 17.4,
+        14.6, 16.6, 16.5, 17.6, 17.4, 17.1, 15.5, 16.5, 17.6, 15.6, 16.9, 17.1,
+        16.2, 17.7, 15.7, 17.7, 15.8, 16.1, 17.4, 17, 15.9, 18, 14.7, 16.7,
+        16.5, 17.5, 16.7, 16, 17.8, 17.2, 15.4, 17, 16.1, 17.6, 16.5, 16.3, 17,
+        15.8, 17.8, 16.2, 16.3, 17.6, 16.8, 15.5, 18.2, 15.6, 17.2, 16.1, 16.4,
+        16.9, 16.5, 17.7, 15.8, 16.5, 17.4, 16.5, 16.6, 15.5, 17.6, 16.3, 16.8,
+        16.9, 17.1, 16.2, 15.5, 17.1, 17, 16.7, 17.3, 16.1, 16.7, 16.3, 17.8,
+        16.7, 15.7, 15.4, 16.9, 17.2, 17.9, 17.1, 15.2, 17.9, 15.5, 16.8, 16.5,
+        16.7, 16.8, 15.6, 16.5, 18, 16.2, 16.3, 16.5, 16.5, 18.3, 15.5, 16.4,
+        16.7, 16.6, 17.5, 15.9, 17.1, 16.1, 15.8, 17.6, 16.3, 17.2
+      ],
+      "aggregates": {
+        "medianFetchMs": 12.7,
+        "medianParseMs": 1,
+        "medianUploadMs": 40.7,
+        "medianTotalMs": 67.4,
+        "medianFrameMs": 16.7,
+        "p95FrameMs": 17.8
+      },
+      "label": "conservative simulation; not a physical low-tier device",
+      "cpuThrottlingRate": 4,
+      "rendererMode": "SwiftShader software rendering",
+      "reducedLod": {
+        "method": "deterministic browser triangle sampling",
+        "ratio": 0.5,
+        "productFallback": true,
+        "distribution": "evenly spaced across every primitive"
+      },
+      "physicalDeviceConfirmationRequired": true,
+      "evidenceDigest": "84b279acc0eeaf981aaf6012e05242b30abb5afb62434965188a312929e3255f"
+    }
+  },
+  "runs": [
+    {
+      "id": "run-1",
+      "executionId": "340c9b0e-770f-4bf4-88d2-65120e8bb7aa",
+      "startedAt": "2026-09-08T19:23:41.584Z",
+      "nativeHardware": {
+        "status": "available",
+        "browserVersion": "151.0.7922.34",
+        "headless": true,
+        "geometryBufferBytes": 2753652,
+        "cameraFit": {
+          "min": [
+            -0.3205469250679016, -0.03798341378569603, -0.024905577301979065
+          ],
+          "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+          "center": [
+            7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147
+          ],
+          "clipMargin": 0.9,
+          "scale": 1.1653786694000279,
+          "fullyInsideClipObjectCount": 139,
+          "clipViolationCount": 0
+        },
+        "renderer": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3, Unspecified Version)",
+          "unmasked": true,
+          "evidence": "WEBGL_debug_renderer_info unmasked vendor and renderer"
+        },
+        "jsHeap": {
+          "bytes": 4751336,
+          "unavailableReason": null,
+          "precision": "precise (--enable-precise-memory-info)"
+        },
+        "execution": {
+          "browserLaunchId": "707bd73c-9752-4879-9e11-1a59020a763d",
+          "startedAt": "2026-09-08T19:23:41.584Z",
+          "measurementIsolation": "fresh Playwright BrowserContext, page, and WebGL2 context per measurement",
+          "contexts": [
+            {
+              "id": "d01aa52e-a690-4bbf-9ba1-3be0a058afef",
+              "role": "warmup",
+              "recordedAt": "2026-09-08T19:23:42.576Z",
+              "digest": "ca7552d777ca05d6815c59c017fb8f5ae6ce8ea89356dc24a690d06c4c545cb4"
+            },
+            {
+              "id": "7b0731c5-2a4c-4ca8-9a99-990a1f02d13e",
+              "role": "cold-1",
+              "recordedAt": "2026-09-08T19:23:43.139Z",
+              "digest": "d1876ea2dd46f63f751c3a573dddf2a0288442098bc2e936e6a62cb9c4cbf7a9"
+            },
+            {
+              "id": "d0e3cb04-4602-47af-8279-69e463123b46",
+              "role": "cold-2",
+              "recordedAt": "2026-09-08T19:23:43.706Z",
+              "digest": "464b463f77f5aef899163381bdac88b01b1da40fa909fdc2ebea9e46f5b6adc9"
+            },
+            {
+              "id": "dc3fc441-ab0e-4265-a30a-153ab4ccbdfc",
+              "role": "cold-3",
+              "recordedAt": "2026-09-08T19:23:44.271Z",
+              "digest": "48075af34977a5b5c5fceebb9d0eb77b001b9b08072b21fc7284d885c9aeff25"
+            },
+            {
+              "id": "826833fe-1bfc-4049-a775-52bad95c36d4",
+              "role": "cold-4",
+              "recordedAt": "2026-09-08T19:23:44.839Z",
+              "digest": "66654c323fdc47ee80117ef12f25f9a5620e9202a7799d4c3b14e3bbfbf6be30"
+            },
+            {
+              "id": "87f66b9a-8739-4105-9d47-ea30659bb250",
+              "role": "cold-5",
+              "recordedAt": "2026-09-08T19:23:45.405Z",
+              "digest": "eeeb2a446f60c7bdc72489096cbbbd8bf589dbb794e6642869cd7e9965e8fd4c"
+            },
+            {
+              "id": "a7b6f1aa-f077-4df1-ab14-e2baf2bfff47",
+              "role": "animation",
+              "recordedAt": "2026-09-08T19:23:50.975Z",
+              "digest": "8a91a0395aa108700392a01812a3fdb316a815a18beb14d2e56fcd7b3f978c9e"
+            }
+          ]
+        },
+        "executionProtocol": {
+          "launchArgs": ["--use-angle=metal", "--enable-precise-memory-info"],
+          "cpuThrottling": {
+            "method": "none",
+            "rate": 1
+          },
+          "browserEngine": "Chromium",
+          "playwrightVersion": "1.62.1"
+        },
+        "warmups": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 7.4,
+            "parseMs": 1.4,
+            "uploadMs": 2,
+            "totalMs": 36.9
+          }
+        ],
+        "trials": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 3.8,
+            "parseMs": 0.4,
+            "uploadMs": 0.8,
+            "totalMs": 10.7
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.1,
+            "parseMs": 0.3,
+            "uploadMs": 0.9,
+            "totalMs": 10.5
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.1,
+            "parseMs": 0.3,
+            "uploadMs": 0.7,
+            "totalMs": 10.8
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.2,
+            "parseMs": 0.4,
+            "uploadMs": 1.1,
+            "totalMs": 11.4
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 3.9,
+            "parseMs": 0.3,
+            "uploadMs": 0.6,
+            "totalMs": 10.4
+          }
+        ],
+        "animationTrial": {
+          "transferredBytes": 2875232,
+          "fetchMs": 4.1,
+          "parseMs": 0.3,
+          "uploadMs": 0.9,
+          "totalMs": 10.8
+        },
+        "frameTimesMs": [
+          15.7, 17.6, 15.7, 17.1, 16.2, 17.1, 16.2, 16.6, 16.7, 16.8, 16.6,
+          16.7, 15.6, 17.7, 16.6, 17, 16.3, 16.8, 16.6, 16.7, 16.7, 16.6, 16.7,
+          15.7, 16.6, 17.6, 17.6, 15.8, 17.6, 16.4, 16.6, 16.1, 17.5, 15.8,
+          16.6, 16.8, 17.5, 15.7, 17.6, 17.9, 14.5, 16.6, 21.5, 11.9, 16.6,
+          16.7, 16.6, 17.5, 16, 16.5, 16.9, 16.7, 16.6, 16.6, 16.6, 16.6, 16.8,
+          16.8, 17.5, 15.5, 17.6, 15.8, 16.8, 17.5, 15.8, 16.6, 16.6, 17.5,
+          15.8, 17.1, 16.2, 16.7, 16.8, 16.6, 16.8, 16.4, 15.8, 17.7, 16.5,
+          16.7, 17.2, 16.2, 17.6, 15.7, 16.7, 16.7, 16.8, 16.5, 16.7, 16.4,
+          17.1, 17.3, 15.8, 17, 16.4, 16.7, 16.8, 16.9, 16.1, 16.7, 16.8, 16.6,
+          16.7, 16.6, 16.7, 16.6, 16.8, 16.7, 16.6, 16.6, 16.7, 16.7, 17.6,
+          15.7, 16.9, 16.6, 17.2, 14.7, 16.7, 17.7, 16.8, 16.7, 16.5, 16.6,
+          16.8, 16.5, 16.8, 16.9, 16.4, 16.8, 16.4, 16.7, 16.7, 16.6, 16.6,
+          16.6, 16.7, 16.7, 16.6, 16.8, 16.6, 17.2, 15.7, 16.7, 16.6, 16.7,
+          16.6, 16.7, 16.7, 16.7, 16.8, 16.6, 16.5, 17.7, 15.9, 16.4, 16.9,
+          16.5, 17.5, 15.8, 16.7, 16.5, 16.6, 17.4, 15, 17.6, 16.7, 16.7, 17.5,
+          15.9, 16.6, 16.7, 16.5, 15.8, 16.6, 17.7, 16.6, 16.6, 16.8, 16.5,
+          17.5, 16, 16, 17, 16.6, 16.8, 16.4, 16.8, 16.6, 17.3, 16, 16.7, 16.6,
+          17.5, 15.7, 16.7, 16.7, 16.6, 16.9, 16.5, 16.6, 16.7, 16.6, 16.8,
+          16.7, 16.6, 16.7, 16.7, 16.5, 17.8, 15.6, 16.8, 16.6, 18.3, 14.9,
+          17.7, 15.7, 15.5, 17.7, 16.7, 16.5, 16.7, 16.7, 16.8, 17, 16.1, 17,
+          16.4, 16.7, 17.2, 16, 16.9, 16.8, 16.3, 16.7, 16.6, 16.7, 17.6, 16,
+          16.5, 16.6, 16.6, 16.7, 16.7, 16.7, 16.7, 16.6, 16.7, 16.6, 16.7,
+          16.8, 17.4, 14.8, 17.6, 17.6, 15.8, 17.5, 15.9, 16.6, 16.6, 16.7,
+          16.7, 16.6, 16.6, 16.7, 17.5, 15.8, 16.5, 16.9, 17.5, 15.5, 17, 16.7,
+          16.3, 16.6, 17, 16.3, 16.9, 16.6, 17.4, 15.7, 16.7, 16.7, 17.1, 16.8,
+          16.1, 16.7, 17.6, 14.7, 17.2, 16.2, 17.4, 16.6, 16.8, 16.6, 16.5,
+          16.6, 16.7, 16.6, 16.7
+        ],
+        "aggregates": {
+          "medianFetchMs": 4.1,
+          "medianParseMs": 0.3,
+          "medianUploadMs": 0.8,
+          "medianTotalMs": 10.7,
+          "medianFrameMs": 16.7,
+          "p95FrameMs": 17.6
+        },
+        "evidenceDigest": "37ff2a053f1ef50cab0f6914a28f1e644fa0c9d3025da3da5681d8436ab7d6f9"
+      },
+      "lowPowerSimulation": {
+        "status": "available",
+        "browserVersion": "151.0.7922.34",
+        "headless": true,
+        "geometryBufferBytes": 2088090,
+        "cameraFit": {
+          "min": [
+            -0.3205469250679016, -0.03798341378569603, -0.024905577301979065
+          ],
+          "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+          "center": [
+            7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147
+          ],
+          "clipMargin": 0.9,
+          "scale": 1.1653786694000279,
+          "fullyInsideClipObjectCount": 139,
+          "clipViolationCount": 0
+        },
+        "renderer": {
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "unmasked": true,
+          "evidence": "WEBGL_debug_renderer_info unmasked vendor and renderer"
+        },
+        "jsHeap": {
+          "bytes": 9235497,
+          "unavailableReason": null,
+          "precision": "precise (--enable-precise-memory-info)"
+        },
+        "execution": {
+          "browserLaunchId": "e94bc900-a6a9-40cb-b03e-227acabb3e79",
+          "startedAt": "2026-09-08T19:23:51.009Z",
+          "measurementIsolation": "fresh Playwright BrowserContext, page, and WebGL2 context per measurement",
+          "contexts": [
+            {
+              "id": "a11d9f1b-8635-4779-a85e-f8482013699d",
+              "role": "warmup",
+              "recordedAt": "2026-09-08T19:23:51.738Z",
+              "digest": "713dae2b4619db678dda578f73c6d99b357b348adf411cdac2deb7910c92044a"
+            },
+            {
+              "id": "b2bf69cf-50fd-4036-ac3d-8b9e763d8559",
+              "role": "cold-1",
+              "recordedAt": "2026-09-08T19:23:52.354Z",
+              "digest": "0ec2ade293ea77bed05765132dcd66001e22cf4ed77088a1b8608e7cbe42900a"
+            },
+            {
+              "id": "06995e1f-2495-4b98-8256-b207ae3bca4c",
+              "role": "cold-2",
+              "recordedAt": "2026-09-08T19:23:52.953Z",
+              "digest": "9f29623053ca06a6462cb430d1a478f0f42d77cb43e40ce8c89f8ab3794ce8f9"
+            },
+            {
+              "id": "37655dd1-a488-44d7-9742-1de1a904212e",
+              "role": "cold-3",
+              "recordedAt": "2026-09-08T19:23:53.570Z",
+              "digest": "7a8288442cd5ea3f26556ee0eb43e2b1173fc1c26701a7532790fe4c6c2d4544"
+            },
+            {
+              "id": "1ac2b5a0-bf52-412d-b51c-ef28ac193150",
+              "role": "cold-4",
+              "recordedAt": "2026-09-08T19:23:54.187Z",
+              "digest": "7d9e903af8fb87d7f10182a2ce73202ba4733c47ed428aa6e10e8e8b51f42c6d"
+            },
+            {
+              "id": "e5c4ac43-9b4d-4985-b7f7-f5e98ddb03bd",
+              "role": "cold-5",
+              "recordedAt": "2026-09-08T19:23:54.804Z",
+              "digest": "61bfe476d933930ab2d1788198cc6cbd887cde662c978ec268f60c27afed494d"
+            },
+            {
+              "id": "5aacd796-4b03-423a-bd2e-d53795a828d9",
+              "role": "animation",
+              "recordedAt": "2026-09-08T19:24:00.408Z",
+              "digest": "c70a2c3c9f7350beaf2427c806f6014e8cdff9f77ed036eb46baef8278dd1f5b"
+            }
+          ]
+        },
+        "executionProtocol": {
+          "launchArgs": [
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--enable-precise-memory-info"
+          ],
+          "cpuThrottling": {
+            "method": "Emulation.setCPUThrottlingRate",
+            "rate": 4
+          },
+          "browserEngine": "Chromium",
+          "playwrightVersion": "1.62.1"
+        },
+        "warmups": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 16.3,
+            "parseMs": 2,
+            "uploadMs": 48.6,
+            "totalMs": 112.2
+          }
+        ],
+        "trials": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 12.5,
+            "parseMs": 1,
+            "uploadMs": 43.7,
+            "totalMs": 72.3
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 12.8,
+            "parseMs": 0.5,
+            "uploadMs": 40.7,
+            "totalMs": 67.1
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 13.2,
+            "parseMs": 1.5,
+            "uploadMs": 43.4,
+            "totalMs": 71.3
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 14.5,
+            "parseMs": 1.1,
+            "uploadMs": 41.6,
+            "totalMs": 68.9
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 13.9,
+            "parseMs": 0.9,
+            "uploadMs": 40.7,
+            "totalMs": 68.5
+          }
+        ],
+        "animationTrial": {
+          "transferredBytes": 2875232,
+          "fetchMs": 12.3,
+          "parseMs": 1.5,
+          "uploadMs": 39.8,
+          "totalMs": 65.1
+        },
+        "frameTimesMs": [
+          17.2, 15.7, 17.4, 16.3, 16.9, 16.2, 17.3, 16.3, 17, 16.2, 16.9, 16.8,
+          16.4, 18.3, 15.2, 16.6, 16.8, 16.6, 16.9, 16.4, 17.2, 16.2, 15.6,
+          16.5, 17, 17.2, 16.9, 16.6, 16.4, 17.6, 17.1, 15.9, 17, 15.8, 16.7,
+          17.3, 15.9, 17.5, 16.1, 16.9, 15.9, 17.3, 16.9, 16.7, 16.9, 16.1,
+          16.3, 17, 17.9, 15.4, 17.1, 16.7, 16.1, 17.5, 15.8, 16.8, 17, 16.9,
+          16.1, 16.9, 16.4, 16.5, 16.6, 17.2, 16.1, 17.4, 17.2, 15.2, 17.4,
+          16.7, 15.8, 16.7, 17.6, 16.6, 16.1, 17.1, 17, 16.2, 16.5, 17.3, 16.5,
+          16.5, 16.7, 16.9, 16.6, 16.1, 16.6, 16.8, 16.5, 17.2, 16.5, 17.3,
+          15.8, 17, 15.9, 17.3, 17.3, 16.6, 16.1, 16.7, 17.7, 15.8, 17.6, 15.2,
+          18.2, 15.2, 16.9, 17.6, 16, 16.8, 16.3, 16.8, 15.6, 17.6, 16.8, 16.2,
+          17.3, 16.6, 16.2, 17.7, 16, 16.3, 17.8, 15.7, 16.5, 17.7, 17.1, 16.1,
+          15.2, 17.2, 17.8, 15.6, 17.2, 17.4, 15.2, 16.6, 16.9, 17.7, 15.6,
+          17.7, 16.2, 16.3, 16, 17, 17.3, 16.5, 16.3, 16.8, 16.8, 16.4, 17.3,
+          16.1, 17, 16.2, 17.2, 17.3, 15.3, 17.1, 17.7, 16.1, 16.3, 17.6, 15.3,
+          17.3, 16.6, 16.4, 17, 16.6, 16.7, 17.7, 15.5, 16.6, 17.4, 14.9, 17.5,
+          16.7, 15.9, 17.6, 16.6, 18, 15.4, 16.3, 17.1, 16, 17.4, 16, 17.1,
+          16.8, 17.3, 15.3, 17.2, 17.6, 16.1, 15.6, 17.8, 16.9, 15.4, 18.2,
+          14.9, 17.8, 16.5, 16.6, 17, 16.7, 17.4, 15.6, 16.2, 17.5, 16, 16.7,
+          17.1, 16.4, 16.8, 16.7, 16.3, 17.3, 16.1, 17.5, 15.8, 17.9, 15.4,
+          16.8, 17.2, 15.9, 16.6, 16.8, 16.7, 16.8, 16.6, 16.4, 16.7, 16.9,
+          16.9, 17.9, 14.7, 17, 17.1, 15.8, 16.5, 17.7, 16.5, 16.8, 17.3, 15,
+          17.2, 17.6, 16.2, 15.4, 16.8, 17.9, 16.5, 16.8, 16.4, 16.7, 17.7,
+          15.8, 15.5, 17.7, 16.2, 16.8, 17.1, 16.3, 16.6, 16.6, 16.7, 17.8, 15,
+          16.9, 16.9, 16.7, 17.6, 16.3, 16.1, 16.9, 17.9, 15.8, 16.2, 17, 16.7,
+          16.3, 16.5, 16.9, 16.8, 17.3, 16.1, 16.1, 17.1, 16.4, 16.6, 17.7,
+          14.9, 18, 16, 17.4, 15.6, 16.9, 17.5, 16.1, 16.6, 17.8
+        ],
+        "aggregates": {
+          "medianFetchMs": 13.2,
+          "medianParseMs": 1,
+          "medianUploadMs": 41.6,
+          "medianTotalMs": 68.9,
+          "medianFrameMs": 16.7,
+          "p95FrameMs": 17.8
+        },
+        "label": "conservative simulation; not a physical low-tier device",
+        "cpuThrottlingRate": 4,
+        "rendererMode": "SwiftShader software rendering",
+        "reducedLod": {
+          "method": "deterministic browser triangle sampling",
+          "ratio": 0.5,
+          "productFallback": true,
+          "distribution": "evenly spaced across every primitive"
+        },
+        "physicalDeviceConfirmationRequired": true,
+        "evidenceDigest": "26207e6e45ca9aa35c1f84d3ed42734b2d47d9755f392851461ea6f144265072"
+      }
+    },
+    {
+      "id": "run-2",
+      "executionId": "d13350c6-e908-4275-ac35-cd577e7dbfa3",
+      "startedAt": "2026-09-08T19:24:00.424Z",
+      "nativeHardware": {
+        "status": "available",
+        "browserVersion": "151.0.7922.34",
+        "headless": true,
+        "geometryBufferBytes": 2753652,
+        "cameraFit": {
+          "min": [
+            -0.3205469250679016, -0.03798341378569603, -0.024905577301979065
+          ],
+          "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+          "center": [
+            7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147
+          ],
+          "clipMargin": 0.9,
+          "scale": 1.1653786694000279,
+          "fullyInsideClipObjectCount": 139,
+          "clipViolationCount": 0
+        },
+        "renderer": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M3, Unspecified Version)",
+          "unmasked": true,
+          "evidence": "WEBGL_debug_renderer_info unmasked vendor and renderer"
+        },
+        "jsHeap": {
+          "bytes": 4746452,
+          "unavailableReason": null,
+          "precision": "precise (--enable-precise-memory-info)"
+        },
+        "execution": {
+          "browserLaunchId": "83b8bd37-e9ba-44ad-a6c2-fca20075bd9b",
+          "startedAt": "2026-09-08T19:24:00.424Z",
+          "measurementIsolation": "fresh Playwright BrowserContext, page, and WebGL2 context per measurement",
+          "contexts": [
+            {
+              "id": "a12ffe5f-89a3-4b89-82eb-2e832ec5723f",
+              "role": "warmup",
+              "recordedAt": "2026-09-08T19:24:01.039Z",
+              "digest": "ce0dcf2b7b4bde7cfc8663efc142d9431a799f93b437ddcdbbc3a8555892c677"
+            },
+            {
+              "id": "7f249924-fcb1-4983-9eb0-81d3e22a89a0",
+              "role": "cold-1",
+              "recordedAt": "2026-09-08T19:24:01.607Z",
+              "digest": "a16fbc574a2a0922c7b8583416cd8f38e6b2456105fb19d4aa09aa0fba3fb948"
+            },
+            {
+              "id": "ff6653f5-8b71-432e-a05e-a09c3039ff59",
+              "role": "cold-2",
+              "recordedAt": "2026-09-08T19:24:02.172Z",
+              "digest": "4e7795c566cfa0be106e900e7e9cef5a2c5344c34c40cfc136a15c5ab6a32017"
+            },
+            {
+              "id": "9a90c528-49c3-465b-a6f3-98d2363b00c7",
+              "role": "cold-3",
+              "recordedAt": "2026-09-08T19:24:02.720Z",
+              "digest": "be5bf4ef155feba0898c9bbd96afcac7c7ce6b8eabfced9f545b40f6a2656278"
+            },
+            {
+              "id": "c45ef039-6f06-4534-85de-4c8cf919d324",
+              "role": "cold-4",
+              "recordedAt": "2026-09-08T19:24:03.287Z",
+              "digest": "b1091db843d54a69ffa81966b7b24f0987fc069fb65c06a133799c8d2e6ebfbb"
+            },
+            {
+              "id": "1a8483a7-1eb2-4fb9-82b4-eecc68862878",
+              "role": "cold-5",
+              "recordedAt": "2026-09-08T19:24:03.837Z",
+              "digest": "68e3a3c9bd340d7bca3fb5c428e5aa202bd83043e1c4ae1eef1fcd245423b1d1"
+            },
+            {
+              "id": "ea034bb5-8b78-4bd5-88c8-917f0ba6e863",
+              "role": "animation",
+              "recordedAt": "2026-09-08T19:24:09.409Z",
+              "digest": "082c05482dd9595be57b871a7b3302e262498737296336ddd97bc21a78d31b19"
+            }
+          ]
+        },
+        "executionProtocol": {
+          "launchArgs": ["--use-angle=metal", "--enable-precise-memory-info"],
+          "cpuThrottling": {
+            "method": "none",
+            "rate": 1
+          },
+          "browserEngine": "Chromium",
+          "playwrightVersion": "1.62.1"
+        },
+        "warmups": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.5,
+            "parseMs": 0.5,
+            "uploadMs": 0.9,
+            "totalMs": 18.1
+          }
+        ],
+        "trials": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.1,
+            "parseMs": 0.4,
+            "uploadMs": 0.9,
+            "totalMs": 10.8
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 3.9,
+            "parseMs": 0.4,
+            "uploadMs": 1,
+            "totalMs": 11.2
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.4,
+            "parseMs": 0.4,
+            "uploadMs": 1.2,
+            "totalMs": 13.2
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 6.2,
+            "parseMs": 0.4,
+            "uploadMs": 1.4,
+            "totalMs": 32.2
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 4.2,
+            "parseMs": 0.3,
+            "uploadMs": 1,
+            "totalMs": 11.5
+          }
+        ],
+        "animationTrial": {
+          "transferredBytes": 2875232,
+          "fetchMs": 4.5,
+          "parseMs": 0.4,
+          "uploadMs": 1,
+          "totalMs": 11.7
+        },
+        "frameTimesMs": [
+          16.7, 16.6, 16.4, 16.6, 17.6, 15.7, 16.8, 16.7, 16.7, 16.5, 16.6,
+          16.7, 16.7, 16.6, 16.7, 16.6, 16.6, 16.7, 16.7, 16.7, 16.5, 16.7,
+          16.7, 16.8, 16.5, 16.7, 16.7, 16.7, 17.5, 15.6, 17, 17.3, 15.8, 17.4,
+          15.9, 16.9, 16.8, 16.1, 17.2, 15.9, 16.9, 16.8, 16.5, 16.6, 16.8,
+          16.7, 17.4, 15.8, 16.6, 16.6, 16.8, 16.5, 17.7, 15, 16.9, 17.4, 16.4,
+          17, 16.4, 17.5, 14.9, 17.5, 16.8, 17.4, 15.7, 16.8, 16.6, 16.8, 16.6,
+          16.7, 16.6, 16.7, 16.6, 16.6, 17.5, 15.9, 16.6, 16.6, 16.8, 16.6,
+          16.6, 17, 16.5, 16.8, 17.3, 15, 16.9, 17.3, 16.7, 16.6, 16.6, 16.6,
+          16.7, 17.6, 15.8, 17.4, 15.7, 16.6, 16.6, 16.7, 16.9, 16.6, 16.8,
+          16.8, 16.6, 16.8, 16.7, 16.6, 16.7, 16.6, 16.6, 16.6, 16.8, 16.7,
+          16.6, 16.6, 16.7, 16.9, 16.6, 16.7, 17.4, 16, 16.6, 16.5, 16.7, 16.6,
+          16.7, 16.6, 16.6, 17.3, 16, 16.8, 17.4, 15, 17.5, 16.6, 16.8, 16.3,
+          17.7, 15.4, 17, 16.7, 16.6, 16.8, 16.6, 16.7, 16.6, 17.4, 14.8, 16.8,
+          16.9, 17.5, 16.6, 16.9, 16.7, 16.7, 16.5, 16.4, 16.7, 17.4, 15.7,
+          16.7, 17, 16.5, 16.6, 16.7, 16.6, 16.6, 16.8, 16.7, 16.8, 16.6, 17.3,
+          16, 17.5, 15.9, 17.5, 15.7, 16.6, 16.8, 16.7, 16.6, 16.6, 16.6, 17,
+          16.2, 16.5, 16.6, 16.7, 16.6, 16.7, 16.7, 16.6, 16.6, 16.8, 16.6,
+          16.9, 16.9, 16.9, 16.4, 17.7, 15.8, 16.7, 16.8, 16.7, 15.6, 17.4,
+          16.6, 16.7, 16.7, 16.7, 16.4, 16.7, 17.6, 16.1, 16.4, 17.5, 15.8,
+          16.8, 16.7, 16.6, 16.9, 16.4, 17.5, 15.1, 16.5, 17.5, 17.6, 15.6,
+          16.7, 16.8, 16.6, 16.6, 16.6, 16.7, 16.7, 16.8, 16.8, 16.6, 16.6,
+          16.6, 16.7, 17, 16.3, 16.7, 16.7, 16.6, 16.6, 16.8, 16.6, 16.7, 16.6,
+          16.8, 16.6, 16.6, 16.7, 16.7, 16.4, 16.7, 16.6, 16.7, 16.7, 16.5,
+          16.7, 16.6, 16.8, 16.6, 16.6, 16.6, 16.7, 16.5, 16.8, 16.8, 16.7,
+          16.6, 16.8, 16.6, 16.5, 17.8, 15.8, 16.9, 16.4, 17.3, 15.7, 16.7,
+          16.6, 16.7, 16.7, 16.6, 16.7, 17.6, 15.5, 17.1, 16.4, 16.7, 17, 16.3,
+          16.4, 16.9, 16.7
+        ],
+        "aggregates": {
+          "medianFetchMs": 4.2,
+          "medianParseMs": 0.4,
+          "medianUploadMs": 1,
+          "medianTotalMs": 11.5,
+          "medianFrameMs": 16.7,
+          "p95FrameMs": 17.5
+        },
+        "evidenceDigest": "71375c26a921fb9554cd05277f49e41318b3a6a0b91c8ab3eb280b9463aa09f7"
+      },
+      "lowPowerSimulation": {
+        "status": "available",
+        "browserVersion": "151.0.7922.34",
+        "headless": true,
+        "geometryBufferBytes": 2088090,
+        "cameraFit": {
+          "min": [
+            -0.3205469250679016, -0.03798341378569603, -0.024905577301979065
+          ],
+          "max": [0.32054707407951355, 1.5065789222717285, 0.21879054605960846],
+          "center": [
+            7.450580596923828e-8, 0.7342977542430162, 0.0969424843788147
+          ],
+          "clipMargin": 0.9,
+          "scale": 1.1653786694000279,
+          "fullyInsideClipObjectCount": 139,
+          "clipViolationCount": 0
+        },
+        "renderer": {
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "unmasked": true,
+          "evidence": "WEBGL_debug_renderer_info unmasked vendor and renderer"
+        },
+        "jsHeap": {
+          "bytes": 9020489,
+          "unavailableReason": null,
+          "precision": "precise (--enable-precise-memory-info)"
+        },
+        "execution": {
+          "browserLaunchId": "5382edd0-ca45-4128-bd16-ce4772a1d8c1",
+          "startedAt": "2026-09-08T19:24:09.434Z",
+          "measurementIsolation": "fresh Playwright BrowserContext, page, and WebGL2 context per measurement",
+          "contexts": [
+            {
+              "id": "4ea28c2c-b6d9-49e4-bdc0-92eb904af802",
+              "role": "warmup",
+              "recordedAt": "2026-09-08T19:24:10.137Z",
+              "digest": "5cd52b4e25858689fff17b614312c49333a3f8aff72abec35a669802b975bfb1"
+            },
+            {
+              "id": "cc4a3fac-0f62-40dd-aadc-d8c7079b2228",
+              "role": "cold-1",
+              "recordedAt": "2026-09-08T19:24:10.737Z",
+              "digest": "fae6aa5ee96dfc8a0f5a9574962ee43bb088fd63a38349f96e0d4466b2af4d79"
+            },
+            {
+              "id": "0eaee00c-d5fe-407a-8cf3-3e552266c494",
+              "role": "cold-2",
+              "recordedAt": "2026-09-08T19:24:11.337Z",
+              "digest": "21721a0367117efc8b2d2fd4d90c57287075641fef606e91b0f28592b6a1640c"
+            },
+            {
+              "id": "993e2d58-d37d-4816-bd9b-0cfbd3c7454a",
+              "role": "cold-3",
+              "recordedAt": "2026-09-08T19:24:11.936Z",
+              "digest": "a7a14f4011ff95226411448dfdaaac3bbb50494103741ef03f7d07ed155f7ebf"
+            },
+            {
+              "id": "3018ede5-052c-40fe-bdc4-a4bd552ced62",
+              "role": "cold-4",
+              "recordedAt": "2026-09-08T19:24:12.536Z",
+              "digest": "794aa89ff159f487ca96e871f7575ad6b567f8442397883aea3ecd8689f24ab8"
+            },
+            {
+              "id": "e746cbcc-78f0-4646-9556-be6a67434de5",
+              "role": "cold-5",
+              "recordedAt": "2026-09-08T19:24:13.138Z",
+              "digest": "befcfe532efbb28cfa94ae50989c14698aae777821afa911aba9a982a2e0d837"
+            },
+            {
+              "id": "97614b27-245e-4ed1-be65-81bdd5ec6868",
+              "role": "animation",
+              "recordedAt": "2026-09-08T19:24:18.776Z",
+              "digest": "8bef00cbe8fdcea8c1400cef6b0e355c08eb7a84a8b56eb244dadf31299de2fd"
+            }
+          ]
+        },
+        "executionProtocol": {
+          "launchArgs": [
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
+            "--enable-unsafe-swiftshader",
+            "--enable-precise-memory-info"
+          ],
+          "cpuThrottling": {
+            "method": "Emulation.setCPUThrottlingRate",
+            "rate": 4
+          },
+          "browserEngine": "Chromium",
+          "playwrightVersion": "1.62.1"
+        },
+        "warmups": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 13.2,
+            "parseMs": 2,
+            "uploadMs": 39.9,
+            "totalMs": 69.5
+          }
+        ],
+        "trials": [
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 12.8,
+            "parseMs": 0.9,
+            "uploadMs": 40.7,
+            "totalMs": 66.3
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 12,
+            "parseMs": 1.1,
+            "uploadMs": 39.6,
+            "totalMs": 64.8
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 12.7,
+            "parseMs": 1,
+            "uploadMs": 41.7,
+            "totalMs": 67.4
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 12.7,
+            "parseMs": 1.1,
+            "uploadMs": 45.6,
+            "totalMs": 71.4
+          },
+          {
+            "transferredBytes": 2875232,
+            "fetchMs": 14.3,
+            "parseMs": 0.8,
+            "uploadMs": 40.1,
+            "totalMs": 68.2
+          }
+        ],
+        "animationTrial": {
+          "transferredBytes": 2875232,
+          "fetchMs": 14.7,
+          "parseMs": 1.3,
+          "uploadMs": 47,
+          "totalMs": 77.9
+        },
+        "frameTimesMs": [
+          17.3, 16.4, 16.1, 16.6, 17.2, 16.7, 16, 17, 16.2, 17.7, 15.8, 17,
+          16.7, 16.4, 16.6, 16.6, 17.1, 16.5, 16.7, 16.7, 16.4, 16.5, 17, 16.6,
+          16.1, 17.9, 15.3, 16.8, 16.7, 17.2, 16.6, 17.3, 15.9, 16.8, 16.1,
+          16.7, 17.4, 16, 17.7, 15.6, 16.4, 17.5, 15.5, 17.4, 16.7, 16.3, 18.3,
+          15.2, 16.7, 17.5, 15.7, 16.7, 16.8, 16.8, 16, 16.2, 17.6, 16.5, 15.8,
+          16.6, 17.2, 17.2, 15.8, 17.2, 17.3, 16.6, 17.4, 15.8, 16.7, 15.4,
+          16.8, 16.8, 17.4, 15.8, 17.1, 16.1, 17.6, 17.9, 14.5, 17.8, 16.3, 17,
+          16.4, 16.4, 17.2, 16.2, 17.1, 16.8, 16.8, 16.4, 16.7, 16.7, 17.4,
+          15.7, 16.1, 16.8, 17.8, 15.6, 20.9, 11.8, 17.5, 15.3, 17.8, 17.3,
+          15.8, 17.2, 16.1, 17.6, 15.8, 17, 16.1, 17.1, 15.7, 17.5, 16.3, 15.9,
+          17.2, 16.8, 17.1, 16.3, 17.1, 16.2, 16.7, 17.8, 15.5, 17, 16.4, 17,
+          16.7, 15.4, 16.5, 16.8, 17.2, 16.4, 16.8, 16.2, 17.8, 17, 16.4, 16.9,
+          16.3, 16, 16.8, 17.2, 16.9, 16.9, 16.3, 16.7, 16.8, 16, 17.3, 16.8,
+          16.2, 17.6, 16.7, 15.8, 17.4, 15.2, 17.6, 17, 15.2, 17.5, 16.9, 16.6,
+          16.8, 16.6, 16.3, 16.8, 17.1, 16.4, 19.3, 15, 15.3, 15.9, 17.4, 17.2,
+          17.2, 16.2, 16.2, 16.4, 17.4, 17.2, 16.6, 17.3, 17.9, 12.9, 16.5,
+          16.9, 17.5, 17.6, 16, 16.6, 17.4, 14.6, 16.6, 16.5, 17.6, 17.4, 17.1,
+          15.5, 16.5, 17.6, 15.6, 16.9, 17.1, 16.2, 17.7, 15.7, 17.7, 15.8,
+          16.1, 17.4, 17, 15.9, 18, 14.7, 16.7, 16.5, 17.5, 16.7, 16, 17.8,
+          17.2, 15.4, 17, 16.1, 17.6, 16.5, 16.3, 17, 15.8, 17.8, 16.2, 16.3,
+          17.6, 16.8, 15.5, 18.2, 15.6, 17.2, 16.1, 16.4, 16.9, 16.5, 17.7,
+          15.8, 16.5, 17.4, 16.5, 16.6, 15.5, 17.6, 16.3, 16.8, 16.9, 17.1,
+          16.2, 15.5, 17.1, 17, 16.7, 17.3, 16.1, 16.7, 16.3, 17.8, 16.7, 15.7,
+          15.4, 16.9, 17.2, 17.9, 17.1, 15.2, 17.9, 15.5, 16.8, 16.5, 16.7,
+          16.8, 15.6, 16.5, 18, 16.2, 16.3, 16.5, 16.5, 18.3, 15.5, 16.4, 16.7,
+          16.6, 17.5, 15.9, 17.1, 16.1, 15.8, 17.6, 16.3, 17.2
+        ],
+        "aggregates": {
+          "medianFetchMs": 12.7,
+          "medianParseMs": 1,
+          "medianUploadMs": 40.7,
+          "medianTotalMs": 67.4,
+          "medianFrameMs": 16.7,
+          "p95FrameMs": 17.8
+        },
+        "label": "conservative simulation; not a physical low-tier device",
+        "cpuThrottlingRate": 4,
+        "rendererMode": "SwiftShader software rendering",
+        "reducedLod": {
+          "method": "deterministic browser triangle sampling",
+          "ratio": 0.5,
+          "productFallback": true,
+          "distribution": "evenly spaced across every primitive"
+        },
+        "physicalDeviceConfirmationRequired": true,
+        "evidenceDigest": "84b279acc0eeaf981aaf6012e05242b30abb5afb62434965188a312929e3255f"
+      }
+    }
+  ],
+  "variance": {
+    "nativeMedianFrameMsDelta": 0,
+    "simulatedMedianFrameMsDelta": 0,
+    "unavailableReason": null,
+    "materialDifferenceThresholdMs": 2,
+    "materialDifferenceObserved": false
+  },
+  "performanceAssessment": {
+    "native": {
+      "status": "measured",
+      "observedMedianFps": 59.88,
+      "passes": true,
+      "reason": null
+    },
+    "simulated": {
+      "status": "measured",
+      "observedMedianFps": 59.88,
+      "passes": true,
+      "reason": null
+    }
+  },
+  "browserPerformanceComplete": true
+}

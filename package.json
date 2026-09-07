@@ -31,7 +31,8 @@
     "assets:benchmark": "node scripts/assets/benchmark.mjs",
     "assets:coverage": "node scripts/assets/coverage.mjs",
     "assets:mesh-map": "node scripts/assets/mesh-map.mjs",
-    "assets:conversion:contract": "vitest run tests/unit/asset-conversion.test.ts"
+    "assets:conversion:contract": "vitest run tests/unit/asset-conversion.test.ts",
+    "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
