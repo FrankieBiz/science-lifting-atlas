@@ -1175,3 +1175,232 @@ describe('asset spike scorecard', () => {
     );
   });
 });
+
+describe('BodyParts3D exercise-media feasibility evidence', () => {
+  async function feasibilityRecord() {
+    return JSON.parse(
+      await readFile(
+        new URL(
+          '../../docs/licenses/bodyparts3d-feasibility.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    );
+  }
+
+  it('separates source facts, direct measurements, and reviewer judgments', async () => {
+    const record = await feasibilityRecord();
+
+    expect(record.schemaVersion).toBe(1);
+    expect(record.candidate).toBe('path-c-bodyparts3d');
+    expect(Object.keys(record.evidence)).toEqual([
+      'sourceFacts',
+      'directMeasurements',
+      'reviewerJudgments',
+    ]);
+  });
+
+  it('records UV, material, topology, coordinate, and origin evidence without inference', async () => {
+    const { sourceFacts, directMeasurements } = (await feasibilityRecord())
+      .evidence;
+
+    expect(sourceFacts.selectedSourceMeshes).toMatchObject({
+      count: 139,
+      uvCoordinateMeshes: 0,
+      normalMeshes: 139,
+      materialUseMeshes: 139,
+      materialLibraryMeshes: 0,
+    });
+    expect(directMeasurements.optimizedArtifact).toMatchObject({
+      meshCount: 139,
+      materialCount: 1,
+      textureCount: 0,
+      imageCount: 0,
+      texcoordPrimitiveCount: 0,
+    });
+    expect(directMeasurements.materialOutcome.status).toBe(
+      'replacement-material-assigned-not-source-material-survival',
+    );
+    expect(directMeasurements.topology).toMatchObject({
+      boundaryEdges: 74524,
+      degenerateFaces: 0,
+      nonManifoldEdges: 0,
+      sameDirectionSharedEdges: 0,
+      closedMeshes: 0,
+      openMeshesWithInconclusiveGlobalWinding: 139,
+    });
+    expect(directMeasurements.coordinateAndOrigin).toMatchObject({
+      sourceUnits: 'millimetres',
+      outputUnits: 'metres',
+      scale: 0.001,
+      origin: 'world-origin-preserved',
+      maximumObservedBrowserTransformDeltaMetres: 4.98e-10,
+    });
+  });
+
+  it('records that no skeleton, skin, UV texture, rig, or source animation exists', async () => {
+    const { directMeasurements, reviewerJudgments } = (
+      await feasibilityRecord()
+    ).evidence;
+
+    expect(directMeasurements.optimizedArtifact).toMatchObject({
+      skinCount: 0,
+      jointCount: 0,
+      animationCount: 0,
+    });
+    expect(reviewerJudgments.shortRiggedLoop).toMatchObject({
+      supportedFromCurrentArtifact: false,
+      requiredFallback: 'authored-vector-or-staged-diagram',
+    });
+  });
+
+  it('proves deterministic still and accessible static-fallback feasibility while blocking unapproved technique', async () => {
+    const { directMeasurements, reviewerJudgments } = (
+      await feasibilityRecord()
+    ).evidence;
+
+    expect(directMeasurements.deterministicStill).toMatchObject({
+      cleanRuns: 2,
+      byteIdentical: true,
+      posterBytes: 11906,
+      posterCeilingBytes: 200000,
+      status: 'feasible',
+    });
+    expect(directMeasurements.accessibleFallback).toMatchObject({
+      format: 'static-joint-path-diagram-plus-text',
+      loadWithoutWebgl: true,
+      status: 'tooling-feasible-content-blocked',
+    });
+    expect(reviewerJudgments.techniqueAccuracy).toMatchObject({
+      status: 'blocked',
+      checkpointOwner: 'Claude Research',
+      fabricatedMovementAllowed: false,
+    });
+  });
+
+  it('binds derived-media rights and attribution to every allowed output', async () => {
+    const rights = (await feasibilityRecord()).evidence.sourceFacts
+      .derivedMediaRights;
+
+    expect(rights.primaryTerms).toMatchObject({
+      license: 'CC BY 4.0 International',
+      modification: 'permitted',
+      redistribution: 'permitted',
+      commercialUse: 'permitted',
+    });
+    expect(rights.historicalEmbeddedNotice).toMatchObject({
+      license: 'CC BY-SA 2.1 Japan',
+      handling: 'preserved-and-applied-conservatively',
+    });
+    expect(rights.outputs).toEqual([
+      'optimized-glb',
+      'poster',
+      'later-staged-still',
+      'later-authored-loop',
+    ]);
+    expect(rights.requiredAttribution).toBe(
+      'BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International',
+    );
+  });
+
+  it('recomputes repeated clean-run throughput and derived/source byte ratios', async () => {
+    const throughput = (await feasibilityRecord()).evidence.directMeasurements
+      .productionThroughput;
+
+    expect(throughput.cleanRuns).toHaveLength(2);
+    expect(
+      new Set(throughput.cleanRuns.map((run: { runId: string }) => run.runId))
+        .size,
+    ).toBe(2);
+    for (const run of throughput.cleanRuns) {
+      expect(run.objectCount).toBe(139);
+      expect(run.meshesPerMinute).toBeCloseTo(
+        (run.objectCount * 60) / run.conversionSeconds,
+        6,
+      );
+      expect(run.glbSha256).toBe(
+        'b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7',
+      );
+      expect(run.posterSha256).toBe(
+        'd7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb',
+      );
+    }
+    expect(throughput.sourceBytes).toBe(54495284);
+    expect(throughput.derivedBytes).toBe(2874932 + 11906);
+    expect(throughput.derivedToSourceByteRatio).toBeCloseTo(
+      throughput.derivedBytes / throughput.sourceBytes,
+      9,
+    );
+    expect(throughput.operatorStepsPerRun).toBe(1);
+    expect(throughput.manualEditingSteps).toBe(0);
+    expect(throughput.forecastClaimed).toBe(false);
+  });
+
+  it('freezes poster and loop budgets plus load-on-intent policy', async () => {
+    const budgets = (await feasibilityRecord()).evidence.directMeasurements
+      .mediaBudgets;
+
+    expect(budgets).toEqual({
+      posterTargetBytes: 200000,
+      loopTargetBytes: 1500000,
+      loopHardCeilingBytes: 3000000,
+      loopsLoadOnIntent: true,
+      measuredLoopBytes: null,
+      measuredLoopUnavailableReason:
+        'Current artifact has no rig, joints, skin, or animation.',
+    });
+  });
+
+  it('records exactly one inspected adult option without inventing sex or inclusive variants', async () => {
+    const presentation = (await feasibilityRecord()).evidence.directMeasurements
+      .presentationInspection;
+
+    expect(presentation.completed).toBe(true);
+    expect(presentation.adultPresentationOptions).toEqual([
+      {
+        id: 'adult-anatomy-unspecified',
+        label:
+          'Adult anatomy; sex and gender not established by inspected evidence',
+        evidenceRef:
+          'docs/licenses/bodyparts3d-feasibility.json#presentationInspection',
+        parity: {
+          requiredCoverage: true,
+          mapping: true,
+          separability: true,
+          artifactChecks: true,
+        },
+      },
+    ]);
+    expect(presentation.maleFemaleOrInclusiveVariantsObserved).toBe(0);
+  });
+
+  it('binds the measured artifacts and all seven rubric criteria to inspectable evidence', async () => {
+    const record = await feasibilityRecord();
+    const artifactRoot = new URL('../../', import.meta.url);
+    const digest = async (path: string) =>
+      createHash('sha256')
+        .update(await readFile(new URL(path, artifactRoot)))
+        .digest('hex');
+
+    expect(
+      await digest('assets/derived/bodyparts3d/sbla005-representative.glb'),
+    ).toBe(record.evidence.directMeasurements.optimizedArtifact.sha256);
+    expect(await digest('assets/derived/bodyparts3d/sbla005-poster.webp')).toBe(
+      record.evidence.directMeasurements.deterministicStill.sha256,
+    );
+    expect(Object.keys(record.traceability.criterionEvidence)).toEqual(
+      PLAN_WEIGHTS.map(([id]) => id),
+    );
+    for (const references of Object.values(
+      record.traceability.criterionEvidence,
+    ) as string[][]) {
+      expect(references.length).toBeGreaterThan(0);
+      for (const reference of references) {
+        expect(
+          (await readFile(new URL(reference, artifactRoot))).length,
+        ).toBeGreaterThan(0);
+      }
+    }
+  });
+});

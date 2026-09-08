@@ -121,6 +121,56 @@ Generated photoreal human video is excluded by §11.9. Generative image models
 must not be used to fabricate anatomical structures presented as accurate anatomy
 (§8.4).
 
+### SBLA-005 measured feasibility — BodyParts3D
+
+The machine-readable evidence is
+[`bodyparts3d-feasibility.json`](bodyparts3d-feasibility.json). It separates
+source facts, direct measurements, and reviewer judgments so an unavailable
+capability cannot be mistaken for a positive result.
+
+- **Static anatomy and staged-still tooling:** feasible. Two new clean runs of
+  the pinned Blender 4.5.13 pipeline produced the same 2,874,932-byte GLB and
+  the same 11,906-byte WebP poster. The poster is well below the 200 KB target.
+  This proves the deterministic rendering path, not an approved exercise pose.
+- **Throughput observation:** the two clean 139-mesh runs took 12.571 and 8.084
+  seconds: 663.431708 and 1,031.667491 meshes/minute. The GLB plus poster is
+  2,886,838 bytes from 54,495,284 selected source bytes, a 0.052974089
+  derived/source byte ratio. Each run was one non-interactive operator command
+  with zero manual editing. These are local measurements, not a production
+  forecast.
+- **Materials and UVs:** all 139 selected OBJ files contain normals and a
+  material-use name, but none contains UV coordinates or a material-library
+  reference. The GLB contains one deterministic neutral review material, zero
+  textures, zero images, and zero texture-coordinate primitives. This is a
+  replacement material, not proof that source appearance survived.
+- **Topology and coordinates:** the decoded GLB has zero degenerate faces, zero
+  non-manifold edges, and zero same-direction shared edges. All 139 meshes are
+  open, with 74,524 boundary edges, so global inward/outward winding remains
+  inconclusive. World origin is preserved; millimetres are uniformly converted
+  to metres; the maximum measured browser-transform difference is
+  0.000000000498 m against a 0.0000005 m tolerance.
+- **Rigged loops:** unsupported by the current source and artifact. The GLB has
+  zero skins, joints, and animations, and the inspected source has no observed
+  rig. Exercise media must use authored vector or staged diagrams unless a
+  separately licensed and validated rig is added. Any later loop must target
+  1.5 MB, remain below 3 MB, and load only on intent.
+- **Accessibility:** a static joint-path diagram plus equivalent text can work
+  without WebGL. Exercise-specific start/midpoint/end, joint path,
+  range-of-motion, and common-error checkpoints are still blocked until Claude
+  Research supplies cited, approved checkpoints. No movement is inferred from
+  the mesh.
+- **Presentation:** exactly one adult muscle-geometry presentation was
+  inspected. The evidence does not establish its sex or gender, and no second
+  male/female, body-shape, or broader inclusive variant was observed. The
+  scorecard must not claim presentation choices that are absent.
+
+The current CC BY 4.0 terms permit adaptation and redistribution of the GLB,
+poster, staged stills, and any later authored loop with attribution. Because the
+downloaded OBJ headers retain a historical CC BY-SA 2.1 Japan notice, the
+project conservatively preserves and applies both notices unless later legal
+review resolves that boundary. Every derived-media record must carry the
+required BodyParts3D attribution shown above.
+
 ## Handling rules in force
 
 - §8.4: "Store original purchased/open assets outside the public repository
@@ -136,9 +186,12 @@ must not be used to fabricate anatomical structures presented as accurate anatom
 
 ## What has not been done
 
-- No complete candidate asset has been selected or purchased. Only the 105,005
-  byte FJ1446 sample has been checked in.
-- No technical criterion has been scored. The repeatable browser benchmark is an
-  observed baseline; SBLA-005 owns candidate-level scoring.
+- No candidate asset has been selected or purchased. The full BodyParts3D
+  archives were acquired and checksum-verified outside Git for the SBLA-005
+  spike; only authorized, budget-compliant derivatives and compact evidence are
+  checked in.
+- No final technical scorecard has been accepted yet. Mapping, conversion,
+  browser-performance, and presentation evidence now exist; SBLA-005 Task 7
+  owns the actual scoring and weighted total.
 - No legal advice has been obtained on the Z-Anatomy NonCommercial components,
   its unclear reference-model boundary, or the share-alike boundary.

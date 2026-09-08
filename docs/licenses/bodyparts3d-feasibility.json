@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "candidate": "path-c-bodyparts3d",
+  "recordedOn": "2026-09-08",
+  "scope": "SBLA-005 Task 6 exercise-media and presentation feasibility; this record does not select an asset or approve exercise technique.",
+  "evidence": {
+    "sourceFacts": {
+      "selectedSourceMeshes": {
+        "count": 139,
+        "uvCoordinateMeshes": 0,
+        "normalMeshes": 139,
+        "materialUseMeshes": 139,
+        "materialLibraryMeshes": 0,
+        "method": "The 139 unique checksum-selected OBJ files in the accepted mapping were scanned for vt, vn, usemtl, and mtllib records.",
+        "mappingManifest": "docs/licenses/bodyparts3d-mesh-mapping.json",
+        "mappingManifestSha256": "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196"
+      },
+      "sourcePresentation": {
+        "observedOptions": 1,
+        "description": "The acquired representative source resolves to one mutually registered adult muscle-geometry presentation. No second sex, gender, body-shape, or inclusive presentation variant was observed in the selected source meshes.",
+        "sexOrGenderClaim": null,
+        "sexOrGenderUnavailableReason": "The inspected mapping, OBJ identity headers, optimized muscle-only artifact, and poster do not establish a sex or gender label for this representative presentation."
+      },
+      "derivedMediaRights": {
+        "primaryTerms": {
+          "license": "CC BY 4.0 International",
+          "sourceUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+          "accessedOn": "2026-09-05",
+          "modification": "permitted",
+          "redistribution": "permitted",
+          "commercialUse": "permitted",
+          "condition": "attribution"
+        },
+        "historicalEmbeddedNotice": {
+          "license": "CC BY-SA 2.1 Japan",
+          "observedIn": "current archive OBJ headers",
+          "handling": "preserved-and-applied-conservatively",
+          "condition": "attribution-and-share-alike"
+        },
+        "rightsConclusion": "The accepted current terms permit adaptation and redistribution of the optimized GLB, poster, staged stills, and an authored loop. Because selected OBJ headers retain an older share-alike notice, derived media must preserve the attribution and be handled under both notices unless later legal review resolves the historical boundary.",
+        "outputs": [
+          "optimized-glb",
+          "poster",
+          "later-staged-still",
+          "later-authored-loop"
+        ],
+        "requiredAttribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+        "licenseRecord": "docs/licenses/anatomy-assets.md#path-c--bodyparts3d--anatomography"
+      }
+    },
+    "directMeasurements": {
+      "optimizedArtifact": {
+        "path": "assets/derived/bodyparts3d/sbla005-representative.glb",
+        "sha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
+        "bytes": 2874932,
+        "nodeCount": 139,
+        "meshCount": 139,
+        "materialCount": 1,
+        "textureCount": 0,
+        "imageCount": 0,
+        "texcoordPrimitiveCount": 0,
+        "skinCount": 0,
+        "jointCount": 0,
+        "animationCount": 0,
+        "inspectionMethod": "The authenticated GLB JSON chunk was decoded and its nodes, meshes, materials, textures, images, TEXCOORD attributes, skins, joints, and animations counted."
+      },
+      "materialOutcome": {
+        "status": "replacement-material-assigned-not-source-material-survival",
+        "sourceUvCoordinatesAvailable": false,
+        "sourceMaterialLibrariesAvailable": false,
+        "assignedMaterial": "SBLA_Neutral_Review",
+        "assignedToSelectableMeshes": 139,
+        "limitation": "There are no source UV coordinates, texture images, or resolved material libraries to preserve; visual-quality scoring can assess the deterministic neutral review material only."
+      },
+      "topology": {
+        "method": "decoded-glb-local-winding-plus-closed-signed-volume",
+        "boundaryEdges": 74524,
+        "degenerateFaces": 0,
+        "nonManifoldEdges": 0,
+        "sameDirectionSharedEdges": 0,
+        "closedMeshes": 0,
+        "openMeshesWithInconclusiveGlobalWinding": 139,
+        "judgmentBoundary": "Boundary edges prove that all meshes are open; they do not by themselves prove visible holes. Global inward/outward orientation is unavailable for open meshes."
+      },
+      "coordinateAndOrigin": {
+        "sourceUnits": "millimetres",
+        "outputUnits": "metres",
+        "scale": 0.001,
+        "origin": "world-origin-preserved",
+        "sourceToBlenderAxes": "[x, y, z]",
+        "blenderToBrowserAxes": "[x, z, -y]",
+        "maximumObservedBrowserTransformDeltaMetres": 4.98e-10,
+        "toleranceMetres": 5e-7,
+        "sceneBoundsMetres": {
+          "min": [-0.320546925, -0.218790546, -0.037983414],
+          "max": [0.320547074, 0.024905577, 1.506578922]
+        }
+      },
+      "deterministicStill": {
+        "status": "feasible",
+        "path": "assets/derived/bodyparts3d/sbla005-poster.webp",
+        "sha256": "d7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb",
+        "posterBytes": 11906,
+        "posterCeilingBytes": 200000,
+        "cleanRuns": 2,
+        "byteIdentical": true,
+        "fixedCameraAndLights": true,
+        "exercisePoseAuthored": false,
+        "limitation": "This proves deterministic rendering of the static representative anatomy scene, not an anatomically approved exercise pose."
+      },
+      "accessibleFallback": {
+        "format": "static-joint-path-diagram-plus-text",
+        "loadWithoutWebgl": true,
+        "status": "tooling-feasible-content-blocked",
+        "toolingEvidence": "The deterministic poster path provides a static raster fallback; an authored SVG joint path and equivalent text can be delivered without WebGL.",
+        "contentBlock": "Exercise-specific joint checkpoints and coaching text must be approved by Claude Research before a technique diagram is produced."
+      },
+      "productionThroughput": {
+        "measurementScope": "Two new clean baseline-only executions of the pinned Blender 4.5.13 pipeline on the accepted 139-mesh source set; timings are observations, not a production forecast.",
+        "sourceBytes": 54495284,
+        "derivedBytes": 2886838,
+        "derivedToSourceByteRatio": 0.052974089,
+        "glbToSourceByteRatio": 0.052755611,
+        "operatorStepsPerRun": 1,
+        "manualEditingSteps": 0,
+        "invocation": "One non-interactive Blender command with explicit mapping, source directories, external output directory, external manifest path, and --baseline-only.",
+        "cleanRuns": [
+          {
+            "runId": "02e7b499-0e30-4b4d-ba6f-3c68494b884b",
+            "createdAt": "2026-09-08T19:35:41Z",
+            "conversionSeconds": 12.571,
+            "objectCount": 139,
+            "meshesPerMinute": 663.431708,
+            "manifestSha256": "6fe01276c31db1d0937f2df77a4ab27d68d864b30f056c57ee40bf5270f542f0",
+            "glbSha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
+            "posterSha256": "d7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb"
+          },
+          {
+            "runId": "e943b650-005a-4506-9538-ffe87b18f8eb",
+            "createdAt": "2026-09-08T19:35:49Z",
+            "conversionSeconds": 8.084,
+            "objectCount": 139,
+            "meshesPerMinute": 1031.667491,
+            "manifestSha256": "1b7687ad964059e80bba65e414e7dd490a85deb424ebb5e726fa2b7b3874d767",
+            "glbSha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
+            "posterSha256": "d7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb"
+          }
+        ],
+        "observedMeshesPerMinuteRange": [663.431708, 1031.667491],
+        "forecastClaimed": false
+      },
+      "mediaBudgets": {
+        "posterTargetBytes": 200000,
+        "loopTargetBytes": 1500000,
+        "loopHardCeilingBytes": 3000000,
+        "loopsLoadOnIntent": true,
+        "measuredLoopBytes": null,
+        "measuredLoopUnavailableReason": "Current artifact has no rig, joints, skin, or animation."
+      },
+      "presentationInspection": {
+        "completed": true,
+        "adultPresentationOptions": [
+          {
+            "id": "adult-anatomy-unspecified",
+            "label": "Adult anatomy; sex and gender not established by inspected evidence",
+            "evidenceRef": "docs/licenses/bodyparts3d-feasibility.json#presentationInspection",
+            "parity": {
+              "requiredCoverage": true,
+              "mapping": true,
+              "separability": true,
+              "artifactChecks": true
+            }
+          }
+        ],
+        "maleFemaleOrInclusiveVariantsObserved": 0,
+        "limitation": "Only one inspected presentation exists, so no cross-option capability parity can be claimed."
+      }
+    },
+    "reviewerJudgments": {
+      "stagedStill": {
+        "toolingFeasible": true,
+        "exerciseContentApproved": false,
+        "reason": "The fixed-camera pipeline is deterministic, but no exercise-specific checkpoint set has been approved."
+      },
+      "shortRiggedLoop": {
+        "supportedFromCurrentArtifact": false,
+        "requiredFallback": "authored-vector-or-staged-diagram",
+        "reason": "The optimized artifact contains zero skins, joints, and animations, and no rig was observed in the inspected source inputs."
+      },
+      "techniqueAccuracy": {
+        "status": "blocked",
+        "checkpointOwner": "Claude Research",
+        "requiredEvidence": "Exercise-specific start, midpoint, end, joint-path, range-of-motion, and common-error checkpoints with primary-source citations.",
+        "fabricatedMovementAllowed": false
+      },
+      "visualInspection": {
+        "posterNecessary": true,
+        "additionalScreenshotsNecessary": false,
+        "result": "The fixed poster is sufficient to show the deterministic neutral material, incomplete muscle-only body context, and whole-scene proportions. Mesh-level checks carry topology and coordinate evidence.",
+        "knownLimitations": [
+          "No head, full distal limbs, skin layer, or skeleton context is present in the representative mapped scene.",
+          "Anatomical overlap in the whole-body poster conceals some meshes; interactive selection is required.",
+          "All 139 meshes are open, so global inward/outward winding is inconclusive.",
+          "No source UV or resolved source material library survives because neither exists in the selected OBJ inputs."
+        ]
+      },
+      "presentationConclusion": "One adult anatomy presentation is usable for the measured static anatomy experience. Male/female or broader inclusive options are not demonstrated and must not be claimed.",
+      "selectionGate": "SBLA-006 owner decision remains required; this feasibility record measures and constrains the option but does not select it."
+    }
+  },
+  "traceability": {
+    "criterionEvidence": {
+      "coverage_naming": ["docs/licenses/bodyparts3d-mesh-mapping.json"],
+      "mesh_separability": [
+        "docs/licenses/bodyparts3d-mesh-mapping.json",
+        "docs/licenses/bodyparts3d-conversion-manifest.json"
+      ],
+      "visual_quality": [
+        "docs/licenses/bodyparts3d-conversion-manifest.json",
+        "docs/licenses/bodyparts3d-feasibility.json"
+      ],
+      "browser_performance": ["docs/licenses/bodyparts3d-performance.json"],
+      "license_clarity": [
+        "docs/licenses/asset-candidates.json",
+        "docs/licenses/anatomy-assets.md"
+      ],
+      "pipeline_ease": [
+        "docs/licenses/bodyparts3d-conversion-manifest.json",
+        "docs/licenses/bodyparts3d-feasibility.json"
+      ],
+      "presentation_options": ["docs/licenses/bodyparts3d-feasibility.json"]
+    },
+    "mapping": "docs/licenses/bodyparts3d-mesh-mapping.json",
+    "conversion": "docs/licenses/bodyparts3d-conversion-manifest.json",
+    "performance": "docs/licenses/bodyparts3d-performance.json",
+    "license": "docs/licenses/anatomy-assets.md",
+    "poster": "assets/derived/bodyparts3d/sbla005-poster.webp",
+    "optimizedArtifact": "assets/derived/bodyparts3d/sbla005-representative.glb"
+  }
+}
