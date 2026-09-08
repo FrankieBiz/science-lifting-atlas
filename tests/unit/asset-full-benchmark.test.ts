@@ -289,6 +289,8 @@ function validRecord(): MutableRecord {
       stabilizedAnimationFrames: 300,
       stabilizationFramesDiscarded: 30,
       glFinish: true,
+      frameTimingMethod: 'synchronous-draw-gl-finish-after-raf-stabilization',
+      drawsPerFrameSample: 10,
       coldDefinition:
         'unique no-store URL; fresh Playwright BrowserContext, page, WebGL2 context, parse, and GPU buffers per measurement',
     },
@@ -551,6 +553,28 @@ describe('complete representative browser benchmark', () => {
     ).cpuThrottling.rate = 1;
     expect(() => validatePerformanceRecord(wrongCdp)).toThrow(
       /CDP|throttling/i,
+    );
+  });
+  it('requires frame samples to measure render cost outside the display-vsync wait', () => {
+    const missingMethod = validRecord();
+    delete (missingMethod.protocol as Record<string, unknown>)
+      .frameTimingMethod;
+    expect(() => validatePerformanceRecord(missingMethod)).toThrow(
+      /frame timing method/i,
+    );
+
+    const vsyncClamped = validRecord();
+    (vsyncClamped.protocol as Record<string, unknown>).frameTimingMethod =
+      'request-animation-frame-interval';
+    expect(() => validatePerformanceRecord(vsyncClamped)).toThrow(
+      /frame timing method/i,
+    );
+
+    const unbatched = validRecord();
+    delete (unbatched.protocol as Record<string, unknown>).drawsPerFrameSample;
+    bindPerformanceEvidence(unbatched);
+    expect(() => validatePerformanceRecord(unbatched)).toThrow(
+      /draws per frame sample/i,
     );
   });
   it('requires fresh measurement contexts and distinct retained runs', () => {

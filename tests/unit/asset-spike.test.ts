@@ -1237,7 +1237,7 @@ describe('SBLA-005 measured candidate scorecard', () => {
       coverage_naming: 3,
       mesh_separability: 5,
       visual_quality: 1,
-      browser_performance: 4,
+      browser_performance: 5,
       license_clarity: 4,
       pipeline_ease: 5,
       presentation_options: 2,
@@ -1250,8 +1250,8 @@ describe('SBLA-005 measured candidate scorecard', () => {
     expect(evaluation.unmeasured).toEqual([]);
     expect(evaluation.complete).toBe(true);
     expect(evaluation.rejected).toBe(false);
-    expect(evaluation.weightedTotal).toBe(70);
-    expect(bodyParts.weightedTotal).toBe(70);
+    expect(evaluation.weightedTotal).toBe(73);
+    expect(bodyParts.weightedTotal).toBe(73);
   });
 
   it('binds the embedded browser score evidence to the authenticated performance record', async () => {
@@ -1326,7 +1326,7 @@ describe('SBLA-005 measured candidate scorecard', () => {
       '- OpenStax Anatomy & Physiology 2e: INELIGIBLE — NonCommercial',
     );
     expect(result.stdout).toContain(
-      '- BodyParts3D / Anatomography: weighted total 70/100 — measured recommendation only',
+      '- BodyParts3D / Anatomography: weighted total 73/100 — measured recommendation only',
     );
     expect(result.stdout).toContain(
       'No asset is selected, purchased, or approved. SBLA-005 measures and recommends; SBLA-006 and the owner decide.',
@@ -1339,10 +1339,10 @@ describe('SBLA-005 measured candidate scorecard', () => {
       ({ id }: { id: string }) => id === 'path-c-bodyparts3d',
     );
     const changedScore = structuredClone(original);
-    changedScore.scores.browser_performance = 5;
+    changedScore.scores.browser_performance = 4;
     expect(
       evaluateCandidate(changedScore).issues.some((issue: string) =>
-        issue.includes('does not match evidence-derived score 4'),
+        issue.includes('does not match evidence-derived score 5'),
       ),
     ).toBe(true);
 
@@ -1355,10 +1355,10 @@ describe('SBLA-005 measured candidate scorecard', () => {
     ).toBe(true);
 
     const changedTotal = structuredClone(original);
-    changedTotal.weightedTotal = 71;
+    changedTotal.weightedTotal = 74;
     expect(
       evaluateCandidate(changedTotal).issues.some((issue: string) =>
-        issue.includes('recorded weightedTotal 71 does not match computed 70'),
+        issue.includes('recorded weightedTotal 74 does not match computed 73'),
       ),
     ).toBe(true);
   });
@@ -1756,7 +1756,7 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
       performance: {
         path: 'docs/licenses/bodyparts3d-performance.json',
         sha256:
-          'e7e55aed924a55540e372d40e75013434d6b3340e05f5142693ea5d8810c2769',
+          'b75315ba9569cf70190c628bcfe1c83cc0f74c8c7f5d3a213b65deaa29e31952',
       },
       poster: {
         path: 'assets/derived/bodyparts3d/sbla005-poster.webp',

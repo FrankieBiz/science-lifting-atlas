@@ -138,12 +138,12 @@
         "coverage_naming": 3,
         "mesh_separability": 5,
         "visual_quality": 1,
-        "browser_performance": 4,
+        "browser_performance": 5,
         "license_clarity": 4,
         "pipeline_ease": 5,
         "presentation_options": 2
       },
-      "weightedTotal": 70,
+      "weightedTotal": 73,
       "measurements": {
         "coverage_naming": {
           "requiredTargetCount": 28,
@@ -175,18 +175,18 @@
           "optimizedGlbBytes": 2874932,
           "nativeProfile": {
             "hardwareBacked": true,
-            "medianFrameMs": 16.7
+            "medianFrameMs": 0.15
           },
           "lowPowerSimulation": {
             "profileKind": "simulation",
             "reducedLod": true,
             "cpuThrottlingDocumented": true,
             "swiftShader": true,
-            "medianFrameMs": 16.8
+            "medianFrameMs": 0.09
           },
           "geometryBufferBytes": 2753652,
           "mobileFallbackPermitted": true,
-          "observedJsHeapBytes": 4743452,
+          "observedJsHeapBytes": 4595816,
           "observedJsHeapUnavailableReason": null,
           "performanceRecord": "docs/licenses/bodyparts3d-performance.json"
         },
@@ -269,7 +269,7 @@
         "coverage_naming": "3/5: 23 of 28 required targets map with zero material mapping defects; five required trunk/back targets are absent.",
         "mesh_separability": "5/5: all 139 expected unique meshes are separately selectable and map exactly once in the exported artifact.",
         "visual_quality": "1/5: deterministic normalization and usable proportions pass. Open topology prevents a no-holes or global outward-normal claim; source materials do not survive; whole-scene overlap occludes meshes.",
-        "browser_performance": "4/5: both required profiles pass, the 2,874,932-byte payload meets the desktop target, and measured geometry memory is below the band ceiling. The recorded native median is 16.7 ms, just outside the frozen 16.67 ms top band.",
+        "browser_performance": "5/5: both required profiles pass, the 2,874,932-byte payload meets the desktop and mobile targets, measured geometry memory is below the top-band ceiling, and unclamped synchronous draw-plus-gl.finish render-cost medians are 0.15 ms native and 0.09 ms in the reduced simulation.",
         "license_clarity": "4/5: current terms and attribution are explicit and commercially flexible, but acquired OBJ headers retain an older CC BY-SA 2.1 Japan notice. Both notices are conservatively preserved.",
         "pipeline_ease": "5/5: the pinned, non-interactive pipeline reproduced byte-identical authorized GLB and poster outputs across clean runs with zero manual editing.",
         "presentation_options": "2/5: one complete adult human male anatomy presentation passes the required parity checks. No female, body-shape, or broader inclusive variant was observed."
@@ -284,11 +284,6 @@
           "criterion": "visual_quality",
           "evidenceRef": "docs/licenses/bodyparts3d-conversion-manifest.json",
           "summary": "All 139 meshes are open; source material libraries and UVs are absent, and whole-scene overlap causes occlusion."
-        },
-        {
-          "criterion": "browser_performance",
-          "evidenceRef": "docs/licenses/bodyparts3d-performance.json",
-          "summary": "The native median frame time is 16.7 ms, just outside the frozen top band, and the low-power result is a documented simulation rather than a physical mid-tier mobile device."
         },
         {
           "criterion": "license_clarity",

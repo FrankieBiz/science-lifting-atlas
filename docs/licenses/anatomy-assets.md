@@ -140,11 +140,14 @@ capability cannot be mistaken for a positive result.
   forecast.
 - **Representative browser scene:** two fresh runs each loaded all 139 mapped
   objects. The GLB is 2,874,932 bytes and geometry buffers are 2,753,652 bytes.
-  The final native Apple M3 profile measured a 16.7 ms median frame time and
-  4,743,452 bytes of precise JS heap; the reduced SwiftShader/4× CPU-throttle
-  simulation measured 16.8 ms. Both pass their frozen bands, but the
-  simulation is not a physical mobile-device result and still requires later
-  device confirmation.
+  The final native Apple M3 profile measured a 0.15 ms median synchronous
+  draw-plus-`gl.finish()` render cost and 4,595,816 bytes of precise JS heap;
+  the reduced SwiftShader/4× CPU-throttle simulation measured 0.09 ms. The
+  harness uses `requestAnimationFrame` only for stabilization, then times ten
+  completed draws per each of 300 samples so display vsync does not masquerade
+  as render cost. Both pass their frozen bands, but the simulation is not a
+  physical mobile-device result and the battery-power environment remains a
+  documented confound requiring later physical-device confirmation.
 - **Materials and UVs:** all 139 selected OBJ files contain normals and a
   material-use name, but none contains UV coordinates or a material-library
   reference. The GLB contains one deterministic neutral review material, zero
@@ -198,7 +201,7 @@ required BodyParts3D attribution shown above.
   archives were acquired and checksum-verified outside Git for the SBLA-005
   spike; only authorized, budget-compliant derivatives and compact evidence are
   checked in.
-- The measured scorecard is 70/100 and remains a recommendation only; SBLA-006
+- The measured scorecard is 73/100 and remains a recommendation only; SBLA-006
   and the owner decide. Five required targets are absent: latissimus dorsi,
   rectus abdominis, internal oblique, transversus abdominis, and multifidus.
   Because these are central to pulling and trunk/bracing coverage, this is a

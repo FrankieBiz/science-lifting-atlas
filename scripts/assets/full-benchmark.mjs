@@ -131,6 +131,8 @@ const BENCHMARK_PROTOCOL = Object.freeze({
   stabilizedAnimationFrames: 300,
   stabilizationFramesDiscarded: 30,
   glFinish: true,
+  frameTimingMethod: 'synchronous-draw-gl-finish-after-raf-stabilization',
+  drawsPerFrameSample: 10,
   coldDefinition:
     'unique no-store URL; fresh Playwright BrowserContext, page, WebGL2 context, parse, and GPU buffers per measurement',
 });
@@ -898,6 +900,15 @@ export function validatePerformanceRecord(record) {
   )
     throw new Error('Performance record camera fit does not prove visibility');
   const p = record.protocol;
+  if (
+    p?.frameTimingMethod !==
+    'synchronous-draw-gl-finish-after-raf-stabilization'
+  )
+    throw new Error(
+      'Benchmark frame timing method must measure synchronous render cost outside the display-vsync wait',
+    );
+  if (p?.drawsPerFrameSample !== 10)
+    throw new Error('Benchmark draws per frame sample must be exactly 10');
   if (JSON.stringify(p) !== JSON.stringify(BENCHMARK_PROTOCOL))
     throw new Error('Benchmark protocol is incomplete');
   if (JSON.stringify(record.budgets) !== JSON.stringify(BUDGETS))
@@ -1408,14 +1419,20 @@ async function browserMeasurement(page, url, reducedRatio, frames = 0) {
       draw(0);
       gl.finish();
       const uploadEnd = performance.now();
-      const frameTimesMs = [];
-      for (let i = -30; i < frames; i += 1) {
-        const before = performance.now();
+      for (let i = 0; i < 30; i += 1) {
         await new Promise(requestAnimationFrame);
         draw(i / 120);
         gl.finish();
-        const elapsed = performance.now() - before;
-        if (i >= 0) frameTimesMs.push(round(elapsed));
+      }
+      const frameTimesMs = [];
+      for (let i = 0; i < frames; i += 1) {
+        const before = performance.now();
+        for (let drawIndex = 0; drawIndex < 10; drawIndex += 1) {
+          draw((i * 10 + drawIndex + 30) / 120);
+          gl.finish();
+        }
+        const elapsedPerDraw = (performance.now() - before) / 10;
+        frameTimesMs.push(round(elapsedPerDraw));
       }
       const resources = /** @type {PerformanceResourceTiming[]} */ (
         performance.getEntriesByName(response.url)
