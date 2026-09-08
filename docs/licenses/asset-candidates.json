@@ -274,6 +274,33 @@
         "pipeline_ease": "5/5: the pinned, non-interactive pipeline reproduced byte-identical authorized GLB and poster outputs across clean runs with zero manual editing.",
         "presentation_options": "2/5: one complete adult human male anatomy presentation passes the required parity checks. No female, body-shape, or broader inclusive variant was observed."
       },
+      "failureRisks": [
+        {
+          "criterion": "coverage_naming",
+          "evidenceRef": "docs/licenses/bodyparts3d-mesh-mapping.json",
+          "summary": "Major SBLA-006 decision risk: latissimus dorsi, rectus abdominis, internal oblique, transversus abdominis, and multifidus are absent, blocking core lifting-atlas coverage if this remains the sole source."
+        },
+        {
+          "criterion": "visual_quality",
+          "evidenceRef": "docs/licenses/bodyparts3d-conversion-manifest.json",
+          "summary": "All 139 meshes are open; source material libraries and UVs are absent, and whole-scene overlap causes occlusion."
+        },
+        {
+          "criterion": "browser_performance",
+          "evidenceRef": "docs/licenses/bodyparts3d-performance.json",
+          "summary": "The native median frame time is 16.7 ms, just outside the frozen top band, and the low-power result is a documented simulation rather than a physical mid-tier mobile device."
+        },
+        {
+          "criterion": "license_clarity",
+          "evidenceRef": "docs/licenses/anatomy-assets.md",
+          "summary": "The acquired OBJ headers preserve an older CC BY-SA 2.1 Japan notice alongside the current CC BY 4.0 terms, requiring conservative dual-notice handling."
+        },
+        {
+          "criterion": "presentation_options",
+          "evidenceRef": "docs/licenses/bodyparts3d-feasibility.json",
+          "summary": "Only one adult human male presentation is demonstrated; no female, body-shape, or broader inclusive alternative is available."
+        }
+      ],
       "recommendation": {
         "status": "measured-recommendation-only",
         "summary": "Proceed to the SBLA-006 owner decision with BodyParts3D as the only currently eligible measured candidate, while treating five missing targets, weak source visuals, absent rigging, and lack of presentation variants as explicit product risks.",

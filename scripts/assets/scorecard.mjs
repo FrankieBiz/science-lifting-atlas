@@ -1070,6 +1070,19 @@ const DATE_FIELDS = Object.freeze(['accessedOn']);
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 /**
+ * @param {unknown} value
+ * @returns {value is string}
+ */
+function isCalendarDate(value) {
+  if (typeof value !== 'string' || !ISO_DATE.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00.000Z`);
+  return (
+    !Number.isNaN(parsed.valueOf()) &&
+    parsed.toISOString().slice(0, 10) === value
+  );
+}
+
+/**
  * @typedef {object} SpikeCandidate
  * @property {string} [id]
  * @property {string} [name]
@@ -1081,6 +1094,9 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
  * @property {Record<string, number|null>} [scores]
  * @property {Record<string, Record<string, unknown>|null>} [measurements]
  * @property {number|null} [weightedTotal]
+ * @property {Record<string, string>} [scoreRationale]
+ * @property {Array<Record<string, unknown>>} [failureRisks]
+ * @property {Record<string, unknown>} [recommendation]
  */
 
 /**
@@ -1215,6 +1231,80 @@ function normalizeLicenseMeasurement(candidate) {
 }
 
 /**
+ * @param {SpikeCandidate} candidate
+ * @param {Record<string, number|null>} scores
+ * @param {Record<string, Record<string, unknown>|null>} measurements
+ */
+function validateMeasuredDecisionMetadata(candidate, scores, measurements) {
+  const id = candidate.id ?? '<unidentified>';
+  const issues = [];
+  const scoredCriteria = SPIKE_CRITERIA.map(({ key }) => key);
+  const rationale = isRecord(candidate.scoreRationale)
+    ? candidate.scoreRationale
+    : {};
+  const rationaleKeys = Object.keys(rationale).sort();
+  if (
+    JSON.stringify(rationaleKeys) !==
+      JSON.stringify([...scoredCriteria].sort()) ||
+    scoredCriteria.some(
+      (key) =>
+        typeof rationale[key] !== 'string' ||
+        rationale[key].trim().length === 0,
+    )
+  ) {
+    issues.push(
+      `${id}: scoreRationale must contain exactly all seven scored criteria`,
+    );
+  }
+
+  const expectedRiskCriteria = scoredCriteria
+    .filter((key) => typeof scores[key] === 'number' && scores[key] < MAX_SCORE)
+    .sort();
+  const risks = Array.isArray(candidate.failureRisks)
+    ? candidate.failureRisks
+    : [];
+  const actualRiskCriteria = risks
+    .map((risk) => (isRecord(risk) ? risk.criterion : null))
+    .sort();
+  const riskShapeValid = risks.every((risk) => {
+    if (!isRecord(risk) || typeof risk.criterion !== 'string') return false;
+    const evidence = measurements[risk.criterion];
+    const evidenceValues = isRecord(evidence) ? Object.values(evidence) : [];
+    return (
+      typeof risk.summary === 'string' &&
+      risk.summary.trim().length > 0 &&
+      typeof risk.evidenceRef === 'string' &&
+      evidenceValues.includes(risk.evidenceRef)
+    );
+  });
+  if (
+    JSON.stringify(actualRiskCriteria) !==
+      JSON.stringify(expectedRiskCriteria) ||
+    !riskShapeValid
+  ) {
+    issues.push(
+      `${id}: failureRisks must cover exactly every scored criterion below 5`,
+    );
+  }
+
+  const recommendation = candidate.recommendation;
+  if (
+    !isRecord(recommendation) ||
+    recommendation.status !== 'measured-recommendation-only' ||
+    recommendation.selected !== false ||
+    recommendation.decisionOwner !== 'SBLA-006 owner gate' ||
+    typeof recommendation.summary !== 'string' ||
+    recommendation.summary.trim().length === 0
+  ) {
+    issues.push(
+      `${id}: recommendation must remain measured-recommendation-only with selected:false and the SBLA-006 owner gate`,
+    );
+  }
+
+  return issues;
+}
+
+/**
  * Evaluate one candidate deterministically. Never throws on bad data: a
  * malformed score becomes a reported issue so a multi-candidate inventory
  * surfaces every problem in one run.
@@ -1323,6 +1413,12 @@ export function evaluateCandidate(candidate) {
   // capture - NonCommercial terms, an AI-ingestion prohibition - so an explicit
   // selectionEligible:false is honoured on its own.
   const ineligible = belowFloor || acknowledged;
+
+  if (!isPlaceholder && !ineligible && unmeasured.length === 0) {
+    issues.push(
+      ...validateMeasuredDecisionMetadata(candidate, scores, measurements),
+    );
+  }
 
   if (ineligible) {
     for (const criterion of SPIKE_CRITERIA) {
@@ -1439,17 +1535,25 @@ export function evaluateInventory(
   const issues = [];
   const seen = new Set();
 
-  if (Object.hasOwn(inventory, 'reverifyBy')) {
-    if (
-      typeof inventory.reverifyBy !== 'string' ||
-      !ISO_DATE.test(inventory.reverifyBy)
-    ) {
-      issues.push('inventory.reverifyBy must be an ISO date (YYYY-MM-DD)');
-    } else if (!ISO_DATE.test(asOfDate)) {
-      issues.push('inventory evaluation date must be an ISO date (YYYY-MM-DD)');
-    } else if (inventory.reverifyBy < asOfDate) {
+  const hasScoredCandidate = raw.some(
+    (candidate) =>
+      isRecord(candidate) &&
+      isRecord(candidate.scores) &&
+      Object.values(candidate.scores).some(
+        (score) => typeof score === 'number',
+      ),
+  );
+  if (hasScoredCandidate) {
+    const reverifyBy = inventory.reverifyBy;
+    if (!isCalendarDate(reverifyBy)) {
       issues.push(
-        `inventory licence evidence expired on ${inventory.reverifyBy}; re-verify before scoring on ${asOfDate}`,
+        'scored inventory requires reverifyBy as an ISO date (YYYY-MM-DD)',
+      );
+    } else if (!isCalendarDate(asOfDate)) {
+      issues.push('inventory evaluation date must be an ISO date (YYYY-MM-DD)');
+    } else if (reverifyBy < asOfDate) {
+      issues.push(
+        `inventory licence evidence expired on ${reverifyBy}; re-verify before scoring on ${asOfDate}`,
       );
     }
   }

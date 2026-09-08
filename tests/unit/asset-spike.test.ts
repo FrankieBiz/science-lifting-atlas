@@ -29,7 +29,11 @@ async function runSpike(candidates: unknown[]) {
   const inventoryPath = join(fixtureRoot, 'inventory.json');
   await writeFile(
     inventoryPath,
-    JSON.stringify({ recordedOn: '2026-09-05', candidates }),
+    JSON.stringify({
+      recordedOn: '2026-09-05',
+      reverifyBy: '2026-11-30',
+      candidates,
+    }),
   );
 
   try {
@@ -320,6 +324,28 @@ function measurementsForScoreFive() {
 }
 
 function candidate(overrides: Record<string, unknown> = {}) {
+  const effectiveScores = (overrides.scores ?? scored()) as Record<
+    string,
+    number | null
+  >;
+  const scoredCriteria = PLAN_WEIGHTS.map(([id]) => id).filter(
+    (id) => effectiveScores[id] !== null,
+  );
+  const limitedCriteria = scoredCriteria.filter(
+    (id) => Number(effectiveScores[id]) < 5,
+  );
+  const measurementDefaults = measurementsForScoreFour();
+  const evidenceRefByCriterion: Record<string, string> = {
+    coverage_naming: measurementDefaults.coverage_naming.mappingManifest,
+    mesh_separability: measurementDefaults.mesh_separability.mappingManifest,
+    visual_quality: measurementDefaults.visual_quality.conversionManifest,
+    browser_performance:
+      measurementDefaults.browser_performance.performanceRecord,
+    license_clarity: measurementDefaults.license_clarity.licenseRecord,
+    pipeline_ease: measurementDefaults.pipeline_ease.conversionManifest,
+    presentation_options:
+      measurementDefaults.presentation_options.feasibilityRecord,
+  };
   return {
     id: 'test',
     name: 'Test candidate',
@@ -335,8 +361,22 @@ function candidate(overrides: Record<string, unknown> = {}) {
       attributionRequired: true,
       webDistribution: 'permitted',
     },
-    scores: scored(),
-    measurements: measurementsForScoreFour(),
+    scores: effectiveScores,
+    measurements: measurementDefaults,
+    scoreRationale: Object.fromEntries(
+      scoredCriteria.map((id) => [id, `Evidence-backed rationale for ${id}`]),
+    ),
+    failureRisks: limitedCriteria.map((criterion) => ({
+      criterion,
+      evidenceRef: evidenceRefByCriterion[criterion],
+      summary: `Measured limitation for ${criterion}`,
+    })),
+    recommendation: {
+      status: 'measured-recommendation-only',
+      summary: 'Proceed to the owner decision with measured limitations.',
+      selected: false,
+      decisionOwner: 'SBLA-006 owner gate',
+    },
     ...overrides,
   };
 }
@@ -1301,6 +1341,49 @@ describe('SBLA-005 measured candidate scorecard', () => {
       'inventory licence evidence expired on 2026-09-07; re-verify before scoring on 2026-09-08',
     );
   });
+
+  it('fails closed when a scored inventory loses its licence freshness anchor', async () => {
+    const inventory = await inventoryRecord();
+    delete inventory.reverifyBy;
+
+    expect(evaluateInventory(inventory, '2026-09-08').issues).toContain(
+      'scored inventory requires reverifyBy as an ISO date (YYYY-MM-DD)',
+    );
+  });
+
+  it('fails closed when score rationales, failure risks, or the owner boundary drift', async () => {
+    const inventory = await inventoryRecord();
+    const original = inventory.candidates.find(
+      ({ id }: { id: string }) => id === 'path-c-bodyparts3d',
+    );
+
+    const missingRationale = structuredClone(original);
+    delete missingRationale.scoreRationale.visual_quality;
+    expect(evaluateCandidate(missingRationale).issues).toContain(
+      'path-c-bodyparts3d: scoreRationale must contain exactly all seven scored criteria',
+    );
+
+    const missingRisk = structuredClone(original);
+    missingRisk.failureRisks = missingRisk.failureRisks.filter(
+      ({ criterion }: { criterion: string }) => criterion !== 'coverage_naming',
+    );
+    expect(evaluateCandidate(missingRisk).issues).toContain(
+      'path-c-bodyparts3d: failureRisks must cover exactly every scored criterion below 5',
+    );
+
+    const selected = structuredClone(original);
+    selected.recommendation.selected = true;
+    expect(evaluateCandidate(selected).issues).toContain(
+      'path-c-bodyparts3d: recommendation must remain measured-recommendation-only with selected:false and the SBLA-006 owner gate',
+    );
+
+    const missingBoundary = structuredClone(original);
+    delete missingBoundary.scoreRationale;
+    delete missingBoundary.failureRisks;
+    delete missingBoundary.recommendation;
+    expect(evaluateCandidate(missingBoundary).complete).toBe(false);
+    expect(evaluateCandidate(missingBoundary).weightedTotal).toBeNull();
+  });
 });
 
 describe('BodyParts3D exercise-media feasibility evidence', () => {
@@ -1329,8 +1412,8 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
   });
 
   it('records UV, material, topology, coordinate, and origin evidence without inference', async () => {
-    const { sourceFacts, directMeasurements } = (await feasibilityRecord())
-      .evidence;
+    const record = await feasibilityRecord();
+    const { sourceFacts, directMeasurements } = record.evidence;
 
     expect(sourceFacts.selectedSourceMeshes).toMatchObject({
       count: 139,
@@ -1339,6 +1422,16 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
       materialUseMeshes: 139,
       materialLibraryMeshes: 0,
     });
+    expect(sourceFacts.selectedSourceMeshes.mappingManifest).toBe(
+      record.traceability.artifactDigests.mapping.path,
+    );
+    expect(sourceFacts.selectedSourceMeshes.mappingManifestSha256).toBe(
+      record.traceability.artifactDigests.mapping.sha256,
+    );
+    expect(Object.keys(record.traceability)).toEqual([
+      'artifactDigests',
+      'criterionEvidence',
+    ]);
     expect(directMeasurements.optimizedArtifact).toMatchObject({
       meshCount: 139,
       materialCount: 1,
@@ -1440,8 +1533,42 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
   });
 
   it('recomputes repeated clean-run throughput and derived/source byte ratios', async () => {
-    const throughput = (await feasibilityRecord()).evidence.directMeasurements
-      .productionThroughput;
+    const record = await feasibilityRecord();
+    const throughput = record.evidence.directMeasurements.productionThroughput;
+    const mapping = JSON.parse(
+      await readFile(
+        new URL(
+          `../../${record.traceability.artifactDigests.mapping.path}`,
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    );
+    const conversion = JSON.parse(
+      await readFile(
+        new URL(
+          `../../${record.traceability.artifactDigests.conversion.path}`,
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    );
+    const uniqueMappingMeshes = new Map<string, Record<string, unknown>>();
+    for (const target of mapping.coverage.targets) {
+      for (const component of target.components) {
+        for (const mesh of component.meshes) {
+          uniqueMappingMeshes.set(mesh.sha256, mesh);
+        }
+      }
+    }
+    const expectedSources = [...uniqueMappingMeshes.values()]
+      .map(({ fileId, bytes, sha256, conceptId }) => ({
+        fileId,
+        bytes,
+        sha256,
+        conceptId,
+      }))
+      .sort((a, b) => String(a.fileId).localeCompare(String(b.fileId)));
 
     expect(throughput.cleanRuns).toHaveLength(2);
     expect(
@@ -1498,6 +1625,28 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
         bytes: 11906,
         sha256: run.posterSha256,
       });
+      expect(manifest.objects).toEqual(conversion.objects);
+      expect(manifest.objects).toHaveLength(139);
+      const actualSources = manifest.objects
+        .map(
+          (object: {
+            source: { fileId: string; bytes: number; sha256: string };
+            normalized: { entityId: string };
+          }) => ({
+            ...object.source,
+            conceptId: object.normalized.entityId,
+          }),
+        )
+        .sort((a: { fileId: string }, b: { fileId: string }) =>
+          a.fileId.localeCompare(b.fileId),
+        );
+      expect(actualSources).toEqual(expectedSources);
+      expect(
+        actualSources.reduce(
+          (total: number, source: { bytes: number }) => total + source.bytes,
+          0,
+        ),
+      ).toBe(throughput.sourceBytes);
     }
     expect(throughput.sourceBytes).toBe(54495284);
     expect(throughput.derivedBytes).toBe(2874932 + 11906);
@@ -1562,6 +1711,34 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
   it('binds the measured artifacts and all seven rubric criteria to inspectable evidence', async () => {
     const record = await feasibilityRecord();
     const artifactRoot = new URL('../../', import.meta.url);
+
+    expect(record.traceability.artifactDigests).toEqual({
+      mapping: {
+        path: 'docs/licenses/bodyparts3d-mesh-mapping.json',
+        sha256:
+          'b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196',
+      },
+      conversion: {
+        path: 'docs/licenses/bodyparts3d-conversion-manifest.json',
+        sha256:
+          '8d2cb6813a49be110c47729da208f3093b74788e7ae479b55e6f8abdef684d5d',
+      },
+      performance: {
+        path: 'docs/licenses/bodyparts3d-performance.json',
+        sha256:
+          '2cfddff661420d9d4bb820fe9fd2a584008d022c75c821a88e1971e88a69a24b',
+      },
+      poster: {
+        path: 'assets/derived/bodyparts3d/sbla005-poster.webp',
+        sha256:
+          'd7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb',
+      },
+      optimizedArtifact: {
+        path: 'assets/derived/bodyparts3d/sbla005-representative.glb',
+        sha256:
+          'b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7',
+      },
+    });
     const digest = async (path: string) =>
       createHash('sha256')
         .update(await readFile(new URL(path, artifactRoot)))

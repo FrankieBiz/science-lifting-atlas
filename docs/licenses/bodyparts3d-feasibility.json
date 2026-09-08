@@ -256,12 +256,6 @@
         "docs/licenses/bodyparts3d-feasibility.json"
       ],
       "presentation_options": ["docs/licenses/bodyparts3d-feasibility.json"]
-    },
-    "mapping": "docs/licenses/bodyparts3d-mesh-mapping.json",
-    "conversion": "docs/licenses/bodyparts3d-conversion-manifest.json",
-    "performance": "docs/licenses/bodyparts3d-performance.json",
-    "license": "docs/licenses/anatomy-assets.md",
-    "poster": "assets/derived/bodyparts3d/sbla005-poster.webp",
-    "optimizedArtifact": "assets/derived/bodyparts3d/sbla005-representative.glb"
+    }
   }
 }
