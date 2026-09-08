@@ -159,10 +159,11 @@ capability cannot be mistaken for a positive result.
   range-of-motion, and common-error checkpoints are still blocked until Claude
   Research supplies cited, approved checkpoints. No movement is inferred from
   the mesh.
-- **Presentation:** exactly one adult muscle-geometry presentation was
-  inspected. The evidence does not establish its sex or gender, and no second
-  male/female, body-shape, or broader inclusive variant was observed. The
-  scorecard must not claim presentation choices that are absent.
+- **Presentation:** DBCLS describes the singular whole-body source model as an
+  **adult human male**. One presentation from that model was inspected. The
+  source makes no gender-identity claim, and no female, body-shape, or broader
+  inclusive variant was observed. The scorecard must not claim presentation
+  choices that are absent.
 
 The current CC BY 4.0 terms permit adaptation and redistribution of the GLB,
 poster, staged stills, and any later authored loop with attribution. Because the

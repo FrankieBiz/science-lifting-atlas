@@ -1240,10 +1240,18 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
   });
 
   it('records that no skeleton, skin, UV texture, rig, or source animation exists', async () => {
-    const { directMeasurements, reviewerJudgments } = (
+    const { sourceFacts, directMeasurements, reviewerJudgments } = (
       await feasibilityRecord()
     ).evidence;
 
+    expect(sourceFacts.sourcePresentation).toMatchObject({
+      observedOptions: 1,
+      sourceSexDescription: 'adult human male',
+      genderClaim: null,
+    });
+    expect(sourceFacts.sourcePresentation.sourceSexEvidenceUrl).toContain(
+      'dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html',
+    );
     expect(directMeasurements.optimizedArtifact).toMatchObject({
       skinCount: 0,
       jointCount: 0,
@@ -1314,6 +1322,11 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
         .size,
     ).toBe(2);
     for (const run of throughput.cleanRuns) {
+      expect(run.runId).toMatch(
+        /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
+      );
+      expect(Number.isNaN(Date.parse(run.createdAt))).toBe(false);
+      expect(run.manifestSha256).toMatch(/^[0-9a-f]{64}$/);
       expect(run.objectCount).toBe(139);
       expect(run.meshesPerMinute).toBeCloseTo(
         (run.objectCount * 60) / run.conversionSeconds,
@@ -1325,6 +1338,39 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
       expect(run.posterSha256).toBe(
         'd7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb',
       );
+      const manifestBytes = await readFile(
+        new URL(`../../${run.evidenceManifest}`, import.meta.url),
+      );
+      expect(createHash('sha256').update(manifestBytes).digest('hex')).toBe(
+        run.manifestSha256,
+      );
+      const manifest = JSON.parse(manifestBytes.toString('utf8'));
+      expect(manifest.runIdentity).toMatchObject({
+        runId: run.runId,
+        createdAt: run.createdAt,
+        mode: 'baseline-unpublished',
+        source: {
+          mappingSha256:
+            'b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196',
+        },
+        tool: {
+          versionString: '4.5.13 LTS',
+          distributionSha256:
+            '663ce944257c61ff1d6aa09e15c8f57bbd8d59023adb2fa7edde33a9ed960b53',
+        },
+      });
+      expect(manifest.timing).toEqual({
+        conversionSeconds: run.conversionSeconds,
+        objectCount: run.objectCount,
+      });
+      expect(manifest.artifacts.glb).toMatchObject({
+        bytes: 2874932,
+        sha256: run.glbSha256,
+      });
+      expect(manifest.artifacts.poster).toMatchObject({
+        bytes: 11906,
+        sha256: run.posterSha256,
+      });
     }
     expect(throughput.sourceBytes).toBe(54495284);
     expect(throughput.derivedBytes).toBe(2874932 + 11906);
@@ -1335,6 +1381,18 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
     expect(throughput.operatorStepsPerRun).toBe(1);
     expect(throughput.manualEditingSteps).toBe(0);
     expect(throughput.forecastClaimed).toBe(false);
+    expect(throughput.observedMeshesPerMinuteRange).toEqual([
+      Math.min(
+        ...throughput.cleanRuns.map(
+          ({ meshesPerMinute }: { meshesPerMinute: number }) => meshesPerMinute,
+        ),
+      ),
+      Math.max(
+        ...throughput.cleanRuns.map(
+          ({ meshesPerMinute }: { meshesPerMinute: number }) => meshesPerMinute,
+        ),
+      ),
+    ]);
   });
 
   it('freezes poster and loop budgets plus load-on-intent policy', async () => {
@@ -1359,9 +1417,8 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
     expect(presentation.completed).toBe(true);
     expect(presentation.adultPresentationOptions).toEqual([
       {
-        id: 'adult-anatomy-unspecified',
-        label:
-          'Adult anatomy; sex and gender not established by inspected evidence',
+        id: 'adult-human-male',
+        label: 'Adult human male anatomy',
         evidenceRef:
           'docs/licenses/bodyparts3d-feasibility.json#presentationInspection',
         parity: {
@@ -1372,7 +1429,7 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
         },
       },
     ]);
-    expect(presentation.maleFemaleOrInclusiveVariantsObserved).toBe(0);
+    expect(presentation.additionalFemaleOrInclusiveVariantsObserved).toBe(0);
   });
 
   it('binds the measured artifacts and all seven rubric criteria to inspectable evidence', async () => {
@@ -1389,9 +1446,32 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
     expect(await digest('assets/derived/bodyparts3d/sbla005-poster.webp')).toBe(
       record.evidence.directMeasurements.deterministicStill.sha256,
     );
-    expect(Object.keys(record.traceability.criterionEvidence)).toEqual(
-      PLAN_WEIGHTS.map(([id]) => id),
-    );
+    expect(record.traceability.criterionEvidence).toEqual({
+      coverage_naming: ['docs/licenses/bodyparts3d-mesh-mapping.json'],
+      mesh_separability: [
+        'docs/licenses/bodyparts3d-mesh-mapping.json',
+        'docs/licenses/bodyparts3d-conversion-manifest.json',
+      ],
+      visual_quality: [
+        'docs/licenses/bodyparts3d-conversion-manifest.json',
+        'docs/licenses/bodyparts3d-feasibility.json',
+      ],
+      browser_performance: ['docs/licenses/bodyparts3d-performance.json'],
+      license_clarity: [
+        'docs/licenses/asset-candidates.json',
+        'docs/licenses/anatomy-assets.md',
+      ],
+      pipeline_ease: [
+        'docs/licenses/bodyparts3d-conversion-manifest.json',
+        'docs/licenses/bodyparts3d-feasibility.json',
+      ],
+      presentation_options: ['docs/licenses/bodyparts3d-feasibility.json'],
+    });
+    for (const evidence of Object.values(
+      record.traceability.artifactDigests,
+    ) as Array<{ path: string; sha256: string }>) {
+      expect(await digest(evidence.path)).toBe(evidence.sha256);
+    }
     for (const references of Object.values(
       record.traceability.criterionEvidence,
     ) as string[][]) {
@@ -1402,5 +1482,47 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
         ).toBeGreaterThan(0);
       }
     }
+
+    const mapping = JSON.parse(
+      await readFile(
+        new URL(
+          '../../docs/licenses/bodyparts3d-mesh-mapping.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    );
+    const conversion = JSON.parse(
+      await readFile(
+        new URL(
+          '../../docs/licenses/bodyparts3d-conversion-manifest.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    );
+    const performance = JSON.parse(
+      await readFile(
+        new URL(
+          '../../docs/licenses/bodyparts3d-performance.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    );
+    expect(mapping.coverage).toMatchObject({
+      required: 28,
+      present: 23,
+      selectedMeshes: 139,
+    });
+    expect(conversion).toMatchObject({
+      candidate: 'path-c-bodyparts3d',
+      determinism: { cleanRuns: 2, sceneStructureEqual: true },
+      timing: { objectCount: 139 },
+    });
+    expect(performance.profiles).toMatchObject({
+      nativeHardware: { status: 'available', geometryBufferBytes: 2753652 },
+      lowPowerSimulation: { status: 'available' },
+    });
   });
 });

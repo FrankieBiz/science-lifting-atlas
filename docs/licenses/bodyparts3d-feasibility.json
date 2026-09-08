@@ -17,9 +17,12 @@
       },
       "sourcePresentation": {
         "observedOptions": 1,
-        "description": "The acquired representative source resolves to one mutually registered adult muscle-geometry presentation. No second sex, gender, body-shape, or inclusive presentation variant was observed in the selected source meshes.",
-        "sexOrGenderClaim": null,
-        "sexOrGenderUnavailableReason": "The inspected mapping, OBJ identity headers, optimized muscle-only artifact, and poster do not establish a sex or gender label for this representative presentation."
+        "description": "DBCLS describes BodyParts3D as a three-dimensional whole-body model for an adult human male. The acquired representative muscle geometry is one presentation from that model. No second female, body-shape, or broader inclusive presentation variant was observed.",
+        "sourceSexDescription": "adult human male",
+        "sourceSexEvidenceUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/desc.html?lang=en&page=1&target_node=archive_en&target_node_type=category",
+        "sourceSexEvidenceAccessedOn": "2026-09-08",
+        "genderClaim": null,
+        "genderClaimUnavailableReason": "The authoritative source describes biological presentation as adult human male but makes no gender-identity claim."
       },
       "derivedMediaRights": {
         "primaryTerms": {
@@ -132,6 +135,7 @@
             "objectCount": 139,
             "meshesPerMinute": 663.431708,
             "manifestSha256": "6fe01276c31db1d0937f2df77a4ab27d68d864b30f056c57ee40bf5270f542f0",
+            "evidenceManifest": "docs/licenses/measurements/bodyparts3d-feasibility-run-1.json",
             "glbSha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
             "posterSha256": "d7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb"
           },
@@ -142,6 +146,7 @@
             "objectCount": 139,
             "meshesPerMinute": 1031.667491,
             "manifestSha256": "1b7687ad964059e80bba65e414e7dd490a85deb424ebb5e726fa2b7b3874d767",
+            "evidenceManifest": "docs/licenses/measurements/bodyparts3d-feasibility-run-2.json",
             "glbSha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7",
             "posterSha256": "d7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb"
           }
@@ -161,8 +166,8 @@
         "completed": true,
         "adultPresentationOptions": [
           {
-            "id": "adult-anatomy-unspecified",
-            "label": "Adult anatomy; sex and gender not established by inspected evidence",
+            "id": "adult-human-male",
+            "label": "Adult human male anatomy",
             "evidenceRef": "docs/licenses/bodyparts3d-feasibility.json#presentationInspection",
             "parity": {
               "requiredCoverage": true,
@@ -172,8 +177,8 @@
             }
           }
         ],
-        "maleFemaleOrInclusiveVariantsObserved": 0,
-        "limitation": "Only one inspected presentation exists, so no cross-option capability parity can be claimed."
+        "additionalFemaleOrInclusiveVariantsObserved": 0,
+        "limitation": "Only one adult human male presentation was identified, so no cross-option capability parity or gender-identity claim can be made."
       }
     },
     "reviewerJudgments": {
@@ -204,11 +209,33 @@
           "No source UV or resolved source material library survives because neither exists in the selected OBJ inputs."
         ]
       },
-      "presentationConclusion": "One adult anatomy presentation is usable for the measured static anatomy experience. Male/female or broader inclusive options are not demonstrated and must not be claimed.",
+      "presentationConclusion": "One adult human male anatomy presentation is usable for the measured static anatomy experience. Female or broader inclusive options are not demonstrated and must not be claimed.",
       "selectionGate": "SBLA-006 owner decision remains required; this feasibility record measures and constrains the option but does not select it."
     }
   },
   "traceability": {
+    "artifactDigests": {
+      "mapping": {
+        "path": "docs/licenses/bodyparts3d-mesh-mapping.json",
+        "sha256": "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196"
+      },
+      "conversion": {
+        "path": "docs/licenses/bodyparts3d-conversion-manifest.json",
+        "sha256": "8d2cb6813a49be110c47729da208f3093b74788e7ae479b55e6f8abdef684d5d"
+      },
+      "performance": {
+        "path": "docs/licenses/bodyparts3d-performance.json",
+        "sha256": "2cfddff661420d9d4bb820fe9fd2a584008d022c75c821a88e1971e88a69a24b"
+      },
+      "poster": {
+        "path": "assets/derived/bodyparts3d/sbla005-poster.webp",
+        "sha256": "d7a3bcb98e380910cfc762f259e5d3f1e1434f71c8caecc66ee163d2fe4b35eb"
+      },
+      "optimizedArtifact": {
+        "path": "assets/derived/bodyparts3d/sbla005-representative.glb",
+        "sha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7"
+      }
+    },
     "criterionEvidence": {
       "coverage_naming": ["docs/licenses/bodyparts3d-mesh-mapping.json"],
       "mesh_separability": [
