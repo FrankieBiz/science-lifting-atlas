@@ -5,6 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { chromium } from '@playwright/test';
+import { format } from 'prettier';
 
 /** @typedef {{transferredBytes:number, fetchMs:number, parseMs:number, uploadMs:number, totalMs:number}} BenchmarkTrial */
 /** @typedef {{nativeHardware:any, lowPowerSimulation:any}} BenchmarkProfiles */
@@ -748,7 +749,6 @@ function validateExecutionIsolation(
  * @param {string} key
  * @param {any} profile
  * @param {Set<string>} profilePayloadDigests
- * @param {Set<string>} trialPayloadDigests
  */
 function validateEvidenceBinding(
   record,
@@ -756,17 +756,8 @@ function validateEvidenceBinding(
   key,
   profile,
   profilePayloadDigests,
-  trialPayloadDigests,
 ) {
   if (profile.status !== 'available') return;
-  for (const trial of profile.trials) {
-    const digest = digestJson(trial);
-    if (trialPayloadDigests.has(digest))
-      throw new Error(
-        `${key} copied measurements are not independent: repeated cold trial`,
-      );
-    trialPayloadDigests.add(digest);
-  }
   const payloadDigest = digestJson({
     warmups: profile.warmups,
     trials: profile.trials,
@@ -968,10 +959,6 @@ export function validatePerformanceRecord(record) {
     nativeHardware: new Set(),
     lowPowerSimulation: new Set(),
   };
-  const trialPayloadDigests = {
-    nativeHardware: new Set(),
-    lowPowerSimulation: new Set(),
-  };
   for (const [runIndex, run] of retainedRuns.entries()) {
     if (run?.id !== `run-${runIndex + 1}`)
       throw new Error('Benchmark run identity is invalid');
@@ -1007,7 +994,6 @@ export function validatePerformanceRecord(record) {
         key,
         run[key],
         profilePayloadDigests[key],
-        trialPayloadDigests[key],
       );
     }
   }
@@ -1881,6 +1867,12 @@ const isMain =
 if (isMain) {
   const record = await runFullBenchmark();
   if (process.argv.includes('--write'))
-    await writeFile(OUTPUT_PATH, `${JSON.stringify(record, null, 2)}\n`);
+    await writeFile(
+      OUTPUT_PATH,
+      await format(JSON.stringify(record), {
+        parser: 'json',
+        endOfLine: 'lf',
+      }),
+    );
   console.log(JSON.stringify(record, null, 2));
 }

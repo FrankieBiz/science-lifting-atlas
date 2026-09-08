@@ -182,11 +182,11 @@
             "reducedLod": true,
             "cpuThrottlingDocumented": true,
             "swiftShader": true,
-            "medianFrameMs": 16.7
+            "medianFrameMs": 16.8
           },
           "geometryBufferBytes": 2753652,
           "mobileFallbackPermitted": true,
-          "observedJsHeapBytes": 4746452,
+          "observedJsHeapBytes": 4743452,
           "observedJsHeapUnavailableReason": null,
           "performanceRecord": "docs/licenses/bodyparts3d-performance.json"
         },

@@ -589,22 +589,39 @@ describe('complete representative browser benchmark', () => {
     expect(() => validatePerformanceRecord(relabelledCopy)).toThrow(
       /copied.*measurement|measurement.*independent/i,
     );
-    const repeatedTrial = validRecord();
+    const copiedWithoutReceiptUpdate = validRecord();
     const repeated = structuredClone(
-      repeatedTrial.runs[0].nativeHardware.trials[0]!,
+      copiedWithoutReceiptUpdate.runs[0].nativeHardware.trials[0]!,
     );
-    repeatedTrial.runs[0].nativeHardware.trials = Array.from(
+    copiedWithoutReceiptUpdate.runs[0].nativeHardware.trials = Array.from(
       { length: 5 },
       () => structuredClone(repeated),
     );
-    const aggregates = repeatedTrial.runs[0].nativeHardware.aggregates!;
+    const aggregates =
+      copiedWithoutReceiptUpdate.runs[0].nativeHardware.aggregates!;
     aggregates.medianFetchMs = repeated.fetchMs;
     aggregates.medianParseMs = repeated.parseMs;
     aggregates.medianUploadMs = repeated.uploadMs;
     aggregates.medianTotalMs = repeated.totalMs;
-    expect(() => validatePerformanceRecord(repeatedTrial)).toThrow(
-      /repeated.*trial|trial.*independent/i,
+    expect(() => validatePerformanceRecord(copiedWithoutReceiptUpdate)).toThrow(
+      /receipt|payload/i,
     );
+  });
+
+  it('allows independently receipted cold trials to have equal rounded measurements', () => {
+    const record = validRecord();
+    const repeated = structuredClone(record.runs[0].nativeHardware.trials[0]!);
+    record.runs[0].nativeHardware.trials = Array.from({ length: 5 }, () =>
+      structuredClone(repeated),
+    );
+    const aggregates = record.runs[0].nativeHardware.aggregates!;
+    aggregates.medianFetchMs = repeated.fetchMs;
+    aggregates.medianParseMs = repeated.parseMs;
+    aggregates.medianUploadMs = repeated.uploadMs;
+    aggregates.medianTotalMs = repeated.totalMs;
+    bindPerformanceEvidence(record);
+
+    expect(() => validatePerformanceRecord(record)).not.toThrow();
   });
   it('blocks completeness if a profile is unavailable', () => {
     const record = validRecord();

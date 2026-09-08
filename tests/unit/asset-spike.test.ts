@@ -1254,6 +1254,36 @@ describe('SBLA-005 measured candidate scorecard', () => {
     expect(bodyParts.weightedTotal).toBe(70);
   });
 
+  it('binds the embedded browser score evidence to the authenticated performance record', async () => {
+    const inventory = await inventoryRecord();
+    const bodyParts = inventory.candidates.find(
+      ({ id }: { id: string }) => id === 'path-c-bodyparts3d',
+    );
+    const measurement = bodyParts.measurements.browser_performance;
+    const performance = JSON.parse(
+      await readFile(
+        new URL(`../../${measurement.performanceRecord}`, import.meta.url),
+        'utf8',
+      ),
+    );
+
+    expect(measurement).toMatchObject({
+      optimizedGlbBytes: performance.source.bytes,
+      nativeProfile: {
+        hardwareBacked: true,
+        medianFrameMs:
+          performance.profiles.nativeHardware.aggregates.medianFrameMs,
+      },
+      lowPowerSimulation: {
+        profileKind: 'simulation',
+        medianFrameMs:
+          performance.profiles.lowPowerSimulation.aggregates.medianFrameMs,
+      },
+      geometryBufferBytes: performance.scene.geometryBufferBytes,
+      observedJsHeapBytes: performance.profiles.nativeHardware.jsHeap.bytes,
+    });
+  });
+
   it('keeps ineligible and unacquired candidates without technical scores or totals', async () => {
     const inventory = await inventoryRecord();
     const technicalCriteria = PLAN_WEIGHTS.map(([id]) => id).filter(
@@ -1726,7 +1756,7 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
       performance: {
         path: 'docs/licenses/bodyparts3d-performance.json',
         sha256:
-          '2cfddff661420d9d4bb820fe9fd2a584008d022c75c821a88e1971e88a69a24b',
+          'e7e55aed924a55540e372d40e75013434d6b3340e05f5142693ea5d8810c2769',
       },
       poster: {
         path: 'assets/derived/bodyparts3d/sbla005-poster.webp',
