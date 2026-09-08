@@ -39,6 +39,8 @@ for (const result of results) {
     console.log(
       `- ${result.name}: PLACEHOLDER — no vendor selected; not scored.`,
     );
+  } else if (result.rejected) {
+    console.log(`- ${result.name}: INELIGIBLE — ${result.rejectionReason}`);
   } else if (!result.complete) {
     if (result.licenceIssues.length > 0) {
       console.log(`- ${result.name}: INCOMPLETE — licence record invalid`);
@@ -47,10 +49,10 @@ for (const result of results) {
         `- ${result.name}: INCOMPLETE — licence recorded; ${result.unmeasured.length} criteria awaiting SBLA-005 measurement (${result.unmeasured.join(', ')})`,
       );
     }
-  } else if (result.rejected) {
-    console.log(`- ${result.name}: INELIGIBLE — ${result.rejectionReason}`);
   } else {
-    console.log(`- ${result.name}: weighted total ${result.weightedTotal}/100`);
+    console.log(
+      `- ${result.name}: weighted total ${result.weightedTotal}/100 — measured recommendation only`,
+    );
   }
 }
 
@@ -69,6 +71,6 @@ if (issues.length > 0) {
     `Asset spike passed: ${results.length} candidate(s); ${eligible} eligible, ${ineligible} ineligible under the §8.3 licence-clarity floor of ${LICENSE_CLARITY_FLOOR}/5.`,
   );
   console.log(
-    'No asset is selected, purchased, or approved. SBLA-005 measures; SBLA-006 decides.',
+    'No asset is selected, purchased, or approved. SBLA-005 measures and recommends; SBLA-006 and the owner decide.',
   );
 }

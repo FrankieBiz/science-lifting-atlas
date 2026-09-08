@@ -1054,14 +1054,14 @@ describe('asset spike scorecard', () => {
   });
 
   it('allows a sub-floor candidate only when it is explicitly acknowledged with a reason', () => {
-    const measurements = measurementsForScoreFour();
-    measurements.license_clarity.conflictStatus = 'unresolved-mixed';
-    measurements.license_clarity.mixedComponentTermsUnresolved = true;
-    measurements.license_clarity.historicalNoticeStatus = 'none';
+    const licenseMeasurement = measurementsForScoreFour().license_clarity;
+    licenseMeasurement.conflictStatus = 'unresolved-mixed';
+    licenseMeasurement.mixedComponentTermsUnresolved = true;
+    licenseMeasurement.historicalNoticeStatus = 'none';
     const ok = evaluateCandidate(
       candidate({
-        scores: { ...scored(), license_clarity: 3 },
-        measurements,
+        scores: { ...scored(null), license_clarity: 3 },
+        measurements: { license_clarity: licenseMeasurement },
         selectionEligible: false,
         ineligibleReason: 'unresolved mixed licensing',
       }),
@@ -1071,8 +1071,8 @@ describe('asset spike scorecard', () => {
 
     const missingReason = evaluateCandidate(
       candidate({
-        scores: { ...scored(), license_clarity: 3 },
-        measurements,
+        scores: { ...scored(null), license_clarity: 3 },
+        measurements: { license_clarity: licenseMeasurement },
         selectionEligible: false,
       }),
     );
@@ -1082,13 +1082,13 @@ describe('asset spike scorecard', () => {
   });
 
   it('honours selectionEligible:false even when clarity is above the floor', () => {
-    const measurements = measurementsForScoreFour();
-    measurements.license_clarity.conflictStatus = 'none';
-    measurements.license_clarity.historicalNoticeStatus = 'none';
+    const licenseMeasurement = measurementsForScoreFour().license_clarity;
+    licenseMeasurement.conflictStatus = 'none';
+    licenseMeasurement.historicalNoticeStatus = 'none';
     const result = evaluateCandidate(
       candidate({
-        scores: { ...scored(), license_clarity: 5 },
-        measurements,
+        scores: { ...scored(null), license_clarity: 5 },
+        measurements: { license_clarity: licenseMeasurement },
         selectionEligible: false,
         ineligibleReason: 'NonCommercial terms',
       }),
@@ -1172,6 +1172,133 @@ describe('asset spike scorecard', () => {
   it('is deterministic: identical input yields identical output', () => {
     expect(JSON.stringify(evaluateCandidate(candidate()))).toBe(
       JSON.stringify(evaluateCandidate(candidate())),
+    );
+  });
+});
+
+describe('SBLA-005 measured candidate scorecard', () => {
+  async function inventoryRecord() {
+    return JSON.parse(
+      await readFile(
+        new URL('../../docs/licenses/asset-candidates.json', import.meta.url),
+        'utf8',
+      ),
+    );
+  }
+
+  it('scores the only eligible acquired candidate from all seven evidence records', async () => {
+    const inventory = await inventoryRecord();
+    const bodyParts = inventory.candidates.find(
+      ({ id }: { id: string }) => id === 'path-c-bodyparts3d',
+    );
+    const evaluation = evaluateCandidate(bodyParts);
+
+    expect(bodyParts.scores).toEqual({
+      coverage_naming: 3,
+      mesh_separability: 5,
+      visual_quality: 1,
+      browser_performance: 4,
+      license_clarity: 4,
+      pipeline_ease: 5,
+      presentation_options: 2,
+    });
+    expect(Object.keys(bodyParts.measurements)).toEqual(
+      PLAN_WEIGHTS.map(([id]) => id),
+    );
+    expect(evaluation.issues).toEqual([]);
+    expect(evaluation.licenceIssues).toEqual([]);
+    expect(evaluation.unmeasured).toEqual([]);
+    expect(evaluation.complete).toBe(true);
+    expect(evaluation.rejected).toBe(false);
+    expect(evaluation.weightedTotal).toBe(70);
+    expect(bodyParts.weightedTotal).toBe(70);
+  });
+
+  it('keeps ineligible and unacquired candidates without technical scores or totals', async () => {
+    const inventory = await inventoryRecord();
+    const technicalCriteria = PLAN_WEIGHTS.map(([id]) => id).filter(
+      (id) => id !== 'license_clarity',
+    );
+
+    for (const candidateRecord of inventory.candidates.filter(
+      ({ id }: { id: string }) => id !== 'path-c-bodyparts3d',
+    )) {
+      for (const criterion of technicalCriteria) {
+        expect(candidateRecord.scores[criterion]).toBeNull();
+      }
+      expect(candidateRecord.weightedTotal).toBeNull();
+      expect(evaluateCandidate(candidateRecord).weightedTotal).toBeNull();
+    }
+
+    const zAnatomy = structuredClone(
+      inventory.candidates.find(
+        ({ id }: { id: string }) => id === 'path-b-z-anatomy',
+      ),
+    );
+    zAnatomy.scores.visual_quality = 4;
+    zAnatomy.measurements = {
+      visual_quality: measurementsForScoreFour().visual_quality,
+    };
+    expect(evaluateCandidate(zAnatomy).issues).toContain(
+      'path-b-z-anatomy: ineligible candidates must keep technical scores null: visual_quality',
+    );
+  });
+
+  it('reports rejected candidates as ineligible and the measured candidate as a recommendation only', async () => {
+    const inventory = await inventoryRecord();
+    const result = await runSpike(inventory.candidates);
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stdout).toContain(
+      '- Z-Anatomy: INELIGIBLE — Mixed licensing:',
+    );
+    expect(result.stdout).toContain(
+      '- OpenStax Anatomy & Physiology 2e: INELIGIBLE — NonCommercial',
+    );
+    expect(result.stdout).toContain(
+      '- BodyParts3D / Anatomography: weighted total 70/100 — measured recommendation only',
+    );
+    expect(result.stdout).toContain(
+      'No asset is selected, purchased, or approved. SBLA-005 measures and recommends; SBLA-006 and the owner decide.',
+    );
+  });
+
+  it('fails closed when an actual BodyParts3D score or evidence value is altered', async () => {
+    const inventory = await inventoryRecord();
+    const original = inventory.candidates.find(
+      ({ id }: { id: string }) => id === 'path-c-bodyparts3d',
+    );
+    const changedScore = structuredClone(original);
+    changedScore.scores.browser_performance = 5;
+    expect(
+      evaluateCandidate(changedScore).issues.some((issue: string) =>
+        issue.includes('does not match evidence-derived score 4'),
+      ),
+    ).toBe(true);
+
+    const changedEvidence = structuredClone(original);
+    changedEvidence.measurements.pipeline_ease.authorizedOutputsByteIdentical = false;
+    expect(
+      evaluateCandidate(changedEvidence).issues.some((issue: string) =>
+        issue.includes('does not match evidence-derived score 4'),
+      ),
+    ).toBe(true);
+
+    const changedTotal = structuredClone(original);
+    changedTotal.weightedTotal = 71;
+    expect(
+      evaluateCandidate(changedTotal).issues.some((issue: string) =>
+        issue.includes('recorded weightedTotal 71 does not match computed 70'),
+      ),
+    ).toBe(true);
+  });
+
+  it('fails closed when the accepted licence-review window has expired', async () => {
+    const inventory = await inventoryRecord();
+    inventory.reverifyBy = '2026-09-07';
+
+    expect(evaluateInventory(inventory, '2026-09-08').issues).toContain(
+      'inventory licence evidence expired on 2026-09-07; re-verify before scoring on 2026-09-08',
     );
   });
 });

@@ -1080,6 +1080,7 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
  * @property {Record<string, unknown>} [license]
  * @property {Record<string, number|null>} [scores]
  * @property {Record<string, Record<string, unknown>|null>} [measurements]
+ * @property {number|null} [weightedTotal]
  */
 
 /**
@@ -1323,6 +1324,28 @@ export function evaluateCandidate(candidate) {
   // selectionEligible:false is honoured on its own.
   const ineligible = belowFloor || acknowledged;
 
+  if (ineligible) {
+    for (const criterion of SPIKE_CRITERIA) {
+      if (criterion.key === 'license_clarity') continue;
+      if (
+        scores[criterion.key] !== null &&
+        scores[criterion.key] !== undefined
+      ) {
+        issues.push(
+          `${id}: ineligible candidates must keep technical scores null: ${criterion.key}`,
+        );
+      }
+      if (
+        Object.hasOwn(measurements, criterion.key) &&
+        measurements[criterion.key] !== null
+      ) {
+        issues.push(
+          `${id}: ineligible candidates must not retain technical measurements: ${criterion.key}`,
+        );
+      }
+    }
+  }
+
   // §8.3 rejection is an outcome, not a repo defect - but it must be recorded
   // deliberately. An unacknowledged sub-floor candidate fails the gate.
   if (belowFloor && !acknowledged) {
@@ -1344,11 +1367,23 @@ export function evaluateCandidate(candidate) {
   const licenceIssues = validUnselectedPlaceholder
     ? []
     : validateLicenseFields(candidate);
-  const complete =
+  const scoreEvidenceComplete =
     !isPlaceholder &&
     unmeasured.length === 0 &&
     issues.length === 0 &&
     licenceIssues.length === 0;
+  const computedWeightedTotal = scoreEvidenceComplete
+    ? Math.round(weighted * 100) / 100
+    : null;
+  if (
+    Object.hasOwn(candidate, 'weightedTotal') &&
+    candidate.weightedTotal !== computedWeightedTotal
+  ) {
+    issues.push(
+      `${id}: recorded weightedTotal ${String(candidate.weightedTotal)} does not match computed ${String(computedWeightedTotal)}`,
+    );
+  }
+  const complete = scoreEvidenceComplete && issues.length === 0;
 
   return {
     id,
@@ -1358,12 +1393,12 @@ export function evaluateCandidate(candidate) {
     issues,
     unmeasured,
     complete,
-    weightedTotal: complete ? Math.round(weighted * 100) / 100 : null,
+    weightedTotal: complete ? computedWeightedTotal : null,
     rejected: ineligible,
-    rejectionReason: belowFloor
-      ? `licence clarity ${clarity} is below the required floor of ${LICENSE_CLARITY_FLOOR} (master plan §8.3)`
-      : acknowledged
-        ? (candidate.ineligibleReason ?? 'recorded as ineligible')
+    rejectionReason: acknowledged
+      ? (candidate.ineligibleReason ?? 'recorded as ineligible')
+      : belowFloor
+        ? `licence clarity ${clarity} is below the required floor of ${LICENSE_CLARITY_FLOOR} (master plan §8.3)`
         : null,
   };
 }
@@ -1373,9 +1408,13 @@ export function evaluateCandidate(candidate) {
  * candidate list: losing the candidates is the most damaging malformation, and
  * an empty run must never report success.
  *
- * @param {{candidates?: unknown}} inventory
+ * @param {{candidates?: unknown, reverifyBy?: unknown}} inventory
+ * @param {string} [asOfDate]
  */
-export function evaluateInventory(inventory) {
+export function evaluateInventory(
+  inventory,
+  asOfDate = new Date().toISOString().slice(0, 10),
+) {
   const raw = inventory?.candidates;
 
   if (!Array.isArray(raw)) {
@@ -1399,6 +1438,21 @@ export function evaluateInventory(inventory) {
   const results = raw.map((candidate) => evaluateCandidate(candidate));
   const issues = [];
   const seen = new Set();
+
+  if (Object.hasOwn(inventory, 'reverifyBy')) {
+    if (
+      typeof inventory.reverifyBy !== 'string' ||
+      !ISO_DATE.test(inventory.reverifyBy)
+    ) {
+      issues.push('inventory.reverifyBy must be an ISO date (YYYY-MM-DD)');
+    } else if (!ISO_DATE.test(asOfDate)) {
+      issues.push('inventory evaluation date must be an ISO date (YYYY-MM-DD)');
+    } else if (inventory.reverifyBy < asOfDate) {
+      issues.push(
+        `inventory licence evidence expired on ${inventory.reverifyBy}; re-verify before scoring on ${asOfDate}`,
+      );
+    }
+  }
 
   for (const result of results) {
     if (!result.malformed && seen.has(result.id))
