@@ -39,6 +39,10 @@ describe('repository command contract', () => {
     expect(globalIgnores).toContain('.worktrees/**');
   });
 
+  it('keeps the approved asset decision in the canonical verification path', () => {
+    expect(REQUIRED_VERIFY_STEPS).toContain('pnpm assets:decision');
+  });
+
   it('requires every stable command from master plan section 13.7', () => {
     const issues = validateFoundation({
       packageJson: { scripts: {} },

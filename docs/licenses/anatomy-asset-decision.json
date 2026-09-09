@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "taskId": "SBLA-006",
+  "decisionId": "gate-a-asset-2026-09-09",
+  "status": "approved",
+  "decision": "approve-2d-authoritative-hybrid-with-bounded-bodyparts3d-enhancement",
+  "recordedOn": "2026-09-09",
+  "ownerApproval": {
+    "approved": true,
+    "approvedOn": "2026-09-09",
+    "authorityBasis": "owner-delegated-project-decision",
+    "recordedBy": "Codex acting under owner delegation",
+    "record": "The owner delegated the next course of action and project decisions to Codex, repeatedly authorized continued execution of the plan, and requested that Codex make the decision. This repository record is the durable Gate A sign-off artifact."
+  },
+  "cost": {
+    "currency": "USD",
+    "purchaseRequired": false,
+    "purchaseUsd": 0,
+    "recurringUsd": 0,
+    "purchaseArchiveRequired": false,
+    "reason": "No commercial asset is selected or purchased. BodyParts3D permits adaptation and redistribution with attribution; the project-authored vector baseline adds no third-party asset fee."
+  },
+  "baseline2d": {
+    "type": "project-authored-evidence-reviewed-semantic-vector-and-text",
+    "role": "authoritative-core-experience",
+    "authoritativeForAllRequiredTargets": true,
+    "thirdPartyAssetSelected": false,
+    "productionStatus": "deferred-to-SBLA-008-through-SBLA-013",
+    "rightsBasis": "Original project-authored presentation; no third-party 2D anatomy asset is selected. Scientific labels, relationships, and depictions require the later research, citation-review, content-integration, visual-system, and production-media gates before publication.",
+    "accessibility": "Semantic text and vector diagrams must carry the complete meaning without WebGL.",
+    "checksumStatus": "No production vector asset exists in SBLA-006, so no output checksum can truthfully be recorded yet. SBLA-013 must checksum every generated production asset."
+  },
+  "enhancement3d": {
+    "candidateId": "path-c-bodyparts3d",
+    "role": "optional-progressive-enhancement-only",
+    "datasetVersion": "BodyParts3D 4.0 / FMA 3.0 / 99% polygon reduction",
+    "sourceBaseUrl": "https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/",
+    "sourceIdentityPolicy": "The source URL is mutable; the versioned filenames, byte counts, and SHA-256 values below are the immutable acquisition identity.",
+    "archives": {
+      "isa_BP3D_4.0_obj_99.zip": {
+        "bytes": 142903898,
+        "sha256": "40665852c49f218326590e204db91064a1ecfc3c6f8cbd7bbbcaac62c7cd409e"
+      },
+      "partof_BP3D_4.0_obj_99.zip": {
+        "bytes": 64888505,
+        "sha256": "9fbc713fffeee924a5a657d9813d84d7eb957bded63adb854931dd5e3eb61c97"
+      }
+    },
+    "license": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "version": "4.0",
+      "source": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "accessedOn": "2026-09-09",
+      "attributionString": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+      "historicalEmbeddedNotice": "CC BY-SA 2.1 Japan remains present in acquired OBJ headers and is preserved and applied conservatively alongside the current terms unless later legal review resolves the boundary."
+    },
+    "representativeArtifact": {
+      "path": "assets/derived/bodyparts3d/sbla005-representative.glb",
+      "sha256": "b51f1fadbf84a5d1c439e5ca6af175397bee054306850d414f23178fb12cf5a7"
+    }
+  },
+  "coverage": {
+    "requiredTargets": 28,
+    "mapped3dTargets": 23,
+    "missing3dTargetIds": [
+      "latissimus-dorsi",
+      "rectus-abdominis",
+      "internal-oblique",
+      "transversus-abdominis",
+      "multifidus"
+    ],
+    "policy": "The five absent targets remain available through the authoritative 2D/text path only. They may enter 3D only after a separately licensed source passes mapping, anatomy, performance, accessibility, and independent review gates."
+  },
+  "evidenceDigests": {
+    "docs/licenses/bodyparts3d-mesh-mapping.json": "b10761d2315b15b3f95ade7343df33d63e55f0d313d219fc39056567c3151196",
+    "docs/licenses/bodyparts3d-feasibility.json": "39a8f846ec4b1d179ea9c84f8ed443c6155c3b9848c5875275105d414dacbd39",
+    "docs/licenses/bodyparts3d-performance.json": "f6be37064594e603a849079ec32e340ae7260efb8702a228a7cb4c7381090019"
+  },
+  "guardrails": {
+    "bodyparts3dMayBeSoleAnatomySource": false,
+    "webglRequiredForCoreJourney": false,
+    "createScientificIllustrationsInThisTask": false,
+    "publishUnsupportedAnatomy": false,
+    "generatedAnatomyImagesPermitted": false,
+    "requiredAttributionMustShipWithEveryDerivative": true
+  },
+  "acceptedRisks": [
+    "BodyParts3D covers only 23 of 28 required targets.",
+    "The measured source has no usable UV/material survival, no rig, no skeleton context in the representative artifact, open meshes, and only one observed adult male presentation.",
+    "The physical mid-tier mobile-device performance gate remains untested.",
+    "The historical CC BY-SA 2.1 Japan notice is conservatively applied alongside the current CC BY 4.0 terms."
+  ],
+  "rejectedAlternatives": [
+    {
+      "option": "purchase-commercial-asset-now",
+      "reason": "No vendor asset has been acquired, license-archived, checksum-pinned, or benchmarked; purchase would be an unmeasured commitment."
+    },
+    {
+      "option": "bodyparts3d-as-complete-sole-source",
+      "reason": "Five required targets and several visual, context, rigging, and presentation capabilities are absent."
+    },
+    {
+      "option": "combine-with-z-anatomy",
+      "reason": "Z-Anatomy remains below the 4/5 license-clarity floor because its model attribution chain includes unresolved NonCommercial components."
+    },
+    {
+      "option": "openstax-2d-assets",
+      "reason": "OpenStax is NonCommercial and prohibits unpermitted LLM ingestion, so it remains ineligible for this AI-executed asset workflow."
+    },
+    {
+      "option": "defer-all-3d",
+      "reason": "The measured BodyParts3D subset already meets mapping, deterministic pipeline, payload, frame-cost, and license-floor gates for bounded progressive enhancement."
+    }
+  ],
+  "laterTaskBoundaries": {
+    "SBLA-007": "production entity and evidence schemas",
+    "SBLA-008-through-SBLA-010": "scientific questions, sourcing, synthesis, and claim review",
+    "SBLA-011": "approved content integration",
+    "SBLA-012": "visual system and formative usability",
+    "SBLA-013": "production media generation, checksums, attribution manifests, and performance",
+    "SBLA-015": "complete accessible anatomy experience, fallbacks, and physical-device acceptance"
+  }
+}

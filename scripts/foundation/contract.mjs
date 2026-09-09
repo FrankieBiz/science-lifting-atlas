@@ -19,6 +19,7 @@ export const REQUIRED_VERIFY_STEPS = Object.freeze([
   'pnpm evidence:status',
   'pnpm build',
   'pnpm verify:foundation',
+  'pnpm assets:decision',
 ]);
 
 export const REQUIRED_PATHS = Object.freeze([
