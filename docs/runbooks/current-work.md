@@ -29,8 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task | Role | Branch | Worktree | Base commit | Started | Expected handoff | Paths owned |
-| ---- | ---- | ------ | -------- | ----------- | ------- | ---------------- | ----------- |
+| Task               | Role                      | Branch                      | Worktree                        | Base commit                                | Started              | Expected handoff                  | Paths owned                            |
+| ------------------ | ------------------------- | --------------------------- | ------------------------------- | ------------------------------------------ | -------------------- | --------------------------------- | -------------------------------------- |
+| SBLA-006 review R1 | Claude Review (account B) | `claude-review/SBLA-006-r1` | `.worktrees/sbla-006-review-r1` | `d98ad23050b18e9a6fa6204bbbdabe162e31dd17` | 2026-09-09 09:42 EDT | `reviews/releases/SBLA-006-r1.md` | `reviews/releases/SBLA-006-r1.md` only |
 
 ## Closed claims
 
