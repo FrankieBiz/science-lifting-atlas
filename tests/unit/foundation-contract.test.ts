@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import eslintConfig from '../../eslint.config.mjs';
+
 import {
   EXPECTED_PACKAGE_MANAGER,
   REQUIRED_PATHS,
@@ -29,6 +31,14 @@ function completeWorkflowFileContents() {
 }
 
 describe('repository command contract', () => {
+  it('keeps ignored task worktrees outside whole-repository lint traversal', () => {
+    const globalIgnores = eslintConfig.find(
+      (entry) => 'ignores' in entry && Array.isArray(entry.ignores),
+    )?.ignores;
+
+    expect(globalIgnores).toContain('.worktrees/**');
+  });
+
   it('requires every stable command from master plan section 13.7', () => {
     const issues = validateFoundation({
       packageJson: { scripts: {} },

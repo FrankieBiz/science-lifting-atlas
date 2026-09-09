@@ -1,8 +1,28 @@
 # Handoff: SBLA-005 — candidate benchmark and measured scorecard
 
-**Status:** Ready for the one plan-required independent Account-B Claude Review.
-This is a measurement and recommendation milestone, not an asset-selection
-decision. PASS requires zero Critical and zero Important findings.
+**Status:** Accepted on `main` at
+`2e08f4371b1744b1b917dad858355e0b29b1c484` after the one plan-required
+independent Account-B Claude Review passed with zero Critical and zero Important
+findings. This remains a measurement and recommendation milestone, not an
+asset-selection decision.
+
+## Acceptance addendum
+
+- Exact reviewed candidate: `26ce8a2bad292f82c05208fcbe4676739bfaefe1`
+- Candidate tree: `b4f57556469a906d1fb34fe77c18e9afd4d3ddff`
+- Reviewer-authored report: `reviews/releases/SBLA-005-r1.md`
+- Reviewer report commit: `b3596209a977229fcd335b85fef5467360a27e10`
+- Integrated report commit: `4427c86c04b3d9fe626bba729f98176caa387f64`
+- Report SHA-256:
+  `64791abd88cf5cccbac2a0170ddd1224816cd66f99f4bddc50e9cdb42d157e90`
+- Verdict: PASS; 0 Critical, 0 Important, 2 nonblocking Minor findings
+- Acceptance/traceability closure: `2e08f4371b1744b1b917dad858355e0b29b1c484`
+- Exact dependency base for SBLA-006:
+  `2e08f4371b1744b1b917dad858355e0b29b1c484`
+
+The acceptance closure changes only traceability and formatter boundaries after
+the reviewed candidate. It does not change the measured artifacts, scorecard,
+benchmark, or immutable reviewer report.
 
 ## Candidate identity and boundary
 
