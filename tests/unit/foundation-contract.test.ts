@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import eslintConfig from '../../eslint.config.mjs';
@@ -37,6 +40,15 @@ describe('repository command contract', () => {
     );
 
     expect(globalIgnores).toContain('.worktrees/**');
+  });
+
+  it('keeps task worktrees outside filesystem simulation fixtures', () => {
+    const fixtureTest = readFileSync(
+      path.resolve(import.meta.dirname, 'operating-model-filesystem.test.ts'),
+      'utf8',
+    );
+
+    expect(fixtureTest).toContain("'.worktrees'");
   });
 
   it('keeps the approved asset decision in the canonical verification path', () => {

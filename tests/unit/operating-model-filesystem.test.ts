@@ -15,6 +15,7 @@ beforeAll(async () => {
   const excludedRoots = new Set([
     '.astro',
     '.git',
+    '.worktrees',
     'coverage',
     'dist',
     'node_modules',
