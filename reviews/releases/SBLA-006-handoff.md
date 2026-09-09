@@ -2,8 +2,7 @@
 
 **Status:** Accepted after independent Account-B Claude Review Round 2 passed
 with zero Critical and zero Important findings. The accepted dependency for
-SBLA-007 is the acceptance-record commit named in the traceability addendum
-below.
+SBLA-007 is `091584b10b3702ed49d33ef236d7727771f17269`.
 
 ## Acceptance addendum
 
@@ -20,8 +19,8 @@ below.
 - Independent evidence: 47 adversarial mutations, all 12 verification stages,
   187 unit tests, 17 portability tests, live HTTP 200 primary-license fetch,
   and corroborated browser assertions
-- Acceptance record and exact SBLA-007 dependency base: the subsequent
-  traceability commit that names this acceptance-record commit
+- Acceptance record and exact SBLA-007 dependency base:
+  `091584b10b3702ed49d33ef236d7727771f17269`
 
 The acceptance record and review reports do not change the immutable candidate
 artifacts. The eight Minor findings remain explicit follow-up hardening work;
