@@ -6,6 +6,7 @@ import {
   bindPerformanceEvidence,
   parseGlb,
   percentile,
+  roundTiming,
   sceneCameraFit,
   summarizeScene,
   validatePerformanceRecord,
@@ -33,6 +34,8 @@ type MutableProfile = {
   warmups: Trial[];
   trials: Trial[];
   frameTimesMs: number[];
+  cpuSubmissionTimesMs: number[];
+  gpuExecutionTimesMs: number[];
   aggregates: {
     medianFetchMs?: number;
     medianParseMs?: number;
@@ -40,6 +43,8 @@ type MutableProfile = {
     medianTotalMs?: number;
     medianFrameMs?: number;
     p95FrameMs?: number;
+    medianCpuSubmissionMs?: number;
+    medianGpuExecutionMs?: number;
   } | null;
   [key: string]: unknown;
 };
@@ -52,7 +57,7 @@ type MutableRun = {
 };
 type PerformanceAssessment = {
   status: string;
-  observedMedianFps: number | null;
+  estimatedUncappedFps: number | null;
   passes: boolean | null;
   reason: string | null;
 };
@@ -66,7 +71,7 @@ type MutableRecord = {
     nativeMedianFrameMsDelta: number | null;
     simulatedMedianFrameMsDelta: number | null;
     unavailableReason: string | null;
-    materialDifferenceThresholdMs: number;
+    materialDifferenceThresholdRatio: number;
     materialDifferenceObserved: boolean | null;
   };
   payloadAssessment: Record<string, boolean>;
@@ -122,11 +127,15 @@ function profile(status = 'available', seed = 1): MutableProfile {
       warmups: [],
       trials: [],
       frameTimesMs: [],
+      cpuSubmissionTimesMs: [],
+      gpuExecutionTimesMs: [],
       aggregates: null,
     };
   const offset = seed * 10;
   const trials = [1, 2, 3, 4, 5].map((value) => trial(value + offset));
   const frames = Array.from({ length: 300 }, (_, i) => 10 + i / 100);
+  const cpuSubmissionTimesMs = frames.map((value) => value - 2);
+  const gpuExecutionTimesMs = frames.map((value) => value - 1);
   return {
     status,
     renderer: {
@@ -173,6 +182,8 @@ function profile(status = 'available', seed = 1): MutableProfile {
     trials,
     animationTrial: trial(offset + 6),
     frameTimesMs: frames,
+    cpuSubmissionTimesMs,
+    gpuExecutionTimesMs,
     aggregates: {
       medianFetchMs: offset + 3,
       medianParseMs: offset + 4,
@@ -180,6 +191,8 @@ function profile(status = 'available', seed = 1): MutableProfile {
       medianTotalMs: offset * 3 + 12,
       medianFrameMs: 11.495,
       p95FrameMs: percentile(frames, 0.95),
+      medianCpuSubmissionMs: 9.495,
+      medianGpuExecutionMs: 10.495,
     },
   };
 }
@@ -288,9 +301,13 @@ function validRecord(): MutableRecord {
       measuredColdTrials: 5,
       stabilizedAnimationFrames: 300,
       stabilizationFramesDiscarded: 30,
-      glFinish: true,
-      frameTimingMethod: 'synchronous-draw-gl-finish-after-raf-stabilization',
-      drawsPerFrameSample: 10,
+      glFinish: false,
+      frameTimingMethod:
+        'ext-disjoint-timer-query-webgl2-critical-path-after-raf-stabilization',
+      gpuTimerQueryExtension: 'EXT_disjoint_timer_query_webgl2',
+      frameCostDefinition:
+        'max(cpu submission time, GPU execution time) for one complete 139-draw frame; excludes display-vsync wait',
+      drawsPerFrameSample: 1,
       coldDefinition:
         'unique no-store URL; fresh Playwright BrowserContext, page, WebGL2 context, parse, and GPU buffers per measurement',
     },
@@ -341,19 +358,19 @@ function validRecord(): MutableRecord {
       nativeMedianFrameMsDelta: 0,
       simulatedMedianFrameMsDelta: 0,
       unavailableReason: null,
-      materialDifferenceThresholdMs: 2,
+      materialDifferenceThresholdRatio: 0.1,
       materialDifferenceObserved: false,
     },
     performanceAssessment: {
       native: {
         status: 'measured',
-        observedMedianFps: 86.994,
+        estimatedUncappedFps: 86.994,
         passes: true,
         reason: null,
       },
       simulated: {
         status: 'measured',
-        observedMedianFps: 86.994,
+        estimatedUncappedFps: 86.994,
         passes: true,
         reason: null,
       },
@@ -364,6 +381,10 @@ function validRecord(): MutableRecord {
 }
 
 describe('complete representative browser benchmark', () => {
+  it('preserves positive sub-millisecond GPU timings instead of rounding them to zero', () => {
+    expect(roundTiming(0.0004)).toBe(0.0004);
+    expect(roundTiming(0.0000004)).toBeGreaterThan(0);
+  });
   it('accepts only the checksum-bound Task 4 GLB with its complete distinct scene', async () => {
     const { manifest, glb } = await acceptedScene();
     const parsed = parseGlb(glb);
@@ -451,6 +472,34 @@ describe('complete representative browser benchmark', () => {
     const absentAggregate = validRecord();
     delete absentAggregate.runs[0].nativeHardware.aggregates!.medianFrameMs;
     expect(() => validatePerformanceRecord(absentAggregate)).toThrow(/finite/i);
+  });
+  it('uses a scale-independent ten-percent threshold for two-run variance', () => {
+    const record = validRecord();
+    const first = record.runs[0].nativeHardware;
+    const second = record.runs[1].nativeHardware;
+    first.frameTimesMs = second.frameTimesMs.map((value) => value * 1.2);
+    first.cpuSubmissionTimesMs = second.cpuSubmissionTimesMs.map(
+      (value) => value * 1.2,
+    );
+    first.gpuExecutionTimesMs = second.gpuExecutionTimesMs.map(
+      (value) => value * 1.2,
+    );
+    first.aggregates!.medianFrameMs = second.aggregates!.medianFrameMs! * 1.2;
+    first.aggregates!.p95FrameMs = second.aggregates!.p95FrameMs! * 1.2;
+    first.aggregates!.medianCpuSubmissionMs =
+      second.aggregates!.medianCpuSubmissionMs! * 1.2;
+    first.aggregates!.medianGpuExecutionMs =
+      second.aggregates!.medianGpuExecutionMs! * 1.2;
+    record.variance.nativeMedianFrameMsDelta =
+      first.aggregates!.medianFrameMs! - second.aggregates!.medianFrameMs!;
+    record.variance.materialDifferenceObserved = true;
+    record.browserPerformanceComplete = false;
+    bindPerformanceEvidence(record);
+    expect(() => validatePerformanceRecord(record)).not.toThrow();
+    record.browserPerformanceComplete = true;
+    expect(() => validatePerformanceRecord(record)).toThrow(
+      /variance|completeness/i,
+    );
   });
   it('requires renderer proof, simulation labeling, reduced LOD, and two runs', () => {
     const software = validRecord();
@@ -555,7 +604,7 @@ describe('complete representative browser benchmark', () => {
       /CDP|throttling/i,
     );
   });
-  it('requires frame samples to measure render cost outside the display-vsync wait', () => {
+  it('requires GPU-query frame samples to measure full-frame critical-path cost outside display vsync', () => {
     const missingMethod = validRecord();
     delete (missingMethod.protocol as Record<string, unknown>)
       .frameTimingMethod;
@@ -570,12 +619,36 @@ describe('complete representative browser benchmark', () => {
       /frame timing method/i,
     );
 
-    const unbatched = validRecord();
-    delete (unbatched.protocol as Record<string, unknown>).drawsPerFrameSample;
-    bindPerformanceEvidence(unbatched);
-    expect(() => validatePerformanceRecord(unbatched)).toThrow(
+    const missingGpuTimer = validRecord();
+    delete (missingGpuTimer.protocol as Record<string, unknown>)
+      .gpuTimerQueryExtension;
+    bindPerformanceEvidence(missingGpuTimer);
+    expect(() => validatePerformanceRecord(missingGpuTimer)).toThrow(
+      /GPU timer query/i,
+    );
+
+    const notOneFrame = validRecord();
+    (notOneFrame.protocol as Record<string, unknown>).drawsPerFrameSample = 10;
+    bindPerformanceEvidence(notOneFrame);
+    expect(() => validatePerformanceRecord(notOneFrame)).toThrow(
       /draws per frame sample/i,
     );
+  });
+
+  it('rejects frame cost that is lower than either measured CPU or GPU component', () => {
+    const impossible = validRecord();
+    impossible.runs[0].nativeHardware.frameTimesMs[0] = 0.001;
+    bindPerformanceEvidence(impossible);
+    expect(() => validatePerformanceRecord(impossible)).toThrow(
+      /critical-path frame cost/i,
+    );
+  });
+
+  it('allows a zero CPU submission sample when timer resolution quantizes it', () => {
+    const quantized = validRecord();
+    quantized.runs[0].nativeHardware.cpuSubmissionTimesMs[0] = 0;
+    bindPerformanceEvidence(quantized);
+    expect(() => validatePerformanceRecord(quantized)).not.toThrow();
   });
   it('requires fresh measurement contexts and distinct retained runs', () => {
     const duplicatedContext = validRecord();
@@ -657,7 +730,7 @@ describe('complete representative browser benchmark', () => {
     record.variance.materialDifferenceObserved = null;
     record.performanceAssessment.native = {
       status: 'unavailable',
-      observedMedianFps: null,
+      estimatedUncappedFps: null,
       passes: null,
       reason: 'Profile unavailable; no performance score may be assigned.',
     };

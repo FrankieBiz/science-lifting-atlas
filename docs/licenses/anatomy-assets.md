@@ -140,12 +140,14 @@ capability cannot be mistaken for a positive result.
   forecast.
 - **Representative browser scene:** two fresh runs each loaded all 139 mapped
   objects. The GLB is 2,874,932 bytes and geometry buffers are 2,753,652 bytes.
-  The final native Apple M3 profile measured a 0.15 ms median synchronous
-  draw-plus-`gl.finish()` render cost and 4,595,816 bytes of precise JS heap;
-  the reduced SwiftShader/4× CPU-throttle simulation measured 0.09 ms. The
-  harness uses `requestAnimationFrame` only for stabilization, then times ten
-  completed draws per each of 300 samples so display vsync does not masquerade
-  as render cost. Both pass their frozen bands, but the simulation is not a
+  The final native Apple M3 profile measured a 3.811125 ms median full-frame
+  critical-path cost and 4,867,807 bytes of precise JS heap; the reduced
+  SwiftShader/4× CPU-throttle simulation measured 6.0015 ms. The harness uses
+  `requestAnimationFrame` only for stabilization, then combines CPU submission
+  time with `EXT_disjoint_timer_query_webgl2` GPU execution time for each of 300
+  complete 139-draw frames. The reported reciprocal is estimated uncapped render
+  capacity, not observed display refresh rate. Both profiles pass their frozen
+  bands and the two-run median variance stays within 10%, but the simulation is not a
   physical mobile-device result and the battery-power environment remains a
   documented confound requiring later physical-device confirmation.
 - **Materials and UVs:** all 139 selected OBJ files contain normals and a

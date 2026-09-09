@@ -1756,7 +1756,7 @@ describe('BodyParts3D exercise-media feasibility evidence', () => {
       performance: {
         path: 'docs/licenses/bodyparts3d-performance.json',
         sha256:
-          'b75315ba9569cf70190c628bcfe1c83cc0f74c8c7f5d3a213b65deaa29e31952',
+          'f6be37064594e603a849079ec32e340ae7260efb8702a228a7cb4c7381090019',
       },
       poster: {
         path: 'assets/derived/bodyparts3d/sbla005-poster.webp',

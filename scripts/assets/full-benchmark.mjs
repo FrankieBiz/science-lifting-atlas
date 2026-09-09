@@ -33,6 +33,9 @@ const finite = (value, label) => {
 };
 /** @param {number} value */
 const rounded = (value) => Math.round(value * 1000) / 1000;
+/** @param {number} value */
+export const roundTiming = (value) =>
+  Math.round(value * 1_000_000_000) / 1_000_000_000;
 const PROFILE_KEYS = /** @type {const} */ ([
   'nativeHardware',
   'lowPowerSimulation',
@@ -130,9 +133,13 @@ const BENCHMARK_PROTOCOL = Object.freeze({
   measuredColdTrials: 5,
   stabilizedAnimationFrames: 300,
   stabilizationFramesDiscarded: 30,
-  glFinish: true,
-  frameTimingMethod: 'synchronous-draw-gl-finish-after-raf-stabilization',
-  drawsPerFrameSample: 10,
+  glFinish: false,
+  frameTimingMethod:
+    'ext-disjoint-timer-query-webgl2-critical-path-after-raf-stabilization',
+  gpuTimerQueryExtension: 'EXT_disjoint_timer_query_webgl2',
+  frameCostDefinition:
+    'max(cpu submission time, GPU execution time) for one complete 139-draw frame; excludes display-vsync wait',
+  drawsPerFrameSample: 1,
   coldDefinition:
     'unique no-store URL; fresh Playwright BrowserContext, page, WebGL2 context, parse, and GPU buffers per measurement',
 });
@@ -152,6 +159,8 @@ function retainedMeasurementPayload(profile, role) {
     return {
       trial: profile.animationTrial,
       frameTimesMs: profile.frameTimesMs,
+      cpuSubmissionTimesMs: profile.cpuSubmissionTimesMs,
+      gpuExecutionTimesMs: profile.gpuExecutionTimesMs,
       renderer: profile.renderer,
       cameraFit: profile.cameraFit,
       geometryBufferBytes: profile.geometryBufferBytes,
@@ -612,6 +621,8 @@ function validateProfile(
       profile.warmups?.length ||
       profile.trials?.length ||
       profile.frameTimesMs?.length ||
+      profile.cpuSubmissionTimesMs?.length ||
+      profile.gpuExecutionTimesMs?.length ||
       profile.aggregates !== null
     )
       throw new Error(
@@ -627,9 +638,17 @@ function validateProfile(
     throw new Error(`${label} needs exactly five measured cold trials`);
   if (profile.frameTimesMs?.length !== protocol.stabilizedAnimationFrames)
     throw new Error(`${label} needs exactly 300 frame samples`);
+  if (
+    profile.cpuSubmissionTimesMs?.length !==
+      protocol.stabilizedAnimationFrames ||
+    profile.gpuExecutionTimesMs?.length !== protocol.stabilizedAnimationFrames
+  )
+    throw new Error(`${label} needs exactly 300 CPU and GPU frame components`);
   const warmups = /** @type {BenchmarkTrial[]} */ (profile.warmups);
   const trials = /** @type {BenchmarkTrial[]} */ (profile.trials);
   const frameTimes = /** @type {number[]} */ (profile.frameTimesMs);
+  const cpuTimes = /** @type {number[]} */ (profile.cpuSubmissionTimesMs);
+  const gpuTimes = /** @type {number[]} */ (profile.gpuExecutionTimesMs);
   warmups.forEach((trial, index) =>
     validateTrial(trial, `${label}.warmups[${index}]`, sourceBytes),
   );
@@ -644,6 +663,25 @@ function validateProfile(
           throw new Error(`${label}.frameTimesMs[${index}] must be positive`);
         })(),
   );
+  for (let index = 0; index < frameTimes.length; index += 1) {
+    const frame = finite(frameTimes[index], `${label}.frameTimesMs[${index}]`);
+    const cpu = finite(
+      cpuTimes[index],
+      `${label}.cpuSubmissionTimesMs[${index}]`,
+    );
+    const gpu = finite(
+      gpuTimes[index],
+      `${label}.gpuExecutionTimesMs[${index}]`,
+    );
+    if (cpu < 0 || gpu <= 0)
+      throw new Error(
+        `${label} CPU frame component must be non-negative and GPU component positive`,
+      );
+    if (frame + 0.001 < Math.max(cpu, gpu))
+      throw new Error(
+        `${label} critical-path frame cost is lower than a measured component`,
+      );
+  }
   if (!profile.renderer?.vendor || !profile.renderer?.renderer)
     throw new Error(`${label} WebGL identity is required`);
   if (
@@ -692,6 +730,16 @@ function validateProfile(
     profile.aggregates?.p95FrameMs,
     percentile(frameTimes, 0.95),
     `${label}.p95FrameMs`,
+  );
+  exact(
+    profile.aggregates?.medianCpuSubmissionMs,
+    rounded(median(cpuTimes)),
+    `${label}.medianCpuSubmissionMs`,
+  );
+  exact(
+    profile.aggregates?.medianGpuExecutionMs,
+    rounded(median(gpuTimes)),
+    `${label}.medianGpuExecutionMs`,
   );
   return true;
 }
@@ -765,6 +813,8 @@ function validateEvidenceBinding(
     trials: profile.trials,
     animationTrial: profile.animationTrial,
     frameTimesMs: profile.frameTimesMs,
+    cpuSubmissionTimesMs: profile.cpuSubmissionTimesMs,
+    gpuExecutionTimesMs: profile.gpuExecutionTimesMs,
     renderer: profile.renderer,
     cameraFit: profile.cameraFit,
     geometryBufferBytes: profile.geometryBufferBytes,
@@ -848,15 +898,15 @@ function performanceAssessment(profile, minimumFps) {
   if (profile.status !== 'available')
     return {
       status: 'unavailable',
-      observedMedianFps: null,
+      estimatedUncappedFps: null,
       passes: null,
       reason: 'Profile unavailable; no performance score may be assigned.',
     };
-  const observedMedianFps = rounded(1000 / profile.aggregates.medianFrameMs);
+  const estimatedUncappedFps = rounded(1000 / profile.aggregates.medianFrameMs);
   return {
     status: 'measured',
-    observedMedianFps,
-    passes: observedMedianFps >= minimumFps,
+    estimatedUncappedFps,
+    passes: estimatedUncappedFps >= minimumFps,
     reason: null,
   };
 }
@@ -902,13 +952,15 @@ export function validatePerformanceRecord(record) {
   const p = record.protocol;
   if (
     p?.frameTimingMethod !==
-    'synchronous-draw-gl-finish-after-raf-stabilization'
+    'ext-disjoint-timer-query-webgl2-critical-path-after-raf-stabilization'
   )
     throw new Error(
-      'Benchmark frame timing method must measure synchronous render cost outside the display-vsync wait',
+      'Benchmark frame timing method must use GPU timer queries outside the display-vsync wait',
     );
-  if (p?.drawsPerFrameSample !== 10)
-    throw new Error('Benchmark draws per frame sample must be exactly 10');
+  if (p?.gpuTimerQueryExtension !== 'EXT_disjoint_timer_query_webgl2')
+    throw new Error('Benchmark GPU timer query extension must be pinned');
+  if (p?.drawsPerFrameSample !== 1)
+    throw new Error('Benchmark draws per frame sample must be exactly 1');
   if (JSON.stringify(p) !== JSON.stringify(BENCHMARK_PROTOCOL))
     throw new Error('Benchmark protocol is incomplete');
   if (JSON.stringify(record.budgets) !== JSON.stringify(BUDGETS))
@@ -1048,16 +1100,28 @@ export function validatePerformanceRecord(record) {
     } else exact(record.variance?.[varianceKey], expected, varianceKey);
   }
   const materialThreshold = finite(
-    record.variance?.materialDifferenceThresholdMs,
-    'materialDifferenceThresholdMs',
+    record.variance?.materialDifferenceThresholdRatio,
+    'materialDifferenceThresholdRatio',
   );
-  if (materialThreshold <= 0)
-    throw new Error('materialDifferenceThresholdMs must be positive');
-  const deltaValues = Object.values(expectedDeltas);
-  const numericDeltas = deltaValues.filter((value) => value !== null);
-  const deltasAvailable = numericDeltas.length === deltaValues.length;
+  if (materialThreshold <= 0 || materialThreshold >= 1)
+    throw new Error(
+      'materialDifferenceThresholdRatio must be between zero and one',
+    );
+  const finalRetainedRun = retainedRuns[1];
+  if (!finalRetainedRun)
+    throw new Error('Final retained benchmark run is missing');
+  const deltaRatios = PROFILE_KEYS.map((profileKey) => {
+    const varianceKey = varianceKeys[profileKey];
+    const delta = expectedDeltas[varianceKey];
+    const reference = finalRetainedRun[profileKey].aggregates?.medianFrameMs;
+    return delta == null || !Number.isFinite(reference) || reference <= 0
+      ? null
+      : delta / reference;
+  });
+  const numericRatios = deltaRatios.filter((value) => value !== null);
+  const deltasAvailable = numericRatios.length === deltaRatios.length;
   const expectedMaterialDifference = deltasAvailable
-    ? numericDeltas.some((value) => value > materialThreshold)
+    ? numericRatios.some((value) => value > materialThreshold)
     : null;
   if (
     record.variance.materialDifferenceObserved !== expectedMaterialDifference ||
@@ -1087,10 +1151,11 @@ export function validatePerformanceRecord(record) {
     JSON.stringify(expectedPerformance)
   )
     throw new Error('Frame-performance assessment is not recomputable');
-  const complete = availability.every(Boolean);
+  const complete =
+    availability.every(Boolean) && expectedMaterialDifference === false;
   if (record.browserPerformanceComplete !== complete)
     throw new Error(
-      'browser performance completeness contradicts profile availability',
+      'browser performance completeness contradicts profile availability or repeatability variance',
     );
   return record;
 }
@@ -1137,6 +1202,8 @@ async function browserMeasurement(page, url, reducedRatio, frames = 0) {
     ) => {
       /** @param {number} n */
       const round = (n) => Math.round(n * 1000) / 1000;
+      /** @param {number} n */
+      const timingRound = (n) => Math.round(n * 1_000_000_000) / 1_000_000_000;
       const fetchStart = performance.now();
       const response = await fetch(`${url}?cold=${crypto.randomUUID()}`, {
         cache: 'no-store',
@@ -1226,6 +1293,9 @@ async function browserMeasurement(page, url, reducedRatio, frames = 0) {
       const gl = canvas.getContext('webgl2', { antialias: false });
       if (!gl) throw new Error('WebGL2 unavailable');
       const debug = gl.getExtension('WEBGL_debug_renderer_info');
+      const gpuTimer = gl.getExtension('EXT_disjoint_timer_query_webgl2');
+      if (!gpuTimer)
+        throw new Error('EXT_disjoint_timer_query_webgl2 unavailable');
       const renderer = {
         vendor: String(
           debug
@@ -1425,14 +1495,27 @@ async function browserMeasurement(page, url, reducedRatio, frames = 0) {
         gl.finish();
       }
       const frameTimesMs = [];
+      const cpuSubmissionTimesMs = [];
+      const gpuExecutionTimesMs = [];
       for (let i = 0; i < frames; i += 1) {
+        const query = gl.createQuery();
+        if (!query) throw new Error('Could not create GPU timer query');
         const before = performance.now();
-        for (let drawIndex = 0; drawIndex < 10; drawIndex += 1) {
-          draw((i * 10 + drawIndex + 30) / 120);
-          gl.finish();
-        }
-        const elapsedPerDraw = (performance.now() - before) / 10;
-        frameTimesMs.push(round(elapsedPerDraw));
+        gl.beginQuery(gpuTimer.TIME_ELAPSED_EXT, query);
+        draw((i + 30) / 120);
+        gl.endQuery(gpuTimer.TIME_ELAPSED_EXT);
+        const cpuSubmissionMs = performance.now() - before;
+        while (!gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE))
+          await new Promise((resolve) => setTimeout(resolve, 0));
+        if (gl.getParameter(gpuTimer.GPU_DISJOINT_EXT))
+          throw new Error('GPU timer query became disjoint');
+        const gpuExecutionMs =
+          Number(gl.getQueryParameter(query, gl.QUERY_RESULT)) / 1_000_000;
+        gl.deleteQuery(query);
+        const frameCostMs = Math.max(cpuSubmissionMs, gpuExecutionMs);
+        cpuSubmissionTimesMs.push(timingRound(cpuSubmissionMs));
+        gpuExecutionTimesMs.push(timingRound(gpuExecutionMs));
+        frameTimesMs.push(timingRound(frameCostMs));
       }
       const resources = /** @type {PerformanceResourceTiming[]} */ (
         performance.getEntriesByName(response.url)
@@ -1455,6 +1538,8 @@ async function browserMeasurement(page, url, reducedRatio, frames = 0) {
           totalMs: round(uploadEnd - fetchStart),
         },
         frameTimesMs,
+        cpuSubmissionTimesMs,
+        gpuExecutionTimesMs,
         renderer,
         cameraFit,
         geometryBufferBytes,
@@ -1477,14 +1562,17 @@ async function browserMeasurement(page, url, reducedRatio, frames = 0) {
 }
 
 /** @param {BenchmarkTrial[]} trials @param {number[]} frames */
-function aggregates(trials, frames) {
+/** @param {BenchmarkTrial[]} trials @param {number[]} frames @param {number[]} cpuSubmissionTimes @param {number[]} gpuExecutionTimes */
+function aggregates(trials, frames, cpuSubmissionTimes, gpuExecutionTimes) {
   return {
     medianFetchMs: rounded(median(trials.map((v) => v.fetchMs))),
     medianParseMs: rounded(median(trials.map((v) => v.parseMs))),
     medianUploadMs: rounded(median(trials.map((v) => v.uploadMs))),
     medianTotalMs: rounded(median(trials.map((v) => v.totalMs))),
-    medianFrameMs: rounded(median(frames)),
-    p95FrameMs: percentile(frames, 0.95),
+    medianFrameMs: roundTiming(median(frames)),
+    p95FrameMs: roundTiming(percentile(frames, 0.95)),
+    medianCpuSubmissionMs: roundTiming(median(cpuSubmissionTimes)),
+    medianGpuExecutionMs: roundTiming(median(gpuExecutionTimes)),
   };
 }
 
@@ -1689,7 +1777,14 @@ async function runProfile(origin, options) {
       trials,
       animationTrial: animated.trial,
       frameTimesMs: animated.frameTimesMs,
-      aggregates: aggregates(trials, animated.frameTimesMs),
+      cpuSubmissionTimesMs: animated.cpuSubmissionTimesMs,
+      gpuExecutionTimesMs: animated.gpuExecutionTimesMs,
+      aggregates: aggregates(
+        trials,
+        animated.frameTimesMs,
+        animated.cpuSubmissionTimesMs,
+        animated.gpuExecutionTimesMs,
+      ),
     };
     if (
       options.native &&
@@ -1723,6 +1818,8 @@ async function runProfile(origin, options) {
       warmups: [],
       trials: [],
       frameTimesMs: [],
+      cpuSubmissionTimesMs: [],
+      gpuExecutionTimesMs: [],
       aggregates: null,
       ...(options.native
         ? {}
@@ -1858,21 +1955,27 @@ export async function runFullBenchmark() {
         nativeDelta === null || simulatedDelta === null
           ? 'At least one retained run profile was unavailable, so variance is not measurable.'
           : null,
-      materialDifferenceThresholdMs: 2,
+      materialDifferenceThresholdRatio: 0.1,
       materialDifferenceObserved:
         nativeDelta !== null && simulatedDelta !== null
-          ? nativeDelta > 2 || simulatedDelta > 2
+          ? nativeDelta / native.aggregates.medianFrameMs > 0.1 ||
+            simulatedDelta / simulated.aggregates.medianFrameMs > 0.1
           : null,
     },
     performanceAssessment: {
       native: performanceAssessment(native, 55),
       simulated: performanceAssessment(simulated, 30),
     },
-    browserPerformanceComplete: runs.every(
-      (run) =>
-        run.nativeHardware.status === 'available' &&
-        run.lowPowerSimulation.status === 'available',
-    ),
+    browserPerformanceComplete:
+      runs.every(
+        (run) =>
+          run.nativeHardware.status === 'available' &&
+          run.lowPowerSimulation.status === 'available',
+      ) &&
+      nativeDelta !== null &&
+      simulatedDelta !== null &&
+      nativeDelta / native.aggregates.medianFrameMs <= 0.1 &&
+      simulatedDelta / simulated.aggregates.medianFrameMs <= 0.1,
   };
   return validatePerformanceRecord(bindPerformanceEvidence(record));
 }
