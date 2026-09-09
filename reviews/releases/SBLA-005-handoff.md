@@ -7,7 +7,7 @@ decision. PASS requires zero Critical and zero Important findings.
 ## Candidate identity and boundary
 
 - Accepted base: `c3f7ef47fa65eb8452de2308b60a2238cf9841d3`
-- Implementation candidate: `17b0815478b4abc8cb399f52f92f597cf5a7cfaf`
+- Implementation candidate: `2cbf7f0184c0e1fed674e2f146e7fad873d3b927`
 - Branch: `codex/SBLA-005-candidate-benchmark`
 - Builder worktree:
   `/Users/frankbisignano/dev/science-lifting-atlas/.worktrees/sbla-005-candidate-benchmark`
@@ -57,16 +57,16 @@ The rubric was frozen before candidate measurement in
 `docs/licenses/asset-score-rubric.json`. `scripts/assets/scorecard.mjs` derives
 each score from evidence, rejects a mismatch, and recomputes the total.
 
-| Criterion                               |   Weight |      Score | Evidence result                                                                                                  |
-| --------------------------------------- | -------: | ---------: | ---------------------------------------------------------------------------------------------------------------- |
-| Anatomical coverage and naming accuracy |      20% |        3/5 | 23/28 required targets; zero mapping defects; five material absences                                             |
-| Mesh separability and mapping           |      15% |        5/5 | 139/139 selectable meshes and 139/139 valid mappings                                                             |
-| Visual quality after optimization       |      15% |        1/5 | Deterministic proportions pass; source materials, clean closed topology, and whole-scene visibility do not       |
-| Browser performance                     |      15% |        5/5 | 2,874,932-byte GLB; 2,753,652 geometry bytes; unclamped render-cost medians 0.15 ms native and 0.09 ms simulated |
-| License clarity and flexibility         |      20% |        4/5 | Current CC BY 4.0 terms pass; historical CC BY-SA 2.1 Japan notice is conservatively retained                    |
-| Scripted Blender/glTF pipeline          |      10% |        5/5 | Pinned, non-interactive, two clean byte-identical output runs                                                    |
-| Presentation options                    |       5% |        2/5 | One complete adult human male presentation; no additional variants                                               |
-| **Weighted total**                      | **100%** | **73/100** | Recommendation only; required-capability table above controls the decision framing                               |
+| Criterion                               |   Weight |      Score | Evidence result                                                                                                       |
+| --------------------------------------- | -------: | ---------: | --------------------------------------------------------------------------------------------------------------------- |
+| Anatomical coverage and naming accuracy |      20% |        3/5 | 23/28 required targets; zero mapping defects; five material absences                                                  |
+| Mesh separability and mapping           |      15% |        5/5 | 139/139 selectable meshes and 139/139 valid mappings                                                                  |
+| Visual quality after optimization       |      15% |        1/5 | Deterministic proportions pass; source materials, clean closed topology, and whole-scene visibility do not            |
+| Browser performance                     |      15% |        5/5 | 2,874,932-byte GLB; 2,753,652 geometry bytes; GPU-timed full-frame medians 3.811125 ms native and 6.0015 ms simulated |
+| License clarity and flexibility         |      20% |        4/5 | Current CC BY 4.0 terms pass; historical CC BY-SA 2.1 Japan notice is conservatively retained                         |
+| Scripted Blender/glTF pipeline          |      10% |        5/5 | Pinned, non-interactive, two clean byte-identical output runs                                                         |
+| Presentation options                    |       5% |        2/5 | One complete adult human male presentation; no additional variants                                                    |
+| **Weighted total**                      | **100%** | **73/100** | Recommendation only; required-capability table above controls the decision framing                                    |
 
 The exact arithmetic is
 `3×.20 + 5×.15 + 1×.15 + 5×.15 + 4×.20 + 5×.10 + 2×.05 = 3.65/5 = 73/100`.
@@ -183,24 +183,28 @@ geometry-buffer bytes. The reduced simulation keeps all 139 objects while
 sampling 53,539 triangles, 73,619 vertices, and 2,088,090 geometry bytes.
 
 Every profile uses one warmup, five cold no-store load/parse/upload trials,
-30 discarded `requestAnimationFrame` stabilization frames, then 300 unclamped
-synchronous render-cost samples. Each sample averages ten completed
-draw-plus-`gl.finish()` operations. Fresh browser contexts, UUIDs, timestamps,
+30 discarded `requestAnimationFrame` stabilization frames, then 300 GPU-timed
+full-frame samples. Each sample combines CPU submission time with
+`EXT_disjoint_timer_query_webgl2` execution time for one complete 139-draw
+frame. Fresh browser contexts, UUIDs, timestamps,
 payload-bound receipts, and evidence digests prove trial/run independence.
 
 | Run/profile                        | Fetch median | Parse median | Upload median | Total median | Render-cost median | p95 render cost | Observed JS heap |
 | ---------------------------------- | -----------: | -----------: | ------------: | -----------: | -----------------: | --------------: | ---------------: |
-| Run 1 native Metal                 |       4.4 ms |       0.4 ms |        0.9 ms |      11.3 ms |            0.15 ms |         0.19 ms |      4,619,160 B |
-| Run 1 reduced SwiftShader + 4× CPU |      13.1 ms |       1.2 ms |       41.4 ms |      68.7 ms |            0.09 ms |        0.131 ms |      9,294,009 B |
-| Run 2 native Metal                 |       4.2 ms |       0.3 ms |        0.9 ms |      11.2 ms |            0.15 ms |         0.18 ms |      4,595,816 B |
-| Run 2 reduced SwiftShader + 4× CPU |      13.0 ms |       1.0 ms |       41.3 ms |      69.3 ms |            0.09 ms |         0.13 ms |      9,163,493 B |
+| Run 1 native Metal                 |       4.8 ms |       0.3 ms |        1.1 ms |      12.3 ms |        3.599813 ms |        7.321 ms |      4,892,139 B |
+| Run 1 reduced SwiftShader + 4× CPU |      14.9 ms |       1.5 ms |       46.2 ms |      76.9 ms |        5.975063 ms |        6.532 ms |      9,265,488 B |
+| Run 2 native Metal                 |       4.6 ms |       0.4 ms |        1.1 ms |      12.2 ms |        3.811125 ms |        7.788 ms |      4,867,807 B |
+| Run 2 reduced SwiftShader + 4× CPU |      14.6 ms |       1.4 ms |       45.0 ms |      75.0 ms |          6.0015 ms |        6.552 ms |      9,253,460 B |
 
-Native render-cost median delta is 0 ms; simulated delta is 0 ms. The payload
+Native render-cost median delta is 0.211 ms; simulated delta is 0.026 ms. Both
+remain within the scale-independent 10% repeatability gate. The payload
 passes the 6 MB desktop target, 10 MB hard ceiling, 3 MB mobile-interactive
 target, and 25 MiB host file ceiling. The software simulation is a fallback
 stress profile, not evidence from a physical low-tier phone. The checked-in
 performance record SHA-256 is
-`b75315ba9569cf70190c628bcfe1c83cc0f74c8c7f5d3a213b65deaa29e31952`.
+`f6be37064594e603a849079ec32e340ae7260efb8702a228a7cb4c7381090019`.
+Reciprocals of the critical-path costs are estimated uncapped render capacity,
+not observed display refresh rate.
 
 ## Four carried SBLA-004 Round 2 Minor closures
 
@@ -218,13 +222,13 @@ candidate:
 
 ## Verification evidence at implementation candidate
 
-The following fresh checks ran on 2026-09-08 after the unclamped frame-timing
+The following fresh checks ran on 2026-09-09 after the GPU-query frame-timing
 repair:
 
 - `pnpm assets:full-benchmark`: PASS; wrote two independently receipted runs
   summarized above.
 - `pnpm verify`: PASS after one formatting correction; 13 unit-test files and
-  172 tests passed, Astro reported zero errors/warnings/hints, production built
+  176 tests passed, Astro reported zero errors/warnings/hints, production built
   one page, 17 portability tests passed, foundation contract passed, and the
   scorecard reported one eligible measured candidate at 73/100.
 - `pnpm test:e2e`: PASS, 1/1 Chromium test.
