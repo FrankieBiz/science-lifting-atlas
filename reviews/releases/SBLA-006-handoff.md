@@ -1,5 +1,33 @@
 # Handoff: SBLA-006 — Gate A asset and 2D fallback decision
 
+**Status:** Accepted after independent Account-B Claude Review Round 2 passed
+with zero Critical and zero Important findings. The accepted dependency for
+SBLA-007 is the acceptance-record commit named in the traceability addendum
+below.
+
+## Acceptance addendum
+
+- Exact reviewed candidate: `d98ad23050b18e9a6fa6204bbbdabe162e31dd17`
+- Candidate tree: `18144129c0801679d0fe4737dce5d2515e26a051`
+- Round 1 report: `reviews/releases/SBLA-006-r1.md`, FAIL with 0 Critical,
+  2 Important review-completeness gaps, and 7 Minor findings
+- Passing report: `reviews/releases/SBLA-006-r2.md`
+- Reviewer report commit: `8b2489a8e945a601c76bb772cd78e035e53b424b`
+- Integrated report commit: `4aecf747ff78614aac692c260d6d9a6381959363`
+- Report SHA-256:
+  `9847f643e3fe6f7ce8c92f3edb643d186bf042df438d981cd7a7b6ad0f8267d6`
+- Verdict: PASS; 0 Critical, 0 Important, 8 nonblocking Minor findings
+- Independent evidence: 47 adversarial mutations, all 12 verification stages,
+  187 unit tests, 17 portability tests, live HTTP 200 primary-license fetch,
+  and corroborated browser assertions
+- Acceptance record and exact SBLA-007 dependency base: the subsequent
+  traceability commit that names this acceptance-record commit
+
+The acceptance record and review reports do not change the immutable candidate
+artifacts. The eight Minor findings remain explicit follow-up hardening work;
+none weakens the approved 2D-authoritative product boundary or the exact
+source/license/checksum record.
+
 ## Objective
 
 Satisfy master plan §18 task SBLA-006: record the owner decision after the

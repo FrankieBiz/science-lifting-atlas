@@ -2,16 +2,15 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-**SBLA-001 through SBLA-005 are accepted.** Distinct Account-B Claude Review
-passed the exact SBLA-005 candidate with zero Critical and zero Important
+**SBLA-001 through SBLA-006 are accepted.** Distinct Account-B Claude Review
+passed the exact SBLA-006 candidate with zero Critical and zero Important
 findings on 2026-09-09. The repository now contains the verified static shell,
 stable command contract, license inventory, lawful checksum-pinned anatomy
 sample, deterministic asset spike, complete BodyParts3D candidate benchmark,
 mesh mapping, feasibility evidence, and weighted scorecard, but no scientific
-content, production schema, or public evidence claim. An owner-delegated
-SBLA-006 Gate A candidate now records a 2D-authoritative hybrid with bounded
-BodyParts3D enhancement and no purchase; it is not accepted until independent
-Account-B review passes. The canonical product and execution requirements live in
+content or public evidence claim. Gate A records an accepted 2D-authoritative
+hybrid with bounded BodyParts3D enhancement and no purchase; production entity
+and evidence schemas begin in SBLA-007. The canonical product and execution requirements live in
 [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
@@ -80,7 +79,10 @@ pnpm exec playwright install --with-deps chromium
   targets, with BodyParts3D 4.0 limited to optional 3D enhancement for 23 mapped
   targets. The five missing targets remain 2D-only, cost is $0, and no
   commercial asset is purchased. See
-  `docs/product/gates/SBLA-006-asset-decision.md`; one Account-B review remains.
+  `docs/product/gates/SBLA-006-asset-decision.md`. Account-B Round 2 is
+  preserved at `reviews/releases/SBLA-006-r2.md` and returned PASS with zero
+  Critical and zero Important findings after 47 adversarial mutations and a
+  live primary-license check.
 - SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
 
 Work follows the authoritative SBLA-001–SBLA-020 queue in master plan §18.
