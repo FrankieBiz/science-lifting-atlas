@@ -40,6 +40,11 @@ function fixture() {
         selectionEligible: true,
         weightedTotal: 73,
         scores: { license_clarity: 4 },
+        selection: {
+          status: 'approved-bounded-enhancement',
+          role: 'optional-progressive-enhancement-only',
+          decisionRecord: 'docs/licenses/anatomy-asset-decision.json',
+        },
         license: {
           name: 'Creative Commons Attribution 4.0 International',
           version: '4.0',
@@ -149,6 +154,14 @@ describe('SBLA-006 asset decision contract', () => {
       '0'.repeat(64);
     expect(validateAssetDecision(input)).toContain(
       'enhancement3d.archives must exactly match the checksum-pinned SBLA-005 source archives',
+    );
+  });
+
+  it('rejects an inventory that does not record the bounded selection', () => {
+    const input = fixture();
+    delete (input.inventory.candidates[0] as { selection?: unknown }).selection;
+    expect(validateAssetDecision(input)).toContain(
+      'candidate inventory must record the approved bounded enhancement selection',
     );
   });
 

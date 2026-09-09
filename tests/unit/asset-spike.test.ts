@@ -1329,7 +1329,7 @@ describe('SBLA-005 measured candidate scorecard', () => {
       '- BodyParts3D / Anatomography: weighted total 73/100 — measured recommendation only',
     );
     expect(result.stdout).toContain(
-      'No asset is selected, purchased, or approved. SBLA-005 measures and recommends; SBLA-006 and the owner decide.',
+      'SBLA-005 measurement remains 73/100. SBLA-006 selects BodyParts3D only as bounded optional 3D enhancement; the 2D/text path is authoritative; no asset was purchased.',
     );
   });
 

@@ -1,10 +1,39 @@
 # Anatomy asset license inventory
 
-**Status: no anatomy asset has been selected, purchased, or approved.** One
-unchanged BodyParts3D mesh sample has been lawfully acquired for the technical
-spike. Master plan §8 still forbids a purchase or selection until that spike is
-complete. This file is the §8.4 licence record; the machine-readable source of
-truth is [`asset-candidates.json`](asset-candidates.json).
+**Status: Gate A approves a 2D-authoritative hybrid with no purchase.**
+Project-authored, evidence-reviewed semantic vector diagrams and equivalent text
+will be authoritative for all 28 required targets. BodyParts3D 4.0 is selected
+only as optional progressive 3D enhancement for its 23 mapped targets. It is not
+a complete anatomy source. The exact machine-verifiable decision is
+[`anatomy-asset-decision.json`](anatomy-asset-decision.json); the candidate
+inventory remains [`asset-candidates.json`](asset-candidates.json).
+
+## SBLA-006 Gate A decision
+
+The owner delegated the project-course decision to Codex and authorized
+continued execution. On 2026-09-09 that authority was recorded as approval of
+the bounded hybrid. No commercial asset was purchased; purchase and recurring
+asset cost are both **$0**.
+
+- **Authoritative baseline:** original project-authored vector diagrams plus
+  semantic text for all required targets. No production diagram is created by
+  this decision task; SBLA-008 through SBLA-013 own the scientific evidence,
+  review, integration, visual system, and production assets.
+- **Optional 3D layer:** BodyParts3D 4.0 / FMA 3.0 / 99% polygon reduction for
+  the 23 targets in the accepted mapping only.
+- **2D-only gaps:** latissimus dorsi, rectus abdominis, internal oblique,
+  transversus abdominis, and multifidus until another source independently
+  clears license, mapping, anatomy, accessibility, and performance gates.
+- **Non-negotiable fallback:** the core journey and all meaning must work
+  without WebGL. A missing or failed 3D asset may never hide content.
+- **Exact source identity:** the two versioned source archives and their
+  SHA-256 values are pinned in the decision record and reproduced from
+  `bodyparts3d-mesh-mapping.json`.
+
+The official license page was checked again on **2026-09-09**. It still names
+CC BY 4.0 International, requires the recorded attribution, and permits
+redistribution and derivative works. The acquired OBJ headers' historical CC
+BY-SA 2.1 Japan notice remains preserved and conservatively applied.
 
 Every licence fact below was read from a primary source. The BodyParts3D license
 and download were re-verified on **2026-09-05**; the other sources were read on
@@ -197,18 +226,15 @@ required BodyParts3D attribution shown above.
 - Conversion must be a deterministic Blender/glTF pipeline; no undocumented
   manual edits (§8.4).
 
-## What has not been done
+## What remains for later gates
 
-- No candidate asset has been selected or purchased. The full BodyParts3D
-  archives were acquired and checksum-verified outside Git for the SBLA-005
-  spike; only authorized, budget-compliant derivatives and compact evidence are
-  checked in.
-- The measured scorecard is 73/100 and remains a recommendation only; SBLA-006
-  and the owner decide. Five required targets are absent: latissimus dorsi,
-  rectus abdominis, internal oblique, transversus abdominis, and multifidus.
-  Because these are central to pulling and trunk/bracing coverage, this is a
-  major product risk that the weighted total must not dilute.
-- The SBLA-005 milestone is not accepted until its immutable handoff and
-  independent review pass with no Critical or Important findings.
+- No commercial asset has been selected or purchased. The full BodyParts3D
+  archives remain checksum-verified outside Git; only authorized,
+  budget-compliant derivatives and compact evidence are checked in.
+- The measured 73/100 score supports only the bounded enhancement decision. The
+  five missing targets remain a major product risk and are explicitly 2D-only.
+- No production anatomy diagram, scientific label set, exercise pose, rigged
+  loop, or additional presentation has been approved. Later queue gates own
+  those outputs and their checksums.
 - No legal advice has been obtained on the Z-Anatomy NonCommercial components,
   its unclear reference-model boundary, or the share-alike boundary.

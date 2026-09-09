@@ -125,6 +125,16 @@ export function validateAssetDecision({
       'the selected enhancement must remain the eligible 73/100 BodyParts3D candidate with license clarity at least 4/5',
     );
   }
+  if (
+    candidate?.selection?.status !== 'approved-bounded-enhancement' ||
+    candidate?.selection?.role !== 'optional-progressive-enhancement-only' ||
+    candidate?.selection?.decisionRecord !==
+      'docs/licenses/anatomy-asset-decision.json'
+  ) {
+    issues.push(
+      'candidate inventory must record the approved bounded enhancement selection',
+    );
+  }
 
   if (
     decision.enhancement3d?.candidateId !== 'path-c-bodyparts3d' ||

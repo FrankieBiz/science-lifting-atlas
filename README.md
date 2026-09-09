@@ -8,8 +8,10 @@ findings on 2026-09-09. The repository now contains the verified static shell,
 stable command contract, license inventory, lawful checksum-pinned anatomy
 sample, deterministic asset spike, complete BodyParts3D candidate benchmark,
 mesh mapping, feasibility evidence, and weighted scorecard, but no scientific
-content, selected production anatomy path, production schema, or public
-evidence claim. The canonical product and execution requirements live in
+content, production schema, or public evidence claim. An owner-delegated
+SBLA-006 Gate A candidate now records a 2D-authoritative hybrid with bounded
+BodyParts3D enhancement and no purchase; it is not accepted until independent
+Account-B review passes. The canonical product and execution requirements live in
 [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
@@ -37,18 +39,18 @@ pnpm exec playwright install --with-deps chromium
 
 ## Commands
 
-| Command                 | Foundation-stage behavior                                                                                                                                       |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm dev`              | Run the Astro development server.                                                                                                                               |
-| `pnpm build`            | Generate the static production output.                                                                                                                          |
-| `pnpm preview`          | Preview the most recent static build.                                                                                                                           |
-| `pnpm verify`           | Run formatting, linting, type checking, unit tests, stage-aware content/graph/evidence checks, the production build, and the repository contract.               |
-| `pnpm test:portability` | Serve the existing static output with a bare `node:http` server. For direct use, run `pnpm build && pnpm test:portability`; `pnpm verify` already builds first. |
-| `pnpm test:e2e`         | Build and test the static output in Chromium, including JavaScript-disabled behavior.                                                                           |
-| `pnpm test:a11y`        | Check the executable foundation accessibility contract. Later tasks expand this into the full accessibility matrix.                                             |
-| `pnpm test:visual`      | Check deterministic viewport definitions. Later tasks add screenshot baselines.                                                                                 |
-| `pnpm test:performance` | Check that the master-plan budgets are represented. Later tasks measure actual bundles and assets.                                                              |
-| `pnpm evidence:status`  | Report zero sources in foundation mode. It fails closed if source records appear before SBLA-007/SBLA-011 implement their schemas and status checks.            |
+| Command                 | Foundation-stage behavior                                                                                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`              | Run the Astro development server.                                                                                                                                                        |
+| `pnpm build`            | Generate the static production output.                                                                                                                                                   |
+| `pnpm preview`          | Preview the most recent static build.                                                                                                                                                    |
+| `pnpm verify`           | Run formatting, linting, type checking, unit tests, stage-aware content/graph/evidence checks, the production build, repository contract, asset scorecard, and Gate A decision contract. |
+| `pnpm test:portability` | Serve the existing static output with a bare `node:http` server. For direct use, run `pnpm build && pnpm test:portability`; `pnpm verify` already builds first.                          |
+| `pnpm test:e2e`         | Build and test the static output in Chromium, including JavaScript-disabled behavior.                                                                                                    |
+| `pnpm test:a11y`        | Check the executable foundation accessibility contract. Later tasks expand this into the full accessibility matrix.                                                                      |
+| `pnpm test:visual`      | Check deterministic viewport definitions. Later tasks add screenshot baselines.                                                                                                          |
+| `pnpm test:performance` | Check that the master-plan budgets are represented. Later tasks measure actual bundles and assets.                                                                                       |
+| `pnpm evidence:status`  | Report zero sources in foundation mode. It fails closed if source records appear before SBLA-007/SBLA-011 implement their schemas and status checks.                                     |
 
 ## Current boundaries
 
@@ -72,8 +74,13 @@ pnpm exec playwright install --with-deps chromium
   `reviews/releases/SBLA-005-handoff.md`; its measured 73/100 remains a
   recommendation, not an asset selection. Account-B Round 1 is preserved at
   `reviews/releases/SBLA-005-r1.md` and returned PASS with zero Critical and
-  zero Important findings. SBLA-006 owns the final asset/fallback decision and
-  acquisition record.
+  zero Important findings.
+- SBLA-006's owner-delegated Gate A candidate approves original,
+  evidence-reviewed 2D/vector and text as the authoritative path for all 28
+  targets, with BodyParts3D 4.0 limited to optional 3D enhancement for 23 mapped
+  targets. The five missing targets remain 2D-only, cost is $0, and no
+  commercial asset is purchased. See
+  `docs/product/gates/SBLA-006-asset-decision.md`; one Account-B review remains.
 - SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
 
 Work follows the authoritative SBLA-001–SBLA-020 queue in master plan §18.
