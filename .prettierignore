@@ -9,5 +9,7 @@ docs/product/master-plan.md
 # Immutable Account-B report preserved at its reviewer-authored checksum.
 reviews/releases/PLAN-001-r1.md
 reviews/releases/SBLA-005-r1.md
+reviews/releases/SBLA-006-r1.md
+reviews/releases/SBLA-006-r2.md
 # Immutable raw Blender measurement manifests; formatting would change their run hashes.
 docs/licenses/measurements/bodyparts3d-feasibility-run-*.json
