@@ -39,7 +39,7 @@ function sameJson(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
-/** @param {unknown} values */
+/** @param {unknown} values @param {readonly string[]} expected */
 function sameStringSet(values, expected) {
   return (
     Array.isArray(values) &&
@@ -113,7 +113,7 @@ export function validateAssetDecision({
   }
 
   const candidate = inventory?.candidates?.find?.(
-    (entry) => entry?.id === 'path-c-bodyparts3d',
+    (/** @type {{id?: unknown}} */ entry) => entry?.id === 'path-c-bodyparts3d',
   );
   if (
     !candidate ||

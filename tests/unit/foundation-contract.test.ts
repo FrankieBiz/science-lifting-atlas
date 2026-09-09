@@ -32,9 +32,9 @@ function completeWorkflowFileContents() {
 
 describe('repository command contract', () => {
   it('keeps ignored task worktrees outside whole-repository lint traversal', () => {
-    const globalIgnores = eslintConfig.find(
-      (entry) => 'ignores' in entry && Array.isArray(entry.ignores),
-    )?.ignores;
+    const globalIgnores = eslintConfig.flatMap((entry) =>
+      'ignores' in entry && Array.isArray(entry.ignores) ? entry.ignores : [],
+    );
 
     expect(globalIgnores).toContain('.worktrees/**');
   });
