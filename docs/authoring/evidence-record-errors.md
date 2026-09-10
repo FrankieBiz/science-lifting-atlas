@@ -218,6 +218,15 @@ by its schema.
   `relationships: [{ public: true, claimId: null, ... }]`.
 - Remediation: Attach an approved claim ID or keep the relationship non-public.
 
+### `PUBLIC_RELATIONSHIP_CLAIM_UNPUBLISHED`
+
+- Rejected: a public relationship cites a claim that is not published.
+- Minimal failing example: a public relationship has
+  `claimId: "claim-draft"` while that claim has
+  `publicationState: "unpublished"`.
+- Remediation: Publish and approve the cited claim, cite another published
+  claim, or keep the relationship non-public.
+
 ## Exit behavior
 
 Any reported issue makes the command exit nonzero. Fix the authoring error; do

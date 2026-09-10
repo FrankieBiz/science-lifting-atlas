@@ -61,6 +61,35 @@ describe('cross-record graph integrity', () => {
       ).toEqual(expect.arrayContaining(testCase.expectedCodes));
     }
   });
+
+  it('rejects a public relationship justified by an unpublished claim', async () => {
+    const valid = await readJson<{ claim: ClaimRecord; source: SourceRecord }>(
+      'records.valid.json',
+    );
+    const published = structuredClone(valid.claim);
+    const draft = structuredClone(valid.claim);
+    draft.id = 'claim-draft-rationale';
+    draft.publicationState = 'unpublished';
+    published.relationships = [
+      {
+        type: 'supported-by',
+        targetId: 'joint-action-horizontal-adduction',
+        claimId: draft.id,
+        public: true,
+      },
+    ];
+
+    expect(
+      validateRecordGraph(
+        {
+          claims: [published, draft],
+          sources: [valid.source],
+          entityIds: ['joint-action-horizontal-adduction'],
+        },
+        { asOf: '2026-09-09' },
+      ).map((issue) => issue.code),
+    ).toContain('PUBLIC_RELATIONSHIP_CLAIM_UNPUBLISHED');
+  });
 });
 
 describe('source publication status', () => {
@@ -169,6 +198,78 @@ describe('certainty-language calibration', () => {
         (issue) => issue.code,
       ),
     ).toContain('CERTAINTY_OVERSTATED');
+  });
+
+  it.each([
+    'This helps all participants.',
+    'This helps every participant.',
+    'This invariably improves strength.',
+    'This works without exception.',
+    'This succeeds for 100% of participants.',
+  ])('rejects common universal wording: %s', (statement) => {
+    expect(
+      lintClaimLanguage(statement, 'high').map((issue) => issue.code),
+    ).toContain('CERTAINTY_UNIVERSAL');
+  });
+
+  it('does not treat a directly negated causal result as an overclaim', () => {
+    expect(
+      lintClaimLanguage(
+        'This intervention does not increase measured strength.',
+        'low',
+      ),
+    ).toEqual([]);
+  });
+
+  it('does not treat a negated universal result as a universal promise', () => {
+    expect(
+      lintClaimLanguage(
+        'This intervention does not help all participants.',
+        'low',
+      ),
+    ).toEqual([]);
+  });
+
+  it('accepts a comparative when intervening words still lead to an outcome', () => {
+    expect(
+      lintClaimLanguage(
+        'This may be one of the better available options for measured strength.',
+        'low',
+      ),
+    ).toEqual([]);
+  });
+});
+
+describe('claim-language field coverage', () => {
+  it('checks public plain-language and qualifier text as well as the statement', async () => {
+    const valid = await readJson<{ claim: ClaimRecord; source: SourceRecord }>(
+      'records.valid.json',
+    );
+    const claim = structuredClone(valid.claim);
+    claim.plainLanguage = 'This always works.';
+    claim.qualifiers = ['This guarantees the result.'];
+
+    const issues = validateRecordGraph(
+      {
+        claims: [claim],
+        sources: [valid.source],
+        entityIds: ['joint-action-horizontal-adduction'],
+      },
+      { asOf: '2026-09-09' },
+    );
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          code: 'CERTAINTY_UNIVERSAL',
+          path: `${claim.id}.plainLanguage`,
+        }),
+        expect.objectContaining({
+          code: 'CERTAINTY_UNIVERSAL',
+          path: `${claim.id}.qualifiers.0`,
+        }),
+      ]),
+    );
   });
 });
 

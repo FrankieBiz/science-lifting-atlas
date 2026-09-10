@@ -147,38 +147,78 @@ export function validateSourceStatus(
 }
 
 const UNIVERSAL_PATTERN =
-  /\b(always|never|guarantees?|everyone|universally)\b/i;
-const OUTCOME_FREE_BETTER_PATTERN =
-  /\b(best|better|superior|optimal)\b(?!\s+(?:for|at|in terms of)\s+\S+)/i;
+  /\b(always|never|guarantees?|everyone|universally|all|every|invariably)\b|\bwithout\s+exception\b|\b100\s*%/gi;
+const COMPARATIVE_PATTERN = /\b(best|better|superior|optimal)\b/gi;
 const CAUSAL_PATTERN =
-  /\b(increases?|decreases?|causes?|prevents?|produces?|improves?|enhances?|reduces?|will|leads? to|results? in)\b/i;
+  /\b(increases?|decreases?|causes?|prevents?|produces?|improves?|enhances?|reduces?|leads? to|results? in)\b/gi;
 const LOW_CALIBRATION_PATTERN =
-  /\b(may|might|suggests?|limited evidence|is plausible|hypothesis|cannot establish)\b/i;
+  /\b(may|might|suggests?|limited evidence|no evidence|is plausible|hypothesis|cannot establish)\b/i;
 const VERY_LOW_DISCLOSURE_PATTERN =
   /\b(is plausible|hypothesis|inference|cannot establish)\b/i;
+
+function hasUniversalLanguage(statement: string) {
+  for (const match of statement.matchAll(UNIVERSAL_PATTERN)) {
+    const prefix = statement.slice(Math.max(0, match.index - 48), match.index);
+    if (
+      match[0].toLowerCase() !== 'never' &&
+      /\bnot(?:\s+\w+){0,3}\s*$/i.test(prefix)
+    ) {
+      continue;
+    }
+    return true;
+  }
+  return false;
+}
+
+function hasOutcomeFreeComparative(statement: string) {
+  for (const match of statement.matchAll(COMPARATIVE_PATTERN)) {
+    const followingClause =
+      statement.slice(match.index + match[0].length).split(/[.!?;]/, 1)[0] ??
+      '';
+    if (!/\b(?:for|at|in terms of)\s+\S+/i.test(followingClause)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isDirectlyNegated(statement: string, matchIndex: number) {
+  const prefix = statement.slice(Math.max(0, matchIndex - 48), matchIndex);
+  return /\b(?:do|does|did|is|are|was|were|can|could|would|should|has|have|had)\s+not(?:\s+\w+){0,2}\s*$|\b(?:do|does|did|is|are|was|were|can|could|would|should|has|have|had)n['’]t(?:\s+\w+){0,2}\s*$/i.test(
+    prefix,
+  );
+}
+
+function hasUncalibratedCausalLanguage(statement: string) {
+  if (LOW_CALIBRATION_PATTERN.test(statement)) return false;
+  return [...statement.matchAll(CAUSAL_PATTERN)].some(
+    (match) => !isDirectlyNegated(statement, match.index),
+  );
+}
 
 export function lintClaimLanguage(
   statement: string,
   certainty: Certainty,
+  path = 'statement',
 ): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
 
-  if (UNIVERSAL_PATTERN.test(statement)) {
+  if (hasUniversalLanguage(statement)) {
     issues.push(
       issue(
         'CERTAINTY_UNIVERSAL',
-        'statement',
+        path,
         'Universal or guaranteed wording is not allowed.',
         'Narrow the population, conditions, comparator, and outcome to what the evidence establishes.',
       ),
     );
   }
 
-  if (OUTCOME_FREE_BETTER_PATTERN.test(statement)) {
+  if (hasOutcomeFreeComparative(statement)) {
     issues.push(
       issue(
         'OUTCOME_REQUIRED',
-        'statement',
+        path,
         'Comparative wording such as “better” must name the outcome.',
         'State better for which measured outcome, population, comparator, and conditions.',
       ),
@@ -187,13 +227,12 @@ export function lintClaimLanguage(
 
   if (
     (certainty === 'low' || certainty === 'very-low') &&
-    CAUSAL_PATTERN.test(statement) &&
-    !LOW_CALIBRATION_PATTERN.test(statement)
+    hasUncalibratedCausalLanguage(statement)
   ) {
     issues.push(
       issue(
         'CERTAINTY_OVERSTATED',
-        'statement',
+        path,
         'Categorical causal wording exceeds the recorded certainty.',
         'Use calibrated wording such as “may” or “suggests,” or strengthen and re-review the evidence.',
       ),
@@ -207,7 +246,7 @@ export function lintClaimLanguage(
     issues.push(
       issue(
         'HYPOTHESIS_DISCLOSURE_REQUIRED',
-        'statement',
+        path,
         'Very-low-certainty wording must disclose hypothesis or inference status.',
         'Explicitly label the statement as a hypothesis, inference, or plausible explanation.',
       ),
@@ -295,10 +334,29 @@ export function validateRecordGraph(
   const sourceById = new Map(
     graph.sources.map((source) => [source.id, source] as const),
   );
+  const claimById = new Map(
+    graph.claims.map((claim) => [claim.id, claim] as const),
+  );
 
   for (const claim of graph.claims) {
     issues.push(
-      ...lintClaimLanguage(claim.statement, claim.evidence.certainty),
+      ...lintClaimLanguage(
+        claim.statement,
+        claim.evidence.certainty,
+        `${claim.id}.statement`,
+      ),
+      ...lintClaimLanguage(
+        claim.plainLanguage,
+        claim.evidence.certainty,
+        `${claim.id}.plainLanguage`,
+      ),
+      ...claim.qualifiers.flatMap((qualifier, index) =>
+        lintClaimLanguage(
+          qualifier,
+          claim.evidence.certainty,
+          `${claim.id}.qualifiers.${index}`,
+        ),
+      ),
     );
     issues.push(...validatePublishedReviewDates(claim, options));
 
@@ -353,15 +411,30 @@ export function validateRecordGraph(
           ),
         );
       }
-      if (relationship.claimId && !seen.has(relationship.claimId)) {
-        issues.push(
-          issue(
-            'REFERENCE_MISSING',
-            `${claim.id}.relationships.${index}.claimId`,
-            `Referenced claim ${relationship.claimId} does not exist.`,
-            'Add the validated claim record or correct the claim ID.',
-          ),
-        );
+      if (relationship.claimId) {
+        const relationshipClaim = claimById.get(relationship.claimId);
+        if (!relationshipClaim) {
+          issues.push(
+            issue(
+              'REFERENCE_MISSING',
+              `${claim.id}.relationships.${index}.claimId`,
+              `Referenced claim ${relationship.claimId} does not exist.`,
+              'Add the validated claim record or correct the claim ID.',
+            ),
+          );
+        } else if (
+          relationship.public &&
+          relationshipClaim.publicationState !== 'published'
+        ) {
+          issues.push(
+            issue(
+              'PUBLIC_RELATIONSHIP_CLAIM_UNPUBLISHED',
+              `${claim.id}.relationships.${index}.claimId`,
+              `Public relationship cites unpublished claim ${relationship.claimId}.`,
+              'Publish and approve the cited claim, cite another published claim, or keep the relationship non-public.',
+            ),
+          );
+        }
       }
     }
   }
