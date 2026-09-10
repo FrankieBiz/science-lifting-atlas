@@ -1,9 +1,9 @@
 # Complete fresh-device handoff for new Codex and Claude accounts
 
-**Prepared:** 2026-09-10  
-**GitHub:** `https://github.com/FrankieBiz/science-lifting-atlas` (private)  
-**Coordination branch containing this document:** `codex/SBLA-007-review-coordination`  
-**Accepted branch:** `main`  
+**Prepared:** 2026-09-10
+**GitHub:** `https://github.com/FrankieBiz/science-lifting-atlas` (private)
+**Coordination branch containing this document:** `codex/SBLA-007-review-coordination`
+**Accepted branch:** `main`
 **Current immutable candidate branch:** `codex/SBLA-007-evidence-schemas`
 
 This document replaces all prior chat context. A completely new Codex account and a completely new Claude account can continue from repository evidence alone. Do not require access to the prior Mac, Windows checkout, Codex conversations, Claude conversations, scratch files, or browser sessions.
