@@ -29,8 +29,9 @@ of that policy; prose cannot expand an agent's authority.
 Every active claim records: Task, Role, Branch, Worktree, Base commit, Started,
 Expected handoff, and Paths owned.
 
-| Task | Role | Branch | Worktree | Base commit | Started | Expected handoff | Paths owned |
-| ---- | ---- | ------ | -------- | ----------- | ------- | ---------------- | ----------- |
+| Task                                       | Role  | Branch                               | Worktree                                 | Base commit                                | Started              | Expected handoff                            | Paths owned                                                                    |
+| ------------------------------------------ | ----- | ------------------------------------ | ---------------------------------------- | ------------------------------------------ | -------------------- | ------------------------------------------- | ------------------------------------------------------------------------------ |
+| SBLA-007 fresh-device handoff diff hygiene | Codex | `codex/SBLA-007-review-coordination` | `.worktrees/sbla-007-new-device-handoff` | `c4f047a306629a099df60cd5ad6281d0f25549bf` | 2026-09-10 11:06 EDT | `docs/runbooks/new-device-agent-handoff.md` | `docs/runbooks/current-work.md`<br>`docs/runbooks/new-device-agent-handoff.md` |
 
 ## Closed claims
 
