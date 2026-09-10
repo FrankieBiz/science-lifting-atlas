@@ -20,6 +20,9 @@ importers:
       astro:
         specifier: 7.2.9
         version: 7.2.9(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0)
+      cookie:
+        specifier: 2.0.1
+        version: 2.0.1
       eslint:
         specifier: 9.39.5
         version: 9.39.5(supports-color@7.2.0)

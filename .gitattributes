@@ -1,1 +1,10 @@
+* text=auto eol=lf
+
+*.glb -text
+*.obj -text
+*.png -text
+*.webp -text
+*.zip -text
+
 docs/product/gates/SBLA-006-asset-decision.md whitespace=-trailing-space
+docs/runbooks/windows-transfer-handoff.md whitespace=-trailing-space

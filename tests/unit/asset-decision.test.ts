@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   EXPECTED_DECISION,
@@ -267,6 +268,8 @@ describe('SBLA-006 asset decision contract', () => {
     const moduleUrl = pathToFileURL(
       '/tmp/Sci Atlas/scripts/assets/decision.mjs',
     ).href;
-    expect(resolveRepositoryRoot(moduleUrl)).toBe('/tmp/Sci Atlas');
+    expect(resolveRepositoryRoot(moduleUrl)).toBe(
+      resolve(fileURLToPath(new URL('../../', moduleUrl))),
+    );
   });
 });

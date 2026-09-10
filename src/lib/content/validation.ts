@@ -31,6 +31,22 @@ function assertIsoDate(value: string, label: string) {
   }
 }
 
+export function validateAsOfDate(asOf: string): ValidationIssue[] {
+  try {
+    assertIsoDate(asOf, 'asOf');
+    return [];
+  } catch (error) {
+    return [
+      issue(
+        'AS_OF_INVALID',
+        'asOf',
+        error instanceof Error ? error.message : 'asOf is not a valid date.',
+        'Set SBLA_AS_OF to a real calendar date in YYYY-MM-DD form.',
+      ),
+    ];
+  }
+}
+
 export function validateSourceStatus(
   source: SourceRecord,
   options: ValidationOptions,
@@ -50,6 +66,17 @@ export function validateSourceStatus(
     );
   }
 
+  if (!publication.statusSource) {
+    issues.push(
+      issue(
+        'SOURCE_STATUS_SOURCE_MISSING',
+        `${source.id}.publication.statusSource`,
+        'The source has no authoritative publication-status source.',
+        'Record the authoritative URL, registry, publisher, or issuer used for the status check.',
+      ),
+    );
+  }
+
   if (!publication.statusCheckedAt || !publication.nextStatusCheckAt) {
     issues.push(
       issue(
@@ -59,15 +86,37 @@ export function validateSourceStatus(
         'Run the authoritative status check and record both ISO dates.',
       ),
     );
-  } else if (publication.nextStatusCheckAt <= options.asOf) {
-    issues.push(
-      issue(
-        'SOURCE_STATUS_OVERDUE',
-        `${source.id}.publication.nextStatusCheckAt`,
-        `The source status check was due on ${publication.nextStatusCheckAt}.`,
-        'Recheck the authoritative source status and set a new policy-compliant due date.',
-      ),
-    );
+  } else {
+    if (publication.statusCheckedAt > options.asOf) {
+      issues.push(
+        issue(
+          'SOURCE_STATUS_CHECKED_IN_FUTURE',
+          `${source.id}.publication.statusCheckedAt`,
+          `The source status check date ${publication.statusCheckedAt} is after asOf ${options.asOf}.`,
+          'Correct the check date or use the reproducible asOf date for which the check had already occurred.',
+        ),
+      );
+    }
+    if (publication.nextStatusCheckAt <= publication.statusCheckedAt) {
+      issues.push(
+        issue(
+          'SOURCE_STATUS_SCHEDULE_INVALID',
+          `${source.id}.publication.nextStatusCheckAt`,
+          'The next source-status check must be later than the completed check.',
+          'Set nextStatusCheckAt to a policy-compliant date after statusCheckedAt.',
+        ),
+      );
+    }
+    if (publication.nextStatusCheckAt <= options.asOf) {
+      issues.push(
+        issue(
+          'SOURCE_STATUS_OVERDUE',
+          `${source.id}.publication.nextStatusCheckAt`,
+          `The source status check was due on ${publication.nextStatusCheckAt}.`,
+          'Recheck the authoritative source status and set a new policy-compliant due date.',
+        ),
+      );
+    }
   }
 
   if (publication.status === 'retracted') {
@@ -99,9 +148,10 @@ export function validateSourceStatus(
 
 const UNIVERSAL_PATTERN =
   /\b(always|never|guarantees?|everyone|universally)\b/i;
-const OUTCOME_FREE_BETTER_PATTERN = /\b(best|better|superior|optimal)\b/i;
+const OUTCOME_FREE_BETTER_PATTERN =
+  /\b(best|better|superior|optimal)\b(?!\s+(?:for|at|in terms of)\s+\S+)/i;
 const CAUSAL_PATTERN =
-  /\b(increases?|decreases?|causes?|prevents?|produces?)\b/i;
+  /\b(increases?|decreases?|causes?|prevents?|produces?|improves?|enhances?|reduces?|will|leads? to|results? in)\b/i;
 const LOW_CALIBRATION_PATTERN =
   /\b(may|might|suggests?|limited evidence|is plausible|hypothesis|cannot establish)\b/i;
 const VERY_LOW_DISCLOSURE_PATTERN =
@@ -173,6 +223,48 @@ export type RecordGraph = {
   entityIds?: string[];
 };
 
+function validatePublishedReviewDates(
+  claim: ClaimRecord,
+  options: ValidationOptions,
+): ValidationIssue[] {
+  if (claim.publicationState !== 'published') return [];
+  const issues: ValidationIssue[] = [];
+  const { lastReviewedAt, reviewDueAt } = claim.review;
+
+  if (lastReviewedAt && lastReviewedAt > options.asOf) {
+    issues.push(
+      issue(
+        'REVIEW_DATE_IN_FUTURE',
+        `${claim.id}.review.lastReviewedAt`,
+        `The recorded review date ${lastReviewedAt} is after asOf ${options.asOf}.`,
+        'Correct lastReviewedAt or use the reproducible asOf date for which the review had already occurred.',
+      ),
+    );
+  }
+  if (lastReviewedAt && reviewDueAt && reviewDueAt <= lastReviewedAt) {
+    issues.push(
+      issue(
+        'REVIEW_SCHEDULE_INVALID',
+        `${claim.id}.review.reviewDueAt`,
+        'The next review date must be later than the completed review.',
+        'Set reviewDueAt to a policy-compliant date after lastReviewedAt.',
+      ),
+    );
+  }
+  if (reviewDueAt && reviewDueAt <= options.asOf) {
+    issues.push(
+      issue(
+        'REVIEW_OVERDUE',
+        `${claim.id}.review.reviewDueAt`,
+        `The claim review was due on ${reviewDueAt}.`,
+        'Re-review the claim and record a new policy-compliant review due date, or unpublish it.',
+      ),
+    );
+  }
+
+  return issues;
+}
+
 export function validateRecordGraph(
   graph: RecordGraph,
   options: ValidationOptions,
@@ -208,6 +300,7 @@ export function validateRecordGraph(
     issues.push(
       ...lintClaimLanguage(claim.statement, claim.evidence.certainty),
     );
+    issues.push(...validatePublishedReviewDates(claim, options));
 
     if (
       claim.publicationState === 'published' &&
@@ -234,10 +327,7 @@ export function validateRecordGraph(
             'Add the validated source record or correct the source ID.',
           ),
         );
-      } else if (
-        claim.publicationState === 'published' &&
-        link.role === 'supports'
-      ) {
+      } else if (claim.publicationState === 'published') {
         issues.push(...validateSourceStatus(source, options));
       }
     }

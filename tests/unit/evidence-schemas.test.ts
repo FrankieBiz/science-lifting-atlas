@@ -73,4 +73,46 @@ describe('SBLA-007 evidence record schemas', () => {
       );
     }
   });
+
+  it('documents every public authoring issue code', async () => {
+    const guide = await readFile(
+      new URL(
+        '../../docs/authoring/evidence-record-errors.md',
+        import.meta.url,
+      ),
+      'utf8',
+    );
+    const issueCodes = [
+      'AS_OF_INVALID',
+      'CERTAINTY_OVERSTATED',
+      'CERTAINTY_UNIVERSAL',
+      'HYPOTHESIS_DISCLOSURE_REQUIRED',
+      'ID_DUPLICATE',
+      'OUTCOME_REQUIRED',
+      'PUBLISHED_CLAIM_UNSOURCED',
+      'PUBLIC_RELATIONSHIP_UNCITED',
+      'RECORD_EXTENSION_UNSUPPORTED',
+      'RECORD_KIND_UNSUPPORTED',
+      'RECORD_NOT_REGULAR_FILE',
+      'RECORD_PARSE_FAILED',
+      'RECORD_PATH_ID_MISMATCH',
+      'REFERENCE_MISSING',
+      'REVIEW_DATE_IN_FUTURE',
+      'REVIEW_OVERDUE',
+      'REVIEW_SCHEDULE_INVALID',
+      'SCHEMA_INVALID',
+      'SOURCE_REEVALUATION_REQUIRED',
+      'SOURCE_RETRACTED',
+      'SOURCE_STATUS_CHECKED_IN_FUTURE',
+      'SOURCE_STATUS_DATE_MISSING',
+      'SOURCE_STATUS_METHOD_MISSING',
+      'SOURCE_STATUS_OVERDUE',
+      'SOURCE_STATUS_SCHEDULE_INVALID',
+      'SOURCE_STATUS_SOURCE_MISSING',
+    ];
+
+    for (const code of issueCodes) {
+      expect(guide, code).toContain(`### \`${code}\``);
+    }
+  });
 });

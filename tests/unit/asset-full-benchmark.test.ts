@@ -1,8 +1,13 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import {
+const originalArgv1 = process.argv[1];
+if (process.platform === 'win32' && originalArgv1) {
+  process.argv[1] = pathToFileURL(originalArgv1).pathname;
+}
+const {
   bindPerformanceEvidence,
   parseGlb,
   percentile,
@@ -11,7 +16,8 @@ import {
   summarizeScene,
   validatePerformanceRecord,
   validateRepresentativeScene,
-} from '../../scripts/assets/full-benchmark.mjs';
+} = await import('../../scripts/assets/full-benchmark.mjs');
+if (originalArgv1) process.argv[1] = originalArgv1;
 
 type Trial = ReturnType<typeof trial>;
 type MutableProfile = {

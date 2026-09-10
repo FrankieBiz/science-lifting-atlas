@@ -18,8 +18,11 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command:
-      'pnpm build && ASTRO_PREVIEW_BACKGROUND=0 pnpm preview --host 127.0.0.1 --port 4321',
+    command: 'pnpm build && pnpm preview --host 127.0.0.1 --port 4321',
+    env: {
+      ...process.env,
+      ASTRO_PREVIEW_BACKGROUND: '0',
+    },
     url: 'http://127.0.0.1:4321/health.txt',
     reuseExistingServer: false,
     timeout: 120_000,

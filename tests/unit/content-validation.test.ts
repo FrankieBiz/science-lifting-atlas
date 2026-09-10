@@ -94,6 +94,36 @@ describe('source publication status', () => {
       ).toEqual(testCase.expectedCodes);
     }
   });
+
+  it('requires a status source and rejects impossible status-check dates', async () => {
+    const valid = await readJson<{ source: SourceRecord }>(
+      'records.valid.json',
+    );
+    const missingSource = structuredClone(valid.source);
+    missingSource.publication.statusSource = null;
+    expect(
+      validateSourceStatus(missingSource, { asOf: '2026-09-09' }).map(
+        (issue) => issue.code,
+      ),
+    ).toContain('SOURCE_STATUS_SOURCE_MISSING');
+
+    const futureCheck = structuredClone(valid.source);
+    futureCheck.publication.statusCheckedAt = '2026-09-10';
+    expect(
+      validateSourceStatus(futureCheck, { asOf: '2026-09-09' }).map(
+        (issue) => issue.code,
+      ),
+    ).toContain('SOURCE_STATUS_CHECKED_IN_FUTURE');
+
+    const reversedSchedule = structuredClone(valid.source);
+    reversedSchedule.publication.statusCheckedAt = '2026-09-08';
+    reversedSchedule.publication.nextStatusCheckAt = '2026-09-08';
+    expect(
+      validateSourceStatus(reversedSchedule, { asOf: '2026-09-07' }).map(
+        (issue) => issue.code,
+      ),
+    ).toContain('SOURCE_STATUS_SCHEDULE_INVALID');
+  });
 });
 
 describe('certainty-language calibration', () => {
@@ -122,5 +152,76 @@ describe('certainty-language calibration', () => {
         'low',
       ),
     ).toEqual([]);
+  });
+
+  it('accepts comparative wording when it names the outcome', () => {
+    expect(
+      lintClaimLanguage(
+        'This setup may be better for pectoralis-major hypertrophy.',
+        'low',
+      ),
+    ).toEqual([]);
+  });
+
+  it('rejects additional categorical causal wording for low certainty', () => {
+    expect(
+      lintClaimLanguage('This exercise will improve strength.', 'low').map(
+        (issue) => issue.code,
+      ),
+    ).toContain('CERTAINTY_OVERSTATED');
+  });
+});
+
+describe('published-record review dates', () => {
+  it('fails closed when a published claim review is due or dated in the future', async () => {
+    const valid = await readJson<{ claim: ClaimRecord; source: SourceRecord }>(
+      'records.valid.json',
+    );
+    const due = structuredClone(valid.claim);
+    due.review.reviewDueAt = '2026-09-09';
+    expect(
+      validateRecordGraph(
+        {
+          claims: [due],
+          sources: [valid.source],
+          entityIds: ['joint-action-horizontal-adduction'],
+        },
+        { asOf: '2026-09-09' },
+      ).map((issue) => issue.code),
+    ).toContain('REVIEW_OVERDUE');
+
+    const future = structuredClone(valid.claim);
+    future.review.lastReviewedAt = '2026-09-10';
+    expect(
+      validateRecordGraph(
+        {
+          claims: [future],
+          sources: [valid.source],
+          entityIds: ['joint-action-horizontal-adduction'],
+        },
+        { asOf: '2026-09-09' },
+      ).map((issue) => issue.code),
+    ).toContain('REVIEW_DATE_IN_FUTURE');
+  });
+
+  it('checks adverse status for every source cited by a published claim', async () => {
+    const valid = await readJson<{ claim: ClaimRecord; source: SourceRecord }>(
+      'records.valid.json',
+    );
+    const claim = structuredClone(valid.claim);
+    claim.sourceLinks[0]!.role = 'qualifies';
+    const source = structuredClone(valid.source);
+    source.publication.status = 'retracted';
+
+    expect(
+      validateRecordGraph(
+        {
+          claims: [claim],
+          sources: [source],
+          entityIds: ['joint-action-horizontal-adduction'],
+        },
+        { asOf: '2026-09-09' },
+      ).map((issue) => issue.code),
+    ).toContain('SOURCE_RETRACTED');
   });
 });

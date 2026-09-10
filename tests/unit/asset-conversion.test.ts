@@ -45,6 +45,14 @@ type MutableGlbDocument = {
   bufferViews: Array<{ byteOffset?: number; byteLength: number }>;
 };
 
+function runPython(args: string[]) {
+  return spawnSync(
+    process.platform === 'win32' ? 'py' : 'python3',
+    process.platform === 'win32' ? ['-3', ...args] : args,
+    { encoding: 'utf8' },
+  );
+}
+
 async function conversionManifest() {
   return JSON.parse(await readFile(conversionPath, 'utf8'));
 }
@@ -78,30 +86,20 @@ function runTransactionProbe(
   manifestPath: string,
   failure: string,
 ) {
-  return spawnSync(
-    'python3',
-    [
-      scriptPath,
-      '--transaction-probe',
-      '--output-dir',
-      outputDir,
-      '--manifest',
-      manifestPath,
-      '--failure',
-      failure,
-    ],
-    { encoding: 'utf8' },
-  );
+  return runPython([
+    scriptPath,
+    '--transaction-probe',
+    '--output-dir',
+    outputDir,
+    '--manifest',
+    manifestPath,
+    '--failure',
+    failure,
+  ]);
 }
 
 function runPolicyProbe(args: string[]) {
-  return spawnSync(
-    'python3',
-    [scriptPath, '--publication-policy-probe', ...args],
-    {
-      encoding: 'utf8',
-    },
-  );
+  return runPython([scriptPath, '--publication-policy-probe', ...args]);
 }
 
 function sha256(bytes: Buffer | string) {
@@ -109,17 +107,18 @@ function sha256(bytes: Buffer | string) {
 }
 
 function runBaselineAuthProbe(args: string[]) {
-  return spawnSync('python3', [scriptPath, '--baseline-auth-probe', ...args], {
-    encoding: 'utf8',
-  });
+  return runPython([scriptPath, '--baseline-auth-probe', ...args]);
 }
 
 function runRawGlbProbe(glb: string) {
-  return spawnSync(
-    'python3',
-    [scriptPath, '--raw-glb-probe', '--glb', glb, '--manifest', conversionPath],
-    { encoding: 'utf8' },
-  );
+  return runPython([
+    scriptPath,
+    '--raw-glb-probe',
+    '--glb',
+    glb,
+    '--manifest',
+    conversionPath,
+  ]);
 }
 
 function runReceiptProbe(commit: string, workingBytes?: string) {
@@ -132,7 +131,7 @@ function runReceiptProbe(commit: string, workingBytes?: string) {
     commit,
   ];
   if (workingBytes) args.push('--working-bytes-override', workingBytes);
-  return spawnSync('python3', args, { encoding: 'utf8' });
+  return runPython(args);
 }
 
 async function mutateGlb(

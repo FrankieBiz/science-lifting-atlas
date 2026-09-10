@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { readFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 
-import {
-  SAMPLE,
-  median,
-  parseObjStats,
-  validateSampleIdentity,
-} from '../../scripts/assets/benchmark.mjs';
+const originalArgv1 = process.argv[1];
+if (process.platform === 'win32' && originalArgv1) {
+  process.argv[1] = pathToFileURL(originalArgv1).pathname;
+}
+const { SAMPLE, median, parseObjStats, validateSampleIdentity } =
+  await import('../../scripts/assets/benchmark.mjs');
+if (originalArgv1) process.argv[1] = originalArgv1;
 
 describe('real asset browser benchmark support', () => {
   it('parses OBJ geometry deterministically and triangulates polygon faces', () => {

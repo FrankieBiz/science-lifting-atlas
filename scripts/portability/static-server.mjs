@@ -149,18 +149,33 @@ function isInside(base, candidate) {
  * @param {unknown} error
  */
 function respondToFilesystemError(response, error) {
+  const status = filesystemErrorStatus(error);
+
+  if (status === 404) {
+    response.writeHead(status).end('Not Found');
+    return;
+  }
+
+  if (status === 403) {
+    response.writeHead(status).end('Forbidden');
+    return;
+  }
+
+  response.writeHead(status).end('Internal Server Error');
+}
+
+/** @param {unknown} error */
+export function filesystemErrorStatus(error) {
   const code =
     error && typeof error === 'object' && 'code' in error ? error.code : null;
 
   if (code === 'ENOENT' || code === 'ENOTDIR' || code === 'EISDIR') {
-    response.writeHead(404).end('Not Found');
-    return;
+    return 404;
   }
 
   if (code === 'EACCES' || code === 'EPERM' || code === 'ELOOP') {
-    response.writeHead(403).end('Forbidden');
-    return;
+    return 403;
   }
 
-  response.writeHead(500).end('Internal Server Error');
+  return 500;
 }

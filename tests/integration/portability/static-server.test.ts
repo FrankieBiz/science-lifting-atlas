@@ -4,7 +4,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
-import { serveStaticDirectory } from '../../../scripts/portability/static-server.mjs';
+import {
+  filesystemErrorStatus,
+  serveStaticDirectory,
+} from '../../../scripts/portability/static-server.mjs';
 import { closeServer } from './server-lifecycle';
 
 interface TestResponse {
@@ -148,8 +151,12 @@ describe('portability static server request safety', () => {
   });
 
   it('does not disguise unexpected filesystem errors as missing files', async () => {
-    expect((await requestPath(server!, `/${'x'.repeat(300)}`)).status).toBe(
-      500,
-    );
+    expect(
+      filesystemErrorStatus(
+        Object.assign(new Error('deterministic unexpected error'), {
+          code: 'EIO',
+        }),
+      ),
+    ).toBe(500);
   });
 });
