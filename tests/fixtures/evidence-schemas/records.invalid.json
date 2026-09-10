@@ -49,6 +49,40 @@
     "expectedPath": "targetChecksums"
   },
   {
+    "name": "review with duplicate target identity",
+    "kind": "review",
+    "path": "targetIds",
+    "value": [
+      "claim-pec-major-horizontal-adduction",
+      "claim-pec-major-horizontal-adduction"
+    ],
+    "expectedPath": "targetIds"
+  },
+  {
+    "name": "review with checksum for an unreviewed target",
+    "kind": "review",
+    "path": "targetChecksums",
+    "value": {
+      "claim-pec-major-horizontal-adduction": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "claim-unreviewed": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "expectedPath": "targetChecksums.claim-unreviewed"
+  },
+  {
+    "name": "evidence packet both includes and excludes one source",
+    "kind": "evidencePacket",
+    "path": "exclusions.0.sourceId",
+    "value": "source-doi-10-1000-valid",
+    "expectedPath": "exclusions.0.sourceId"
+  },
+  {
+    "name": "evidence packet updated before it was created",
+    "kind": "evidencePacket",
+    "path": "updatedAt",
+    "value": "2026-08-31T23:59:59Z",
+    "expectedPath": "updatedAt"
+  },
+  {
     "name": "change without deployment identity",
     "kind": "changeRecord",
     "path": "deploymentId",

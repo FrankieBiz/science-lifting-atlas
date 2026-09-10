@@ -437,7 +437,27 @@ export const evidencePacketSchema = z
     createdAt: isoTimestampSchema,
     updatedAt: isoTimestampSchema,
   })
-  .strict();
+  .strict()
+  .superRefine((packet, context) => {
+    if (packet.updatedAt < packet.createdAt) {
+      context.addIssue({
+        code: 'custom',
+        path: ['updatedAt'],
+        message: 'updatedAt must not precede createdAt',
+      });
+    }
+
+    const includedSourceIds = new Set(packet.includedSourceIds);
+    for (const [index, exclusion] of packet.exclusions.entries()) {
+      if (includedSourceIds.has(exclusion.sourceId)) {
+        context.addIssue({
+          code: 'custom',
+          path: ['exclusions', index, 'sourceId'],
+          message: 'A source cannot be both included and excluded',
+        });
+      }
+    }
+  });
 
 const reviewFindingSchema = z
   .object({
@@ -461,12 +481,30 @@ export const reviewRecordSchema = z
   })
   .strict()
   .superRefine((review, context) => {
+    if (new Set(review.targetIds).size !== review.targetIds.length) {
+      context.addIssue({
+        code: 'custom',
+        path: ['targetIds'],
+        message: 'Review target IDs must be unique',
+      });
+    }
+
     for (const targetId of review.targetIds) {
       if (!review.targetChecksums[targetId]) {
         context.addIssue({
           code: 'custom',
           path: ['targetChecksums'],
           message: `Missing immutable checksum for ${targetId}`,
+        });
+      }
+    }
+    const targetIds = new Set(review.targetIds);
+    for (const checksumTargetId of Object.keys(review.targetChecksums)) {
+      if (!targetIds.has(checksumTargetId)) {
+        context.addIssue({
+          code: 'custom',
+          path: ['targetChecksums', checksumTargetId],
+          message: `Checksum target ${checksumTargetId} is not present in targetIds`,
         });
       }
     }
