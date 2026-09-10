@@ -23,9 +23,15 @@ contracts with adversarial fixtures; and document every public authoring error.
 - Transfer checkpoint tree: `8d177ffa66e96465fdc75d6132a425b555d8be74`
 - Verified cloned branch head before this continuation:
   `b6925f805e3b257129cf2d9127ac6d69c003d813`
-- Implementation candidate:
-  `a7bd6f2a45665f0d5bf94c57c77ed709b1774a95`
-- Implementation tree: `bed71dd95ff64aacb84b8b4bec4319027cd77c5c`
+- Superseded pre-advisory handoff candidate:
+  `cabb387aaf7122b97e314ec7909c33a963d1ac71`
+- Account-A remediation implementation:
+  `d9e987ca8f717075f395b1e37813806e0c0a8e52`
+- Remediation implementation tree: `33514da5b5e2d0f609edafe763db74c6f5792a10`
+- Final implementation-plus-verification commit:
+  `9a5f5eabba256b5a7e72c182ac0f98c0e3f1a846`
+- Final implementation-plus-verification tree:
+  `7d4c3a69cf0b120815b0d030e58bbe84782bfb06`
 - Runtime: official Node.js `v24.20.0`, Corepack-prepared pnpm `11.24.0`
 - Design:
   `docs/superpowers/specs/2026-09-09-sbla-007-evidence-schemas-design.md`
@@ -70,7 +76,7 @@ pre-dispatch review claim before Account B receives the review prompt.
 5. Added real subprocess coverage for invalid deterministic dates, empty-state
    success, malformed records, unsupported extensions, missing references, and
    retracted sources.
-6. Added `docs/authoring/evidence-record-errors.md`, documenting all 26 public
+6. Added `docs/authoring/evidence-record-errors.md`, documenting all 27 public
    issue codes with rejection conditions, minimal examples, and exact repairs;
    a unit test keeps the guide and public codes synchronized.
 7. Closed Windows-only verification gaps: correct URL/path expectations, the
@@ -80,6 +86,36 @@ pre-dispatch review claim before Account B receives the review prompt.
 8. Added a direct pinned `cookie@2.0.1` development dependency so Astro's
    prerender build cannot resolve an unrelated CommonJS package from an ambient
    ancestor `node_modules` directory on Windows.
+9. Retrieved the missing Account-A read-only advisory before Account B accessed
+   the candidate. Added red tests and bounded corrections for the material
+   findings: public relationships now require a published cited claim; language
+   checks cover statement, plain-language, and qualifiers; common universal
+   forms are rejected; directly negated causal wording is not treated as an
+   overclaim; and outcome-qualified comparatives may contain intervening words.
+
+## Account-A advisory disposition
+
+Account A explicitly stated that it had no repository access and performed only
+a self-contained desk review. Its response was assessed against the actual code:
+
+- The alleged wall-clock determinism gap was not present: future dates are
+  compared only with explicit `asOf`.
+- The alleged missing supporting-source rule was not present: `claimSchema`
+  requires at least one `supports` link for publication.
+- Claim withdrawal already exists as `publicationState: withdrawn`; automated
+  source-status acquisition and scheduling remain explicitly deferred.
+- Global duplicate-ID detection was already implemented across claims, sources,
+  and entity IDs. DOI, PMID, and PMCID canonical forms were already enforced.
+- Fail-closed handling of corrected, expression-of-concern, and superseded
+  sources is intentional pending manual reevaluation.
+- The public-relationship unpublished-claim leak, negation false positive,
+  comparative-clause false positive, common universal false negatives, and
+  unlinted public claim fields were material and were repaired with tests.
+- An explicit test now proves very-low disclosure remains independent of the
+  general low-certainty calibration gate.
+- URL equivalence, live status acquisition, scheduling, graph compilation, and
+  approval-manifest byte binding remain owned by their later tasks; SBLA-007
+  stores their normalized structural inputs and fails closed where specified.
 
 ## Decisions made
 
@@ -98,6 +134,10 @@ pre-dispatch review claim before Account B receives the review prompt.
 - Existing Markdown hardbreak bytes in the transfer handoff are preserved. A
   path-specific whitespace attribute makes the mandated accepted-base range
   check truthful without rewriting historical transfer content.
+- Account B's first pre-dispatch claim was canceled without candidate access or
+  a report when expired OAuth prevented dispatch and Account A's material
+  advisory arrived. The clean superseded reviewer worktree and empty report path
+  were preserved rather than rewritten or backdated.
 
 ## Tests/checks run and results
 
@@ -141,14 +181,35 @@ pre-dispatch review claim before Account B receives the review prompt.
 - `git diff --check bbeddc06b53962a8f76e4d0f5d0871e20fa4075a...HEAD`
   at implementation commit `a7bd6f2a45665f0d5bf94c57c77ed709b1774a95`
   — PASS with no output.
+- Account-A remediation TDD red:
+  `pnpm vitest run tests/unit/content-validation.test.ts` — FAIL as expected;
+  nine new adversarial cases failed before implementation.
+- Account-A remediation focused green:
+  `pnpm vitest run tests/unit/content-validation.test.ts tests/unit/evidence-schemas.test.ts tests/unit/foundation-adapters.test.ts`
+  — PASS; three files and 32 tests. A later independent-disclosure case raised
+  the final unit total by one.
+- Deep nested remediation-worktree `pnpm verify` — FAIL only in the inherited
+  historical asset-receipt probe: the absolute Windows path plus the long
+  `commit:path` argument exceeded legacy `MAX_PATH`, so Git reported the
+  committed receipt absent. The same commit was fast-forwarded into the shorter
+  canonical checkout before final verification; no asset implementation or
+  evidence artifact was changed.
+- First remediation full run in the short checkout — FAIL at Astro typecheck on
+  a possibly undefined split result. The local type was corrected and formatted.
+- Final remediation `pnpm verify` in the canonical checkout — PASS: Prettier,
+  ESLint, and Astro check clean; 16 unit files and 222 tests pass; all content,
+  graph, evidence, build, 17 portability, foundation, and asset gates pass.
+- Final remediation `pnpm test:e2e` — PASS; 1/1 Chromium production-build
+  journey.
+- Final remediation accepted-base range `git diff --check` — PASS with no
+  output.
 
 ## Known uncertainties
 
-- The Account-A advisory packet is recorded as sent in the transfer runbook,
-  but its response was unavailable after searching the cloned repository,
-  available Codex task history, and the logged-in personal Free Claude account's
-  chat history for SBLA-007 and evidence-schema terms. No advisory finding was
-  silently claimed or fabricated. Account A did not inspect this Windows clone.
+- Account A's advisory was based only on the self-contained summary and regexes
+  supplied in chat. It did not inspect this checkout, run fixtures, or provide
+  acceptance evidence. Its material observations were independently reproduced
+  as red tests before remediation; summary-based false alarms are recorded above.
 - The validators intentionally use conservative English-language regexes, not a
   scientific-language classifier. Account B should try adversarial punctuation,
   phrasing, and Unicode boundary cases.
