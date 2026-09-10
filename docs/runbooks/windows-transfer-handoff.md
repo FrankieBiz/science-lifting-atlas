@@ -81,8 +81,8 @@ Read this file in full, then read `AGENTS.md`, `docs/product/master-plan.md` sec
 
 ## Transfer identity
 
-The exact transfer commit and tree are filled in immediately before push:
+The code-and-context checkpoint below is the commit that preserves the complete portable work state. The branch also contains one later metadata-only commit that replaces the placeholders in this section; therefore the remote branch HEAD is expected to be a descendant of this checkpoint.
 
-- Active checkpoint commit: `TRANSFER_COMMIT_PENDING`
-- Active checkpoint tree: `TRANSFER_TREE_PENDING`
+- Active code checkpoint commit: `a7c5b24bbf6fc268afcb17fe43a8a48f6d7e6df6`
+- Active code checkpoint tree: `8d177ffa66e96465fdc75d6132a425b555d8be74`
 - Expected remote: `origin https://github.com/FrankieBiz/science-lifting-atlas.git`
