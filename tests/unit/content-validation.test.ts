@@ -238,6 +238,15 @@ describe('certainty-language calibration', () => {
       ),
     ).toEqual([]);
   });
+
+  it('requires very-low disclosure independently of low-certainty calibration', () => {
+    expect(
+      lintClaimLanguage(
+        'This intervention may change measured strength.',
+        'very-low',
+      ).map((issue) => issue.code),
+    ).toContain('HYPOTHESIS_DISCLOSURE_REQUIRED');
+  });
 });
 
 describe('claim-language field coverage', () => {
