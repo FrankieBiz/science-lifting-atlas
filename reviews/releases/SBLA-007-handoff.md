@@ -1,6 +1,7 @@
 # Handoff: SBLA-007 — Evidence schemas and validators
 
-**Status:** Immutable builder candidate ready for independent Account-B review.
+**Status:** Replacement immutable builder candidate pending a fresh independent
+Account-B review.
 This is not acceptance and must not be merged to `main` unless the latest
 Account-B report says PASS with zero unresolved Critical and Important findings.
 
@@ -297,3 +298,43 @@ SBLA-007 is complete only when all are independently checkable:
 7. The latest independent Account-B report says PASS with zero unresolved
    Critical and zero unresolved Important findings, and its trusted exact-path
    boundary passes.
+
+## Windows receipt portability remediation (2026-09-10)
+
+Read-only verification of the earlier replacement candidate
+`7a3111889c67527dfc4edc04b76055c124d26862` in its long nested reviewer
+worktree exposed an inherited SBLA-005 test failure before any Account-B
+dispatch or report write. The receipt probe passed a long
+`<commit>:docs/licenses/bodyparts3d-conversion-baseline-receipt.json` argument
+to `git show`; Windows Git interpreted that long argument as a filename and
+failed with `Filename too long`, masking the test's intended tampered-receipt
+assertion. The prior reviewer worktree remains clean at the superseded
+candidate and no `SBLA-007-r1.md` report exists.
+
+The bounded repair resolves the committed receipt to its blob ID with
+`git rev-parse`, then reads the blob with `git cat-file blob <id>`. It changes
+only `scripts/assets/blender/convert.py`; the existing strict-ancestor,
+tamper, and genuine-receipt test reproduces the Windows failure red and passes
+green after the repair. The implementation commit is
+`da59b10b5c56193b397e2ea75388ec4df0fab748`, tree
+`4f4740ea3b2211249aecbd82ee756c308395e14c`.
+
+Because this Windows host has legacy executable-path limits, nested long
+worktrees can also prevent esbuild from spawning even when repository code is
+correct. The formal Account-B review must therefore use a short, recorded
+Windows worktree path. Verification of the repair ran from
+`C:\Users\frank.DESKTOP-8VOID7R\Documents\Codex\2026-09-09\clone-https-github-com-frankiebiz-science\work\s007v`:
+
+- focused BodyParts3D conversion contract: 21/21 tests PASS;
+- `pnpm verify`: PASS — 222 unit tests, 17 portability tests, zero Astro
+  diagnostics, production build, foundation, and asset gates;
+- `pnpm test:e2e`: PASS — 1/1 Chromium production journey;
+- `git diff --check bbeddc06b53962a8f76e4d0f5d0871e20fa4075a...da59b10b5c56193b397e2ea75388ec4df0fab748`:
+  PASS with no output.
+
+This repair is a Windows execution guardrail required to make the already
+required candidate verification reproducible. It adds no scientific content,
+graph output, network client, production media, or other later-task work.
+The next reviewer claim must pin the immutable handoff commit that contains
+this section, use the short path, and remain restricted to its one append-only
+report file.
