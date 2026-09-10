@@ -1,0 +1,58 @@
+[
+  {
+    "name": "uppercase entity id",
+    "kind": "claim",
+    "path": "id",
+    "value": "Claim-Uppercase",
+    "expectedPath": "id"
+  },
+  {
+    "name": "DOI URL stored as DOI identifier",
+    "kind": "source",
+    "path": "identifiers.doi",
+    "value": "https://doi.org/10.1000/valid",
+    "expectedPath": "identifiers.doi"
+  },
+  {
+    "name": "noncanonical DOI URL",
+    "kind": "source",
+    "path": "urls.doi",
+    "value": "http://dx.doi.org/10.1000/valid",
+    "expectedPath": "urls.doi"
+  },
+  {
+    "name": "published claim without owner approval",
+    "kind": "claim",
+    "path": "review.ownerApprovedAt",
+    "value": null,
+    "expectedPath": "review.ownerApprovedAt"
+  },
+  {
+    "name": "published claim without manifest",
+    "kind": "claim",
+    "path": "approvalManifestId",
+    "value": null,
+    "expectedPath": "approvalManifestId"
+  },
+  {
+    "name": "source link without locator",
+    "kind": "claim",
+    "path": "sourceLinks.0.locator",
+    "value": "",
+    "expectedPath": "sourceLinks.0.locator"
+  },
+  {
+    "name": "review without immutable target checksums",
+    "kind": "review",
+    "path": "targetChecksums",
+    "value": {},
+    "expectedPath": "targetChecksums"
+  },
+  {
+    "name": "change without deployment identity",
+    "kind": "changeRecord",
+    "path": "deploymentId",
+    "value": "",
+    "expectedPath": "deploymentId"
+  }
+]

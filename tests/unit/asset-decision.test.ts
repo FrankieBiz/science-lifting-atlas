@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { pathToFileURL } from 'node:url';
 
 import {
   EXPECTED_DECISION,
   EXPECTED_MISSING_TARGET_IDS,
+  resolveRepositoryRoot,
   validateAssetDecision,
 } from '../../scripts/assets/decision.mjs';
 
@@ -80,32 +82,47 @@ function fixture() {
   const decision = {
     schemaVersion: 1,
     taskId: 'SBLA-006',
+    decisionId: 'gate-a-asset-2026-09-09',
     status: 'approved',
     decision: EXPECTED_DECISION,
+    recordedOn: '2026-09-09',
     ownerApproval: {
       approved: true,
       approvedOn: '2026-09-09',
       authorityBasis: 'owner-delegated-project-decision',
       recordedBy: 'Codex acting under owner delegation',
+      record: 'The durable owner-delegated approval record.',
     },
     cost: {
+      currency: 'USD',
       purchaseRequired: false,
       purchaseUsd: 0,
       recurringUsd: 0,
+      purchaseArchiveRequired: false,
+      reason: 'No commercial asset is selected or purchased.',
     },
     baseline2d: {
       type: 'project-authored-evidence-reviewed-semantic-vector-and-text',
+      role: 'authoritative-core-experience',
       authoritativeForAllRequiredTargets: true,
       thirdPartyAssetSelected: false,
       productionStatus: 'deferred-to-SBLA-008-through-SBLA-013',
+      rightsBasis: 'Original project-authored presentation.',
+      accessibility: 'Semantic text remains complete without WebGL.',
+      checksumStatus: 'Production checksums are deferred to SBLA-013.',
     },
     enhancement3d: {
       candidateId: 'path-c-bodyparts3d',
       role: 'optional-progressive-enhancement-only',
       datasetVersion: mapping.datasetVersion,
       sourceBaseUrl: mapping.source.baseUrl,
+      sourceIdentityPolicy: 'Checksums provide immutable source identity.',
       archives: structuredClone(ARCHIVES),
-      license: structuredClone(inventory.candidates[0]!.license),
+      license: {
+        ...structuredClone(inventory.candidates[0]!.license),
+        accessedOn: '2026-09-09',
+        historicalEmbeddedNotice: 'Historical license notice is preserved.',
+      },
       representativeArtifact: structuredClone(
         feasibility.evidence.directMeasurements.optimizedArtifact,
       ),
@@ -114,17 +131,33 @@ function fixture() {
       requiredTargets: 28,
       mapped3dTargets: 23,
       missing3dTargetIds: [...EXPECTED_MISSING_TARGET_IDS],
+      policy: 'Missing targets remain on the authoritative 2D path.',
     },
     guardrails: {
       bodyparts3dMayBeSoleAnatomySource: false,
       webglRequiredForCoreJourney: false,
       createScientificIllustrationsInThisTask: false,
       publishUnsupportedAnatomy: false,
+      generatedAnatomyImagesPermitted: false,
+      requiredAttributionMustShipWithEveryDerivative: true,
     },
     evidenceDigests: structuredClone(evidenceDigests),
+    acceptedRisks: ['The 3D enhancement has bounded coverage.'],
+    rejectedAlternatives: [
+      { option: 'commercial-asset', reason: 'No candidate passed every gate.' },
+    ],
+    laterTaskBoundaries: { SBLA_013: 'Production media validation.' },
   };
 
-  return { decision, inventory, mapping, feasibility, evidenceDigests };
+  return {
+    decision,
+    inventory,
+    mapping,
+    feasibility,
+    evidenceDigests,
+    decisionDigest: 'a'.repeat(64),
+    gatePacketDecisionDigest: 'a'.repeat(64),
+  };
 }
 
 describe('SBLA-006 asset decision contract', () => {
@@ -200,5 +233,40 @@ describe('SBLA-006 asset decision contract', () => {
         'the core journey must work without WebGL',
       ]),
     );
+  });
+
+  it('rejects either unvalidated publication and attribution guardrail inversion', () => {
+    const input = fixture();
+    input.decision.guardrails.generatedAnatomyImagesPermitted = true;
+    input.decision.guardrails.requiredAttributionMustShipWithEveryDerivative = false;
+    expect(validateAssetDecision(input)).toEqual(
+      expect.arrayContaining([
+        'generated anatomy images must remain prohibited until their later evidence and review gates pass',
+        'required attribution must ship with every derivative',
+      ]),
+    );
+  });
+
+  it('fails closed when the selected candidate has no license score', () => {
+    const input = fixture();
+    delete (input.inventory.candidates[0] as { scores?: unknown }).scores;
+    expect(validateAssetDecision(input)).toContain(
+      'the selected enhancement must remain the eligible 73/100 BodyParts3D candidate with license clarity at least 4/5',
+    );
+  });
+
+  it('rejects a stale Gate A packet decision checksum', () => {
+    const input = fixture();
+    input.gatePacketDecisionDigest = 'b'.repeat(64);
+    expect(validateAssetDecision(input)).toContain(
+      'the Gate A packet must cite the current decision-record SHA-256',
+    );
+  });
+
+  it('decodes spaces while resolving the repository root', () => {
+    const moduleUrl = pathToFileURL(
+      '/tmp/Sci Atlas/scripts/assets/decision.mjs',
+    ).href;
+    expect(resolveRepositoryRoot(moduleUrl)).toBe('/tmp/Sci Atlas');
   });
 });

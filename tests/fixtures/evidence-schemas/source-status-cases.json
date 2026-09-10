@@ -1,0 +1,43 @@
+[
+  {
+    "name": "current and not overdue",
+    "status": "current",
+    "statusCheckedAt": "2026-09-01",
+    "nextStatusCheckAt": "2026-10-01",
+    "asOf": "2026-09-09",
+    "expectedCodes": []
+  },
+  {
+    "name": "due date is inclusive and overdue",
+    "status": "current",
+    "statusCheckedAt": "2026-08-01",
+    "nextStatusCheckAt": "2026-09-09",
+    "asOf": "2026-09-09",
+    "expectedCodes": ["SOURCE_STATUS_OVERDUE"]
+  },
+  {
+    "name": "retracted source blocks publication",
+    "status": "retracted",
+    "statusCheckedAt": "2026-09-08",
+    "nextStatusCheckAt": "2026-10-08",
+    "asOf": "2026-09-09",
+    "expectedCodes": ["SOURCE_RETRACTED"]
+  },
+  {
+    "name": "expression of concern requires reevaluation",
+    "status": "expression-of-concern",
+    "statusCheckedAt": "2026-09-08",
+    "nextStatusCheckAt": "2026-10-08",
+    "asOf": "2026-09-09",
+    "expectedCodes": ["SOURCE_REEVALUATION_REQUIRED"]
+  },
+  {
+    "name": "missing status method fails closed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-08",
+    "statusMethod": null,
+    "nextStatusCheckAt": "2026-10-08",
+    "asOf": "2026-09-09",
+    "expectedCodes": ["SOURCE_STATUS_METHOD_MISSING"]
+  }
+]

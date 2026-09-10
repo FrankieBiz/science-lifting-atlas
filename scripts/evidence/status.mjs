@@ -1,22 +1,24 @@
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { findUnexpectedRecordFiles } from '../foundation/foundation-mode.mjs';
-import { listRelativeFiles } from '../foundation/scan-records.mjs';
+import { validateSourceStatus } from '../../src/lib/content/validation.ts';
+import { loadAndValidateRecords, printIssues } from '../content/validate.mjs';
 
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
-const filePaths = await listRelativeFiles(
-  path.join(repositoryRoot, 'content/sources'),
-  repositoryRoot,
-);
-const unexpectedFiles = findUnexpectedRecordFiles(filePaths);
+const asOf = process.env.SBLA_AS_OF ?? new Date().toISOString().slice(0, 10);
+const loaded = await loadAndValidateRecords(repositoryRoot);
+const sources = loaded.records
+  .filter((record) => record.kind === 'source')
+  .map((record) => record.data);
+const issues = [
+  ...loaded.issues,
+  ...sources.flatMap((source) => validateSourceStatus(source, { asOf })),
+];
 
-if (unexpectedFiles.length > 0) {
-  console.error(
-    'Evidence status is in foundation mode and cannot verify source records:',
-  );
-  for (const filePath of unexpectedFiles) console.error(`- ${filePath}`);
+if (issues.length > 0) {
+  printIssues('Evidence status', issues);
   process.exitCode = 1;
 } else {
-  console.log('Evidence status: foundation mode; 0 sources checked.');
+  console.log(
+    `Evidence status passed: ${sources.length} sources checked as of ${asOf}; live network acquisition remains a later task.`,
+  );
 }

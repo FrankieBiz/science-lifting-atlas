@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const EXPECTED_DECISION =
   'approve-2d-authoritative-hybrid-with-bounded-bodyparts3d-enhancement';
@@ -34,6 +34,21 @@ function isRecord(value) {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+/** @param {unknown} value */
+function isNonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+/** @param {string} moduleUrl */
+export function resolveRepositoryRoot(moduleUrl = import.meta.url) {
+  return resolve(fileURLToPath(new URL('../..', moduleUrl)));
+}
+
+/** @param {string} packet */
+export function extractGatePacketDecisionDigest(packet) {
+  return packet.match(/Machine record:.*SHA-256 `([a-f0-9]{64})`/)?.[1] ?? null;
+}
+
 /** @param {unknown} left @param {unknown} right */
 function sameJson(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
@@ -54,7 +69,9 @@ function sameStringSet(values, expected) {
  *   inventory?: any,
  *   mapping?: any,
  *   feasibility?: any,
- *   evidenceDigests?: Record<string, string>
+ *   evidenceDigests?: Record<string, string>,
+ *   decisionDigest?: string,
+ *   gatePacketDecisionDigest?: string | null
  * }} input
  */
 export function validateAssetDecision({
@@ -63,12 +80,22 @@ export function validateAssetDecision({
   mapping,
   feasibility,
   evidenceDigests,
+  decisionDigest,
+  gatePacketDecisionDigest,
 }) {
   const issues = [];
 
   if (!isRecord(decision)) return ['decision must be a JSON object'];
   if (decision.schemaVersion !== 1) issues.push('schemaVersion must be 1');
   if (decision.taskId !== 'SBLA-006') issues.push('taskId must be SBLA-006');
+  if (
+    decision.decisionId !== 'gate-a-asset-2026-09-09' ||
+    decision.recordedOn !== '2026-09-09'
+  ) {
+    issues.push(
+      'decisionId and recordedOn must preserve the accepted Gate A identity',
+    );
+  }
   if (decision.status !== 'approved') issues.push('status must be approved');
   if (decision.decision !== EXPECTED_DECISION) {
     issues.push(`decision must be ${EXPECTED_DECISION}`);
@@ -82,6 +109,7 @@ export function validateAssetDecision({
     decision.ownerApproval.authorityBasis.length === 0 ||
     typeof decision.ownerApproval?.recordedBy !== 'string' ||
     decision.ownerApproval.recordedBy.length === 0 ||
+    !isNonEmptyString(decision.ownerApproval?.record) ||
     !/^\d{4}-\d{2}-\d{2}$/.test(decision.ownerApproval?.approvedOn ?? '')
   ) {
     issues.push(
@@ -92,7 +120,10 @@ export function validateAssetDecision({
   if (
     decision.cost?.purchaseRequired !== false ||
     decision.cost?.purchaseUsd !== 0 ||
-    decision.cost?.recurringUsd !== 0
+    decision.cost?.recurringUsd !== 0 ||
+    decision.cost?.currency !== 'USD' ||
+    decision.cost?.purchaseArchiveRequired !== false ||
+    !isNonEmptyString(decision.cost?.reason)
   ) {
     issues.push(
       'the approved decision must require no purchase and record $0 purchase and recurring cost',
@@ -111,6 +142,16 @@ export function validateAssetDecision({
       'baseline2d must be the authoritative non-WebGL path for all required targets',
     );
   }
+  if (
+    decision.baseline2d?.role !== 'authoritative-core-experience' ||
+    !isNonEmptyString(decision.baseline2d?.rightsBasis) ||
+    !isNonEmptyString(decision.baseline2d?.accessibility) ||
+    !isNonEmptyString(decision.baseline2d?.checksumStatus)
+  ) {
+    issues.push(
+      'baseline2d must preserve its rights, accessibility, and checksum policy',
+    );
+  }
 
   const candidate = inventory?.candidates?.find?.(
     (/** @type {{id?: unknown}} */ entry) => entry?.id === 'path-c-bodyparts3d',
@@ -119,7 +160,10 @@ export function validateAssetDecision({
     !candidate ||
     candidate.selectionEligible === false ||
     candidate.weightedTotal !== 73 ||
-    candidate.scores?.license_clarity < 4
+    !(
+      Number.isFinite(candidate.scores?.license_clarity) &&
+      candidate.scores.license_clarity >= 4
+    )
   ) {
     issues.push(
       'the selected enhancement must remain the eligible 73/100 BodyParts3D candidate with license clarity at least 4/5',
@@ -154,6 +198,11 @@ export function validateAssetDecision({
       'enhancement3d.archives must exactly match the checksum-pinned SBLA-005 source archives',
     );
   }
+  if (!isNonEmptyString(decision.enhancement3d?.sourceIdentityPolicy)) {
+    issues.push(
+      'enhancement3d must preserve its immutable source identity policy',
+    );
+  }
 
   if (
     decision.enhancement3d?.license?.name !==
@@ -162,6 +211,10 @@ export function validateAssetDecision({
     decision.enhancement3d?.license?.source !== EXPECTED_LICENSE_SOURCE ||
     decision.enhancement3d?.license?.attributionString !==
       EXPECTED_ATTRIBUTION ||
+    decision.enhancement3d?.license?.accessedOn !== '2026-09-09' ||
+    !isNonEmptyString(
+      decision.enhancement3d?.license?.historicalEmbeddedNotice,
+    ) ||
     decision.enhancement3d?.license?.name !== candidate?.license?.name ||
     decision.enhancement3d?.license?.version !== candidate?.license?.version ||
     decision.enhancement3d?.license?.source !== candidate?.license?.source ||
@@ -188,6 +241,9 @@ export function validateAssetDecision({
       'enhancement3d representative artifact must match the measured SBLA-005 artifact',
     );
   }
+  if (!isNonEmptyString(decision.coverage?.policy)) {
+    issues.push('coverage must preserve the explicit five-gap fallback policy');
+  }
 
   if (
     mapping?.coverage?.required !== 28 ||
@@ -205,6 +261,40 @@ export function validateAssetDecision({
       'coverage must preserve the exact 23/28 mapping and five absent target ids',
     );
   }
+  if (decision.guardrails?.generatedAnatomyImagesPermitted !== false) {
+    issues.push(
+      'generated anatomy images must remain prohibited until their later evidence and review gates pass',
+    );
+  }
+  if (
+    decision.guardrails?.requiredAttributionMustShipWithEveryDerivative !== true
+  ) {
+    issues.push('required attribution must ship with every derivative');
+  }
+
+  if (
+    !Array.isArray(decision.acceptedRisks) ||
+    decision.acceptedRisks.length === 0 ||
+    decision.acceptedRisks.some(
+      (/** @type {unknown} */ risk) => !isNonEmptyString(risk),
+    ) ||
+    !Array.isArray(decision.rejectedAlternatives) ||
+    decision.rejectedAlternatives.length === 0 ||
+    decision.rejectedAlternatives.some(
+      (/** @type {any} */ alternative) =>
+        !isNonEmptyString(alternative?.option) ||
+        !isNonEmptyString(alternative?.reason),
+    ) ||
+    !isRecord(decision.laterTaskBoundaries) ||
+    Object.keys(decision.laterTaskBoundaries).length === 0 ||
+    Object.values(decision.laterTaskBoundaries).some(
+      (boundary) => !isNonEmptyString(boundary),
+    )
+  ) {
+    issues.push(
+      'accepted risks, rejected alternatives, and later-task boundaries must remain explicit',
+    );
+  }
 
   if (decision.guardrails?.bodyparts3dMayBeSoleAnatomySource !== false) {
     issues.push('BodyParts3D must not be the sole anatomy source');
@@ -218,6 +308,15 @@ export function validateAssetDecision({
   ) {
     issues.push(
       'SBLA-006 must not create or publish unreviewed scientific anatomy',
+    );
+  }
+
+  if (
+    !/^[a-f0-9]{64}$/.test(decisionDigest ?? '') ||
+    gatePacketDecisionDigest !== decisionDigest
+  ) {
+    issues.push(
+      'the Gate A packet must cite the current decision-record SHA-256',
     );
   }
 
@@ -251,13 +350,14 @@ async function sha256(path) {
 }
 
 async function runCli() {
-  const root = resolve(new URL('../..', import.meta.url).pathname);
+  const root = resolveRepositoryRoot();
   const decisionPath = resolve(
     process.argv[2] ?? `${root}/docs/licenses/anatomy-asset-decision.json`,
   );
   const inventoryPath = `${root}/docs/licenses/asset-candidates.json`;
   const mappingPath = `${root}/docs/licenses/bodyparts3d-mesh-mapping.json`;
   const feasibilityPath = `${root}/docs/licenses/bodyparts3d-feasibility.json`;
+  const gatePacketPath = `${root}/docs/product/gates/SBLA-006-asset-decision.md`;
 
   try {
     const evidenceDigests = Object.fromEntries(
@@ -274,6 +374,10 @@ async function runCli() {
       mapping: await readJson(mappingPath),
       feasibility: await readJson(feasibilityPath),
       evidenceDigests,
+      decisionDigest: await sha256(decisionPath),
+      gatePacketDecisionDigest: extractGatePacketDecisionDigest(
+        await readFile(gatePacketPath, 'utf8'),
+      ),
     });
 
     if (issues.length > 0) {

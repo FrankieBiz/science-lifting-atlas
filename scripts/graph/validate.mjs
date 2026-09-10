@@ -1,22 +1,30 @@
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { findUnexpectedRecordFiles } from '../foundation/foundation-mode.mjs';
-import { listRelativeFiles } from '../foundation/scan-records.mjs';
+import { validateRecordGraph } from '../../src/lib/content/validation.ts';
+import { loadAndValidateRecords, printIssues } from '../content/validate.mjs';
 
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
-const filePaths = await listRelativeFiles(
-  path.join(repositoryRoot, 'content'),
-  repositoryRoot,
-);
-const unexpectedFiles = findUnexpectedRecordFiles(filePaths);
+const asOf = process.env.SBLA_AS_OF ?? new Date().toISOString().slice(0, 10);
+const loaded = await loadAndValidateRecords(repositoryRoot);
+const claims = loaded.records
+  .filter((record) => record.kind === 'claim')
+  .map((record) => record.data);
+const sources = loaded.records
+  .filter((record) => record.kind === 'source')
+  .map((record) => record.data);
+const entityIds = loaded.records
+  .filter((record) => record.kind === 'changeRecord')
+  .map((record) => record.data.id);
+const issues = [
+  ...loaded.issues,
+  ...validateRecordGraph({ claims, sources, entityIds }, { asOf }),
+];
 
-if (unexpectedFiles.length > 0) {
-  console.error(
-    'Graph validation is in foundation mode and cannot compile records:',
-  );
-  for (const filePath of unexpectedFiles) console.error(`- ${filePath}`);
+if (issues.length > 0) {
+  printIssues('Graph validation', issues);
   process.exitCode = 1;
 } else {
-  console.log('Graph validation: foundation mode; 0 nodes and 0 edges.');
+  console.log(
+    `Graph validation passed: ${claims.length + sources.length + entityIds.length} nodes checked; graph generation remains SBLA-011.`,
+  );
 }

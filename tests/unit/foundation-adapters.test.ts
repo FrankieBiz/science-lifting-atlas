@@ -51,6 +51,8 @@ beforeAll(async () => {
     copyScript('scripts/foundation/foundation-mode.mjs'),
     copyScript('scripts/foundation/scan-records.mjs'),
     copyScript('scripts/graph/validate.mjs'),
+    copyScript('src/lib/content/schemas.ts'),
+    copyScript('src/lib/content/validation.ts'),
   ]);
 
   await Promise.all([
@@ -59,7 +61,13 @@ beforeAll(async () => {
     mkdir(path.join(fixtureRoot, 'content-drafts/exercises'), {
       recursive: true,
     }),
+    mkdir(path.join(fixtureRoot, 'research/packets'), { recursive: true }),
+    mkdir(path.join(fixtureRoot, 'reviews/evidence'), { recursive: true }),
     writeFile(path.join(fixtureRoot, 'README.md'), 'fixture target\n'),
+    symlink(
+      path.join(repositoryRoot, 'node_modules'),
+      path.join(fixtureRoot, 'node_modules'),
+    ),
   ]);
 
   await Promise.all([

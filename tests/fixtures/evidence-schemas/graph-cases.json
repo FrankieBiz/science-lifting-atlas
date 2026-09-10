@@ -1,0 +1,25 @@
+[
+  {
+    "name": "valid claim and source references",
+    "mutation": null,
+    "expectedCodes": []
+  },
+  {
+    "name": "missing source reference",
+    "mutation": {
+      "path": "claims.0.sourceLinks.0.sourceId",
+      "value": "source-missing"
+    },
+    "expectedCodes": ["REFERENCE_MISSING"]
+  },
+  {
+    "name": "public relationship without claim",
+    "mutation": { "path": "claims.0.relationships.0.claimId", "value": null },
+    "expectedCodes": ["PUBLIC_RELATIONSHIP_UNCITED"]
+  },
+  {
+    "name": "duplicate record id",
+    "mutation": { "path": "duplicateSource", "value": true },
+    "expectedCodes": ["ID_DUPLICATE"]
+  }
+]

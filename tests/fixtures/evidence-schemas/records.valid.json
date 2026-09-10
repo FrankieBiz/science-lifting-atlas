@@ -1,0 +1,157 @@
+{
+  "source": {
+    "id": "source-doi-10-1000-valid",
+    "type": "randomized-trial",
+    "title": "A valid resistance-training trial",
+    "authors": ["Example A", "Example B"],
+    "year": 2025,
+    "identifiers": {
+      "doi": "10.1000/valid",
+      "pmid": "12345678",
+      "pmcid": null,
+      "isbn": null
+    },
+    "urls": {
+      "doi": "https://doi.org/10.1000/valid",
+      "pubmed": "https://pubmed.ncbi.nlm.nih.gov/12345678/",
+      "primary": null
+    },
+    "access": { "level": "full-text-open", "license": "CC-BY-4.0" },
+    "study": {
+      "population": "healthy adults",
+      "sampleSize": 40,
+      "durationWeeks": 12,
+      "intervention": "resistance training",
+      "comparator": "alternate resistance training",
+      "outcomes": ["pectoralis-major hypertrophy"]
+    },
+    "quality": {
+      "riskOfBias": "some-concerns",
+      "applicability": "direct",
+      "notes": []
+    },
+    "publication": {
+      "status": "current",
+      "statusCheckedAt": "2026-09-01",
+      "statusSource": "crossref",
+      "statusMethod": "doi-crossref-retraction-watch",
+      "nextStatusCheckAt": "2026-10-01"
+    },
+    "funding": null,
+    "conflicts": null,
+    "projectSummary": "The source directly compares two resistance-training conditions."
+  },
+  "claim": {
+    "id": "claim-pec-major-horizontal-adduction",
+    "type": "function",
+    "reviewState": "approved",
+    "publicationState": "published",
+    "approvalManifestId": "approval-pec-slice-v1",
+    "contentChecksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "statement": "The pectoralis major contributes to humeral horizontal adduction.",
+    "plainLanguage": "It helps move the upper arm across the torso.",
+    "scope": {
+      "population": "adult-human",
+      "conditions": ["glenohumeral-joint"]
+    },
+    "qualifiers": ["Contribution varies with shoulder position."],
+    "evidence": {
+      "certainty": "high",
+      "applicability": "direct",
+      "direction": "not-applicable",
+      "magnitude": "not-applicable"
+    },
+    "sourceLinks": [
+      {
+        "sourceId": "source-doi-10-1000-valid",
+        "locator": "Results, paragraph 2",
+        "role": "supports",
+        "supportStrength": "direct"
+      }
+    ],
+    "relationships": [
+      {
+        "type": "contributes-to-action",
+        "targetId": "joint-action-horizontal-adduction",
+        "claimId": "claim-pec-major-horizontal-adduction",
+        "public": true
+      }
+    ],
+    "review": {
+      "researchedBy": "claude-research",
+      "auditedBy": "claude-review",
+      "integratedBy": "codex",
+      "ownerApprovedAt": "2026-09-02T14:00:00Z",
+      "lastReviewedAt": "2026-09-02",
+      "reviewDueAt": "2027-09-02"
+    },
+    "history": {
+      "createdAt": "2026-09-01T12:00:00Z",
+      "updatedAt": "2026-09-02T14:00:00Z"
+    }
+  },
+  "evidencePacket": {
+    "id": "evidence-packet-pec-slice-v1",
+    "question": "How does pectoralis major contribute to horizontal adduction?",
+    "searchedAt": "2026-09-01",
+    "searches": [
+      {
+        "database": "pubmed",
+        "query": "pectoralis major AND horizontal adduction",
+        "searchedAt": "2026-09-01",
+        "resultCount": 12
+      }
+    ],
+    "includedSourceIds": ["source-doi-10-1000-valid"],
+    "exclusions": [
+      { "sourceId": "source-pmid-87654321", "reason": "Wrong population" }
+    ],
+    "synthesis": "The included source directly supports the scoped function claim.",
+    "decisionLog": [
+      {
+        "at": "2026-09-01T16:00:00Z",
+        "actor": "claude-research",
+        "decision": "Retain the narrow joint-action wording."
+      }
+    ],
+    "reviewState": "in-review",
+    "createdAt": "2026-09-01T12:00:00Z",
+    "updatedAt": "2026-09-01T16:00:00Z"
+  },
+  "review": {
+    "id": "review-claim-pec-major-r1",
+    "targetIds": ["claim-pec-major-horizontal-adduction"],
+    "targetChecksums": {
+      "claim-pec-major-horizontal-adduction": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "reviewerRole": "claude-review",
+    "verdict": "pass",
+    "findings": [],
+    "reviewedAt": "2026-09-02T13:00:00Z"
+  },
+  "changeRecord": {
+    "id": "change-pec-slice-copy-v1",
+    "reviewState": "approved",
+    "publicationState": "published",
+    "approvalManifestId": "approval-pec-slice-v1",
+    "contentChecksum": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "affectedIds": ["claim-pec-major-horizontal-adduction"],
+    "reason": "Clarified the population scope without changing the conclusion.",
+    "beforeSummary": "The population was implicit.",
+    "afterSummary": "The population is explicitly healthy adults.",
+    "approvalId": "approval-pec-slice-v1",
+    "deploymentId": "deployment-pec-slice-v1",
+    "review": {
+      "researchedBy": "claude-research",
+      "auditedBy": "claude-review",
+      "integratedBy": "codex",
+      "ownerApprovedAt": "2026-09-02T14:00:00Z",
+      "lastReviewedAt": "2026-09-02",
+      "reviewDueAt": "2027-09-02"
+    },
+    "history": {
+      "createdAt": "2026-09-02T14:00:00Z",
+      "updatedAt": "2026-09-02T14:00:00Z"
+    }
+  }
+}
