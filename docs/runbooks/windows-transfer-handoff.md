@@ -58,7 +58,13 @@ No scientific content, public claim, graph bundle, MDX claim component, or live 
 
 ## Verification state at transfer
 
-The first focused run failed because the schema/validation modules did not exist, establishing the required red test baseline. After implementation, 24 focused tests passed and Astro type checking passed with zero errors. A full `pnpm verify` must still be run and recorded after formatting and after incorporating any material Account-A advisory findings. Treat this branch as a cleanly preserved work-in-progress checkpoint, not a finished SBLA-007 candidate.
+The first focused run failed because the schema/validation modules did not exist, establishing the required red test baseline. After implementation, 24 focused tests passed.
+
+The complete local `pnpm verify` passed before the checkpoint commit: formatting, lint, Astro type checking with zero diagnostics, 16 unit-test files with 200 tests, content/graph/evidence gates, production build, 3 portability files with 17 tests, foundation checks, the asset scorecard, and the asset decision gate. `pnpm test:e2e` separately passed its one JavaScript-disabled Chromium journey. The accepted-base range `git diff --check bbeddc06b53962a8f76e4d0f5d0871e20fa4075a` returned no output and exit 0.
+
+GitHub transfer was independently proven by cloning the private remote into a new empty temporary directory at branch HEAD `2c84e9a1b2c3bac8ceabc261ac3661ebebcaf29f`, tree `9a805011b81299d1b6d98068677cb15d97bdda89`, installing the exact lockfile, and running `pnpm verify` there. It passed again with 200 unit tests and 17 portability tests. The clean clone tracked `origin/codex/SBLA-007-evidence-schemas` with no working-tree changes.
+
+These checks prove the transfer checkpoint is reproducible. They do not make SBLA-007 accepted: material Account-A advisory findings, authoring documentation, the final builder handoff, and Account-B acceptance still remain.
 
 ## Account-A advisory status
 
