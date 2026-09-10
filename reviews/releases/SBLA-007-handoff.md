@@ -338,3 +338,40 @@ graph output, network client, production media, or other later-task work.
 The next reviewer claim must pin the immutable handoff commit that contains
 this section, use the short path, and remain restricted to its one append-only
 report file.
+
+## Exact provenance remediation (2026-09-10)
+
+A later Codex self-audit found two local-invariant gaps before Account B was
+dispatched and before any report existed. Review records allowed duplicate
+`targetIds` and checksum entries for IDs absent from `targetIds`, so the schema
+did not guarantee the design's exact reviewed-target/checksum binding. Evidence
+packets also allowed one source to appear in both `includedSourceIds` and
+`exclusions`, making a screening decision internally contradictory. Packet
+`updatedAt` could additionally precede `createdAt`, unlike the common history
+contract.
+
+The prior short-path review claim was canceled while its worktree was still
+clean at `4e14a6a6cf257f5f5517780f538f195f911abfea`; no Account-B prompt was sent
+and no `SBLA-007-r1.md` existed. Four adversarial fixture mutations were added
+first. The focused schema test failed red on the first duplicate-target case,
+then passed after the refinements were implemented.
+
+The bounded repair now requires unique review target IDs, an exact checksum-key
+subset with no unreviewed target entries (while retaining the existing missing-
+checksum check), disjoint included/excluded evidence decisions, and monotonic
+evidence-packet creation/update timestamps. The implementation commit is
+`f8385841c3429a0e8cb9508f13a36f46a2dfbc1a`, tree
+`7618592a537c449e72254024727bc672edd31770`.
+
+Verification from the short Windows remediation checkout:
+
+- focused schema red: FAIL as expected on duplicate review targets;
+- focused schema green: 4/4 tests PASS, including all invalid fixture cases;
+- `pnpm verify`: PASS — 222 unit tests, 17 portability tests, zero Astro
+  diagnostics, production build, foundation, and asset gates;
+- `pnpm test:e2e`: PASS — 1/1 Chromium production journey;
+- accepted-base and working-tree `git diff --check`: PASS with no output.
+
+The immutable review candidate is the commit that adds this section. A fresh
+Account-B claim must record that exact commit and tree, use a short Windows
+worktree path, and permit only `reviews/releases/SBLA-007-r1.md`.
