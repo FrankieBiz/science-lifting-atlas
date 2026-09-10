@@ -119,8 +119,8 @@ def load_committed_receipt(receipt_path, receipt_commit, working_bytes_override=
     if not ancestor or resolved == head:
         raise RuntimeError("baseline receipt commit must be a strict ancestor of current HEAD")
     try:
-        committed_bytes = git_command(["show", resolved + ":" + RECEIPT_RELATIVE_PATH]).stdout
         blob = git_command(["rev-parse", resolved + ":" + RECEIPT_RELATIVE_PATH]).stdout.decode().strip()
+        committed_bytes = git_command(["cat-file", "blob", blob]).stdout
     except subprocess.CalledProcessError as error:
         raise RuntimeError("baseline receipt is absent from the supplied ancestor commit") from error
     working_bytes = (Path(working_bytes_override).read_bytes() if working_bytes_override
