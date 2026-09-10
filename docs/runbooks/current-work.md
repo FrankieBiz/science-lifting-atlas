@@ -32,6 +32,7 @@ Expected handoff, and Paths owned.
 | Task                              | Role                      | Branch                                     | Worktree                                       | Base commit                                | Started              | Expected handoff                  | Paths owned                       |
 | --------------------------------- | ------------------------- | ------------------------------------------ | ---------------------------------------------- | ------------------------------------------ | -------------------- | --------------------------------- | --------------------------------- |
 | SBLA-007 review R1 after provenance remediation | Claude Review (account B) | `claude-review/SBLA-007-r1-after-provenance` | `..\\s007r2` | `a48981a8c1a8a66b4345251633a841fc4e08df5c` | 2026-09-10 08:45 EDT | `reviews/releases/SBLA-007-r1.md` | `reviews/releases/SBLA-007-r1.md` |
+| SBLA-007 fresh-device coordination handoff | Codex | `codex/SBLA-007-review-coordination` | `.worktrees/sbla-007-new-device-handoff` | `54c8129b9502f1430cb1994b9e4022b84c506de8` | 2026-09-10 10:57 EDT | `docs/runbooks/new-device-agent-handoff.md` | `docs/runbooks/current-work.md`<br>`docs/runbooks/new-device-agent-handoff.md` |
 
 ## Closed claims
 
