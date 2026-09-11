@@ -21,12 +21,12 @@ if (asOfIssues.length > 0) {
   const sources = loaded.records
     .filter((record) => record.kind === 'source')
     .map((record) => record.data);
-  const entityIds = loaded.records
+  const changeRecords = loaded.records
     .filter((record) => record.kind === 'changeRecord')
-    .map((record) => record.data.id);
+    .map((record) => record.data);
   const issues = [
     ...loaded.issues,
-    ...validateRecordGraph({ claims, sources, entityIds }, { asOf }),
+    ...validateRecordGraph({ claims, sources, changeRecords }, { asOf }),
   ];
 
   if (issues.length > 0) {
@@ -34,7 +34,7 @@ if (asOfIssues.length > 0) {
     process.exitCode = 1;
   } else {
     console.log(
-      `Graph validation passed: ${claims.length + sources.length + entityIds.length} nodes checked; graph generation remains SBLA-011.`,
+      `Graph validation passed: ${claims.length + sources.length + changeRecords.length} nodes checked; graph generation remains SBLA-011.`,
     );
   }
 }

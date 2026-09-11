@@ -1,4 +1,9 @@
-import type { Certainty, ClaimRecord, SourceRecord } from './schemas';
+import type {
+  Certainty,
+  ChangeRecord,
+  ClaimRecord,
+  SourceRecord,
+} from './schemas';
 
 export type ValidationIssue = {
   code: string;
@@ -190,10 +195,19 @@ function isDirectlyNegated(statement: string, matchIndex: number) {
 }
 
 function hasUncalibratedCausalLanguage(statement: string) {
-  if (LOW_CALIBRATION_PATTERN.test(statement)) return false;
-  return [...statement.matchAll(CAUSAL_PATTERN)].some(
-    (match) => !isDirectlyNegated(statement, match.index),
-  );
+  return [...statement.matchAll(CAUSAL_PATTERN)].some((match) => {
+    if (isDirectlyNegated(statement, match.index)) return false;
+    const clauseStart = Math.max(
+      statement.lastIndexOf('.', match.index - 1),
+      statement.lastIndexOf(';', match.index - 1),
+      statement.lastIndexOf('!', match.index - 1),
+      statement.lastIndexOf('?', match.index - 1),
+    );
+    const clausePrefix = statement
+      .slice(clauseStart + 1, match.index)
+      .replace(/\bMay\s+\d{4}\b/g, '');
+    return !LOW_CALIBRATION_PATTERN.test(clausePrefix);
+  });
 }
 
 export function lintClaimLanguage(
@@ -259,22 +273,26 @@ export function lintClaimLanguage(
 export type RecordGraph = {
   claims: ClaimRecord[];
   sources: SourceRecord[];
+  changeRecords?: ChangeRecord[];
   entityIds?: string[];
 };
 
 function validatePublishedReviewDates(
-  claim: ClaimRecord,
+  record: Pick<
+    ClaimRecord | ChangeRecord,
+    'id' | 'publicationState' | 'review'
+  >,
   options: ValidationOptions,
 ): ValidationIssue[] {
-  if (claim.publicationState !== 'published') return [];
+  if (record.publicationState !== 'published') return [];
   const issues: ValidationIssue[] = [];
-  const { lastReviewedAt, reviewDueAt } = claim.review;
+  const { lastReviewedAt, reviewDueAt } = record.review;
 
   if (lastReviewedAt && lastReviewedAt > options.asOf) {
     issues.push(
       issue(
         'REVIEW_DATE_IN_FUTURE',
-        `${claim.id}.review.lastReviewedAt`,
+        `${record.id}.review.lastReviewedAt`,
         `The recorded review date ${lastReviewedAt} is after asOf ${options.asOf}.`,
         'Correct lastReviewedAt or use the reproducible asOf date for which the review had already occurred.',
       ),
@@ -284,7 +302,7 @@ function validatePublishedReviewDates(
     issues.push(
       issue(
         'REVIEW_SCHEDULE_INVALID',
-        `${claim.id}.review.reviewDueAt`,
+        `${record.id}.review.reviewDueAt`,
         'The next review date must be later than the completed review.',
         'Set reviewDueAt to a policy-compliant date after lastReviewedAt.',
       ),
@@ -294,9 +312,9 @@ function validatePublishedReviewDates(
     issues.push(
       issue(
         'REVIEW_OVERDUE',
-        `${claim.id}.review.reviewDueAt`,
-        `The claim review was due on ${reviewDueAt}.`,
-        'Re-review the claim and record a new policy-compliant review due date, or unpublish it.',
+        `${record.id}.review.reviewDueAt`,
+        `The record review was due on ${reviewDueAt}.`,
+        'Re-review the record and record a new policy-compliant review due date, or unpublish it.',
       ),
     );
   }
@@ -313,6 +331,7 @@ export function validateRecordGraph(
   const allIds = [
     ...graph.claims.map((claim) => claim.id),
     ...graph.sources.map((source) => source.id),
+    ...(graph.changeRecords ?? []).map((changeRecord) => changeRecord.id),
     ...(graph.entityIds ?? []),
   ];
   const seen = new Set<string>();
@@ -437,6 +456,10 @@ export function validateRecordGraph(
         }
       }
     }
+  }
+
+  for (const changeRecord of graph.changeRecords ?? []) {
+    issues.push(...validatePublishedReviewDates(changeRecord, options));
   }
 
   return issues;

@@ -7,7 +7,11 @@ import {
   validateRecordGraph,
   validateSourceStatus,
 } from '../../src/lib/content/validation';
-import type { ClaimRecord, SourceRecord } from '../../src/lib/content/schemas';
+import type {
+  ChangeRecord,
+  ClaimRecord,
+  SourceRecord,
+} from '../../src/lib/content/schemas';
 
 const fixtureUrl = new URL('../fixtures/evidence-schemas/', import.meta.url);
 
@@ -183,6 +187,22 @@ describe('certainty-language calibration', () => {
     ).toEqual([]);
   });
 
+  it('does not let calibration in another clause excuse a causal overclaim', () => {
+    expect(
+      lintClaimLanguage(
+        'Resistance training increases hypertrophy; individual results may vary.',
+        'low',
+      ).map((issue) => issue.code),
+    ).toContain('CERTAINTY_OVERSTATED');
+
+    expect(
+      lintClaimLanguage(
+        'In May 2020 the protocol increases strength.',
+        'low',
+      ).map((issue) => issue.code),
+    ).toContain('CERTAINTY_OVERSTATED');
+  });
+
   it('accepts comparative wording when it names the outcome', () => {
     expect(
       lintClaimLanguage(
@@ -312,6 +332,35 @@ describe('published-record review dates', () => {
         { asOf: '2026-09-09' },
       ).map((issue) => issue.code),
     ).toContain('REVIEW_DATE_IN_FUTURE');
+  });
+
+  it('applies review-date currency checks to published change records', async () => {
+    const valid = await readJson<{
+      claim: ClaimRecord;
+      source: SourceRecord;
+      changeRecord: ChangeRecord;
+    }>('records.valid.json');
+    const changeRecord = structuredClone(valid.changeRecord);
+    changeRecord.review.lastReviewedAt = '2026-09-10';
+    changeRecord.review.reviewDueAt = '2026-09-08';
+
+    const issues = validateRecordGraph(
+      {
+        claims: [valid.claim],
+        sources: [valid.source],
+        changeRecords: [changeRecord],
+        entityIds: ['joint-action-horizontal-adduction'],
+      },
+      { asOf: '2026-09-09' },
+    ).map((issue) => issue.code);
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        'REVIEW_DATE_IN_FUTURE',
+        'REVIEW_SCHEDULE_INVALID',
+        'REVIEW_OVERDUE',
+      ]),
+    );
   });
 
   it('checks adverse status for every source cited by a published claim', async () => {

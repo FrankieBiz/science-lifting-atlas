@@ -5,6 +5,8 @@ import { describe, expect, it } from 'vitest';
 import {
   RECORD_KINDS,
   validateRecord,
+  type ClaimRecord,
+  type EvidencePacketRecord,
   type RecordKind,
 } from '../../src/lib/content/schemas';
 
@@ -43,6 +45,69 @@ describe('SBLA-007 evidence record schemas', () => {
         success: true,
       });
     }
+  });
+
+  it('orders fractional-second timestamps by instant for entity history', async () => {
+    const fixtures =
+      await readJson<Record<RecordKind, unknown>>('records.valid.json');
+    const claim = structuredClone(fixtures.claim) as ClaimRecord;
+
+    claim.history.createdAt = '2026-09-01T12:00:00.500Z';
+    claim.history.updatedAt = '2026-09-01T12:00:00Z';
+    expect(validateRecord('claim', claim).success).toBe(false);
+
+    claim.history.createdAt = '2026-09-01T12:00:00Z';
+    claim.history.updatedAt = '2026-09-01T12:00:00.500Z';
+    expect(validateRecord('claim', claim).success).toBe(true);
+  });
+
+  it('orders fractional-second timestamps by instant for evidence packets', async () => {
+    const fixtures =
+      await readJson<Record<RecordKind, unknown>>('records.valid.json');
+    const packet = structuredClone(
+      fixtures.evidencePacket,
+    ) as EvidencePacketRecord;
+
+    packet.createdAt = '2026-09-01T12:00:00.500Z';
+    packet.updatedAt = '2026-09-01T12:00:00Z';
+    expect(validateRecord('evidencePacket', packet).success).toBe(false);
+
+    packet.createdAt = '2026-09-01T12:00:00Z';
+    packet.updatedAt = '2026-09-01T12:00:00.500Z';
+    expect(validateRecord('evidencePacket', packet).success).toBe(true);
+  });
+
+  it('requires own checksum entries for every review target', async () => {
+    const fixtures =
+      await readJson<Record<RecordKind, unknown>>('records.valid.json');
+    const review = structuredClone(fixtures.review) as Record<string, unknown>;
+    review.targetIds = ['constructor'];
+    review.targetChecksums = {};
+
+    const result = validateRecord('review', review);
+    expect(result.success).toBe(false);
+    if (result.success) return;
+    expect(result.issues.map((issue) => issue.path)).toContain(
+      'targetChecksums',
+    );
+  });
+
+  it('rejects duplicate packet and change-record identifier lists', async () => {
+    const fixtures =
+      await readJson<Record<RecordKind, unknown>>('records.valid.json');
+    const packet = structuredClone(fixtures.evidencePacket) as Record<
+      string,
+      unknown
+    >;
+    packet.includedSourceIds = ['source-one', 'source-one'];
+    expect(validateRecord('evidencePacket', packet).success).toBe(false);
+
+    const changeRecord = structuredClone(fixtures.changeRecord) as Record<
+      string,
+      unknown
+    >;
+    changeRecord.affectedIds = ['claim-one', 'claim-one'];
+    expect(validateRecord('changeRecord', changeRecord).success).toBe(false);
   });
 
   it('rejects every one-field invalid fixture at the documented path', async () => {

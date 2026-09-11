@@ -29,6 +29,25 @@ function isRealIsoTimestamp(value: string) {
   return !Number.isNaN(new Date(value).valueOf());
 }
 
+function timestampInstant(value: string) {
+  return Date.parse(value);
+}
+
+function requireUniqueIds(
+  values: string[],
+  path: PropertyKey[],
+  label: string,
+  context: z.RefinementCtx,
+) {
+  if (new Set(values).size !== values.length) {
+    context.addIssue({
+      code: 'custom',
+      path,
+      message: `${label} must be unique`,
+    });
+  }
+}
+
 export const entityIdSchema = z
   .string()
   .min(1, 'ID is required')
@@ -94,7 +113,9 @@ export const historyMetadataSchema = z
   })
   .strict()
   .superRefine((history, context) => {
-    if (history.updatedAt < history.createdAt) {
+    if (
+      timestampInstant(history.updatedAt) < timestampInstant(history.createdAt)
+    ) {
       context.addIssue({
         code: 'custom',
         path: ['updatedAt'],
@@ -439,7 +460,9 @@ export const evidencePacketSchema = z
   })
   .strict()
   .superRefine((packet, context) => {
-    if (packet.updatedAt < packet.createdAt) {
+    if (
+      timestampInstant(packet.updatedAt) < timestampInstant(packet.createdAt)
+    ) {
       context.addIssue({
         code: 'custom',
         path: ['updatedAt'],
@@ -447,6 +470,12 @@ export const evidencePacketSchema = z
       });
     }
 
+    requireUniqueIds(
+      packet.includedSourceIds,
+      ['includedSourceIds'],
+      'Included source IDs',
+      context,
+    );
     const includedSourceIds = new Set(packet.includedSourceIds);
     for (const [index, exclusion] of packet.exclusions.entries()) {
       if (includedSourceIds.has(exclusion.sourceId)) {
@@ -490,7 +519,7 @@ export const reviewRecordSchema = z
     }
 
     for (const targetId of review.targetIds) {
-      if (!review.targetChecksums[targetId]) {
+      if (!Object.hasOwn(review.targetChecksums, targetId)) {
         context.addIssue({
           code: 'custom',
           path: ['targetChecksums'],
@@ -533,7 +562,15 @@ export const changeRecordSchema = z
     deploymentId: entityIdSchema,
   })
   .strict()
-  .superRefine(validateCommonLifecycle);
+  .superRefine((changeRecord, context) => {
+    validateCommonLifecycle(changeRecord, context);
+    requireUniqueIds(
+      changeRecord.affectedIds,
+      ['affectedIds'],
+      'Affected IDs',
+      context,
+    );
+  });
 
 export const recordSchemaByKind = {
   claim: claimSchema,
