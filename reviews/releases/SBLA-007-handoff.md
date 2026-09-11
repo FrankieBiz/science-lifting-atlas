@@ -431,3 +431,58 @@ Verification from the short Windows remediation checkout:
 The immutable review candidate is the commit that adds this section. A fresh
 Account-B claim must record that exact commit and tree, use a short Windows
 worktree path, and permit only `reviews/releases/SBLA-007-r1.md`.
+
+## Round 2 bounded remediation (2026-09-11)
+
+Account B's complete-artifact R2 report at
+`reviews/releases/SBLA-007-r2.md` returned FAIL with zero Critical, one
+Important, and nine nonblocking Minor findings. I-1, I-2, M-1, and M-8 were
+confirmed repaired. I-3 remained open for lowercase and punctuated calendar
+uses of `may`, and R2 recorded M-11 for legitimate calibration following the
+causal verb in the same clause.
+
+Codex opened `codex/SBLA-007-r2-remediation` from reviewer commit
+`6a55a954df8735c162568869e7d75429b4006d2f`. Account B subsequently authored
+the mechanical Prettier correction at
+`53d1537dc5a99ccdb8b16e61c832b29d18959197`; Codex replayed that report-only
+commit as `b01c756a7c8c7d1058179be506b69a36ffcced7d` before freezing the repair.
+The final formatted R2 report SHA-256 is
+`f830212097fb8273a748f0927cbdacc4d97002180c19ce9db1abe5f7e953d897`.
+
+Five new regression cases were added before implementation. The focused test
+failed red on all five: lowercase `may 2020`, `May, 2020`, `May 3, 2020`, an
+`and`-joined trailing hedge, and a comma-joined `limited evidence` hedge.
+
+The repair now identifies the complete punctuation-bounded clause containing
+each causal match and evaluates calibration across that clause. `may` and
+`might` are rejected as calibration when their following text introduces a
+numeric date, rather than relying on one capitalized date spelling. Genuine
+pre-verb and trailing same-clause calibration remains accepted; calibration in
+a different `.;!?`-bounded clause cannot excuse the causal statement.
+
+The implementation commit is
+`fb6a30bf73e339d810e83da09be009c5d1151259`, tree
+`2c75b9d193204e74c504b2cf6f74f750cacdad3f`.
+
+Checks run from the saved Windows Codex worktree:
+
+- Red: `pnpm vitest run tests/unit/content-validation.test.ts` — FAIL as
+  expected, five new cases failed and 23 existing tests passed.
+- Focused green:
+  `pnpm vitest run tests/unit/content-validation.test.ts tests/unit/evidence-schemas.test.ts`
+  — PASS, 36/36 tests.
+- `pnpm verify` — PASS: Prettier and ESLint clean, zero Astro/TypeScript
+  diagnostics, 16 unit files with 233 tests, content/graph/evidence validation,
+  production build, 17 portability tests, foundation contract, and both asset
+  gates.
+- `pnpm test:e2e` — PASS, 1/1 Chromium production-build journey.
+- `git diff --check 6a55a954df8735c162568869e7d75429b4006d2f`
+  — PASS with no output.
+
+A fresh Account-B complete-artifact recheck must start from the immutable
+handoff commit containing this section, use a new `claude-review/SBLA-007-r3-*`
+branch/worktree, and write only `reviews/releases/SBLA-007-r3.md`. Account B
+must recheck all prior Important findings, M-11, the complete acceptance rubric,
+and general regressions without repairing the candidate. SBLA-007 passes only
+with zero unresolved Critical and Important findings plus the trusted exact-path
+boundary.
