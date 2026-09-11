@@ -8,6 +8,9 @@
 - 713 nodes · 1075 edges · 50 communities (37 shown, 7 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
+- Token accounting note: semantic extraction was performed by separately metered
+  agent sessions, so Graphify's local counters do not include their actual
+  consumption. Treat the zero figure as **unavailable**, not free.
 
 ## Community Hubs (Navigation)
 - Asset Scoring

@@ -4,9 +4,11 @@
       "date": "2026-09-11T23:39:03.946147+00:00",
       "input_tokens": 0,
       "output_tokens": 0,
-      "files": 150
+      "files": 150,
+      "token_accounting": "unavailable: semantic extraction used separately metered agent sessions"
     }
   ],
   "total_input_tokens": 0,
-  "total_output_tokens": 0
+  "total_output_tokens": 0,
+  "token_accounting": "unavailable for the initial semantic-extraction run"
 }
