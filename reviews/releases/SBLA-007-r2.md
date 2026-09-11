@@ -112,7 +112,7 @@ return PASS or FAIL with exact evidence, without repairing the candidate.
    `src/lib/content/validation.ts`, `tests/unit/content-validation.test.ts`,
    `tests/unit/evidence-schemas.test.ts`. No other file changed. Read both modified source files in full
    (not just diff hunks) to understand complete current behavior.
-3. **Reran all four required commands fresh** in this session (not copied from the handoff): 
+3. **Reran all four required commands fresh** in this session (not copied from the handoff):
    `pnpm install --frozen-lockfile`, `pnpm verify`, `pnpm test:e2e`, and
    `git diff --check bbeddc06b...HEAD` (plus the narrower remediation-range check). All four passed with
    real, first-party output (see Tests/checks).
@@ -381,7 +381,7 @@ accepted-base range).
 **`git diff --check 6e299c44c465ff34e81ec4e1c492f9b9274b2289...HEAD`** — PASS, exit 0, no output
 (remediation-only range).
 
-**Scope-boundary diff (this round):** `git diff --stat a48981a8...HEAD` — 7 files changed: 
+**Scope-boundary diff (this round):** `git diff --stat a48981a8...HEAD` — 7 files changed:
 `reviews/releases/SBLA-007-handoff.md` (+56/−0), `reviews/releases/SBLA-007-r1.md` (+581/−0, the report
 itself being carried in), `scripts/graph/validate.mjs` (+8/−8 net across a 5-line change),
 `src/lib/content/schemas.ts` (+45/−10 approx), `src/lib/content/validation.ts` (+49/−23 approx),
