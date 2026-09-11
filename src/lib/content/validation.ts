@@ -157,7 +157,7 @@ const COMPARATIVE_PATTERN = /\b(best|better|superior|optimal)\b/gi;
 const CAUSAL_PATTERN =
   /\b(increases?|decreases?|causes?|prevents?|produces?|improves?|enhances?|reduces?|leads? to|results? in)\b/gi;
 const LOW_CALIBRATION_PATTERN =
-  /\b(may|might|suggests?|limited evidence|no evidence|is plausible|hypothesis|cannot establish)\b/i;
+  /\b(may|might|suggests?|limited evidence|no evidence|is plausible|hypothesis|cannot establish)\b/gi;
 const VERY_LOW_DISCLOSURE_PATTERN =
   /\b(is plausible|hypothesis|inference|cannot establish)\b/i;
 
@@ -194,19 +194,37 @@ function isDirectlyNegated(statement: string, matchIndex: number) {
   );
 }
 
+function clauseContaining(statement: string, matchIndex: number) {
+  const clauseStart = Math.max(
+    statement.lastIndexOf('.', matchIndex - 1),
+    statement.lastIndexOf(';', matchIndex - 1),
+    statement.lastIndexOf('!', matchIndex - 1),
+    statement.lastIndexOf('?', matchIndex - 1),
+  );
+  const clauseEnds = ['.', ';', '!', '?']
+    .map((separator) => statement.indexOf(separator, matchIndex))
+    .filter((index) => index >= 0);
+  const clauseEnd =
+    clauseEnds.length > 0 ? Math.min(...clauseEnds) : statement.length;
+  return statement.slice(clauseStart + 1, clauseEnd);
+}
+
+function hasLowCalibration(clause: string) {
+  for (const match of clause.matchAll(LOW_CALIBRATION_PATTERN)) {
+    const token = match[0].toLowerCase();
+    if (token === 'may' || token === 'might') {
+      const suffix = clause.slice(match.index + match[0].length);
+      if (/^\s*,?\s*\d/.test(suffix)) continue;
+    }
+    return true;
+  }
+  return false;
+}
+
 function hasUncalibratedCausalLanguage(statement: string) {
   return [...statement.matchAll(CAUSAL_PATTERN)].some((match) => {
     if (isDirectlyNegated(statement, match.index)) return false;
-    const clauseStart = Math.max(
-      statement.lastIndexOf('.', match.index - 1),
-      statement.lastIndexOf(';', match.index - 1),
-      statement.lastIndexOf('!', match.index - 1),
-      statement.lastIndexOf('?', match.index - 1),
-    );
-    const clausePrefix = statement
-      .slice(clauseStart + 1, match.index)
-      .replace(/\bMay\s+\d{4}\b/g, '');
-    return !LOW_CALIBRATION_PATTERN.test(clausePrefix);
+    return !hasLowCalibration(clauseContaining(statement, match.index));
   });
 }
 

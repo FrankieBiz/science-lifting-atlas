@@ -203,6 +203,26 @@ describe('certainty-language calibration', () => {
     ).toContain('CERTAINTY_OVERSTATED');
   });
 
+  it.each([
+    'The trial in may 2020 increases pectoralis-major hypertrophy reports.',
+    'In May, 2020 the protocol increases strength.',
+    'On May 3, 2020 the protocol increases strength.',
+  ])(
+    'does not treat a calendar month as causal calibration: %s',
+    (statement) => {
+      expect(
+        lintClaimLanguage(statement, 'low').map((issue) => issue.code),
+      ).toContain('CERTAINTY_OVERSTATED');
+    },
+  );
+
+  it.each([
+    'Resistance training increases hypertrophy and results may vary by individual.',
+    'Resistance training increases hypertrophy, according to limited evidence.',
+  ])('accepts a same-clause trailing calibration: %s', (statement) => {
+    expect(lintClaimLanguage(statement, 'low')).toEqual([]);
+  });
+
   it('accepts comparative wording when it names the outcome', () => {
     expect(
       lintClaimLanguage(
