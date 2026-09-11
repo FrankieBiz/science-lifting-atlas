@@ -30,6 +30,8 @@ function completeDocFileContents() {
       },
       lifecycle: {
         builderClaimCloses: 'immutable-handoff-commit',
+        builderClaimRecordedBy: 'codex',
+        builderClaimScope: 'exact-path-list',
         reviewClaimRecordedBy: 'codex',
         reviewClaimScope: 'exact-append-only-report-path',
         restrictedRoleDiffBase: 'reviewed-artifact-commit',
@@ -49,6 +51,7 @@ function completeDocFileContents() {
           'SBLA-017-observed-throughput-and-owner-approved-estimate',
       },
       roleIdentity: {
+        claudeBuilderAccount: 'A',
         claudeResearchAccount: 'A',
         claudeReviewAccount: 'B',
         requiresDistinctClaudeTeamAccounts: true,
@@ -56,6 +59,7 @@ function completeDocFileContents() {
       },
       writeBoundaries: {
         codex: null,
+        'claude-builder': [],
         'claude-research': ['research/', 'content-drafts/'],
         'claude-review': ['reviews/'],
       },
@@ -78,6 +82,7 @@ describe('agent operating-model contract', () => {
         'docs/runbooks/operating-policy.json',
         'docs/product/master-plan.md',
         'docs/adr/0006-execution-quality-and-validation-gates.md',
+        'docs/adr/0007-balanced-agent-implementation.md',
       ]),
     );
   });
@@ -229,6 +234,31 @@ describe('agent operating-model contract', () => {
         'operating policy lifecycle.restrictedRoleDiffBase must equal reviewed-artifact-commit',
         'operating policy lifecycle.claimRecordLocation must equal codex-coordination-branch',
         'operating policy lifecycle.reviewClaimCloses must equal immutable-review-report-commit',
+      ]),
+    );
+  });
+
+  it('requires Codex-mediated exact-path Claude Builder claims', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.lifecycle.builderClaimRecordedBy = 'claude-builder';
+    policy.lifecycle.builderClaimScope = 'whole-repository';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toEqual(
+      expect.arrayContaining([
+        'operating policy lifecycle.builderClaimRecordedBy must equal codex',
+        'operating policy lifecycle.builderClaimScope must equal exact-path-list',
       ]),
     );
   });

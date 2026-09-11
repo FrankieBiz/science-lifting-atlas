@@ -2,7 +2,7 @@
 
 > **For Codex and Claude:** This is the single source of truth for planning and executing the project. Read it completely before acting. Do not silently change product scope, scientific standards, schemas, architecture, or ownership rules. Propose changes in an Architecture Decision Record (ADR) and obtain the project owner's approval.
 >
-> **For agentic implementation:** Work one checked task at a time. Codex is the repository maintainer and integration owner. Claude Research produces evidence packets and draft content. Claude Review independently audits research, claims, UX, and completed milestones. No model may approve its own output.
+> **For agentic implementation:** Work one checked task at a time. Codex is the repository maintainer, technical lead, and integration owner. Claude Builder account A may implement exact claimed code/test packages; Claude Research account A produces evidence packets and draft content. Claude Review account B independently audits research, claims, implementations, UX, and completed milestones. No model may approve its own output.
 
 **Goal:** Build a free, premium, evidence-first web atlas where serious lifters, coaches, and trainers can explore human anatomy, understand muscle function, connect muscles to exercises, and inspect the evidence behind every meaningful training claim.
 
@@ -1232,6 +1232,22 @@ Codex must not:
 - rewrite Claude's source extraction silently.
 - merge simultaneous edits without inspecting the diff.
 
+### 13.2A Claude Builder — Implementation Partner
+
+Use Claude Team account A for this role. Codex remains accountable for technical
+direction and integration, but may assign substantial implementation packages
+to Claude Builder so both systems contribute directly to product progress.
+
+Claude Builder owns the exact packages Codex assigns: application code, schemas,
+tooling, tests, refactors, and implementation documentation. Before editing,
+Codex records every permitted file in the current-work ledger. The trusted role
+gate compares the complete branch diff with that exact path list.
+
+Claude Builder has no ambient repository write boundary. It must never write
+published `content/`, `reviews/`, `docs/runbooks/current-work.md`, merge state,
+or release approval. It runs required checks, produces an immutable handoff,
+and stops for independent Account-B review and Codex integration.
+
 ### 13.3 Claude Research — Evidence Lead and Content Drafter
 
 Use Claude Team account A for this role.
@@ -1274,8 +1290,8 @@ Claude Review writes only to `reviews/`. It does not repair the work it audits. 
 | Source extraction | Claude Research | Claude Review sample/full based on risk | Codex validates schema |
 | Claim set | Claude Research | Claude Review | Human owner + Codex integration |
 | Editorial page | Claude Research | Claude Review | Codex |
-| Schema/pipeline | Codex | Claude Review against spec | Codex after tests |
-| UI/3D implementation | Codex | Claude Review UX audit + automated tests | Human owner at visual gates |
+| Schema/pipeline | Codex or Claude Builder | Claude Review against spec | Codex after tests |
+| UI/3D implementation | Codex or Claude Builder | Claude Review UX audit + automated tests | Human owner at visual gates |
 | Scientific methodology | Claude Research + Codex | Claude Review | Human owner |
 | Release | Codex | Claude Review | Human owner |
 
@@ -1303,10 +1319,13 @@ No handoff may rely on hidden chat context. The repository artifact must be suff
 ### 13.7 Conflict and edit rules
 
 - One writer owns a file at a time.
-- Claude Research and Claude Review never edit the same artifact.
+- Claude Builder and Claude Research use account A; Claude Review uses distinct
+  account B and never reviews an artifact authored by account B.
+- Claude Builder writes only exact paths in a Codex-recorded claim and never
+  writes `content/`, `reviews/`, or `docs/runbooks/current-work.md`.
 - Codex is the only agent that promotes draft content to published `content/` paths.
 - Claude Research writes candidate pages only to `content-drafts/`; Claude Review writes only immutable review reports to `reviews/<discipline>/<task-id>-r<number>.md`.
-- Use branches `codex/<task-id>-<slug>`, `claude-research/<task-id>-<slug>`, and `claude-review/<task-id>-<slug>`. If the tools cannot share branches safely, use separate Git worktrees created from the same reviewed base commit.
+- Use branches `codex/<task-id>-<slug>`, `claude-builder/<task-id>-<slug>`, `claude-research/<task-id>-<slug>`, and `claude-review/<task-id>-<slug>`. Never share a live worktree between sessions; use separate Git worktrees created from the same reviewed base commit.
 - Before work begins, claim the task and exact paths in `docs/runbooks/current-work.md` with owner, branch/worktree, base commit, start time, and expected handoff. Codex is the only merge authority.
 - An ownership lock becomes stale after 24 hours with no handoff or active session. Codex may clear it only after checking the branch/worktree for unmerged changes and recording the recovery action; never delete unmerged work.
 - Review reports are append-only. A new review round creates a new `-r<number>` file and points to the exact commit/artifact checksum reviewed.
@@ -1368,6 +1387,15 @@ You are the evidence lead. Use only lawful, identifiable sources. Separate extra
 Do not use model memory as evidence. Do not draft beyond the claim scope. Record search strategy, access level,
 study limitations, applicability, conflicts, contradictory evidence, exact citation locators, and uncertainty.
 Write only to the assigned research/draft paths and produce a complete handoff packet.
+```
+
+#### Claude Builder session header
+
+```text
+Read the master plan, accepted dependency handoff, exact task packet, and committed path claim.
+You are the implementation partner. Work only on the claimed files and write tests before behavior changes.
+Preserve unrelated work; do not edit content/, reviews/, the current-work ledger, merge state, or release state.
+Run the exact acceptance checks, create a standalone handoff, and stop for independent review and Codex integration.
 ```
 
 #### Claude Review session header
@@ -1767,6 +1795,11 @@ Every gate packet should fit on one page and contain: decision, evidence, screen
 ## 18. First 20 tasks in exact order
 
 This manifest is the authoritative operational queue and resolves any ambiguity in the narrative phases. Do not skip ahead. Every task starts from the reviewed commit named by its dependency and ends with the standard handoff packet. `pnpm verify` is required wherever a repository implementation exists; a failed required check blocks handoff.
+
+For work starting after ADR 0007, a queue row accountable to Codex may delegate
+one or more substantial, exact-path implementation packages to Claude Builder
+account A. This does not change the row's accountable owner, dependency, review,
+approval, or integration authority.
 
 | ID | Owner → reviewer/approver | Depends on | Required outputs | Verification and pass condition |
 |---|---|---|---|---|

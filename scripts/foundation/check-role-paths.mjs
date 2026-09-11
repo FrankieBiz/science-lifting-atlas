@@ -2,7 +2,20 @@ import { execFile } from 'node:child_process';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import { ROLE_WRITE_BOUNDARIES, validateRolePaths } from './role-paths.mjs';
+import {
+  normalizeRepositoryPath,
+  ROLE_WRITE_BOUNDARIES,
+  validateRolePaths,
+} from './role-paths.mjs';
+
+const EXACT_CLAIM_ROLES = new Set(['claude-builder', 'claude-review']);
+const CLAUDE_BUILDER_FORBIDDEN_PREFIXES = Object.freeze([
+  'content/',
+  'reviews/',
+]);
+const CLAUDE_BUILDER_FORBIDDEN_PATHS = new Set([
+  'docs/runbooks/current-work.md',
+]);
 
 const execFileAsync = promisify(execFile);
 const arguments_ = process.argv.slice(2);
@@ -47,8 +60,15 @@ if (role === 'claude-review' && allowedPaths.length !== 1) {
   process.exit(2);
 }
 
-if (role !== 'claude-review' && allowedPaths.length > 0) {
-  console.error('--allowed-path is reserved for exact Claude Review claims.');
+if (role === 'claude-builder' && allowedPaths.length === 0) {
+  console.error('Claude Builder requires at least one --allowed-path.');
+  process.exit(2);
+}
+
+if (!EXACT_CLAIM_ROLES.has(role) && allowedPaths.length > 0) {
+  console.error(
+    '--allowed-path is reserved for exact Claude Builder and Claude Review claims.',
+  );
   process.exit(2);
 }
 
@@ -116,10 +136,51 @@ if (
   process.exit(2);
 }
 
+if (
+  basePolicy?.lifecycle?.builderClaimRecordedBy !== 'codex' ||
+  basePolicy?.lifecycle?.builderClaimScope !== 'exact-path-list'
+) {
+  console.error(
+    'Trusted base policy must require a Codex-recorded exact-path Claude Builder claim.',
+  );
+  process.exit(2);
+}
+
+/** @type {string[]} */
+const normalizedAllowedPaths = [];
+if (EXACT_CLAIM_ROLES.has(role)) {
+  for (const allowedPath of allowedPaths) {
+    const normalized = normalizeRepositoryPath(allowedPath);
+    if (!normalized || normalized !== allowedPath.replaceAll('\\', '/')) {
+      console.error(`Exact claim path is invalid: ${allowedPath}`);
+      process.exit(2);
+    }
+    if (normalizedAllowedPaths.includes(normalized)) {
+      console.error(`Exact claim path is duplicated: ${normalized}`);
+      process.exit(2);
+    }
+    normalizedAllowedPaths.push(normalized);
+  }
+}
+
+if (role === 'claude-builder') {
+  for (const allowedPath of normalizedAllowedPaths) {
+    if (
+      CLAUDE_BUILDER_FORBIDDEN_PATHS.has(allowedPath) ||
+      CLAUDE_BUILDER_FORBIDDEN_PREFIXES.some((prefix) =>
+        allowedPath.startsWith(prefix),
+      )
+    ) {
+      console.error(`Claude Builder claim may not include: ${allowedPath}`);
+      process.exit(2);
+    }
+  }
+}
+
 if (role === 'claude-review') {
   const claimIssues = validateRolePaths({
     role,
-    changedPaths: allowedPaths,
+    changedPaths: normalizedAllowedPaths,
     writeBoundaries: baseWriteBoundaries,
   });
   if (claimIssues.length > 0) {
@@ -193,11 +254,14 @@ if (changedPaths.length === 0) {
   process.exit(1);
 }
 
-const issues = validateRolePaths({
-  role,
-  changedPaths,
-  writeBoundaries: baseWriteBoundaries,
-});
+const issues =
+  role === 'claude-builder'
+    ? []
+    : validateRolePaths({
+        role,
+        changedPaths,
+        writeBoundaries: baseWriteBoundaries,
+      });
 
 const isRestrictedRole = baseWriteBoundaries[role] !== null;
 if (isRestrictedRole) {
@@ -215,7 +279,7 @@ if (isRestrictedRole) {
 }
 
 if (role === 'claude-review') {
-  const allowedPath = allowedPaths[0];
+  const allowedPath = normalizedAllowedPaths[0];
   if (!allowedPath) {
     console.error('Claude Review requires exactly one --allowed-path.');
     process.exit(2);
@@ -238,6 +302,17 @@ if (role === 'claude-review') {
     issues.push(
       `Claude Review did not produce the exact claimed path: ${allowedPath}`,
     );
+  }
+}
+
+if (role === 'claude-builder') {
+  const exactClaim = new Set(normalizedAllowedPaths);
+  for (const entry of changedEntries) {
+    if (!exactClaim.has(entry.path)) {
+      issues.push(
+        `Claude Builder path is outside the exact claim: ${entry.path}`,
+      );
+    }
   }
 }
 

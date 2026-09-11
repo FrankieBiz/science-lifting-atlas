@@ -8,6 +8,7 @@ runbook is the operational form of master plan section 13.7.
 Branches are named by role and task:
 
 - `codex/<task-id>-<slug>`
+- `claude-builder/<task-id>-<slug>`
 - `claude-research/<task-id>-<slug>`
 - `claude-review/<task-id>-<slug>`
 
@@ -46,7 +47,8 @@ not, stop and report — you have inherited a broken base, not created one.
 
 ### Restricted Claude-role claims
 
-Claude Research and Claude Review cannot edit the ledger. Before either role
+Claude Builder, Claude Research, and Claude Review cannot edit the ledger.
+Before any of these roles
 writes, it sends Codex the task, role, exact output paths, branch/worktree, base
 commit, start time, and expected handoff. Codex records the claim in
 [`current-work.md`](current-work.md) and commits it. The restricted role verifies
@@ -59,6 +61,13 @@ Codex or CI runs the path gate from a trusted checkout, targeting the restricted
 worktree explicitly:
 
 ```bash
+node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
+  claude-builder \
+  --base <reviewed-artifact-commit> \
+  --repository <claude-builder-worktree> \
+  --allowed-path <exact-claimed-path-1> \
+  --allowed-path <exact-claimed-path-2>
+
 node <trusted-checkout>/scripts/foundation/check-role-paths.mjs \
   claude-research \
   --base <reviewed-artifact-commit> \
@@ -75,6 +84,12 @@ The trusted checker loads `operating-policy.json` from the exact base commit and
 rejects a target diff that edits the checker, the policy, or any other
 out-of-boundary path. Running a possibly edited checker from the target branch
 is not acceptance evidence.
+
+For Claude Builder, **Codex records every exact implementation path** before
+dispatch. The complete branch diff must be a subset of that list. Claims cannot
+include published `content/`, `reviews/`, or `docs/runbooks/current-work.md`.
+Multiple Account-A implementation sessions may run concurrently only in
+separate worktrees with disjoint exact claims.
 
 For independent review, **Codex records the exact append-only report path**
 before dispatch. The review claim owns no builder file. When the report becomes
@@ -105,8 +120,8 @@ and cannot grant a role permissions absent from that structured policy.
 
 ## Integration
 
-**Codex is the only merge authority.** Research and review roles never merge,
-never rebase another role's branch, and never force-push.
+**Codex is the only merge authority.** Builder, research, and review roles never
+merge, never rebase another role's branch, and never force-push.
 
 Integrate only a reviewed commit, and prefer a fast-forward so the reviewed
 commit ID survives:

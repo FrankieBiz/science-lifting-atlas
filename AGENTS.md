@@ -31,17 +31,21 @@ is usually correct; confirm the owning task before changing the validator.
 
 ## Roles and write boundaries
 
-| Role            | Owns                                                                | May write                      | Must never write                                                               |
-| --------------- | ------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
-| Codex           | Architecture, schemas, tooling, UI, tests, CI, release, integration | Anything in the repository     | —                                                                              |
-| Claude Research | Research questions, extraction, synthesis, claim and page drafts    | `research/`, `content-drafts/` | Application code, schemas, published `content/`, CI, release state, `reviews/` |
-| Claude Review   | Independent citation, UX, and release audits                        | `reviews/`                     | Everything else, including the artifact under review                           |
+| Role            | Owns                                                               | May write                                          | Must never write                                                               |
+| --------------- | ------------------------------------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Codex           | Technical direction, integration, release, and any implementation  | Anything in the repository                         | —                                                                              |
+| Claude Builder  | Assigned implementation, tests, refactors, and implementation docs | Only the exact Codex-recorded claim paths          | `content/`, `reviews/`, the current-work ledger, merge or release state        |
+| Claude Research | Research questions, extraction, synthesis, claim and page drafts   | `research/`, `content-drafts/`                     | Application code, schemas, published `content/`, CI, release state, `reviews/` |
+| Claude Review   | Independent citation, UX, implementation, and release audits       | One exact append-only report path under `reviews/` | Everything else, including the artifact under review                           |
 
-Three rules follow from that table and are not negotiable:
+Four rules follow from that table and are not negotiable:
 
 - Codex is the only role that promotes a draft into published `content/`.
+- Claude Builder receives no ambient repository access: every writable file is
+  named in a committed Codex claim and checked from a trusted checkout.
 - Claude Review never repairs what it audits. Findings go back to the author.
-- Claude Research and Claude Review never edit the same artifact.
+- Account B never reviews its own output; Account A Builder/Research and Account
+  B Review never edit the same artifact.
 
 Codex additionally must not invent or approve a scientific claim, weaken a
 failed evidence gate to make a build pass, silently rewrite an extraction, or

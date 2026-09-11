@@ -12,6 +12,12 @@ confirmed that both Round 4 Important findings are repaired; Codex then passed
 the trusted exact-path boundary and pinned verification gates. Two Minor
 findings remain recorded and do not block acceptance.
 
+**Claude Builder status: CONFIGURED; first-task proof pending.** ADR 0007 adds
+the Account-A implementation role after the original readiness exercise. It
+uses the same repository-capable Claude Code environment already demonstrated
+by account A, but its first assigned task must additionally prove the new
+multi-path exact-claim gate before that task can be accepted.
+
 ## Environment record
 
 | Field                  | Codex (technical lead)                                   | Claude Research (account A)                                          | Claude Review (account B)                                                                                                          |
@@ -212,36 +218,51 @@ Git so restricted material is never committed.
 Master plan §13 names three roles but does not dictate which product fills each
 one. The owner's actual toolchain is:
 
-| Plan role                                           | Filled by                          | Notes                                                              |
-| --------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------ |
-| Codex — technical lead, integrator, merge authority | **ChatGPT Codex**                  | Implements and integrates; internal Codex reviews do not satisfy B |
-| Claude Research — evidence lead (account A)         | **Claude Team account A**          | Writes only `research/`, `content-drafts/`                         |
-| Claude Review — independent auditor (account B)     | **Distinct Claude Team account B** | Uses a separate account and session; writes only `reviews/`        |
+| Plan role                                           | Filled by                          | Notes                                                                         |
+| --------------------------------------------------- | ---------------------------------- | ----------------------------------------------------------------------------- |
+| Codex — technical lead, integrator, merge authority | **ChatGPT Codex**                  | Implements, assigns bounded packages, verifies, and integrates                |
+| Claude Builder — implementation partner (account A) | **Claude Team account A**          | Implements only exact Codex-claimed paths; never reviews or merges            |
+| Claude Research — evidence lead (account A)         | **Claude Team account A**          | Writes only `research/`, `content-drafts/`                                    |
+| Claude Review — independent auditor (account B)     | **Distinct Claude Team account B** | Uses a separate account and session; writes one exact report under `reviews/` |
 
-## Runs are sequential, with distinct accounts and sessions
+## Concurrent use with distinct accounts, profiles, and worktrees
 
-The two Claude role runs may be performed **one after another**, not
-simultaneously. Nothing in master plan §13.9 requires concurrency. Master plan
-§§13.3–13.4 and the production constraint do require distinct Claude Team
-account A and account B; a new session in the same account does not replace that
-identity boundary.
+Claude Code supports isolated state directories through `CLAUDE_CONFIG_DIR`.
+Authenticate each Team account once into a different directory, then launch
+each from its own terminal and Git worktree. The two processes may run at the
+same time; they do not share credentials, settings, history, or worktree state.
+
+```powershell
+$env:CLAUDE_CONFIG_DIR = '<profile-directory-for-account-A>'
+claude
+
+# In a second PowerShell process and a different Git worktree:
+$env:CLAUDE_CONFIG_DIR = '<profile-directory-for-account-B>'
+claude
+```
+
+Account A may also run more than one Builder/Research chat, but all Account-A
+chats consume the same account quota. Every live session needs its own worktree
+and a disjoint exact claim. Account B can run concurrently as reviewer only
+after the candidate is immutable; it must not access or repair an in-progress
+artifact it will later accept.
 
 What independence actually requires, and what it does not:
 
-- **Required:** Claude Research runs in account A and Claude Review runs in
-  distinct account B, each in its own session.
+- **Required:** Claude Builder/Research runs in account A and Claude Review runs
+  in distinct account B, each in its own profile and session.
 - **Required:** the account/session performing a Claude Review audit must not
   have authored the artifact under review. Independence is about _who judged
   the work_, not about wall-clock separation.
 - **Required:** each role writes only within its own paths, enforced by
   `check-role-paths.mjs` run by Codex from a trusted checkout.
 - **Not sufficient:** opening two sessions under one Claude Team account.
-- **Not required:** the two runs happening at the same time or both accounts
-  being actively logged in simultaneously.
+- **Allowed, not required:** both accounts being logged in and running
+  simultaneously from separate profile directories and worktrees.
 
-Consequently the readiness gate is satisfied by two sequential runs only when
-they use distinct accounts A and B. `Readiness result` in the environment record
-is filled in per role as each run completes rather than only when both are done.
+Consequently the identity gate is satisfied whether the runs are sequential or
+concurrent, provided they use distinct accounts A and B and preserve authorship
+independence. `Readiness result` is filled in per role as each run completes.
 
 ### Standing constraint on Claude Review
 

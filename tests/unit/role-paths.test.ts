@@ -6,9 +6,14 @@ import {
 } from '../../scripts/foundation/role-paths.mjs';
 
 describe('role write boundaries', () => {
-  it('defines the three roles from master plan section 13.7', () => {
+  it('defines the four roles from master plan section 13.7', () => {
     expect(Object.keys(ROLE_WRITE_BOUNDARIES)).toEqual(
-      expect.arrayContaining(['codex', 'claude-research', 'claude-review']),
+      expect.arrayContaining([
+        'codex',
+        'claude-builder',
+        'claude-research',
+        'claude-review',
+      ]),
     );
   });
 
@@ -28,6 +33,17 @@ describe('role write boundaries', () => {
     });
 
     expect(issues).toEqual([]);
+  });
+
+  it('denies ambient Claude Builder writes until the CLI applies an exact claim', () => {
+    const issues = validateRolePaths({
+      role: 'claude-builder',
+      changedPaths: ['src/pages/index.astro'],
+    });
+
+    expect(issues).toContain(
+      'role claude-builder may not write: src/pages/index.astro',
+    );
   });
 
   it('confines Claude Research to research and draft paths', () => {

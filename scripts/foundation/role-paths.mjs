@@ -1,20 +1,22 @@
 import path from 'node:path';
 
 /**
- * Write boundaries from master plan sections 13.3, 13.4, and 13.7.
- * `null` means unrestricted. Every other role is confined to the listed
- * directory prefixes, and anything not listed is denied.
+ * Write boundaries from master plan sections 13.2-13.4 and 13.7.
+ * `null` means unrestricted. An empty list means deny by default: Claude
+ * Builder receives repository paths only through the trusted CLI's exact
+ * Codex-recorded claim. Every other role is confined to the listed prefixes.
  *
  * @type {Readonly<Record<string, readonly string[] | null>>}
  */
 export const ROLE_WRITE_BOUNDARIES = Object.freeze({
   codex: null,
+  'claude-builder': Object.freeze([]),
   'claude-research': Object.freeze(['research/', 'content-drafts/']),
   'claude-review': Object.freeze(['reviews/']),
 });
 
 /** @param {string} changedPath */
-function normalize(changedPath) {
+export function normalizeRepositoryPath(changedPath) {
   const portablePath = changedPath.replaceAll('\\', '/');
   if (
     !portablePath ||
@@ -55,7 +57,7 @@ export function validateRolePaths({
   const issues = [];
 
   for (const changedPath of changedPaths) {
-    const normalized = normalize(changedPath);
+    const normalized = normalizeRepositoryPath(changedPath);
     if (!normalized) {
       issues.push(`invalid repository-relative path: ${changedPath}`);
       continue;

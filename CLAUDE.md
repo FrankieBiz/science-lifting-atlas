@@ -2,7 +2,8 @@
 
 This file governs Claude sessions working on the Science-Based Lifting Atlas.
 [`AGENTS.md`](AGENTS.md) is the shared contract for every agent and applies to
-you as well; this file adds what is specific to the two Claude roles.
+you as well; this file adds what is specific to the three Claude roles operated
+across two Team accounts.
 
 Canonical plan: [`docs/product/master-plan.md`](docs/product/master-plan.md).
 Section 18 is the authoritative task queue and resolves any conflict between
@@ -10,9 +11,25 @@ summaries. Read it before acting, not after.
 
 ## Pick your role first
 
-This repository uses two distinct Claude roles. They are separate accounts and
-separate sessions. Never perform both in one session — the independence of the
-review is the point.
+Account A may run Claude Builder and Claude Research in separate sessions and
+worktrees. Account B runs Claude Review. Never perform Account B's review role
+in an Account A session—the account-level independence is the point.
+
+### Claude Builder — implementation partner (account A)
+
+Session header:
+
+> Read the master plan, accepted handoff, exact task packet, and committed path
+> claim. You are Claude Builder. Implement only the claimed files, write tests
+> before behavior changes, preserve unrelated work, run the required checks,
+> and create a standalone handoff. Do not edit published content, reviews, the
+> current-work ledger, or merge/release state. Stop at the review gate.
+
+Owns bounded packages of application code, schemas, tools, tests, refactors,
+and implementation documentation assigned by Codex. It may work across the
+repository only through an exact path list that Codex records before editing.
+It never writes `content/`, `reviews/`, or
+`docs/runbooks/current-work.md`, never merges, and never accepts its own work.
 
 ### Claude Research — evidence lead and content drafter
 
@@ -91,8 +108,9 @@ high-impact comparative claims.
    on the exact reviewed artifact commit.
 3. Create your branch or worktree per
    [`docs/runbooks/branch-and-worktree.md`](docs/runbooks/branch-and-worktree.md);
-   research branches are `claude-research/<task-id>-<slug>` and review branches
-   are `claude-review/<task-id>-<slug>`.
+   builder branches are `claude-builder/<task-id>-<slug>`, research branches
+   are `claude-research/<task-id>-<slug>`, and review branches are
+   `claude-review/<task-id>-<slug>`.
 4. Confirm your environment against
    [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md).
    If you are chat-only, use the documented bundle fallback and say so in the
@@ -106,9 +124,10 @@ Markdown explanations never grant permission beyond that policy.
 
 Produce a handoff from
 [`docs/runbooks/handoff-template.md`](docs/runbooks/handoff-template.md).
-Research packets end in `research/packets/<task-id>-handoff.md`; review reports
-end in `reviews/<discipline>/<task-id>-r<number>.md` and cite the exact commit
-or checksum reviewed.
+Builder tasks end in `reviews/releases/<task-id>-handoff.md`, research packets
+end in `research/packets/<task-id>-handoff.md`, and review reports end in
+`reviews/<discipline>/<task-id>-r<number>.md` and cite the exact commit or
+checksum reviewed.
 
 Review reports are append-only. A second round creates `-r2`, never an edit of
 `-r1`.

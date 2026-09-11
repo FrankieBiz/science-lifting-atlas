@@ -8,6 +8,7 @@ export const REQUIRED_OPERATING_PATHS = Object.freeze([
   'docs/runbooks/operating-policy.json',
   'docs/product/master-plan.md',
   'docs/adr/0006-execution-quality-and-validation-gates.md',
+  'docs/adr/0007-balanced-agent-implementation.md',
 ]);
 
 const OPERATING_POLICY_PATH = 'docs/runbooks/operating-policy.json';
@@ -34,6 +35,7 @@ export const REQUIRED_HANDOFF_SECTIONS = Object.freeze([
 export const REQUIRED_DOC_SNIPPETS = Object.freeze({
   'AGENTS.md': Object.freeze([
     'Codex',
+    'Claude Builder',
     'Claude Research',
     'Claude Review',
     'docs/runbooks/current-work.md',
@@ -53,6 +55,7 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'docs/product/master-plan.md',
     'docs/runbooks/handoff-template.md',
     'Claude Research',
+    'Claude Builder',
     'Claude Review',
     'content-drafts/',
     'reviews/',
@@ -75,6 +78,7 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
   ]),
   'docs/runbooks/branch-and-worktree.md': Object.freeze([
     'codex/<task-id>-<slug>',
+    'claude-builder/<task-id>-<slug>',
     'claude-research/<task-id>-<slug>',
     'claude-review/<task-id>-<slug>',
     'git worktree add',
@@ -90,8 +94,12 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'Readiness result',
     'Fallback',
     'SBLA-008',
+    'CLAUDE_CONFIG_DIR',
+    'Claude Builder',
   ]),
   'docs/product/master-plan.md': Object.freeze([
+    'Claude Builder',
+    'exact-path implementation packages',
     'one independent acceptance review',
     'zero unresolved Critical and Important findings',
     'their impact and follow-up destination are recorded',
@@ -107,19 +115,30 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'SBLA-017 records observed throughput',
     'approves the revised estimate',
   ]),
+  'docs/adr/0007-balanced-agent-implementation.md': Object.freeze([
+    'Claude Builder',
+    'exact list',
+    'deny-by-default',
+    'Account B remains the independent Claude Review role',
+    'only Codex integrates',
+  ]),
 });
 
 export const FORBIDDEN_DOC_SNIPPETS = Object.freeze({
   'AGENTS.md': Object.freeze([
     'Claude Review may merge',
+    'Claude Builder may merge',
     'Claude Research may merge',
     'Claude Review may clear stale',
+    'Claude Builder may clear stale',
     'Claude Research may clear stale',
   ]),
   'CLAUDE.md': Object.freeze([
     'Claude Review may merge',
+    'Claude Builder may merge',
     'Claude Research may merge',
     'Claude Review may clear stale',
+    'Claude Builder may clear stale',
     'Claude Research may clear stale',
   ]),
   'docs/runbooks/current-work.md': Object.freeze([
@@ -128,8 +147,10 @@ export const FORBIDDEN_DOC_SNIPPETS = Object.freeze({
   ]),
   'docs/runbooks/branch-and-worktree.md': Object.freeze([
     'Claude Review may merge',
+    'Claude Builder may merge',
     'Claude Research may merge',
     'Claude Review may clear stale',
+    'Claude Builder may clear stale',
     'Claude Research may clear stale',
   ]),
 });
@@ -140,6 +161,8 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'authority.staleClaimClearance': 'codex',
   'authority.contentPromotion': 'codex',
   'lifecycle.builderClaimCloses': 'immutable-handoff-commit',
+  'lifecycle.builderClaimRecordedBy': 'codex',
+  'lifecycle.builderClaimScope': 'exact-path-list',
   'lifecycle.reviewClaimRecordedBy': 'codex',
   'lifecycle.reviewClaimScope': 'exact-append-only-report-path',
   'lifecycle.restrictedRoleDiffBase': 'reviewed-artifact-commit',
@@ -157,6 +180,7 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'qualityControl.overallPercentAllowedAfter':
     'SBLA-017-observed-throughput-and-owner-approved-estimate',
   'roleIdentity.claudeResearchAccount': 'A',
+  'roleIdentity.claudeBuilderAccount': 'A',
   'roleIdentity.claudeReviewAccount': 'B',
   'roleIdentity.requiresDistinctClaudeTeamAccounts': true,
   'roleIdentity.sameAccountSessionSatisfiesReview': false,
@@ -178,6 +202,8 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
   ]),
   lifecycle: Object.freeze([
     'builderClaimCloses',
+    'builderClaimRecordedBy',
+    'builderClaimScope',
     'reviewClaimRecordedBy',
     'reviewClaimScope',
     'restrictedRoleDiffBase',
@@ -186,6 +212,7 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'failedReviewOpens',
   ]),
   roleIdentity: Object.freeze([
+    'claudeBuilderAccount',
     'claudeResearchAccount',
     'claudeReviewAccount',
     'requiresDistinctClaudeTeamAccounts',
@@ -201,7 +228,12 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'progressUnit',
     'overallPercentAllowedAfter',
   ]),
-  writeBoundaries: Object.freeze(['codex', 'claude-research', 'claude-review']),
+  writeBoundaries: Object.freeze([
+    'codex',
+    'claude-builder',
+    'claude-research',
+    'claude-review',
+  ]),
 });
 
 /**
@@ -285,6 +317,7 @@ function validateStructuredPolicy(policy) {
 
   const expectedBoundaries = {
     codex: null,
+    'claude-builder': [],
     'claude-research': ['research/', 'content-drafts/'],
     'claude-review': ['reviews/'],
   };

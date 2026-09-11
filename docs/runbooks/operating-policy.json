@@ -7,6 +7,8 @@
   },
   "lifecycle": {
     "builderClaimCloses": "immutable-handoff-commit",
+    "builderClaimRecordedBy": "codex",
+    "builderClaimScope": "exact-path-list",
     "reviewClaimRecordedBy": "codex",
     "reviewClaimScope": "exact-append-only-report-path",
     "restrictedRoleDiffBase": "reviewed-artifact-commit",
@@ -25,6 +27,7 @@
     "overallPercentAllowedAfter": "SBLA-017-observed-throughput-and-owner-approved-estimate"
   },
   "roleIdentity": {
+    "claudeBuilderAccount": "A",
     "claudeResearchAccount": "A",
     "claudeReviewAccount": "B",
     "requiresDistinctClaudeTeamAccounts": true,
@@ -32,6 +35,7 @@
   },
   "writeBoundaries": {
     "codex": null,
+    "claude-builder": [],
     "claude-research": ["research/", "content-drafts/"],
     "claude-review": ["reviews/"]
   }

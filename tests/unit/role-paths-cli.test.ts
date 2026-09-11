@@ -114,12 +114,18 @@ async function runTrustedChecker(
   repository: string,
   role: string,
   base: string,
-  allowedPath = role === 'claude-review'
+  allowedPath: string | string[] | undefined = role === 'claude-review'
     ? 'reviews/releases/SBLA-test-r1.md'
     : undefined,
 ) {
   const args = [checkerPath, role, '--base', base, '--repository', repository];
-  if (allowedPath) args.push('--allowed-path', allowedPath);
+  for (const claimedPath of Array.isArray(allowedPath)
+    ? allowedPath
+    : allowedPath
+      ? [allowedPath]
+      : []) {
+    args.push('--allowed-path', claimedPath);
+  }
 
   return execFileAsync(process.execPath, args, { encoding: 'utf8' });
 }
@@ -133,6 +139,74 @@ afterEach(async () => {
 });
 
 describe('role path boundary CLI', () => {
+  it('requires at least one exact claimed path for Claude Builder', async () => {
+    const { repository, base } = await createRepository();
+    await commitFile(repository, 'src/pages/index.astro');
+
+    await expect(
+      runTrustedChecker(repository, 'claude-builder', base),
+    ).rejects.toMatchObject({
+      code: 2,
+      stderr: expect.stringContaining(
+        'Claude Builder requires at least one --allowed-path',
+      ),
+    });
+  });
+
+  it('allows Claude Builder to implement only the exact claimed code and test paths', async () => {
+    const { repository, base } = await createRepository();
+    await commitFile(repository, 'src/lib/feature.ts');
+    await commitFile(repository, 'tests/unit/feature.test.ts');
+
+    await expect(
+      runTrustedChecker(repository, 'claude-builder', base, [
+        'src/lib/feature.ts',
+        'tests/unit/feature.test.ts',
+      ]),
+    ).resolves.toMatchObject({
+      stdout: expect.stringContaining('2 changed path(s)'),
+    });
+  });
+
+  it('rejects a Claude Builder change outside its exact claim', async () => {
+    const { repository, base } = await createRepository();
+    await commitFile(repository, 'src/lib/feature.ts');
+    await commitFile(repository, 'tests/unit/unclaimed.test.ts');
+
+    await expect(
+      runTrustedChecker(
+        repository,
+        'claude-builder',
+        base,
+        'src/lib/feature.ts',
+      ),
+    ).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining(
+        'Claude Builder path is outside the exact claim: tests/unit/unclaimed.test.ts',
+      ),
+    });
+  });
+
+  it('rejects protected publication, review, and ledger paths even when claimed for Claude Builder', async () => {
+    const { repository, base } = await createRepository();
+    await commitFile(repository, 'reviews/releases/not-a-review.md');
+
+    await expect(
+      runTrustedChecker(
+        repository,
+        'claude-builder',
+        base,
+        'reviews/releases/not-a-review.md',
+      ),
+    ).rejects.toMatchObject({
+      code: 2,
+      stderr: expect.stringContaining(
+        'Claude Builder claim may not include: reviews/releases/not-a-review.md',
+      ),
+    });
+  });
+
   it('rejects an empty diff that proves no role work', async () => {
     const { repository, base } = await createRepository();
 
