@@ -299,6 +299,62 @@ SBLA-007 is complete only when all are independently checkable:
    Critical and zero unresolved Important findings, and its trusted exact-path
    boundary passes.
 
+## Round 1 bounded remediation (2026-09-11)
+
+Claude Review Account B returned FAIL in `reviews/releases/SBLA-007-r1.md` with
+zero Critical, three Important, and ten Minor findings. Codex performed the one
+bounded remediation allowed by the review stop rule on branch
+`codex/SBLA-007-r1-remediation` in worktree
+`C:\Users\frank.DESKTOP-8VOID7R\OneDrive\Documents\ChatGPT\SBLA`.
+
+The remediation started from reviewed report commit
+`6e299c44c465ff34e81ec4e1c492f9b9274b2289`. The implementation commit is
+`88853733b83e1b5ad48bb953e21768474394687b`, with tree
+`38c39ddbb148781caf09e5ab9d4d7851deb0e69e`.
+
+### Finding disposition
+
+- I-1 repaired: entity-history and evidence-packet timestamp ordering now
+  compares parsed instants instead of lexicographic timestamp strings. Tests
+  cover both directions of a second/fractional-second pair.
+- I-2 repaired: `RecordGraph` now carries complete change records; the graph
+  adapter passes them through, and published change records undergo the same
+  future, reverse-schedule, and overdue review-date checks as claims.
+- I-3 repaired: calibration is evaluated only in the causal verb's own clause,
+  before the causal match. An unrelated later clause can no longer disable the
+  gate, and a calendar expression such as `May 2020` is not treated as modal
+  calibration.
+- M-1 repaired: checksum presence uses `Object.hasOwn`, so inherited keys such
+  as `constructor` cannot satisfy a review target.
+- M-8 repaired: evidence-packet included-source IDs and change-record affected
+  IDs must be unique.
+- M-2 through M-7, M-9, and M-10 remain nonblocking and retain the destinations
+  recorded in R1. They were not pulled into this bounded remediation.
+
+### Remediation tests and checks
+
+- Red run before implementation:
+  `pnpm vitest run tests/unit/evidence-schemas.test.ts tests/unit/content-validation.test.ts`
+  — FAIL as expected: six new assertions failed and 25 existing tests passed.
+- Focused green run after implementation: the same command — PASS, two files
+  and 31 tests.
+- `pnpm verify` — PASS: formatting, lint, Astro/TypeScript diagnostics, 16 unit
+  files with 228 tests, content/graph/evidence validation, production build,
+  17 portability tests, foundation contract, and both asset gates.
+- `pnpm test:e2e` — PASS: 1/1 Chromium production-build journey.
+- `git diff --check 6e299c44c465ff34e81ec4e1c492f9b9274b2289...88853733b83e1b5ad48bb953e21768474394687b`
+  — PASS with no output.
+
+### Round 2 required reviewer action
+
+Account B must create a fresh `claude-review/SBLA-007-r2-*` branch and worktree
+from the immutable commit containing this section. Codex must first commit an
+exact-path claim for only `reviews/releases/SBLA-007-r2.md`. Account B then
+rechecks the complete SBLA-007 artifact, every R1 Important finding, M-1 and
+M-8, and the unchanged acceptance rubric. Account B must not repair the
+candidate. SBLA-007 passes only if R2 records zero unresolved Critical and zero
+unresolved Important findings and the trusted role-boundary gate passes.
+
 ## Windows receipt portability remediation (2026-09-10)
 
 Read-only verification of the earlier replacement candidate
