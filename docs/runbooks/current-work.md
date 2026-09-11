@@ -33,6 +33,14 @@ Expected handoff, and Paths owned.
 | -------------------------- | ------------------------- | --------------------------- | ----------------- | ------------------------------------------ | -------------------- | --------------------------------- | --------------------------------- |
 | SBLA-007 review R3 recheck | Claude Review (account B) | `claude-review/SBLA-007-r3` | `C:\\src\\s007r3` | `3d453d7787efe08f3b2da104ff9b8d7eec5ca3b1` | 2026-09-11 18:45 EDT | `reviews/releases/SBLA-007-r3.md` | `reviews/releases/SBLA-007-r3.md` |
 
+R3 continuity note (2026-09-11 19:04 EDT): Account B session
+`f73d7d2a-db7e-48be-a220-599a8b35f1b4` hit its session limit, which reports a
+22:00 EDT reset, after writing a 52,039-byte Prettier-clean but untracked draft
+at the claimed report path. The draft contains a preliminary FAIL, but it is not
+an immutable review result and must not trigger remediation. Resume the same
+Account-B session after reset, require it to finish, commit only the claimed
+report, and then run the trusted role-path boundary before acting on its verdict.
+
 ## Closed claims
 
 | Task                                                | Role                                             | Branch                                        | Base commit                                | Closed               | Handoff                                                          | Result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
