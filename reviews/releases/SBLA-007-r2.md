@@ -42,8 +42,8 @@ date in May. This is the same class of defect I-3 named, still open, so criterio
 the acceptance rubric are not met and the review fails.
 
 I also found one new, real regression introduced by the I-3 remediation's specific mechanism (clause
-scoping bounded to the text *preceding* the causal verb): a legitimately calibrated statement that places
-its hedge *after* the causal verb in the same sentence — "Resistance training increases hypertrophy,
+scoping bounded to the text _preceding_ the causal verb): a legitimately calibrated statement that places
+its hedge _after_ the causal verb in the same sentence — "Resistance training increases hypertrophy,
 though results may vary." — is now wrongly rejected as `CERTAINTY_OVERSTATED`. This fails closed (blocks
 correct content, author can reword) rather than open, so — consistent with how this same review lineage
 graded analogous language-gate imprecision in R1 (M-3, M-4) — I grade it Minor (M-11), not Important, and
@@ -73,7 +73,7 @@ return PASS or FAIL with exact evidence, without repairing the candidate.
   candidate (`git merge-base --is-ancestor bbeddc06... HEAD`, exit 0).
 - Coordination claim commit `e996c002f147ecd50011aa9d4b8da9c56985b8dc` on
   `codex/SBLA-007-review-coordination`, read via `git show`: the sole active ledger row is `SBLA-007
-  review R2 recheck`, role `Claude Review (account B)`, branch `claude-review/SBLA-007-r2`, worktree
+review R2 recheck`, role `Claude Review (account B)`, branch `claude-review/SBLA-007-r2`, worktree
   `C:\src\s007r2`, base commit `1e724939c7783e893be962df6d4ddce22f0750bb`, expected handoff
   `reviews/releases/SBLA-007-r2.md`, **paths owned: `reviews/releases/SBLA-007-r2.md` only.** This matches
   the dispatch exactly.
@@ -158,13 +158,13 @@ function hasUncalibratedCausalLanguage(statement: string) {
     );
     const clausePrefix = statement
       .slice(clauseStart + 1, match.index)
-      .replace(/\bMay\s+\d{4}\b/g, '')
+      .replace(/\bMay\s+\d{4}\b/g, '');
     return !LOW_CALIBRATION_PATTERN.test(clausePrefix);
   });
 }
 ```
 
-now scopes the `LOW_CALIBRATION_PATTERN` search (`validation.ts:159-160`) to the text strictly *preceding*
+now scopes the `LOW_CALIBRATION_PATTERN` search (`validation.ts:159-160`) to the text strictly _preceding_
 each causal-verb match, bounded by the nearest `.;!?`, and specifically strips a capitalized month name
 immediately followed by a bare four-digit year so `"In May 2020 the protocol increases strength."` is
 also now correctly flagged. Both are covered by the new pinned tests at
@@ -207,7 +207,7 @@ Graph validation passed: 2 nodes checked; graph generation remains SBLA-011.
 exit=0
 ```
 
-This control is *correctly* clean (genuine pre-verb calibration), which is what makes the date-phrasing
+This control is _correctly_ clean (genuine pre-verb calibration), which is what makes the date-phrasing
 cases a real defect rather than a general false-negative — the gate works, and an incidental "may" in a
 date is enough to switch it off for the same reason the original I-3 token was: `LOW_CALIBRATION_PATTERN`
 cannot distinguish a modal hedge from an unrelated token that happens to match `\b(may|...)\b`, and the
@@ -226,9 +226,9 @@ not met on schema-legal input, and the fix remains bounded.
 format. A more robust fix: don't special-case "May" at all; instead require a `may`/`might` match to
 actually be followed by a verb rather than a digit/comma, e.g. reject the match as calibration when it is
 immediately followed by an optional comma and then a numeral (`/\b(?:may|might)\b(?=\s*,?\s*\d)/i` should
-*not* count as calibration), or, more simply, only treat `may`/`might` as calibration when followed by
+_not_ count as calibration), or, more simply, only treat `may`/`might` as calibration when followed by
 whitespace and a lowercase alphabetic word (a plausible verb), not a digit. Separately, consider widening
-`clausePrefix` to the whole clause (both before *and* after the causal verb, still bounded by `.;!?`)
+`clausePrefix` to the whole clause (both before _and_ after the causal verb, still bounded by `.;!?`)
 rather than only the text before it — see M-11 below, which is the mirror-image failure this narrower
 choice produces. A single fix that scans the entire bounded clause for calibration, combined with a
 digit-aware exclusion for `may`/`might`, should close both I-3's residual bypass and M-11 together. Add
@@ -241,7 +241,7 @@ case, since the current fixtures only cover the one exact spelling that was spec
 
 **M-11 (new) — trailing same-clause calibration is no longer recognized, rejecting legitimately hedged
 low-certainty prose.** `src/lib/content/validation.ts:200-208`. Because `clausePrefix` only looks at text
-*before* the causal-verb match (from the nearest preceding `.;!?` up to the match index), a calibration
+_before_ the causal-verb match (from the nearest preceding `.;!?` up to the match index), a calibration
 token that follows the verb in the same sentence — the ordinary place English puts a trailing hedge — no
 longer counts, even with no intervening clause-ending punctuation at all. Reproduced through the real
 command in isolation:
@@ -274,18 +274,18 @@ remediation alongside I-3's residual date-phrasing gap — the same fix (whole-c
 
 **M-1 through M-10 disposition (R1's original ten, this round):**
 
-| ID | Status this round | Evidence |
-|---|---|---|
-| M-1 | **Resolved.** `constructor` target with empty checksums now rejected. | `Object.hasOwn(review.targetChecksums, targetId)` at `schemas.ts:522`; reproduced via real `node scripts/content/validate.mjs` — `[SCHEMA_INVALID] .../review-constructor-probe.json:targetChecksums: Missing immutable checksum for constructor`, exit 1. Control `valueof` still correctly rejected too; untouched valid fixture still passes. |
-| M-2 | Unresolved, carried from R1. Not in this remediation's scope (schemas.ts/validation.ts diff does not touch URL typing or the DOI-only canonical check). Destination unchanged: SBLA-007 if §10.8 binds here, otherwise the first task that renders/resolves source URLs. |
-| M-3 | Unresolved, carried from R1. **Spot-checked this round:** `"Resistance training reduces all-cause mortality risk in older adults."` at `certainty: "high"` still produces `CERTAINTY_UNIVERSAL` (confirmed via direct call to `lintClaimLanguage`, unchanged). Destination unchanged: SBLA-007 language-gate hardening. |
-| M-4 | Unresolved, carried from R1. `hasOutcomeFreeComparative`/`COMPARATIVE_PATTERN` untouched by this diff. Destination unchanged. |
-| M-5 | Unresolved, carried from R1. No Unicode/`NFKC` normalization added by this diff. Destination unchanged. |
-| M-6 | Unresolved, carried from R1. `scope.population`/`scope.conditions` still not passed to `lintClaimLanguage` (confirmed by reading the current `validateRecordGraph` claim loop, `validation.ts:360-379` — only `statement`, `plainLanguage`, and `qualifiers` are linted). Destination unchanged. |
-| M-7 | Unresolved, carried from R1. `scripts/foundation/scan-records.mjs` untouched by this diff. Destination unchanged. |
-| M-8 | **Resolved.** Duplicate `includedSourceIds`/`affectedIds` now rejected. | `requireUniqueIds` at `schemas.ts:36-49`, applied at `schemas.ts:473` (evidence packet) and `schemas.ts:567` (change record); reproduced via real `node scripts/content/validate.mjs` for both families, each failing with the expected `must be unique` message; untouched valid fixtures still pass. |
-| M-9 | Unresolved, carried from R1. **Spot-checked this round:** an uppercase `.JSON` extension still produces `RECORD_PATH_ID_MISMATCH` rather than an extension-specific message (confirmed via real `node scripts/content/validate.mjs`, unchanged). Destination unchanged: SBLA-007 adapter hardening. |
-| M-10 | Unresolved, carried from R1. PMID `"0"` pattern and DOI-URL message concatenation untouched by this diff. Destination unchanged. |
+| ID   | Status this round                                                                                                                                                                                                                                                                                                       | Evidence                                                                                                                                                                                                                                                                                                                                         |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| M-1  | **Resolved.** `constructor` target with empty checksums now rejected.                                                                                                                                                                                                                                                   | `Object.hasOwn(review.targetChecksums, targetId)` at `schemas.ts:522`; reproduced via real `node scripts/content/validate.mjs` — `[SCHEMA_INVALID] .../review-constructor-probe.json:targetChecksums: Missing immutable checksum for constructor`, exit 1. Control `valueof` still correctly rejected too; untouched valid fixture still passes. |
+| M-2  | Unresolved, carried from R1. Not in this remediation's scope (schemas.ts/validation.ts diff does not touch URL typing or the DOI-only canonical check). Destination unchanged: SBLA-007 if §10.8 binds here, otherwise the first task that renders/resolves source URLs.                                                |
+| M-3  | Unresolved, carried from R1. **Spot-checked this round:** `"Resistance training reduces all-cause mortality risk in older adults."` at `certainty: "high"` still produces `CERTAINTY_UNIVERSAL` (confirmed via direct call to `lintClaimLanguage`, unchanged). Destination unchanged: SBLA-007 language-gate hardening. |
+| M-4  | Unresolved, carried from R1. `hasOutcomeFreeComparative`/`COMPARATIVE_PATTERN` untouched by this diff. Destination unchanged.                                                                                                                                                                                           |
+| M-5  | Unresolved, carried from R1. No Unicode/`NFKC` normalization added by this diff. Destination unchanged.                                                                                                                                                                                                                 |
+| M-6  | Unresolved, carried from R1. `scope.population`/`scope.conditions` still not passed to `lintClaimLanguage` (confirmed by reading the current `validateRecordGraph` claim loop, `validation.ts:360-379` — only `statement`, `plainLanguage`, and `qualifiers` are linted). Destination unchanged.                        |
+| M-7  | Unresolved, carried from R1. `scripts/foundation/scan-records.mjs` untouched by this diff. Destination unchanged.                                                                                                                                                                                                       |
+| M-8  | **Resolved.** Duplicate `includedSourceIds`/`affectedIds` now rejected.                                                                                                                                                                                                                                                 | `requireUniqueIds` at `schemas.ts:36-49`, applied at `schemas.ts:473` (evidence packet) and `schemas.ts:567` (change record); reproduced via real `node scripts/content/validate.mjs` for both families, each failing with the expected `must be unique` message; untouched valid fixtures still pass.                                           |
+| M-9  | Unresolved, carried from R1. **Spot-checked this round:** an uppercase `.JSON` extension still produces `RECORD_PATH_ID_MISMATCH` rather than an extension-specific message (confirmed via real `node scripts/content/validate.mjs`, unchanged). Destination unchanged: SBLA-007 adapter hardening.                     |
+| M-10 | Unresolved, carried from R1. PMID `"0"` pattern and DOI-URL message concatenation untouched by this diff. Destination unchanged.                                                                                                                                                                                        |
 
 I did not re-derive full new reproductions for M-2, M-4, M-5, M-6, M-7, and M-10 this round beyond
 confirming (by reading the current file state, not just the diff) that the code paths R1 cited are
@@ -343,19 +343,19 @@ disposable export.
 
 **Provenance (all before any review work):**
 
-| Check | Command | Result |
-|---|---|---|
-| Branch | `git rev-parse --abbrev-ref HEAD` | `claude-review/SBLA-007-r2` |
-| Candidate commit | `git rev-parse HEAD` | `1e724939c7783e893be962df6d4ddce22f0750bb` |
-| Candidate tree | `git rev-parse "HEAD^{tree}"` | `2b99d1387aa314034701657768444743da99a638` |
-| Worktree clean | `git status --porcelain --untracked-files=all` | empty, before and after |
-| Node.js | `node --version` | `v24.20.0` |
-| pnpm | `pnpm --version` | `11.24.0` |
-| Dependency ancestry | `git merge-base --is-ancestor bbeddc06... HEAD` | exit 0 |
-| Coordination claim | `git show e996c002... -- docs/runbooks/current-work.md` | one active row; paths owned = `reviews/releases/SBLA-007-r2.md` only |
-| Coordination claim ancestry | `git merge-base --is-ancestor e996c002... HEAD` | exit 1 (not an ancestor — correct) |
-| R1 report checksum | `sha256sum reviews/releases/SBLA-007-r1.md` | `eac91752b2a9fa9665390cda0819d0ee31c94b8844e554f764646991a9a0f261` — matches the ledger record exactly |
-| R1 report byte-identical | `git diff 6e299c44...HEAD -- reviews/releases/SBLA-007-r1.md` | no output (identical) |
+| Check                       | Command                                                       | Result                                                                                                 |
+| --------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Branch                      | `git rev-parse --abbrev-ref HEAD`                             | `claude-review/SBLA-007-r2`                                                                            |
+| Candidate commit            | `git rev-parse HEAD`                                          | `1e724939c7783e893be962df6d4ddce22f0750bb`                                                             |
+| Candidate tree              | `git rev-parse "HEAD^{tree}"`                                 | `2b99d1387aa314034701657768444743da99a638`                                                             |
+| Worktree clean              | `git status --porcelain --untracked-files=all`                | empty, before and after                                                                                |
+| Node.js                     | `node --version`                                              | `v24.20.0`                                                                                             |
+| pnpm                        | `pnpm --version`                                              | `11.24.0`                                                                                              |
+| Dependency ancestry         | `git merge-base --is-ancestor bbeddc06... HEAD`               | exit 0                                                                                                 |
+| Coordination claim          | `git show e996c002... -- docs/runbooks/current-work.md`       | one active row; paths owned = `reviews/releases/SBLA-007-r2.md` only                                   |
+| Coordination claim ancestry | `git merge-base --is-ancestor e996c002... HEAD`               | exit 1 (not an ancestor — correct)                                                                     |
+| R1 report checksum          | `sha256sum reviews/releases/SBLA-007-r1.md`                   | `eac91752b2a9fa9665390cda0819d0ee31c94b8844e554f764646991a9a0f261` — matches the ledger record exactly |
+| R1 report byte-identical    | `git diff 6e299c44...HEAD -- reviews/releases/SBLA-007-r1.md` | no output (identical)                                                                                  |
 
 **`pnpm install --frozen-lockfile`** — PASS. `Already up to date. Done in 261ms using pnpm v11.24.0`.
 
@@ -395,20 +395,20 @@ real repaired modules/commands:**
 
 - I-1 false negative (ms-precision reversal) — real `node scripts/content/validate.mjs`:
   `Content validation failed: [SCHEMA_INVALID] .../evidence-packet-ms-reversed.json:updatedAt: updatedAt
-  must not precede createdAt`, exit 1. **Correctly rejected now** (R1 found this passed with exit 0).
+must not precede createdAt`, exit 1. **Correctly rejected now** (R1 found this passed with exit 0).
 - I-1 false positive (legitimate 500ms-later update) — real command: `Content validation passed: 1
-  records.`, exit 0. **Correctly accepted now** (R1 found this was wrongly rejected).
+records.`, exit 0. **Correctly accepted now** (R1 found this was wrongly rejected).
 - I-1 equal instants, second-precision control, and `changeRecord`-family coverage — all confirmed via
   direct `validateRecord` calls against the same module; see Findings.
 - I-2 (published change record, review dated 2029, due 2020) — real `SBLA_AS_OF=2026-09-11 node
-  scripts/graph/validate.mjs`: `Graph validation failed:` with `REVIEW_DATE_IN_FUTURE`,
+scripts/graph/validate.mjs`: `Graph validation failed:` with `REVIEW_DATE_IN_FUTURE`,
   `REVIEW_SCHEDULE_INVALID`, and `REVIEW_OVERDUE` all reported, exit 1. **Correctly rejected now** (R1
   found this passed all three commands with exit 0).
 - M-1 (`constructor` review target, empty checksums) — real `node scripts/content/validate.mjs`:
   `[SCHEMA_INVALID] .../review-constructor-probe.json:targetChecksums: Missing immutable checksum for
-  constructor`, exit 1. **Correctly rejected now.**
+constructor`, exit 1. **Correctly rejected now.**
 - M-8 (duplicate `includedSourceIds`) — real `node scripts/content/validate.mjs`: `[SCHEMA_INVALID]
-  .../evidence-packet-dup-sources.json:includedSourceIds: Included source IDs must be unique`, exit 1.
+.../evidence-packet-dup-sources.json:includedSourceIds: Included source IDs must be unique`, exit 1.
   **Correctly rejected now**; `affectedIds` duplicate confirmed via direct `validateRecord` call.
 - I-3 original bypass and capitalized "May 2020" — both now produce `CERTAINTY_OVERSTATED` (direct call
   and, for the original bypass, the pinned unit test).
@@ -417,7 +417,7 @@ real repaired modules/commands:**
 - M-11 (trailing "and"-joined hedge) — real `node scripts/graph/validate.mjs`, isolated:
   `Graph validation failed: [CERTAINTY_OVERSTATED] ...`, exit 1. **Wrongly rejected — confirmed new.**
 - Control (legit pre-verb calibration, isolated) — real command: `Graph validation passed: 2 nodes
-  checked...`, exit 0. Confirms the gate is not broken in general.
+checked...`, exit 0. Confirms the gate is not broken in general.
 - M-3 spot check (`"...all-cause mortality..."` at high certainty) — direct call: still produces
   `CERTAINTY_UNIVERSAL`. Unchanged.
 - M-9 spot check (uppercase `.JSON` extension) — real `node scripts/content/validate.mjs`:
