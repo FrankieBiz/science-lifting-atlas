@@ -14,6 +14,7 @@ test-results/
 .superpowers/
 .cache/
 .pnpm-store/
+.graphify_python
 *.tsbuildinfo
 .DS_Store
 

@@ -1,0 +1,896 @@
+{
+  "C:\\src\\sciatlas\\.prettierrc.mjs": {
+    "mtime": 1789054377.1230648,
+    "seen": 1789169943.8623147,
+    "ast_hash": "9a0a9be32bb44cb3e246d7f20c2e4cf5",
+    "semantic_hash": "9a0a9be32bb44cb3e246d7f20c2e4cf5"
+  },
+  "C:\\src\\sciatlas\\astro.config.mjs": {
+    "mtime": 1789054377.1442516,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d2428ed612926f07acffdef6b48b56c4",
+    "semantic_hash": "d2428ed612926f07acffdef6b48b56c4"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\provider-quotas.json": {
+    "mtime": 1789054377.15635,
+    "seen": 1789169943.8623147,
+    "ast_hash": "b990f77d95dbb41e7a34b1be19feaa13",
+    "semantic_hash": "b990f77d95dbb41e7a34b1be19feaa13"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\anatomy-asset-decision.json": {
+    "mtime": 1789054377.1578584,
+    "seen": 1789169943.8623147,
+    "ast_hash": "71ee36863914559f68ae9ed5b446b0db",
+    "semantic_hash": "71ee36863914559f68ae9ed5b446b0db"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\asset-candidates.json": {
+    "mtime": 1789054377.1593692,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6b1403ed41a4e2155ad8d707b6f776c4",
+    "semantic_hash": "6b1403ed41a4e2155ad8d707b6f776c4"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\asset-score-rubric.json": {
+    "mtime": 1789054377.1593692,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e56c85318db64e0bd2cf49cdba143a1d",
+    "semantic_hash": "e56c85318db64e0bd2cf49cdba143a1d"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-browser-benchmark.json": {
+    "mtime": 1789054377.1593692,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d3b29431671c985bb28e48384a151a85",
+    "semantic_hash": "d3b29431671c985bb28e48384a151a85"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-conversion-baseline-receipt.json": {
+    "mtime": 1789054377.1593692,
+    "seen": 1789169943.8623147,
+    "ast_hash": "716c3b019defc36ea015a03c3f45a9c4",
+    "semantic_hash": "716c3b019defc36ea015a03c3f45a9c4"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-conversion-manifest.json": {
+    "mtime": 1789054377.1623862,
+    "seen": 1789169943.8623147,
+    "ast_hash": "4e39cc986a0178d6f89f8f4c5863d379",
+    "semantic_hash": "4e39cc986a0178d6f89f8f4c5863d379"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-feasibility.json": {
+    "mtime": 1789054377.1623862,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d896279fd57a5ffa816aa520e58df0d9",
+    "semantic_hash": "d896279fd57a5ffa816aa520e58df0d9"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-mesh-mapping.json": {
+    "mtime": 1789054377.1638951,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ee60bf87c2c3fcbbc946849f9ab9dee1",
+    "semantic_hash": "ee60bf87c2c3fcbbc946849f9ab9dee1"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-performance.json": {
+    "mtime": 1789054377.1638951,
+    "seen": 1789169943.8623147,
+    "ast_hash": "9f533fe1305fb2f9221c80e67e8bf6e3",
+    "semantic_hash": "9f533fe1305fb2f9221c80e67e8bf6e3"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\measurements\\bodyparts3d-feasibility-run-1.json": {
+    "mtime": 1789054377.1669123,
+    "seen": 1789169943.8623147,
+    "ast_hash": "11b26715c8002ed71c5c91107b7a965c",
+    "semantic_hash": "11b26715c8002ed71c5c91107b7a965c"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\measurements\\bodyparts3d-feasibility-run-2.json": {
+    "mtime": 1789054377.168421,
+    "seen": 1789169943.8623147,
+    "ast_hash": "87e8081418bc52cd55f29c52107b093f",
+    "semantic_hash": "87e8081418bc52cd55f29c52107b093f"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\operating-policy.json": {
+    "mtime": 1789054377.1729898,
+    "seen": 1789169943.8623147,
+    "ast_hash": "06cb1991b8da6fa938c6343f5be51cbf",
+    "semantic_hash": "06cb1991b8da6fa938c6343f5be51cbf"
+  },
+  "C:\\src\\sciatlas\\eslint.config.mjs": {
+    "mtime": 1789054377.176011,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d6d763f781d041720cb83ddd26167368",
+    "semantic_hash": "d6d763f781d041720cb83ddd26167368"
+  },
+  "C:\\src\\sciatlas\\package.json": {
+    "mtime": 1789054378.169088,
+    "seen": 1789169943.8623147,
+    "ast_hash": "bb3500e485c0e5a327c0c620c0a376db",
+    "semantic_hash": "bb3500e485c0e5a327c0c620c0a376db"
+  },
+  "C:\\src\\sciatlas\\playwright.config.ts": {
+    "mtime": 1789054378.170092,
+    "seen": 1789169943.8623147,
+    "ast_hash": "9067d5c75fd3f966dbf89f8c95aae024",
+    "semantic_hash": "9067d5c75fd3f966dbf89f8c95aae024"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\benchmark.mjs": {
+    "mtime": 1789054377.1997612,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e40ae8d4ae8cd5b155ec30b21cf5ac77",
+    "semantic_hash": "e40ae8d4ae8cd5b155ec30b21cf5ac77"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\blender\\convert.py": {
+    "mtime": 1789054377.2013104,
+    "seen": 1789169943.8623147,
+    "ast_hash": "99e47b47c5cce32dd585e81ac85ff46d",
+    "semantic_hash": "99e47b47c5cce32dd585e81ac85ff46d"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\coverage.mjs": {
+    "mtime": 1789054377.2013104,
+    "seen": 1789169943.8623147,
+    "ast_hash": "5b69ad06183808265b10c41019fe0f16",
+    "semantic_hash": "5b69ad06183808265b10c41019fe0f16"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\decision.mjs": {
+    "mtime": 1789054378.1705961,
+    "seen": 1789169943.8623147,
+    "ast_hash": "534d5f8ad6417879c4b3d513b8224d76",
+    "semantic_hash": "534d5f8ad6417879c4b3d513b8224d76"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\full-benchmark.mjs": {
+    "mtime": 1789054377.2013104,
+    "seen": 1789169943.8623147,
+    "ast_hash": "db2f5a1d251b2952c5eabcb6de1f5cdb",
+    "semantic_hash": "db2f5a1d251b2952c5eabcb6de1f5cdb"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\mesh-map.mjs": {
+    "mtime": 1789054377.2028234,
+    "seen": 1789169943.8623147,
+    "ast_hash": "363f084f7d4072dfefc9877a94f0feae",
+    "semantic_hash": "363f084f7d4072dfefc9877a94f0feae"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\scorecard.mjs": {
+    "mtime": 1789054377.2028234,
+    "seen": 1789169943.8623147,
+    "ast_hash": "597bb2ae8642b5068293e2df6c9384c8",
+    "semantic_hash": "597bb2ae8642b5068293e2df6c9384c8"
+  },
+  "C:\\src\\sciatlas\\scripts\\assets\\spike.mjs": {
+    "mtime": 1789054377.2028234,
+    "seen": 1789169943.8623147,
+    "ast_hash": "352fb5aac8597c9e6fc2280c26426355",
+    "semantic_hash": "352fb5aac8597c9e6fc2280c26426355"
+  },
+  "C:\\src\\sciatlas\\scripts\\content\\validate.mjs": {
+    "mtime": 1789054378.1705961,
+    "seen": 1789169943.8623147,
+    "ast_hash": "cb497964555f3e1c4b132471a2f45635",
+    "semantic_hash": "cb497964555f3e1c4b132471a2f45635"
+  },
+  "C:\\src\\sciatlas\\scripts\\evidence\\status.mjs": {
+    "mtime": 1789054378.1721077,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6572106c8a05e7aa76f5595806fe7857",
+    "semantic_hash": "6572106c8a05e7aa76f5595806fe7857"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\check-role-paths.mjs": {
+    "mtime": 1789054377.2043371,
+    "seen": 1789169943.8623147,
+    "ast_hash": "a7a03010303ecf203d05dbdbab9e84de",
+    "semantic_hash": "a7a03010303ecf203d05dbdbab9e84de"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\contract.mjs": {
+    "mtime": 1789054377.2058508,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e65a165e23b25642c9cd7fc3a3e62b8c",
+    "semantic_hash": "e65a165e23b25642c9cd7fc3a3e62b8c"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\foundation-mode.mjs": {
+    "mtime": 1789054377.2058508,
+    "seen": 1789169943.8623147,
+    "ast_hash": "df49cc64072b3a910a2beb069268dc4e",
+    "semantic_hash": "df49cc64072b3a910a2beb069268dc4e"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\operating-model.mjs": {
+    "mtime": 1789054377.2058508,
+    "seen": 1789169943.8623147,
+    "ast_hash": "4f1a5d18b74d7761f73a506be767eeed",
+    "semantic_hash": "4f1a5d18b74d7761f73a506be767eeed"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\role-paths.mjs": {
+    "mtime": 1789054377.2058508,
+    "seen": 1789169943.8623147,
+    "ast_hash": "4986472df51dc61cf9b9331835c44e07",
+    "semantic_hash": "4986472df51dc61cf9b9331835c44e07"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\scan-records.mjs": {
+    "mtime": 1789054377.2058508,
+    "seen": 1789169943.8623147,
+    "ast_hash": "c60afb069b501b7c96c7fc16a6879b92",
+    "semantic_hash": "c60afb069b501b7c96c7fc16a6879b92"
+  },
+  "C:\\src\\sciatlas\\scripts\\foundation\\verify.mjs": {
+    "mtime": 1789054377.2073622,
+    "seen": 1789169943.8623147,
+    "ast_hash": "13686ce6a5e4f0551243bb0c49df805b",
+    "semantic_hash": "13686ce6a5e4f0551243bb0c49df805b"
+  },
+  "C:\\src\\sciatlas\\scripts\\graph\\validate.mjs": {
+    "mtime": 1789054378.1721077,
+    "seen": 1789169943.8623147,
+    "ast_hash": "3b6bb0f426b575c44cda9ea27976f494",
+    "semantic_hash": "3b6bb0f426b575c44cda9ea27976f494"
+  },
+  "C:\\src\\sciatlas\\scripts\\portability\\static-server.mjs": {
+    "mtime": 1789054378.1721077,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ee232749113219a563e61677c674b730",
+    "semantic_hash": "ee232749113219a563e61677c674b730"
+  },
+  "C:\\src\\sciatlas\\src\\content.config.ts": {
+    "mtime": 1789054378.1736178,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e06155c7ed83b29cb644544363fdfe2b",
+    "semantic_hash": "e06155c7ed83b29cb644544363fdfe2b"
+  },
+  "C:\\src\\sciatlas\\src\\env.d.ts": {
+    "mtime": 1789054377.210387,
+    "seen": 1789169943.8623147,
+    "ast_hash": "135b858eacc6fa47650c6f978da54a38",
+    "semantic_hash": "135b858eacc6fa47650c6f978da54a38"
+  },
+  "C:\\src\\sciatlas\\src\\lib\\content\\schemas.ts": {
+    "mtime": 1789054378.1736178,
+    "seen": 1789169943.8623147,
+    "ast_hash": "2c1ee8139b9ad5aa9480aa3f28a865a2",
+    "semantic_hash": "2c1ee8139b9ad5aa9480aa3f28a865a2"
+  },
+  "C:\\src\\sciatlas\\src\\lib\\content\\validation.ts": {
+    "mtime": 1789054378.1736178,
+    "seen": 1789169943.8623147,
+    "ast_hash": "70d62a72740fce0f3b8a46808bc37b19",
+    "semantic_hash": "70d62a72740fce0f3b8a46808bc37b19"
+  },
+  "C:\\src\\sciatlas\\src\\lib\\foundation\\gates.ts": {
+    "mtime": 1789054377.2134132,
+    "seen": 1789169943.8623147,
+    "ast_hash": "478384500477899b3265f778a5f28d45",
+    "semantic_hash": "478384500477899b3265f778a5f28d45"
+  },
+  "C:\\src\\sciatlas\\src\\pages\\index.astro": {
+    "mtime": 1789054377.2149248,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e891c0f06994228b4d487f78caded31f",
+    "semantic_hash": "e891c0f06994228b4d487f78caded31f"
+  },
+  "C:\\src\\sciatlas\\tests\\accessibility\\foundation.test.ts": {
+    "mtime": 1789054377.2164702,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d1b50d5224a85521f35b48f4c254cdc9",
+    "semantic_hash": "d1b50d5224a85521f35b48f4c254cdc9"
+  },
+  "C:\\src\\sciatlas\\tests\\e2e\\foundation.spec.ts": {
+    "mtime": 1789054377.2164702,
+    "seen": 1789169943.8623147,
+    "ast_hash": "1f3a1198677a2db3a0bf002ff08afe76",
+    "semantic_hash": "1f3a1198677a2db3a0bf002ff08afe76"
+  },
+  "C:\\src\\sciatlas\\tests\\fixtures\\evidence-schemas\\graph-cases.json": {
+    "mtime": 1789054378.1736178,
+    "seen": 1789169943.8623147,
+    "ast_hash": "346eb72d1064aeb430c9e3b405802988",
+    "semantic_hash": "346eb72d1064aeb430c9e3b405802988"
+  },
+  "C:\\src\\sciatlas\\tests\\fixtures\\evidence-schemas\\records.invalid.json": {
+    "mtime": 1789054378.1751325,
+    "seen": 1789169943.8623147,
+    "ast_hash": "3ff78f699080d7292f04be0ff54651b4",
+    "semantic_hash": "3ff78f699080d7292f04be0ff54651b4"
+  },
+  "C:\\src\\sciatlas\\tests\\fixtures\\evidence-schemas\\records.valid.json": {
+    "mtime": 1789054378.1751325,
+    "seen": 1789169943.8623147,
+    "ast_hash": "75c514b22a7fc536094772326ba2d2cc",
+    "semantic_hash": "75c514b22a7fc536094772326ba2d2cc"
+  },
+  "C:\\src\\sciatlas\\tests\\fixtures\\evidence-schemas\\source-status-cases.json": {
+    "mtime": 1789054378.1751325,
+    "seen": 1789169943.8623147,
+    "ast_hash": "b4a50697ca2de7be25c9a86ff988c478",
+    "semantic_hash": "b4a50697ca2de7be25c9a86ff988c478"
+  },
+  "C:\\src\\sciatlas\\tests\\integration\\portability.test.ts": {
+    "mtime": 1789054377.2179809,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f07f74da65050e272610dd58e096fce4",
+    "semantic_hash": "f07f74da65050e272610dd58e096fce4"
+  },
+  "C:\\src\\sciatlas\\tests\\integration\\portability\\resource-references.test.ts": {
+    "mtime": 1789054377.219007,
+    "seen": 1789169943.8623147,
+    "ast_hash": "323bb227049991a5d19cfe4782a63f58",
+    "semantic_hash": "323bb227049991a5d19cfe4782a63f58"
+  },
+  "C:\\src\\sciatlas\\tests\\integration\\portability\\resource-references.ts": {
+    "mtime": 1789054377.219007,
+    "seen": 1789169943.8623147,
+    "ast_hash": "1b71fa628c3ef9a9ea7f50a64e6992eb",
+    "semantic_hash": "1b71fa628c3ef9a9ea7f50a64e6992eb"
+  },
+  "C:\\src\\sciatlas\\tests\\integration\\portability\\server-lifecycle.ts": {
+    "mtime": 1789054377.219007,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d8796d89f284ba3b3a9d8c66b6dc01cc",
+    "semantic_hash": "d8796d89f284ba3b3a9d8c66b6dc01cc"
+  },
+  "C:\\src\\sciatlas\\tests\\integration\\portability\\static-server.test.ts": {
+    "mtime": 1789054378.1751325,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6761ec09afd5f4acff999603476faab4",
+    "semantic_hash": "6761ec09afd5f4acff999603476faab4"
+  },
+  "C:\\src\\sciatlas\\tests\\performance\\foundation.test.ts": {
+    "mtime": 1789054377.219007,
+    "seen": 1789169943.8623147,
+    "ast_hash": "5e40a7e6ad4a35dff70d047436d442bd",
+    "semantic_hash": "5e40a7e6ad4a35dff70d047436d442bd"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-benchmark.test.ts": {
+    "mtime": 1789054378.1766448,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6e803436e3a3a876c787fd04df240402",
+    "semantic_hash": "6e803436e3a3a876c787fd04df240402"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-conversion.test.ts": {
+    "mtime": 1789054378.1766448,
+    "seen": 1789169943.8623147,
+    "ast_hash": "241bb1405f3e29ad20ab26ff60e50a9f",
+    "semantic_hash": "241bb1405f3e29ad20ab26ff60e50a9f"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-coverage.test.ts": {
+    "mtime": 1789054377.220517,
+    "seen": 1789169943.8623147,
+    "ast_hash": "663fe5de78dfa1f04e37e75df0cceec1",
+    "semantic_hash": "663fe5de78dfa1f04e37e75df0cceec1"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-decision.test.ts": {
+    "mtime": 1789054378.1766448,
+    "seen": 1789169943.8623147,
+    "ast_hash": "de256b7684dfaa60390bcc53a6545c0a",
+    "semantic_hash": "de256b7684dfaa60390bcc53a6545c0a"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-full-benchmark.test.ts": {
+    "mtime": 1789054378.1781566,
+    "seen": 1789169943.8623147,
+    "ast_hash": "65a16b599aed86f2309a0b01a6fb418b",
+    "semantic_hash": "65a16b599aed86f2309a0b01a6fb418b"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-mesh-map.test.ts": {
+    "mtime": 1789054377.2220316,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ce1a276daa67e01ce10b0b583741188a",
+    "semantic_hash": "ce1a276daa67e01ce10b0b583741188a"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\asset-spike.test.ts": {
+    "mtime": 1789054377.2235436,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e04365fc6d835fde392af198a2680d8a",
+    "semantic_hash": "e04365fc6d835fde392af198a2680d8a"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\content-validation.test.ts": {
+    "mtime": 1789054378.1781566,
+    "seen": 1789169943.8623147,
+    "ast_hash": "334712db2c85242c1d81ab068bfa9c8c",
+    "semantic_hash": "334712db2c85242c1d81ab068bfa9c8c"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\evidence-schemas.test.ts": {
+    "mtime": 1789054378.1781566,
+    "seen": 1789169943.8623147,
+    "ast_hash": "cfaee427163fba16cdb308435f757889",
+    "semantic_hash": "cfaee427163fba16cdb308435f757889"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\foundation-adapters.test.ts": {
+    "mtime": 1789054378.1781566,
+    "seen": 1789169943.8623147,
+    "ast_hash": "767bf21f58cd2343328161dd6d8e279e",
+    "semantic_hash": "767bf21f58cd2343328161dd6d8e279e"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\foundation-contract.test.ts": {
+    "mtime": 1789054377.2235436,
+    "seen": 1789169943.8623147,
+    "ast_hash": "8d91804b63a550a59d159e0a465c2a36",
+    "semantic_hash": "8d91804b63a550a59d159e0a465c2a36"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\foundation-mode.test.ts": {
+    "mtime": 1789054377.2235436,
+    "seen": 1789169943.8623147,
+    "ast_hash": "0858e8f218cf3d6b88c0a7960faf4d58",
+    "semantic_hash": "0858e8f218cf3d6b88c0a7960faf4d58"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\operating-model-contract.test.ts": {
+    "mtime": 1789054377.225056,
+    "seen": 1789169943.8623147,
+    "ast_hash": "0bb57e59c829d956ce1d8143e150fa87",
+    "semantic_hash": "0bb57e59c829d956ce1d8143e150fa87"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\operating-model-filesystem.test.ts": {
+    "mtime": 1789054377.225056,
+    "seen": 1789169943.8623147,
+    "ast_hash": "a812e7aca693e08c4f1e438ee3a41658",
+    "semantic_hash": "a812e7aca693e08c4f1e438ee3a41658"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\role-paths-cli.test.ts": {
+    "mtime": 1789054377.225056,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6de5f8c6119e338d65537fd7d4fbcffe",
+    "semantic_hash": "6de5f8c6119e338d65537fd7d4fbcffe"
+  },
+  "C:\\src\\sciatlas\\tests\\unit\\role-paths.test.ts": {
+    "mtime": 1789054377.225056,
+    "seen": 1789169943.8623147,
+    "ast_hash": "63cb461b5b97acd82cf9ceaf30968e2a",
+    "semantic_hash": "63cb461b5b97acd82cf9ceaf30968e2a"
+  },
+  "C:\\src\\sciatlas\\tests\\visual\\foundation.test.ts": {
+    "mtime": 1789054377.2265694,
+    "seen": 1789169943.8623147,
+    "ast_hash": "053daa9aafb60cc98aaf606513ee86a5",
+    "semantic_hash": "053daa9aafb60cc98aaf606513ee86a5"
+  },
+  "C:\\src\\sciatlas\\tsconfig.json": {
+    "mtime": 1789054377.2265694,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f2e2d6555e788dc45bf50d744300b2db",
+    "semantic_hash": "f2e2d6555e788dc45bf50d744300b2db"
+  },
+  "C:\\src\\sciatlas\\vitest.config.ts": {
+    "mtime": 1789054377.2265694,
+    "seen": 1789169943.8623147,
+    "ast_hash": "b9721607cdb3252e887fda46f3678cd5",
+    "semantic_hash": "b9721607cdb3252e887fda46f3678cd5"
+  },
+  "C:\\src\\sciatlas\\vitest.portability.config.ts": {
+    "mtime": 1789054377.2265694,
+    "seen": 1789169943.8623147,
+    "ast_hash": "dc6f8bc47d4d712380303e5e8b262dec",
+    "semantic_hash": "dc6f8bc47d4d712380303e5e8b262dec"
+  },
+  "C:\\src\\sciatlas\\.agents\\rules\\sbla.md": {
+    "mtime": 1789162758.07009,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f757dfc1103ea3a24e7ea94c53698cd1",
+    "semantic_hash": "f757dfc1103ea3a24e7ea94c53698cd1"
+  },
+  "C:\\src\\sciatlas\\.github\\pull_request_template.md": {
+    "mtime": 1789054377.120006,
+    "seen": 1789169943.8623147,
+    "ast_hash": "8d33c52011ee5463600a3dd65105f010",
+    "semantic_hash": "8d33c52011ee5463600a3dd65105f010"
+  },
+  "C:\\src\\sciatlas\\.github\\workflows\\ci.yml": {
+    "mtime": 1789054377.1215193,
+    "seen": 1789169943.8623147,
+    "ast_hash": "b944e165737c76b773bca98ce955b164",
+    "semantic_hash": "b944e165737c76b773bca98ce955b164"
+  },
+  "C:\\src\\sciatlas\\.github\\workflows\\source-status.yml": {
+    "mtime": 1789054377.1215193,
+    "seen": 1789169943.8623147,
+    "ast_hash": "a6edb11dc5523b54f71fd4890d11000c",
+    "semantic_hash": "a6edb11dc5523b54f71fd4890d11000c"
+  },
+  "C:\\src\\sciatlas\\AGENTS.md": {
+    "mtime": 1789054377.1245773,
+    "seen": 1789169943.8623147,
+    "ast_hash": "9845debe8e5f3e0aaa2e8f9108c6e91b",
+    "semantic_hash": "9845debe8e5f3e0aaa2e8f9108c6e91b"
+  },
+  "C:\\src\\sciatlas\\CLAUDE.md": {
+    "mtime": 1789054377.1245773,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f8dbbaa927da32607c48f81a3769470b",
+    "semantic_hash": "f8dbbaa927da32607c48f81a3769470b"
+  },
+  "C:\\src\\sciatlas\\README.md": {
+    "mtime": 1789054377.1245773,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f01a9a7709c24fbfde70936d86190c0b",
+    "semantic_hash": "f01a9a7709c24fbfde70936d86190c0b"
+  },
+  "C:\\src\\sciatlas\\assets\\samples\\bodyparts3d\\LICENSE.md": {
+    "mtime": 1789054377.142742,
+    "seen": 1789169943.8623147,
+    "ast_hash": "a679c6ecda7af6a5cc55429a29f53395",
+    "semantic_hash": "a679c6ecda7af6a5cc55429a29f53395"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\0001-static-first-architecture.md": {
+    "mtime": 1789054377.1533315,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e8d05e839131646ddd51b1d60cea89cb",
+    "semantic_hash": "e8d05e839131646ddd51b1d60cea89cb"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\0002-content-data-and-graph.md": {
+    "mtime": 1789054377.1548414,
+    "seen": 1789169943.8623147,
+    "ast_hash": "c70c6e3ebbcb87171964658a7f94562b",
+    "semantic_hash": "c70c6e3ebbcb87171964658a7f94562b"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\0003-hosting-and-asset-delivery.md": {
+    "mtime": 1789054377.1548414,
+    "seen": 1789169943.8623147,
+    "ast_hash": "4efa9d429f813e7954191c886bed8a03",
+    "semantic_hash": "4efa9d429f813e7954191c886bed8a03"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\0004-analytics.md": {
+    "mtime": 1789054377.1548414,
+    "seen": 1789169943.8623147,
+    "ast_hash": "273d79f85b9421627d4529ae0cf65794",
+    "semantic_hash": "273d79f85b9421627d4529ae0cf65794"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\0005-zero-cost-infrastructure-model.md": {
+    "mtime": 1789054377.15635,
+    "seen": 1789169943.8623147,
+    "ast_hash": "a85ffc17f4b62a635d2544d645341826",
+    "semantic_hash": "a85ffc17f4b62a635d2544d645341826"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\0006-execution-quality-and-validation-gates.md": {
+    "mtime": 1789054377.15635,
+    "seen": 1789169943.8623147,
+    "ast_hash": "17af8ae2e2b821194c821844b9f5d203",
+    "semantic_hash": "17af8ae2e2b821194c821844b9f5d203"
+  },
+  "C:\\src\\sciatlas\\docs\\adr\\README.md": {
+    "mtime": 1789054377.15635,
+    "seen": 1789169943.8623147,
+    "ast_hash": "4c08855b71852c5130534c108aaa0a0a",
+    "semantic_hash": "4c08855b71852c5130534c108aaa0a0a"
+  },
+  "C:\\src\\sciatlas\\docs\\authoring\\evidence-record-errors.md": {
+    "mtime": 1789054378.166039,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d8c9644ff271827c87fe0be2645cfeee",
+    "semantic_hash": "d8c9644ff271827c87fe0be2645cfeee"
+  },
+  "C:\\src\\sciatlas\\docs\\editorial-style.md": {
+    "mtime": 1789054377.15635,
+    "seen": 1789169943.8623147,
+    "ast_hash": "cd697804833a77e8217d7c358ab246ed",
+    "semantic_hash": "cd697804833a77e8217d7c358ab246ed"
+  },
+  "C:\\src\\sciatlas\\docs\\evidence-methodology.md": {
+    "mtime": 1789054377.1578584,
+    "seen": 1789169943.8623147,
+    "ast_hash": "776276ab425a651980599bcab4bcabdc",
+    "semantic_hash": "776276ab425a651980599bcab4bcabdc"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\anatomy-assets.md": {
+    "mtime": 1789054377.1578584,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6b4631109861a4f48adb30d8f186a6f3",
+    "semantic_hash": "6b4631109861a4f48adb30d8f186a6f3"
+  },
+  "C:\\src\\sciatlas\\docs\\licenses\\bodyparts3d-sample-manifest.md": {
+    "mtime": 1789054377.1638951,
+    "seen": 1789169943.8623147,
+    "ast_hash": "9fc43bf7472ec37c5fbdd74ae92786c7",
+    "semantic_hash": "9fc43bf7472ec37c5fbdd74ae92786c7"
+  },
+  "C:\\src\\sciatlas\\docs\\product\\gates\\SBLA-006-asset-decision.md": {
+    "mtime": 1789054377.168421,
+    "seen": 1789169943.8623147,
+    "ast_hash": "efee259b09a85bee3ab02e8249d2f583",
+    "semantic_hash": "efee259b09a85bee3ab02e8249d2f583"
+  },
+  "C:\\src\\sciatlas\\docs\\product\\master-plan.md": {
+    "mtime": 1789054377.1699684,
+    "seen": 1789169943.8623147,
+    "ast_hash": "6d5f21166c61fdc04d44b5702e889852",
+    "semantic_hash": "6d5f21166c61fdc04d44b5702e889852"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\README.md": {
+    "mtime": 1789054377.1714785,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d4638f0fc6bcb55e39c0f529c727564e",
+    "semantic_hash": "d4638f0fc6bcb55e39c0f529c727564e"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\branch-and-worktree.md": {
+    "mtime": 1789054377.1714785,
+    "seen": 1789169943.8623147,
+    "ast_hash": "c43353a70d2d041de57f1efaf87eef42",
+    "semantic_hash": "c43353a70d2d041de57f1efaf87eef42"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\claude-environments.md": {
+    "mtime": 1789054377.1714785,
+    "seen": 1789169943.8623147,
+    "ast_hash": "63e75af4380196ec2086f2f4fd16289f",
+    "semantic_hash": "63e75af4380196ec2086f2f4fd16289f"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\current-work.md": {
+    "mtime": 1789168696.204356,
+    "seen": 1789169943.8623147,
+    "ast_hash": "269e3b9f6a64492e4ca2114297f58494",
+    "semantic_hash": "269e3b9f6a64492e4ca2114297f58494"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\handoff-template.md": {
+    "mtime": 1789054377.1729898,
+    "seen": 1789169943.8623147,
+    "ast_hash": "afa16af5d5eeceb1f283f48760e513fa",
+    "semantic_hash": "afa16af5d5eeceb1f283f48760e513fa"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\new-device-agent-handoff.md": {
+    "mtime": 1789054378.167577,
+    "seen": 1789169943.8623147,
+    "ast_hash": "8213e870ed8398833feebfb6d2e28c18",
+    "semantic_hash": "8213e870ed8398833feebfb6d2e28c18"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\windows-setup.md": {
+    "mtime": 1789054378.167577,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ca6ff9e83a0cd8bbacaa0d7cc3615c69",
+    "semantic_hash": "ca6ff9e83a0cd8bbacaa0d7cc3615c69"
+  },
+  "C:\\src\\sciatlas\\docs\\runbooks\\windows-transfer-handoff.md": {
+    "mtime": 1789054378.167577,
+    "seen": 1789169943.8623147,
+    "ast_hash": "793c15ec809767dd878f11c022c1eceb",
+    "semantic_hash": "793c15ec809767dd878f11c022c1eceb"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\plans\\2026-08-29-sbla-001-repository-foundation.md": {
+    "mtime": 1789054377.1745014,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ce8079ce5b3e168f7dea80f35ce31d1a",
+    "semantic_hash": "ce8079ce5b3e168f7dea80f35ce31d1a"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\plans\\2026-09-05-execution-quality-correction.md": {
+    "mtime": 1789054377.1745014,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ad8e8939196f93e64701b9d8b32157b9",
+    "semantic_hash": "ad8e8939196f93e64701b9d8b32157b9"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\plans\\2026-09-05-sbla-005-candidate-benchmark.md": {
+    "mtime": 1789054377.1745014,
+    "seen": 1789169943.8623147,
+    "ast_hash": "2edab00a18e8b203c746f769b7aef683",
+    "semantic_hash": "2edab00a18e8b203c746f769b7aef683"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\plans\\2026-09-09-sbla-006-asset-decision.md": {
+    "mtime": 1789054377.1745014,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f072e21b5f7d14d6f29f43e1ea115fad",
+    "semantic_hash": "f072e21b5f7d14d6f29f43e1ea115fad"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\plans\\2026-09-09-sbla-007-evidence-schemas.md": {
+    "mtime": 1789054378.169088,
+    "seen": 1789169943.8623147,
+    "ast_hash": "35cf695be26af5fbc76496fe1a79d387",
+    "semantic_hash": "35cf695be26af5fbc76496fe1a79d387"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\specs\\2026-08-29-science-based-lifting-atlas-design.md": {
+    "mtime": 1789054377.176011,
+    "seen": 1789169943.8623147,
+    "ast_hash": "ed877b19f23453877d112efe866b9b66",
+    "semantic_hash": "ed877b19f23453877d112efe866b9b66"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\specs\\2026-09-05-execution-quality-correction-design.md": {
+    "mtime": 1789054377.176011,
+    "seen": 1789169943.8623147,
+    "ast_hash": "cd1771cf2810d33a15a85e72d18fff9f",
+    "semantic_hash": "cd1771cf2810d33a15a85e72d18fff9f"
+  },
+  "C:\\src\\sciatlas\\docs\\superpowers\\specs\\2026-09-09-sbla-007-evidence-schemas-design.md": {
+    "mtime": 1789054378.169088,
+    "seen": 1789169943.8623147,
+    "ast_hash": "beede115099265aba527da49d12547d4",
+    "semantic_hash": "beede115099265aba527da49d12547d4"
+  },
+  "C:\\src\\sciatlas\\pnpm-workspace.yaml": {
+    "mtime": 1789054377.1790385,
+    "seen": 1789169943.8623147,
+    "ast_hash": "93834015539e5ef806161d09ba6ee901",
+    "semantic_hash": "93834015539e5ef806161d09ba6ee901"
+  },
+  "C:\\src\\sciatlas\\public\\health.txt": {
+    "mtime": 1789054377.1820676,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d3accd33402becc720abebee93ebe193",
+    "semantic_hash": "d3accd33402becc720abebee93ebe193"
+  },
+  "C:\\src\\sciatlas\\research\\extractions\\SBLA-002-readiness.md": {
+    "mtime": 1789054377.1841366,
+    "seen": 1789169943.8623147,
+    "ast_hash": "117f6cc5e75d5dd84d5d10fb0d5d63d8",
+    "semantic_hash": "117f6cc5e75d5dd84d5d10fb0d5d63d8"
+  },
+  "C:\\src\\sciatlas\\research\\packets\\SBLA-002-claude-research-readiness-handoff.md": {
+    "mtime": 1789054377.1846437,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f03f54a45622c5ff4feac20fb9c73e21",
+    "semantic_hash": "f03f54a45622c5ff4feac20fb9c73e21"
+  },
+  "C:\\src\\sciatlas\\research\\questions\\SBLA-002-readiness.md": {
+    "mtime": 1789054377.1846437,
+    "seen": 1789169943.8623147,
+    "ast_hash": "d752f7274f2330efa4f294900a7f4fcb",
+    "semantic_hash": "d752f7274f2330efa4f294900a7f4fcb"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\PLAN-001-acceptance.md": {
+    "mtime": 1789054377.1876667,
+    "seen": 1789169943.8623147,
+    "ast_hash": "1cb6e4a7f67a1aead031c0087167813c",
+    "semantic_hash": "1cb6e4a7f67a1aead031c0087167813c"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\PLAN-001-handoff.md": {
+    "mtime": 1789054377.1876667,
+    "seen": 1789169943.8623147,
+    "ast_hash": "c4a4b68f867d4ed0906bd44fd91e43ef",
+    "semantic_hash": "c4a4b68f867d4ed0906bd44fd91e43ef"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\PLAN-001-r1.md": {
+    "mtime": 1789054377.1891809,
+    "seen": 1789169943.8623147,
+    "ast_hash": "e3c5bff93c8436ad037889f70d8a10c4",
+    "semantic_hash": "e3c5bff93c8436ad037889f70d8a10c4"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\PLAN-001-r2.md": {
+    "mtime": 1789054377.1891809,
+    "seen": 1789169943.8623147,
+    "ast_hash": "282538b4cadb79e7ad7e74c07d947409",
+    "semantic_hash": "282538b4cadb79e7ad7e74c07d947409"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\PLAN-001-remediation-handoff.md": {
+    "mtime": 1789054377.1891809,
+    "seen": 1789169943.8623147,
+    "ast_hash": "55887e241cc742ef5b278a62ccbd59cb",
+    "semantic_hash": "55887e241cc742ef5b278a62ccbd59cb"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-001-handoff.md": {
+    "mtime": 1789054377.1891809,
+    "seen": 1789169943.8623147,
+    "ast_hash": "35bbba3b3c69a90af8815b1178743789",
+    "semantic_hash": "35bbba3b3c69a90af8815b1178743789"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-001-r1.md": {
+    "mtime": 1789054377.1906946,
+    "seen": 1789169943.8623147,
+    "ast_hash": "c19a6f95e9e62f8ce3a3cdc78e5e95fe",
+    "semantic_hash": "c19a6f95e9e62f8ce3a3cdc78e5e95fe"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-001-r2.md": {
+    "mtime": 1789054377.1906946,
+    "seen": 1789169943.8623147,
+    "ast_hash": "7896697633b9e923c6e2b9ddae44ec44",
+    "semantic_hash": "7896697633b9e923c6e2b9ddae44ec44"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-002-handoff.md": {
+    "mtime": 1789054377.1906946,
+    "seen": 1789169943.8623147,
+    "ast_hash": "5654fba42b314fa3e08478c082f2ea22",
+    "semantic_hash": "5654fba42b314fa3e08478c082f2ea22"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-002-r1.md": {
+    "mtime": 1789054377.1906946,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f53c1a03eb43d6bfdafa99d8c4b2caa6",
+    "semantic_hash": "f53c1a03eb43d6bfdafa99d8c4b2caa6"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-002-r2.md": {
+    "mtime": 1789054377.1922061,
+    "seen": 1789169943.8623147,
+    "ast_hash": "969777a9387879abbc0291135ce495cd",
+    "semantic_hash": "969777a9387879abbc0291135ce495cd"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-002-r3.md": {
+    "mtime": 1789054377.1922061,
+    "seen": 1789169943.8623147,
+    "ast_hash": "2f8413e446e0547eedbb213a55a71f89",
+    "semantic_hash": "2f8413e446e0547eedbb213a55a71f89"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-002-r4.md": {
+    "mtime": 1789054377.1922061,
+    "seen": 1789169943.8623147,
+    "ast_hash": "031a00e1ab47c74e1d8e5073bb12e5dc",
+    "semantic_hash": "031a00e1ab47c74e1d8e5073bb12e5dc"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-002-r5.md": {
+    "mtime": 1789054377.1922061,
+    "seen": 1789169943.8623147,
+    "ast_hash": "20be5337b8f2d2ed93c2f6f4c1df3c46",
+    "semantic_hash": "20be5337b8f2d2ed93c2f6f4c1df3c46"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-003-handoff.md": {
+    "mtime": 1789054377.1937182,
+    "seen": 1789169943.8623147,
+    "ast_hash": "451efa77856228c892c97b29b0422eb1",
+    "semantic_hash": "451efa77856228c892c97b29b0422eb1"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-003-internal-r1.md": {
+    "mtime": 1789054377.1937182,
+    "seen": 1789169943.8623147,
+    "ast_hash": "3e8483e05db178bbd55242d528307d14",
+    "semantic_hash": "3e8483e05db178bbd55242d528307d14"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-003-r1-addendum.md": {
+    "mtime": 1789054377.1937182,
+    "seen": 1789169943.8623147,
+    "ast_hash": "2c194be35594e5d63aba8cc1d74dca73",
+    "semantic_hash": "2c194be35594e5d63aba8cc1d74dca73"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-003-r1.md": {
+    "mtime": 1789054377.1952298,
+    "seen": 1789169943.8623147,
+    "ast_hash": "bf0f07f476594ca28e8e803cb7ac3fd2",
+    "semantic_hash": "bf0f07f476594ca28e8e803cb7ac3fd2"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-003-r2.md": {
+    "mtime": 1789054377.1952298,
+    "seen": 1789169943.8623147,
+    "ast_hash": "48397c917548d435fb227fefa84eaab2",
+    "semantic_hash": "48397c917548d435fb227fefa84eaab2"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-004-handoff.md": {
+    "mtime": 1789054377.1952298,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f1aee8fc1edb78e4b3672a00930315a3",
+    "semantic_hash": "f1aee8fc1edb78e4b3672a00930315a3"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-004-r1.md": {
+    "mtime": 1789054377.1967402,
+    "seen": 1789169943.8623147,
+    "ast_hash": "79adf848c5fd264cc7b5510124e92f90",
+    "semantic_hash": "79adf848c5fd264cc7b5510124e92f90"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-004-r2.md": {
+    "mtime": 1789054377.1967402,
+    "seen": 1789169943.8623147,
+    "ast_hash": "31fbc71844944eec7f2502cf67d2eb2f",
+    "semantic_hash": "31fbc71844944eec7f2502cf67d2eb2f"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-005-handoff.md": {
+    "mtime": 1789054377.1967402,
+    "seen": 1789169943.8623147,
+    "ast_hash": "dac5352891c076021e52b9e924c1ccbc",
+    "semantic_hash": "dac5352891c076021e52b9e924c1ccbc"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-005-r1.md": {
+    "mtime": 1789054377.198251,
+    "seen": 1789169943.8623147,
+    "ast_hash": "846d6ea6208b73362e6f0559cd9fc1d3",
+    "semantic_hash": "846d6ea6208b73362e6f0559cd9fc1d3"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-006-handoff.md": {
+    "mtime": 1789054377.198251,
+    "seen": 1789169943.8623147,
+    "ast_hash": "96aac2d34d71567e8836cac74eedbd30",
+    "semantic_hash": "96aac2d34d71567e8836cac74eedbd30"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-006-r1.md": {
+    "mtime": 1789054377.198251,
+    "seen": 1789169943.8623147,
+    "ast_hash": "4bfc49d2c3fe4151bfd8288484e01b94",
+    "semantic_hash": "4bfc49d2c3fe4151bfd8288484e01b94"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-006-r2.md": {
+    "mtime": 1789054377.198251,
+    "seen": 1789169943.8623147,
+    "ast_hash": "1618a90486d5c4497af1435757221558",
+    "semantic_hash": "1618a90486d5c4497af1435757221558"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-007-handoff.md": {
+    "mtime": 1789054378.1705961,
+    "seen": 1789169943.8623147,
+    "ast_hash": "7f85cc99a789b5241b39b957094880aa",
+    "semantic_hash": "7f85cc99a789b5241b39b957094880aa"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-007-r1.md": {
+    "mtime": 1789162214.12509,
+    "seen": 1789169943.8623147,
+    "ast_hash": "f313286c68248bd2367472d924bbd67b",
+    "semantic_hash": "f313286c68248bd2367472d924bbd67b"
+  },
+  "C:\\src\\sciatlas\\reviews\\releases\\SBLA-007-r2.md": {
+    "mtime": 1789166553.0041602,
+    "seen": 1789169943.8623147,
+    "ast_hash": "55a73a92ec963553f29421b2e6f64298",
+    "semantic_hash": "55a73a92ec963553f29421b2e6f64298"
+  },
+  "C:\\src\\sciatlas\\assets\\derived\\bodyparts3d\\sbla005-poster.webp": {
+    "mtime": 1789054377.1260874,
+    "seen": 1789169943.8623147,
+    "ast_hash": "00567463bdd9a0c014253875b881f429",
+    "semantic_hash": "00567463bdd9a0c014253875b881f429"
+  }
+}
