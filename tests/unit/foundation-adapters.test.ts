@@ -198,6 +198,39 @@ describe('foundation adapters', () => {
     }
   });
 
+  it('allows append-only Markdown evidence reviews beside structured review records', async () => {
+    const root = await createAdapterFixture();
+    try {
+      await writeFile(
+        path.join(root, 'reviews/evidence/SBLA-008-r1.md'),
+        '# Evidence review\n\nVerdict: FAIL.\n',
+      );
+
+      await expect(
+        runAdapterAt(root, 'scripts/content/validate.mjs'),
+      ).resolves.toMatchObject({
+        stdout: expect.stringContaining(
+          'Content validation passed: 0 records.',
+        ),
+      });
+
+      await writeFile(
+        path.join(root, 'reviews/evidence/notes.md'),
+        '# Unstructured note\n',
+      );
+      await expect(
+        runAdapterAt(root, 'scripts/content/validate.mjs'),
+      ).rejects.toMatchObject({
+        code: 1,
+        stderr: expect.stringContaining(
+          '[RECORD_EXTENSION_UNSUPPORTED] reviews/evidence/notes.md',
+        ),
+      });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
   it('reports malformed syntax and unsupported extensions with remediation', async () => {
     const root = await createAdapterFixture();
     try {

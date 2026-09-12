@@ -33,7 +33,9 @@ function isIgnored(relativePath) {
     fileName.startsWith('.') ||
     fileName.toLowerCase() === 'readme.md' ||
     (relativePath.startsWith('research/packets/') &&
-      fileName.endsWith('-handoff.md'))
+      fileName.endsWith('-handoff.md')) ||
+    (relativePath.startsWith('reviews/evidence/') &&
+      /-r[1-9]\d*\.md$/i.test(fileName))
   );
 }
 
