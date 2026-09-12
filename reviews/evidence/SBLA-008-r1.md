@@ -152,7 +152,7 @@ about anatomy or training; they are statements about query languages and control
    `SCTID:181624003` and `UMLS:C0585574`. Both identifier anchors in the questions file §2 resolve, and
    the FMA cross-reference is real.
 5. **The publication-type finding, which was my strongest falsification target.** `Retraction of
-   Publication` is a genuine NLM publication characteristic, so §3.3's claim looked like a likely
+Publication` is a genuine NLM publication characteristic, so §3.3's claim looked like a likely
    vocabulary error. It is not. Against E-utilities `esearch`:
    - `"Retraction of Publication"[pt]` returns count **0** with the term in `quotedphrasesnotfound`.
    - `"Retraction of Publication"[Publication Type]` and `"Retraction of Publication"[ptyp]` also return
@@ -199,7 +199,7 @@ about anatomy or training; they are statements about query languages and control
 
 13. **SE-U1 is accurate.** `src/lib/content/schemas.ts:301-311` defines `sourceSchema.type` with no
     `preprint` member, and the `publication.status` enum is `current | corrected |
-    expression-of-concern | retracted | superseded`, again with no preprint state. The candidate's
+expression-of-concern | retracted | superseded`, again with no preprint state. The candidate's
     observation and its routing ("Reviewer, to route to Codex if it matters") are both correct.
 14. **The `searches[]` and `exclusions[]` claims are accurate, and the gap is real.**
     `src/lib/content/schemas.ts:419-444` defines `evidencePacketSchema` as `.strict()` with
