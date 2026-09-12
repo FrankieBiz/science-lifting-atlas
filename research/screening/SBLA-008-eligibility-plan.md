@@ -378,13 +378,28 @@ the review look more complete than it is. The count of `awaiting-full-text`
 records is reported alongside the inclusion count, and a large count is itself a
 reason to lower certainty.
 
+**Where the state lives.** In the screening log it is its own state. In the
+evidence packet it has no home at all, because `evidencePacketSchema` offers only
+`includedSourceIds` and `exclusions[]`. §6.4 sets out the full mapping and the
+unresolved item it produces (**SE-U2**); the short version is that an
+`awaiting-full-text` record is written into neither packet array, and its count is
+carried in prose instead.
+
 ---
 
 ## 5. Exclusion reason codes
 
-Exactly one **primary** code per excluded record. Codes are stable strings so a
-later run can be compared with this one. The code plus its plain-language text is
-what goes into `evidencePacketSchema.exclusions[].reason`.
+Exactly one **primary** code per excluded record, and that rule covers duplicates
+as well: a duplicate is recorded in `exclusions[]` under `E-REC-1` and under
+nothing else, never under a second substantive code. §6.4 gives the full mapping
+from the four rule-3 states onto the packet and states plainly where the
+arithmetic does and does not close; R1 finding M-2 was right that the earlier
+draft left this to the screener to guess.
+
+Codes are stable strings so a later run can be compared with this one. The code
+plus its plain-language text is what goes into
+`evidencePacketSchema.exclusions[].reason`. There are **28** codes across the
+five families below, and the numbering has one deliberate gap, explained at §5.3.
 
 ### 5.1 Population
 
@@ -415,6 +430,16 @@ what goes into `evidencePacketSchema.exclusions[].reason`.
 | `E-OUT-1` | No outcome in tiers 1–4 and no harms outcome                            |
 | `E-OUT-2` | Outcome is not pectoralis-specific and cannot be resolved to the muscle |
 | `E-OUT-5` | Tier-5 outcomes only (§2.2)                                             |
+
+**`E-OUT-3` and `E-OUT-4` are reserved and will never be issued.** After
+`E-OUT-2`, an outcome code is numbered for the outcome tier it excludes on, and
+tiers 3 and 4 are eligible: `E-OUT-1` excludes a record only when it carries no
+outcome in tiers 1–4 and no harms outcome, and `E-OUT-5` covers the one tier that
+is context-only. There is therefore no tier-3 or tier-4 exclusion to name, and the
+two numbers stay unused rather than being reassigned to something else. This is
+stated because R1 finding M-1 was right that the gap was unexplained; under EA3 a
+silent gap invites a later screener to reuse `E-OUT-3` for an unrelated reason and
+make two runs incomparable.
 
 ### 5.4 Design and method
 
@@ -500,6 +525,51 @@ So that SBLA-009's log is auditable and reconcilable:
 | Screener and date     | Both screeners where double-screened                                                           |
 | Disagreement          | Whether there was one, and how it resolved (§7)                                                |
 
+### 6.4 How the four states map onto the evidence packet
+
+Rule 3 requires every retrieved record to end in exactly one of four states —
+duplicate, excluded with a code, `awaiting-full-text`, or included — and
+requires the arithmetic to close. `evidencePacketSchema` in
+`src/lib/content/schemas.ts` offers two per-record arrays: `includedSourceIds`,
+and a `.strict()` `exclusions[]` of `{sourceId, reason}`. Four states, two
+buckets, and no field for a retrieved total. R1 findings I-2 and M-2 are both
+about that mismatch, and the plan did not previously say how it resolves. It
+says so now.
+
+| Plan state           | Where it goes in the packet                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------------- |
+| Included             | `includedSourceIds`                                                                                   |
+| Excluded with a code | `exclusions[]`, `reason` = the code plus its plain-language text (§5)                                 |
+| Duplicate            | `exclusions[]`, `reason` = `E-REC-1` plus its text — **yes, duplicates go in `exclusions[]`**         |
+| `awaiting-full-text` | **Neither array.** Reported by count in `synthesis`; the per-record detail stays in the screening log |
+
+**Duplicates are recorded in `exclusions[]` (M-2).** This is a decision, not a
+reading of the schema, and it is made this way for one reason: `exclusions[]` is
+the only per-record structure the packet has, so a duplicate left out of it
+disappears from the packet entirely and the retrieved-versus-accounted arithmetic
+stops closing. `E-REC-1` already says in its own text that it is "deduplication,
+not an exclusion of a study", so the true state stays recoverable from the packet
+by reading the reason string. A screener must therefore read "exactly one
+**primary** code per excluded record" (§5) as covering duplicates too, and must
+not also record the duplicate under a substantive code.
+
+**`awaiting-full-text` is recorded in neither array, and that is the gap (I-2).**
+Writing it to `exclusions[]` would contradict §4.5, which states the record is
+"**not** an exclusion and **not** an inclusion", and would make the review look
+more complete than it is — the exact failure §4.5 exists to prevent. Writing it to
+`includedSourceIds` would assert an inclusion that was never made. So the packet
+can carry the count only in prose. The consequence is stated rather than smoothed
+over: the rule 3 arithmetic closes in the **screening log**, which is the
+executor's own artifact (§6.3); it does **not** close inside the packet, and it is
+not machine-checkable there. `synthesis` and `decisionLog[].decision` are free
+text and can narrate the four numbers, but a narrated number is not a validated
+one.
+
+**This is not repairable by this role.** Schemas are outside the Claude Research
+write boundary (CLAUDE.md). It is recorded as **SE-U2** in §8 and routed to Codex,
+with the two paths the owner must choose between stated there. The same gap on the
+search-record side is **SU8** in the search strategy §10.
+
 ---
 
 ## 7. Conflict resolution
@@ -539,14 +609,15 @@ that reason.
 
 ## 8. Assumptions and unresolved items in this file
 
-| ID    | Type       | Statement                                                                                                                                                                                                                                      | Who resolves it                           |
-| ----- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| EA1   | Assumption | The four-way outcome of every record (duplicate / excluded / `awaiting-full-text` / included) is exhaustive. If SBLA-009 finds a record that fits none, that is a defect in this plan and an amendment is required                             | SBLA-009 executor, by amendment           |
-| EA2   | Assumption | 20% stage-1 and 100% stage-3 double-screening is a proportionate substitute for two independent screeners. It is weaker than two screeners and is recorded as a limitation, not presented as equivalent                                        | Reviewer                                  |
-| EA3   | Assumption | Reason codes are stable identifiers. New codes are added by amendment; existing codes are never redefined, since redefinition would make two runs incomparable                                                                                 | SBLA-009 executor                         |
-| EA4   | Assumption | The ≥6-week minimum for tier 1 is a defensible floor for detecting training-induced size change with the stated methods. It is a **project convention set here**, not a finding extracted from a source, and the reviewer may set it elsewhere | Reviewer                                  |
-| EU1   | Unresolved | **U3** — whether within-participant contralateral-limb designs enter the primary tier-1 synthesis (§3.4)                                                                                                                                       | Reviewer or owner, **before screening**   |
-| EU2   | Unresolved | **U2** — whether Exercise Y may be widened if index-Y evidence is empty. §2.3 and rule 10 in §6.1 both depend on the answer                                                                                                                    | Reviewer, **before searching**            |
-| EU3   | Unresolved | **U4** — whether regional (clavicular versus sternocostal) hypertrophy is part of the primary tier-1 estimand or a separate secondary question                                                                                                 | Reviewer                                  |
-| EU4   | Unresolved | **U5** — whether non-English full texts will be translated (§4.1)                                                                                                                                                                              | Owner, on cost grounds                    |
-| SE-U1 | Unresolved | `sourceSchema` has no representation for "preprint" as a type or a publication status (§4.2). Not actionable by this role — schemas are outside its write boundary                                                                             | Reviewer, to route to Codex if it matters |
+| ID    | Type       | Statement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Who resolves it                                                                      |
+| ----- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| EA1   | Assumption | The four-way outcome of every record (duplicate / excluded / `awaiting-full-text` / included) is exhaustive. If SBLA-009 finds a record that fits none, that is a defect in this plan and an amendment is required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | SBLA-009 executor, by amendment                                                      |
+| EA2   | Assumption | 20% stage-1 and 100% stage-3 double-screening is a proportionate substitute for two independent screeners. It is weaker than two screeners and is recorded as a limitation, not presented as equivalent                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Reviewer                                                                             |
+| EA3   | Assumption | Reason codes are stable identifiers. New codes are added by amendment; existing codes are never redefined, since redefinition would make two runs incomparable                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | SBLA-009 executor                                                                    |
+| EA4   | Assumption | The ≥6-week minimum for tier 1 is a defensible floor for detecting training-induced size change with the stated methods. It is a **project convention set here**, not a finding extracted from a source, and the reviewer may set it elsewhere                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Reviewer                                                                             |
+| EU1   | Unresolved | **U3** — whether within-participant contralateral-limb designs enter the primary tier-1 synthesis (§3.4)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Reviewer or owner, **before screening**                                              |
+| EU2   | Unresolved | **U2** — whether Exercise Y may be widened if index-Y evidence is empty. §2.3 and rule 10 in §6.1 both depend on the answer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Reviewer, **before searching**                                                       |
+| EU3   | Unresolved | **U4** — whether regional (clavicular versus sternocostal) hypertrophy is part of the primary tier-1 estimand or a separate secondary question                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Reviewer                                                                             |
+| EU4   | Unresolved | **U5** — whether non-English full texts will be translated (§4.1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Owner, on cost grounds                                                               |
+| SE-U1 | Unresolved | `sourceSchema` has no representation for "preprint" as a type or a publication status (§4.2). Not actionable by this role — schemas are outside its write boundary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Reviewer, to route to Codex if it matters                                            |
+| SE-U2 | Unresolved | `evidencePacketSchema` cannot represent the four-way outcome that rule 3 and EA1 make load-bearing. The `.strict()` `searches[]` object holds only `database`, `query`, `searchedAt`, `resultCount`, and the only per-record arrays are `includedSourceIds` and `exclusions[]`, so `awaiting-full-text` has no home, there is no retrieved total, and the PRISMA-style arithmetic is narratable but not validatable (§6.4). The search-record half of the same gap is **SU8** in the search strategy §10. **Two paths, and the owner picks one:** (a) extend `evidencePacketSchema` to carry a retrieved count, an `awaitingFullText` array, and the per-search fields §9.8 step 2 requires — a Codex task, and a schema change to an artifact accepted at SBLA-007; or (b) amend this plan and the search strategy so the recorded states map onto what the schema already accepts, accepting that the flow arithmetic is then only narrated. Not actionable by this role — schemas are outside its write boundary | **Codex**, on an owner decision between (a) and (b), before SBLA-009 writes a packet |

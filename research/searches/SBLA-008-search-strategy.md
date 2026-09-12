@@ -10,17 +10,28 @@
 
 ## 0. Status boundary — read this before quoting anything from this file
 
-**No evidence search has been run.** No records have been retrieved, screened,
-extracted, or cited. No result set exists. This file is a _plan_, plus a
-_verification log_ of the query languages the plan uses.
+**No records have been retrieved, screened, extracted, or cited, and no result
+set exists.** This file is a _plan_, plus a _verification log_ of the query
+languages the plan uses.
 
-Three categories of statement appear below and are labelled throughout:
+One qualification belongs here rather than buried further down. On 2026-09-11
+the E1 composite string was submitted to Europe PMC **without** a zero-yield
+anchor and returned `hitCount` 334 (§4.2). That is a route-level composite
+search on one of the retrieval routes listed in §1, not a single-term index
+probe, so it is wrong to describe this file as one in which no question-level
+query has been run. A question-level yield figure for the Europe PMC route
+exists and was visible while the rest of this file was written. No identifier
+from it was collected, opened, screened, or cited, and no other route produced
+one. It is recorded in §4.2, carried into the SBLA-009 search record by §5.0,
+and its effect on unresolved item **U2** is stated in §4.3.
+Four categories of statement appear below and are labelled throughout:
 
-| Label                      | Meaning                                                                                                                                                                                                                                                                                                                       |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Plan**                   | Proposed methodology for SBLA-009. Not executed.                                                                                                                                                                                                                                                                              |
-| **Verified platform fact** | Something I observed by calling an official endpoint or reading an official documentation page on 2026-09-11, with the URL and the observed response recorded.                                                                                                                                                                |
-| **Index diagnostic**       | A bounded count returned by a database's own index for a _single search term_, run only to size the strategy and design its fallbacks (§4). These are counts of how many records use a phrase. They are **not** evidence, **not** a search result set, and no identifier from them was collected, opened, screened, or cited. |
+| Label                           | Meaning                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Plan**                        | Proposed methodology for SBLA-009. Not executed.                                                                                                                                                                                                                                                                                         |
+| **Verified platform fact**      | Something I observed by calling an official endpoint or reading an official documentation page on 2026-09-11, with the URL and the observed response recorded.                                                                                                                                                                           |
+| **Index diagnostic**            | A bounded count returned by a database's own index for a _single search term_, run only to size the strategy and design its fallbacks (§4.1). These are counts of how many records use a phrase. They are **not** evidence, **not** a search result set, and no identifier from them was collected, opened, screened, or cited.          |
+| **Route-level composite count** | A `hitCount` or `count` returned for a full composite question string on one route. Exactly one exists in this file — Europe PMC E1, 2026-09-11, `hitCount` 334 (§4.2). It is a search result **count**, so it is not an index diagnostic and is not labelled as one. No identifier behind it was collected, opened, screened, or cited. |
 
 Nothing here is a scientific conclusion about anatomy, exercise, or training, and
 model memory is not used as evidence anywhere in this file (CLAUDE.md; §13.8).
@@ -53,26 +64,71 @@ model memory is not used as evidence anywhere in this file (CLAUDE.md; §13.8).
 Every row was executed or fetched by me on **2026-09-11**. "Observed" records what
 came back, so a reviewer can re-run the same call and compare.
 
-| #   | Source (official)                       | URL                                                                              | What I verified                                                                                                 | Observed                                                                                                                                                             |
-| --- | --------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | PubMed User Guide (NLM)                 | `https://pubmed.ncbi.nlm.nih.gov/help/`                                          | Field tags, Boolean rules, truncation rules, proximity syntax, date syntax, subsets, phrase-index behaviour     | HTTP 200; page states "Last update: September 1, 2026"                                                                                                               |
-| 2   | NLM, "Use of MeSH in Online Retrieval"  | `https://www.nlm.nih.gov/mesh/intro_retrieval.html`                              | The `[mh:noexp]` tag                                                                                            | HTTP 200; page Last Reviewed 9 July 2025; states that to search the broader subject without the indented subjects, the search is qualified with the tag `[mh:noexp]` |
-| 3   | NLM MeSH lookup API                     | `https://id.nlm.nih.gov/mesh/lookup/descriptor?label=<label>&match=exact`        | Which candidate terms are real descriptors                                                                      | See §3.1                                                                                                                                                             |
-| 4   | NLM MeSH SPARQL endpoint                | `https://id.nlm.nih.gov/mesh/sparql`                                             | Whether D010369 has narrower descriptors                                                                        | Only D010369 occupies tree `A02.633.567.775`; no children                                                                                                            |
-| 5   | NCBI E-utilities `esearch`              | `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi`                     | That each final query parses; field-tag validity; `querytranslation` availability                               | All six strings: no `ERROR`, empty `fieldsnotfound`, empty `quotedphrasesnotfound`                                                                                   |
-| 6   | Cochrane Library Search Manager help    | `https://www.cochranelibrary.com/search-manager-help`                            | `[mh ...]` / `[mh ^...]`, `NEAR`, `NEAR/x`, `NEXT`, wildcards, field labels, `:pt` values, MeSH-coverage caveat | HTTP 200 via `curl` with a browser user agent; HTTP 403 to a plain fetch                                                                                             |
-| 7   | Europe PMC RESTful Web Service          | `https://europepmc.org/RestfulWebService`                                        | Base URL, parameters, field names                                                                               | HTTP 200. `https://europepmc.org/searchsyntax` returns HTTP 404 and is **not** a current URL                                                                         |
-| 8   | Europe PMC search endpoint              | `https://www.ebi.ac.uk/europepmc/webservices/rest/search`                        | That `MESH:`, `TITLE_ABS:`, `KW:`, `LANG:`, `SRC:`, `FIRST_PDATE:[a TO b]` parse                                | Query echoed back in `request.queryString`; `version 6.9`                                                                                                            |
-| 9   | ClinicalTrials.gov API v2               | `https://clinicaltrials.gov/api/v2/version`, `/studies/search-areas`, `/studies` | API version; valid area names; that `AREA[...]` Essie expressions parse                                         | `apiVersion 2.0.5`, `dataTimestamp 2026-09-11T09:00:04`; a deliberately invalid area returned HTTP 400 `Unknown area name`                                           |
-| 10  | Crossref REST API                       | `https://api.crossref.org/works`                                                 | `query.bibliographic`, `filter=update-type:retraction`, `filter=from-update-date:`                              | HTTP 200 for each                                                                                                                                                    |
-| 11  | OpenAlex API                            | `https://api.openalex.org/works`                                                 | `filter=default.search:`, `cites:`, `cited_by:`, `referenced_works:`, `from_publication_date:`, `type:`         | HTTP 200 for each; direction semantics resolved in §3.4                                                                                                              |
-| 12  | EMBL-EBI OLS4                           | `https://www.ebi.ac.uk/ols4/` (UBERON)                                           | `UBERON:0002381` label, synonyms, cross-references                                                              | Label "pectoralis major"; cross-references include `FMA:9627`, `NCIT:C33284`, `MA:0002354`, `SCTID:181624003`, `UMLS:C0585574`; UBERON release `2026-06-19`          |
-| 13  | bioRxiv / medRxiv API                   | `https://api.biorxiv.org/details/biorxiv/<doi>`                                  | Endpoint shape                                                                                                  | HTTP 200; returns `{"messages":[{"status":"no posts found"}],"collection":[]}` for a non-existent DOI                                                                |
-| 14  | OSF API (SportRxiv legacy archive)      | `https://api.osf.io/v2/preprints/?filter[provider]=sportrxiv`                    | Provider filter; archive extent                                                                                 | HTTP 200; total 377; newest `date_published` 2021-08-24                                                                                                              |
-| 15  | SportRxiv current server                | `https://sportrxiv.org/index.php/server/search/search?query=<terms>`             | That the current server is a PKP/OJS preprint server with an HTML search route                                  | HTTP 200; `https://sportrxiv.org/` redirects to `https://sportrxiv.org/index.php/server`                                                                             |
-| 16  | PROSPERO                                | `https://www.crd.york.ac.uk/prospero/`                                           | Reachability                                                                                                    | HTTP 200 but a JavaScript application shell; **no query syntax could be verified and no public API was found**                                                       |
-| 17  | Crossref Retraction Watch labs endpoint | `https://api.labs.crossref.org/data/retractionwatch`                             | Availability                                                                                                    | **HTTP 502, then 504.** Unavailable on 2026-09-11                                                                                                                    |
-| 18  | FIPAT / Terminologia Anatomica          | `https://fipat.library.dal.ca/ta2/`                                              | Reachability                                                                                                    | **Connection failure (`curl` exit 000).** Unreachable on 2026-09-11                                                                                                  |
+| #   | Source (official)                       | URL                                                                              | What I verified                                                                                                                              | Observed                                                                                                                                                                                                                                                                                                                                                                                      |
+| --- | --------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | PubMed User Guide (NLM)                 | `https://pubmed.ncbi.nlm.nih.gov/help/`                                          | Field tags, Boolean rules, truncation rules, proximity syntax, date syntax, subsets, phrase-index behaviour                                  | HTTP 200; page states "Last update: September 1, 2026"                                                                                                                                                                                                                                                                                                                                        |
+| 2   | NLM, "Use of MeSH in Online Retrieval"  | `https://www.nlm.nih.gov/mesh/intro_retrieval.html`                              | The `[mh:noexp]` tag                                                                                                                         | HTTP 200; page Last Reviewed 9 July 2025; states that to search the broader subject without the indented subjects, the search is qualified with the tag `[mh:noexp]`                                                                                                                                                                                                                          |
+| 3   | NLM MeSH lookup API                     | `https://id.nlm.nih.gov/mesh/lookup/descriptor?label=<label>&match=exact`        | Which candidate terms are real descriptors                                                                                                   | See §3.1                                                                                                                                                                                                                                                                                                                                                                                      |
+| 4   | NLM MeSH SPARQL endpoint                | `https://id.nlm.nih.gov/mesh/sparql`                                             | Whether D010369 has narrower descriptors                                                                                                     | Only D010369 occupies tree `A02.633.567.775`; no children                                                                                                                                                                                                                                                                                                                                     |
+| 5   | NCBI E-utilities `esearch`              | `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi`                     | That each final query parses; field-tag validity; `querytranslation` availability                                                            | All six strings: no `ERROR`, empty `fieldsnotfound`, empty `quotedphrasesnotfound`                                                                                                                                                                                                                                                                                                            |
+| 6   | Cochrane Library Search Manager help    | `https://www.cochranelibrary.com/search-manager-help`                            | **Attempted**, not verified: `[mh ...]` / `[mh ^...]`, `NEAR`, `NEAR/x`, `NEXT`, wildcards, field labels, `:pt` values, MeSH-coverage caveat | HTTP 403 to a plain `curl` fetch on 2026-09-11; HTTP 200 when that same single request was re-sent with a browser `User-Agent`; HTTP 419 to a plain fetch on 2026-09-12, to me and to the R1 reviewer independently. The author's 403 and the reviewer's 419 **diverge**, so the block response is not stable. **Recorded as "Syntax unverified at scope time" — see the note below and SU9** |
+| 7   | Europe PMC RESTful Web Service          | `https://europepmc.org/RestfulWebService`                                        | Base URL, parameters, field names                                                                                                            | HTTP 200. `https://europepmc.org/searchsyntax` returns HTTP 404 and is **not** a current URL                                                                                                                                                                                                                                                                                                  |
+| 8   | Europe PMC search endpoint              | `https://www.ebi.ac.uk/europepmc/webservices/rest/search`                        | That `MESH:`, `TITLE_ABS:`, `KW:`, `LANG:`, `SRC:`, `FIRST_PDATE:[a TO b]` parse                                                             | Query echoed back in `request.queryString`; `version 6.9`                                                                                                                                                                                                                                                                                                                                     |
+| 9   | ClinicalTrials.gov API v2               | `https://clinicaltrials.gov/api/v2/version`, `/studies/search-areas`, `/studies` | API version; valid area names; that `AREA[...]` Essie expressions parse                                                                      | `apiVersion 2.0.5`, `dataTimestamp 2026-09-11T09:00:04`; a deliberately invalid area returned HTTP 400 `Unknown area name`                                                                                                                                                                                                                                                                    |
+| 10  | Crossref REST API                       | `https://api.crossref.org/works`                                                 | `query.bibliographic`, `filter=update-type:retraction`, `filter=from-update-date:`                                                           | HTTP 200 for each                                                                                                                                                                                                                                                                                                                                                                             |
+| 11  | OpenAlex API                            | `https://api.openalex.org/works`                                                 | `filter=default.search:`, `cites:`, `cited_by:`, `referenced_works:`, `from_publication_date:`, `type:`                                      | HTTP 200 for each; direction semantics resolved in §3.4                                                                                                                                                                                                                                                                                                                                       |
+| 12  | EMBL-EBI OLS4                           | `https://www.ebi.ac.uk/ols4/` (UBERON)                                           | `UBERON:0002381` label, synonyms, cross-references                                                                                           | Label "pectoralis major"; cross-references include `FMA:9627`, `NCIT:C33284`, `MA:0002354`, `SCTID:181624003`, `UMLS:C0585574`; UBERON release `2026-06-19`                                                                                                                                                                                                                                   |
+| 13  | bioRxiv / medRxiv API                   | `https://api.biorxiv.org/details/biorxiv/<doi>`                                  | Endpoint shape                                                                                                                               | HTTP 200; returns `{"messages":[{"status":"no posts found"}],"collection":[]}` for a non-existent DOI                                                                                                                                                                                                                                                                                         |
+| 14  | OSF API (SportRxiv legacy archive)      | `https://api.osf.io/v2/preprints/?filter[provider]=sportrxiv`                    | Provider filter; archive extent                                                                                                              | HTTP 200; total 377; newest `date_published` 2021-08-24                                                                                                                                                                                                                                                                                                                                       |
+| 15  | SportRxiv current server                | `https://sportrxiv.org/index.php/server/search/search?query=<terms>`             | That the current server is a PKP/OJS preprint server with an HTML search route                                                               | HTTP 200; `https://sportrxiv.org/` redirects to `https://sportrxiv.org/index.php/server`                                                                                                                                                                                                                                                                                                      |
+| 16  | PROSPERO                                | `https://www.crd.york.ac.uk/prospero/`                                           | Reachability                                                                                                                                 | HTTP 200 but a JavaScript application shell; **no query syntax could be verified and no public API was found**                                                                                                                                                                                                                                                                                |
+| 17  | Crossref Retraction Watch labs endpoint | `https://api.labs.crossref.org/data/retractionwatch`                             | Availability                                                                                                                                 | **HTTP 502, then 504.** Unavailable on 2026-09-11                                                                                                                                                                                                                                                                                                                                             |
+| 18  | FIPAT / Terminologia Anatomica          | `https://fipat.library.dal.ca/ta2/`                                              | Reachability                                                                                                                                 | **Connection failure (`curl` exit 000).** Unreachable on 2026-09-11                                                                                                                                                                                                                                                                                                                           |
+
+**Row 6 is the one row in this log a reader cannot reproduce (M-5).** The exact
+method matters, so it is recorded rather than summarised. On 2026-09-11 I sent a
+single `GET` for the one help-page URL above using `curl`. With `curl`'s own
+default `User-Agent` the response was HTTP 403 with an empty body. I re-sent the
+same single request with a browser `User-Agent` header substituted, received HTTP
+200, read the page once, and made no further request to that domain — no crawl, no
+link following, no search, and no retrieval of any record. On 2026-09-12, during
+R1 remediation, a plain `curl` fetch of the same URL returned **HTTP 419** twice,
+with `Content-Length: 0`. The R1 reviewer's independent plain fetch on that date
+also returned 419 (`reviews/evidence/SBLA-008-r1.md`, finding M-5). So the block
+response is not stable even across two days for the same class of client, and no
+reader can be told "re-run this call and compare" — the standard every other row
+in this log meets.
+
+**Why that is compatible with §9.6, and where the line actually falls.** §9.6
+forbids scraping where an official route exists. What it protects is the retrieval
+of _content_ — records, results, data — by a route the publisher did not intend.
+Reading one public documentation page once, to learn the grammar of a search
+interface, retrieves no record and competes with no official route, and no API
+serves that page. The R1 reviewer reached the same conclusion and still raised it,
+correctly: a project with rules this strict should draw the distinction in writing
+rather than leave it to be inferred. It is drawn here. Substituting a `User-Agent`
+is nonetheless a workaround of the platform's own client filter, and this file
+does not pretend otherwise. The standing rule for SBLA-009 is therefore narrower
+than what was done at scope time: **do not substitute a user agent to reach any
+Cochrane URL.** If the help page is needed again, open it in a browser or read it
+from inside an authenticated Search Manager session, and record which. C1 was
+always specified as a manual session, so no part of the route depends on scripted
+access.
+
+**What that costs the C1 claims.** Every syntax rule in §6.2, the `:pt` value list
+that carries the CENTRAL half of D4 (§3.3), and the MeSH-coverage caveat in §3.5
+rest on that single unreproducible reading. They are therefore **downgraded to
+"Syntax unverified at scope time"** — the same status this file already carries for
+PROSPERO (SU1) and SportRxiv (SU2), and the status R1 finding M-5 asked for.
+
+That label is exact in both directions. The page was opened and read, so the claims
+are not inventions and are not withdrawn. But a reading no reader can repeat is not
+verification, and this file does not present it as one: **no independent
+confirmation of the Cochrane Search Manager grammar exists at scope time, and this
+file claims none.** Rows 1–5 and 7–18 are verified in the sense this log's header
+claims — a reviewer can re-run the call and compare. Row 6 is not. C1 is therefore
+planned against unconfirmed syntax until SBLA-009 re-verifies it from inside the
+Search Manager. Recorded as **SU9** in §10.
 
 **Not re-fetched this session.** The methodological references in §9.2 and §20 —
 GRADE Book, Cochrane Handbook, PRISMA 2020, CONSORT 2025 — are used here only as
@@ -166,9 +222,16 @@ are not affected.
 | `"Preprint"[pt]`                                                                                                 | Valid; 67,320                                                           |
 | `"Randomized Controlled Trial"[pt]`, `"Comparative Study"[pt]`, `"Systematic Review"[pt]`, `"Meta-Analysis"[pt]` | Valid (parsed with empty `fieldsnotfound`)                              |
 
-`Retraction of Publication` **is** a valid `:pt` value in Cochrane's Search
-Manager (row 6), so this is a platform difference, not a vocabulary error. S6
-drops it for PubMed and keeps it for CENTRAL.
+`Retraction of Publication` was **read as** a valid `:pt` value in Cochrane's
+Search Manager (row 6), which would make this a platform difference rather than a
+vocabulary error. S6 drops it for PubMed and keeps it for CENTRAL. The two halves
+do not carry equal weight, and only one of them is verified. The PubMed half is
+reproducible from the E-utilities call recorded above. **The CENTRAL half is
+unverified:** it rests on row 6 alone, carries **SU9** and the status "Syntax
+unverified at scope time", and is not independently confirmed (M-5). It is recorded
+here as a planning assumption, not as a fact about Cochrane's controlled
+vocabulary. SBLA-009 must confirm the value inside the Search Manager before
+relying on `#9`, and if it cannot, drop `#9` rather than run it blind.
 
 ### 3.4 OpenAlex citation-direction semantics, resolved empirically
 
@@ -189,10 +252,14 @@ reference list.
 
 ### 3.5 Cochrane CENTRAL MeSH coverage caveat
 
-The Search Manager help states that only records from PubMed, MEDLINE and
-ClinicalTrials.gov have MeSH terms assigned. A CENTRAL strategy that leans on
-`[mh ...]` therefore under-retrieves exactly the hand-searched and registry
-records CENTRAL exists to add. C1 below puts the weight on free text.
+The Search Manager help was **read as** stating that only records from PubMed,
+MEDLINE and ClinicalTrials.gov have MeSH terms assigned. If that is right, a
+CENTRAL strategy that leans on `[mh ...]` under-retrieves exactly the hand-searched
+and registry records CENTRAL exists to add. C1 below puts the weight on free text.
+This is also a row 6 claim: it is **unverified at scope time**, carries **SU9**, and
+is not independently confirmed. Unlike the `:pt` value in D4 it does not gate
+execution — the design consequence is conservative either way, because leaning on
+free text costs nothing if the caveat turns out to be wrong.
 
 ### 3.6 SportRxiv moved; the OSF archive is frozen
 
@@ -204,12 +271,15 @@ silently miss five years of preprints.
 
 ---
 
-## 4. Index diagnostics
+## 4. Index diagnostics and one route-level composite count
+
+### 4.1 Single-term index diagnostics
 
 **These are not evidence and not a search.** Each is a single-term count returned
 by a database's own index, run on 2026-09-11 to size the strategy and to write
-honest fallback rules. No identifier was collected, opened, screened, or cited,
-and no composite question query was executed.
+honest fallback rules. No identifier was collected, opened, screened, or cited.
+Every row in the table below is a single term; the one composite count this
+session produced is **not** in this table and is recorded separately in §4.2.
 
 | Term                            | PubMed count |
 | ------------------------------- | -----------: |
@@ -226,20 +296,80 @@ and no composite question query was executed.
 | `"butterfly exercise"[tiab:~0]` |            0 |
 | `"pectoral deck"[tiab:~0]`      |            0 |
 
-Europe PMC, composite E1 string below, `hitCount` 334.
+**Two further counts, cited from the R1 review rather than re-observed here.**
+The R1 reviewer ran the same kind of single-term probe on 2026-09-12 and
+reported `"pectoral fly"[tiab:~0]` = 3 and `"pec fly"[tiab:~0]` = 3; that the
+twenty-two fly, deck and crossover terms in S2 returned 72; and that adding the
+four `pectoral fly` / `pec fly` / `pectoral flye` / `pec flye` forms surfaces
+five PubMed records no term in the pre-remediation plan matched, two of which
+also fall outside S2's broader exercise block
+(`reviews/evidence/SBLA-008-r1.md`, finding M-3, lines 519–532). Those are the
+counts that R1 finding M-3 rests on, and they are what the term additions in
+§5.2, §5.3 and §6.1 answer. They are recorded as the reviewer observed them and
+were not re-run by this role.
 
-**Finding that the reviewer must act on.** The index footprint of the _fly_
-family in PubMed titles and abstracts is on the order of a few dozen records
-before any deduplication or screening, and the cable fly specifically is in
-single digits. The `"machine fly"` count is additionally inflated by unrelated
-senses of the words. Exercise X is well represented; **Exercise Y as defined may
-have almost no directly indexed PubMed literature.** Three consequences:
+### 4.2 Route-level composite count — Europe PMC E1, 2026-09-11
+
+On 2026-09-11 the E1 composite string as it then stood (§6.1) was submitted to
+the Europe PMC REST `search` endpoint **without** the §5.0 zero-yield anchor and
+returned `hitCount` **334**, platform `version 6.9`, with the query echoed in
+`request.queryString`.
+
+| Field                | Value                                                            |
+| -------------------- | ---------------------------------------------------------------- |
+| Database             | Europe PMC                                                       |
+| Route                | E1 (§6.1)                                                        |
+| Endpoint             | `https://www.ebi.ac.uk/europepmc/webservices/rest/search`        |
+| Query                | the E1 string as of 2026-09-11, unanchored                       |
+| `searchedAt`         | 2026-09-11                                                       |
+| `resultCount`        | 334                                                              |
+| Platform version     | 6.9                                                              |
+| Identifiers examined | none — `resultType=idlist`, no record opened, screened, or cited |
+
+Calling this an _index diagnostic_ was wrong, and R1 finding I-1 is correct on
+the point. An index diagnostic counts one term; this counted a full
+three-concept question string on a real route. Whatever the intent, the effect
+was a route-level search executed during a scope task, and its yield was visible
+to the author of the rest of this file. Four consequences follow, and none of
+them is optional:
+
+1. **It is a search, and it is recorded as one.** §5.0 requires SBLA-009 to carry
+   this row into the search record as a real `evidencePacketSchema.searches`
+   entry with `database` Europe PMC, this exact query string, `searchedAt`
+   2026-09-11 and `resultCount` 334 — not to re-run it quietly and record only
+   the newer number.
+2. **The E1 string has since changed.** The 334 belongs to the pre-remediation E1
+   string, not to the wider string now in §6.1 (M-3, M-4). SBLA-009 must run the
+   current string, record its own count, and keep both rows so the change in the
+   exercise block is auditable.
+3. **The number is a count, not a yield.** 334 Europe PMC records match the
+   Boolean; the eligible subset after deduplication and screening will be very
+   much smaller, and §4.1 is the better guide to how much smaller.
+4. **U2 is now being decided with partial yield visible** — see §4.3.
+
+This disclosure stays in the file. It is not to be deleted, softened, or demoted
+to a footnote in any later revision.
+
+### 4.3 Finding that the reviewer must act on
+
+The index footprint of the _fly_ family in PubMed titles and abstracts is on the
+order of a few dozen records before any deduplication or screening, and the
+cable fly specifically is in single digits. The `"machine fly"` count is
+additionally inflated by unrelated senses of the words. Exercise X is well
+represented; **Exercise Y as defined may have almost no directly indexed PubMed
+literature.** Three consequences:
 
 1. S3, E1, C1, O1 and P1 are not optional supplements. They are the routes most
    likely to hold whatever evidence exists for Y.
 2. Unresolved item **U2** in the questions file — whether Y may be widened to pec
-   deck or dumbbell fly — should be settled by the reviewer _before_ SBLA-009
-   searches, not after the yield is visible.
+   deck or dumbbell fly — should be settled by the owner _before_ SBLA-009
+   searches. That condition is no longer clean, and saying so is the honest
+   position: the §4.2 composite count means one route-level yield figure is
+   already visible, so U2 is being decided with partial yield in view rather
+   than blind to it. The owner should record the U2 decision with its stated
+   rationale, so a later reader can judge whether the 334 bore on it. The §4.1
+   single-term counts, which are what actually motivate widening Y, were
+   observed before the composite was run.
 3. "The search found little" is a legitimate and likely outcome. §2.2 forbids
    converting a thin evidence base into a confident comparative recommendation,
    and the screening plan's §6 anti-cherry-picking rules exist for exactly this
@@ -257,7 +387,15 @@ date, the result count, **and the PubMed `querytranslation` string returned by
 E-utilities**, which is the only artifact that proves what PubMed actually ran.
 This satisfies §9.8 step 2 and populates `evidencePacketSchema.searches`
 (`database`, `query`, `searchedAt`, `resultCount`) from
-`src/lib/content/schemas.ts`.
+`src/lib/content/schemas.ts`. §8.3 records what §9.8 step 2 demands beyond what
+those four fields can hold.
+
+**Carry-in from scope time.** One search row already exists before SBLA-009 runs
+anything: the Europe PMC E1 composite of 2026-09-11, `resultCount` 334 (§4.2).
+SBLA-009 records it as a search row in its own right, and separately records the
+run of the amended E1 string. Two rows, two dates, two counts. Dropping the
+earlier row would hide that a route-level count was visible while the scope was
+being written.
 
 Two equivalent execution paths, both to be recorded:
 
@@ -273,6 +411,19 @@ Applying a field tag turns off automatic term mapping, and truncation with `*`
 turns off both automatic term mapping and MeSH explosion (User Guide, row 1).
 Every term below is deliberately tagged, so no string depends on automatic term
 mapping and none will drift when NLM changes the mapping tables.
+
+**Anchored zero-yield parse test.** Every composite string in this file was
+checked by appending a nonsense token — `AND zzzqqqnonsenseanchor[tiab]` for
+PubMed, `AND (TITLE_ABS:"zzzqqqnonsenseanchor")` for Europe PMC — so the
+platform must parse the entire string while the result count is structurally
+zero and no question-level yield is observed. A string passes when the platform
+returns HTTP 200; `errorlist.fieldsnotfound` and
+`warninglist.quotedphrasesnotfound` are empty; `errorlist.phrasesnotfound`
+contains the anchor and nothing else; and `querytranslation` shows every
+intended term. This is the test to use whenever a string is amended at scope
+time, and it is the only one this role may run on a composite string: running a
+composite **without** the anchor observes question-level yield and is a search
+execution belonging to SBLA-009 (§0, §4).
 
 ### 5.1 S1 — Q1, pectoralis major structure and function
 
@@ -305,10 +456,16 @@ Verified to parse on 2026-09-11: no `ERROR`, `fieldsnotfound` empty,
 **Purpose.** Exercise concept **and** pectoral concept **and** outcome concept.
 
 ```text
-("Resistance Training"[mh] OR "Weight Lifting"[mh] OR "Exercise"[mh] OR "Exercise Therapy"[mh] OR "Exercise Test"[mh] OR "Athletic Performance"[mh] OR "bench press"[tiab:~0] OR "bench presses"[tiab:~0] OR "bench pressing"[tiab:~0] OR "chest press"[tiab:~0] OR "chest presses"[tiab:~0] OR "chest pressing"[tiab:~0] OR "barbell press"[tiab:~0] OR "barbell presses"[tiab:~0] OR "dumbbell press"[tiab:~0] OR "dumbbell presses"[tiab:~0] OR "machine press"[tiab:~0] OR "smith machine"[tiab:~0] OR "cable fly"[tiab:~0] OR "cable flies"[tiab:~0] OR "cable flye"[tiab:~0] OR "cable flyes"[tiab:~0] OR "chest fly"[tiab:~0] OR "chest flies"[tiab:~0] OR "chest flye"[tiab:~0] OR "chest flyes"[tiab:~0] OR "dumbbell fly"[tiab:~0] OR "dumbbell flies"[tiab:~0] OR "dumbbell flye"[tiab:~0] OR "dumbbell flyes"[tiab:~0] OR "machine fly"[tiab:~0] OR "machine flies"[tiab:~0] OR "pec deck"[tiab:~0] OR "peck deck"[tiab:~0] OR "pectoral deck"[tiab:~0] OR "cable crossover"[tiab:~0] OR "cable crossovers"[tiab:~0] OR "cable cross over"[tiab:~0] OR "butterfly exercise"[tiab:~0] OR "butterfly machine"[tiab:~0] OR "resistance training"[tiab:~0] OR "resistance exercise"[tiab:~0] OR "strength training"[tiab:~0] OR "weight training"[tiab:~0] OR "multi joint"[tiab:~0] OR multijoint[tiab] OR "single joint"[tiab:~0] OR singlejoint[tiab]) AND ("Pectoralis Muscles"[mh] OR pectoral*[tiab] OR "pec major"[tiab:~0] OR "chest muscle"[tiab:~0] OR "chest muscles"[tiab:~0] OR "upper body"[tiab:~0]) AND ("Hypertrophy"[mh] OR "Muscle Development"[mh] OR "Muscle Strength"[mh] OR "Organ Size"[mh] OR "Electromyography"[mh] OR "Biomechanical Phenomena"[mh] OR "Adaptation, Physiological"[mh] OR "Torque"[mh] OR "Muscle, Skeletal"[mh] OR hypertroph*[tiab] OR "muscle thickness"[tiab:~0] OR "muscle thicknesses"[tiab:~0] OR "cross sectional area"[tiab:~0] OR "muscle volume"[tiab:~0] OR "muscle size"[tiab:~0] OR "muscle mass"[tiab:~0] OR "lean mass"[tiab:~0] OR "muscle growth"[tiab:~0] OR "one repetition maximum"[tiab:~0] OR 1RM[tiab] OR "maximal strength"[tiab:~0] OR "maximum strength"[tiab:~0] OR "muscle activation"[tiab:~0] OR "muscle activity"[tiab:~0] OR electromyogra*[tiab] OR EMG[tiab] OR "moment arm"[tiab:~0] OR "moment arms"[tiab:~0] OR "joint moment"[tiab:~0] OR "joint moments"[tiab:~0] OR kinemat*[tiab] OR kinetic*[tiab] OR "resistance profile"[tiab:~0] OR "force profile"[tiab:~0])
+("Resistance Training"[mh] OR "Weight Lifting"[mh] OR "Exercise"[mh] OR "Exercise Therapy"[mh] OR "Exercise Test"[mh] OR "Athletic Performance"[mh] OR "bench press"[tiab:~0] OR "bench presses"[tiab:~0] OR "bench pressing"[tiab:~0] OR "chest press"[tiab:~0] OR "chest presses"[tiab:~0] OR "chest pressing"[tiab:~0] OR "barbell press"[tiab:~0] OR "barbell presses"[tiab:~0] OR "dumbbell press"[tiab:~0] OR "dumbbell presses"[tiab:~0] OR "machine press"[tiab:~0] OR "smith machine"[tiab:~0] OR "cable fly"[tiab:~0] OR "cable flies"[tiab:~0] OR "cable flye"[tiab:~0] OR "cable flyes"[tiab:~0] OR "chest fly"[tiab:~0] OR "chest flies"[tiab:~0] OR "chest flye"[tiab:~0] OR "chest flyes"[tiab:~0] OR "dumbbell fly"[tiab:~0] OR "dumbbell flies"[tiab:~0] OR "dumbbell flye"[tiab:~0] OR "dumbbell flyes"[tiab:~0] OR "machine fly"[tiab:~0] OR "machine flies"[tiab:~0] OR "pectoral fly"[tiab:~0] OR "pectoral flies"[tiab:~0] OR "pectoral flye"[tiab:~0] OR "pectoral flyes"[tiab:~0] OR "pec fly"[tiab:~0] OR "pec flies"[tiab:~0] OR "pec flye"[tiab:~0] OR "pec flyes"[tiab:~0] OR "pec deck"[tiab:~0] OR "peck deck"[tiab:~0] OR "pectoral deck"[tiab:~0] OR "cable crossover"[tiab:~0] OR "cable crossovers"[tiab:~0] OR "cable cross over"[tiab:~0] OR "butterfly exercise"[tiab:~0] OR "butterfly machine"[tiab:~0] OR "resistance training"[tiab:~0] OR "resistance exercise"[tiab:~0] OR "strength training"[tiab:~0] OR "weight training"[tiab:~0] OR "multi joint"[tiab:~0] OR multijoint[tiab] OR "single joint"[tiab:~0] OR singlejoint[tiab]) AND ("Pectoralis Muscles"[mh] OR pectoral*[tiab] OR "pec major"[tiab:~0] OR "chest muscle"[tiab:~0] OR "chest muscles"[tiab:~0] OR "upper body"[tiab:~0]) AND ("Hypertrophy"[mh] OR "Muscle Development"[mh] OR "Muscle Strength"[mh] OR "Organ Size"[mh] OR "Electromyography"[mh] OR "Biomechanical Phenomena"[mh] OR "Adaptation, Physiological"[mh] OR "Torque"[mh] OR "Muscle, Skeletal"[mh] OR hypertroph*[tiab] OR "muscle thickness"[tiab:~0] OR "muscle thicknesses"[tiab:~0] OR "cross sectional area"[tiab:~0] OR "muscle volume"[tiab:~0] OR "muscle size"[tiab:~0] OR "muscle mass"[tiab:~0] OR "lean mass"[tiab:~0] OR "muscle growth"[tiab:~0] OR "one repetition maximum"[tiab:~0] OR 1RM[tiab] OR "maximal strength"[tiab:~0] OR "maximum strength"[tiab:~0] OR "muscle activation"[tiab:~0] OR "muscle activity"[tiab:~0] OR electromyogra*[tiab] OR EMG[tiab] OR "moment arm"[tiab:~0] OR "moment arms"[tiab:~0] OR "joint moment"[tiab:~0] OR "joint moments"[tiab:~0] OR kinemat*[tiab] OR kinetic*[tiab] OR "resistance profile"[tiab:~0] OR "force profile"[tiab:~0])
 ```
 
-Verified to parse on 2026-09-11; all three warning lists empty.
+Verified to parse on 2026-09-11; all three warning lists empty. Eight
+`pectoral fly` and `pec fly` forms were added on 2026-09-12 under R1 finding M-3
+and the amended string was re-checked the same day with the §5.0 anchored
+zero-yield parse test: HTTP 200, `count` 0, `errorlist.fieldsnotfound` empty,
+`warninglist.quotedphrasesnotfound` empty, `errorlist.phrasesnotfound` holding
+the anchor and nothing else, and all eight added forms present verbatim as
+`[tiab:~0]` phrases in the returned `querytranslation`.
 
 - **Filters (separate recorded steps):** none; then `AND "humans"[mh]`; then
   `AND "adult"[mh]` only as a sensitivity step, never as the primary filter,
@@ -327,10 +484,13 @@ outcomes. Includes push-up deliberately, as an alternative horizontal-press
 comparator that may carry contradictory or boundary evidence.
 
 ```text
-("bench press"[tiab:~0] OR "bench presses"[tiab:~0] OR "bench pressing"[tiab:~0] OR "chest press"[tiab:~0] OR "chest presses"[tiab:~0] OR "cable fly"[tiab:~0] OR "cable flies"[tiab:~0] OR "cable flye"[tiab:~0] OR "cable flyes"[tiab:~0] OR "chest fly"[tiab:~0] OR "chest flies"[tiab:~0] OR "chest flye"[tiab:~0] OR "chest flyes"[tiab:~0] OR "dumbbell fly"[tiab:~0] OR "dumbbell flies"[tiab:~0] OR "dumbbell flye"[tiab:~0] OR "dumbbell flyes"[tiab:~0] OR "pec deck"[tiab:~0] OR "peck deck"[tiab:~0] OR "pectoral deck"[tiab:~0] OR "cable crossover"[tiab:~0] OR "cable crossovers"[tiab:~0] OR "butterfly exercise"[tiab:~0] OR "butterfly machine"[tiab:~0] OR "push up"[tiab:~0] OR "push ups"[tiab:~0] OR pushup*[tiab]) AND ("Hypertrophy"[mh] OR "Muscle Development"[mh] OR "Muscle Strength"[mh] OR "Organ Size"[mh] OR "Electromyography"[mh] OR "Biomechanical Phenomena"[mh] OR hypertroph*[tiab] OR "muscle thickness"[tiab:~0] OR "cross sectional area"[tiab:~0] OR "muscle volume"[tiab:~0] OR "muscle size"[tiab:~0] OR "muscle activation"[tiab:~0] OR "muscle activity"[tiab:~0] OR electromyogra*[tiab] OR EMG[tiab] OR "moment arm"[tiab:~0] OR kinemat*[tiab] OR kinetic*[tiab] OR strength[tiab])
+("bench press"[tiab:~0] OR "bench presses"[tiab:~0] OR "bench pressing"[tiab:~0] OR "chest press"[tiab:~0] OR "chest presses"[tiab:~0] OR "cable fly"[tiab:~0] OR "cable flies"[tiab:~0] OR "cable flye"[tiab:~0] OR "cable flyes"[tiab:~0] OR "chest fly"[tiab:~0] OR "chest flies"[tiab:~0] OR "chest flye"[tiab:~0] OR "chest flyes"[tiab:~0] OR "dumbbell fly"[tiab:~0] OR "dumbbell flies"[tiab:~0] OR "dumbbell flye"[tiab:~0] OR "dumbbell flyes"[tiab:~0] OR "pectoral fly"[tiab:~0] OR "pectoral flies"[tiab:~0] OR "pectoral flye"[tiab:~0] OR "pectoral flyes"[tiab:~0] OR "pec fly"[tiab:~0] OR "pec flies"[tiab:~0] OR "pec flye"[tiab:~0] OR "pec flyes"[tiab:~0] OR "pec deck"[tiab:~0] OR "peck deck"[tiab:~0] OR "pectoral deck"[tiab:~0] OR "cable crossover"[tiab:~0] OR "cable crossovers"[tiab:~0] OR "butterfly exercise"[tiab:~0] OR "butterfly machine"[tiab:~0] OR "push up"[tiab:~0] OR "push ups"[tiab:~0] OR pushup*[tiab]) AND ("Hypertrophy"[mh] OR "Muscle Development"[mh] OR "Muscle Strength"[mh] OR "Organ Size"[mh] OR "Electromyography"[mh] OR "Biomechanical Phenomena"[mh] OR hypertroph*[tiab] OR "muscle thickness"[tiab:~0] OR "cross sectional area"[tiab:~0] OR "muscle volume"[tiab:~0] OR "muscle size"[tiab:~0] OR "muscle activation"[tiab:~0] OR "muscle activity"[tiab:~0] OR electromyogra*[tiab] OR EMG[tiab] OR "moment arm"[tiab:~0] OR kinemat*[tiab] OR kinetic*[tiab] OR strength[tiab])
 ```
 
-Verified to parse on 2026-09-11.
+Verified to parse on 2026-09-11. The same eight `pectoral fly` and `pec fly`
+forms were added on 2026-09-12 under M-3, and the amended string passed the §5.0
+anchored zero-yield parse test the same day with all eight present verbatim in
+`querytranslation`.
 
 - **Filters:** none first; then `AND "humans"[mh]`.
 - **Expected failure mode:** `strength[tiab]` is a very broad term and will import
@@ -388,12 +548,25 @@ response if the source is already supporting live content.
 paging, `resultType` (`idlist` | `lite` | `core`), `sort`.
 
 ```text
-((MESH:"Pectoralis Muscles") OR (TITLE_ABS:"pectoralis") OR (TITLE_ABS:"pectoral") OR (KW:"pectoralis major")) AND ((TITLE_ABS:"bench press") OR (TITLE_ABS:"chest press") OR (TITLE_ABS:"cable fly") OR (TITLE_ABS:"cable crossover") OR (TITLE_ABS:"pec deck") OR (TITLE_ABS:"dumbbell fly") OR (TITLE_ABS:"chest fly") OR (TITLE_ABS:"machine fly") OR (MESH:"Resistance Training") OR (MESH:"Weight Lifting") OR (TITLE_ABS:"resistance training")) AND (FIRST_PDATE:[1960-01-01 TO 2026-09-11])
+((MESH:"Pectoralis Muscles") OR (TITLE_ABS:"pectoralis") OR (TITLE_ABS:"pectoral") OR (KW:"pectoralis major")) AND ((MESH:"Resistance Training") OR (MESH:"Weight Lifting") OR (TITLE_ABS:"bench press") OR (TITLE_ABS:"bench presses") OR (TITLE_ABS:"bench pressing") OR (TITLE_ABS:"chest press") OR (TITLE_ABS:"chest presses") OR (TITLE_ABS:"chest pressing") OR (TITLE_ABS:"barbell press") OR (TITLE_ABS:"barbell presses") OR (TITLE_ABS:"dumbbell press") OR (TITLE_ABS:"dumbbell presses") OR (TITLE_ABS:"machine press") OR (TITLE_ABS:"smith machine") OR (TITLE_ABS:"cable fly") OR (TITLE_ABS:"cable flies") OR (TITLE_ABS:"cable flye") OR (TITLE_ABS:"cable flyes") OR (TITLE_ABS:"chest fly") OR (TITLE_ABS:"chest flies") OR (TITLE_ABS:"chest flye") OR (TITLE_ABS:"chest flyes") OR (TITLE_ABS:"dumbbell fly") OR (TITLE_ABS:"dumbbell flies") OR (TITLE_ABS:"dumbbell flye") OR (TITLE_ABS:"dumbbell flyes") OR (TITLE_ABS:"machine fly") OR (TITLE_ABS:"machine flies") OR (TITLE_ABS:"pectoral fly") OR (TITLE_ABS:"pectoral flies") OR (TITLE_ABS:"pectoral flye") OR (TITLE_ABS:"pectoral flyes") OR (TITLE_ABS:"pec fly") OR (TITLE_ABS:"pec flies") OR (TITLE_ABS:"pec flye") OR (TITLE_ABS:"pec flyes") OR (TITLE_ABS:"pec deck") OR (TITLE_ABS:"peck deck") OR (TITLE_ABS:"pectoral deck") OR (TITLE_ABS:"cable crossover") OR (TITLE_ABS:"cable crossovers") OR (TITLE_ABS:"cable cross over") OR (TITLE_ABS:"butterfly exercise") OR (TITLE_ABS:"butterfly machine") OR (TITLE_ABS:"resistance training") OR (TITLE_ABS:"resistance exercise") OR (TITLE_ABS:"strength training") OR (TITLE_ABS:"weight training") OR (TITLE_ABS:"multi joint") OR (TITLE_ABS:"multijoint") OR (TITLE_ABS:"single joint") OR (TITLE_ABS:"singlejoint")) AND (FIRST_PDATE:[1960-01-01 TO 2026-09-11])
 ```
 
 Verified to parse on 2026-09-11; Europe PMC echoed the query in
-`request.queryString` and reported `version 6.9`.
+`request.queryString` and reported `version 6.9`. The exercise block was rebuilt
+on 2026-09-12 under R1 findings M-3 and M-4, and the amended string passed the
+§5.0 anchored zero-yield parse test the same day: HTTP 200, `hitCount` 0,
+`version 6.9`, and `request.queryString` echoing the submitted string — anchor
+included — byte for byte.
 
+- **Exercise block parity with S2 (M-4).** The second block now carries every
+  free-text exercise term from S2's exercise block, expressed as `TITLE_ABS:`
+  phrases, alongside the two MeSH descriptors. Before the 2026-09-12 amendment it
+  carried eight of them, so E1 was materially narrower than S2 on the exercise
+  concept without that narrowing being stated anywhere. One asymmetry is **not**
+  removable by adding terms: PubMed's `[tiab:~0]` matches its two words in either
+  order, whereas a quoted `TITLE_ABS` phrase is ordered. No Europe PMC proximity
+  operator was verified at scope time, so E1 will miss inverted word orders that
+  S2 catches. Recorded as **SU7**, not solved.
 - **Anatomy variant:** replace the second block with the S1 attribute concepts
   expressed as `TITLE_ABS:` terms.
 - **Preprint variant:** add `AND (SRC:"PPR")`; restrict to journals with
@@ -410,24 +583,31 @@ Verified to parse on 2026-09-11; Europe PMC echoed the query in
 
 ### 6.2 C1 — Cochrane Library CENTRAL, Search Manager
 
-Syntax verified against `https://www.cochranelibrary.com/search-manager-help` on
-2026-09-11. The Cochrane Library has no public API for this project, so C1 is run
-by hand in the Search Manager and the line-by-line strategy plus per-line counts
-are pasted into the SBLA-009 search record.
+Syntax read from `https://www.cochranelibrary.com/search-manager-help` on
+2026-09-11, in a single reading **no reader can reproduce**. Every syntax claim in
+this section is therefore **"Syntax unverified at scope time"** and is not
+independently confirmed (R1 finding M-5). The row 6 note in §2 records the exact
+retrieval method attempted and every status code observed, and **SU9** in §10
+records the status. Read the strategy below as a draft to be re-verified inside the
+Search Manager, not as validated syntax. The Cochrane Library has no public API for
+this project, so C1 is run by hand in the Search Manager and the line-by-line
+strategy plus per-line counts are pasted into the SBLA-009 search record.
 
 ```text
 #1  [mh "Pectoralis Muscles"]
 #2  (pectoral* or (pec NEXT major) or (chest NEXT muscle*)):ti,ab,kw
 #3  #1 OR #2
 #4  [mh "Resistance Training"] OR [mh "Weight Lifting"] OR [mh ^Exercise]
-#5  ((bench NEXT press*) or (chest NEXT press*) or (chest NEXT fl*) or (cable NEXT fl*) or (dumbbell NEXT fl*) or (machine NEXT fl*) or (pec NEXT deck) or (pectoral NEXT deck) or (cable NEXT crossover*) or (butterfly NEXT exercis*) or (resistance NEXT train*) or (strength NEXT train*)):ti,ab,kw
+#5  ((bench NEXT press*) or (chest NEXT press*) or (chest NEXT fly*) or (chest NEXT flies) or (cable NEXT fly*) or (cable NEXT flies) or (dumbbell NEXT fly*) or (dumbbell NEXT flies) or (machine NEXT fly*) or (machine NEXT flies) or (pec NEXT fly*) or (pec NEXT flies) or (pectoral NEXT fly*) or (pectoral NEXT flies) or (pec NEXT deck) or (pectoral NEXT deck) or (cable NEXT crossover*) or (butterfly NEXT exercis*) or (resistance NEXT train*) or (strength NEXT train*)):ti,ab,kw
 #6  #4 OR #5
 #7  (hypertroph* or (muscle NEXT thickness) or (cross NEXT sectional NEXT area) or (muscle NEXT volume) or (muscle NEXT size) or (muscle NEXT activation) or (muscle NEXT activity) or electromyograph* or EMG or (one NEXT repetition NEXT maximum) or 1RM or strength):ti,ab,kw
 #8  #3 AND #6 AND #7
 #9  #8 AND ([pt "Retracted publication"] OR [pt "Retraction of publication"] OR [pt "Expression of concern"])
 ```
 
-Syntax rules that shaped this, all verified on the help page:
+Syntax rules that shaped this, all read from the help page on 2026-09-11 and all
+carrying the SU9 "syntax unverified at scope time" status above. Each is what the
+page was read to say; none is independently confirmed:
 
 - `[mh vaccines]` explodes; `[mh ^vaccines]` does not; multi-word descriptors need
   quotes; qualifiers are written in capitals after a slash.
@@ -442,12 +622,26 @@ Syntax rules that shaped this, all verified on the help page:
 - Only PubMed, MEDLINE and ClinicalTrials.gov records carry MeSH in CENTRAL
   (§3.5), so `#2`, `#5` and `#7` carry the retrieval, not `#1` and `#4`.
 
-**Expected failure and fallback.** The Cochrane Library is subscription-gated for
-parts of its content and blocks scripted access — a plain fetch of the help page
-returned HTTP 403 during verification. If the owner has no Cochrane access,
-record C1 as **not executed for want of access**, and note that trial coverage
-then rests on E1, T1, and O1. Do not scrape it; §9.6 forbids scraping where an
-official route exists, and no official API exists here.
+**Two corrections to `#5` made during R1 remediation.** The first is
+self-identified and is not a review finding: `#5` previously used `fl*` in four
+places, and `fl` is a two-character root, so the line broke the three-character
+wildcard rule listed above — this file's own rule, applied to this file's own
+line. It is replaced by `fly*`, a legal root covering `fly`, `flye` and `flyes`,
+plus an explicit `flies`, which `fly*` cannot reach. The second follows M-3 past
+its named destination: M-3 asked for the `pec fly` and `pectoral fly` forms in S2,
+S3 and E1, but its own heading is that they are absent from **every** route, so
+they are added here too. Both changes use only constructs already listed above and
+neither required a new fetch — but both inherit SU9, like every other syntax claim
+in this section.
+
+**Expected failure and fallback.** The Cochrane Library is subscription-gated
+for parts of its content and blocks scripted clients at the edge — a plain fetch
+of the help page returned HTTP 403 on 2026-09-11 and HTTP 419 on 2026-09-12, so
+the block is real but its status code is not stable (§2, row 6 note). If the
+owner has no Cochrane access, record C1 as **not executed for want of access**,
+and note that trial coverage then rests on E1, T1, and O1. Do not scrape it, and
+do not substitute a user agent to get past the edge filter; §9.6 forbids
+scraping where an official route exists, and no official API exists here.
 
 ### 6.3 T1 — ClinicalTrials.gov API v2
 
@@ -679,18 +873,44 @@ handled in the eligibility plan §4.3.
 
 ### 8.3 What must be recorded for every search
 
-Required by §9.8 step 2 and by `evidencePacketSchema.searches`:
+Two different requirements are in play here, and the earlier draft of this
+section ran them together under one heading. §9.8 step 2 of the master plan sets
+what the **search record** must contain. `evidencePacketSchema.searches` in
+`src/lib/content/schemas.ts` sets what the **evidence packet** can hold. They are
+not the same set, the schema is the smaller one, and §5.0 has it right: the
+`.strict()` `searches[]` object accepts exactly `database`, `query`, `searchedAt`
+and `resultCount`, and rejects anything else. R1 finding I-2 is correct that this
+section was the one that was wrong.
 
-| Field                     | Note                                                                                                                                                                     |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `database`                | Platform name and the exact endpoint or interface used                                                                                                                   |
-| `query`                   | The string exactly as submitted, before any URL encoding                                                                                                                 |
-| `searchedAt`              | ISO date                                                                                                                                                                 |
-| `resultCount`             | Integer, from the platform's own count                                                                                                                                   |
-| Filters                   | Each as its own step with its own count                                                                                                                                  |
-| Platform version          | PubMed "last update" date; Europe PMC `version`; ClinicalTrials.gov `apiVersion` and `dataTimestamp`; OpenAlex and Crossref response metadata; MeSH year; UBERON release |
-| PubMed `querytranslation` | Mandatory. It is the only proof of what PubMed actually executed                                                                                                         |
-| Failures                  | Any non-200, timeout, or rate limit, with its timestamp                                                                                                                  |
+| Field                     | Note                                                                                                                                                                     | Fits `evidencePacketSchema.searches`?                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| `database`                | Platform name and the exact endpoint or interface used                                                                                                                   | Yes                                                   |
+| `query`                   | The string exactly as submitted, before any URL encoding                                                                                                                 | Yes                                                   |
+| `searchedAt`              | ISO date                                                                                                                                                                 | Yes                                                   |
+| `resultCount`             | Integer, from the platform's own count                                                                                                                                   | Yes                                                   |
+| Filters                   | Each as its own step with its own count                                                                                                                                  | Yes — as additional `searches[]` rows, not as a field |
+| Platform version          | PubMed "last update" date; Europe PMC `version`; ClinicalTrials.gov `apiVersion` and `dataTimestamp`; OpenAlex and Crossref response metadata; MeSH year; UBERON release | **No home in the schema**                             |
+| PubMed `querytranslation` | Mandatory. It is the only proof of what PubMed actually executed                                                                                                         | **No home in the schema**                             |
+| Failures                  | Any non-200, timeout, or rate limit, with its timestamp                                                                                                                  | **No home in the schema**                             |
+
+Every row is still mandatory for the **search record**. The right-hand column says
+only where each one can be stored. Filters are fine because §8.2 and D6 already
+treat each filter step as its own recorded search with its own count, so a filter
+step becomes another `searches[]` row rather than an extra field inside one.
+
+The last three rows have nowhere structured to go. `querytranslation` is the case
+that matters most, because this file calls it the only proof of what PubMed
+actually executed, and under the schema as accepted that proof can live only in
+free text — `synthesis`, or a `decisionLog[].decision` entry — where nothing
+validates it and nothing stops it being dropped. SBLA-009 must therefore keep the
+full eight-field record in its own search log regardless of what the packet can
+carry, and must not silently drop a field because the schema has no slot for it.
+
+This is a schema question, and schemas are outside the Claude Research write
+boundary (CLAUDE.md). It is recorded as **SU8** in §10, and paired with **SE-U2**
+in `research/screening/SBLA-008-eligibility-plan.md` §8, which is the screening
+half of the same gap. Both are routed to Codex on an owner decision. Neither is
+resolved by this file.
 
 ### 8.4 Update strategy
 
@@ -713,34 +933,37 @@ anatomy and function annually; exercise mechanics annually; source status monthl
 
 ## 9. Failure and fallback matrix
 
-| Route                     | Observed or expected failure                                                                   | Fallback                                                                                                                             | Recorded as                                                                                           |
-| ------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| PubMed API                | Rate limit at 3 requests/second without an API key — **hit during verification on 2026-09-11** | Use an NCBI API key; throttle; fall back to the web interface with saved permalinks                                                  | Failure timestamp plus the retry                                                                      |
-| PubMed phrase index       | Quoted phrase silently decomposed                                                              | Proximity `~0` (§3.2); re-check `quotedphrasesnotfound` on every run                                                                 | Warning list copied into the search record                                                            |
-| MeSH                      | Descriptor added, removed, or renamed                                                          | Re-run §3.1 lookups; record the MeSH year; re-check V1                                                                               | Diff against the values recorded here                                                                 |
-| Europe PMC                | Maintenance window, non-200                                                                    | One retry; then record as not executed                                                                                               | Explicitly "not executed", never as zero results                                                      |
-| Cochrane CENTRAL          | Subscription gate; HTTP 403 to scripted access — **observed on 2026-09-11**                    | Manual Search Manager session; if no access, record as not executed and note the coverage loss                                       | "Not executed for want of access"                                                                     |
-| ClinicalTrials.gov        | JavaScript shell on human-facing pages                                                         | Use API v2 only; never scrape                                                                                                        | Route note                                                                                            |
-| Crossref Retraction Watch | **HTTP 502 then 504 on 2026-09-11**                                                            | Crossref `update-type:retraction`; per-DOI `update-to`/`updated-by`; PubMed S6                                                       | Outage recorded; §9.7 transient-outage rule applied; publication stays blocked until a check succeeds |
-| OpenAlex                  | Metadata mismatch with the publisher record                                                    | Publisher or NCBI record wins                                                                                                        | Discrepancy recorded                                                                                  |
-| bioRxiv API               | No keyword search                                                                              | Discover preprints through Europe PMC `SRC:"PPR"`; use the API to confirm and version                                                | Route note                                                                                            |
-| SportRxiv                 | No documented Boolean API; **syntax unverified**                                               | Keyword browse with the exact terms recorded; verify at execution time                                                               | "Syntax unverified at scope time"                                                                     |
-| PROSPERO                  | JavaScript shell; no API; **syntax unverified**                                                | Manual browse with terms recorded; if unusable, record as not executed                                                               | "Syntax unverified at scope time"                                                                     |
-| Terminologia Anatomica    | **Host unreachable on 2026-09-11**                                                             | Retry at execution; otherwise anchor on MeSH, UBERON, FMA and record the gap                                                         | Unresolved U1                                                                                         |
-| Any route                 | Yield near zero for Exercise Y                                                                 | Do **not** widen the definition silently. Escalate unresolved U2 to the reviewer, then amend the scope file with a date and a reason | Amendment record                                                                                      |
+| Route                     | Observed or expected failure                                                                                                                                                                        | Fallback                                                                                                                                                                                                                        | Recorded as                                                                                                                |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| PubMed API                | Rate limit at 3 requests/second without an API key — **hit during verification on 2026-09-11**                                                                                                      | Use an NCBI API key; throttle; fall back to the web interface with saved permalinks                                                                                                                                             | Failure timestamp plus the retry                                                                                           |
+| PubMed phrase index       | Quoted phrase silently decomposed                                                                                                                                                                   | Proximity `~0` (§3.2); re-check `quotedphrasesnotfound` on every run                                                                                                                                                            | Warning list copied into the search record                                                                                 |
+| MeSH                      | Descriptor added, removed, or renamed                                                                                                                                                               | Re-run §3.1 lookups; record the MeSH year; re-check V1                                                                                                                                                                          | Diff against the values recorded here                                                                                      |
+| Europe PMC                | Maintenance window, non-200                                                                                                                                                                         | One retry; then record as not executed                                                                                                                                                                                          | Explicitly "not executed", never as zero results                                                                           |
+| Cochrane CENTRAL          | Subscription gate; scripted clients blocked at the edge — HTTP 403 **observed 2026-09-11**, HTTP 419 **observed 2026-09-12**, the two divergent (§2, row 6 note). The grammar itself is unconfirmed | Manual Search Manager session, re-verifying the grammar in-session before any line is run; never substitute a user agent or otherwise bypass an access control; if no access, record as not executed and note the coverage loss | "Not executed for want of access"; C1 grammar and the CENTRAL half of D4 recorded as **"Syntax unverified at scope time"** |
+| ClinicalTrials.gov        | JavaScript shell on human-facing pages                                                                                                                                                              | Use API v2 only; never scrape                                                                                                                                                                                                   | Route note                                                                                                                 |
+| Crossref Retraction Watch | **HTTP 502 then 504 on 2026-09-11**                                                                                                                                                                 | Crossref `update-type:retraction`; per-DOI `update-to`/`updated-by`; PubMed S6                                                                                                                                                  | Outage recorded; §9.7 transient-outage rule applied; publication stays blocked until a check succeeds                      |
+| OpenAlex                  | Metadata mismatch with the publisher record                                                                                                                                                         | Publisher or NCBI record wins                                                                                                                                                                                                   | Discrepancy recorded                                                                                                       |
+| bioRxiv API               | No keyword search                                                                                                                                                                                   | Discover preprints through Europe PMC `SRC:"PPR"`; use the API to confirm and version                                                                                                                                           | Route note                                                                                                                 |
+| SportRxiv                 | No documented Boolean API; **syntax unverified**                                                                                                                                                    | Keyword browse with the exact terms recorded; verify at execution time                                                                                                                                                          | "Syntax unverified at scope time"                                                                                          |
+| PROSPERO                  | JavaScript shell; no API; **syntax unverified**                                                                                                                                                     | Manual browse with terms recorded; if unusable, record as not executed                                                                                                                                                          | "Syntax unverified at scope time"                                                                                          |
+| Terminologia Anatomica    | **Host unreachable on 2026-09-11**                                                                                                                                                                  | Retry at execution; otherwise anchor on MeSH, UBERON, FMA and record the gap                                                                                                                                                    | Unresolved U1                                                                                                              |
+| Any route                 | Yield near zero for Exercise Y                                                                                                                                                                      | Do **not** widen the definition silently. Escalate unresolved U2 to the reviewer, then amend the scope file with a date and a reason                                                                                            | Amendment record                                                                                                           |
 
 ---
 
 ## 10. Assumptions and unverified items in this file
 
-| ID  | Statement                                                                                                                                                                                                                                                                                       |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SA1 | **Assumption.** The term lists are adequate for discovery. They were built from the master plan's vocabulary and from the controlled vocabularies verified in §3, not from a validated published search filter. The reviewer should treat term coverage as the most likely defect in this file. |
-| SA2 | **Assumption.** English-language search terms suffice for discovery even though the eligibility plan permits non-English records. A non-English study with no English title or abstract will be missed by every route here. Recorded rather than solved.                                        |
-| SA3 | **Assumption.** Index diagnostics (§4) are a fair proxy for likely yield. They count title/abstract phrase occurrences, not eligible studies, so the true eligible yield is lower, not higher.                                                                                                  |
-| SU1 | **Unverified.** PROSPERO query syntax.                                                                                                                                                                                                                                                          |
-| SU2 | **Unverified.** SportRxiv (current PKP server) query syntax.                                                                                                                                                                                                                                    |
-| SU3 | **Unverified.** Terminologia Anatomica; host unreachable.                                                                                                                                                                                                                                       |
-| SU4 | **Unverified.** Crossref Retraction Watch labs endpoint; HTTP 502/504.                                                                                                                                                                                                                          |
-| SU5 | **Not re-fetched.** GRADE Book, Cochrane Handbook, PRISMA 2020, CONSORT 2025 — cited as the master plan cites them, not opened in this session.                                                                                                                                                 |
-| SU6 | **Time-bounded.** Every verification is a 2026-09-11 observation. All of it must be re-verified at execution time; §8.4 explains why that is not a formality.                                                                                                                                   |
+| ID  | Statement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SA1 | **Assumption.** The term lists are adequate for discovery. They were built from the master plan's vocabulary and from the controlled vocabularies verified in §3, not from a validated published search filter. The reviewer should treat term coverage as the most likely defect in this file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| SA2 | **Assumption.** English-language search terms suffice for discovery even though the eligibility plan permits non-English records. A non-English study with no English title or abstract will be missed by every route here. Recorded rather than solved.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| SA3 | **Assumption.** Index diagnostics (§4) are a fair proxy for likely yield. They count title/abstract phrase occurrences, not eligible studies, so the true eligible yield is lower, not higher.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| SU1 | **Unverified.** PROSPERO query syntax.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| SU2 | **Unverified.** SportRxiv (current PKP server) query syntax.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| SU3 | **Unverified.** Terminologia Anatomica; host unreachable.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| SU4 | **Unverified.** Crossref Retraction Watch labs endpoint; HTTP 502/504.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| SU5 | **Not re-fetched.** GRADE Book, Cochrane Handbook, PRISMA 2020, CONSORT 2025 — cited as the master plan cites them, not opened in this session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| SU6 | **Time-bounded.** Every verification is a 2026-09-11 observation, except the 2026-09-12 re-checks recorded in §5.2, §5.3 and §6.1. All of it must be re-verified at execution time; §8.4 explains why that is not a formality.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| SU7 | **Unverified, self-identified during R1 remediation.** Whether Europe PMC offers a proximity operator equivalent to PubMed `[tiab:~0]`. E1 uses ordered quoted `TITLE_ABS` phrases, so it misses inverted word orders that S2 and S3 catch. SBLA-009 should check the Europe PMC syntax documentation at execution time and either tighten E1 or record the residual recall loss.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| SU8 | **Unresolved, and not resolvable by this role.** Three of the eight mandatory per-search fields in §8.3 — platform version, PubMed `querytranslation`, and failures — have no home in the `.strict()` `evidencePacketSchema.searches` object, which accepts only `database`, `query`, `searchedAt` and `resultCount` (`src/lib/content/schemas.ts`). The packet therefore cannot carry the one artifact this file calls the only proof of what PubMed executed. Schemas are outside the Claude Research write boundary, so this is disclosed rather than fixed. The owner chooses between (a) extending `evidencePacketSchema` with the missing per-search fields — a Codex task, and a change to an artifact accepted at SBLA-007 — and (b) accepting a narrated rather than validated search record, with the eight-field record kept in SBLA-009's own search log. Paired with **SE-U2** in the eligibility plan §8, the screening half of the same gap. **Resolver: Codex, on an owner decision, before SBLA-009 writes a packet.**                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| SU9 | **Syntax unverified at scope time** — the same status as SU1 and SU2, and **not independently confirmed**. Every Cochrane Search Manager syntax claim in §6.2, the `:pt` value list that carries the CENTRAL half of D4 (§3.3), and the MeSH-coverage caveat (§3.5) rest on one reading of the official help page on 2026-09-11 that no reader can repeat. Retrieval methods attempted, exactly: a plain `curl` fetch returned **HTTP 403** on 2026-09-11; that same single request re-sent with a browser `User-Agent` returned **HTTP 200**, and the page was read once; a plain fetch on 2026-09-12 returned **HTTP 419** twice, and the R1 reviewer's independent plain fetch that day also returned **419**. The author's 403 and the reviewer's 419 **diverge**, so the block response is not stable even for the same class of client (§2, row 6 note; R1 finding M-5). The claims are not withdrawn, because the page was read; they are not verified either, because no one can repeat the reading, and **this file claims no independent syntax verification for C1**. SBLA-009 must re-verify the grammar from inside an authenticated Search Manager session before running C1, and must **not** substitute a user agent or otherwise work around any Cochrane access control. If the grammar cannot be re-verified, record C1 as not executed for want of access and note the coverage loss rather than running it against unconfirmed syntax. |

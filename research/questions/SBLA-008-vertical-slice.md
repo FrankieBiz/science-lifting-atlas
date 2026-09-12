@@ -2,8 +2,12 @@
 
 - Task: SBLA-008 (§18 queue row; §14 Phase 1 Task 1.2 scope step)
 - Role: Claude Research (account A) — evidence lead, not the independent reviewer
-- Pipeline stage: **`scope` only** (§9.8). No search, acquisition, screening,
-  extraction, appraisal, synthesis, or drafting is performed or claimed here.
+- Pipeline stage: **`scope` only** (§9.8). No acquisition, screening, extraction,
+  appraisal, synthesis, or drafting is performed or claimed here. One route-level
+  composite search was run at scope time and is disclosed rather than denied:
+  Europe PMC E1, 2026-09-11, `hitCount` 334
+  (`research/searches/SBLA-008-search-strategy.md` §4.2). No record behind it was
+  retrieved, opened, screened, or cited.
 - Base commit: `0752d5021da72eed840f61ae06f6c1966906c177`
 - Date written: 2026-09-11
 - Companion files: `research/searches/SBLA-008-search-strategy.md`,
@@ -166,10 +170,23 @@ synthesis that combines them must state the pooling decision and justify it. The
 same applies to dumbbell and machine flat presses relative to X.
 
 **Unresolved U2.** The pooling rule above is a methodological choice made by this
-role, not something the master plan fixes. If the reviewer judges that the
+role, not something the master plan fixes. If the owner judges that the
 literature is too sparse for Y as defined to yield any evidence, the correct
 remedy is to widen Y _explicitly in a revised scope file_, not to quietly pool at
 synthesis time.
+
+**U2 is being decided with partial yield already visible.** The intended
+condition was that U2 be settled before any question-level yield existed. That
+condition no longer holds and the file says so rather than implying otherwise: on
+2026-09-11 the Europe PMC E1 composite string was run without a zero-yield anchor
+and returned `hitCount` 334, which is a route-level count for one of the planned
+routes (`research/searches/SBLA-008-search-strategy.md` §4.2; R1 finding I-1). No
+record behind that count was opened, screened, or cited, and it says nothing
+about how many of the 334 are eligible. It is nonetheless a yield figure, and
+whoever settles U2 will have seen it. The single-term index counts that actually
+motivate widening Y — §4.1 of that file — were observed before the composite was
+run. The owner should record the U2 decision together with its stated rationale,
+so a later reader can judge for themselves whether the 334 bore on it.
 
 ---
 
@@ -385,17 +402,17 @@ is not chosen after the results are visible.
 
 ## 7. Assumptions and unresolved scope decisions (consolidated)
 
-| ID  | Type       | Statement                                                                                                                                                             | Who should resolve it                                  |
-| --- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| A1  | Assumption | The slice is one muscle plus two named exercises, not a general chest-training review                                                                                 | Reviewer; owner if contested                           |
-| A2  | Assumption | The decision-relevant estimand is the difference in change between X and Y, not an additive "X plus Y" question                                                       | Reviewer; owner if contested                           |
-| A3  | Assumption | "A flat press" is best instantiated as the barbell flat bench press, the `foundational` and most commonly studied case                                                | Reviewer                                               |
-| A4  | Assumption | Access to full text will be uneven; the plan is written so that abstract-only records still have a defined fate rather than being silently dropped                    | Reviewer                                               |
-| U1  | Unresolved | No verified Terminologia Anatomica anchor; FIPAT unreachable on 2026-09-11                                                                                            | SBLA-009 executor; record absence if still unreachable |
-| U2  | Unresolved | Whether Y may be widened to pec deck or dumbbell fly if the literature for Y as defined is empty                                                                      | Reviewer, **before** SBLA-009 searches                 |
-| U3  | Unresolved | Whether contralateral-limb within-participant designs enter the primary synthesis or only a sensitivity analysis                                                      | Reviewer or owner, **before** screening                |
-| U4  | Unresolved | Whether the regional (clavicular vs sternocostal) hypertrophy outcome is part of the primary tier-1 estimand or a separate secondary question                         | Reviewer                                               |
-| U5  | Unresolved | Whether non-English records will be translated or excluded; this scope plans for inclusion with a recorded translation method, which costs time SBLA-009 may not have | Owner, on cost grounds                                 |
+| ID  | Type       | Statement                                                                                                                                                                          | Who should resolve it                                  |
+| --- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| A1  | Assumption | The slice is one muscle plus two named exercises, not a general chest-training review                                                                                              | Reviewer; owner if contested                           |
+| A2  | Assumption | The decision-relevant estimand is the difference in change between X and Y, not an additive "X plus Y" question                                                                    | Reviewer; owner if contested                           |
+| A3  | Assumption | "A flat press" is best instantiated as the barbell flat bench press, the `foundational` and most commonly studied case                                                             | Reviewer                                               |
+| A4  | Assumption | Access to full text will be uneven; the plan is written so that abstract-only records still have a defined fate rather than being silently dropped                                 | Reviewer                                               |
+| U1  | Unresolved | No verified Terminologia Anatomica anchor; FIPAT unreachable on 2026-09-11                                                                                                         | SBLA-009 executor; record absence if still unreachable |
+| U2  | Unresolved | Whether Y may be widened to pec deck or dumbbell fly if the literature for Y as defined is empty. Now being decided with one route-level yield figure visible (§3, Europe PMC 334) | Owner, **before** SBLA-009 searches                    |
+| U3  | Unresolved | Whether contralateral-limb within-participant designs enter the primary synthesis or only a sensitivity analysis                                                                   | Reviewer or owner, **before** screening                |
+| U4  | Unresolved | Whether the regional (clavicular vs sternocostal) hypertrophy outcome is part of the primary tier-1 estimand or a separate secondary question                                      | Reviewer                                               |
+| U5  | Unresolved | Whether non-English records will be translated or excluded; this scope plans for inclusion with a recorded translation method, which costs time SBLA-009 may not have              | Owner, on cost grounds                                 |
 
 ---
 
@@ -403,7 +420,11 @@ is not chosen after the results are visible.
 
 1. Executed searches matching `research/searches/SBLA-008-search-strategy.md`,
    each with database, date, exact query, filters, and result count (§9.8 step 2),
-   plus the PubMed `querytranslation` string for every PubMed search.
+   plus the PubMed `querytranslation` string for every PubMed search. One search
+   row already exists and must be carried in rather than dropped: the Europe PMC
+   E1 composite run at scope time, `searchedAt` 2026-09-11, `resultCount` 334
+   (§4.2 of that file). Record it and the run of the amended E1 string as two
+   separate rows, with their two dates and two counts.
 2. A screening log implementing `research/screening/SBLA-008-eligibility-plan.md`,
    with one recorded reason per exclusion.
 3. Extractions that separate reported data from interpretation (§9.8 step 5).
