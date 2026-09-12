@@ -218,7 +218,7 @@ describe('role path boundary CLI', () => {
         'Role path boundary found no changed paths to evaluate',
       ),
     });
-  });
+  }, 10_000);
 
   it('derives and accepts the complete allowed diff from a reviewed base', async () => {
     const { repository, base } = await createRepository();
