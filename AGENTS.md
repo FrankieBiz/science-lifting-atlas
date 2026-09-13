@@ -129,3 +129,31 @@ runtime, not the default.
 Never publish an unsupported scientific claim, unlicensed media, or a production
 evidence record that has not passed its gate. Never paste secrets, Git
 credentials, private keys, or deployment tokens into a chat service.
+
+## graphify
+
+This project has a persistent knowledge graph in `graphify-out/`, including
+community structure and cross-file relationships. It is shared context for every
+agent and model working in this repository.
+
+When the user types `/graphify`, use the installed graphify skill or instructions
+before doing anything else.
+
+- For codebase questions, first run `graphify query "<question>"` when
+  `graphify-out/graph.json` exists. Use `graphify path "<A>" "<B>"` for
+  relationships and `graphify explain "<concept>"` for focused concepts.
+- Dirty generated files in `graphify-out/` are expected after hooks or incremental
+  updates and are not a reason to skip the graph.
+- Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review or when a
+  scoped query does not surface enough context.
+- After integrated code changes, Codex runs `graphify update .` so future
+  sessions inherit the current structure. This update is deterministic and does
+  not require an API key, but it updates code only.
+- After integrated changes to `research/`, `content-drafts/`, `reviews/`, or
+  documentation, Codex runs the semantic extraction workflow recorded in the
+  Graphify handoff. Do not treat `graphify update .` as a semantic document
+  refresh.
+- Restricted Claude Research and Claude Review sessions never modify
+  `graphify-out/`; their handoffs list changed paths and Codex owns the refresh.
+- Project hooks are navigation reminders. `AGENTS.md`, the claim ledger, and the
+  trusted role-path checks remain the actual authority boundaries.

@@ -1,4 +1,5 @@
 .astro/
+graphify-out/
 dist/
 node_modules/
 .pnpm-store/

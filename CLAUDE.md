@@ -126,3 +126,25 @@ The role-path result must come from Codex or CI executing the checker from a
 trusted checkout against your worktree with `--repository`. Do not treat a
 checker executed from your mutable role branch as independent boundary
 evidence.
+
+## graphify
+
+This project has a persistent shared knowledge graph in `graphify-out/`. Use it
+as the first navigation layer regardless of which Claude model is running.
+
+- For codebase questions, first run `graphify query "<question>"` when
+  `graphify-out/graph.json` exists. Use `graphify path "<A>" "<B>"` for
+  relationships and `graphify explain "<concept>"` for focused concepts.
+- Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review or when a
+  scoped query does not surface enough context.
+- After integrated code changes, Codex runs `graphify update .` so the next
+  Claude or Codex session sees the current structure. This deterministic command
+  updates code only and requires no API key.
+- After integrated changes to `research/`, `content-drafts/`, `reviews/`, or
+  documentation, Codex runs the semantic extraction workflow recorded in the
+  Graphify handoff. Do not treat `graphify update .` as a semantic document
+  refresh.
+- Claude Research and Claude Review must not modify `graphify-out/`; list changed
+  paths in the handoff so Codex can refresh it without weakening role boundaries.
+- The hooks are navigation reminders, not permission or acceptance gates. The
+  claim ledger and trusted role-path checks remain authoritative.
