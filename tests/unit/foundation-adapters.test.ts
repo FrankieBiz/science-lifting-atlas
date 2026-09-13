@@ -261,6 +261,85 @@ describe('foundation adapters', () => {
     }
   });
 
+  it('resolves structured cross-links with exact repository path casing', async () => {
+    const root = await createAdapterFixture();
+    try {
+      await Promise.all([
+        mkdir(path.join(root, 'content-drafts/syntheses'), { recursive: true }),
+        mkdir(path.join(root, 'research/searches'), { recursive: true }),
+      ]);
+      await Promise.all([
+        writeFile(
+          path.join(root, 'research/searches/search-receipts.json'),
+          '{}\n',
+        ),
+        writeFile(
+          path.join(root, 'content-drafts/syntheses/atomic-claims.json'),
+          `${JSON.stringify(
+            {
+              crossLinks: {
+                searchReceipts: 'research/searches/SEARCH-receipts.json@1.0.0',
+              },
+            },
+            null,
+            2,
+          )}\n`,
+        ),
+      ]);
+
+      await expect(
+        runAdapterAt(root, 'scripts/content/validate.mjs'),
+      ).rejects.toMatchObject({
+        code: 1,
+        stderr: expect.stringContaining('[CROSS_LINK_CASE_MISMATCH]'),
+      });
+
+      await writeFile(
+        path.join(root, 'content-drafts/syntheses/atomic-claims.json'),
+        `${JSON.stringify(
+          {
+            crossLinks: {
+              searchReceipts: 'research/searches/search-receipts.json@1.0.0',
+            },
+          },
+          null,
+          2,
+        )}\n`,
+      );
+
+      await expect(
+        runAdapterAt(root, 'scripts/content/validate.mjs'),
+      ).resolves.toMatchObject({
+        stdout: expect.stringContaining(
+          'Content validation passed: 0 records.',
+        ),
+      });
+
+      await writeFile(
+        path.join(root, 'content-drafts/syntheses/atomic-claims.json'),
+        `${JSON.stringify(
+          {
+            nested: {
+              crossLinks: {
+                searchReceipts: 'research/searches/missing.json@1.0.0',
+              },
+            },
+          },
+          null,
+          2,
+        )}\n`,
+      );
+      await expect(
+        runAdapterAt(root, 'scripts/content/validate.mjs'),
+      ).rejects.toMatchObject({
+        code: 1,
+        stderr: expect.stringContaining('[CROSS_LINK_TARGET_MISSING]'),
+      });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
   it('reports malformed syntax and unsupported extensions with remediation', async () => {
     const root = await createAdapterFixture();
     try {
