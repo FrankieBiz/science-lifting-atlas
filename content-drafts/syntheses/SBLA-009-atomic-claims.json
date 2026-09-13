@@ -1,0 +1,1163 @@
+{
+  "artifactId": "SBLA-009-atomic-claims",
+  "artifactVersion": "1.0.0",
+  "schemaContract": "SBLA-009-atomic-claims/1.0.0",
+  "task": "SBLA-009",
+  "role": "claude-research",
+  "account": "A",
+  "generatedAt": "2026-09-13",
+  "baseCommit": "8ca59e850beb0770554074d474a3ff3a9e16710a",
+  "status": "draft-for-independent-review",
+  "crossLinks": {
+    "searchReceipts": "research/searches/SBLA-009-search-receipts.json@1.0.0",
+    "screeningFlow": "research/screening/SBLA-009-screening-flow.json@1.0.0",
+    "sourceExtractions": "research/extractions/SBLA-009-source-extractions.json@1.0.0",
+    "appraisals": "research/appraisals/SBLA-009-appraisals.md@1.0.0",
+    "synthesis": "research/syntheses/SBLA-009-synthesis.md@1.0.0",
+    "evidencePacket": "research/packets/SBLA-009-evidence-packet.json@1.0.0",
+    "muscleDraft": "content-drafts/muscles/pectoralis-major.md@1.0.0",
+    "pressDraft": "content-drafts/exercises/barbell-flat-bench-press.md@1.0.0",
+    "flyDraft": "content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md@1.0.0"
+  },
+  "fieldContract": {
+    "claims[]": "Each entry is shaped to claimSchema in src/lib/content/schemas.ts, minus the lifecycle fields Codex owns (reviewState, publicationState, approvalManifestId, contentChecksum, review, history, relationships). Codex can split this array into individual claim records without inventing content.",
+    "claims[].id": "Proposed lowercase kebab-case entity ID. Proposed, not authoritative: Codex owns content/claims/.",
+    "claims[].type": "One of the eight master plan section 9.3 claim types.",
+    "claims[].statement": "The claim as it would be rendered. Language is calibrated to certainty per master plan section 9.5.",
+    "claims[].plainLanguage": "The same claim for a reader who has not opened a methodology paper.",
+    "claims[].scope": "Population and conditions the claim is bounded to. A claim read outside its scope is a different claim.",
+    "claims[].qualifiers": "Every limit that must travel with the claim. A confident sentence without these is a defect.",
+    "claims[].evidence": "certainty, applicability, direction and magnitude, as four independent axes per master plan section 9.4.",
+    "claims[].sourceLinks[].sourceId": "The proposedSourceId of the extraction that supports, qualifies or contradicts this claim.",
+    "claims[].sourceLinks[].locator": "The exact place in that source. Every link has one.",
+    "claims[].sourceLinks[].role": "supports, qualifies, contradicts, or neutral-context.",
+    "claims[].sourceLinks[].supportStrength": "direct, partially-direct, or indirect, for the claim being made rather than for the study in general.",
+    "claims[].recordIds": "The screening-flow recordIds behind the sourceLinks, so a reviewer can walk back to retrieval.",
+    "absenceRecords[]": "Not claims. Explicit records that the evidence did not support a claim, kept separate so an absence is never rendered as an assertion."
+  },
+  "draftingRule": "Every statement in the three content drafts is generated from this file. A sentence in a draft that is not traceable to a claim ID here, or to the draft's own explicitly labelled definitional or provenance sections, is a defect.",
+  "claims": [
+    {
+      "id": "claim-pectoralis-major-attachments",
+      "type": "anatomy",
+      "statement": "The pectoralis major arises from the anterior surface of the medial half of the clavicle, the anterior surface of the sternum, the upper costal cartilages and the aponeurosis of the external oblique, and inserts on the lateral lip of the intertubercular sulcus of the humerus.",
+      "plainLanguage": "The chest muscle runs from the collarbone, breastbone and upper rib cartilages to a narrow attachment on the upper arm bone.",
+      "scope": {
+        "population": "adult humans",
+        "conditions": ["gross anatomy of the intact muscle"]
+      },
+      "qualifiers": [
+        "The attachment description is taken from an authoritative reference chapter; the primary cadaveric studies in this evidence set measured the humeral end rather than re-describing the origins.",
+        "About a third of dissected specimens depart from this configuration in some way (see claim-pectoralis-major-structural-variation)."
+      ],
+      "evidence": {
+        "certainty": "established-descriptive-fact",
+        "applicability": "direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-bookshelf-nbk525991",
+          "locator": "StatPearls, Anatomy, Thorax, Pectoralis Major, Bookshelf NBK525991, Introduction and summary; last update 24 July 2023",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-31061824",
+          "locator": "Introduction, first paragraph (the paper's cited background description, attributed there to its own reference 1)",
+          "role": "neutral-context",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-23444001",
+          "locator": "Abstract, Methods (origin of the abdominal head measured against the seventh rib-costal cartilage junction)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        }
+      ],
+      "recordIds": ["G0244", "G0292", "G0335"]
+    },
+    {
+      "id": "claim-pectoralis-major-humeral-footprint",
+      "type": "anatomy",
+      "statement": "At the humerus the pectoralis major tendon has a tall, narrow footprint, measured in fourteen cadaveric specimens at 75 mm (SD 9) superior-inferior by 7 mm (SD 1) medial-lateral, with the clavicular head tendon shorter than the sternal head tendon.",
+      "plainLanguage": "Where the chest muscle attaches to the arm bone, the attachment is long from top to bottom but very narrow from side to side.",
+      "scope": {
+        "population": "adult cadaveric specimens",
+        "conditions": [
+          "fresh-frozen whole upper extremities, imaged and then dissected"
+        ]
+      },
+      "qualifiers": [
+        "Fourteen specimens in one series; donor age and sex are not stated in the retrieved text.",
+        "Cadaveric measurement, so it is partially direct for a living lifter."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-32169467",
+          "locator": "Results, footprint dimensions and tendon lengths",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-36157089",
+          "locator": "Methods and Results, width of the humeral insertion measured in total and by head in eight cadavers",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        }
+      ],
+      "recordIds": ["G0281", "G0256"]
+    },
+    {
+      "id": "claim-pectoralis-major-enthesis-unilaminar",
+      "type": "anatomy",
+      "statement": "In one cadaveric series using ultrasound, MRI and histology on the same fourteen specimens, the pectoralis major humeral enthesis was unilaminar and fibrocartilaginous in every specimen, and none of the three methods identified the tendon layers that the standard description reports.",
+      "plainLanguage": "A study that imaged and then sectioned the same fourteen shoulders found a single-layer attachment, not the two-layer attachment usually described.",
+      "scope": {
+        "population": "adult cadaveric specimens",
+        "conditions": ["the enthesis specifically, not the whole tendon"]
+      },
+      "qualifiers": [
+        "One series of fourteen specimens.",
+        "The finding concerns the enthesis; the authors are explicit that a layered structure elsewhere in the tendon is not excluded.",
+        "This contradicts the layered description repeated in reference works, and the contradiction is unresolved in the primary literature."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-32169467",
+          "locator": "Results and Conclusion, enthesis histology",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-38189926",
+          "locator": "Abstract, Purpose (records that the layered description remains controversial)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-19291757",
+          "locator": "Abstract, background (records that there is little consensus on musculotendinous architecture)",
+          "role": "qualifies",
+          "supportStrength": "indirect"
+        }
+      ],
+      "recordIds": ["G0281", "G0236", "G0356"]
+    },
+    {
+      "id": "claim-pectoralis-major-portions",
+      "type": "anatomy",
+      "statement": "The pectoralis major is conventionally divided into a clavicular portion and a sternocostal portion, named for their origins, with an abdominal part described as a third division.",
+      "plainLanguage": "The chest muscle is usually described as having an upper part from the collarbone and a larger lower part from the breastbone and ribs, plus a small lowest part.",
+      "scope": {
+        "population": "adult humans",
+        "conditions": ["descriptive division of the intact muscle"]
+      },
+      "qualifiers": [
+        "The sternocostal head is described as having between two and seven distinct segments, so a two-part division is a simplification.",
+        "The abdominal part has its own traceable nerve supply, which supports treating it as a separable division."
+      ],
+      "evidence": {
+        "certainty": "established-descriptive-fact",
+        "applicability": "direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-bookshelf-nbk525991",
+          "locator": "StatPearls NBK525991, Introduction (two heads; sternocostal head with two to seven segments)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-35196672",
+          "locator": "Abstract, Methods (nerve branches to the abdominal part traced in 50 muscles from 27 specimens)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-25693862",
+          "locator": "Abstract (neurovascular entry points and distribution within the abdominal head, 32 hemithoraxes)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        }
+      ],
+      "recordIds": ["G0244", "G0262", "G0318"]
+    },
+    {
+      "id": "claim-pectoralis-major-structural-variation",
+      "type": "anatomy",
+      "statement": "The typical pectoralis major configuration was observed in 63.75 per cent of 80 cadaveric specimens, with a separate clavicular portion the most frequent variation.",
+      "plainLanguage": "Roughly one chest muscle in three differs in some way from the textbook description.",
+      "scope": {
+        "population": "40 adult cadavers of both sexes, 22 male and 18 female",
+        "conditions": ["gross dissection of 80 pectoralis major specimens"]
+      },
+      "qualifiers": [
+        "One cadaveric series; donor age is not stated in the retrieved text.",
+        "The proportion is specific to this series and to its classification scheme."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-31061824",
+          "locator": "Results, proportion of typical structure and the variation classification",
+          "role": "supports",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0292"]
+    },
+    {
+      "id": "claim-pectoralis-major-innervation",
+      "type": "anatomy",
+      "statement": "The pectoralis major is innervated by the pectoral nerves, with the lateral pectoral nerve supplying the proximal part of the muscle and the medial pectoral nerve the lower part; primary dissection series report substantial variation in this pattern, including three trunk-level pectoral nerves and an intercostal contribution.",
+      "plainLanguage": "Two main nerves supply the chest muscle, an upper one and a lower one, but dissection studies find the pattern varies from person to person and that other nerves contribute too.",
+      "scope": {
+        "population": "adult cadaveric specimens",
+        "conditions": ["gross and intramuscular nerve dissection"]
+      },
+      "qualifiers": [
+        "A clean one-nerve-per-head account is a simplification: a Sihler-stained series reports the muscle mainly innervated by the lateral pectoral nerve with an intercostal contribution in every specimen.",
+        "Two independent series report three constant pectoral branches rather than two.",
+        "The 62 and 38 per cent figures for the medial nerve's course are reported in the source as attributed to earlier work, not measured there."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-3579399",
+          "locator": "Abstract, opening (medial nerve course proportions and territories)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-bookshelf-nbk556059",
+          "locator": "StatPearls NBK556059, Introduction (medial pectoral nerve, medial cord, C8-T1, lower half of the pectoralis major)",
+          "role": "supports",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-31061824",
+          "locator": "Results and Conclusion (mainly lateral pectoral nerve; intercostal contribution in all Sihler-stained specimens)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-11040310",
+          "locator": "Abstract, Results (three distinct pectoral nerves at trunk level in all 29 dissections)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-22534124",
+          "locator": "Abstract, Results (three constant branches in 26 plexuses)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-28719731",
+          "locator": "Abstract, Results (multiple nerve entry points identified by dissection of 20 cadavers)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-bookshelf-nbk525991",
+          "locator": "StatPearls NBK525991, Nerves (lateral nerve to clavicular head, medial nerve to sternocostal head)",
+          "role": "neutral-context",
+          "supportStrength": "indirect"
+        }
+      ],
+      "recordIds": [
+        "G0621",
+        "G0505",
+        "G0292",
+        "G0399",
+        "G0548",
+        "G0532",
+        "G0244"
+      ]
+    },
+    {
+      "id": "claim-pectoralis-major-adduction",
+      "type": "function",
+      "statement": "The pectoralis major is among the muscles with the largest measured adductor moment arms at the glenohumeral joint, alongside the latissimus dorsi and teres major.",
+      "plainLanguage": "Of all the shoulder muscles, the chest muscle has some of the best leverage for pulling the upper arm down and across the body.",
+      "scope": {
+        "population": "adult cadaveric upper-extremity specimens",
+        "conditions": [
+          "glenohumeral horizontal flexion and elevation in the sagittal, scapular and coronal planes"
+        ]
+      },
+      "qualifiers": [
+        "Moment arm is leverage, not force and not activation: a large moment arm does not by itself establish how much a muscle contributes to a given movement.",
+        "Measured by tendon excursion in cadaveric specimens, so it is partially direct for a living lifter.",
+        "Leverage varies by sub-region and by joint position, so a single value for the whole muscle is not meaningful."
+      ],
+      "evidence": {
+        "certainty": "high",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-9356931",
+          "locator": "Abstract, Results (largest depressor and adductor moment arms in pectoralis major, latissimus dorsi and teres major)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-18691376",
+          "locator": "Abstract, Results (instantaneous moment arms of 18 sub-regions in eight specimens)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-21064160",
+          "locator": "Abstract, Results (internal-rotation leverage dominated by inferior subscapularis)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0599", "G0361", "G0556"]
+    },
+    {
+      "id": "claim-pectoralis-major-regional-differentiation",
+      "type": "function",
+      "statement": "The regions of the pectoralis major are not activated or loaded as one unit: measured moment arms, regional electromyography and tissue-stiffness measurement each show that its sub-regions differ from one another.",
+      "plainLanguage": "Different parts of the chest muscle do measurably different amounts of work, and which part works hardest depends on the movement.",
+      "scope": {
+        "population": "healthy adults and adult cadaveric specimens",
+        "conditions": [
+          "isometric and ballistic shoulder tasks, passive stretch, and cadaveric moment-arm measurement"
+        ]
+      },
+      "qualifiers": [
+        "The phenomenon is reported by five independent method families; the magnitudes are not comparable across them and are not pooled.",
+        "Individual samples are small, between eight and forty-eight participants or specimens.",
+        "The strongest regional activation evidence is from female participants only, while most of the exercise activation evidence is from male participants only.",
+        "Regional differentiation in activation is not by itself evidence that a region can be grown selectively by training."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-35093733",
+          "locator": "Abstract, Results (middle sternocostal region activating 12-108 per cent more than clavicular and superior sternocostal regions in named tasks)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-18691376",
+          "locator": "Abstract, Results (significant moment-arm differences across pectoralis major sub-regions, p < 0.01)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-21975455",
+          "locator": "Abstract, Results (heterogeneous surface EMG across the breadth of the muscle during ballistic adduction)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-20870556",
+          "locator": "Abstract (independent segmental control during isometric shoulder actions)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-16458022",
+          "locator": "Abstract (coordination of 19 muscle segments by movement direction, line of action and moment arm)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-37939425",
+          "locator": "Abstract (region-specific in vivo passive stretch response)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-28823503",
+          "locator": "Abstract (material properties differ between sternocostal and clavicular fibre regions)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-34009684",
+          "locator": "Abstract (activation-dependent stiffness differs by sex and changes with age)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        }
+      ],
+      "recordIds": [
+        "G0264",
+        "G0361",
+        "G0341",
+        "G0422",
+        "G0569",
+        "G0241",
+        "G0303",
+        "G0270"
+      ]
+    },
+    {
+      "id": "claim-pectoralis-major-regional-activation-varies-with-position",
+      "type": "function",
+      "statement": "Which region of the pectoralis major is most active depends on the position of the humerus: regional activation differs by arm elevation angle and by the plane of the movement.",
+      "plainLanguage": "Change the angle your arm works at and you change which part of the chest muscle does most of the work.",
+      "scope": {
+        "population": "healthy adults",
+        "conditions": [
+          "isometric shoulder tasks at defined elevation angles, and bench press at defined bench inclinations"
+        ]
+      },
+      "qualifiers": [
+        "Demonstrated in activation and in spectral EMG measures, not in force contribution.",
+        "Surface electromyography over this muscle carries a measurement qualifier that its own methods literature states plainly (see claim-pectoralis-major-surface-emg-limitation).",
+        "Samples of eight to twenty-four participants."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-35093733",
+          "locator": "Abstract, Results (regional differences by task and by high versus low elevation)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-36334406",
+          "locator": "Abstract, Results (clavicular head greater than sternocostal on the 45-degree incline, reversed on the flat bench, p < 0.001)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-20512064",
+          "locator": "Abstract, Results (clavicular head greater at 44 and 56 degrees than at 0 degrees)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-42376296",
+          "locator": "Abstract and Results (pectoralis major mean frequency higher at 90 degrees than at 135 and 180 degrees)",
+          "role": "supports",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-16458022",
+          "locator": "Abstract (segment coordination influenced by movement direction and moment arm)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        }
+      ],
+      "recordIds": ["G0264", "G0103", "G0348", "G0482", "G0569"]
+    },
+    {
+      "id": "claim-pectoralis-major-surface-emg-limitation",
+      "type": "exercise-mechanics",
+      "statement": "Standard bipolar surface electromyography mischaracterises pectoralis major activity in commonly performed tasks, and innervation-zone positions shift within the muscle during the bench press, so single-site surface EMG amplitude comparisons for this muscle are not reliably comparable.",
+      "plainLanguage": "The usual way of measuring chest-muscle activity with skin electrodes does not represent the whole muscle, and the measurement point effectively moves during a bench press.",
+      "scope": {
+        "population": "healthy adults",
+        "conditions": [
+          "surface electromyography over the pectoralis major during common shoulder tasks and the bench press"
+        ]
+      },
+      "qualifiers": [
+        "This is a methodological finding, not a finding about training.",
+        "It applies to every tier-4 activation statement in this slice, including the ones drafted here."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-33310606",
+          "locator": "Title and Abstract (standard bipolar surface EMG estimations mischaracterise pectoralis major activity)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-30870768",
+          "locator": "Title and Abstract (innervation-zone locations distribute medially during the bench press; offered as an explanation of conflicting activation reports)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-34644424",
+          "locator": "Abstract, background (the bench press inclination literature is contradictory and measurement artefact is the likely reason)",
+          "role": "supports",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0274", "G0520", "G0265"]
+    },
+    {
+      "id": "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
+      "type": "longitudinal-adaptation",
+      "statement": "Eight weeks of supervised chest resistance training increased pectoralis major muscle thickness in untrained and recreationally active adults, in two small trials using different exercises.",
+      "plainLanguage": "In two small studies, about two months of chest training made the chest muscle measurably thicker.",
+      "scope": {
+        "population": "untrained and recreationally active adults aged about 19 to 30",
+        "conditions": [
+          "8 weeks; machine butterfly at 10-12RM three times weekly, or bench press once or twice weekly"
+        ]
+      },
+      "qualifiers": [
+        "Two usable trials, both small; eight further eligible trials could not be read in full and are recorded as awaiting full text.",
+        "Measured by B-mode ultrasound at one or three sites, and the imaging plane, the measurement site and operator experience all change the number obtained.",
+        "One of the two trials prints identical pectoralis values for both of its randomised arms, so only the direction of its result is used.",
+        "Neither trial establishes a dose, and neither is a comparison between the two exercises in this slice."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "small"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-38240811",
+          "locator": "Results, Muscle thickness (strength group versus control, right d = 0.533 p = 0.029, left d = 0.721 p = 0.002)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-32922646",
+          "locator": "Results, muscle thickness at three intercostal sites after 8 weeks",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-29541130",
+          "locator": "Results, Muscle hypertrophy (both arms increased, p < 0.01)",
+          "role": "supports",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-34857426",
+          "locator": "Abstract (operator experience is a measurable error source in panoramic ultrasound of this muscle)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-37675501",
+          "locator": "Abstract (imaging plane changes the cross-sectional area obtained)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-35033973",
+          "locator": "Abstract (muscle volume and anatomical cross-sectional area are not interchangeable)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0098", "G0118", "G0132", "G0684", "G0674", "G0108"]
+    },
+    {
+      "id": "claim-bench-press-pectoralis-activation",
+      "type": "acute-response",
+      "statement": "The pectoralis major is measurably activated during the barbell flat bench press, at both its clavicular and sternocostal regions.",
+      "plainLanguage": "The chest muscle works during a barbell bench press, both its upper and lower parts.",
+      "scope": {
+        "population": "resistance-trained adults",
+        "conditions": [
+          "barbell flat bench press at loads from 60 per cent of 1RM to 10RM"
+        ]
+      },
+      "qualifiers": [
+        "Electromyography measures activation, not force and not growth; master plan section 2.2 prohibits presenting it as a measurement of hypertrophy.",
+        "Surface EMG over this muscle carries the measurement qualifier in claim-pectoralis-major-surface-emg-limitation.",
+        "Samples of twelve to thirty-five participants, mostly male."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-40269203",
+          "locator": "Methods and Results (pectoralis major sampled at clavicular 15 and 60 per cent and sternocostal 15 and 60 per cent during 10RM bench press)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-28713459",
+          "locator": "Abstract and Results (pectoralis major EMG during 6RM competition-style bench press)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-37229415",
+          "locator": "Abstract and Results (clavicular and lower pectoralis major during horizontal bench press at 60 per cent 1RM)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-33310606",
+          "locator": "Title and Abstract",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0090", "G0135", "G0245", "G0274"]
+    },
+    {
+      "id": "claim-bench-press-shoulder-moment-arm-decreases",
+      "type": "exercise-mechanics",
+      "statement": "During the ascent of a barbell bench press the moment arm of the bar about the shoulder axis decreases continuously, while the moment arm about the elbow axis reaches its minimum at the sticking region.",
+      "plainLanguage": "As the bar goes up, the leverage the weight has over the shoulder falls the whole way, while the leverage over the elbow is smallest at the hardest point of the lift.",
+      "scope": {
+        "population": "elite male powerlifters",
+        "conditions": [
+          "bench press at about 80 per cent of maximum, at maximum, and at a failed supramaximal load, in a simulated competition setting"
+        ]
+      },
+      "qualifiers": [
+        "Ten elite powerlifters in a 1989 study; competition technique may not generalise to a recreational lifter.",
+        "Joint moments computed from vertical barbell force alone are incomplete: lateral barbell forces must be measured, and technique and expertise change the moments obtained."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-applicable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-2779404",
+          "locator": "Abstract, Results (shoulder and elbow moment arms through the ascent and the sticking region)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-33555823",
+          "locator": "Title and Abstract (lateral barbell forces must be measured)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-35157403",
+          "locator": "Abstract (net joint moments differ by training expertise and sex)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0436", "G0117", "G0263"]
+    },
+    {
+      "id": "claim-bench-press-inclination-shifts-regional-activation",
+      "type": "exercise-mechanics",
+      "statement": "Raising the bench inclination shifts activation within the pectoralis major toward the clavicular region and away from the sternocostal region.",
+      "plainLanguage": "Pressing on an inclined bench moves more of the work to the upper part of the chest muscle.",
+      "scope": {
+        "population": "resistance-trained and untrained adult men",
+        "conditions": [
+          "flat versus 28, 44, 45 and 56 degree inclined bench or chest press at 50 to 80 per cent of 1RM"
+        ]
+      },
+      "qualifiers": [
+        "The researchers who measured this most carefully state in print that the inclination literature is contradictory and that measurement artefact is a likely reason.",
+        "Activation is not growth: a single small trial found a matching site-specific thickness difference, and it is the only outcome evidence in this direction.",
+        "Samples of eight to fifteen participants; one source reports effect sizes too large to be credible as population estimates and only its direction is used."
+      ],
+      "evidence": {
+        "certainty": "moderate",
+        "applicability": "partially-direct",
+        "direction": "not-applicable",
+        "magnitude": "not-estimable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-36334406",
+          "locator": "Abstract, Results (clavicular head greater on the incline, sternocostal greater on the flat bench, p < 0.001)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-20512064",
+          "locator": "Abstract, Results (clavicular head significantly greater at 44 and 56 degrees than at 0 degrees)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-31397215",
+          "locator": "Abstract, Results (clavicular head more excited on the inclined bench press; direction only)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-32922646",
+          "locator": "Results, muscle thickness at the second intercostal space (incline greater than horizontal, mean difference 0.62 cm, 95 per cent CI 0.23 to 1.0, p = 0.003)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-34644424",
+          "locator": "Abstract, background",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-28713459",
+          "locator": "Abstract, Results (no significant pectoralis activation difference between flat, inclined and declined positions in elite athletes)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0103", "G0348", "G0288", "G0118", "G0265", "G0135"]
+    },
+    {
+      "id": "claim-bench-press-grip-width-activation-mixed",
+      "type": "exercise-mechanics",
+      "statement": "Evidence on whether bench press grip width changes pectoralis major activation is mixed: one isometric study found grip width and forearm rotation shifted activation between the muscle's portions, while a study of national and international competitors found no significant difference in pectoralis activation across three grip widths at 6RM.",
+      "plainLanguage": "Studies disagree about whether changing your grip width changes how hard the chest muscle works.",
+      "scope": {
+        "population": "healthy men and elite male bench press competitors",
+        "conditions": [
+          "isometric holds at narrow, mid and wide grips; 6RM sets at three grip widths"
+        ]
+      },
+      "qualifiers": [
+        "The two studies differ in population, load and whether the contraction was isometric or dynamic, so they are not directly comparable.",
+        "The elite-athlete null is a non-significant result in twelve participants and cannot distinguish no difference from not enough information.",
+        "The 6RM load itself did change with grip width, by 5.8 to 11.1 per cent."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "mixed",
+        "magnitude": "not-estimable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-16095407",
+          "locator": "Abstract, Results (supinated grip increased clavicular portion activity; narrower grip decreased sternoclavicular portion activity)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-28713459",
+          "locator": "Abstract, Results (non-significant activation differences across three grip widths; 6RM loads differed by 5.8-11.1 per cent)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-37229415",
+          "locator": "Abstract, Results (clavicular portion activity differed between a 150 and a 50 per cent biacromial grip only in comparison with a machine press)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        }
+      ],
+      "recordIds": ["G0381", "G0135", "G0245"]
+    },
+    {
+      "id": "claim-bench-press-pectoralis-rupture",
+      "type": "safety-context",
+      "statement": "Rupture of the pectoralis major tendon is reported to occur during the bench press, and published case reports describe it happening during a bench press manoeuvre.",
+      "plainLanguage": "Tearing the chest muscle's tendon is a recognised injury that has been reported to happen while bench pressing.",
+      "scope": {
+        "population": "adult recreational and trained lifters",
+        "conditions": [
+          "bench pressing, reported in individual cases and in pooled case series"
+        ]
+      },
+      "qualifiers": [
+        "Case reports and pooled case series have no denominator, so nothing here supports a rate, a risk, or a comparison between exercises.",
+        "This is context, not medical, diagnostic or rehabilitation advice; the project does not give any.",
+        "The commonly repeated association with anabolic steroid use is described in the literature as lacking coherent supporting evidence."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "indirect",
+        "direction": "not-applicable",
+        "magnitude": "not-estimable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-42434169",
+          "locator": "Title and case presentation (complex intratendinous rupture during heavy bench pressing)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-21667914",
+          "locator": "Abstract, case description (rupture at the humeral insertion during a bench press manoeuvre)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-10795675",
+          "locator": "Title and Abstract (pooled analysis of 112 reported cases)",
+          "role": "supports",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-32577421",
+          "locator": "Title and Results (mechanism of injury related to tear location)",
+          "role": "qualifies",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-31303006",
+          "locator": "Abstract, Results (return to sport and weight training after repair)",
+          "role": "neutral-context",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-35413736",
+          "locator": "Abstract, Introduction (steroid association described but not coherently evidenced)",
+          "role": "qualifies",
+          "supportStrength": "indirect"
+        }
+      ],
+      "recordIds": ["G0212", "G0151", "G0209", "G0277", "G0047", "G0032"]
+    },
+    {
+      "id": "claim-cable-crossover-shoulder-moment-larger-than-bench-press",
+      "type": "exercise-mechanics",
+      "statement": "At matched external loads of 15 and 30 per cent of body weight, a standing cable cross-over produced significantly larger maximum absolute shoulder joint moments than a flat barbell bench press: 0.650 (SD 0.113) against 0.442 (SD 0.046) Nm/kg at 15 per cent of body weight, and 1.026 (SD 0.192) against 0.760 (SD 0.079) Nm/kg at 30 per cent.",
+      "plainLanguage": "For the same relative load, a standing cable cross-over put a larger turning force on the shoulder joint than a flat barbell bench press.",
+      "scope": {
+        "population": "twenty healthy adults aged 18 to 45 with at least two hours per week of weight-training experience, ten male and ten female",
+        "conditions": [
+          "loads of 15 and 30 per cent of body weight, six repetitions per condition, laboratory motion capture with cable load cells"
+        ]
+      },
+      "qualifiers": [
+        "The cable cross-over in this study is not the index cable fly: pulley height was not reported, the elbow angle was not prescribed and stance was not described, so it is a related condition.",
+        "Loads were set as a percentage of body weight rather than of 1RM, so the relative intensity of the two exercises is unknown and may differ.",
+        "The shoulder was modelled as the humerus relative to the thorax with no separate scapula, which the authors name as their key limitation.",
+        "A joint moment is an external mechanical demand, not a muscle force and not a growth stimulus.",
+        "One study, twenty participants."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "favors-b",
+        "magnitude": "moderate"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-35202059",
+          "locator": "Table 1 and Results 3.1 (maximum absolute shoulder moments, significance p < 0.0125)",
+          "role": "supports",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-33555823",
+          "locator": "Title and Abstract (bench press joint moments require lateral barbell force measurement)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-31668905",
+          "locator": "Abstract (static optimisation underestimates antagonist activity at the glenohumeral joint)",
+          "role": "qualifies",
+          "supportStrength": "indirect"
+        }
+      ],
+      "recordIds": ["G0034", "G0117", "G0517"]
+    },
+    {
+      "id": "claim-cable-crossover-elbow-excursion-smaller-than-bench-press",
+      "type": "exercise-mechanics",
+      "statement": "At matched external loads, elbow flexion-extension range of motion was far smaller in a standing cable cross-over than in a flat barbell bench press: 21.8 (SD 10.9) degrees against 79.5 (SD 6.2) degrees at 15 per cent of body weight.",
+      "plainLanguage": "The elbow bends and straightens much less in a cable cross-over than in a bench press.",
+      "scope": {
+        "population": "twenty healthy adults aged 18 to 45 with weight-training experience",
+        "conditions": [
+          "loads of 15 and 30 per cent of body weight, laboratory motion capture"
+        ]
+      },
+      "qualifiers": [
+        "The cable cross-over in this study is a related condition, not the index cable fly.",
+        "Elbow excursion in the cross-over rose significantly when load increased from 15 to 30 per cent of body weight, which the authors read as difficulty stabilising the elbow under heavier load.",
+        "The cable conditions showed markedly larger between-participant variation than the bench press conditions.",
+        "One study, twenty participants."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "favors-a",
+        "magnitude": "large"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-35202059",
+          "locator": "Table 2 and Results 3.2 (elbow flexion-extension range of motion and moment; significance p < 0.0125)",
+          "role": "supports",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0034"]
+    },
+    {
+      "id": "claim-machine-fly-increases-pectoralis-thickness",
+      "type": "longitudinal-adaptation",
+      "statement": "Eight weeks of machine butterfly training, five sets of 10 to 12 repetitions at a 10-12RM load three times weekly, increased pectoralis major muscle thickness compared with a non-training control in recreationally active adults.",
+      "plainLanguage": "Two months of pec deck training made the chest muscle thicker than doing nothing.",
+      "scope": {
+        "population": "recreationally active adults, physically active at least twice weekly, without chest or shoulder injury or surgery in the previous six months",
+        "conditions": [
+          "machine butterfly, 5 x 10-12 at 10-12RM, 90 s rest, three times weekly for 8 weeks, against a non-training control"
+        ]
+      },
+      "qualifiers": [
+        "One trial. Group allocation is described but randomisation sequence, allocation concealment and blinded outcome assessment are not reported.",
+        "Muscle thickness was measured at a single supra-axillary site, so the result says nothing about regional growth.",
+        "In the same trial, fifteen minutes a day of pectoral static stretching produced a statistically indistinguishable thickness change, which constrains how confidently this result can be attributed to the resistance training specifically.",
+        "The machine butterfly is a related condition, not the index bilateral standing cable fly at shoulder height."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "partially-direct",
+        "direction": "favors-a",
+        "magnitude": "small"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-38240811",
+          "locator": "Methods, intervention; Results, Muscle thickness (strength group versus control, right d = 0.533 p = 0.029, left d = 0.721 p = 0.002; intervention groups indistinguishable, right p = 0.983, left p = 0.905)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-34857426",
+          "locator": "Abstract (operator experience is a measurable error source in ultrasound measurement of this muscle)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0098", "G0684"]
+    },
+    {
+      "id": "claim-dumbbell-fly-clavicular-activation",
+      "type": "acute-response",
+      "statement": "The clavicular portion of the pectoralis major is activated during a dumbbell fly.",
+      "plainLanguage": "The upper part of the chest muscle works during a dumbbell fly.",
+      "scope": {
+        "population": "healthy adult men",
+        "conditions": [
+          "dumbbell fly performed across several modalities; loads not standardised across the source studies"
+        ]
+      },
+      "qualifiers": [
+        "The supporting studies used two-channel instrumentation and report no numeric activation values in their retrievable text.",
+        "Electromyography measures activation, not force and not growth.",
+        "A dumbbell fly is a related condition, not the index bilateral standing cable fly at shoulder height."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "indirect",
+        "direction": "not-applicable",
+        "magnitude": "not-estimable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-12661129",
+          "locator": "Abstract (all four modalities of the frontal-lateral cross with dumbbells developed high action-potential levels for both muscles)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-12661130",
+          "locator": "Abstract (clavicular pectoralis activity compared between rowing modalities and the frontal-lateral cross with dumbbells)",
+          "role": "supports",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-33310606",
+          "locator": "Title and Abstract",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0392", "G0391", "G0274"]
+    },
+    {
+      "id": "claim-press-versus-fly-activation-mixed",
+      "type": "acute-response",
+      "statement": "Acute electromyography comparing a barbell bench press with a dumbbell fly is inconsistent: one study reported higher pectoralis major activation in the press across most movement phases, while another reported no significant difference in activation level and only a shorter relative time of activation in the fly.",
+      "plainLanguage": "Studies that compared chest-muscle activity between a bench press and a dumbbell fly disagree with each other.",
+      "scope": {
+        "population": "resistance-trained adult men, and mixed-sex college-age lifters of varied experience",
+        "conditions": ["six-repetition-maximum loads in each exercise"]
+      },
+      "qualifiers": [
+        "Both studies were read as abstracts only; normalisation, electrode placement and crosstalk handling could not be verified.",
+        "The null result comes from twelve participants and cannot distinguish no difference from not enough information.",
+        "Both compare a dumbbell fly, not the index bilateral standing cable fly at shoulder height.",
+        "Electromyography is never evidence of hypertrophy."
+      ],
+      "evidence": {
+        "certainty": "very-low",
+        "applicability": "indirect",
+        "direction": "mixed",
+        "magnitude": "not-estimable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-33239937",
+          "locator": "Abstract, Results (higher activation in the barbell bench press across the whole movement and most phases)",
+          "role": "supports",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-15903389",
+          "locator": "Abstract, Results (no significant difference in motor unit activation across the three lifts; shorter relative time of activation in the dumbbell fly)",
+          "role": "contradicts",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-35599468",
+          "locator": "Abstract, Methods (bench press and dumbbell fly at 50 per cent 1RM; per-exercise pectoralis values not reported in the retrievable abstract)",
+          "role": "neutral-context",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-33310606",
+          "locator": "Title and Abstract",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0042", "G0077", "G0031", "G0274"]
+    },
+    {
+      "id": "claim-multi-joint-versus-single-joint-programme-strength",
+      "type": "longitudinal-adaptation",
+      "statement": "In one eight-week volume-equated trial, a programme built entirely from multi-joint exercises produced a larger increase in one-repetition-maximum bench press than a programme built entirely from single-joint exercises (10.9 versus 8.1 per cent, p < 0.05), with no difference in body composition.",
+      "plainLanguage": "In one study, people who trained with compound lifts gained more bench press strength than people who trained with isolation lifts, but their body composition changed the same amount.",
+      "scope": {
+        "population": "36 young male amateur soccer players with no previous resistance-training experience, in pre-season",
+        "conditions": [
+          "8 weeks, three sessions weekly, work volume equated individually; multi-joint chest work was the bench press, single-joint chest work was the pec deck machine and incline dumbbell fly"
+        ]
+      },
+      "qualifiers": [
+        "The outcome is the exercise the multi-joint group trained and the single-joint group did not, so the difference confounds adaptation with practice of the test.",
+        "No pectoralis-specific size or strength measure was taken, so this says nothing about chest muscle growth.",
+        "The contrast is whole programmes differing in every exercise, not two chest exercises.",
+        "Both groups performed an identical concurrent soccer routine.",
+        "Strength adaptation transfers only partly beyond the trained task, which is why the task-specificity qualifier is mandatory here."
+      ],
+      "evidence": {
+        "certainty": "low",
+        "applicability": "indirect",
+        "direction": "favors-a",
+        "magnitude": "small"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-29312007",
+          "locator": "Results and Table 2 (1RM bench press 8.1 versus 10.9 per cent, ANCOVA p < 0.05); Table 1 (exercise lists per group)",
+          "role": "supports",
+          "supportStrength": "indirect"
+        },
+        {
+          "sourceId": "source-pmid-36396899",
+          "locator": "Title and Abstract (generality of strength adaptation)",
+          "role": "qualifies",
+          "supportStrength": "indirect"
+        }
+      ],
+      "recordIds": ["G0052", "G0179"]
+    }
+  ],
+  "absenceRecords": [
+    {
+      "id": "absence-index-cable-fly-no-evidence",
+      "statement": "No study of the bilateral standing cable fly at shoulder height, as defined in research/questions/SBLA-008-vertical-slice.md section 3.2, was retrieved by any route in this pass. The index comparator condition has no evidence of any tier.",
+      "searchesThatWouldHaveFoundIt": [
+        "PubMed 30-phrase fly-family stratum N-RS1, 77 records retrieved and screened",
+        "Europe PMC 26-phrase fly-family stratum, 51 records",
+        "Europe PMC fly-family preprint stratum, 1 record",
+        "OpenAlex quoted-phrase probes for cable fly, cable flies, chest fly, chest flies, dumbbell fly, pec deck, pectoral fly, cable crossover and butterfly exercise, 133 records",
+        "SportRxiv current server and the frozen OSF legacy archive",
+        "ClinicalTrials.gov Essie intervention-and-outcome expression, 159 registrations"
+      ],
+      "interpretation": "Absence of evidence, reported as absence. This is not evidence that the cable fly is ineffective, and it is not evidence that it is equivalent to a bench press. It means nobody in the retrieved literature has measured it.",
+      "governingDecision": "The frozen U2/EU2 decision forbids widening Y or pooling a related condition into the primary comparison. A later widening would require a dated scope amendment and a new search and could not become the primary result retroactively."
+    },
+    {
+      "id": "absence-primary-comparison-no-evidence",
+      "statement": "No study comparing a barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved. The primary Q2 estimand, the between-condition difference in change, has no direct evidence.",
+      "searchesThatWouldHaveFoundIt": [
+        "PubMed stratum N-RS2, pectoral concept intersected with hypertrophy outcomes and resistance training, 87 records",
+        "PubMed stratum N-RS1, fly family, 77 records",
+        "PubMed stratum N-RS3, existing syntheses, 53 records",
+        "PubMed stratum N-RS6, contradiction, harms and measurement validity, 211 records"
+      ],
+      "interpretation": "Under master plan section 2.2 a thin evidence base may not be converted into a confident comparative recommendation. No claim in this pass makes a press-versus-fly hypertrophy statement.",
+      "governingDecision": "Anti-cherry-picking rule 7 in the eligibility plan: absence of evidence is reported as absence, never as evidence of no difference."
+    },
+    {
+      "id": "absence-contralateral-sensitivity-analysis-empty",
+      "statement": "The pre-specified sensitivity analysis for within-participant contralateral-limb designs contains zero eligible studies. No retrieved record trains one limb with the index press and the other with a fly-family condition.",
+      "searchesThatWouldHaveFoundIt": [
+        "All six PubMed retrieval strata; contrast type was recorded for every included study and every tier-1 study is between-participant",
+        "One record that would have entered the analysis, a within-subject pec deck volume comparison, is held at awaiting-full-text"
+      ],
+      "interpretation": "An empty pre-specified analysis is a result. The specification was fixed by the frozen U3/EU1 decision before any result was seen and is kept in the record.",
+      "governingDecision": "Frozen U3/EU1: contralateral designs are sensitivity evidence only and are never pooled with between-participant contrasts."
+    },
+    {
+      "id": "absence-terminologia-anatomica-anchor",
+      "statement": "No verified Terminologia Anatomica nomenclature anchor exists for this muscle record. The FIPAT TA2 host was unreachable on 2026-09-11 and again on 2026-09-13 (connection failure).",
+      "searchesThatWouldHaveFoundIt": [
+        "V1 terminology route, https://fipat.library.dal.ca/ta2/, attempted 2026-09-13"
+      ],
+      "interpretation": "Unresolved item U1 stands. The muscle draft records the absence. MeSH D010369, UBERON:0002381 and FMA:9627 are the anchors this slice does have.",
+      "governingDecision": "Search strategy section 6.8: record the absence; do not substitute model memory for official nomenclature."
+    },
+    {
+      "id": "absence-architectural-parameters",
+      "statement": "No fascicle length, pennation angle or physiological cross-sectional area value for the pectoralis major was extracted in this pass.",
+      "searchesThatWouldHaveFoundIt": [
+        "PubMed stratum N-RS5, pectoralis major intersected with architecture, attachment and innervation terms, 206 records"
+      ],
+      "interpretation": "One retrieved source modelled the three-dimensional architecture but its numeric results were not retrievable. The muscle draft therefore describes architecture qualitatively and records the gap.",
+      "governingDecision": "Master plan section 9.9: narrow claims to what the retrieved material actually supports."
+    }
+  ]
+}
