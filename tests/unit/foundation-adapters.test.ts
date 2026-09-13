@@ -231,6 +231,36 @@ describe('foundation adapters', () => {
     }
   });
 
+  it('keeps unpublished content drafts outside published-record validation', async () => {
+    const root = await createAdapterFixture();
+    try {
+      await Promise.all([
+        mkdir(path.join(root, 'content-drafts/exercises'), { recursive: true }),
+        mkdir(path.join(root, 'content-drafts/syntheses'), { recursive: true }),
+      ]);
+      await Promise.all([
+        writeFile(
+          path.join(root, 'content-drafts/exercises/bench-press.md'),
+          '# Unpublished exercise draft\n',
+        ),
+        writeFile(
+          path.join(root, 'content-drafts/syntheses/atomic-claims.json'),
+          '{"status":"draft-for-independent-review","claims":[]}\n',
+        ),
+      ]);
+
+      await expect(
+        runAdapterAt(root, 'scripts/content/validate.mjs'),
+      ).resolves.toMatchObject({
+        stdout: expect.stringContaining(
+          'Content validation passed: 0 records.',
+        ),
+      });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
   it('reports malformed syntax and unsupported extensions with remediation', async () => {
     const root = await createAdapterFixture();
     try {

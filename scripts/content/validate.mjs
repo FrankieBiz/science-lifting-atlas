@@ -10,12 +10,7 @@ import { listRelativeFiles } from '../foundation/scan-records.mjs';
 
 export const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
 
-const RECORD_ROOTS = [
-  'content',
-  'content-drafts',
-  'research/packets',
-  'reviews/evidence',
-];
+const RECORD_ROOTS = ['content', 'research/packets', 'reviews/evidence'];
 /** @type {ReadonlyArray<readonly [string, import('../../src/lib/content/schemas.ts').RecordKind]>} */
 const KIND_BY_PREFIX = [
   ['content/claims/', 'claim'],
