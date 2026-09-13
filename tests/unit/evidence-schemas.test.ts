@@ -47,6 +47,34 @@ describe('SBLA-007 evidence record schemas', () => {
     }
   });
 
+  it('represents a preprint without discarding its study design', async () => {
+    const fixtures =
+      await readJson<Record<RecordKind, unknown>>('records.valid.json');
+    const source = structuredClone(fixtures.source) as Record<string, unknown>;
+    const publication = source.publication as Record<string, unknown>;
+
+    source.type = 'randomized-trial';
+    publication.stage = 'preprint';
+
+    expect(validateRecord('source', source)).toMatchObject({ success: true });
+  });
+
+  it('requires every source to state its publication stage', async () => {
+    const fixtures =
+      await readJson<Record<RecordKind, unknown>>('records.valid.json');
+    const source = structuredClone(fixtures.source) as Record<string, unknown>;
+    const publication = source.publication as Record<string, unknown>;
+
+    delete publication.stage;
+
+    const result = validateRecord('source', source);
+    expect(result.success).toBe(false);
+    if (result.success) return;
+    expect(result.issues.map((issue) => issue.path)).toContain(
+      'publication.stage',
+    );
+  });
+
   it('orders fractional-second timestamps by instant for entity history', async () => {
     const fixtures =
       await readJson<Record<RecordKind, unknown>>('records.valid.json');

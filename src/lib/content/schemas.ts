@@ -376,6 +376,12 @@ export const sourceSchema = z
       .strict(),
     publication: z
       .object({
+        stage: z.enum([
+          'peer-reviewed',
+          'preprint',
+          'other-non-peer-reviewed',
+          'not-applicable',
+        ]),
         status: z.enum([
           'current',
           'corrected',

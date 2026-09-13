@@ -803,6 +803,7 @@ quality:
   applicability: partially-direct
   notes: []
 publication:
+  stage: peer-reviewed
   status: current
   statusCheckedAt: null
   statusSource: crossref
