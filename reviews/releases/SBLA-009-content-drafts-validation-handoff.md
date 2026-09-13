@@ -1,8 +1,11 @@
 # SBLA-009 content-drafts validation handoff
 
-**Role:** Codex  
-**Base:** `8ca59e850beb0770554074d474a3ff3a9e16710a`  
-**Branch:** `codex/SBLA-009-content-drafts-validation`  
+**Role:** Codex
+
+**Base:** `8ca59e850beb0770554074d474a3ff3a9e16710a`
+
+**Branch:** `codex/SBLA-009-content-drafts-validation`
+
 **Worktree:** `C:\src\s009draftgate`
 
 ## Decision
