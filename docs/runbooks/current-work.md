@@ -31,7 +31,8 @@ Expected handoff, and Paths owned.
 
 | Task                   | Role                        | Branch                              | Worktree                | Base commit                                | Started              | Expected handoff                         | Paths owned                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ---------------------- | --------------------------- | ----------------------------------- | ----------------------- | ------------------------------------------ | -------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| SBLA-009 evidence pass | Claude Research (account A) | `claude-research/SBLA-009-evidence` | `C:\\src\\s009research` | `303b23fb7e4a8794c9d83e64b5b3d4253006074f` | 2026-09-13 14:01 EDT | `research/packets/SBLA-009-handoff.md` | `research/searches/SBLA-009-search-receipts.json`; `research/screening/SBLA-009-screening-flow.json`; `research/extractions/SBLA-009-source-extractions.json`; `research/appraisals/SBLA-009-appraisals.md`; `research/syntheses/SBLA-009-synthesis.md`; `research/packets/sbla-009-evidence-packet.json`; `research/packets/SBLA-009-handoff.md`; `content-drafts/muscles/pectoralis-major.md`; `content-drafts/exercises/barbell-flat-bench-press.md`; `content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md`; `content-drafts/syntheses/SBLA-009-atomic-claims.json` |
+| SBLA-009 evidence pass | Claude Research (account A) | `claude-research/SBLA-009-evidence` | `C:\\src\\s009research` | `303b23fb7e4a8794c9d83e64b5b3d4253006074f` | 2026-09-13 14:01 EDT | Ten-artifact research candidate | `research/searches/SBLA-009-search-receipts.json`; `research/screening/SBLA-009-screening-flow.json`; `research/extractions/SBLA-009-source-extractions.json`; `research/appraisals/SBLA-009-appraisals.md`; `research/syntheses/SBLA-009-synthesis.md`; `research/packets/sbla-009-evidence-packet.json`; `content-drafts/muscles/pectoralis-major.md`; `content-drafts/exercises/barbell-flat-bench-press.md`; `content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md`; `content-drafts/syntheses/SBLA-009-atomic-claims.json` |
+| SBLA-009 continuity handoff | Codex | `claude-research/SBLA-009-evidence` | `C:\\src\\s009research` | `303b23fb7e4a8794c9d83e64b5b3d4253006074f` | 2026-09-13 16:05 EDT | `research/packets/SBLA-009-handoff.md` | `research/packets/SBLA-009-handoff.md` |
 
 SBLA-009 claim correction (2026-09-13 15:23 EDT): before the packet file was
 created, Account A found that the originally claimed uppercase packet filename
@@ -49,6 +50,13 @@ accepted `main` at `303b23fb7e4a8794c9d83e64b5b3d4253006074f`. Before any
 research commit, the still-uncommitted eleven-path worktree was fast-forwarded
 to that exact base. The research contents were preserved and the restricted-role
 diff is measured from the new base.
+
+SBLA-009 handoff transfer (2026-09-13 16:05 EDT): Account A exhausted its
+session limit after producing the ten scientific artifacts and an external
+packet generator, but before creating the claimed handoff. Codex now owns only
+the still-uncreated handoff path and will assemble it mechanically from the
+Account-A artifacts, real command output, and repository metadata. The handoff
+must disclose this provenance and may not add or alter a scientific claim.
 
 R3 override note (2026-09-11 20:09 EDT): Account B session
 `f73d7d2a-db7e-48be-a220-599a8b35f1b4` hit its session limit after writing a
