@@ -1,0 +1,166 @@
+{
+  "search": {
+    "artifactId": "SBLA-TEST-search-receipts",
+    "generatedAt": "2026-09-13T12:00:00Z",
+    "receipts": [
+      {
+        "receiptId": "R-001",
+        "executedAt": "2026-09-12",
+        "resultCount": 4,
+        "recordsRetrievedIntoScreening": 4
+      },
+      {
+        "receiptId": "R-002",
+        "executedAt": "2026-09-13T12:01:00Z",
+        "resultCount": 0,
+        "recordsRetrievedIntoScreening": 0
+      }
+    ]
+  },
+  "screening": {
+    "artifactId": "SBLA-TEST-screening-flow",
+    "generatedAt": "2026-09-13T12:10:00Z",
+    "fieldContract": {
+      "retrievalEventsDefault": 1
+    },
+    "reconciliation": {
+      "recordsRetrieved": 5,
+      "duplicateRetrievalEvents": 1,
+      "uniqueRecordsAfterDeduplication": 4,
+      "excluded": 1,
+      "awaitingFullText": 1,
+      "included": 2,
+      "equationOneCloses": true,
+      "equationTwoCloses": true
+    },
+    "exclusionCodeCounts": {
+      "E-OUT-1": 1
+    },
+    "records": [
+      {
+        "recordId": "G0001",
+        "terminalState": "excluded",
+        "primaryReasonCode": "E-OUT-1"
+      },
+      {
+        "recordId": "G0002",
+        "terminalState": "awaiting-full-text",
+        "acquisition": {
+          "accessLevel": "abstract-only",
+          "ladderStepsTried": [
+            {
+              "step": "publisher-open-access",
+              "attemptedAt": "2026-09-13",
+              "result": "HTTP 403"
+            }
+          ]
+        }
+      },
+      {
+        "recordId": "G0003",
+        "terminalState": "included",
+        "acquisition": {
+          "accessLevel": "abstract-only",
+          "ladderStepsTried": [
+            {
+              "step": "pubmed-central",
+              "attemptedAt": "2026-09-13",
+              "result": "No matching manuscript"
+            }
+          ]
+        }
+      },
+      {
+        "recordId": "G0004",
+        "terminalState": "included",
+        "retrievalEvents": 2,
+        "acquisition": {
+          "accessLevel": "full-text-open",
+          "ladderStepsTried": [
+            {
+              "step": "publisher-open-access",
+              "attemptedAt": "2026-09-13",
+              "result": "HTTP 200; version of record obtained"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "extraction": {
+    "artifactId": "SBLA-TEST-source-extractions",
+    "generatedAt": "2026-09-13T12:20:00Z",
+    "counts": {
+      "includedSources": 2,
+      "fullTextObtained": 1,
+      "abstractOnly": 1,
+      "nonEnglish": 1,
+      "preprints": 1,
+      "corrected": 1
+    },
+    "awaitingFullText": [
+      {
+        "recordId": "G0002"
+      }
+    ],
+    "extractions": [
+      {
+        "extractionId": "X-G0003",
+        "recordId": "G0003",
+        "proposedSourceId": "source-abstract",
+        "sourceSchemaFields": {
+          "access": {
+            "level": "abstract-only"
+          },
+          "publication": {
+            "stage": "peer-reviewed",
+            "status": "corrected",
+            "statusCheckedAt": "2026-09-13",
+            "nextStatusCheckAt": "2026-10-13"
+          }
+        },
+        "extraction": {
+          "language": "eng",
+          "reportedFacts": [
+            {
+              "fact": "Abstract-level observation.",
+              "basis": "abstract-only"
+            }
+          ]
+        }
+      },
+      {
+        "extractionId": "X-G0004",
+        "recordId": "G0004",
+        "proposedSourceId": "source-full-text",
+        "sourceSchemaFields": {
+          "access": {
+            "level": "full-text-open"
+          },
+          "publication": {
+            "stage": "preprint",
+            "status": "current",
+            "statusCheckedAt": "2026-09-13",
+            "nextStatusCheckAt": "2026-10-13"
+          }
+        },
+        "extraction": {
+          "language": "spa",
+          "reportedFacts": [
+            {
+              "fact": "Full-text observation.",
+              "basis": "full-text, machine-translated"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "packet": {
+    "id": "sbla-test-evidence-packet",
+    "searchedAt": "2026-09-13",
+    "includedSourceIds": ["source-abstract", "source-full-text"],
+    "createdAt": "2026-09-13T12:30:00Z",
+    "updatedAt": "2026-09-13T12:30:00Z"
+  }
+}

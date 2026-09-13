@@ -1,0 +1,207 @@
+{
+  "cases": [
+    {
+      "name": "missing receipt identifier",
+      "expectedCode": "ID_INVALID",
+      "artifact": "search",
+      "expectedPath": "$.receipts[0].receiptId",
+      "operation": "set",
+      "path": ["search", "receipts", 0, "receiptId"],
+      "value": ""
+    },
+    {
+      "name": "duplicate receipt identifier",
+      "expectedCode": "ID_DUPLICATE",
+      "artifact": "search",
+      "expectedPath": "$.receipts[1].receiptId",
+      "operation": "set",
+      "path": ["search", "receipts", 1, "receiptId"],
+      "value": "R-001"
+    },
+    {
+      "name": "impossible execution date",
+      "expectedCode": "DATE_INVALID",
+      "artifact": "search",
+      "expectedPath": "$.receipts[0].executedAt",
+      "operation": "set",
+      "path": ["search", "receipts", 0, "executedAt"],
+      "value": "2026-02-30"
+    },
+    {
+      "name": "negative result count",
+      "expectedCode": "COUNT_INVALID",
+      "artifact": "search",
+      "expectedPath": "$.receipts[0].resultCount",
+      "operation": "set",
+      "path": ["search", "receipts", 0, "resultCount"],
+      "value": -1
+    },
+    {
+      "name": "non-scalar terminal state",
+      "expectedCode": "TERMINAL_STATE_INVALID",
+      "artifact": "screening",
+      "expectedPath": "$.records[0].terminalState",
+      "operation": "set",
+      "path": ["screening", "records", 0, "terminalState"],
+      "value": ["excluded", "included"]
+    },
+    {
+      "name": "declared state total differs from records",
+      "expectedCode": "SCREENING_TOTAL_MISMATCH",
+      "artifact": "screening",
+      "expectedPath": "$.reconciliation.excluded",
+      "operation": "set",
+      "path": ["screening", "reconciliation", "excluded"],
+      "value": 2
+    },
+    {
+      "name": "first reconciliation equation does not close",
+      "expectedCode": "RECONCILIATION_EQUATION_ONE_MISMATCH",
+      "artifact": "screening",
+      "expectedPath": "$.reconciliation",
+      "operation": "set",
+      "path": ["screening", "reconciliation", "included"],
+      "value": 3
+    },
+    {
+      "name": "second reconciliation equation does not close",
+      "expectedCode": "RECONCILIATION_EQUATION_TWO_MISMATCH",
+      "artifact": "screening",
+      "expectedPath": "$.reconciliation",
+      "operation": "set",
+      "path": ["screening", "reconciliation", "duplicateRetrievalEvents"],
+      "value": 2
+    },
+    {
+      "name": "implicit retrieval event default",
+      "expectedCode": "RETRIEVAL_EVENTS_DEFAULT_MISSING",
+      "artifact": "screening",
+      "expectedPath": "$.fieldContract.retrievalEventsDefault",
+      "operation": "delete",
+      "path": ["screening", "fieldContract", "retrievalEventsDefault"]
+    },
+    {
+      "name": "awaiting-full-text acquisition ladder empty",
+      "expectedCode": "ACQUISITION_LADDER_REQUIRED",
+      "artifact": "screening",
+      "expectedPath": "$.records[1].acquisition.ladderStepsTried",
+      "operation": "set",
+      "path": ["screening", "records", 1, "acquisition", "ladderStepsTried"],
+      "value": []
+    },
+    {
+      "name": "included lower-access acquisition ladder empty",
+      "expectedCode": "ACQUISITION_LADDER_REQUIRED",
+      "artifact": "screening",
+      "expectedPath": "$.records[2].acquisition.ladderStepsTried",
+      "operation": "set",
+      "path": ["screening", "records", 2, "acquisition", "ladderStepsTried"],
+      "value": []
+    },
+    {
+      "name": "acquisition attempt has impossible date",
+      "expectedCode": "ACQUISITION_ATTEMPT_DATE_INVALID",
+      "artifact": "screening",
+      "expectedPath": "$.records[1].acquisition.ladderStepsTried[0].attemptedAt",
+      "operation": "set",
+      "path": [
+        "screening",
+        "records",
+        1,
+        "acquisition",
+        "ladderStepsTried",
+        0,
+        "attemptedAt"
+      ],
+      "value": "2026-02-30"
+    },
+    {
+      "name": "acquisition attempt lacks a result",
+      "expectedCode": "ACQUISITION_ATTEMPT_RESULT_REQUIRED",
+      "artifact": "screening",
+      "expectedPath": "$.records[1].acquisition.ladderStepsTried[0].result",
+      "operation": "set",
+      "path": [
+        "screening",
+        "records",
+        1,
+        "acquisition",
+        "ladderStepsTried",
+        0,
+        "result"
+      ],
+      "value": ""
+    },
+    {
+      "name": "included record and extraction identifiers differ",
+      "expectedCode": "INCLUDED_EXTRACTION_IDS_MISMATCH",
+      "artifact": "extraction",
+      "expectedPath": "$.extractions",
+      "operation": "set",
+      "path": ["extraction", "extractions", 0, "recordId"],
+      "value": "G0999"
+    },
+    {
+      "name": "awaiting-full-text registers differ",
+      "expectedCode": "AWAITING_IDS_MISMATCH",
+      "artifact": "extraction",
+      "expectedPath": "$.awaitingFullText",
+      "operation": "set",
+      "path": ["extraction", "awaitingFullText", 0, "recordId"],
+      "value": "G0999"
+    },
+    {
+      "name": "packet source identifiers differ",
+      "expectedCode": "PACKET_SOURCE_IDS_MISMATCH",
+      "artifact": "packet",
+      "expectedPath": "$.includedSourceIds",
+      "operation": "set",
+      "path": ["packet", "includedSourceIds"],
+      "value": ["source-abstract"]
+    },
+    {
+      "name": "extraction summary count differs",
+      "expectedCode": "EXTRACTION_COUNT_MISMATCH",
+      "artifact": "extraction",
+      "expectedPath": "$.counts.fullTextObtained",
+      "operation": "set",
+      "path": ["extraction", "counts", "fullTextObtained"],
+      "value": 2
+    },
+    {
+      "name": "screening and extraction access levels differ",
+      "expectedCode": "ACCESS_LEVEL_MISMATCH",
+      "artifact": "extraction",
+      "expectedPath": "$.extractions[0].sourceSchemaFields.access.level",
+      "operation": "set",
+      "path": ["screening", "records", 2, "acquisition", "accessLevel"],
+      "value": "metadata-only"
+    },
+    {
+      "name": "full-text fact exceeds source access",
+      "expectedCode": "FULL_TEXT_BASIS_EXCEEDS_ACCESS",
+      "artifact": "extraction",
+      "expectedPath": "$.extractions[0].extraction.reportedFacts[0].basis",
+      "operation": "set",
+      "path": [
+        "extraction",
+        "extractions",
+        0,
+        "extraction",
+        "reportedFacts",
+        0,
+        "basis"
+      ],
+      "value": "full-text"
+    },
+    {
+      "name": "contracted extraction language is null",
+      "expectedCode": "LANGUAGE_REQUIRED",
+      "artifact": "extraction",
+      "expectedPath": "$.extractions[0].extraction.language",
+      "operation": "set",
+      "path": ["extraction", "extractions", 0, "extraction", "language"],
+      "value": null
+    }
+  ]
+}
