@@ -5,12 +5,14 @@
     "receipts": [
       {
         "receiptId": "R-001",
+        "submittedQuery": "fixture query one",
         "executedAt": "2026-09-12",
-        "resultCount": 4,
-        "recordsRetrievedIntoScreening": 4
+        "resultCount": 5,
+        "recordsRetrievedIntoScreening": 5
       },
       {
         "receiptId": "R-002",
+        "submittedQuery": "fixture query two",
         "executedAt": "2026-09-13T12:01:00Z",
         "resultCount": 0,
         "recordsRetrievedIntoScreening": 0
@@ -159,6 +161,20 @@
   "packet": {
     "id": "sbla-test-evidence-packet",
     "searchedAt": "2026-09-13",
+    "searches": [
+      {
+        "database": "Example index — receipt R-001",
+        "query": "fixture query one",
+        "searchedAt": "2026-09-12",
+        "resultCount": 5
+      },
+      {
+        "database": "Example index — receipt R-002",
+        "query": "fixture query two",
+        "searchedAt": "2026-09-13T12:01:00Z",
+        "resultCount": 0
+      }
+    ],
     "includedSourceIds": ["source-abstract", "source-full-text"],
     "createdAt": "2026-09-13T12:30:00Z",
     "updatedAt": "2026-09-13T12:30:00Z"

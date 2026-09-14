@@ -37,6 +37,15 @@
       "value": -1
     },
     {
+      "name": "search retrieval total differs from screening",
+      "expectedCode": "SEARCH_SCREENING_TOTAL_MISMATCH",
+      "artifact": "search",
+      "expectedPath": "$.receipts",
+      "operation": "set",
+      "path": ["search", "receipts", 0, "recordsRetrievedIntoScreening"],
+      "value": 999
+    },
+    {
       "name": "non-scalar terminal state",
       "expectedCode": "TERMINAL_STATE_INVALID",
       "artifact": "screening",
@@ -116,6 +125,22 @@
       "value": "2026-02-30"
     },
     {
+      "name": "acquisition attempt lacks a step",
+      "expectedCode": "ACQUISITION_ATTEMPT_STEP_REQUIRED",
+      "artifact": "screening",
+      "expectedPath": "$.records[1].acquisition.ladderStepsTried[0].step",
+      "operation": "delete",
+      "path": [
+        "screening",
+        "records",
+        1,
+        "acquisition",
+        "ladderStepsTried",
+        0,
+        "step"
+      ]
+    },
+    {
       "name": "acquisition attempt lacks a result",
       "expectedCode": "ACQUISITION_ATTEMPT_RESULT_REQUIRED",
       "artifact": "screening",
@@ -178,6 +203,31 @@
       "value": "metadata-only"
     },
     {
+      "name": "screening access level is outside the closed vocabulary",
+      "expectedCode": "ACCESS_LEVEL_INVALID",
+      "artifact": "screening",
+      "expectedPath": "$.records[2].acquisition.accessLevel",
+      "operation": "set",
+      "path": ["screening", "records", 2, "acquisition", "accessLevel"],
+      "value": "abstract_only"
+    },
+    {
+      "name": "extraction access breakdown omits an included source",
+      "expectedCode": "ACCESS_LEVEL_BREAKDOWN_MISMATCH",
+      "artifact": "extraction",
+      "expectedPath": "$.counts",
+      "operation": "set",
+      "path": [
+        "extraction",
+        "extractions",
+        0,
+        "sourceSchemaFields",
+        "access",
+        "level"
+      ],
+      "value": "unknown-access"
+    },
+    {
       "name": "full-text fact exceeds source access",
       "expectedCode": "FULL_TEXT_BASIS_EXCEEDS_ACCESS",
       "artifact": "extraction",
@@ -193,6 +243,40 @@
         "basis"
       ],
       "value": "full-text"
+    },
+    {
+      "name": "fact basis is outside the closed vocabulary",
+      "expectedCode": "FACT_BASIS_INVALID",
+      "artifact": "extraction",
+      "expectedPath": "$.extractions[0].extraction.reportedFacts[0].basis",
+      "operation": "set",
+      "path": [
+        "extraction",
+        "extractions",
+        0,
+        "extraction",
+        "reportedFacts",
+        0,
+        "basis"
+      ],
+      "value": "full text"
+    },
+    {
+      "name": "reported facts field is missing",
+      "expectedCode": "REPORTED_FACTS_REQUIRED",
+      "artifact": "extraction",
+      "expectedPath": "$.extractions[0].extraction.reportedFacts",
+      "operation": "delete",
+      "path": ["extraction", "extractions", 0, "extraction", "reportedFacts"]
+    },
+    {
+      "name": "packet search does not match its receipt",
+      "expectedCode": "PACKET_SEARCH_RECEIPTS_MISMATCH",
+      "artifact": "packet",
+      "expectedPath": "$.searches",
+      "operation": "set",
+      "path": ["packet", "searches", 0, "resultCount"],
+      "value": 999
     },
     {
       "name": "contracted extraction language is null",

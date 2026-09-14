@@ -129,6 +129,89 @@ describe('research companion bundle validation', () => {
     expect(second).toEqual(first);
   });
 
+  it('rejects the three reproduced cross-companion and vocabulary bypasses', async () => {
+    const valid = await readJson<JsonObject>('valid-bundle.json');
+
+    const searchMismatch = structuredClone(valid);
+    mutate(searchMismatch, {
+      name: 'search total',
+      expectedCode: 'SEARCH_SCREENING_TOTAL_MISMATCH',
+      artifact: 'search',
+      expectedPath: '$.receipts',
+      operation: 'set',
+      path: ['search', 'receipts', 0, 'recordsRetrievedIntoScreening'],
+      value: 999,
+    });
+    expect(validateResearchBundle(searchMismatch)).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          code: 'SEARCH_SCREENING_TOTAL_MISMATCH',
+          artifact: 'search',
+          path: '$.receipts',
+        }),
+      ]),
+    );
+
+    const packetMismatch = structuredClone(valid);
+    mutate(packetMismatch, {
+      name: 'packet search',
+      expectedCode: 'PACKET_SEARCH_RECEIPTS_MISMATCH',
+      artifact: 'packet',
+      expectedPath: '$.searches',
+      operation: 'set',
+      path: ['packet', 'searches', 0, 'resultCount'],
+      value: 999,
+    });
+    expect(validateResearchBundle(packetMismatch)).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          code: 'PACKET_SEARCH_RECEIPTS_MISMATCH',
+          artifact: 'packet',
+          path: '$.searches',
+        }),
+      ]),
+    );
+
+    const vocabularyBypass = structuredClone(valid);
+    mutate(vocabularyBypass, {
+      name: 'screening access',
+      expectedCode: 'ACCESS_LEVEL_INVALID',
+      artifact: 'screening',
+      expectedPath: '$.records[2].acquisition.accessLevel',
+      operation: 'set',
+      path: ['screening', 'records', 2, 'acquisition', 'accessLevel'],
+      value: 'abstract_only',
+    });
+    mutate(vocabularyBypass, {
+      name: 'extraction access',
+      expectedCode: 'ACCESS_LEVEL_INVALID',
+      artifact: 'extraction',
+      expectedPath: '$.extractions[0].sourceSchemaFields.access.level',
+      operation: 'set',
+      path: [
+        'extraction',
+        'extractions',
+        0,
+        'sourceSchemaFields',
+        'access',
+        'level',
+      ],
+      value: 'abstract_only',
+    });
+    expect(validateResearchBundle(vocabularyBypass)).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          code: 'ACCESS_LEVEL_INVALID',
+          artifact: 'screening',
+        }),
+        expect.objectContaining({
+          code: 'ACCESS_LEVEL_INVALID',
+          artifact: 'extraction',
+        }),
+      ]),
+    );
+  });
+
   it('independently exercises every bundle validation code with exact paths', async () => {
     const valid = await readJson<JsonObject>('valid-bundle.json');
     const invalid = await readJson<{ cases: Mutation[] }>(
@@ -194,6 +277,16 @@ describe('research companion CLI', () => {
 
   it('rejects an explicitly selected missing bundle', async () => {
     const root = await makeRoot();
+    await Promise.all(
+      [
+        'research/searches',
+        'research/screening',
+        'research/extractions',
+        'research/packets',
+      ].map((directory) =>
+        mkdir(path.join(root, directory), { recursive: true }),
+      ),
+    );
 
     await expect(runCli(root, '--bundle', 'SBLA-TEST')).rejects.toMatchObject({
       code: 1,
@@ -215,6 +308,30 @@ describe('research companion CLI', () => {
       stderr: expect.stringMatching(
         /\[JSON_PARSE_FAILED\].*research\/screening\/SBLA-TEST-screening-flow\.json/s,
       ),
+    });
+  });
+
+  it('rejects a repository root with no companion directories', async () => {
+    const root = await makeRoot();
+
+    await expect(runCli(root)).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining('[ROOT_INVALID]'),
+    });
+  });
+
+  it('rejects duplicate root flags even when the first resolves to cwd', async () => {
+    const root = await makeRoot();
+
+    await expect(
+      execFileAsync(
+        process.execPath,
+        [checkerPath, '--root', '.', '--root', path.join(root, 'shadow')],
+        { cwd: root, encoding: 'utf8' },
+      ),
+    ).rejects.toMatchObject({
+      code: 2,
+      stderr: expect.stringContaining('[ARGUMENT_INVALID]'),
     });
   });
 });

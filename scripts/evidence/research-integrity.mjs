@@ -13,6 +13,17 @@ const FULL_TEXT_ACCESS_LEVELS = new Set([
   'full-text-open',
   'full-text-limited',
 ]);
+const ACCESS_LEVELS = new Set([
+  ...LOWER_ACCESS_LEVELS,
+  ...FULL_TEXT_ACCESS_LEVELS,
+]);
+const FACT_BASIS_PARTS = new Set([
+  'abstract',
+  'abstract-only',
+  'full-text',
+  'machine-translated',
+  'metadata',
+]);
 const ENGLISH_LANGUAGE_CODES = new Set(['en', 'eng', 'english']);
 const ARTIFACT_ORDER = new Map([
   ['bundle', 0],
@@ -27,25 +38,33 @@ export const BUNDLE_VALIDATION_CODES = Object.freeze([
   'ID_DUPLICATE',
   'DATE_INVALID',
   'COUNT_INVALID',
+  'SEARCH_SCREENING_TOTAL_MISMATCH',
   'TERMINAL_STATE_INVALID',
   'SCREENING_TOTAL_MISMATCH',
   'RECONCILIATION_EQUATION_ONE_MISMATCH',
   'RECONCILIATION_EQUATION_TWO_MISMATCH',
   'RETRIEVAL_EVENTS_DEFAULT_MISSING',
   'ACQUISITION_LADDER_REQUIRED',
+  'ACQUISITION_ATTEMPT_STEP_REQUIRED',
   'ACQUISITION_ATTEMPT_DATE_INVALID',
   'ACQUISITION_ATTEMPT_RESULT_REQUIRED',
   'INCLUDED_EXTRACTION_IDS_MISMATCH',
   'AWAITING_IDS_MISMATCH',
   'PACKET_SOURCE_IDS_MISMATCH',
   'EXTRACTION_COUNT_MISMATCH',
+  'ACCESS_LEVEL_INVALID',
+  'ACCESS_LEVEL_BREAKDOWN_MISMATCH',
   'ACCESS_LEVEL_MISMATCH',
+  'REPORTED_FACTS_REQUIRED',
+  'FACT_BASIS_INVALID',
   'FULL_TEXT_BASIS_EXCEEDS_ACCESS',
   'LANGUAGE_REQUIRED',
+  'PACKET_SEARCH_RECEIPTS_MISMATCH',
 ]);
 
 export const CLI_ISSUE_CODES = Object.freeze([
   'ARGUMENT_INVALID',
+  'ROOT_INVALID',
   'BUNDLE_MISSING',
   'BUNDLE_PARTIAL',
   'JSON_PARSE_FAILED',
@@ -98,6 +117,17 @@ function asArray(value) {
  */
 function isIdentifier(value) {
   return typeof value === 'string' && value.trim().length > 0;
+}
+
+/** @param {unknown} value */
+function packetReceiptId(value) {
+  const packetSearch = asObject(value);
+  if (isIdentifier(packetSearch.receiptId)) {
+    return String(packetSearch.receiptId).toUpperCase();
+  }
+  if (typeof packetSearch.database !== 'string') return null;
+  const match = /\breceipt\s+(R-\d+)\b/i.exec(packetSearch.database);
+  return match?.[1] ? match[1].toUpperCase() : null;
 }
 
 /**
@@ -368,6 +398,11 @@ export function validateResearchBundle(rawBundle) {
       );
     }
   });
+  let searchRetrievedTotal = 0;
+  for (const rawReceipt of receipts) {
+    const value = asObject(rawReceipt).recordsRetrievedIntoScreening;
+    if (isCount(value)) searchRetrievedTotal += Number(value);
+  }
 
   const records = asArray(screening.records);
   validateUniqueIds(
@@ -456,6 +491,22 @@ export function validateResearchBundle(rawBundle) {
 
     const acquisition = asObject(record.acquisition);
     const accessLevel = acquisition.accessLevel;
+    if (
+      (accessLevel !== undefined && accessLevel !== null) ||
+      state === 'awaiting-full-text' ||
+      state === 'included'
+    ) {
+      if (!ACCESS_LEVELS.has(String(accessLevel))) {
+        addIssue(issues, {
+          code: 'ACCESS_LEVEL_INVALID',
+          artifact: 'screening',
+          path: `$.records[${recordIndex}].acquisition.accessLevel`,
+          message: `Screening access level ${JSON.stringify(accessLevel)} is not in the closed access vocabulary.`,
+          remediation:
+            'Use full-text-open, full-text-limited, abstract-only, or metadata-only, matching the material actually obtained.',
+        });
+      }
+    }
     const requiresLadder =
       state === 'awaiting-full-text' ||
       (state === 'included' && LOWER_ACCESS_LEVELS.has(String(accessLevel)));
@@ -473,6 +524,16 @@ export function validateResearchBundle(rawBundle) {
     attempts.forEach((rawAttempt, attemptIndex) => {
       const attempt = asObject(rawAttempt);
       const attemptPath = `$.records[${recordIndex}].acquisition.ladderStepsTried[${attemptIndex}]`;
+      if (!isIdentifier(attempt.step)) {
+        addIssue(issues, {
+          code: 'ACQUISITION_ATTEMPT_STEP_REQUIRED',
+          artifact: 'screening',
+          path: `${attemptPath}.step`,
+          message: 'Every acquisition attempt must name the ladder step tried.',
+          remediation:
+            'Record the lawful acquisition route as a nonempty step alongside attemptedAt and result.',
+        });
+      }
       if (!isRealIsoDate(attempt.attemptedAt)) {
         addIssue(issues, {
           code: 'ACQUISITION_ATTEMPT_DATE_INVALID',
@@ -514,6 +575,19 @@ export function validateResearchBundle(rawBundle) {
       reconciliation[key],
       `Reconciliation ${key}`,
     );
+  }
+  if (
+    isCount(reconciliation.recordsRetrieved) &&
+    searchRetrievedTotal !== Number(reconciliation.recordsRetrieved)
+  ) {
+    addIssue(issues, {
+      code: 'SEARCH_SCREENING_TOTAL_MISMATCH',
+      artifact: 'search',
+      path: '$.receipts',
+      message: `Search receipts declare ${searchRetrievedTotal} records retrieved into screening; screening reconciliation declares ${reconciliation.recordsRetrieved}.`,
+      remediation:
+        'Reconcile recordsRetrievedIntoScreening across all receipts to the screening retrieval-event total; use 0 for count-only routes.',
+    });
   }
 
   const uniqueRecordTotal = records.length - (terminalCounts.duplicate ?? 0);
@@ -701,6 +775,16 @@ export function validateResearchBundle(rawBundle) {
     const screeningAccess = asObject(
       asObject(screeningRecord).acquisition,
     ).accessLevel;
+    if (!ACCESS_LEVELS.has(String(accessLevel))) {
+      addIssue(issues, {
+        code: 'ACCESS_LEVEL_INVALID',
+        artifact: 'extraction',
+        path: `$.extractions[${extractionIndex}].sourceSchemaFields.access.level`,
+        message: `Extraction access level ${JSON.stringify(accessLevel)} is not in the closed access vocabulary.`,
+        remediation:
+          'Use full-text-open, full-text-limited, abstract-only, or metadata-only, matching the material actually obtained.',
+      });
+    }
     if (
       !isIdentifier(accessLevel) ||
       !isIdentifier(screeningAccess) ||
@@ -728,6 +812,17 @@ export function validateResearchBundle(rawBundle) {
       });
     }
 
+    if (!Array.isArray(extracted.reportedFacts)) {
+      addIssue(issues, {
+        code: 'REPORTED_FACTS_REQUIRED',
+        artifact: 'extraction',
+        path: `$.extractions[${extractionIndex}].extraction.reportedFacts`,
+        message:
+          'Every extraction must carry an explicit reportedFacts array, including when it is empty.',
+        remediation:
+          'Add reportedFacts as an array; use [] only when the source contributes no extracted facts.',
+      });
+    }
     const reportedFacts = asArray(extracted.reportedFacts);
     reportedFacts.forEach((rawFact, factIndex) => {
       const fact = asObject(rawFact);
@@ -738,6 +833,20 @@ export function validateResearchBundle(rawBundle) {
               .split(',')
               .map((part) => part.trim())
           : [];
+      if (
+        !isIdentifier(fact.basis) ||
+        basisParts.length === 0 ||
+        basisParts.some((part) => !FACT_BASIS_PARTS.has(part))
+      ) {
+        addIssue(issues, {
+          code: 'FACT_BASIS_INVALID',
+          artifact: 'extraction',
+          path: `$.extractions[${extractionIndex}].extraction.reportedFacts[${factIndex}].basis`,
+          message: `Fact basis ${JSON.stringify(fact.basis)} is not a comma-delimited combination of the closed basis vocabulary.`,
+          remediation:
+            'Use only abstract-only, full-text, metadata, and machine-translated basis tokens, separated by commas.',
+        });
+      }
       if (
         basisParts.includes('full-text') &&
         !FULL_TEXT_ACCESS_LEVELS.has(String(accessLevel))
@@ -851,6 +960,20 @@ export function validateResearchBundle(rawBundle) {
     }).length,
     awaitingFullText: awaitingFullText.length,
   };
+  const accountedAccessLevels =
+    Number(derivedExtractionCounts.fullTextObtained) +
+    Number(derivedExtractionCounts.abstractOnly) +
+    Number(derivedExtractionCounts.metadataOnly);
+  if (accountedAccessLevels !== derivedExtractionCounts.includedSources) {
+    addIssue(issues, {
+      code: 'ACCESS_LEVEL_BREAKDOWN_MISMATCH',
+      artifact: 'extraction',
+      path: '$.counts',
+      message: `Access-level categories account for ${accountedAccessLevels} of ${derivedExtractionCounts.includedSources} included source(s).`,
+      remediation:
+        'Assign every included extraction exactly one allowed access level, then recompute the access summary counts.',
+    });
+  }
   const requiredExtractionCounts = [
     'includedSources',
     'fullTextObtained',
@@ -924,7 +1047,8 @@ export function validateResearchBundle(rawBundle) {
       );
     }
   }
-  asArray(packet.searches).forEach((rawSearch, index) => {
+  const packetSearches = asArray(packet.searches);
+  packetSearches.forEach((rawSearch, index) => {
     const packetSearch = asObject(rawSearch);
     if (packetSearch.searchedAt !== undefined) {
       validateDate(
@@ -945,6 +1069,59 @@ export function validateResearchBundle(rawBundle) {
       );
     }
   });
+
+  const receiptsById = new Map(
+    receipts
+      .map((rawReceipt) => asObject(rawReceipt))
+      .filter((receipt) => isIdentifier(receipt.receiptId))
+      .map((receipt) => [String(receipt.receiptId).toUpperCase(), receipt]),
+  );
+  const seenPacketReceiptIds = new Set();
+  const packetSearchMismatches = [];
+  packetSearches.forEach((rawSearch, index) => {
+    const packetSearch = asObject(rawSearch);
+    const receiptId = packetReceiptId(packetSearch);
+    if (!receiptId) {
+      packetSearchMismatches.push(`search[${index}] has no receipt identity`);
+      return;
+    }
+    if (seenPacketReceiptIds.has(receiptId)) {
+      packetSearchMismatches.push(`search[${index}] duplicates ${receiptId}`);
+      return;
+    }
+    seenPacketReceiptIds.add(receiptId);
+    const receipt = receiptsById.get(receiptId);
+    if (!receipt) {
+      packetSearchMismatches.push(
+        `search[${index}] names missing ${receiptId}`,
+      );
+      return;
+    }
+    if (
+      packetSearch.searchedAt !== receipt.executedAt ||
+      packetSearch.resultCount !== receipt.resultCount ||
+      packetSearch.query !== receipt.submittedQuery
+    ) {
+      packetSearchMismatches.push(
+        `search[${index}] does not match ${receiptId} query/date/count`,
+      );
+    }
+  });
+  for (const receiptId of [...receiptsById.keys()].sort(compareStrings)) {
+    if (!seenPacketReceiptIds.has(receiptId)) {
+      packetSearchMismatches.push(`packet is missing ${receiptId}`);
+    }
+  }
+  if (packetSearchMismatches.length > 0) {
+    addIssue(issues, {
+      code: 'PACKET_SEARCH_RECEIPTS_MISMATCH',
+      artifact: 'packet',
+      path: '$.searches',
+      message: `Packet searches do not exactly reconcile to search receipts: ${packetSearchMismatches.slice(0, 8).join('; ')}${packetSearchMismatches.length > 8 ? `; and ${packetSearchMismatches.length - 8} more` : ''}.`,
+      remediation:
+        'Rebuild packet searches so every receipt appears exactly once with the same receipt identity, submitted query, execution date, and result count.',
+    });
+  }
 
   return issues.sort(compareIssues);
 }
@@ -970,11 +1147,12 @@ const COMPONENTS = Object.freeze({
 
 /**
  * @param {string} root
- * @returns {Promise<Map<string, Map<string, string>>>}
+ * @returns {Promise<{bundles: Map<string, Map<string, string>>, existingDirectoryCount: number}>}
  */
 async function discoverComponents(root) {
   /** @type {Map<string, Map<string, string>>} */
   const bundles = new Map();
+  let existingDirectoryCount = 0;
   for (const [kind, contract] of Object.entries(COMPONENTS)) {
     const directory = path.join(root, contract.directory);
     let entries;
@@ -984,6 +1162,7 @@ async function discoverComponents(root) {
       if (isObject(error) && error.code === 'ENOENT') continue;
       throw error;
     }
+    existingDirectoryCount += 1;
     for (const entry of entries.sort((left, right) =>
       compareStrings(left.name, right.name),
     )) {
@@ -997,7 +1176,7 @@ async function discoverComponents(root) {
       bundles.set(taskId, components);
     }
   }
-  return bundles;
+  return { bundles, existingDirectoryCount };
 }
 
 /**
@@ -1006,6 +1185,8 @@ async function discoverComponents(root) {
 function parseArguments(arguments_) {
   let root = process.cwd();
   let bundleId;
+  let rootSeen = false;
+  let bundleSeen = false;
   let invalid = false;
   const remaining = [...arguments_];
   while (remaining.length > 0) {
@@ -1015,9 +1196,13 @@ function parseArguments(arguments_) {
       invalid = true;
       break;
     }
-    if (flag === '--root' && root === process.cwd()) root = path.resolve(value);
-    else if (flag === '--bundle' && !bundleId) bundleId = value.toUpperCase();
-    else {
+    if (flag === '--root' && !rootSeen) {
+      rootSeen = true;
+      root = path.resolve(value);
+    } else if (flag === '--bundle' && !bundleSeen) {
+      bundleSeen = true;
+      bundleId = value.toUpperCase();
+    } else {
       invalid = true;
       break;
     }
@@ -1051,7 +1236,23 @@ export async function runResearchIntegrityCli(arguments_) {
     return 2;
   }
 
-  const discovered = await discoverComponents(root);
+  const { bundles: discovered, existingDirectoryCount } =
+    await discoverComponents(root);
+  if (existingDirectoryCount === 0) {
+    printIssue(
+      {
+        code: 'ROOT_INVALID',
+        artifact: 'bundle',
+        path: root,
+        message:
+          'The selected root contains none of the four research companion directories.',
+        remediation:
+          'Pass the repository root that contains research/searches, research/screening, research/extractions, and research/packets.',
+      },
+      {},
+    );
+    return 1;
+  }
   if (bundleId && !discovered.has(bundleId)) {
     printIssue(
       {
