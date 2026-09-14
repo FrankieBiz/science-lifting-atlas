@@ -123,6 +123,7 @@ artifact, path, code, and message, independent of object insertion order.
 | `ID_DUPLICATE`                         | An ID repeats within its namespace. Give the later record a unique ID and update references.                               |
 | `DATE_INVALID`                         | An execution, generation, packet, or publication-status date is not a real ISO date/timestamp. Record the actual date.     |
 | `COUNT_INVALID`                        | A count is not a nonnegative safe integer. Replace it with the measured integer.                                           |
+| `SEARCH_QUERY_REQUIRED`                | A receipt omits its exact nonempty submitted query. Record the query actually sent to the database.                        |
 | `SEARCH_SCREENING_TOTAL_MISMATCH`      | Search receipts and screening disagree on records retrieved. Reconcile receipt imports to retrieval events.                |
 | `TERMINAL_STATE_INVALID`               | A screening record lacks one scalar allowed terminal state. Record exactly one of the four states.                         |
 | `SCREENING_TOTAL_MISMATCH`             | A declared screening or exclusion-code total differs from raw records. Recompute it.                                       |
@@ -144,6 +145,7 @@ artifact, path, code, and message, independent of object insertion order.
 | `FACT_BASIS_INVALID`                   | A fact basis contains an unrecognized token or shape. Use only the documented comma-delimited vocabulary.                  |
 | `FULL_TEXT_BASIS_EXCEEDS_ACCESS`       | A fact claims full-text basis while the source is abstract- or metadata-only. Obtain/document the text or lower the basis. |
 | `LANGUAGE_REQUIRED`                    | An extraction language is null or empty. Record the source language and keep translation details separately.               |
+| `PACKET_SEARCH_QUERY_REQUIRED`         | A packet search omits the nonempty query copied from its receipt. Restore the exact receipt query.                         |
 | `PACKET_SEARCH_RECEIPTS_MISMATCH`      | Packet searches do not exactly mirror search receipts. Rebuild them from receipt identity, query, date, and count.         |
 | `ARGUMENT_INVALID`                     | CLI flags are incomplete or unknown. Use `--root <repository>` and optional `--bundle <task-id>`.                          |
 | `ROOT_INVALID`                         | The selected root contains no companion directories. Point the gate at the repository root.                                |

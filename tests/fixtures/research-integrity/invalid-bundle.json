@@ -28,6 +28,14 @@
       "value": "2026-02-30"
     },
     {
+      "name": "search receipt lacks its submitted query",
+      "expectedCode": "SEARCH_QUERY_REQUIRED",
+      "artifact": "search",
+      "expectedPath": "$.receipts[0].submittedQuery",
+      "operation": "delete",
+      "path": ["search", "receipts", 0, "submittedQuery"]
+    },
+    {
       "name": "negative result count",
       "expectedCode": "COUNT_INVALID",
       "artifact": "search",
@@ -277,6 +285,14 @@
       "operation": "set",
       "path": ["packet", "searches", 0, "resultCount"],
       "value": 999
+    },
+    {
+      "name": "packet search lacks its query",
+      "expectedCode": "PACKET_SEARCH_QUERY_REQUIRED",
+      "artifact": "packet",
+      "expectedPath": "$.searches[0].query",
+      "operation": "delete",
+      "path": ["packet", "searches", 0, "query"]
     },
     {
       "name": "contracted extraction language is null",

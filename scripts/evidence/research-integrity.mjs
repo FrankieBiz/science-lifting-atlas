@@ -38,6 +38,7 @@ export const BUNDLE_VALIDATION_CODES = Object.freeze([
   'ID_DUPLICATE',
   'DATE_INVALID',
   'COUNT_INVALID',
+  'SEARCH_QUERY_REQUIRED',
   'SEARCH_SCREENING_TOTAL_MISMATCH',
   'TERMINAL_STATE_INVALID',
   'SCREENING_TOTAL_MISMATCH',
@@ -59,6 +60,7 @@ export const BUNDLE_VALIDATION_CODES = Object.freeze([
   'FACT_BASIS_INVALID',
   'FULL_TEXT_BASIS_EXCEEDS_ACCESS',
   'LANGUAGE_REQUIRED',
+  'PACKET_SEARCH_QUERY_REQUIRED',
   'PACKET_SEARCH_RECEIPTS_MISMATCH',
 ]);
 
@@ -374,6 +376,17 @@ export function validateResearchBundle(rawBundle) {
   }
   receipts.forEach((rawReceipt, index) => {
     const receipt = asObject(rawReceipt);
+    if (!isIdentifier(receipt.submittedQuery)) {
+      addIssue(issues, {
+        code: 'SEARCH_QUERY_REQUIRED',
+        artifact: 'search',
+        path: `$.receipts[${index}].submittedQuery`,
+        message:
+          'Every search receipt must preserve its nonempty submitted query.',
+        remediation:
+          'Record the exact query submitted to the named database; do not substitute a summary or omit the field.',
+      });
+    }
     validateDate(
       issues,
       'search',
@@ -844,7 +857,7 @@ export function validateResearchBundle(rawBundle) {
           path: `$.extractions[${extractionIndex}].extraction.reportedFacts[${factIndex}].basis`,
           message: `Fact basis ${JSON.stringify(fact.basis)} is not a comma-delimited combination of the closed basis vocabulary.`,
           remediation:
-            'Use only abstract-only, full-text, metadata, and machine-translated basis tokens, separated by commas.',
+            'Use only abstract, abstract-only, full-text, metadata, and machine-translated basis tokens, separated by commas.',
         });
       }
       if (
@@ -1050,6 +1063,17 @@ export function validateResearchBundle(rawBundle) {
   const packetSearches = asArray(packet.searches);
   packetSearches.forEach((rawSearch, index) => {
     const packetSearch = asObject(rawSearch);
+    if (!isIdentifier(packetSearch.query)) {
+      addIssue(issues, {
+        code: 'PACKET_SEARCH_QUERY_REQUIRED',
+        artifact: 'packet',
+        path: `$.searches[${index}].query`,
+        message:
+          'Every packet search must preserve the nonempty query copied from its receipt.',
+        remediation:
+          'Copy the exact submittedQuery from the matching search receipt into this packet search.',
+      });
+    }
     if (packetSearch.searchedAt !== undefined) {
       validateDate(
         issues,

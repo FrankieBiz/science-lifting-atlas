@@ -212,6 +212,42 @@ describe('research companion bundle validation', () => {
     );
   });
 
+  it('requires both query fields instead of accepting a vacuous missing pair', async () => {
+    const valid = await readJson<JsonObject>('valid-bundle.json');
+    const missingQueries = structuredClone(valid);
+    mutate(missingQueries, {
+      name: 'receipt query',
+      expectedCode: 'SEARCH_QUERY_REQUIRED',
+      artifact: 'search',
+      expectedPath: '$.receipts[0].submittedQuery',
+      operation: 'delete',
+      path: ['search', 'receipts', 0, 'submittedQuery'],
+    });
+    mutate(missingQueries, {
+      name: 'packet query',
+      expectedCode: 'PACKET_SEARCH_QUERY_REQUIRED',
+      artifact: 'packet',
+      expectedPath: '$.searches[0].query',
+      operation: 'delete',
+      path: ['packet', 'searches', 0, 'query'],
+    });
+
+    expect(validateResearchBundle(missingQueries)).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          code: 'SEARCH_QUERY_REQUIRED',
+          artifact: 'search',
+          path: '$.receipts[0].submittedQuery',
+        }),
+        expect.objectContaining({
+          code: 'PACKET_SEARCH_QUERY_REQUIRED',
+          artifact: 'packet',
+          path: '$.searches[0].query',
+        }),
+      ]),
+    );
+  });
+
   it('independently exercises every bundle validation code with exact paths', async () => {
     const valid = await readJson<JsonObject>('valid-bundle.json');
     const invalid = await readJson<{ cases: Mutation[] }>(
