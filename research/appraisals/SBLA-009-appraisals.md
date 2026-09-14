@@ -4,13 +4,16 @@
 - Role: Claude Research (account A) — evidence lead, not the independent reviewer
 - Base commit: `8ca59e850beb0770554074d474a3ff3a9e16710a`
 - Date: 2026-09-13
-- Artifact version: 1.0.0
+- Artifact version: 2.0.0
+- Revision: R1 bounded remediation against
+  [`reviews/evidence/SBLA-009-r1.md`](../../reviews/evidence/SBLA-009-r1.md) at
+  `8154f1167062403a96ee5d6ec0fc63bd50ebfd17`. Changes are listed in §7.
 - Companions, all at version 1.0.0:
   [`research/searches/SBLA-009-search-receipts.json`](../searches/SBLA-009-search-receipts.json),
   [`research/screening/SBLA-009-screening-flow.json`](../screening/SBLA-009-screening-flow.json),
   [`research/extractions/SBLA-009-source-extractions.json`](../extractions/SBLA-009-source-extractions.json),
   [`research/syntheses/SBLA-009-synthesis.md`](../syntheses/SBLA-009-synthesis.md),
-  [`research/packets/SBLA-009-evidence-packet.json`](../packets/SBLA-009-evidence-packet.json),
+  [`research/packets/sbla-009-evidence-packet.json`](../packets/sbla-009-evidence-packet.json),
   [`content-drafts/syntheses/SBLA-009-atomic-claims.json`](../../content-drafts/syntheses/SBLA-009-atomic-claims.json)
 - Governing scope: [`research/questions/SBLA-008-vertical-slice.md`](../questions/SBLA-008-vertical-slice.md),
   [`research/screening/SBLA-008-eligibility-plan.md`](../screening/SBLA-008-eligibility-plan.md),
@@ -236,17 +239,20 @@ is not the sole support for anything drafted here.
 §9.4 requires certainty per claim. The grades this appraisal supports, and the
 reason for each ceiling:
 
-| Claim family                                                                 | Ceiling                      | Why it cannot go higher                                                                                            |
-| ---------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Pectoralis major attachments and portions                                    | established-descriptive-fact | Multiple primary cadaveric observations plus an authoritative reference; §9.4 reserves this grade for exactly this |
-| Pectoralis major innervation                                                 | moderate                     | Primary series disagree with the tertiary two-nerve account and with each other on branch count                    |
-| Pectoralis major contributes to shoulder adduction and horizontal adduction  | high                         | Measured moment arms plus activation, consistent across methods                                                    |
-| Regional differentiation within the muscle                                   | moderate                     | Five methods agree on the phenomenon; magnitudes are not comparable across methods, and samples are small          |
-| Bench press changes pectoralis major thickness                               | low                          | Two usable trials, one with a data-integrity defect, no control arm in the other, small samples                    |
-| A machine fly changes pectoralis major thickness                             | low                          | One trial, one measurement site, allocation not detailed                                                           |
-| Bench press versus cable fly for hypertrophy                                 | **no claim possible**        | Zero direct studies; absence is reported as absence                                                                |
-| Cable cross-over loads the shoulder more than the bench press at matched %BW | low                          | One study, twenty participants, unreported pulley height, %BW loading, simplified shoulder model                   |
-| Pectoralis major rupture occurs during the bench press and on a fly machine  | low                          | Case reports and a case-series meta-analysis; no denominator, so no rate                                           |
+| Claim family                                                                 | Ceiling                      | Why it cannot go higher                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pectoralis major attachments and portions                                    | established-descriptive-fact | Multiple primary cadaveric observations plus an authoritative reference; §9.4 reserves this grade for exactly this                                                                                                                                       |
+| Pectoralis major innervation                                                 | moderate                     | Primary series disagree with the tertiary two-nerve account and with each other on branch count                                                                                                                                                          |
+| Pectoralis major contributes to shoulder adduction and horizontal adduction  | high                         | Measured moment arms plus activation, consistent across methods                                                                                                                                                                                          |
+| Regional differentiation within the muscle                                   | moderate                     | Five methods agree on the phenomenon; magnitudes are not comparable across methods, and samples are small                                                                                                                                                |
+| Bench press changes pectoralis major thickness                               | low                          | Three usable trials, one with a data-integrity defect, no control arm in another, small samples                                                                                                                                                          |
+| A machine fly changes pectoralis major thickness                             | low                          | One trial, one measurement site, allocation not detailed                                                                                                                                                                                                 |
+| Bench press versus cable fly for hypertrophy                                 | **no claim possible**        | Zero direct studies; absence is reported as absence                                                                                                                                                                                                      |
+| Cable cross-over loads the shoulder more than the bench press at matched %BW | low                          | One study, twenty participants, unreported pulley height, %BW loading, simplified shoulder model                                                                                                                                                         |
+| Pectoralis major rupture occurs during the bench press                       | low                          | Case reports and a case-series meta-analysis; no denominator, so no rate                                                                                                                                                                                 |
+| Pectoralis major rupture occurs on a fly machine                             | very-low                     | **One** German-language case report, abstract-only, machine-assisted translation with no second check. It now has its own claim record with its own scope, rather than being attributed to the bench-press rupture claim                                 |
+| Bench inclination shifts activation toward the clavicular portion            | low                          | Re-derived. The sternocostal decrease is consistent; the clavicular response is not. A peak near 30° with reduced performance above 45°, a whole-contraction null, and a pooled clavicular null (p = 0.81, I² = 92.6 %) all contradict a monotonic shift |
+| Bench press versus a fly-family exercise for activation                      | very-low                     | Four primary comparisons, three of them null, none of them index Y, one un-normalised; the pooled estimates carry I² of 94.9 % and 98 %                                                                                                                  |
 
 No claim in this slice reaches `high` on a comparative training question, and none
 uses the word "better".
@@ -277,14 +283,53 @@ across sexes in the same protocol.
   Risk of bias here is a structured judgement against the design-specific criteria
   in the eligibility plan, not a RoB 2 or ROBINS-I score. It is weaker than a
   two-rater tool-based assessment and is not presented as equivalent.
-- **L-A2.** Fifty of the 76 included sources were appraised from their abstracts.
+- **L-A2.** Forty-six of the 88 included sources were appraised from their abstracts.
   For those, "risk of bias" is bounded by what an abstract discloses, which is
-  systematically less than the full text would show.
+  systematically less than the full text would show. The first pass reported fifty of 76
+  while also holding two sources at `metadata-only`; after the R1 acquisition ladder was
+  run and recorded, nine sources moved to `full-text-open` and none remains at
+  `metadata-only`.
 - **L-A3.** Funding and conflict-of-interest statements were read for the full-text
   sources and recorded inside `reportedFacts` where present. They were not
   transcribed into the structured `funding` and `conflicts` fields for every
   source, and those fields are `null` meaning _not extracted_, not _absent_.
-- **L-A4.** The one study that would most change this appraisal is a dissertation
-  (G1016, "Electromyographical analysis of the pectoralis major muscle during
-  various chest exercises") that could not be obtained. If it reports a cable fly,
-  it is the most directly relevant tier-4 source located anywhere in this pass.
+- **L-A4.** _Closed by the R1 remediation._ The dissertation this appraisal named as
+  the one study that would most change it (G1016, "Electromyographical analysis of the
+  pectoralis major muscle during various chest exercises") **was obtained and read**:
+  21,237,276 bytes from the MINDS@UW institutional repository, sha256
+  `81a2a094349a0fccd822247cf2d36b08449bffe2035d30869521049c2dc6a950`, no
+  authentication and no access control circumvented. It does report a cable condition,
+  and it does not change the index-Y absence. Its bent-forward cable crossover is
+  described in the Methods as performed with the arms at chest height and parallel to the
+  floor, but the **pulley origin height is never stated**, and Figure 2 depicts handles
+  above shoulder height with a downward-and-inward path. Under the frozen §3.2 attribute
+  table the pulley origin is a defining attribute of index Y and high-to-low crossover is
+  a named distinct condition, so this is a related condition. It is appraised at **high**
+  risk of bias for three reasons recorded on its extraction: EMG normalised to the
+  barbell bench press itself rather than to an MVIC, so no condition has an independent
+  scale; concentric and eccentric phases averaged together; and the bodyweight conditions
+  not load-matched to the 80 % 1RM used elsewhere. It is grey literature and may never be
+  sole support for a published claim.
+- **L-A5.** The twelve sources added by the R1 remediation were appraised in this round.
+  Seven were appraised from full text and five from abstracts, and each carries its named
+  defects on its extraction record: the 2023 meta-analysis for extreme heterogeneity
+  (I² 87.6–98 %), implausibly large pooled standardised mean differences consistent with
+  imputed standard deviations, and an internal contradiction between its Table 3 and its
+  own Featured Application; the beginners' bench-angle study for fixing load at 50 % of
+  the 0° 1RM without re-determining it per angle, so relative intensity varies with angle;
+  and the push-up-versus-bench-press comparison for running both conditions to task
+  failure, which confounds activation with repetitions completed.
+
+## 7. What the R1 bounded remediation changed in this appraisal
+
+| Finding  | Change                                                                                                                                                                                                                                               |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **C-1**  | §6 L-A4 is closed: the dissertation named as the one study that would most change this appraisal was obtained and read, and it is appraised at high risk of bias with its three named defects.                                                       |
+| **I-1**  | The evidence-packet link in the header is corrected to the committed lowercase filename.                                                                                                                                                             |
+| **I-7**  | §4 now reads "three usable trials" for the bench-press thickness ceiling, matching the §2.1 table that already listed three. The claim record, the synthesis and both drafts now agree.                                                              |
+| **I-11** | §4 splits the single rupture row into a bench-press row and a fly-machine row, because the fly-machine statement rests on one abstract-only machine-translated German case report and now has its own claim record with its own scope and certainty. |
+| **I-12** | §6 L-A2 is recomputed from the completed acquisition ladder: forty-six of 88 abstract-only, none at `metadata-only`.                                                                                                                                 |
+| **I-13** | §4 gains an explicit bench-inclination ceiling of `low`, with the three contradicting results that set it.                                                                                                                                           |
+| **M-3**  | The two StatPearls chapters are corrected from `metadata-only` to `full-text-open`; their facts always carried basis `full-text`, which was the internal contradiction M-3 identified.                                                               |
+| **M-4**  | The three `null` `extraction.language` fields are completed.                                                                                                                                                                                         |
+| **new**  | §6 gains **L-A5**, appraising the twelve sources the remediation added and naming the defect on each.                                                                                                                                                |

@@ -75,9 +75,10 @@ proximal part and the medial pectoral nerve the lower part
 `[claim-pectoralis-major-innervation]`.
 
 That clean account is a simplification, and this page says so because the primary
-dissection literature says so. A Sihler-stained series of 80 specimens reports the
-muscle as mainly innervated by the lateral pectoral nerve, with an intercostal
-contribution present in every stained specimen; two independent series report three
+dissection literature says so. A cadaveric series of 80 specimens reports the
+muscle as mainly innervated by the lateral pectoral nerve; within that series, five
+randomly selected muscles were examined by Sihler whole-mount nerve staining, and an
+intercostal contribution was present in every one of those five; two independent series report three
 constant pectoral branches rather than two; and the medial nerve's course through
 pectoralis minor is reported as present in 62 per cent of people and absent in 38 per
 cent `[claim-pectoralis-major-innervation]`.
@@ -99,7 +100,8 @@ heterogeneous activity across its breadth and independent segmental control; and
 tissue-stiffness measurement finds the regions differ in passive stretch response and
 in activation-dependent stiffness `[claim-pectoralis-major-regional-differentiation]`.
 
-One high-density study of twenty healthy females found the middle sternocostal region
+One high-density study of twenty-nine healthy young females, across two independent
+experiments, found the middle sternocostal region
 activating 12 to 108 per cent more than the clavicular and superior sternocostal
 regions during extension, during adduction with external rotation and during
 high-elevation internal rotation `[claim-pectoralis-major-regional-differentiation]`.
@@ -117,15 +119,18 @@ regional growth in this slice is a single site-specific result in one small tria
 ## Training response
 
 Eight weeks of supervised chest resistance training increased pectoralis major muscle
-thickness in untrained and recreationally active adults, in two small trials using
+thickness in untrained and recreationally active adults, in three small trials using
 different exercises `[claim-pectoralis-major-hypertrophy-with-chest-resistance-training]`.
 
 The certainty on that is **low**, and the reasons are worth stating rather than
-hiding: two usable trials, both small; eight further eligible trials could not be
-read in full; measurement is by ultrasound at one or three sites, and the imaging
-plane, the site and the operator's experience each change the number obtained; and
-one of the two trials prints identical values for both of its randomised arms, so
-only the direction of its result is used
+hiding: three usable trials, all small — a machine-fly trial, a horizontal-versus-incline
+bench press trial and a low-load bench press versus push-up trial; **ten** further
+eligible trials could not be read in full, and the acquisition ladder was run and
+recorded for every one of them without obtaining lawful full text; measurement is by
+ultrasound at one or three sites, and the imaging plane, the site and the operator's
+experience each change the number obtained; and one of the three trials prints identical
+values for both of its randomised arms, so only the direction of its result is used and
+none of its numbers is carried
 `[claim-pectoralis-major-hypertrophy-with-chest-resistance-training]`.
 
 ## How this muscle is measured, and why that matters

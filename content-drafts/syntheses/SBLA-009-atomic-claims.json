@@ -1,6 +1,6 @@
 {
   "artifactId": "SBLA-009-atomic-claims",
-  "artifactVersion": "1.0.0",
+  "artifactVersion": "2.0.0",
   "schemaContract": "SBLA-009-atomic-claims/1.0.0",
   "task": "SBLA-009",
   "role": "claude-research",
@@ -9,15 +9,15 @@
   "baseCommit": "8ca59e850beb0770554074d474a3ff3a9e16710a",
   "status": "draft-for-independent-review",
   "crossLinks": {
-    "searchReceipts": "research/searches/SBLA-009-search-receipts.json@1.0.0",
-    "screeningFlow": "research/screening/SBLA-009-screening-flow.json@1.0.0",
-    "sourceExtractions": "research/extractions/SBLA-009-source-extractions.json@1.0.0",
-    "appraisals": "research/appraisals/SBLA-009-appraisals.md@1.0.0",
-    "synthesis": "research/syntheses/SBLA-009-synthesis.md@1.0.0",
-    "evidencePacket": "research/packets/SBLA-009-evidence-packet.json@1.0.0",
-    "muscleDraft": "content-drafts/muscles/pectoralis-major.md@1.0.0",
-    "pressDraft": "content-drafts/exercises/barbell-flat-bench-press.md@1.0.0",
-    "flyDraft": "content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md@1.0.0"
+    "searchReceipts": "research/searches/SBLA-009-search-receipts.json@2.0.0",
+    "screeningFlow": "research/screening/SBLA-009-screening-flow.json@2.0.0",
+    "sourceExtractions": "research/extractions/SBLA-009-source-extractions.json@2.0.0",
+    "appraisals": "research/appraisals/SBLA-009-appraisals.md@2.0.0",
+    "synthesis": "research/syntheses/SBLA-009-synthesis.md@2.0.0",
+    "evidencePacket": "research/packets/sbla-009-evidence-packet.json@2.0.0",
+    "muscleDraft": "content-drafts/muscles/pectoralis-major.md@2.0.0",
+    "pressDraft": "content-drafts/exercises/barbell-flat-bench-press.md@2.0.0",
+    "flyDraft": "content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md@2.0.0"
   },
   "fieldContract": {
     "claims[]": "Each entry is shaped to claimSchema in src/lib/content/schemas.ts, minus the lifecycle fields Codex owns (reviewState, publicationState, approvalManifestId, contentChecksum, review, history, relationships). Codex can split this array into individual claim records without inventing content.",
@@ -35,7 +35,7 @@
     "claims[].recordIds": "The screening-flow recordIds behind the sourceLinks, so a reviewer can walk back to retrieval.",
     "absenceRecords[]": "Not claims. Explicit records that the evidence did not support a claim, kept separate so an absence is never rendered as an assertion."
   },
-  "draftingRule": "Every statement in the three content drafts is generated from this file. A sentence in a draft that is not traceable to a claim ID here, or to the draft's own explicitly labelled definitional or provenance sections, is a defect.",
+  "draftingRule": "Every statement in the three content drafts is generated from this file. A sentence in a draft that is not traceable to a claim ID here, or to the draft's own explicitly labelled definitional or provenance sections, is a defect. Mechanical traceability is necessary and not sufficient: a draft sentence must be entailed by the claim whose ID it cites, not merely adjacent to it. R1 finding I-11 was a sentence that resolved to a real claim ID whose claim said something else.",
   "claims": [
     {
       "id": "claim-pectoralis-major-attachments",
@@ -90,8 +90,8 @@
         ]
       },
       "qualifiers": [
-        "Fourteen specimens in one series; donor age and sex are not stated in the retrieved text.",
-        "Cadaveric measurement, so it is partially direct for a living lifter."
+        "Fourteen specimens in one series. The donors were 51 (SD 14) years old at time of death, range 21 to 70 years, 9 male and 5 female. The first pass stated that donor age and sex were not in the retrieved text; they are stated in the Materials and Methods, and the correction is recorded.",
+        "Cadaveric measurement, so it is partially direct for a living lifter, and a mean donor age of 51 years is older than the site audience."
       ],
       "evidence": {
         "certainty": "moderate",
@@ -113,7 +113,13 @@
           "supportStrength": "partially-direct"
         }
       ],
-      "recordIds": ["G0281", "G0256"]
+      "recordIds": ["G0281", "G0256"],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "finding": "I-10",
+        "why": "The qualifier asserted that a source fact was absent when the full text states it. Suppressing a stated donor age and sex removes an applicability limit a reader is entitled to."
+      }
     },
     {
       "id": "claim-pectoralis-major-enthesis-unilaminar",
@@ -208,12 +214,13 @@
         "conditions": ["gross dissection of 80 pectoralis major specimens"]
       },
       "qualifiers": [
-        "One cadaveric series; donor age is not stated in the retrieved text.",
+        "One cadaveric series of 40 cadavers (22 male, 18 female) yielding 80 specimens. The donors had a mean age of 69.3 (SD 11.8) years, range 48 to 90. The first pass stated that donor age was not in the retrieved text; it is stated in the Material and Methods, and the correction is recorded.",
+        "A mean donor age of 69.3 years is a material applicability limitation for a claim about typical adult structure presented to lifters, and it is the reason applicability is now recorded as indirect rather than partially-direct.",
         "The proportion is specific to this series and to its classification scheme."
       ],
       "evidence": {
         "certainty": "moderate",
-        "applicability": "partially-direct",
+        "applicability": "indirect",
         "direction": "not-applicable",
         "magnitude": "not-applicable"
       },
@@ -225,7 +232,13 @@
           "supportStrength": "direct"
         }
       ],
-      "recordIds": ["G0292"]
+      "recordIds": ["G0292"],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "finding": "I-10",
+        "why": "The qualifier asserted that donor age was absent when the full text states a mean of 69.3 years. Recording it changes the applicability grade, which is the point of recording it."
+      }
     },
     {
       "id": "claim-pectoralis-major-innervation",
@@ -239,7 +252,9 @@
       "qualifiers": [
         "A clean one-nerve-per-head account is a simplification: a Sihler-stained series reports the muscle mainly innervated by the lateral pectoral nerve with an intercostal contribution in every specimen.",
         "Two independent series report three constant pectoral branches rather than two.",
-        "The 62 and 38 per cent figures for the medial nerve's course are reported in the source as attributed to earlier work, not measured there."
+        "The 62 and 38 per cent figures for the medial nerve's course are reported in the source as attributed to earlier work, not measured there.",
+        "The intercostal contribution was established by Sihler whole-mount nerve staining on five randomly selected muscles, not on all 80 specimens. Eighty is the gross-dissection total. Any statement about intercostal contribution rests on those five.",
+        "Donor mean age in this series was 69.3 (SD 11.8) years, range 48 to 90."
       ],
       "evidence": {
         "certainty": "moderate",
@@ -299,7 +314,13 @@
         "G0548",
         "G0532",
         "G0244"
-      ]
+      ],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "finding": "I-9(a)",
+        "why": "The downstream text described the Sihler finding as resting on 80 specimens. The source states five randomly selected muscles were stained. The extraction was correct; the overstatement was introduced downstream."
+      }
     },
     {
       "id": "claim-pectoralis-major-adduction",
@@ -531,7 +552,7 @@
     {
       "id": "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
       "type": "longitudinal-adaptation",
-      "statement": "Eight weeks of supervised chest resistance training increased pectoralis major muscle thickness in untrained and recreationally active adults, in two small trials using different exercises.",
+      "statement": "Eight weeks of supervised chest resistance training increased pectoralis major muscle thickness in untrained and recreationally active adults, in three small trials using different exercises.",
       "plainLanguage": "In two small studies, about two months of chest training made the chest muscle measurably thicker.",
       "scope": {
         "population": "untrained and recreationally active adults aged about 19 to 30",
@@ -540,10 +561,11 @@
         ]
       },
       "qualifiers": [
-        "Two usable trials, both small; eight further eligible trials could not be read in full and are recorded as awaiting full text.",
+        "Three usable trials, all small, and they are the same three the appraisal section 2.1 table lists: a machine-fly trial, a horizontal-versus-incline bench press trial, and a low-load bench press versus push-up trial. The first pass said \"two\" while citing three, which left a reader unable to tell which trials the claim rested on.",
+        "One of the three prints identical pectoralis major values for both of its randomised arms, so only the direction of its result is used and none of its numbers is carried.",
+        "Ten further eligible tier-1 trials could not be read in full and are recorded as awaiting full text. The acquisition ladder was executed and recorded for all ten on 2026-09-13; all ten remain closed to this client.",
         "Measured by B-mode ultrasound at one or three sites, and the imaging plane, the measurement site and operator experience all change the number obtained.",
-        "One of the two trials prints identical pectoralis values for both of its randomised arms, so only the direction of its result is used.",
-        "Neither trial establishes a dose, and neither is a comparison between the two exercises in this slice."
+        "Neither trial establishes a dose, and none is a comparison between the two exercises in this slice."
       ],
       "evidence": {
         "certainty": "low",
@@ -589,7 +611,13 @@
           "supportStrength": "direct"
         }
       ],
-      "recordIds": ["G0098", "G0118", "G0132", "G0684", "G0674", "G0108"]
+      "recordIds": ["G0098", "G0118", "G0132", "G0684", "G0674", "G0108"],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "findings": ["I-7", "I-8"],
+        "why": "The claim cited three trial sources while stating \"two\", and stated \"eight\" awaiting-full-text trials where the count is ten. Both counts are corrected and reconciled against the appraisal, the synthesis and both drafts."
+      }
     },
     {
       "id": "claim-bench-press-pectoralis-activation",
@@ -687,26 +715,56 @@
     {
       "id": "claim-bench-press-inclination-shifts-regional-activation",
       "type": "exercise-mechanics",
-      "statement": "Raising the bench inclination shifts activation within the pectoralis major toward the clavicular region and away from the sternocostal region.",
-      "plainLanguage": "Pressing on an inclined bench moves more of the work to the upper part of the chest muscle.",
+      "statement": "Across the bench-press inclinations that have been measured, sternocostal pectoralis major activation falls as the bench is raised, while clavicular activation does not rise consistently: the largest single study places the clavicular peak near 30 degrees and reports reduced pectoralis performance above 45 degrees, and a 2023 meta-analysis finds no significant clavicular difference between a horizontal and an inclined bench.",
+      "plainLanguage": "Raising the bench reliably takes work away from the lower chest. Whether it adds work to the upper chest is not settled: the best single study suggests a peak around 30 degrees rather than a steady increase, and pooled evidence finds no clear upper-chest difference at all.",
       "scope": {
-        "population": "resistance-trained and untrained adult men",
+        "population": "resistance-trained and untrained adult men and women, and one sample of training beginners",
         "conditions": [
-          "flat versus 28, 44, 45 and 56 degree inclined bench or chest press at 50 to 80 per cent of 1RM"
+          "barbell or dumbbell bench and chest press, horizontal versus inclinations measured at 15, 28, 30, 44, 45, 56 and 60 degrees, at 50 to 80 per cent of one-repetition maximum",
+          "acute surface electromyography only; no inclination claim here rests on a size outcome"
         ]
       },
       "qualifiers": [
-        "The researchers who measured this most carefully state in print that the inclination literature is contradictory and that measurement artefact is a likely reason.",
-        "Activation is not growth: a single small trial found a matching site-specific thickness difference, and it is the only outcome evidence in this direction.",
-        "Samples of eight to fifteen participants; one source reports effect sizes too large to be credible as population estimates and only its direction is used."
+        "The two portions behave differently and must not be described with one sentence. The sternocostal decrease is the consistent finding; the clavicular response is not consistent across studies.",
+        "The relationship is not monotonic. In the largest single study (n = 30 trained adults across 0, 15, 30, 45 and 60 degrees) the clavicular peak is at 30 degrees, and the authors state that inclinations above 45 degrees decrease pectoralis major performance while raising anterior deltoid activation.",
+        "The 2023 systematic review and meta-analysis pools four studies for the inclination contrast and reports no significant clavicular difference (standardised mean difference 0.36, 95 per cent CI -3.03 to 3.74, p = 0.81) alongside a significant sternal difference (1.80, 95 per cent CI 0.40 to 3.19, p = 0.017). Heterogeneity is extreme in both (I-squared 92.6 and 87.6 per cent), so neither pooled value is a precise estimate.",
+        "One study reports no upper-pectoralis difference across any bench condition over the complete concentric contraction, with a difference appearing only in the 26 to 50 per cent contraction-duration window. A sub-phase difference is not a whole-repetition difference.",
+        "One study of training beginners fixed the load at 50 per cent of the 1RM measured at 0 degrees and did not re-determine it per angle, so relative intensity varied with angle in that study.",
+        "Activation is not growth. One small trial found a site-specific thickness difference in the same direction, and it is the only outcome evidence in this direction.",
+        "Sample sizes range from eight to thirty. Two sources report effect sizes too large to be credible as population estimates, and only their direction is used.",
+        "Electromyography is never evidence of hypertrophy."
       ],
       "evidence": {
-        "certainty": "moderate",
+        "certainty": "low",
         "applicability": "partially-direct",
-        "direction": "not-applicable",
+        "direction": "mixed",
         "magnitude": "not-estimable"
       },
       "sourceLinks": [
+        {
+          "sourceId": "source-doi-10-3390-app13085203",
+          "locator": "Table 3, Angle of inclination, Horizontal vs. inclined (sternal p = 0.017; clavicular p = 0.81); Results text",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-33049982",
+          "locator": "Abstract and Results (clavicular peak at 30 degrees; middle and lower portions highest at 0 degrees; above 45 degrees pectoralis performance decreases)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-25799093",
+          "locator": "Abstract, Results (no upper-pectoralis difference across any bench condition over the complete concentric contraction; difference only in the 26 to 50 per cent window)",
+          "role": "contradicts",
+          "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-pmid-39764299",
+          "locator": "Abstract, Results (middle and lower pectoralis output decreased with increasing angle; no significant upper-pectoralis effect reported)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        },
         {
           "sourceId": "source-pmid-36334406",
           "locator": "Abstract, Results (clavicular head greater on the incline, sternocostal greater on the flat bench, p < 0.001)",
@@ -715,7 +773,7 @@
         },
         {
           "sourceId": "source-pmid-20512064",
-          "locator": "Abstract, Results (clavicular head significantly greater at 44 and 56 degrees than at 0 degrees)",
+          "locator": "Abstract, Results (clavicular head greater at 44 and 56 degrees than at 0 degrees; no increase from 44 to 56 degrees; sternocostal greater at 44 than at 56 degrees)",
           "role": "supports",
           "supportStrength": "direct"
         },
@@ -726,6 +784,12 @@
           "supportStrength": "partially-direct"
         },
         {
+          "sourceId": "source-pmid-26464884",
+          "locator": "Abstract, Results (clavicular activation greater in the incline press eccentric phase only; sternal activation greater in bench and incline than shoulder press)",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        },
+        {
           "sourceId": "source-pmid-32922646",
           "locator": "Results, muscle thickness at the second intercostal space (incline greater than horizontal, mean difference 0.62 cm, 95 per cent CI 0.23 to 1.0, p = 0.003)",
           "role": "supports",
@@ -733,7 +797,7 @@
         },
         {
           "sourceId": "source-pmid-34644424",
-          "locator": "Abstract, background",
+          "locator": "Abstract, background (the inclination literature is contradictory and measurement artefact is a likely reason)",
           "role": "qualifies",
           "supportStrength": "direct"
         },
@@ -744,7 +808,26 @@
           "supportStrength": "direct"
         }
       ],
-      "recordIds": ["G0103", "G0348", "G0288", "G0118", "G0265", "G0135"]
+      "recordIds": [
+        "G1903",
+        "G1881",
+        "G1872",
+        "G1928",
+        "G0103",
+        "G0348",
+        "G0288",
+        "G1955",
+        "G0118",
+        "G0265",
+        "G0135"
+      ],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "finding": "I-13",
+        "was": "Raising the bench inclination shifts activation within the pectoralis major toward the clavicular region and away from the sternocostal region. Certainty moderate, direction not-applicable.",
+        "why": "The monotonic wording was not supported even by its own cited source: PMID 20512064 reports no increase from 44 to 56 degrees and reports sternocostal activation greater at 44 than at 56 degrees. Four sources retrieved by the remediation contradict or narrow the clavicular half of the statement, including a 2023 meta-analysis that finds no significant clavicular difference. Certainty is lowered from moderate to low for inconsistency and imprecision, and direction is changed from not-applicable to mixed."
+      }
     },
     {
       "id": "claim-bench-press-grip-width-activation-mixed",
@@ -1017,16 +1100,23 @@
     {
       "id": "claim-press-versus-fly-activation-mixed",
       "type": "acute-response",
-      "statement": "Acute electromyography comparing a barbell bench press with a dumbbell fly is inconsistent: one study reported higher pectoralis major activation in the press across most movement phases, while another reported no significant difference in activation level and only a shorter relative time of activation in the fly.",
-      "plainLanguage": "Studies that compared chest-muscle activity between a bench press and a dumbbell fly disagree with each other.",
+      "statement": "Acute electromyography comparing a barbell bench press with a fly-family exercise is inconsistent. One un-normalised comparison found 16 per cent higher pectoralis major activation in the press than in a dumbbell fly across the whole movement; three other comparisons, against a dumbbell fly, a machine fly and a bent-forward cable crossover, found no significant pectoralis major difference; and a 2023 meta-analysis reports a significant sternal difference favouring the bench press alongside no significant clavicular difference, with heterogeneity so high that neither pooled value is a precise estimate.",
+      "plainLanguage": "Studies that compared chest-muscle activity between a bench press and a fly disagree. Some find the press higher, several find no difference, and the pooled evidence is too inconsistent to settle it.",
       "scope": {
-        "population": "resistance-trained adult men, and mixed-sex college-age lifters of varied experience",
-        "conditions": ["six-repetition-maximum loads in each exercise"]
+        "population": "resistance-trained adult men, mixed-sex college-age lifters of varied experience, and one sample of trained men in a non-peer-reviewed thesis",
+        "conditions": [
+          "six-repetition-maximum, ten-repetition-maximum and 80 per cent of one-repetition maximum loads",
+          "comparators are a dumbbell fly, a machine fly or pec deck, and a bent-forward cable crossover; none is the index bilateral standing cable fly at shoulder height"
+        ]
       },
       "qualifiers": [
-        "Both studies were read as abstracts only; normalisation, electrode placement and crosstalk handling could not be verified.",
-        "The null result comes from twelve participants and cannot distinguish no difference from not enough information.",
-        "Both compare a dumbbell fly, not the index bilateral standing cable fly at shoulder height.",
+        "None of these comparators is index Y. Two are dumbbell flies, one is a pec deck machine fly, and one is a bent-forward cable crossover whose pulley origin height is not stated and whose figure depicts a high-to-low path. Under the frozen section 3.2 table each is a distinct condition that is not pooled with the index bilateral standing cable fly at shoulder height.",
+        "The one comparison that reports a difference did not normalise its EMG to any reference contraction. The authors state this and justify it as a within-subject comparison between similar exercises. Un-normalised amplitude cannot be pooled with normalised studies and cannot be read as effort relative to capacity. The first pass recorded these methods as unverifiable; the full text was obtained on 2026-09-13 and they are recorded here.",
+        "The bent-forward cable crossover comparison is an MSc thesis, is not peer-reviewed, normalised every exercise to the bench press itself so that no condition has an independent scale, and averaged the concentric and eccentric phases together. It may inform a tier-4 statement with applicability downgraded and may never be sole support.",
+        "Exercise order changes the result. In a full-text source that samples the sternocostal head, chest-fly activation was 100.13 (SD 13.56) per cent of maximal voluntary isometric contraction when the fly followed the bench press and 81.47 (SD 13.09) per cent when it did not. A single press-versus-fly activation difference is therefore not a stable property of the two exercises.",
+        "The 2023 meta-analysis pools six exercise-type studies whose comparators are push-ups, dumbbell exercises, elastic resistance and a chest press. No cable fly appears in any of them, so it adds no index-Y evidence.",
+        "Heterogeneity in the pooled exercise-type estimates is I-squared 98 per cent (sternal) and 94.9 per cent (clavicular), and the pooled standardised mean differences of 4.04 and 4.53 are implausibly large for surface-EMG contrasts; the review reports imputing standard deviations where studies did not report them.",
+        "Three of the four primary comparisons are null results. A null is not evidence of equivalence: none reports an equivalence margin, and the samples (n = 12 to 17) cannot exclude a moderate difference.",
         "Electromyography is never evidence of hypertrophy."
       ],
       "evidence": {
@@ -1038,7 +1128,7 @@
       "sourceLinks": [
         {
           "sourceId": "source-pmid-33239937",
-          "locator": "Abstract, Results (higher activation in the barbell bench press across the whole movement and most phases)",
+          "locator": "Results, Pectoralis major (16 per cent higher in the barbell bench press across the whole movement, p = 0.027, effect size 0.36); Methods, EMG processing (RMS values not normalised); Discussion, Limitations (cross-talk acknowledged, no mitigation described)",
           "role": "supports",
           "supportStrength": "partially-direct"
         },
@@ -1049,6 +1139,30 @@
           "supportStrength": "partially-direct"
         },
         {
+          "sourceId": "source-doi-10-1590-s1517-86922007000100012",
+          "locator": "Abstract (authorised English), Results (no differences in pectoralis major or anterior deltoid activity between the barbell bench press and the machine fly in 13 trained men at 10RM)",
+          "role": "contradicts",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-handle-1793-62857",
+          "locator": "Table 2, page 14, and Results, page 13 (bent-forward cable crossovers 93 per cent of the barbell bench press, SD 22.0, not significantly different; peck deck 98 per cent, SD 26.4, not significantly different; inclined dumbbell flys 69 per cent, SD 30.5, significantly lower)",
+          "role": "contradicts",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-doi-10-3390-app13085203",
+          "locator": "Table 3, Type of exercise, Bench press vs. other variants type (sternal standardised mean difference 4.04, 95 per cent CI 1.74 to 6.35, I-squared 98, p = 0.001; clavicular 4.53, 95 per cent CI -4.22 to 13.27, I-squared 94.9, p = 0.198); Results text naming the six comparator exercise types",
+          "role": "qualifies",
+          "supportStrength": "partially-direct"
+        },
+        {
+          "sourceId": "source-pmid-25713681",
+          "locator": "Abstract; Results and Table 1 (chest-fly sternocostal pectoralis major 100.13 per cent MVIC in sequence A versus 81.47 per cent in sequence B; significant main effect of sequence)",
+          "role": "qualifies",
+          "supportStrength": "direct"
+        },
+        {
           "sourceId": "source-pmid-35599468",
           "locator": "Abstract, Methods (bench press and dumbbell fly at 50 per cent 1RM; per-exercise pectoralis values not reported in the retrievable abstract)",
           "role": "neutral-context",
@@ -1056,12 +1170,28 @@
         },
         {
           "sourceId": "source-pmid-33310606",
-          "locator": "Title and Abstract",
+          "locator": "Title and Abstract (surface-EMG amplitude limitations)",
           "role": "qualifies",
           "supportStrength": "direct"
         }
       ],
-      "recordIds": ["G0042", "G0077", "G0031", "G0274"]
+      "recordIds": [
+        "G0042",
+        "G0077",
+        "G1896",
+        "G1016",
+        "G1903",
+        "G0062",
+        "G0031",
+        "G0274"
+      ],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "findings": ["I-2", "I-3", "I-12", "C-1 (G1016)"],
+        "was": "Two abstract-only dumbbell-fly comparisons, graded very-low / mixed, with a qualifier asserting that normalisation, electrode placement and crosstalk handling could not be verified.",
+        "why": "The full text of PMID 33239937 was obtained from PubMed Central on 2026-09-13, so the three methodological facts the qualifier said could not be verified are now recorded, and the un-normalised amplitude is stated as the material limitation it is (I-12). G0062, the included full-text source whose recorded purpose was this claim, is now linked and supplies the order-dependence qualifier (I-3). The 2023 systematic review and meta-analysis is added (I-2). G1016, the record R1 identified as decisive and unopened, is added as a fourth primary comparison after its full text was obtained and read (C-1). Certainty stays very-low: the evidence base is larger but the direction is still mixed, three of four primary comparisons are null, and the pooled estimates carry I-squared of 94.9 and 98 per cent. A post-hoc amendment may lower certainty and may not raise it."
+      }
     },
     {
       "id": "claim-multi-joint-versus-single-joint-programme-strength",
@@ -1102,34 +1232,97 @@
         }
       ],
       "recordIds": ["G0052", "G0179"]
+    },
+    {
+      "id": "claim-fly-machine-pectoralis-rupture",
+      "type": "safety-context",
+      "statement": "A single published case report describes a humeral rupture of the pectoralis major occurring while training on a chest fly machine, in a 33-year-old man of normal habitus who felt sudden pectoral pain and heard a whip-like popping sound.",
+      "plainLanguage": "There is one published report of someone tearing the chest muscle off the arm bone while using a chest fly machine.",
+      "scope": {
+        "population": "one adult recreational male athlete, aged 33, of normal habitus",
+        "conditions": [
+          "training on a chest fly machine, which is a related fly-family condition and not the index bilateral standing cable fly at shoulder height"
+        ]
+      },
+      "qualifiers": [
+        "One case has no denominator. It establishes that the injury can occur in the fly family and nothing whatever about how often, and it supports no comparison of risk between exercises.",
+        "The comparator is a chest fly machine, not the index bilateral standing cable fly at shoulder height. Nothing here transfers to the index condition.",
+        "The report is in German. The translation ladder reached step 1, the authorised English abstract on the PubMed record, and step 2, machine-assisted translation of the abstract and title. Step 3, an independent second check, was not performed, so this claim may not be the sole support for any published statement and its wording must stay at the level the abstract supports.",
+        "No full text was obtained; the extraction is abstract-only.",
+        "This is context, not medical, diagnostic or rehabilitation advice; the project does not give any."
+      ],
+      "evidence": {
+        "certainty": "very-low",
+        "applicability": "indirect",
+        "direction": "not-applicable",
+        "magnitude": "not-estimable"
+      },
+      "sourceLinks": [
+        {
+          "sourceId": "source-pmid-35413736",
+          "locator": "Abstract, Case history (33-year-old patient of normal habitus; sudden left pectoral pain during training on the chest fly machine with a whip-like popping sound and immediate painful restriction of movement)",
+          "role": "supports",
+          "supportStrength": "direct"
+        }
+      ],
+      "recordIds": ["G0032"],
+      "rederivation": {
+        "round": "R1 remediation",
+        "date": "2026-09-13",
+        "finding": "I-11",
+        "why": "The fly draft attributed a chest-fly-machine rupture to claim-bench-press-pectoralis-rupture, which carries no fly-machine content, no fly-machine scope and no translation qualifier. The underlying fact was correctly extracted in X-G0032 and correctly graded in appraisal section 4; only the claim record was missing. This claim supplies it with its own scope, certainty and translation limitation so the draft sentence is traceable to a claim that actually says it."
+      }
     }
   ],
   "absenceRecords": [
     {
       "id": "absence-index-cable-fly-no-evidence",
-      "statement": "No study of the bilateral standing cable fly at shoulder height, as defined in research/questions/SBLA-008-vertical-slice.md section 3.2, was retrieved by any route in this pass. The index comparator condition has no evidence of any tier.",
+      "statement": "No study of the bilateral standing cable fly at shoulder height, as defined in research/questions/SBLA-008-vertical-slice.md section 3.2, was retrieved by any route run in this pass or in its R1 remediation. Within the routes listed below, the index comparator condition returned no evidence of any tier. This is a statement about what these searches retrieved, not a statement that no such study exists.",
       "searchesThatWouldHaveFoundIt": [
         "PubMed 30-phrase fly-family stratum N-RS1, 77 records retrieved and screened",
         "Europe PMC 26-phrase fly-family stratum, 51 records",
         "Europe PMC fly-family preprint stratum, 1 record",
         "OpenAlex quoted-phrase probes for cable fly, cable flies, chest fly, chest flies, dumbbell fly, pec deck, pectoral fly, cable crossover and butterfly exercise, 133 records",
         "SportRxiv current server and the frozen OSF legacy archive",
-        "ClinicalTrials.gov Essie intervention-and-outcome expression, 159 registrations"
+        "ClinicalTrials.gov Essie intervention-and-outcome expression, 159 registrations",
+        "R1 remediation: backward citation chasing over the referenced works of the included set, 1,631 distinct candidate works",
+        "R1 remediation: forward citation chasing over the works citing the included set, 2,219 distinct candidate works",
+        "R1 remediation: non-English vocabulary probes on OpenAlex and Europe PMC for crucifixo, aperturas con mancuernas, cruce de poleas, fliegende kurzhantel and the Korean pec-deck term",
+        "R1 remediation: the DOAJ public article API"
       ],
-      "interpretation": "Absence of evidence, reported as absence. This is not evidence that the cable fly is ineffective, and it is not evidence that it is equivalent to a bench press. It means nobody in the retrieved literature has measured it.",
-      "governingDecision": "The frozen U2/EU2 decision forbids widening Y or pooling a related condition into the primary comparison. A later widening would require a dated scope amendment and a new search and could not become the primary result retroactively."
+      "interpretation": "Absence of evidence within the routes actually run, reported as absence. This is not evidence that the cable fly is ineffective, and it is not evidence that it is equivalent to a bench press. It means that no study of the index condition was retrieved by these searches.",
+      "governingDecision": "The frozen U2/EU2 decision forbids widening Y or pooling a related condition into the primary comparison. A later widening would require a dated scope amendment and a new search and could not become the primary result retroactively.",
+      "externalCorroboration": {
+        "source": "source-doi-10-3390-app13085203",
+        "statement": "An independent 2023 systematic review and meta-analysis of pectoralis major EMG in the bench press versus other pectoral exercises searched PubMed/MEDLINE, SPORTDiscus and Web of Science to 25 March 2023, hand-screened the reference lists of all selected articles, identified 951 publications and included 23 studies. Its six exercise-type comparisons are against push-ups, dumbbell exercises, elastic resistance and a chest press. No cable fly, cable crossover or standing cable condition appears anywhere in it.",
+        "whyItMatters": "This corroborates the absence from outside this project, across two databases this project did not search, and it is stronger evidence of absence than this project own search can be. It is recorded because R1 finding I-5 required the absence statements to be bound to retrieval and I-2 required this review to be cited as external corroboration."
+      },
+      "boundedBy": [
+        "Of 11,765 records returned by the four PubMed composites, 911 entered record-level screening in the first pass; the remainder is a quantified residual, not a screened zero.",
+        "Cochrane CENTRAL was not searched: no public API and no authenticated Search Manager session exists for this project, and no access control was circumvented.",
+        "SPORTDiscus and Web of Science were not searched directly by this project. The 2023 meta-analysis above did search both.",
+        "Twenty-six records remain awaiting full text after the remediation ladder was run and recorded for every one of them.",
+        "One record, G1016, was identified in the first pass as potentially the most directly relevant press-versus-fly source and was not opened. It has now been opened and read; it is a bent-forward cable crossover whose pulley origin height is not stated and whose figure depicts a high-to-low path, so it is a related condition and not index Y. The absence survives, but it now survives on a read document."
+      ]
     },
     {
       "id": "absence-primary-comparison-no-evidence",
-      "statement": "No study comparing a barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved. The primary Q2 estimand, the between-condition difference in change, has no direct evidence.",
+      "statement": "No study comparing a barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved by any route run in this pass or in its R1 remediation. Within these routes the primary Q2 estimand, the between-condition difference in change, returned no direct evidence.",
       "searchesThatWouldHaveFoundIt": [
         "PubMed stratum N-RS2, pectoral concept intersected with hypertrophy outcomes and resistance training, 87 records",
         "PubMed stratum N-RS1, fly family, 77 records",
         "PubMed stratum N-RS3, existing syntheses, 53 records",
-        "PubMed stratum N-RS6, contradiction, harms and measurement validity, 211 records"
+        "PubMed stratum N-RS6, contradiction, harms and measurement validity, 211 records",
+        "R1 remediation: backward and forward citation chasing over the included set, 3,559 distinct candidate works after deduplication, of which 841 passed a pre-specified pectoral/press/fly relevance filter and 745 were new to screening",
+        "R1 remediation: amended portion-terminology stratum N-RS4a, 59 records",
+        "R1 remediation: bench-angle stratum N-RS7, 26 records"
       ],
       "interpretation": "Under master plan section 2.2 a thin evidence base may not be converted into a confident comparative recommendation. No claim in this pass makes a press-versus-fly hypertrophy statement.",
-      "governingDecision": "Anti-cherry-picking rule 7 in the eligibility plan: absence of evidence is reported as absence, never as evidence of no difference."
+      "governingDecision": "Anti-cherry-picking rule 7 in the eligibility plan: absence of evidence is reported as absence, never as evidence of no difference.",
+      "boundedBy": [
+        "The same four retrieval limits recorded on absence record 1 apply here.",
+        "No tier-1 cable-fly hypertrophy trial appeared in any of the 848 records added by the remediation."
+      ]
     },
     {
       "id": "absence-contralateral-sensitivity-analysis-empty",
@@ -1159,5 +1352,37 @@
       "interpretation": "One retrieved source modelled the three-dimensional architecture but its numeric results were not retrievable. The muscle draft therefore describes architecture qualitatively and records the gap.",
       "governingDecision": "Master plan section 9.9: narrow claims to what the retrieved material actually supports."
     }
-  ]
+  ],
+  "remediationLog": {
+    "round": "R1 remediation",
+    "date": "2026-09-13",
+    "reviewedReport": "reviews/evidence/SBLA-009-r1.md at 8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
+    "claimsRederived": [
+      "claim-bench-press-inclination-shifts-regional-activation",
+      "claim-press-versus-fly-activation-mixed"
+    ],
+    "claimsCorrected": [
+      "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
+      "claim-pectoralis-major-humeral-footprint",
+      "claim-pectoralis-major-structural-variation",
+      "claim-pectoralis-major-innervation"
+    ],
+    "claimsAdded": ["claim-fly-machine-pectoralis-rupture"],
+    "absenceRecordsBounded": [
+      "absence-index-cable-fly-no-evidence",
+      "absence-primary-comparison-no-evidence"
+    ],
+    "certaintyChanges": [
+      "claim-bench-press-inclination-shifts-regional-activation: moderate -> low (inconsistency and imprecision)",
+      "claim-pectoralis-major-structural-variation: applicability partially-direct -> indirect (mean donor age 69.3 years)",
+      "claim-press-versus-fly-activation-mixed: very-low retained; the enlarged base did not raise it"
+    ]
+  },
+  "governingReview": {
+    "report": "reviews/evidence/SBLA-009-r1.md",
+    "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
+    "branch": "claude-review/SBLA-009-r1",
+    "verdict": "FAIL — 1 Critical, 13 Important, 10 Minor",
+    "note": "The immutable Account-B round-one report this artifact remediates. It is recorded as a commit reference rather than as a crossLinks entry because the report lives on the reviewer branch and is not a path in this worktree; asserting it as a repository cross-link would claim a file that is not here. Retrieve it with: git show 8154f1167062403a96ee5d6ec0fc63bd50ebfd17:reviews/evidence/SBLA-009-r1.md"
+  }
 }

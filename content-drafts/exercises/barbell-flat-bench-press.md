@@ -24,7 +24,8 @@ indexRole: Exercise X
 ## Practical takeaway
 
 The bench press loads the pectoralis major, and it does so unevenly across the
-muscle: bench angle, grip and range of motion change which part is working
+muscle: bench angle, grip and range of motion change which part is working, though how
+much bench angle changes the upper chest specifically is not settled
 `[claim-bench-press-pectoralis-activation]`,
 `[claim-bench-press-inclination-shifts-regional-activation]`. Eight weeks of
 bench-press training measurably thickened the pectoralis major in small trials, at
@@ -81,15 +82,31 @@ exercise `[claim-bench-press-shoulder-moment-arm-decreases]`.
 
 ## Setup variables that change what is loaded
 
-**Bench angle.** Raising the bench inclination shifts activation within the
-pectoralis major toward the clavicular region and away from the sternocostal region
-`[claim-bench-press-inclination-shifts-regional-activation]`. One small trial found a
-matching site-specific thickness difference after eight weeks, at the upper
-measurement site `[claim-bench-press-inclination-shifts-regional-activation]`. The
-researchers who have measured this most carefully state in print that the inclination
-literature is contradictory and that measurement artefact is a likely reason, and
-one study of elite competitors found no significant activation difference between
-flat, inclined and declined positions at all
+**Bench angle.** The two parts of the muscle do not behave the same way, and one
+sentence cannot describe both. As the bench is raised, sternocostal (lower) activation
+falls — that is the consistent finding across the studies retrieved and across a 2023
+meta-analysis `[claim-bench-press-inclination-shifts-regional-activation]`.
+
+What happens to the clavicular (upper) portion is **not settled**. The largest single
+study, thirty trained adults measured at 0, 15, 30, 45 and 60 degrees, puts the upper
+peak at **30 degrees**, not at the top of the range, and its authors state that
+inclinations above 45 degrees raise anterior deltoid activation and _decrease_
+pectoralis major performance. A second study found no upper-pectoralis difference across
+any bench condition over the complete concentric contraction, with a difference
+appearing only in the middle quarter of the movement. The 2023 meta-analysis finds no
+significant clavicular difference between a horizontal and an inclined bench at all
+`[claim-bench-press-inclination-shifts-regional-activation]`.
+
+So the useful reading is that raising the bench reliably takes work away from the lower
+chest, and that any upper-chest gain is smaller, less consistent, and probably does not
+keep increasing as the bench gets steeper. One small trial found a matching
+site-specific thickness difference after eight weeks at the upper measurement site, and
+that is the only outcome evidence in this direction
+`[claim-bench-press-inclination-shifts-regional-activation]`. The researchers who have
+measured this most carefully state in print that the inclination literature is
+contradictory and that measurement artefact is a likely reason, and one study of elite
+competitors found no significant activation difference between flat, inclined and
+declined positions at all
 `[claim-bench-press-inclination-shifts-regional-activation]`.
 
 **Grip width.** The evidence is mixed. One isometric study found that grip width and
@@ -103,8 +120,8 @@ support one.
 ## Training response
 
 Eight weeks of supervised chest resistance training increased pectoralis major muscle
-thickness in untrained and recreationally active adults, in two small trials; one of
-those trials used the bench press
+thickness in untrained and recreationally active adults, in three small trials; two of
+those three used the bench press
 `[claim-pectoralis-major-hypertrophy-with-chest-resistance-training]`. Certainty is
 low and the limits are listed with the claim.
 

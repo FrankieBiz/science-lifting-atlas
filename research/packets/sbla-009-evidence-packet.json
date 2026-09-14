@@ -4,7 +4,7 @@
   "searchedAt": "2026-09-13",
   "searches": [
     {
-      "database": "Europe PMC — https://www.ebi.ac.uk/europepmc/webservices/rest/search — transport GET — receipt R-001 — E1 composite, historical carry-in from SBLA-008 scope time",
+      "database": "Europe PMC — https://www.ebi.ac.uk/europepmc/webservices/rest/search — transport GET — receipt R-001 — E1 composite, historical carry-in from SBLA-008 scope time — status historical",
       "query": "The E1 composite string as it stood on 2026-09-11, before the R1 exercise-block remediation. The exact string is not reproduced here because the amended string is the one this task executed; the historical string is preserved in git at research/searches/SBLA-008-search-strategy.md@56068c222bd8971378586776d133a7cf7a470b96.",
       "searchedAt": "2026-09-11",
       "resultCount": 334
@@ -136,31 +136,31 @@
       "resultCount": 159
     },
     {
-      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-023 — O-RS1-cable-fly",
+      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-023 — O-RS1-cable-fly — status executed-superseded",
       "query": "title_and_abstract.search:cable fly",
       "searchedAt": "2026-09-13",
       "resultCount": 719
     },
     {
-      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-024 — O-RS2-pec-deck",
+      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-024 — O-RS2-pec-deck — status executed-superseded",
       "query": "title_and_abstract.search:pec deck",
       "searchedAt": "2026-09-13",
       "resultCount": 45
     },
     {
-      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-025 — O-RS3-chest-fly",
+      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-025 — O-RS3-chest-fly — status executed-superseded",
       "query": "title_and_abstract.search:chest fly",
       "searchedAt": "2026-09-13",
       "resultCount": 543
     },
     {
-      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-026 — O-RS4-cable-crossover",
+      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-026 — O-RS4-cable-crossover — status executed-superseded",
       "query": "title_and_abstract.search:cable crossover",
       "searchedAt": "2026-09-13",
       "resultCount": 361
     },
     {
-      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-027 — O-RS5-pectoralis-hypertrophy-training",
+      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-027 — O-RS5-pectoralis-hypertrophy-training — status executed-superseded",
       "query": "title_and_abstract.search:pectoralis major hypertrophy resistance training",
       "searchedAt": "2026-09-13",
       "resultCount": 54
@@ -260,6 +260,54 @@
       "query": "title_and_abstract.search:\"pectoralis major\" \"muscle thickness\"",
       "searchedAt": "2026-09-13",
       "resultCount": 82
+    },
+    {
+      "database": "PubMed / MEDLINE — https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi — transport GET — receipt R-044 — N-RS4a",
+      "query": "(\"Pectoralis Muscles\"[mh] OR \"pectoralis major\"[tiab:~0] OR \"pec major\"[tiab:~0] OR \"musculus pectoralis major\"[tiab:~0]) AND (\"upper portion\"[tiab:~0] OR \"lower portion\"[tiab:~0] OR \"middle portion\"[tiab:~0] OR \"upper pectoralis\"[tiab:~0] OR \"lower pectoralis\"[tiab:~0] OR \"upper pec\"[tiab:~0] OR \"lower pec\"[tiab:~0] OR \"upper chest\"[tiab:~0] OR \"lower chest\"[tiab:~0])",
+      "searchedAt": "2026-09-13",
+      "resultCount": 59
+    },
+    {
+      "database": "PubMed / MEDLINE — https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi — transport GET — receipt R-045 — N-RS7",
+      "query": "(\"Pectoralis Muscles\"[mh] OR \"pectoralis major\"[tiab:~0] OR \"pec major\"[tiab:~0] OR \"musculus pectoralis major\"[tiab:~0]) AND (\"bench press\"[tiab:~0] OR \"chest press\"[tiab:~0]) AND (incline[tiab] OR inclined[tiab] OR inclination[tiab] OR decline[tiab] OR declined[tiab] OR angle[tiab] OR angles[tiab])",
+      "searchedAt": "2026-09-13",
+      "resultCount": 26
+    },
+    {
+      "database": "OpenAlex — https://api.openalex.org/works — transport GET — receipt R-046 — L1-nonenglish-openalex",
+      "query": "search= each of: \"crucifixo\"; \"aperturas con mancuernas\"; \"cruce de poleas\"; \"fliegende kurzhantel\"; \"팩덱플라이\"; \"peitoral maior eletromiografia\"; \"supino reto crucifixo\"; \"pectoral mayor electromiografia\"",
+      "searchedAt": "2026-09-13",
+      "resultCount": 6372
+    },
+    {
+      "database": "Europe PMC — https://www.ebi.ac.uk/europepmc/webservices/rest/search — transport GET — receipt R-047 — L2-nonenglish-europepmc",
+      "query": "The same eight quoted non-English phrases submitted to OpenAlex in R-046.",
+      "searchedAt": "2026-09-13",
+      "resultCount": 1
+    },
+    {
+      "database": "OpenAlex — https://api.openalex.org/works/{id} referenced_works — transport GET — receipt R-048 — backward citation chasing over the included set",
+      "query": "For each of the 76 included sources, resolve the source to an OpenAlex work by DOI and then by PMID, and collect its referenced_works list.",
+      "searchedAt": "2026-09-13",
+      "resultCount": 1631
+    },
+    {
+      "database": "OpenAlex — https://api.openalex.org/works?filter=cites:{id} — transport GET — receipt R-049 — forward citation chasing over the included set",
+      "query": "For each resolved included source, retrieve the works citing it.",
+      "searchedAt": "2026-09-13",
+      "resultCount": 2219
+    },
+    {
+      "database": "DOAJ (Directory of Open Access Journals) — https://doaj.org/api/search/articles/{query} — transport GET — receipt R-050 — DOAJ public article metadata",
+      "query": "Title-phrase queries for the Portuguese-language fly-family records held at awaiting-full-text, including \"crucifixo em diferentes planos\".",
+      "searchedAt": "2026-09-13",
+      "resultCount": 2
+    },
+    {
+      "database": "Publisher, institutional repository and national index endpoints — Per-record; listed under provenance — transport GET — receipt R-051 — targeted acquisition of four named records",
+      "query": "Direct retrieval of four records named by the R1 report or surfaced by the non-English routes: DOI 10.3390/app13085203; DOI 10.1590/s1517-86922007000100012; DOI 10.12820/rbafs.v.19n3p342; handle hdl:1793/62857.",
+      "searchedAt": "2026-09-13",
+      "resultCount": 4
     }
   ],
   "includedSourceIds": [
@@ -338,7 +386,19 @@
     "source-pmid-37675501",
     "source-pmid-34857426",
     "source-doi-10-21203-rs-3-rs-4612110-v1",
-    "source-doi-10-37310-ref-v85i3-145"
+    "source-doi-10-37310-ref-v85i3-145",
+    "source-doi-10-3390-app13085203",
+    "source-pmid-33049982",
+    "source-pmid-39764299",
+    "source-pmid-25799093",
+    "source-doi-10-1590-s1517-86922007000100012",
+    "source-pmid-36026487",
+    "source-pmid-28129277",
+    "source-pmid-26464884",
+    "source-pmid-32390722",
+    "source-pmid-28170449",
+    "source-pmid-35599715",
+    "source-handle-1793-62857"
   ],
   "exclusions": [
     {
@@ -404,9 +464,245 @@
     {
       "sourceId": "source-doi-10-20944-preprints202504-2630-v1",
       "reason": "E-REC-2 — Preprint of the subscapularis activation study already recorded; linked as a secondary report. [screening-flow recordId G1083]"
+    },
+    {
+      "sourceId": "source-doi-10-12820-rbafs-v-19n3p342",
+      "reason": "E-EXP-7 — Full text obtained and read (open-access publisher PDF, 163,897 bytes). Dumbbell fly on a stable bench versus a Swiss ball in 14 volunteers at 30% 1RM; the manipulated variable is surface stability within one fly variant, not an index-versus-related-condition contrast. Clavicular pectoralis major EMG was higher on the unstable surface (p = 0.036). [screening-flow recordId G1820; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-20300023",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1866; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-22692120",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1867; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-18076235",
+      "reason": "E-EXP-7 — The standing cable press is a press performed with intentional elbow extension; the frozen §3.2 definition excludes intentional elbow extension from the fly family, so it is neither index Y nor a pre-specified related fly condition. [screening-flow recordId G1868; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-27632870",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1869; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-26528421",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1870; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-20373201",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1875; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-19855317",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1877; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-33422743",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1878; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-19209083",
+      "reason": "E-EXP-7 — The comparator is a proprietary multigrip flexible device, which is neither an index condition nor a pre-specified related condition. [screening-flow recordId G1880; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-31199829",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1882; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-15705025",
+      "reason": "E-EXP-7 — The manipulated variable is a push-up variant contrast (hand position, surface, or plyometric mode), a distinct condition rather than a press-versus-fly contrast. This follows the disposition already recorded for G0325. [screening-flow recordId G1883; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-29231125",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1884; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-16540847",
+      "reason": "E-EXP-7 — The manipulated variable is a push-up variant contrast (hand position, surface, or plyometric mode), a distinct condition rather than a press-versus-fly contrast. This follows the disposition already recorded for G0325. [screening-flow recordId G1885; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-20664364",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1887; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-22076100",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1888; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-21701289",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1889; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-23879709",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1890; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-16095413",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1892; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-23332682",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1893; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-36157940",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1895; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-28841536",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1899; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-20300308",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1901; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-21735215",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1902; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-38513183",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1904; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-42454078",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1905; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-29340001",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1907; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-27669189",
+      "reason": "E-EXP-7 — The comparator is a triceps-extension exercise, a distinct condition rather than a pectoral-targeted related condition. [screening-flow recordId G1908; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-32492829",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1909; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-32765305",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1910; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-41579184",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1911; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-31627293",
+      "reason": "E-EXP-7 — The manipulated variable is an experimental barbell-bench-press apparatus variant, not an index-versus-related-condition contrast. [screening-flow recordId G1913; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-37559769",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1914; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-38668577",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1915; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-39686276",
+      "reason": "E-EXP-7 — The comparator is outdoor fitness equipment without load selection, a distinct condition outside the index and related-condition set. [screening-flow recordId G1916; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-40407464",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1920; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-32460639",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1921; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-36148298",
+      "reason": "E-EXP-7 — Read at abstract level: the manipulated variable is degree of bench-press instability (Smith machine vs free weight vs suspended elastic load), a within-exercise modifier, not an index-versus-related-condition contrast. [screening-flow recordId G1922; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-33096856",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1923; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-36518295",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1925; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-doi-10-22282-tojras-1296673",
+      "reason": "E-EXP-7 — The manipulated variable is a push-up variant contrast (hand position, surface, or plyometric mode), a distinct condition rather than a press-versus-fly contrast. This follows the disposition already recorded for G0325. [screening-flow recordId G1926; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-40783763",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1927; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-doi-10-1101-2025-02-19-638473",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1930; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-41673781",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1931; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-39584871",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1934; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-38551927",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1936; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-40150756",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1937; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-doi-10-1101-2023-12-16-572002",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1938; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-33218529",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1940; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-doi-10-21203-rs-3-rs-3344478-v1",
+      "reason": "E-EXP-7 — The manipulated variable is a push-up variant contrast (hand position, surface, or plyometric mode), a distinct condition rather than a press-versus-fly contrast. This follows the disposition already recorded for G0325. [screening-flow recordId G1942; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-41892990",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1943; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-doi-10-3823-1897",
+      "reason": "E-EXP-7 — The manipulated variable is a bench-press execution modifier, not an index-versus-related-condition contrast. [screening-flow recordId G1945; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-28415066",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1948; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-40415788",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1949; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-28234710",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1950; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-33779514",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1951; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-25932979",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1954; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-18520435",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1956; added by the R1 bounded remediation]"
+    },
+    {
+      "sourceId": "source-pmid-8781868",
+      "reason": "E-EXP-7 — An exercise contrast exists and is the manipulated variable, but the title states a technique, load, surface, tempo, device, grip or instruction modifier within a single exercise rather than an index-versus-related-condition contrast. [screening-flow recordId G1957; added by the R1 bounded remediation]"
     }
   ],
-  "synthesis": "SBLA-009 evidence packet for the vertical slice: pectoralis major, barbell flat bench press (Exercise X) and bilateral standing cable fly at shoulder height (Exercise Y).\n\nHEADLINE. The primary comparative question has no answer in the retrieved literature. No study of the index cable fly as defined in research/questions/SBLA-008-vertical-slice.md section 3.2 was retrieved by any route, and no study comparing the barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved. That absence is reported as absence. It is not evidence of equivalence and not evidence of ineffectiveness. Under the frozen U2/EU2 decision Y was not widened and no related condition was pooled into the primary comparison.\n\nFOUR-STATE RECONCILIATION. Records retrieved 1361. Duplicate retrieval events 252. Unique records after deduplication 1109. Excluded 1009. Awaiting full text 24. Included 76. Equation one, unique after deduplication = excluded + awaiting-full-text + included: 1109 = 1009 + 24 + 76, closes. Equation two, records retrieved = duplicates + unique after deduplication: 1361 = 252 + 1109, closes.\n\nHOW THIS PACKET USES ITS TWO ARRAYS. includedSourceIds carries all 76 included sources. exclusions[] carries only the substantive exclusions of records that reached stage 3 as candidate evidence, plus the two retracted records and the four linked secondary reports. The remaining stage-1 exclusions are summarised by code here and enumerated one record at a time in research/screening/SBLA-009-screening-flow.json, which is authoritative for reconciliation under the frozen SE-U2/SU8 decision. Duplicates are deduplication events and appear in neither array; awaiting-full-text records are neither included nor excluded and appear in neither array; both are carried by count above and per record in the companion. No duplicate and no awaiting-full-text record is encoded here as a substantive exclusion.\n\nEXCLUSION CODE COUNTS ACROSS ALL 1,009 EXCLUDED RECORDS: E-POP-5=236, E-POP-4=157, E-POP-1=150, E-EXP-3=110, E-OUT-2=90, E-EXP-1=73, E-OUT-1=40, E-REC-5=39, E-POP-6=18, E-DES-5=17, E-DES-4=15, E-OUT-5=15, E-REC-6=14, E-POP-2=7, E-EXP-7=6, E-DES-3=5, E-DES-6=5, E-EXP-2=4, E-REC-2=4, E-REC-4=2, E-EXP-4=2. Five codes were added by a dated, post-hoc, administrative amendment recorded in the screening-flow companion (AM-1): E-REC-5, E-REC-6, E-REC-7 (reserved, not issued), E-EXP-7 and E-DES-6. A post-hoc amendment cannot raise the certainty of any claim.\n\nWHAT THE EVIDENCE DOES SUPPORT. Twenty-two draft claims and five absence records are in content-drafts/syntheses/SBLA-009-atomic-claims.json. The best-supported finding is that the pectoralis major is regionally differentiated: measured moment arms, segmental and high-density electromyography, shear-wave elastography, cadaveric innervation and exercise activation all converge on it, at moderate certainty. The muscle is among the principal glenohumeral adductors by measured moment arm, at high certainty. Chest resistance training increases pectoralis major thickness, at low certainty, from two small usable trials. At matched percentages of body weight a standing cable cross-over of unreported pulley height produced significantly larger shoulder joint moments and a far smaller elbow excursion than a flat barbell bench press, at low certainty, from one study of twenty participants. No claim in this packet uses the word better, and no claim makes a press-versus-fly hypertrophy statement.\n\nSENSITIVITY ANALYSIS. The pre-specified within-participant contralateral-limb sensitivity analysis required by the frozen U3/EU1 decision contains zero eligible studies. The specification was fixed before results were seen and is retained. Every included tier-1 study uses a between-participant contrast.\n\nSECONDARY QUESTION. Regional clavicular-versus-sternocostal hypertrophy, kept secondary by the frozen U4/EU3 decision, has one small site-specific tier-1 result in the direction the activation evidence predicts, and nothing else. It does not replace or upgrade the whole-muscle outcome.\n\nCONTRADICTIONS FOUND AND KEPT. Nine are mapped in research/syntheses/SBLA-009-synthesis.md section 3, including two disagreeing press-versus-fly activation studies, a cadaveric series contradicting the standard bilaminar description of the humeral enthesis, primary innervation series contradicting the two-nerve textbook account, and a published statement by the group that measured bench press activation most carefully that the inclination literature is contradictory because of measurement artefact. Two retracted papers (PMID 31188644 and PMID 30779716) were retrieved by the contradiction stratum and are blocked from supporting any live claim.\n\nMAIN LIMITATIONS. The search was not exhaustive: route-level composites returned 11,765 PubMed records across S1 to S4 alone and six pre-specified retrieval strata brought 911 of them into screening. Cochrane CENTRAL was not searched, for want of a Search Manager session. Ten eligible tier-1 records are awaiting full text because the eligibility plan forbids taking a tier-1 hypertrophy datum from an abstract. Fifty of the 76 included sources were read as abstracts only. Double screening was not performed on a separate day as specified. Two search-syntax defects were found in the governing SBLA-008 strategy and are routed to its owner rather than fixed here. Full limitations are in research/syntheses/SBLA-009-synthesis.md section 7 and research/appraisals/SBLA-009-appraisals.md section 6.\n\nCOMPANION ARTIFACTS, all at version 1.0.0: research/searches/SBLA-009-search-receipts.json, research/screening/SBLA-009-screening-flow.json, research/extractions/SBLA-009-source-extractions.json, research/appraisals/SBLA-009-appraisals.md, research/syntheses/SBLA-009-synthesis.md, content-drafts/syntheses/SBLA-009-atomic-claims.json, content-drafts/muscles/pectoralis-major.md, content-drafts/exercises/barbell-flat-bench-press.md, content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md.\n\nPACKET IDENTIFIER NOTE. This record is stored at research/packets/sbla-009-evidence-packet.json and its id is sbla-009-evidence-packet, so the lowercase entityIdSchema and path-to-record-ID invariant agree. Codex corrected the initially uppercase uncreated path in the coordination claim before this file was generated; the other ten claimed paths and immutable base did not change.",
+  "synthesis": "SBLA-009 evidence packet, version 2.0.0, rebuilt in the R1 bounded remediation against reviews/evidence/SBLA-009-r1.md at 8154f1167062403a96ee5d6ec0fc63bd50ebfd17.\n\nRECONCILIATION. unique records after deduplication = excluded + awaiting-full-text + included : 1956 = 1842 + 26 + 88. records retrieved = duplicates + unique records after deduplication : 2343 = 387 + 1956. Duplicates are deduplication events, not exclusions; an awaiting-full-text record is neither included nor excluded. The sum of exclusionCodeCounts equals 1842, the excluded total.\n\nQ2, THE PRIMARY QUESTION, HAS NO ANSWER AND THIS PACKET DOES NOT MANUFACTURE ONE. No study of the index condition — the bilateral standing cable fly at shoulder height as frozen in research/questions/SBLA-008-vertical-slice.md section 3.2 — was retrieved by any route this project ran, and no study comparing a barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved. Both absences are recorded as absence of evidence within the routes actually run, never as equivalence or ineffectiveness, and both are now bound to the retrieval that produced them rather than stated universally.\n\nTHE ABSENCE NOW RESTS ON OPENED DOCUMENTS. The R1 review established that the single record this pass had itself called the most directly relevant press-versus-fly source had never been opened. It has been. G1016 (Schanke 2012, MSc thesis, University of Wisconsin-La Crosse) was obtained from the MINDS@UW institutional repository without authentication — 21,237,276 bytes, sha256 81a2a094349a0fccd822247cf2d36b08449bffe2035d30869521049c2dc6a950 — and read in full. Its bent-forward cable crossover is described in the Methods with the arms at chest height and parallel to the floor, but the pulley origin height is never stated, and Figure 2 depicts handles above shoulder height with a downward-and-inward path. Under the frozen section 3.2 attribute table the pulley origin is a defining attribute of index Y and high-to-low crossover is a named distinct condition, so it is a related condition. Index Y remains unstudied, and the pass can now say so from a document it read.\n\nEXTERNAL CORROBORATION OF THE ABSENCE. An independent 2023 systematic review and meta-analysis of pectoralis major EMG in the bench press and other pectoral exercises (DOI 10.3390/app13085203, CC BY 4.0) searched PubMed/MEDLINE, SPORTDiscus and Web of Science to 25 March 2023 — two databases this project cannot search — hand-screened every selected article's reference list, identified 951 publications and included 23 studies. Its six exercise-type comparisons are against push-ups, dumbbell exercises, elastic resistance and a chest press. No cable fly appears anywhere in it. That is stronger evidence of absence than this project's own search can be.\n\nWHAT THE PASS DOES CARRY. 23 draft claims and 5 explicit absence records, drawn from 88 included sources. The best-corroborated finding is regional differentiation within the pectoralis major. Two claims were re-derived in this remediation. claim-bench-press-inclination-shifts-regional-activation loses its monotonic wording and drops from moderate to low: the sternocostal decrease with inclination is consistent, but the clavicular response is not, with a measured peak near 30 degrees, reduced pectoralis performance above 45 degrees, a whole-contraction null, and a pooled clavicular null at p = 0.81 with I-squared 92.6 per cent. claim-press-versus-fly-activation-mixed is rebuilt on four primary comparisons plus a meta-analysis and is held at very-low: three of the four are null, none of the comparators is index Y, the one comparison reporting a difference did not normalise its EMG, and the pooled estimates carry I-squared of 94.9 and 98 per cent. A post-hoc amendment may lower certainty and may not raise it.\n\nACQUISITION IS NOW AN AUDITABLE STAGE. The eligibility-plan section 4.5 ladder was executed and recorded with its date and HTTP result for every record whose eligibility could turn on it. No record held awaiting-full-text or included at a lower access level carries an empty ladder. Nine sources moved from abstract-only or metadata-only to full-text-open once the ladder reached PubMed Central or a repository rather than stopping at the Europe PMC fullTextXML endpoint; no source remains at metadata-only. Where a host refused this client the status code is recorded and the ladder moved to the next lawful rung: no paywall was circumvented, no user-agent was substituted, and no shadow library was accessed.\n\nLIMITS THAT REMAIN. The search is not exhaustive: 11,765 PubMed composite records across S1 to S4 against a screened set of 1956. Cochrane CENTRAL was not searched, and no access control was circumvented to reach it. SPORTDiscus and Web of Science were not searched by this project, and the gap is mitigated by citing the 2023 review rather than closed by searching. Forward citation chasing is truncated at 200 citing works per seed, and a pre-specified relevance expression reduced 3,479 chased works to 841 before screening. 26 records remain awaiting full text, each with a dated ladder. Screening of the 848 records added by the remediation used a disclosed two-pass method whose first pass is a deterministic rule set that can only exclude. Double screening on a separate day was not performed. Every one of these is stated in the synthesis and appraisal limitation sections rather than left for a reviewer to find.",
   "decisionLog": [
     {
       "at": "2026-09-13T14:05:00Z",
@@ -457,9 +753,69 @@
       "at": "2026-09-13T17:40:00Z",
       "actor": "claude-research",
       "decision": "Reported the absence of index-Y evidence as absence and did not widen Y, did not pool a related condition into the primary comparison, and drafted no press-versus-fly hypertrophy claim. Anti-cherry-picking rule 7 and the frozen U2/EU2 decision both require this, and the search receipts record the six routes that would have found such a study."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, C-1. Executed the eligibility-plan section 4.5 acquisition ladder, with its date and HTTP result, for every record that carried an empty or partial ladder: 24 awaiting-full-text records and 52 included records below full-text-open. Recorded every attempt as a structured {step, route, url, attemptedAt, result} object rather than opaque text, so that no absence or completeness statement rests on a record nobody tried to open."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, C-1. Obtained and read G1016, the record the first pass had itself called the most directly relevant press-versus-fly source and had never attempted to retrieve. Promoted it from awaiting-full-text to included. Its cable condition is a high-to-low crossover with an unstated pulley origin, so index Y remains unstudied — but that is now a finding from a read document rather than an assumption."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-2 and I-4. Added backward and forward citation chasing over the included set, which the first pass omitted entirely despite master plan section 9.6 naming it a primary discovery channel, and added the 2023 systematic review and meta-analysis it recovers. Chasing produced 3,559 distinct candidate works; a pre-specified relevance expression retained 841, of which 745 were new and were screened to a terminal state."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-6. Added non-English exercise vocabulary to the OpenAlex and Europe PMC routes and used the DOAJ public article API. Both records the R1 report named as demonstrated recall losses were retrieved. One of them, a Portuguese comparison of the barbell bench press with a machine fly in 13 trained men, is now an included source and carries an authorised English abstract, so it needed no machine translation."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-6 and deduplication. The DOAJ record established that the English-titled record held as G1006 and the Portuguese-titled record held as G1022 are the same 2014 RBPFEX report: identical author list, identical year, identical publisher URL, and one bilingual abstract carrying both titles. Merged as a deduplication event, never as an exclusion. This is a defect completed retrieval exposed, not one the review was asked to find."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-13. Added the amended portion-terminology stratum N-RS4a and a bench-angle stratum N-RS7. Between them they recovered five of the six PMIDs the R1 report named as absent, including both studies that contradict the inclination claim as it was first worded."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, honesty over inclusion count. Four records adjudicated eligible on their titles were held at awaiting-full-text rather than counted as included, because no abstract and no full text could be obtained for them by any lawful route and nothing can be extracted from a record whose content was never obtained. Eligibility-plan section 4.5 reserves inclusion for records whose content was actually obtained."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-12 and M-3. Corrected nine access levels from abstract-only or metadata-only to full-text-open after the ladder reached PubMed Central or a repository rather than stopping at the Europe PMC fullTextXML endpoint, which returns 404 for these records. Corrected the claim qualifier that asserted normalisation, electrode placement and crosstalk handling could not be verified: all three are in the full text, and the study did not normalise its EMG at all, which is a material limitation the first pass recorded as unverifiable."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-10. Corrected two qualifiers that asserted a source fact was absent when the full text states it. Donor age and sex are stated for both cadaveric series (51 +/- 14 years, 9 male and 5 female; and mean 69.3 +/- 11.8 years, range 48 to 90). Recording the second lowered the applicability grade of claim-pectoralis-major-structural-variation from partially-direct to indirect, which is the point of recording it."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-5. Bound every universal absence statement to the retrieval that produced it, in the absence records and in the reader-facing fly draft, and cited the 2023 review as external corroboration. An existence claim is not something this retrieval design can support; a statement about what these routes retrieved is."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, I-11. Added claim-fly-machine-pectoralis-rupture. The fly draft carried the only safety statement on the index-Y page and attributed it to the bench-press rupture claim, which contains no fly-machine content, no fly-machine scope and no translation qualifier. The underlying fact was correctly extracted and correctly appraised; only the claim record was missing. Mechanical traceability passed while entailment failed, and the drafting rule now says so explicitly."
+    },
+    {
+      "at": "2026-09-13T21:40:00Z",
+      "actor": "claude-research",
+      "decision": "R1 REMEDIATION, M-1. Stated the retrievalEvents default as a structured field (fieldContract.retrievalEventsDefault = 1) rather than leaving it to prose. Applied literally, the prose contract yielded the explicit subtotal rather than recordsRetrieved, which is the ambiguity the review identified."
     }
   ],
-  "reviewState": "draft",
+  "reviewState": "in-review",
   "createdAt": "2026-09-13T14:01:00Z",
-  "updatedAt": "2026-09-13T18:00:00Z"
+  "updatedAt": "2026-09-13T21:40:00Z"
 }

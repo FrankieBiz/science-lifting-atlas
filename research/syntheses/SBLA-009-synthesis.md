@@ -3,14 +3,17 @@
 - Task: SBLA-009 (§18 queue row; §14 Phase 1 Task 1.2, `synthesize` stage of the §9.8 pipeline)
 - Role: Claude Research (account A) — evidence lead, not the independent reviewer
 - Base commit: `8ca59e850beb0770554074d474a3ff3a9e16710a`
-- Date: 2026-09-13
-- Artifact version: 1.0.0
-- Companions, all at version 1.0.0:
+- Date: 2026-09-13; revised 2026-09-13 in the R1 bounded remediation
+- Artifact version: 2.0.0
+- Revision: R1 bounded remediation against
+  [`reviews/evidence/SBLA-009-r1.md`](../../reviews/evidence/SBLA-009-r1.md) at
+  `8154f1167062403a96ee5d6ec0fc63bd50ebfd17`. Every change is listed in §8.
+- Companions, all at version 2.0.0:
   [`research/searches/SBLA-009-search-receipts.json`](../searches/SBLA-009-search-receipts.json),
   [`research/screening/SBLA-009-screening-flow.json`](../screening/SBLA-009-screening-flow.json),
   [`research/extractions/SBLA-009-source-extractions.json`](../extractions/SBLA-009-source-extractions.json),
   [`research/appraisals/SBLA-009-appraisals.md`](../appraisals/SBLA-009-appraisals.md),
-  [`research/packets/SBLA-009-evidence-packet.json`](../packets/SBLA-009-evidence-packet.json),
+  [`research/packets/sbla-009-evidence-packet.json`](../packets/sbla-009-evidence-packet.json),
   [`content-drafts/syntheses/SBLA-009-atomic-claims.json`](../../content-drafts/syntheses/SBLA-009-atomic-claims.json)
 
 ## 0. The headline, stated first
@@ -20,8 +23,21 @@
 The comparative question this slice was built around — does a programme using the
 barbell flat bench press differ from one using the bilateral standing cable fly at
 shoulder height in pectoralis major hypertrophy — cannot be answered from the
-retrieved evidence, because **no study of the index cable fly was found**. Not a
-weak study. Not an indirect one. None.
+retrieved evidence, because **no study of the index cable fly was retrieved by any
+route this project ran**. Not a weak study. Not an indirect one. None.
+
+That absence now rests on opened documents rather than on an assumption. The R1 review
+established that the single record this pass had itself called the most directly
+relevant press-versus-fly source had never been opened. It has been: G1016 was obtained
+from its institutional repository and read in full, and its cable condition is a
+bent-forward crossover whose pulley origin height the Methods do not state and whose
+Figure 2 depicts a high-to-low path, so the frozen §3.2 attribute table makes it a
+related condition and not index Y. Independent corroboration now sits alongside the
+project's own search: a 2023 systematic review and meta-analysis of pectoralis major
+EMG in the bench press and other pectoral exercises searched PubMed/MEDLINE, SPORTDiscus
+and Web of Science to March 2023, hand-screened every selected article's reference list,
+and included 23 studies whose exercise-type comparators are push-ups, dumbbell exercises,
+elastic resistance and a chest press. No cable fly appears anywhere in it.
 
 The scope file anticipated this in §4.3 of the search strategy: "Exercise Y as
 defined may have almost no directly indexed PubMed literature." That prediction is
@@ -69,10 +85,13 @@ the medial cord, C8–T1, supplying the lower half of the muscle (G0505).
 The primary series are messier and they do not agree with it or fully with each
 other:
 
-- G0292, using Sihler intramuscular staining on 80 specimens, reports that the
-  muscle is **mainly innervated by the lateral pectoral nerve** and that a
-  contribution from the **intercostal nerves** was confirmed in every stained
-  specimen.
+- G0292 dissected 80 specimens from 40 cadavers (22 male, 18 female; mean donor age
+  69.3 ± 11.8 years, range 48–90) and reports the muscle as **mainly innervated by the
+  lateral pectoral nerve**. Within that series, **five randomly selected muscles** were
+  examined by Sihler whole-mount nerve staining, and a contribution from the
+  **intercostal nerves** was confirmed in every one of those five. Eighty is the
+  gross-dissection total; the intercostal finding rests on the five stained muscles, and
+  the earlier draft of this synthesis attributed it to all eighty.
 - G0399 found, in all 29 dissections, that the pectoral nerves exit at trunk level
   as **three** distinct nerves, naming a superior pectoral nerve to the lateral
   clavicular portion.
@@ -107,7 +126,8 @@ Five independent method families, five research groups, three decades, one
 conclusion: the pectoralis major does not behave as a single unit.
 
 - **Leverage.** Sub-regions have significantly different moment arms (G0361, G0556).
-- **Activation.** High-density surface EMG in twenty healthy females found the
+- **Activation.** High-density surface EMG in **twenty-nine** healthy young females,
+  across two independent experiments, found the
   middle sternocostal region activating **12–108 % more** than the clavicular and
   superior sternocostal regions during extension, adduction with external rotation,
   and high-elevation internal rotation, and 7–22 % more than the superior
@@ -282,17 +302,21 @@ outcome evidence, which is exactly the situation §2.2 warns about.
 Assembled from the deliberate contradiction search (stratum N-RS6, 211 records) and
 from disagreements found inside the included set, not after a conclusion had formed.
 
-| #   | Contradiction                                                                                                              | Records                                    | How it is handled                                                                                              |
-| --- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| C-1 | Press versus fly activation: higher in the press, versus no significant difference                                         | G0042 vs G0077                             | Both carried. Neither preferred. The null is recorded as "not enough information" under rule H2                |
-| C-2 | The bench press inclination EMG literature is contradictory, by the admission of the group that measured it best           | G0265, G0520, G0274                        | Treated as a measurement-validity problem, not an effect. All tier-4 claims carry the surface-EMG qualifier    |
-| C-3 | The pectoralis major enthesis: bilaminar in the standard description, unilaminar in all 14 imaged-and-sectioned specimens  | G0281 vs G0236, G0244                      | The primary imaging-plus-histology finding is reported, with the disagreement stated                           |
-| C-4 | Innervation: two nerves, one per head, versus three trunk-level nerves, intercostal contribution, and 62/38 % variation    | G0244, G0505 vs G0292, G0399, G0548, G0621 | The primary series win on grading; the claim is `moderate` with a variation qualifier                          |
-| C-5 | Grip width changes pectoralis activation (G0381) versus no significant grip-width effect in elite athletes (G0135)         | G0381 vs G0135                             | Both carried. Populations and protocols differ (isometric holds versus 6RM sets in national-level competitors) |
-| C-6 | Eight weeks of machine-fly training and eight weeks of daily static stretching produced indistinguishable thickness change | G0098 (internal)                           | Reported at full prominence; it constrains how confidently any fly-family hypertrophy claim can be stated      |
-| C-7 | Two retracted training-volume papers were retrieved by the contradiction stratum                                           | PMID 31188644, 30779716                    | Blocked from supporting a live claim under §9.7; recorded here so the block is visible                         |
-| C-8 | A systematic review of glenohumeral moment arms carries an erratum that could not be read                                  | G0521                                      | No number from it is used anywhere                                                                             |
-| C-9 | A tier-1 trial prints identical pectoralis values for both randomised arms                                                 | G0132                                      | Between-group estimate discarded; risk of bias set to high                                                     |
+| #    | Contradiction                                                                                                                                                                                                                                            | Records                                    | How it is handled                                                                                                                                                                      |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| C-1  | Press versus fly activation: higher in the press, versus no significant difference                                                                                                                                                                       | G0042 vs G0077                             | Both carried. Neither preferred. The null is recorded as "not enough information" under rule H2                                                                                        |
+| C-2  | The bench press inclination EMG literature is contradictory, by the admission of the group that measured it best                                                                                                                                         | G0265, G0520, G0274                        | Treated as a measurement-validity problem, not an effect. All tier-4 claims carry the surface-EMG qualifier                                                                            |
+| C-3  | The pectoralis major enthesis: bilaminar in the standard description, unilaminar in all 14 imaged-and-sectioned specimens                                                                                                                                | G0281 vs G0236, G0244                      | The primary imaging-plus-histology finding is reported, with the disagreement stated                                                                                                   |
+| C-4  | Innervation: two nerves, one per head, versus three trunk-level nerves, intercostal contribution, and 62/38 % variation                                                                                                                                  | G0244, G0505 vs G0292, G0399, G0548, G0621 | The primary series win on grading; the claim is `moderate` with a variation qualifier                                                                                                  |
+| C-5  | Grip width changes pectoralis activation (G0381) versus no significant grip-width effect in elite athletes (G0135)                                                                                                                                       | G0381 vs G0135                             | Both carried. Populations and protocols differ (isometric holds versus 6RM sets in national-level competitors)                                                                         |
+| C-6  | Eight weeks of machine-fly training and eight weeks of daily static stretching produced indistinguishable thickness change                                                                                                                               | G0098 (internal)                           | Reported at full prominence; it constrains how confidently any fly-family hypertrophy claim can be stated                                                                              |
+| C-7  | Two retracted training-volume papers were retrieved by the contradiction stratum                                                                                                                                                                         | PMID 31188644, 30779716                    | Blocked from supporting a live claim under §9.7; recorded here so the block is visible                                                                                                 |
+| C-8  | A systematic review of glenohumeral moment arms carries an erratum that could not be read                                                                                                                                                                | G0521                                      | No number from it is used anywhere                                                                                                                                                     |
+| C-9  | A tier-1 trial prints identical pectoralis values for both randomised arms                                                                                                                                                                               | G0132                                      | Between-group estimate discarded; risk of bias set to high                                                                                                                             |
+| C-10 | Bench inclination and the clavicular portion: a monotonic shift toward the clavicular head, versus a peak near 30° with reduced pectoralis performance above 45°, versus no whole-contraction difference at all, versus no significant pooled difference | G0103, G0348 vs G1881, G1872, G1903        | Claim 14 re-derived. The monotonic wording is withdrawn, certainty lowered from moderate to low, direction changed to mixed, and all four contradicting sources are cited on the claim |
+| C-11 | Press versus fly activation, enlarged: one un-normalised comparison favours the press, three comparisons find no significant difference, and a meta-analysis finds a sternal difference with I² = 98 % and no clavicular difference                      | G0042 vs G0077, G1896, G1016, G1903        | Supersedes C-1. All five carried, none preferred. Certainty held at very-low; the enlarged base did not raise it                                                                       |
+| C-12 | The 2023 meta-analysis contradicts itself on the decline contrast: its Table 3 and Results report no significant decline effect for either portion, while its Featured Application and Abstract conclusion assert a directional decline effect           | G1903 (internal)                           | The Table and Results are the primary record and are what the extraction relies on. The inconsistency is recorded as a quality defect of the source, not smoothed                      |
+| C-13 | Exercise order changes fly activation by roughly 19 percentage points of MVIC, which destabilises any single press-versus-fly activation comparison                                                                                                      | G0062 (internal)                           | Carried as a qualifier on claim 21. It is the reason no press-versus-fly activation difference is presented as a property of the exercises                                             |
 
 ## 4. Publication-bias probe
 
@@ -332,9 +356,10 @@ Stated plainly, because a synthesis that cannot be summarised is not finished:
 1. The pectoralis major is a regionally differentiated muscle, and that is the
    best-supported statement in this pass.
 2. It is a principal adductor and horizontal adductor at the glenohumeral joint.
-3. Chest resistance training increases its thickness; the two usable trials say so
-   at low certainty, one for a bench press and one for a machine fly against no
-   training.
+3. Chest resistance training increases its thickness; the **three** usable trials say
+   so at low certainty — a machine fly against no training, a horizontal-versus-incline
+   bench press trial, and a low-load bench press versus push-up trial whose between-group
+   numbers are discarded for a data-integrity defect, leaving only its direction.
 4. A cable cross-over loads the shoulder joint more, and the elbow far less, than a
    flat barbell bench press at matched percentages of body weight.
 5. **Whether a bench press or a cable fly produces more pectoralis major growth is
@@ -344,9 +369,15 @@ Stated plainly, because a synthesis that cannot be summarised is not finished:
 ## 7. Limitations of this synthesis
 
 - **L-1. The search was not exhaustive.** Route-level composites returned 11,765
-  PubMed records across S1–S4 alone; six pre-specified retrieval strata brought 911
-  of them into screening. The difference is a real recall gap, quantified per route
-  in the search receipts. This is a prototype of the pipeline, not a systematic review.
+  PubMed records across S1–S4 alone; the pre-specified retrieval strata brought 911
+  of them into screening in the first pass. The R1 remediation added two strata, eight
+  non-English probes, backward and forward citation chasing and four targeted retrievals,
+  taking the screened set from 1,109 to **1,956** unique records. The difference between
+  a composite count and a screened set is still a real recall gap, and the chasing itself
+  is bounded: forward chasing is truncated at 200 citing works per seed, and a
+  pre-specified relevance expression reduced 3,479 chased works to 841 before screening.
+  Both residuals are quantified in the search receipts. This is a prototype of the
+  pipeline, not a systematic review.
 - **L-2. Cochrane CENTRAL was not searched.** No subscription or Search Manager
   session exists for this project. Trial coverage rests on Europe PMC,
   ClinicalTrials.gov and OpenAlex.
@@ -354,8 +385,11 @@ Stated plainly, because a synthesis that cannot be summarised is not finished:
   eligibility plan forbids taking a tier-1 hypertrophy datum from an abstract and no
   lawful full text was obtained. If those were read, the tier-1 picture could change
   materially. They are listed by record ID in the extraction artifact.
-- **L-4. Fifty of 76 included sources were read as abstracts only.** Their facts are
-  bounded by what an abstract discloses.
+- **L-4. Forty-six of 88 included sources were read as abstracts only.** Their facts
+  are bounded by what an abstract discloses. The first pass reported fifty of 76 while
+  also holding two sources at `metadata-only`, which understated the shortfall; the
+  acquisition ladder run in the remediation moved nine sources up to `full-text-open`
+  and left no source at `metadata-only`.
 - **L-5. Publisher edge blocks.** Wiley, Elsevier, ScienceDirect, MDPI's PDF
   endpoint and the NATA platform returned HTTP 403 or interstitial pages to this
   client. No workaround was attempted, and no Cochrane URL was reached by
@@ -364,7 +398,11 @@ Stated plainly, because a synthesis that cannot be summarised is not finished:
   those fields means not extracted, not absent.
 - **L-7. Two non-English sources were read through machine-assisted translation with
   no second independent check**, so neither can carry a decision-critical prose claim
-  alone. Six further non-English records could not be obtained at all.
+  alone. A third, the Portuguese bench-press-versus-machine-fly comparison added by the
+  remediation, needed no machine translation: it carries an authorised English abstract
+  published alongside the Portuguese text, which is step 1 of the ladder. Non-English
+  records that could not be obtained at all remain in the awaiting-full-text register
+  with their dated ladders.
 - **L-8. Double screening was not performed as specified.** The eligibility plan
   requires re-screening 20 % of stage-1 and 100 % of stage-3 records on a separate
   pass on a separate day. This pass ran in a single session on a single day, so the
@@ -377,3 +415,36 @@ Stated plainly, because a synthesis that cannot be summarised is not finished:
   is outside this task's claimed paths.
 - **L-10. Single analyst, no independent verification of any extracted number** until
   the SBLA-010 citation-entailment audit runs.
+- **L-11. Screening of the 848 records added by the remediation used a two-pass
+  method, and the first pass was a rule set rather than 756 individual judgements.**
+  A written, deterministic, ordered rule set over title and abstract terminated 756
+  records; the 93 it did not terminate were adjudicated individually against the
+  title-stated manipulated variable. The rule set can only exclude, so a
+  misclassification inside it is an over-exclusion — a recall cost, not a false
+  inclusion that could inflate a claim. Abstracts were obtainable for 541 of the 848,
+  so 307 were screened on title alone, which is a weaker decision and is marked by the
+  absence of an abstract in the retrieval metadata.
+- **L-12. The bounded remediation is one round.** It closes the findings the R1 report
+  raised; it is not a re-execution of the review from scratch, and it inherits every
+  first-pass limitation not named in that report.
+
+## 8. What the R1 bounded remediation changed in this synthesis
+
+Recorded so that a reviewer can diff this synthesis against its first version without
+reading the artifact twice. Every item names the R1 finding it answers.
+
+| Finding    | Change                                                                                                                                                                                                                                                                                                     |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **C-1**    | §0 now states that the absence rests on opened documents. G1016 was obtained from its institutional repository (21,237,276 bytes, sha256 `81a2a094…`) and read; its cable condition is a high-to-low crossover with an unstated pulley origin, so it is a related condition and index Y remains unstudied. |
+| **I-1**    | The evidence-packet link in the header is corrected to the committed lowercase filename `sbla-009-evidence-packet.json`.                                                                                                                                                                                   |
+| **I-2**    | The 2023 systematic review and meta-analysis (DOI `10.3390/app13085203`) is retrieved, extracted and cited in §0 as external corroboration of the index-Y absence and in the contradiction map as C-10 and C-11.                                                                                           |
+| **I-4**    | §7 L-1 now records that backward and forward citation chasing exist, and states their two bounds.                                                                                                                                                                                                          |
+| **I-6**    | §7 L-7 records that the Portuguese bench-press-versus-machine-fly comparison needed no machine translation because it carries an authorised English abstract.                                                                                                                                              |
+| **I-7**    | §6 item 3 now says three usable trials, names all three, and states which one contributes direction only.                                                                                                                                                                                                  |
+| **I-8**    | The awaiting-full-text tier-1 count is ten in every location; L-3 was already correct and is unchanged.                                                                                                                                                                                                    |
+| **I-9(a)** | §1.2 now attributes the intercostal-contribution finding to the **five** Sihler-stained muscles rather than to all 80 dissected specimens, and states the donor demographics.                                                                                                                              |
+| **I-9(b)** | §1.4 now reports **twenty-nine** healthy young females across two experiments, not twenty.                                                                                                                                                                                                                 |
+| **I-12**   | §7 L-4 is recomputed: forty-six of 88 included sources are abstract-only, no source remains at `metadata-only`, and nine sources moved to `full-text-open` after the ladder was run.                                                                                                                       |
+| **I-13**   | Contradiction map row **C-10** records the inclination disagreement in full and states that claim 14 was re-derived, its wording withdrawn and its certainty lowered.                                                                                                                                      |
+| **new**    | Rows **C-11**, **C-12** and **C-13** record the enlarged press-versus-fly disagreement, the 2023 review's internal contradiction on the decline contrast, and the exercise-order instability that destabilises any single activation comparison.                                                           |
+| **new**    | §7 gains **L-11** (the two-pass screening method and its bound) and **L-12** (the remediation is one bounded round).                                                                                                                                                                                       |

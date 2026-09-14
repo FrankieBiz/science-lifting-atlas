@@ -25,15 +25,26 @@ evidenceState: no-direct-evidence-found
 
 ## Practical takeaway
 
-**Nobody has studied this exercise.** A search across PubMed, Europe PMC, OpenAlex,
-ClinicalTrials.gov and three preprint routes, using thirty phrase variants for the
-fly family, retrieved no study in which a bilateral standing cable fly at shoulder
+**These searches found no study of this exercise.** Searches across PubMed, Europe
+PMC, OpenAlex, ClinicalTrials.gov and three preprint routes, using thirty phrase
+variants for the fly family, and then backward and forward citation chasing over every
+included source, retrieved no study in which a bilateral standing cable fly at shoulder
 height was a trained or measured condition
 `[absence-index-cable-fly-no-evidence]`.
 
-That is not a verdict on the exercise. It is a statement about the literature. What
-follows is what can honestly be said from related conditions, each labelled as
-related rather than as evidence about this exercise.
+An independent 2023 systematic review and meta-analysis of pectoralis major
+electromyography in the bench press and other pectoral exercises points the same way
+from outside this project. It searched PubMed/MEDLINE, SPORTDiscus and Web of Science
+to March 2023 — two databases this project did not search — hand-screened the reference
+lists of every article it selected, and included 23 studies. Its exercise-type
+comparisons are against push-ups, dumbbell exercises, elastic resistance and a chest
+press. No cable fly appears anywhere in it
+`[absence-index-cable-fly-no-evidence]`.
+
+That is not a verdict on the exercise, and it is not a claim that no such study exists
+anywhere. It is a statement about what these searches retrieved. What follows is what
+can honestly be said from related conditions, each labelled as related rather than as
+evidence about this exercise.
 
 ## Definition used by this project
 
@@ -74,8 +85,10 @@ what each returned:
 | SportRxiv current server and the frozen OSF legacy archive |                             24 |                              0 |
 
 No trial registration in the retrieved set manipulates any fly-family exercise, so
-there is not even a registered-but-unpublished study to suspect
-`[absence-index-cable-fly-no-evidence]`.
+within the one registry searched there is not even a registered-but-unpublished study
+to suspect. Only ClinicalTrials.gov was queried; WHO ICTRP, ISRCTN and the national
+registries were not, so this is a statement about that registry and not about trial
+registration in general `[absence-index-cable-fly-no-evidence]`.
 
 **What this absence does not mean.** It is not evidence that the exercise is
 ineffective, and it is not evidence that it is equivalent to a bench press. Absence of
@@ -133,10 +146,24 @@ two-channel instrumentation and report no numeric activation values in their
 retrievable text, and electromyography is never evidence of growth
 `[claim-dumbbell-fly-clavicular-activation]`.
 
-Acute activation comparisons between a barbell bench press and a dumbbell fly
-disagree with each other: one found higher pectoralis activation in the press across
-most movement phases, another found no significant difference in activation level and
-only a shorter relative time of activation in the fly
+Acute activation comparisons between a barbell bench press and a fly-family exercise
+disagree with each other. One un-normalised comparison found 16 per cent higher
+pectoralis major activation in the press than in a dumbbell fly across the whole
+movement; three others — against a dumbbell fly, a machine fly and a bent-forward cable
+crossover — found no significant pectoralis major difference
+`[claim-press-versus-fly-activation-mixed]`.
+
+Two things keep that from settling anything. Exercise order changes the answer: in a
+full-text source that sampled the sternocostal head, chest-fly activation was 100 per
+cent of a maximal voluntary isometric contraction when the fly followed the bench press
+and 81 per cent when it did not, so a single press-versus-fly difference is not a stable
+property of the two exercises. And a 2023 meta-analysis that pools this contrast reports
+heterogeneity of 98 per cent, which is too high for its pooled value to be read as a
+precise estimate `[claim-press-versus-fly-activation-mixed]`.
+
+None of those four comparators is this exercise. Two are dumbbell flies, one is a pec
+deck, and one is a bent-forward cable crossover whose pulley height is not stated in its
+methods and whose own figure shows a high-to-low path
 `[claim-press-versus-fly-activation-mixed]`.
 
 ## Safety context
@@ -144,13 +171,17 @@ only a shorter relative time of activation in the fly
 A published case report describes a humeral rupture of the pectoralis major in a
 33-year-old man of normal habitus who felt sudden pectoral pain and heard a whip-like
 popping sound while training on a chest fly machine
-`[claim-bench-press-pectoralis-rupture]`.
+`[claim-fly-machine-pectoralis-rupture]`.
 
-One case establishes that the injury can occur on a fly machine and nothing about how
-often. The report is in German and was read through machine-assisted translation
-without a second independent check, so it cannot carry a decision-critical statement
-on its own `[claim-bench-press-pectoralis-rupture]`. This is context, not medical,
-diagnostic or rehabilitation advice.
+One case establishes that the injury can occur in the fly family and nothing about how
+often; it supports no comparison of risk between exercises. The machine in that report
+is a chest fly machine, which is a related condition and not this exercise, so nothing
+in it transfers to the standing cable fly
+`[claim-fly-machine-pectoralis-rupture]`. The report is in German and was read
+through the authorised English abstract and machine-assisted translation without a
+second independent check, so it cannot carry a decision-critical statement on its own
+`[claim-fly-machine-pectoralis-rupture]`. This is context, not medical, diagnostic or
+rehabilitation advice.
 
 ## Comparison with the bench press
 
@@ -171,14 +202,24 @@ is mechanical, and it is against a cable cross-over of unreported setup
 
 ## Provenance and open items
 
-**Records that could change this page.** Nine fly-family records are held at
-`awaiting-full-text` in `research/extractions/SBLA-009-source-extractions.json`,
-including a dissertation on electromyographical analysis of the pectoralis major
-during various chest exercises, two reports of dumbbell-fly electromyography across
-planes, a Korean-language simulation of a pec deck machine, a Portuguese-language pec
-deck activation study and a conference report on chest-wall pain with chest flies. If
-any of them reports a cable fly, it is the most directly relevant source located
-anywhere in this pass.
+**Records that could change this page.** The dissertation on electromyographical
+analysis of the pectoralis major during various chest exercises, which the first pass
+flagged as potentially the most directly relevant source located anywhere and did not
+open, has now been obtained from its institutional repository and read in full. Its
+cable condition is a bent-forward crossover whose pulley origin height the methods do
+not state and whose figure depicts a high-to-low path, so it is a related condition and
+not this exercise. Its numbers are reported above.
+
+Eight fly-family records remain at `awaiting-full-text` in
+`research/extractions/SBLA-009-source-extractions.json`: a Portuguese-language
+dumbbell-fly study across planes and angles whose publisher refuses this client, a
+second dumbbell-fly report across planes and labile surfaces, a Korean-language
+simulation of a pec deck machine, a Portuguese-language pec deck activation study, a
+conference report on chest-wall pain with chest flies, and three bench-press records
+bearing on regional activation. The acquisition ladder was run and recorded for every
+one of them on 2026-09-13; none yielded lawful full text. If any of them reports a cable
+fly at shoulder height, it would be the most directly relevant source located anywhere
+in this pass.
 
 **A search defect that may have cost recall.** PubMed proximity distance 0 matches its
 two terms in either order, so `"machine fly"[tiab:~0]` retrieves "on-the-fly machine
@@ -188,4 +229,7 @@ string does not use, so E1 misses inverted word orders. Both are recorded in
 
 **What this page deliberately does not say.** It does not claim the cable fly is
 effective, ineffective, better or worse than any other exercise, or equivalent to
-one. It reports that the study has not been done.
+one. It reports that the searches listed above did not retrieve a study of it, and that
+an independent 2023 review covering two further databases did not contain one either.
+That is a statement about the retrieved literature, not a proof that no such study
+exists.
