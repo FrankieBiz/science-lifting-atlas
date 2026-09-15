@@ -497,7 +497,7 @@ All three drafts now declare `draftVersion: '2.0.0'` and
 3  research/screening/SBLA-009-screening-flow.json@2.0.0
 3  research/extractions/SBLA-009-source-extractions.json@2.0.0
 3  research/appraisals/SBLA-009-appraisals.md@2.0.0
-1  research/packets/sbla-009-evidence-packet.json@2.0.0 (bare filename form)
+1  sbla-009-evidence-packet.json@2.0.0
 1  content-drafts/muscles/pectoralis-major.md@2.0.0
 1  content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md@2.0.0
 1  content-drafts/exercises/barbell-flat-bench-press.md@2.0.0
