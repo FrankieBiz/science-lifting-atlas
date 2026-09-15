@@ -1,6 +1,6 @@
 ---
 draftId: pectoralis-major
-draftVersion: '1.0.0'
+draftVersion: '2.0.0'
 task: SBLA-009
 role: claude-research
 account: A
@@ -8,7 +8,7 @@ generatedAt: '2026-09-13'
 baseCommit: 8ca59e850beb0770554074d474a3ff3a9e16710a
 status: draft-for-independent-review
 publicationState: unpublished
-claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@1.0.0
+claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@2.0.0
 ontologyAnchors:
   mesh: D010369 (Pectoralis Muscles), tree A02.633.567.775, re-verified 2026-09-13
   uberon: UBERON:0002381 (pectoralis major), resolved via EMBL-EBI OLS4 on 2026-09-13

@@ -1,6 +1,6 @@
 ---
 draftId: barbell-flat-bench-press
-draftVersion: '1.0.0'
+draftVersion: '2.0.0'
 task: SBLA-009
 role: claude-research
 account: A
@@ -8,7 +8,7 @@ generatedAt: '2026-09-13'
 baseCommit: 8ca59e850beb0770554074d474a3ff3a9e16710a
 status: draft-for-independent-review
 publicationState: unpublished
-claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@1.0.0
+claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@2.0.0
 definitionSource: research/questions/SBLA-008-vertical-slice.md section 3.1
 indexRole: Exercise X
 ---
@@ -30,8 +30,8 @@ much bench angle changes the upper chest specifically is not settled
 `[claim-bench-press-inclination-shifts-regional-activation]`. Eight weeks of
 bench-press training measurably thickened the pectoralis major in small trials, at
 low certainty `[claim-pectoralis-major-hypertrophy-with-chest-resistance-training]`.
-Whether it builds more chest muscle than a cable fly is **unknown**: no study has
-compared them `[absence-primary-comparison-no-evidence]`.
+Whether it builds more chest muscle than a cable fly is **unknown**: **these searches
+retrieved no study comparing them** `[absence-primary-comparison-no-evidence]`.
 
 ## Definition used by this project
 
@@ -146,8 +146,17 @@ medical, diagnostic or rehabilitation advice.
 
 ## Comparison with the cable fly
 
-**No study has compared this exercise with a bilateral standing cable fly at shoulder
-height for pectoralis major size** `[absence-primary-comparison-no-evidence]`.
+**These searches retrieved no study comparing this exercise with a bilateral standing
+cable fly at shoulder height for pectoralis major size**
+`[absence-primary-comparison-no-evidence]`. That statement is bounded by what the
+searches reached. Forward citation chasing took at most the first 200 citing works per
+seed; the pre-specified title filter over the 3,479 chased works with metadata dropped
+2,638 of them unscreened; 80 further chased candidates returned no metadata at all; the
+non-English route inspected only the first 50 results of each of eight probes; and
+twenty-four records remain unread at `awaiting-full-text`, nine of which could bear on a
+press-versus-fly comparison. It is a statement about the retrieved literature, not a
+proof that no such study exists, and it is not evidence that the two exercises are
+equivalent.
 
 What does exist is a mechanical comparison against a cable cross-over, which is a
 related condition rather than the index cable fly: at matched percentages of body

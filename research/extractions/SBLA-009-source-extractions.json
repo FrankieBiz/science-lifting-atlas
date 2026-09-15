@@ -30,12 +30,13 @@
     "extraction.contrastType": "between-participant, within-participant, or not-applicable, per the frozen U3/EU1 decision.",
     "extraction.translationLadder": "Non-null only for non-English sources. Records which rungs of the eligibility plan 4.1 ladder were reached.",
     "accessLadderSteps": "The structured acquisition attempts for this source, copied verbatim from the authoritative screening-flow record. Each entry is {step, route, url, attemptedAt, result, note, attemptSource, verbatim}. An empty array is not permitted for an included source.",
-    "accessLadderRunAt": "ISO date on which the recorded acquisition ladder was executed."
+    "accessLadderRunAt": "ISO date on which the recorded acquisition ladder was executed.",
+    "awaitingFullText": "Records eligible or possibly eligible on title or abstract for which no lawful full text was obtained in this pass. Each entry carries the same structured acquisition attempts as the authoritative screening-flow record, in the same {step, route, url, attemptedAt, result, note, attemptSource, verbatim} shape used by accessLadderSteps. The first pass held these entries as plain strings equal to the verbatim field of each attempt, which was lossless but left the register undated when read on its own; the SBLA-010 R2 remediation converted them to the structured shape (finding M-8)."
   },
   "separationRule": "Three layers are kept apart in every record and must stay apart if these extractions are split into sourceSchema records: what the source reports, what its authors conclude from it, and what this role infers for the project. A claim may cite the first. The second is context. The third is never citable.",
   "counts": {
-    "includedSources": 88,
-    "fullTextObtained": 42,
+    "includedSources": 89,
+    "fullTextObtained": 43,
     "fullTextLimited": 0,
     "abstractOnly": 46,
     "metadataOnly": 0,
@@ -43,7 +44,7 @@
     "preprints": 1,
     "otherNonPeerReviewed": 3,
     "corrected": 1,
-    "awaitingFullText": 26,
+    "awaitingFullText": 24,
     "nullLanguage": 0
   },
   "awaitingFullText": [
@@ -56,13 +57,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W4409734431 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W4409734431 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W4409734431 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 regional pectoralis major thickness after pec deck training, reported only in an abstract. The eligibility plan forbids supporting a tier-1 hypertrophy claim from an abstract, and no lawful full text was obtained."
@@ -76,13 +140,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W2013965259 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W2013965259 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W2013965259 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Pre-exhaustion versus priority ordering of peck deck and chest press with upper-body muscle activation. The abstract does not state whether the pectoralis major was among the sampled muscles, and no lawful full text was obtained."
@@ -96,13 +223,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W4405933957 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W4405933957 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W4405933957 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 and tier-2 free-weight versus Smith-machine bench press adaptations, reported only in an abstract; no lawful full text was obtained."
@@ -116,13 +306,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W4400879727 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W4400879727 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W4400879727 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 bench press versus non-training control hypertrophy across four muscles, reported only in an abstract; no lawful full text was obtained."
@@ -136,13 +389,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W4385514904 is_oa=false oa_status=closed locations=3",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W4385514904 is_oa=false oa_status=closed locations=3",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W4385514904 is_oa=false oa_status=closed locations=3"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 and tier-2 free-weight versus machine-based training, reported only in an abstract; no lawful full text was obtained."
@@ -156,13 +472,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W3143748484 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W3143748484 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W3143748484 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 regional pectoralis major cross-sectional area after time-under-tension-equated bench press protocols, reported only in an abstract; no lawful full text was obtained."
@@ -176,15 +555,89 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W3017041721 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W3017041721 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W3017041721 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doi.org/10.1519/jsc.0000000000003575",
+          "repository": null,
+          "attemptedAt": "2026-09-15",
+          "result": "200 (332418 bytes, text/html)",
+          "note": "The DOI resolves to the Ovid/LWW article page for \"Effects of 4, 8, and 12 Repetition Maximum Resistance Training\", which returns the complete abstract to an unauthenticated client and puts the article body behind a login. SHA-256 9c291dcf824803478281a32912a90e61f1e40a8a2c721da304f8c9d663ad0826. This confirms the recorded abstract-only access level from an observed response rather than from an OpenAlex is_oa=false inference. No full text was obtained; no authentication was attempted.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1519/jsc.0000000000003575: 200 (332418 bytes, text/html) - The DOI resolves to the Ovid/LWW article page for \"Effects of 4, 8, and 12 Repetition Maximum Resistance Training\", which returns the complete abstract to an unauthenticated client and puts the article body behind a login. SHA-256 9c291dcf824803478281a32912a90e61f1e40a8a2c721da304f8c9d663ad0826. This confirms the recorded abstract-only access level from an observed response rather than from an OpenAlex is_oa=false inference. No full text was obtained; no authentication was attempted."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Tier-1 pectoralis major muscle volume by MRI after 4RM, 8RM and 12RM bench press training against a non-exercising control, reported only in an abstract; no lawful full text was obtained."
     },
     {
@@ -196,13 +649,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W3014824746 is_oa=false oa_status=closed locations=3",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W3014824746 is_oa=false oa_status=closed locations=3",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W3014824746 is_oa=false oa_status=closed locations=3"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Six-month multi-joint versus single-joint versus combined exercise selection in trained women with muscle thickness; a tier-1 and tier-2 outcome that the eligibility plan forbids extracting from an abstract, and no lawful full text was obtained."
@@ -216,13 +732,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W3011167079 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W3011167079 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W3011167079 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 pectoralis major cross-sectional area after multi-joint, single-joint and combined protocols, reported only in an abstract; no lawful full text was obtained."
@@ -236,13 +815,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W2552596154 is_oa=false oa_status=closed locations=3",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W2552596154 is_oa=false oa_status=closed locations=3",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W2552596154 is_oa=false oa_status=closed locations=3"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 muscle thickness after push-up versus bench press training, reported only in an abstract; no lawful full text was obtained."
@@ -256,13 +898,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W1824644408 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W1824644408 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W1824644408 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Tier-1 pectoralis major cross-sectional area after high-intensity bench press training against a non-training control, reported only in an abstract; no lawful full text was obtained."
@@ -275,13 +980,76 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W2416932807 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W2416932807 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W2416932807 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Japanese-language 1992 anatomical study of communication between the pectoral nerves and intercostal nerve branches. No lawful full text or authorised English version was obtained, so the translation ladder could not be started."
@@ -294,13 +1062,76 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "id-resolution/ncbi-idconv: no-record",
-        "oa-discovery/openalex: id=https://openalex.org/W2394897303 is_oa=false oa_status=closed locations=2",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "id-resolution",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "id-resolution/ncbi-idconv: no-record"
+        },
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W2394897303 is_oa=false oa_status=closed locations=2",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W2394897303 is_oa=false oa_status=closed locations=2"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "1954 non-English article on the innervation of the pectoral muscles. No lawful full text or authorised English version was obtained, so the translation ladder could not be started."
@@ -313,14 +1144,70 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=https://openalex.org/W2990319635 is_oa=true oa_status=green locations=3",
-        "ladder-1-publisher-open-access https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714: 202 (2009 bytes)",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository (Figshare) https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714: 202 (2009 bytes)",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W2990319635 is_oa=true oa_status=green locations=3",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W2990319635 is_oa=true oa_status=green locations=3"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714",
+          "repository": null,
+          "attemptedAt": "2026-09-13",
+          "result": "202 (2009 bytes)",
+          "note": "Re-run on 2026-09-15 reproduced HTTP 202 with a zero-byte body. figshare answers this download route asynchronously and never delivered a file. The disposition is confirmed.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714: 202 (2009 bytes)"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714",
+          "repository": "Figshare",
+          "attemptedAt": "2026-09-13",
+          "result": "202 (2009 bytes)",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository (Figshare) https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714: 202 (2009 bytes)"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Portuguese-language figshare deposit reporting that shoulder rotation does not change pectoralis major and anterior deltoid activation during the pec deck. The figshare landing page returned HTTP 202 and no file was retrieved, so neither the full text nor the translation ladder could be completed."
     },
     {
@@ -331,14 +1218,79 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=https://openalex.org/W2160552189 is_oa=false oa_status=closed locations=1",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W2160552189 is_oa=false oa_status=closed locations=1",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W2160552189 is_oa=false oa_status=closed locations=1"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE00915543",
+          "repository": "DBpia",
+          "attemptedAt": "2026-09-15",
+          "result": "200 (545474 bytes, text/html)",
+          "note": "Korean commercial aggregator page for this conference paper; the title matches the record exactly. The page carries no abstract text to an unauthenticated client and states that institutional authentication is required to read the item. This is a true access-control outcome, not a challenge. No authentication was attempted. SHA-256 b77aae29a27c6743f655cd390cca6df90642a821629812da3ee7a9829af2b882.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-3-repository (DBpia) https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE00915543: 200 (545474 bytes, text/html) - Korean commercial aggregator page for this conference paper; the title matches the record exactly. The page carries no abstract text to an unauthenticated client and states that institutional authentication is required to read the item. This is a true access-control outcome, not a challenge. No authentication was attempted. SHA-256 b77aae29a27c6743f655cd390cca6df90642a821629812da3ee7a9829af2b882."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Korean-language 2007 musculoskeletal-model simulation of the pec deck fly machine. No lawful full text was located, so the translation ladder could not be started."
     },
     {
@@ -349,14 +1301,79 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=https://openalex.org/W4414225915 is_oa=false oa_status=closed locations=1",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W4414225915 is_oa=false oa_status=closed locations=1",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W4414225915 is_oa=false oa_status=closed locations=1"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doi.org/10.1249/01.mss.0001156852.22257.45",
+          "repository": null,
+          "attemptedAt": "2026-09-15",
+          "result": "200 (151478 bytes, text/html)",
+          "note": "The DOI resolves to the Ovid/LWW page for \"Chest Wall Pain With Chest Flies\", a 2025 ACSM annual-meeting clinical case slide abstract (Med Sci Sports Exerc 57(10S):266-267). The page carries title, authors, affiliations, pagination and DOI but no abstract text and no body, so metadata-only is confirmed by observation rather than by inference. SHA-256 d1b6aaccc73e0815ac7bd9204391c3079aaee7c8fb0596480c1fbaac1055c8c2.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1249/01.mss.0001156852.22257.45: 200 (151478 bytes, text/html) - The DOI resolves to the Ovid/LWW page for \"Chest Wall Pain With Chest Flies\", a 2025 ACSM annual-meeting clinical case slide abstract (Med Sci Sports Exerc 57(10S):266-267). The page carries title, authors, affiliations, pagination and DOI but no abstract text and no body, so metadata-only is confirmed by observation rather than by inference. SHA-256 d1b6aaccc73e0815ac7bd9204391c3079aaee7c8fb0596480c1fbaac1055c8c2."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Conference report titled \"Chest Wall Pain With Chest Flies\"; only a citation stub was retrievable, so the harms content could not be read."
     },
     {
@@ -365,16 +1382,92 @@
       "identifiers": {
         "internalId": "G1003"
       },
-      "accessLevel": "metadata-only",
+      "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=https://openalex.org/W3210189307 is_oa=false oa_status=closed locations=1",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W3210189307 is_oa=false oa_status=closed locations=1",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W3210189307 is_oa=false oa_status=closed locations=1"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://observatorio.fm.usp.br/handle/OPI/25022",
+          "repository": "Observatorio da Producao Intelectual do Sistema FMUSP-HC",
+          "attemptedAt": "2026-09-15",
+          "result": "200 (514144 bytes, text/html)",
+          "note": "Institutional repository landing page, title matching this record exactly, carrying the complete abstract openly: 17 males, dumbbell fly on a stable horizontal surface, a stable incline surface and an unstable surface, EMG normalised to maximum voluntary contraction; the pectoralis major sternocostal head was higher in the horizontal than in the incline condition, and the unstable condition held activity similar at a lower total load. SHA-256 3b778bc013739305492fe88f8b3a87ae7487fe027f9fbd2b0bdda2be698667b4.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-3-repository (Observatorio da Producao Intelectual do Sistema FMUSP-HC) https://observatorio.fm.usp.br/handle/OPI/25022: 200 (514144 bytes, text/html) - Institutional repository landing page, title matching this record exactly, carrying the complete abstract openly: 17 males, dumbbell fly on a stable horizontal surface, a stable incline surface and an unstable surface, EMG normalised to maximum voluntary contraction; the pectoralis major sternocostal head was higher in the horizontal than in the incline condition, and the unstable condition held activity similar at a lower total load. SHA-256 3b778bc013739305492fe88f8b3a87ae7487fe027f9fbd2b0bdda2be698667b4."
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://observatorio.fm.usp.br/bitstreams/bcc778b3-2f06-43ab-9d7f-cb1c5ebcd78d/download",
+          "repository": "Observatorio da Producao Intelectual do Sistema FMUSP-HC",
+          "attemptedAt": "2026-09-15",
+          "result": "200 (387285 bytes, text/html, Login page)",
+          "note": "The deposited file is access-controlled: the download route returns the repository login form rather than the document, and the item page offers a request-a-copy link. This is a true access-control outcome, not a challenge and not an inference. No authentication was attempted.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-3-repository (Observatorio da Producao Intelectual do Sistema FMUSP-HC) https://observatorio.fm.usp.br/bitstreams/bcc778b3-2f06-43ab-9d7f-cb1c5ebcd78d/download: 200 (387285 bytes, text/html, Login page) - The deposited file is access-controlled: the download route returns the repository login form rather than the document, and the item page offers a request-a-copy link. This is a true access-control outcome, not a challenge and not an inference. No authentication was attempted."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Electromyography of the dumbbell fly across planes and labile surfaces; no lawful full text or abstract detail sufficient for extraction was obtained."
     },
     {
@@ -387,16 +1480,92 @@
       },
       "accessLevel": "abstract-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=W1629280803 is_oa=true oa_status=green locations=1",
-        "ladder-1-publisher-open-access https://doaj.org/article/b30da9121dea490a864f046f3ea86479: 403 (5,774 bytes) - the DOAJ article page refuses this client; no user-agent substitution was attempted",
-        "ladder-1-publisher-open-access https://doaj.org/api/search/articles/: 200 - the DOAJ public API returned the record including a bilingual Portuguese/English abstract of 2,387 characters, which is the lawful abstract relied on here",
-        "ladder-1-publisher-open-access https://www.rbpfex.com.br/index.php/rbpfex/article/view/725: 403 (5,656 bytes) - the publisher of record refuses this client; recorded, not circumvented",
-        "ladder-2-pubmed-central/ncbi-idconv: no-pmcid - PMC holds no copy",
-        "ladder-3-repository https://doaj.org/article/b30da9121dea490a864f046f3ea86479: 403 (5,774 bytes)",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - this project operates no outbound correspondence channel"
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=W1629280803 is_oa=true oa_status=green locations=1",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=W1629280803 is_oa=true oa_status=green locations=1"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doaj.org/article/b30da9121dea490a864f046f3ea86479",
+          "repository": null,
+          "attemptedAt": "2026-09-13",
+          "result": "403 (5,774 bytes)",
+          "note": "Re-run on 2026-09-15: HTTP 403, 5562 bytes, response header cf-mitigated: challenge, body titled \"Just a moment...\". A bot-protection refusal of an automated client, not an access-control decision.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access https://doaj.org/article/b30da9121dea490a864f046f3ea86479: 403 (5,774 bytes) - the DOAJ article page refuses this client; no user-agent substitution was attempted"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doaj.org/api/search/articles/",
+          "repository": null,
+          "attemptedAt": "2026-09-13",
+          "result": "200",
+          "note": "the DOAJ public API returned the record including a bilingual Portuguese/English abstract of 2,387 characters, which is the lawful abstract relied on here",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access https://doaj.org/api/search/articles/: 200 - the DOAJ public API returned the record including a bilingual Portuguese/English abstract of 2,387 characters, which is the lawful abstract relied on here"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://www.rbpfex.com.br/index.php/rbpfex/article/view/725",
+          "repository": null,
+          "attemptedAt": "2026-09-13",
+          "result": "403 (5,656 bytes)",
+          "note": "Re-run on 2026-09-15: HTTP 403, 5464 bytes, response header cf-mitigated: challenge, body titled \"Just a moment...\". A bot-protection refusal of an automated client. OpenAlex reports this record is_oa=true oa_status=green, so the refusal is very likely client filtering rather than a closed article; this pass simply could not read it.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access https://www.rbpfex.com.br/index.php/rbpfex/article/view/725: 403 (5,656 bytes) - the publisher of record refuses this client; recorded, not circumvented"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": "ncbi-idconv",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central/ncbi-idconv: no-pmcid - PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://doaj.org/article/b30da9121dea490a864f046f3ea86479",
+          "repository": null,
+          "attemptedAt": "2026-09-13",
+          "result": "403 (5,774 bytes)",
+          "note": "Re-run on 2026-09-15: HTTP 403, 5562 bytes, response header cf-mitigated: challenge, body titled \"Just a moment...\". A bot-protection refusal of an automated client, not an access-control decision.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository https://doaj.org/article/b30da9121dea490a864f046f3ea86479: 403 (5,774 bytes)"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "this project operates no outbound correspondence channel attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - this project operates no outbound correspondence channel"
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Reiser, F.C. et al. (2014), Rev Bras Prescr Fisiol Exerc 8(50). Dumbbell fly (crucifixo) with clavicular and sternocostal pectoralis major and anterior deltoid EMG across a horizontal and a 30-degree inclined plane and 30/60/90-degree isometric angles in seven physically active subjects. The English-titled record formerly held separately as G1006 is the SAME report: identical author list, identical year, and the identical publisher URL, and the DOAJ record carries both titles in one bilingual abstract. G1006 is therefore folded in here as a deduplication event, never as an exclusion. The translation ladder reached step 1: an authorised English abstract published alongside the Portuguese one. The full text remains refused to this client, so the record stays awaiting-full-text."
     },
     {
@@ -407,12 +1576,68 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=https://openalex.org/W4210596685 is_oa=true oa_status=gold locations=3",
-        "ladder-1-publisher-open-access https://www.mdpi.com/2076-3417/12/3/1593/pdf?version=1643799586: 200 (2305 bytes)",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository (DOAJ (DOAJ: Directory of Open Access Journals)) https://doaj.org/article/c56f750a03da4b91b8ad06edaf9a6d23: 403 (5774 bytes)",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W4210596685 is_oa=true oa_status=gold locations=3",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W4210596685 is_oa=true oa_status=gold locations=3"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://www.mdpi.com/2076-3417/12/3/1593/pdf?version=1643799586",
+          "repository": null,
+          "attemptedAt": "2026-09-13",
+          "result": "200 (2305 bytes)",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access https://www.mdpi.com/2076-3417/12/3/1593/pdf?version=1643799586: 200 (2305 bytes)"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://doaj.org/article/c56f750a03da4b91b8ad06edaf9a6d23",
+          "repository": "DOAJ (DOAJ: Directory of Open Access Journals)",
+          "attemptedAt": "2026-09-13",
+          "result": "403 (5774 bytes)",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository (DOAJ (DOAJ: Directory of Open Access Journals)) https://doaj.org/article/c56f750a03da4b91b8ad06edaf9a6d23: 403 (5774 bytes)"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Systematic review of resistance-training effects on upper-extremity muscle architecture and volume; the publisher's open-access PDF endpoint returned an interstitial page to this client and no full text was obtained. Re-run on 2026-09-13: the publisher endpoint still answers HTTP 200 but serves a 2,202-byte interstitial rather than the article body, so the earlier open-access 200 must not be read as a successful full-text acquisition. The record remains awaiting-full-text."
@@ -425,12 +1650,66 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: id=https://openalex.org/W7202174979 is_oa=false oa_status=closed locations=1",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "id=https://openalex.org/W7202174979 is_oa=false oa_status=closed locations=1",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: id=https://openalex.org/W7202174979 is_oa=false oa_status=closed locations=1"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        }
       ],
       "ladderRunAt": "2026-09-13",
       "reason": "Conference paper on full versus lengthened-partial range of motion and chest hypertrophy; no lawful full text was obtained, and the tier-1 outcome cannot be taken from a title."
@@ -443,33 +1722,91 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: no-record",
-        "ladder-1-publisher-open-access: not-available - no OpenAlex record to supply an open location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-record",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: no-record"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no OpenAlex record to supply an open location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - no OpenAlex record to supply an open location"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID exists for this record; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
+        },
+        {
+          "step": "ladder-4-preprint",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": "https://digitalcommons.wku.edu/cgi/viewcontent.cgi?article=4642&context=ijesab",
+          "repository": "TopSCHOLAR, Western Kentucky University",
+          "attemptedAt": "2026-09-15",
+          "result": "403 (5690 bytes, text/html, cf-mitigated: challenge)",
+          "note": "The repository front end refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved and no cookie was supplied. This is a bot-protection refusal of an automated client, not an access-control decision about the item and not evidence that no lawful full text exists. The item is a conference abstract in International Journal of Exercise Science: Conference Proceedings and may well be openly readable in a browser; this pass cannot record it as obtained because this pass did not obtain it.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-3-repository (TopSCHOLAR, Western Kentucky University) https://digitalcommons.wku.edu/cgi/viewcontent.cgi?article=4642&context=ijesab: 403 (5690 bytes, text/html, cf-mitigated: challenge) - The repository front end refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved and no cookie was supplied. This is a bot-protection refusal of an automated client, not an access-control decision about the item and not evidence that no lawful full text exists. The item is a conference abstract in International Journal of Exercise Science: Conference Proceedings and may well be openly readable in a browser; this pass cannot record it as obtained because this pass did not obtain it."
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": "host-reachability-control",
+          "url": "https://digitalcommons.wku.edu/ijes/vol2/iss1/",
+          "repository": "TopSCHOLAR, Western Kentucky University",
+          "attemptedAt": "2026-09-15",
+          "result": "200 (38463 bytes, text/html)",
+          "note": "Control request showing the host itself answers this client normally; the refusal above is specific to the viewcontent delivery route. Recorded so the 403 is not read as the host being unreachable.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-3-repository (TopSCHOLAR, Western Kentucky University) https://digitalcommons.wku.edu/ijes/vol2/iss1/: 200 (38463 bytes, text/html) - Control request showing the host itself answers this client normally; the refusal above is specific to the viewcontent delivery route. Recorded so the 403 is not read as the host being unreachable."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Conference paper on partial-range bench press with regional myoelectrical amplitude; no lawful full text was obtained."
-    },
-    {
-      "recordId": "G1087",
-      "title": "Names of resistance exercises Text analysis of survey responses",
-      "identifiers": {
-        "internalId": "G1087"
-      },
-      "accessLevel": "metadata-only",
-      "ladderStepsTried": [
-        "oa-discovery/openalex: no-record",
-        "ladder-1-publisher-open-access: not-available - no OpenAlex record to supply an open location",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID exists for this record; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed for this record",
-        "ladder-4-preprint: not-available - no preprint version indexed",
-        "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
-      ],
-      "ladderRunAt": "2026-09-13",
-      "reason": "SportRxiv preprint analysing the names lifters give resistance exercises; the server's search interface returned the record but no full text was retrieved for this pass."
     },
     {
       "recordId": "G1873",
@@ -479,13 +1816,69 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: is_oa=false oa_status=closed",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed",
-        "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "is_oa=false oa_status=closed",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: is_oa=false oa_status=closed"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doi.org/10.1519/1533-4287(1997)011<0163:EAOTPM>2.3.CO;2",
+          "repository": null,
+          "attemptedAt": "2026-09-15",
+          "result": "403 (103 bytes, text/html, Error 403 Forbidden)",
+          "note": "The DOI resolves to http://nsca.allenpress.com/nscaonline/?request=get-abstract&doi=... which refuses this request with a bare HTTP 403 carrying no challenge marker. A 1997 article on a retired publishing platform; whether the refusal is access control or client filtering cannot be determined from the response. No full text and no abstract were obtained.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1519/1533-4287(1997)011<0163:EAOTPM>2.3.CO;2: 403 (103 bytes, text/html, Error 403 Forbidden) - The DOI resolves to http://nsca.allenpress.com/nscaonline/?request=get-abstract&doi=... which refuses this request with a bare HTTP 403 carrying no challenge marker. A 1997 article on a retired publishing platform; whether the refusal is access control or client filtering cannot be determined from the response. No full text and no abstract were obtained."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Electromyographical activity of the pectoralis muscle during incline and decline bench presses (J Strength Cond Res 1997). Eligible on title: the manipulated variable is bench inclination and the outcome is pectoralis EMG. Neither an abstract nor a full text was obtainable from any lawful route for this 1997 record, so nothing can be extracted and the record cannot support a claim. Held awaiting-full-text rather than included, because eligibility-plan section 4.5 reserves inclusion for records whose content was actually obtained."
     },
     {
@@ -496,13 +1889,69 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: is_oa=false oa_status=closed",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed",
-        "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "is_oa=false oa_status=closed",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: is_oa=false oa_status=closed"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doi.org/10.1177/17479541261457744",
+          "repository": null,
+          "attemptedAt": "2026-09-15",
+          "result": "403 (5583 bytes, text/html, cf-mitigated: challenge)",
+          "note": "The DOI resolves to journals.sagepub.com, which refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved. This is a bot-protection refusal, not an observed access-control decision, and it is not evidence that no lawful full text or abstract exists.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1177/17479541261457744: 403 (5583 bytes, text/html, cf-mitigated: challenge) - The DOI resolves to journals.sagepub.com, which refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved. This is a bot-protection refusal, not an observed access-control decision, and it is not evidence that no lawful full text or abstract exists."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Distinct activation patterns of the clavicular and sternal regions of the pectoralis major (2026). Eligible on title: portion-resolved pectoralis major activation. No abstract and no full text were obtainable from any lawful route at the time of this pass, so nothing can be extracted. Held awaiting-full-text."
     },
     {
@@ -513,31 +1962,70 @@
       },
       "accessLevel": "metadata-only",
       "ladderStepsTried": [
-        "oa-discovery/openalex: is_oa=false oa_status=closed",
-        "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy",
-        "ladder-3-repository: not-available - no open repository location indexed",
-        "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+        {
+          "step": "oa-discovery",
+          "route": "openalex",
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "is_oa=false oa_status=closed",
+          "note": null,
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "oa-discovery/openalex: is_oa=false oa_status=closed"
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "openalex reports is_oa=false oa_status=closed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed"
+        },
+        {
+          "step": "ladder-2-pubmed-central",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "no-pmcid",
+          "note": "no PMCID; PMC holds no copy",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy"
+        },
+        {
+          "step": "ladder-3-repository",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-available",
+          "note": "no open repository location indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-3-repository: not-available - no open repository location indexed"
+        },
+        {
+          "step": "ladder-5-author-request",
+          "route": null,
+          "url": null,
+          "attemptedAt": "2026-09-13",
+          "result": "not-performed",
+          "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+          "attemptSource": "r1-remediation-ladder-run",
+          "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+        },
+        {
+          "step": "ladder-1-publisher-open-access",
+          "route": null,
+          "url": "https://doi.org/10.1007/978-981-13-2517-5_46",
+          "repository": null,
+          "attemptedAt": "2026-09-15",
+          "result": "200 (3038 bytes, text/html, Client Challenge)",
+          "note": "The DOI resolves through idp.springer.com/transit to a page titled \"Client Challenge\". The 200 status carries a challenge page, not the chapter and not an abstract. This is a bot-protection refusal of an automated client, not an observed access-control decision.",
+          "attemptSource": "sbla-010-r2-remediation-reacquisition",
+          "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1007/978-981-13-2517-5_46: 200 (3038 bytes, text/html, Client Challenge) - The DOI resolves through idp.springer.com/transit to a page titled \"Client Challenge\". The 200 status carries a challenge page, not the chapter and not an abstract. This is a bot-protection refusal of an automated client, not an observed access-control decision."
+        }
       ],
-      "ladderRunAt": "2026-09-13",
+      "ladderRunAt": "2026-09-15",
       "reason": "Is the EMG amplitude distribution spatially localized in the pectoralis major muscle during the inclined bench press (Springer Lecture Notes in Bioengineering, 2019). Eligible on title: regional pectoralis activation under bench inclination. The book chapter is behind the publisher paywall and no abstract was obtainable from any lawful route. Held awaiting-full-text."
-    },
-    {
-      "recordId": "G1944",
-      "title": "The Effect of 12 variations of the bench press exercise on the EMG activity of three heads of the pectoralis major",
-      "identifiers": {
-        "doi": "10.47206/ijsc.v1i1.39"
-      },
-      "accessLevel": "metadata-only",
-      "ladderStepsTried": [
-        "oa-discovery/openalex: is_oa=true oa_status=diamond",
-        "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/download/39/124: 200 (23 bytes)",
-        "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy",
-        "ladder-3-repository (DOAJ (DOAJ: Directory of Open Access Journals)) https://doaj.org/article/4230b8d4b92d4277ab79ec8bfb3b1579: 403 (5774 bytes)",
-        "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
-      ],
-      "ladderRunAt": "2026-09-13",
-      "reason": "The effect of 12 variations of the bench press exercise on the EMG activity of three heads of the pectoralis major (Int J Strength Cond, 2021). Eligible on title: portion-resolved pectoralis activation across bench-press variations. No abstract and no full text were obtainable from any lawful route. Held awaiting-full-text."
     }
   ],
   "extractions": [
@@ -11265,10 +12753,12 @@
           "applicability": "partially-direct",
           "notes": [
             "Heterogeneity is extreme in every pooled estimate that matters here: I-squared 87.6 per cent and 92.6 per cent for the two inclination contrasts and 98 per cent and 94.9 per cent for the two exercise-type contrasts. A pooled standardised mean difference at that level of heterogeneity is not a precise estimate and must not be reported as one.",
-            "The pooled standardised mean differences for the exercise-type comparisons (4.04 and 4.53) are implausibly large for surface-EMG contrasts and are consistent with standard deviations having been imputed or mishandled for studies that did not report them; the paper states that standard deviations were estimated and imputed from standard errors and confidence intervals where feasible.",
-            "The source contradicts itself on the decline contrast. Table 3 and the Results text both report no significant decline effect for either portion (sternal p = 0.143; clavicular p = 0.218), but the Featured Application and the Abstract conclusion both assert a directional decline effect. The Table and Results are the primary record and are what this extraction relies on.",
-            "The sign convention is stated only indirectly; the Results prose resolves it ('the BP variant with the inclined bench activates less the sternal portion'), so a positive standardised mean difference favours the horizontal bench press.",
-            "No cable fly appears in any of the 23 included studies' exercise-type comparisons, which is the fact of interest for the index-Y absence."
+            "The pooled standardised mean differences for the exercise-type comparisons (sternal 4.04 and clavicular 4.53) are implausibly large for surface-EMG contrasts and are consistent with standard deviations having been imputed or mishandled for studies that did not report them; the paper states that standard deviations were estimated and imputed from standard errors and confidence intervals where feasible.",
+            "The source contradicts itself on the decline contrast. Table 3 reports no significant decline effect in either portion, and the point estimates run opposite to the prose: sternal standardised mean difference -0.75 (95 per cent CI -1.85 to 0.36, p = 0.143) and clavicular 2.03 (95 per cent CI -2.03 to 6.53, p = 0.218). The Abstract Conclusions nonetheless state that \"the sternal portion of pectoralis major showed greater activation with the declined variant of bench press\", and the Featured Application states that in the decline \"the decrease in the clavicular portion should be considered, as opposed to an increase in the sternal portion\". Both assert significance and a direction that Table 3 does not support in either portion. The Table and the Results text are the primary record and are what this extraction relies on.",
+            "The sign convention is not uniform across contrast families, which is the trap this source sets. For the inclination family the Results prose resolves it (\"the BP variant with the inclined bench activates less the sternal portion\"), so a positive standardised mean difference favours the horizontal bench press. For the type-of-exercise family the same prose resolves it the other way: \"there is a greater activation in the sternal pectoralis in the variable exercise (SMD = 4.04; 95% ICI 0 = 1.74; 6.35)\", so a positive standardised mean difference favours the comparator exercise, not the bench press. A reader who carries the inclination-family convention across to the type-of-exercise row inverts the direction. No direction for the type-of-exercise contrast may be taken from Table 3 alone.",
+            "No cable fly appears in any of the 23 included studies' exercise-type comparisons, which is the fact of interest for the index-Y absence.",
+            "Two distinct results in this paper both carry the point estimate SMD = 4.53 and are separated only by their full signature. (a) Table 3, Type of exercise, Bench press vs. other variants, Clavicular: SMD 4.53, 95 per cent CI -4.22 to 13.27, I-squared 94.9 per cent, t = 1.65, p = 0.198 - the row this extraction and the claims cite. (b) Results text accompanying Figure 7: \"As when comparing other exercises to push up (SMD = 4.53; 95%CI = 4.40; 7.65)\" - a different comparison with a different confidence interval and no reported I-squared or p. Any citation of SMD 4.53 must carry the confidence interval so the two cannot be confused.",
+            "The reported database count is internally inconsistent. The Abstract states that the search covered \"four databases\", while Methods 2.1 names three (PUBMED/MEDLINE, SPORT DISCUS and Web of Science) and Appendix A, Search Strategy, reproduces exactly three search strings for those same three databases. The three-database reading is taken here because it is the one the Methods and the Appendix agree on; the Abstract count is unsupported anywhere in the paper."
           ]
         },
         "publication": {
@@ -11285,7 +12775,7 @@
       "extraction": {
         "question": ["Q1b", "Q1c", "Q2"],
         "outcomeTiers": ["4"],
-        "designNote": "Systematic review and meta-analysis of surface-EMG comparisons between the barbell bench press and other pectoral exercises. PRISMA-declared; three databases searched (PubMed/MEDLINE, SPORTDiscus, Web of Science) to 25 March 2023, with reference-list screening; 951 publications identified, 23 studies included. Pooled with DerSimonian-Laird random or fixed effects depending on heterogeneity.",
+        "designNote": "Systematic review and meta-analysis of surface-EMG comparisons between the barbell bench press and other pectoral exercises. PRISMA-declared. Methods 2.1 and Appendix A name three databases (PubMed/MEDLINE, SPORTDiscus, Web of Science) searched to 25 March 2023, with reference-list screening; the Abstract says four. 951 publications identified, 23 studies included. Pooled with DerSimonian-Laird random or fixed effects depending on heterogeneity.",
         "conditionLabels": {
           "bench press": "index-X where the implement is a barbell",
           "other pectoral exercises": "the six exercise-type comparison studies compare the bench press with push-ups, dumbbell exercises, elastic resistance, chest press and 'others'. No cable fly appears in any comparison.",
@@ -11312,7 +12802,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (2305 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned 200 with 2296 bytes of text/html. That reproduces the recorded disposition: the response is a JavaScript interstitial, not the PDF. The byte count of an interstitial varies between clients and days; the disposition does not.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.mdpi.com/2076-3417/13/8/5203/pdf?version=1682081448: 200 (2305 bytes)"
           },
@@ -11333,7 +12823,7 @@
             "repository": "RIUCAM",
             "attemptedAt": "2026-09-13",
             "result": "200 (24 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository (RIUCAM) https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf: 200 (24 bytes)"
           },
@@ -11343,18 +12833,41 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
           {
             "step": "ladder-outcome-full-text-obtained",
             "route": null,
-            "url": "https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf",
+            "url": "https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf",
             "attemptedAt": "2026-09-13",
             "result": "full text obtained and read; 3358506 bytes",
             "attemptSource": "r1-remediation-ladder-run",
-            "verbatim": "full text obtained and read: https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf (3358506 bytes)"
+            "verbatim": "full text obtained and read: https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf (3358506 bytes)",
+            "note": "URL corrected on 2026-09-15. The first pass recorded a truncated handle URL here and in fullTextSource that returns HTTP 404. The SHA-256 of the obtained file, 8ac15532f5cf871ab6e5cb4f7384c1539f3347938a981976e1cff61066cbb50d, is unchanged and was re-verified against this corrected URL."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf",
+            "repository": "Repositorio Institucional UCAM",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (3358506 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 8ac15532f5cf871ab6e5cb4f7384c1539f3347938a981976e1cff61066cbb50d. The server redirects this URL to the bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf form carrying a jsessionid and ?sequence=1, and serves the PDF there. This is the route that actually yielded the full text.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (Repositorio Institucional UCAM) https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf: 200 (3358506 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 8ac15532f5cf871ab6e5cb4f7384c1539f3347938a981976e1cff61066cbb50d. The server redirects this URL to the bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf form carrying a jsessionid and ?sequence=1, and serves the PDF there. This is the route that actually yielded the full text."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf",
+            "repository": "Repositorio Institucional UCAM",
+            "attemptedAt": "2026-09-15",
+            "result": "404 (10885 bytes, text/html, Resource not found)",
+            "note": "This URL was recorded as fullTextSource and as the ladder-outcome URL in the first pass and does not resolve: its title segment is truncated and omits the word major. Corrected here; the working URL is the bitstream/10952/9780/1/ form above.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (Repositorio Institucional UCAM) https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf: 404 (10885 bytes, text/html, Resource not found) - This URL was recorded as fullTextSource and as the ladder-outcome URL in the first pass and does not resolve: its title segment is truncated and omits the word major. Corrected here; the working URL is the bitstream/10952/9780/1/ form above."
           }
         ],
         "fullTextObtained": "institutional-repository-pdf",
@@ -11380,7 +12893,7 @@
             "basis": "full-text"
           },
           {
-            "fact": "Bench press versus other exercise variants, sternal portion: pooled standardised mean difference 4.04 (95% CI 1.74 to 6.35), I-squared 98 per cent, t = 3.62, p = 0.001. Clavicular portion: 4.53 (95% CI -4.22 to 13.27), I-squared 94.9 per cent, t = 1.65, p = 0.198.",
+            "fact": "Bench press versus other exercise variants, sternal portion: pooled standardised mean difference 4.04 (95% CI 1.74 to 6.35), I-squared 98 per cent, t = 3.62, p = 0.001. Clavicular portion: 4.53 (95% CI -4.22 to 13.27), I-squared 94.9 per cent, t = 1.65, p = 0.198. The confidence intervals are load-bearing: a second and unrelated result in the same paper, reported only in the Results text with Figure 7, also carries SMD = 4.53 but with 95% CI 4.40 to 7.65 and is the comparison of other exercises with the push-up.",
             "locator": "Table 3, Type of exercise, Bench press vs. other variants type",
             "basis": "full-text"
           },
@@ -11390,12 +12903,17 @@
             "basis": "full-text"
           },
           {
-            "fact": "The Results text states that there is no significant difference in clavicular activation when comparing the bench press with another exercise, while the sternal pectoralis differs.",
+            "fact": "The Results text states, twice and verbatim, that \"there is no significant difference in the activation of the clavicular portion when comparing the PB with another exercise; however, there is a greater activation in the sternal pectoralis in the variable exercise (SMD = 4.04; 95% ICI 0 = 1.74; 6.35) (Figure 6).\" The direction of the sternal difference is therefore toward the comparator exercise, not toward the bench press. The Abstract states the opposite (\"greater activations are also seen in the original bench press vs. the comparisons (p = 0.023 to 0.001)\"), as does the Featured Application (\"BP is the one that most involves the pectoralis major\"). This extraction records the Results text as the primary record and records the contradiction rather than resolving it.",
             "locator": "Results, text accompanying Figure 6",
+            "basis": "full-text"
+          },
+          {
+            "fact": "The Abstract reports the electronic search as covering \"four databases\"; Methods 2.1 names three (PUBMED/MEDLINE, SPORT DISCUS and Web of Science) and Appendix A reproduces three search strings. Both statements yield 951 original publications and 23 included studies.",
+            "locator": "Abstract, Methods; Methods 2.1 Search Strategy; Appendix A Search Strategy",
             "basis": "full-text"
           }
         ],
-        "accessLadderRunAt": "2026-09-13"
+        "accessLadderRunAt": "2026-09-15"
       }
     },
     {
@@ -11647,7 +13165,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (24 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.jstage.jst.go.jp/article/jpts/37/1/37_2024-110/_pdf: 200 (24 bytes)"
           },
@@ -11678,7 +13196,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -11690,6 +13208,17 @@
             "result": "full text obtained and read; 116876 bytes",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "full text obtained and read: https://pmc.ncbi.nlm.nih.gov/articles/PMC11700571/ (116876 bytes)"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://www.jstage.jst.go.jp/article/jpts/37/1/37_2024-110/_pdf",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (2171116 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 ad4f265eef0e8b668314cd64eaf4c618ed2aac20981e63e9c2e4d7713b30ebaf. The record was already included at full-text-open by the PubMed Central route.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://www.jstage.jst.go.jp/article/jpts/37/1/37_2024-110/_pdf: 200 (2171116 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 ad4f265eef0e8b668314cd64eaf4c618ed2aac20981e63e9c2e4d7713b30ebaf. The record was already included at full-text-open by the PubMed Central route."
           }
         ],
         "fullTextObtained": "pmc-modern-host",
@@ -11715,7 +13244,7 @@
             "basis": "full-text"
           }
         ],
-        "accessLadderRunAt": "2026-09-13"
+        "accessLadderRunAt": "2026-09-15"
       }
     },
     {
@@ -11932,7 +13461,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (22 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf: 200 (22 bytes)"
           },
@@ -11963,7 +13492,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -11975,6 +13504,17 @@
             "result": "full text obtained and read; 37307 bytes",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "full text obtained and read: https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf (37307 bytes)"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (37307 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (22 bytes). SHA-256 4a4f78904dcd1bf2e497603f91ab7b680aa2f0b847f2055888f40f0f8fc7c3d5, identical to the file the pass obtained from the same URL at ladder-outcome.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf: 200 (37307 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (22 bytes). SHA-256 4a4f78904dcd1bf2e497603f91ab7b680aa2f0b847f2055888f40f0f8fc7c3d5, identical to the file the pass obtained from the same URL at ladder-outcome."
           }
         ],
         "fullTextObtained": "publisher-open-access",
@@ -12005,7 +13545,7 @@
             "basis": "full-text"
           }
         ],
-        "accessLadderRunAt": "2026-09-13"
+        "accessLadderRunAt": "2026-09-15"
       }
     },
     {
@@ -12700,7 +14240,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (24 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0171632&type=printable: 200 (24 bytes)"
           },
@@ -12731,7 +14271,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -12743,6 +14283,17 @@
             "result": "full text obtained and read; 224661 bytes",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "full text obtained and read: https://www.ncbi.nlm.nih.gov/pmc/articles/5721175 (224661 bytes)"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0171632&type=printable",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (1183736 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 270c2ea772c61525192606ee437d9921d3b51a43256f9707b5e22f464197e707. The record was already included at full-text-open by the PubMed Central route, so the misread cost no evidence; the publisher route is recorded correctly here.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0171632&type=printable: 200 (1183736 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 270c2ea772c61525192606ee437d9921d3b51a43256f9707b5e22f464197e707. The record was already included at full-text-open by the PubMed Central route, so the misread cost no evidence; the publisher route is recorded correctly here."
           }
         ],
         "fullTextObtained": "open-access-or-repository",
@@ -12753,7 +14304,7 @@
             "basis": "abstract"
           }
         ],
-        "accessLadderRunAt": "2026-09-13"
+        "accessLadderRunAt": "2026-09-15"
       }
     },
     {
@@ -13091,13 +14642,249 @@
         ],
         "accessLadderRunAt": "2026-09-13"
       }
+    },
+    {
+      "extractionId": "X-G1944",
+      "recordId": "G1944",
+      "proposedSourceId": "source-doi-10-47206-ijsc-v1i1-39",
+      "sourceSchemaFields": {
+        "type": "observational-study",
+        "title": "The Effect of 12 Variations of the Bench Press Exercise on the EMG Activity of Three Heads of the Pectoralis Major",
+        "authors": ["Arseneault", "Roy", "Sercia"],
+        "year": 2021,
+        "identifiers": {
+          "doi": "10.47206/ijsc.v1i1.39",
+          "pmid": null,
+          "pmcid": null,
+          "isbn": null
+        },
+        "urls": {
+          "doi": "https://doi.org/10.47206/ijsc.v1i1.39",
+          "pubmed": null,
+          "primary": "https://journal.iusca.org/index.php/Journal/article/view/39"
+        },
+        "access": {
+          "level": "full-text-open",
+          "license": "cc by 4.0"
+        },
+        "study": {},
+        "quality": {
+          "riskOfBias": "some-concerns",
+          "applicability": "partially-direct",
+          "notes": [
+            "The source contradicts itself on its own headline conclusion. The Abstract states that \"the bench press exercise performed with a wide pronation grip at 0 degrees can maximize the activation of the three heads of the PM\", but Table 3 lists that same position (HPW) among the positions of MINIMUM activation for the clavicular head, and Practical Application point 3 states that in the horizontal bench press \"a closer grip leads to a better recruitment\" of the clavicular head. The Abstract conclusion is not supported by the paper for the clavicular head. Table 3 and the Results text are the primary record and are what this extraction relies on.",
+            "Inclination is confounded with grip in the design. The twelve cells vary inclination, grip type and grip width together, and each cell was loaded at its own 12RM, so absolute load differs between cells by design (Table 1 ranges from 57.1 kg for the incline supinated close grip to 84.9 kg for the horizontal and decline wide pronated grips, and the Discussion reports a strength difference of almost 18 kg between pronated and supinated grips). A between-inclination contrast read off Table 3 is therefore not an isolated inclination effect.",
+            "The analysed sample size is ambiguous. Methods, Subjects states that \"data were collected from 13 male subjects\" and that \"one subject was, however, forced to leave the study for medical reasons\". The paper does not restate the analysed n, so whether the ANOVA ran on 13 or 12 participants cannot be determined from the text.",
+            "The normalisation reference is ambiguous. Methods state that \"the data were normalized (in percentage) according to the highest EMG value obtained during the exercises and/or the maximum voluntary isometric contraction for each muscle, respectively.\" An \"and/or\" reference does not identify which denominator was used, so the reported percentages cannot be compared with studies normalised to MVIC alone.",
+            "Results are reported as pairwise significance only. Significant differences are enumerated as position-versus-position statements with a single alpha (p = 0.05) and Bonferroni post hoc; no per-contrast effect size, exact p-value, mean or standard deviation is tabulated for any EMG outcome, and the underlying values appear only in Figures 1 to 4. No effect estimate can be extracted from this source.",
+            "Surface electromyography is not evidence of hypertrophy. The authors offer bodybuilding programming advice in Practical Application points 6 and 7; that is an author interpretation of an acute activation measurement and is not extractable as an outcome.",
+            "Single-session acute measurement in 13 trained men aged about 31 years; a tier-4 acute proxy with no size, strength or harms outcome."
+          ]
+        },
+        "publication": {
+          "stage": "peer-reviewed",
+          "status": "current",
+          "statusCheckedAt": "2026-09-15",
+          "statusSource": "Publisher landing page https://journal.iusca.org/index.php/Journal/article/view/39 fetched 2026-09-15 (HTTP 200, 34509 bytes): article live, no retraction, correction or expression-of-concern notice displayed. DOAJ indexes the journal; its article page refused this automated client with a Cloudflare challenge and could not be read.",
+          "statusMethod": "publisher-landing-page",
+          "nextStatusCheckAt": "2026-10-15"
+        },
+        "funding": null,
+        "conflicts": null
+      },
+      "extraction": {
+        "question": ["Q1b", "Q1c"],
+        "outcomeTiers": ["4"],
+        "designNote": "Within-participant acute surface-EMG comparison of twelve bench-press variations formed by crossing three trunk inclinations (-15, 0 and +30 degrees) with two grip types (pronated, supinated) and two grip widths (100 and 200 per cent of biacromial width). Six repetitions per cell at that cell own 12RM, order randomised and counterbalanced across two laboratory visits. Three-factor repeated-measures ANOVA with Bonferroni post hoc, alpha 0.05.",
+        "conditionLabels": {
+          "bench press": "index-X where the implement is a barbell",
+          "bench inclination, grip width and grip type": "within-index-X modifiers, crossed rather than varied one at a time; this is the regional-activation question Q1b/Q1c"
+        },
+        "contrastType": "between-condition, within-participant",
+        "language": "eng",
+        "translationLadder": null,
+        "accessLadderSteps": [
+          {
+            "step": "oa-discovery",
+            "route": "openalex",
+            "url": null,
+            "attemptedAt": "2026-09-13",
+            "result": "is_oa=true oa_status=diamond",
+            "note": null,
+            "attemptSource": "r1-remediation-ladder-run",
+            "verbatim": "oa-discovery/openalex: is_oa=true oa_status=diamond"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://journal.iusca.org/index.php/Journal/article/download/39/124",
+            "repository": null,
+            "attemptedAt": "2026-09-13",
+            "result": "200 (23 bytes)",
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
+            "attemptSource": "r1-remediation-ladder-run",
+            "verbatim": "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/download/39/124: 200 (23 bytes)"
+          },
+          {
+            "step": "ladder-2-pubmed-central",
+            "route": null,
+            "url": null,
+            "attemptedAt": "2026-09-13",
+            "result": "no-pmcid",
+            "note": "no PMCID; PMC holds no copy",
+            "attemptSource": "r1-remediation-ladder-run",
+            "verbatim": "ladder-2-pubmed-central: no-pmcid - no PMCID; PMC holds no copy"
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://doaj.org/article/4230b8d4b92d4277ab79ec8bfb3b1579",
+            "repository": "DOAJ (DOAJ: Directory of Open Access Journals)",
+            "attemptedAt": "2026-09-13",
+            "result": "403 (5774 bytes)",
+            "note": "Re-run on 2026-09-15 reproduced HTTP 403 carrying the response header cf-mitigated: challenge and a body titled \"Just a moment...\". That is an automated-client bot-protection refusal by the index front end. It is not an access-control decision about the article and is not evidence that the article is closed.",
+            "attemptSource": "r1-remediation-ladder-run",
+            "verbatim": "ladder-3-repository (DOAJ (DOAJ: Directory of Open Access Journals)) https://doaj.org/article/4230b8d4b92d4277ab79ec8bfb3b1579: 403 (5774 bytes)"
+          },
+          {
+            "step": "ladder-5-author-request",
+            "route": null,
+            "url": null,
+            "attemptedAt": "2026-09-13",
+            "result": "not-performed",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
+            "attemptSource": "r1-remediation-ladder-run",
+            "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://journal.iusca.org/index.php/Journal/article/download/39/124",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (689102 bytes, application/pdf)",
+            "note": "Lawful unauthenticated GET with redirects followed; no credentials or cookies were supplied and no challenge was solved. SHA-256 1a01086a81ffff228a766e4a9b2813467e349e8891f8651487f7c4d32f39831e. Full text obtained and read.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/download/39/124: 200 (689102 bytes, application/pdf) - Lawful unauthenticated GET with redirects followed; no credentials or cookies were supplied and no challenge was solved. SHA-256 1a01086a81ffff228a766e4a9b2813467e349e8891f8651487f7c4d32f39831e. Full text obtained and read."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": "landing-page",
+            "url": "https://journal.iusca.org/index.php/Journal/article/view/39",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (34509 bytes, text/html)",
+            "note": "Open landing page carrying the complete abstract and the CC BY 4.0 licence statement. SHA-256 71075eb7c500ca32c6e4a832650fb0ff5c1d7b3a9e3d5b0439ee35a46202a3f9.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/view/39: 200 (34509 bytes, text/html) - Open landing page carrying the complete abstract and the CC BY 4.0 licence statement. SHA-256 71075eb7c500ca32c6e4a832650fb0ff5c1d7b3a9e3d5b0439ee35a46202a3f9."
+          },
+          {
+            "step": "ladder-outcome-full-text-obtained",
+            "route": null,
+            "url": "https://journal.iusca.org/index.php/Journal/article/download/39/124",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "full text obtained and read; 689102 bytes",
+            "note": "Obtained on 2026-09-15 during the SBLA-010 R2 remediation, not during the original pass. The article is 11 pages and carries the Creative Commons Attribution (CC BY) 4.0 licence on every page.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-outcome-full-text-obtained https://journal.iusca.org/index.php/Journal/article/download/39/124: full text obtained and read; 689102 bytes - Obtained on 2026-09-15 during the SBLA-010 R2 remediation, not during the original pass. The article is 11 pages and carries the Creative Commons Attribution (CC BY) 4.0 licence on every page."
+          }
+        ],
+        "fullTextObtained": "publisher-open-access",
+        "reportedFacts": [
+          {
+            "fact": "Data were collected from 13 male subjects (age 31.1 (SD 6.3) years, height 179.5 (SD 10.2) cm, weight 88.8 (SD 14.4) kg, biacromial width 41.9 (SD 2.0) cm, resistance-training experience 12.2 (SD 6.0) years). One subject left the study for medical reasons; the analysed n is not restated.",
+            "locator": "Methods, Subjects",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Twelve variations were measured: three inclinations (-15 degrees decline, 0 degrees horizontal, +30 degrees incline) by two grip types (pronated, supinated) by two grip widths (100 and 200 per cent of biacromial width). Six repetitions per variation at that variation own 12RM, tempo 3-1-1-0, three minutes rest between sets. Surface EMG was recorded from the clavicular, sternocostal and abdominal heads of the pectoralis major (electrodes above the 1st, 3rd and 5th intercostal spaces on a vertical line below the mid-clavicle) and from the long head of the triceps brachii.",
+            "locator": "Methods, Procedures; Methods, Subjects",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Shoulder abduction angle was controlled and verified: mean 33.6 (SD 2.1) degrees for the close grip and 67.9 (SD 3.3) degrees for the wide grip, with no significant difference between grip widths across the three inclinations.",
+            "locator": "Results, Shoulder angles; Table 2",
+            "basis": "full-text"
+          },
+          {
+            "fact": "EMG was \"normalized (in percentage) according to the highest EMG value obtained during the exercises and/or the maximum voluntary isometric contraction for each muscle, respectively\", after rectification and a second-order Butterworth 6 Hz filter.",
+            "locator": "Methods, EMG recording and processing",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Table 3 summarises the maxima and minima. Clavicular head: maximum activation at HPC, IPC, ISC and ISW; minimum at HPW, HSW, DPC, DPW, DSC and DSW. Sternocostal head: maximum at HPW; minimum at ISC and ISW. Abdominal head: maximum at HPW and DPW; minimum at IPC, IPW, ISC and ISW. Long head of triceps brachii: maximum at HPC and DPC. (H horizontal 0 degrees, I incline +30, D decline -15; P pronated, S supinated; C close, W wide.)",
+            "locator": "Table 3; Results, Clavicular / Sternocostal / Abdominal head sections",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Within matched pronated grips the study reports no significant inclination effect on the sternocostal head: \"the present study showed no significant difference in activation of the sternocostal head between the three inclinations in both close and wide pronated grips\".",
+            "locator": "Discussion, sternocostal head paragraph",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Practical Application point 1 states that \"the incline bench press (+30 degrees) with a wide pronated grip does not recruit the clavicular head of pectoralis major more than the horizontal (0 degrees) and declined (-15 degrees) using the same grip\", and that the clavicular head is instead favoured by the close pronated grip at 0 and +30 degrees and by both supinated grips at +30 degrees.",
+            "locator": "Practical Application, point 1; Discussion, clavicular head paragraph",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Practical Application point 2 states that \"the decline bench press (-15 degrees) does not recruit the abdominal head of the pectoralis major more than the horizontal bench press (0 degrees)\", and the Discussion records no significant difference (p = 1.000) between the decline and horizontal positions with a wide grip. The decline was, however, favoured over the incline for the abdominal head.",
+            "locator": "Practical Application, point 2; Discussion, abdominal head paragraph",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Estimated 1RM differed between the twelve cells (Table 1), from 57.1 (SD 11.1) kg for the incline supinated close grip to 84.9 (SD 15.9 and 16.3) kg for the horizontal and decline wide pronated grips, and the Discussion reports a strength difference of almost 18 kg between pronated and supinated grips in this sample.",
+            "locator": "Table 1; Discussion, supinated grip paragraph",
+            "basis": "full-text"
+          },
+          {
+            "fact": "Grip width did not change triceps brachii long-head activation at any inclination or grip type, which the authors attribute to their control of shoulder abduction angle.",
+            "locator": "Results, Long head of the triceps brachii; Discussion, triceps paragraph; Practical Application point 4",
+            "basis": "full-text"
+          }
+        ],
+        "authorsInterpretation": "The Abstract concludes that \"the bench press exercise performed with a wide pronation grip at 0 degrees can maximize the activation of the three heads of the PM\", and Practical Application points 6 and 7 advise combining a pronated close grip and a pronated wide grip at 0 degrees for overall pectoral hypertrophy and for strength. This is the authors interpretation. It is recorded here as context and is not extracted as a finding: it is contradicted by the paper own Table 3 for the clavicular head, and an acute EMG measurement cannot support a hypertrophy recommendation.",
+        "researchRoleInference": "The most portion-resolved bench-press variation study retrieved in this pass, and the record SBLA-010 R2 finding N-1 proved had been recorded as unobtainable while its own publisher URL served the complete CC BY PDF. Its bearing on claim-bench-press-inclination-shifts-regional-activation is mainly restrictive: within matched pronated grips it reports no significant sternocostal difference across the three inclinations, which is evidence against the claim sternocostal limb, and it reports no clavicular advantage for the incline at matched wide pronated grip. Its apparent incline-favours-clavicular and decline-favours-abdominal pattern in Table 3 is carried by cells that also differ in grip type and width and in absolute load, so it cannot be read as an inclination effect. It supports no hypertrophy statement and no index-Y statement.",
+        "statusCheckEvidence": {
+          "pubmedPublicationTypes": [],
+          "pubmedCommentsCorrections": {
+            "retractionIn": false,
+            "erratumIn": false,
+            "eocIn": false
+          },
+          "retractionWatchHit": false,
+          "crossrefUpdatedBy": [],
+          "crossrefStatus": null
+        },
+        "accessLadderRunAt": "2026-09-15"
+      }
     }
   ],
   "governingReview": {
-    "report": "reviews/evidence/SBLA-009-r1.md",
-    "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
-    "branch": "claude-review/SBLA-009-r1",
-    "verdict": "FAIL — 1 Critical, 13 Important, 10 Minor",
-    "note": "The immutable Account-B round-one report this artifact remediates. It is recorded as a commit reference rather than as a crossLinks entry because the report lives on the reviewer branch and is not a path in this worktree; asserting it as a repository cross-link would claim a file that is not here. Retrieve it with: git show 8154f1167062403a96ee5d6ec0fc63bd50ebfd17:reviews/evidence/SBLA-009-r1.md"
+    "report": "reviews/evidence/SBLA-009-r2.md",
+    "commit": "f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46",
+    "tree": "779567bad94305ad22e28973e6067915f0d5deac",
+    "branch": "claude-review/SBLA-009-r2",
+    "verdict": "FAIL - 0 Critical, 4 Important, 13 Minor",
+    "sha256": "3428d3feb9b58bb150ac4c93375d868cabc5dc3f5597e83e50503b30a47a12b5",
+    "remediation": {
+      "task": "SBLA-010 R2 bounded remediation",
+      "branch": "claude-research/SBLA-010-r2-remediation",
+      "baseCommit": "f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46",
+      "baseTree": "779567bad94305ad22e28973e6067915f0d5deac",
+      "date": "2026-09-15",
+      "blockersAnswered": ["N-1", "N-2", "N-3", "N-4"],
+      "nextReview": "reviews/evidence/SBLA-009-r3.md (Account B, one complete-artifact recheck)"
+    },
+    "priorRounds": [
+      {
+        "report": "reviews/evidence/SBLA-009-r1.md",
+        "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
+        "branch": "claude-review/SBLA-009-r1",
+        "verdict": "FAIL - 1 Critical, 13 Important, 10 Minor",
+        "sha256": "7c829be485846c7fa71a48637c4795978d003e8d2501c77ffcc31ef671f9f46e"
+      }
+    ],
+    "note": "Both Account-B reports are ordinary files in this tree: reviews/evidence/SBLA-009-r1.md was added by integration commit 1dc1c41b96508edbd2ae7d2ebff0ca6f5a1eb3f1 and reviews/evidence/SBLA-009-r2.md by f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46. The first pass recorded the round-one report as a commit reference on the ground that it was \"not a path in this worktree\"; that was true at Account-A commit 0880d5fb and is false here, so the claim is withdrawn (SBLA-010 R2 finding M-12). Both reports remain immutable and are never edited by this role. This bundle stays at artifactVersion 2.0.0 because SBLA-010 R2 finding N-3 prescribes pinning the three drafts to atomic-claims.json@2.0.0; this governingReview block, not the version string, is what distinguishes the reviewed 2.0.0 tree from this remediated 2.0.0 tree."
   }
 }

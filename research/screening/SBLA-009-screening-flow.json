@@ -82,6 +82,26 @@
       "reason": "R1 finding C-1 established that absence and completeness statements rested on records that were never opened, and findings I-2, I-4, I-6 and I-13 established four distinct recall defects. The amendment closes the acquisition gap and the four recall gaps. It is recorded here, post hoc and with results visible, exactly as AM-1 and AM-2 were.",
       "effectOnCertainty": "The amendment may lower certainty and may add contradictory evidence; it may not raise certainty (eligibility plan section 6.2). In this pass it lowered the certainty of the bench-inclination claim and left the two headline absence records standing but bounded to retrieval.",
       "effectOnCounts": "Unique records after deduplication 1109 -> 1956; excluded 1009 -> 1842; awaiting-full-text 24 -> 26; included 76 -> 88; records retrieved 1361 -> 2343; duplicate retrieval events 252 -> 387. Both reconciliation equations close on the enlarged set, and the per-receipt retrieval totals sum to recordsRetrieved."
+    },
+    {
+      "id": "AM-4",
+      "date": "2026-09-15",
+      "decidedBy": "claude-research (account A), SBLA-010 R2 bounded remediation, under eligibility plan section 6.2 and assumption EA1",
+      "resultsVisibleAtAmendment": true,
+      "postHoc": true,
+      "rule": "Acquisition-ladder result recording, eligibility plan section 4.5",
+      "before": "A ladder attempt recorded whatever the acquisition client observed, without distinguishing an observed HTTP response from an inference drawn from an OpenAlex or identifier lookup, and without following redirects. Sixteen attempts were recorded as a 2xx with fewer than 6,000 bytes; five of those were 22 to 24 bytes.",
+      "after": "Four classes are now distinguished on every rung this remediation touched: (a) an observed HTTP response from the host, with status, content type, byte count and, where a file was obtained, its SHA-256; (b) a metadata inference, where the rung was resolved from an OpenAlex or identifier lookup and no request was made to the host; (c) a bot-protection refusal of an automated client, evidenced by a challenge marker such as cf-mitigated: challenge or a Client Challenge body; and (d) a true access-control outcome. The five 22-to-24-byte results are re-run and recorded as what the URL actually serves, with the original observation kept verbatim alongside.",
+      "reason": "SBLA-010 R2 finding N-1 proved that a 22-to-24-byte \"200\" was an unfollowed redirect recorded as a terminal failure, and that G1944 - an openly licensed, directly on-topic source - was frozen at metadata-only and written up as unobtainable as a result. Recording an inference or a bot challenge as though it were an observed access-control outcome is the same defect class: it lets a completeness statement rest on something no server ever said.",
+      "effectOnCertainty": "None upward. The amendment adds one included source (G1944) and one exclusion (G1087) and lowers no evidentiary bar. Post-hoc amendments cannot raise certainty (eligibility plan section 6.2), and no claim certainty was raised in this remediation.",
+      "recordsAffected": [
+        "G1944 (promoted to included on its own full text)",
+        "G1087 (excluded on substance on its own full text, E-OUT-1)",
+        "G1876, G1896, G1903, G1928 (false failure results corrected; access level and terminal state already correct)",
+        "G1084, G1873, G1917, G1941 (bot-protection or publisher refusal recorded as observed; terminal state unchanged)",
+        "G0117, G0121 (publisher landing-page response recorded as observed; abstract-only access level confirmed, terminal state unchanged)",
+        "G0964 (202 reproduced; disposition confirmed)"
+      ]
     }
   ],
   "screeningDiscipline": {
@@ -99,15 +119,15 @@
     "recordsRetrieved": 2343,
     "duplicateRetrievalEvents": 387,
     "uniqueRecordsAfterDeduplication": 1956,
-    "excluded": 1842,
-    "awaitingFullText": 26,
-    "included": 88,
-    "equationOne": "unique records after deduplication = excluded + awaiting-full-text + included : 1956 = 1842 + 26 + 88",
+    "excluded": 1843,
+    "awaitingFullText": 24,
+    "included": 89,
+    "equationOne": "unique records after deduplication = excluded + awaiting-full-text + included : 1956 = 1843 + 24 + 89",
     "equationOneCloses": true,
     "equationTwo": "records retrieved = duplicates + unique records after deduplication : 2343 = 387 + 1956",
     "equationTwoCloses": true,
-    "note": "Duplicates are deduplication events, not exclusions, and are never encoded as a substantive exclusion. An awaiting-full-text record is neither included nor excluded. These are the post-remediation figures. They incorporate the records added by the R1 remediation retrieval expansion (backward and forward citation chasing, the amended portion-terminology stratum, the bench-angle stratum, the non-English routes, and four targeted retrievals), the merge of the duplicate RBPFEX report formerly held separately as G1006, and the promotion of G1016 to included once its full text was obtained.",
-    "routeReconciliation": "The sum of recordsRetrievedIntoScreening over every receipt in research/searches/SBLA-009-search-receipts.json equals recordsRetrieved (2343). A route that returns a record already in the flow contributes a retrieval event to that record; the R1 remediation initially failed to credit 116 such re-retrievals, and they are credited here."
+    "note": "Duplicates are deduplication events, not exclusions, and are never encoded as a substantive exclusion. An awaiting-full-text record is neither included nor excluded. These are the post-SBLA-010-R2-remediation figures. They carry forward every record added by the R1 remediation retrieval expansion (backward and forward citation chasing, the amended portion-terminology stratum, the bench-angle stratum, the non-English routes, and four targeted retrievals), the merge of the duplicate RBPFEX report formerly held separately as G1006, and the promotion of G1016 to included once its full text was obtained. Two records moved in the SBLA-010 R2 remediation, both because full text was lawfully obtained on 2026-09-15 that the first pass had recorded as unobtainable: G1944 moved awaiting-full-text to included and G1087 moved awaiting-full-text to excluded under E-OUT-1. Awaiting-full-text therefore falls from 26 to 24, included rises from 88 to 89 and excluded rises from 1842 to 1843. No retrieval event was added, so recordsRetrieved, duplicateRetrievalEvents and uniqueRecordsAfterDeduplication are unchanged and equation two is untouched.",
+    "routeReconciliation": "The sum of recordsRetrievedIntoScreening over every receipt in research/searches/SBLA-009-search-receipts.json equals recordsRetrieved (2343). A route that returns a record already in the flow contributes a retrieval event to that record; the R1 remediation initially failed to credit 116 such re-retrievals, and they are credited here. The SBLA-010 R2 remediation re-acquired full text for records already in the flow and ran no new search, so it added no retrieval event and this identity is unchanged. research/searches/SBLA-009-search-receipts.json was not writable by that remediation and was not modified."
   },
   "exclusionCodeCounts": {
     "E-POP-5": 421,
@@ -117,7 +137,7 @@
     "E-POP-1": 153,
     "E-EXP-3": 117,
     "E-EXP-7": 65,
-    "E-OUT-1": 47,
+    "E-OUT-1": 48,
     "E-REC-5": 39,
     "E-DES-5": 30,
     "E-REC-6": 24,
@@ -129,8 +149,8 @@
     "E-DES-6": 5,
     "E-EXP-2": 4,
     "E-REC-2": 4,
-    "E-REC-4": 2,
-    "E-EXP-4": 2
+    "E-EXP-4": 2,
+    "E-REC-4": 2
   },
   "records": [
     {
@@ -455,7 +475,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -881,7 +901,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -988,7 +1008,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -1306,7 +1326,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -1485,7 +1505,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -2212,7 +2232,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -2313,7 +2333,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -2746,7 +2766,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -2841,7 +2861,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -3062,7 +3082,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -3214,7 +3234,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -3379,7 +3399,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -3500,7 +3520,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -3687,7 +3707,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
           },
@@ -3707,7 +3727,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -3717,7 +3737,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -3727,12 +3747,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://doi.org/10.1519/jsc.0000000000003948",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (767545 bytes, text/html)",
+            "note": "The DOI resolves to the Ovid/LWW article page for \"Understanding Bench Press Biomechanics\", which returns the complete abstract to an unauthenticated client and puts the article body behind a login. SHA-256 d3ad9d6df67216552b4bc9a127d77d27a5a5cfc62dff653af469061de1128bcf. This confirms the recorded abstract-only access level from an observed response rather than from an OpenAlex is_oa=false inference. No full text was obtained; no authentication was attempted.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1519/jsc.0000000000003948: 200 (767545 bytes, text/html) - The DOI resolves to the Ovid/LWW article page for \"Understanding Bench Press Biomechanics\", which returns the complete abstract to an unauthenticated client and puts the article body behind a login. SHA-256 d3ad9d6df67216552b4bc9a127d77d27a5a5cfc62dff653af469061de1128bcf. This confirms the recorded abstract-only access level from an observed response rather than from an OpenAlex is_oa=false inference. No full text was obtained; no authentication was attempted."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": "N",
         "license": null
       }
@@ -3906,7 +3937,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
           },
@@ -3926,7 +3957,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -3936,7 +3967,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -3946,12 +3977,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://doi.org/10.1519/jsc.0000000000003575",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (332418 bytes, text/html)",
+            "note": "The DOI resolves to the Ovid/LWW article page for \"Effects of 4, 8, and 12 Repetition Maximum Resistance Training\", which returns the complete abstract to an unauthenticated client and puts the article body behind a login. SHA-256 9c291dcf824803478281a32912a90e61f1e40a8a2c721da304f8c9d663ad0826. This confirms the recorded abstract-only access level from an observed response rather than from an OpenAlex is_oa=false inference. No full text was obtained; no authentication was attempted.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1519/jsc.0000000000003575: 200 (332418 bytes, text/html) - The DOI resolves to the Ovid/LWW article page for \"Effects of 4, 8, and 12 Repetition Maximum Resistance Training\", which returns the complete abstract to an unauthenticated client and puts the article body behind a login. SHA-256 9c291dcf824803478281a32912a90e61f1e40a8a2c721da304f8c9d663ad0826. This confirms the recorded abstract-only access level from an observed response rather than from an OpenAlex is_oa=false inference. No full text was obtained; no authentication was attempted."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": "N",
         "license": null
       }
@@ -4046,7 +4088,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -4161,7 +4203,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -4443,7 +4485,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -4675,7 +4717,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -4918,7 +4960,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -5012,7 +5054,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -5589,7 +5631,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -6133,7 +6175,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -6469,7 +6511,7 @@
       "routes": ["S-PubMed"],
       "strata": ["N-RS4"],
       "terminalState": "excluded",
-      "decidedAtStage": "stage-1-title-abstract",
+      "decidedAtStage": "stage-2-acquisition",
       "primaryReasonCode": "E-OUT-5",
       "note": "Near-infrared spectroscopy of muscle oxygen dynamics during push-ups; a tier-5 context outcome only.",
       "acquisition": {
@@ -6687,7 +6729,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -6865,7 +6907,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -6981,7 +7023,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "not required; the chapter is freely readable",
+            "note": "not required; the chapter is freely readable attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - not required; the chapter is freely readable"
           }
@@ -7404,7 +7446,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -7504,7 +7546,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -7652,7 +7694,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -7689,7 +7731,7 @@
       "routes": ["S-PubMed", "C1-citation-chase"],
       "strata": ["N-RS4", "C1-citation-chase"],
       "terminalState": "excluded",
-      "decidedAtStage": "stage-1-title-abstract",
+      "decidedAtStage": "stage-2-acquisition",
       "primaryReasonCode": "E-DES-5",
       "note": "Critical analysis review of pectoralis major tendon tear with no primary observation of its own. Re-retrieved by the R1 remediation route C1-citation-chase on 2026-09-13; that retrieval event was not credited when the route was first recorded and is credited here.",
       "acquisition": {
@@ -7831,7 +7873,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -7974,7 +8016,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -8625,7 +8667,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -8904,7 +8946,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -9037,7 +9079,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -9399,7 +9441,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -9576,7 +9618,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -9729,7 +9771,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -9837,7 +9879,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -10058,7 +10100,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -10228,7 +10270,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -10622,7 +10664,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -10816,7 +10858,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -10925,7 +10967,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -11018,7 +11060,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -11111,7 +11153,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -11302,7 +11344,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -11742,7 +11784,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -11870,7 +11912,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -12118,7 +12160,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -12671,7 +12713,7 @@
       "routes": ["S-PubMed"],
       "strata": ["N-RS4"],
       "terminalState": "excluded",
-      "decidedAtStage": "stage-1-title-abstract",
+      "decidedAtStage": "stage-2-acquisition",
       "primaryReasonCode": "E-EXP-1",
       "note": "Diagonal shoulder movements resisted by a weight-and-pulley circuit are neither an index nor a pre-specified related condition, and the reported movers are the deltoid and infraspinatus.",
       "acquisition": {
@@ -13346,7 +13388,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "not required; the chapter is freely readable",
+            "note": "not required; the chapter is freely readable attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - not required; the chapter is freely readable"
           }
@@ -13549,7 +13591,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -13771,7 +13813,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -13871,7 +13913,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -14120,7 +14162,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -14189,7 +14231,7 @@
       "routes": ["S-PubMed"],
       "strata": ["N-RS5"],
       "terminalState": "excluded",
-      "decidedAtStage": "stage-1-title-abstract",
+      "decidedAtStage": "stage-2-acquisition",
       "primaryReasonCode": "E-OUT-1",
       "note": "The reported outcome is the effect of physiological cross-sectional-area scaling on upper-extremity model prediction error, not a pectoralis-resolvable structural or functional outcome.",
       "acquisition": {
@@ -14508,7 +14550,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -14638,7 +14680,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -14762,7 +14804,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -14870,7 +14912,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -15144,7 +15186,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -15517,7 +15559,7 @@
       "routes": ["S-PubMed"],
       "strata": ["N-RS5", "N-RS6"],
       "terminalState": "excluded",
-      "decidedAtStage": "stage-1-title-abstract",
+      "decidedAtStage": "stage-2-acquisition",
       "retrievalEvents": 2,
       "dedupKeysMatched": [
         "pmid:10888162",
@@ -15620,7 +15662,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -15773,7 +15815,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -16188,7 +16230,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -16635,7 +16677,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -17188,7 +17230,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -17426,7 +17468,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -21562,7 +21604,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "202 (2009 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 reproduced HTTP 202 with a zero-byte body. figshare answers this download route asynchronously and never delivered a file. The disposition is confirmed.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://figshare.com/articles/A_ROTA_O_DE_OMBRO_N_O_AFETA_A_ATIVA_O_MUSCULAR_DO_PEITORAL_MAIOR_E_DELTOIDE_ANTERIOR_DURANTE_O_EXERC_CIO_PEC_DECK/11195714: 202 (2009 bytes)"
           },
@@ -21603,12 +21645,12 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       },
@@ -21689,7 +21731,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
           },
@@ -21709,7 +21751,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -21719,7 +21761,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -21729,12 +21771,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE00915543",
+            "repository": "DBpia",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (545474 bytes, text/html)",
+            "note": "Korean commercial aggregator page for this conference paper; the title matches the record exactly. The page carries no abstract text to an unauthenticated client and states that institutional authentication is required to read the item. This is a true access-control outcome, not a challenge. No authentication was attempted. SHA-256 b77aae29a27c6743f655cd390cca6df90642a821629812da3ee7a9829af2b882.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (DBpia) https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE00915543: 200 (545474 bytes, text/html) - Korean commercial aggregator page for this conference paper; the title matches the record exactly. The page carries no abstract text to an unauthenticated client and states that institutional authentication is required to read the item. This is a true access-control outcome, not a challenge. No authentication was attempted. SHA-256 b77aae29a27c6743f655cd390cca6df90642a821629812da3ee7a9829af2b882."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -22191,7 +22244,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
           },
@@ -22211,7 +22264,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -22221,7 +22274,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -22231,12 +22284,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://doi.org/10.1249/01.mss.0001156852.22257.45",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (151478 bytes, text/html)",
+            "note": "The DOI resolves to the Ovid/LWW page for \"Chest Wall Pain With Chest Flies\", a 2025 ACSM annual-meeting clinical case slide abstract (Med Sci Sports Exerc 57(10S):266-267). The page carries title, authors, affiliations, pagination and DOI but no abstract text and no body, so metadata-only is confirmed by observation rather than by inference. SHA-256 d1b6aaccc73e0815ac7bd9204391c3079aaee7c8fb0596480c1fbaac1055c8c2.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1249/01.mss.0001156852.22257.45: 200 (151478 bytes, text/html) - The DOI resolves to the Ovid/LWW page for \"Chest Wall Pain With Chest Flies\", a 2025 ACSM annual-meeting clinical case slide abstract (Med Sci Sports Exerc 57(10S):266-267). The page carries title, authors, affiliations, pagination and DOI but no abstract text and no body, so metadata-only is confirmed by observation rather than by inference. SHA-256 d1b6aaccc73e0815ac7bd9204391c3079aaee7c8fb0596480c1fbaac1055c8c2."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -22337,9 +22401,9 @@
       "strata": ["O-RS6-dumbbell-fly", "C1-citation-chase"],
       "terminalState": "awaiting-full-text",
       "decidedAtStage": "stage-3-full-record",
-      "note": "Electromyography of the dumbbell fly across planes and labile surfaces; no lawful full text or abstract detail sufficient for extraction was obtained. Re-retrieved by the R1 remediation route C1-citation-chase on 2026-09-13; that retrieval event was not credited when the route was first recorded and is credited here.",
+      "note": "Dumbbell-fly EMG study across planes and labile surfaces. Its institutional-repository landing page was reached on 2026-09-15 and carries the full abstract openly, so the access level is corrected from metadata-only to abstract-only on observed evidence; the first pass had recorded no open location from an OpenAlex is_oa=false inference without contacting the host. The deposited file itself is behind a repository login and a request-a-copy workflow, which is a true access-control outcome. Held awaiting-full-text: it is a dumbbell fly and a related condition, not the index, and no claim is drawn from its abstract.",
       "acquisition": {
-        "accessLevel": "metadata-only",
+        "accessLevel": "abstract-only",
         "fullTextObtained": false,
         "fullTextSource": null,
         "ladderStepsTried": [
@@ -22359,7 +22423,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location",
+            "note": "openalex reports is_oa=false oa_status=closed; no best_oa_location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed; no best_oa_location"
           },
@@ -22379,7 +22443,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -22389,7 +22453,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -22399,12 +22463,34 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://observatorio.fm.usp.br/handle/OPI/25022",
+            "repository": "Observatorio da Producao Intelectual do Sistema FMUSP-HC",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (514144 bytes, text/html)",
+            "note": "Institutional repository landing page, title matching this record exactly, carrying the complete abstract openly: 17 males, dumbbell fly on a stable horizontal surface, a stable incline surface and an unstable surface, EMG normalised to maximum voluntary contraction; the pectoralis major sternocostal head was higher in the horizontal than in the incline condition, and the unstable condition held activity similar at a lower total load. SHA-256 3b778bc013739305492fe88f8b3a87ae7487fe027f9fbd2b0bdda2be698667b4.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (Observatorio da Producao Intelectual do Sistema FMUSP-HC) https://observatorio.fm.usp.br/handle/OPI/25022: 200 (514144 bytes, text/html) - Institutional repository landing page, title matching this record exactly, carrying the complete abstract openly: 17 males, dumbbell fly on a stable horizontal surface, a stable incline surface and an unstable surface, EMG normalised to maximum voluntary contraction; the pectoralis major sternocostal head was higher in the horizontal than in the incline condition, and the unstable condition held activity similar at a lower total load. SHA-256 3b778bc013739305492fe88f8b3a87ae7487fe027f9fbd2b0bdda2be698667b4."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://observatorio.fm.usp.br/bitstreams/bcc778b3-2f06-43ab-9d7f-cb1c5ebcd78d/download",
+            "repository": "Observatorio da Producao Intelectual do Sistema FMUSP-HC",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (387285 bytes, text/html, Login page)",
+            "note": "The deposited file is access-controlled: the download route returns the repository login form rather than the document, and the item page offers a request-a-copy link. This is a true access-control outcome, not a challenge and not an inference. No authentication was attempted.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (Observatorio da Producao Intelectual do Sistema FMUSP-HC) https://observatorio.fm.usp.br/bitstreams/bcc778b3-2f06-43ab-9d7f-cb1c5ebcd78d/download: 200 (387285 bytes, text/html, Login page) - The deposited file is access-controlled: the download route returns the repository login form rather than the document, and the item page offers a request-a-copy link. This is a true access-control outcome, not a challenge and not an inference. No authentication was attempted."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       },
@@ -22656,7 +22742,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "this project operates no outbound correspondence channel",
+            "note": "this project operates no outbound correspondence channel attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - this project operates no outbound correspondence channel"
           }
@@ -22753,7 +22839,7 @@
       ],
       "terminalState": "awaiting-full-text",
       "decidedAtStage": "stage-3-full-record",
-      "note": "Reiser, F.C. et al. (2014), Rev Bras Prescr Fisiol Exerc 8(50). Dumbbell fly (crucifixo) with clavicular and sternocostal pectoralis major and anterior deltoid EMG across a horizontal and a 30-degree inclined plane and 30/60/90-degree isometric angles in seven physically active subjects. The English-titled record formerly held separately as G1006 is the SAME report: identical author list, identical year, and the identical publisher URL, and the DOAJ record carries both titles in one bilingual abstract. G1006 is therefore folded in here as a deduplication event, never as an exclusion. The translation ladder reached step 1: an authorised English abstract published alongside the Portuguese one. The full text remains refused to this client, so the record stays awaiting-full-text. Re-retrieved by the R1 remediation route L1-nonenglish-openalex on 2026-09-13; that retrieval event was not credited when the route was first recorded and is credited here. Re-retrieved by the R1 remediation route C1-citation-chase on 2026-09-13; that retrieval event was not credited when the route was first recorded and is credited here.",
+      "note": "Portuguese-language dumbbell-fly (crucifixo) study across planes and angles of movement. Both the DOAJ and the publisher route return HTTP 403 with a Cloudflare challenge to this automated client, on 2026-09-13 and again on 2026-09-15. OpenAlex reports the record as open access (green). No lawful full text was obtained by this pass; that is a statement about this client, not a finding that the article is closed.",
       "acquisition": {
         "accessLevel": "abstract-only",
         "fullTextObtained": false,
@@ -22776,7 +22862,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "403 (5,774 bytes)",
-            "note": "the DOAJ article page refuses this client; no user-agent substitution was attempted",
+            "note": "Re-run on 2026-09-15: HTTP 403, 5562 bytes, response header cf-mitigated: challenge, body titled \"Just a moment...\". A bot-protection refusal of an automated client, not an access-control decision.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://doaj.org/article/b30da9121dea490a864f046f3ea86479: 403 (5,774 bytes) - the DOAJ article page refuses this client; no user-agent substitution was attempted"
           },
@@ -22798,7 +22884,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "403 (5,656 bytes)",
-            "note": "the publisher of record refuses this client; recorded, not circumvented",
+            "note": "Re-run on 2026-09-15: HTTP 403, 5464 bytes, response header cf-mitigated: challenge, body titled \"Just a moment...\". A bot-protection refusal of an automated client. OpenAlex reports this record is_oa=true oa_status=green, so the refusal is very likely client filtering rather than a closed article; this pass simply could not read it.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.rbpfex.com.br/index.php/rbpfex/article/view/725: 403 (5,656 bytes) - the publisher of record refuses this client; recorded, not circumvented"
           },
@@ -22819,7 +22905,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "403 (5,774 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15: HTTP 403, 5562 bytes, response header cf-mitigated: challenge, body titled \"Just a moment...\". A bot-protection refusal of an automated client, not an access-control decision.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository https://doaj.org/article/b30da9121dea490a864f046f3ea86479: 403 (5,774 bytes)"
           },
@@ -22839,12 +22925,12 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "this project operates no outbound correspondence channel",
+            "note": "this project operates no outbound correspondence channel attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - this project operates no outbound correspondence channel"
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": "listed as open access, but the full text is refused to this client",
         "license": "cc-by-sa as reported by OpenAlex and DOAJ"
       },
@@ -23409,7 +23495,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -23725,7 +23811,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
           }
@@ -23887,7 +23973,7 @@
       "strata": ["O-RS10-pectoralis-hypertrophy"],
       "terminalState": "awaiting-full-text",
       "decidedAtStage": "stage-3-full-record",
-      "note": "Conference paper on partial-range bench press with regional myoelectrical amplitude; no lawful full text was obtained.",
+      "note": "Conference paper on partial-range bench press with regional myoelectrical amplitude. Re-attempted on 2026-09-15: the institutional repository refused this automated client with a Cloudflare challenge (HTTP 403, cf-mitigated: challenge), while the same host answered a control request normally. No lawful full text was obtained by this pass. That is a statement about what this client retrieved, not a finding that the item is closed.",
       "acquisition": {
         "accessLevel": "metadata-only",
         "fullTextObtained": false,
@@ -23909,7 +23995,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no OpenAlex record to supply an open location",
+            "note": "no OpenAlex record to supply an open location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - no OpenAlex record to supply an open location"
           },
@@ -23929,7 +24015,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -23939,7 +24025,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -23949,12 +24035,34 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://digitalcommons.wku.edu/cgi/viewcontent.cgi?article=4642&context=ijesab",
+            "repository": "TopSCHOLAR, Western Kentucky University",
+            "attemptedAt": "2026-09-15",
+            "result": "403 (5690 bytes, text/html, cf-mitigated: challenge)",
+            "note": "The repository front end refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved and no cookie was supplied. This is a bot-protection refusal of an automated client, not an access-control decision about the item and not evidence that no lawful full text exists. The item is a conference abstract in International Journal of Exercise Science: Conference Proceedings and may well be openly readable in a browser; this pass cannot record it as obtained because this pass did not obtain it.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (TopSCHOLAR, Western Kentucky University) https://digitalcommons.wku.edu/cgi/viewcontent.cgi?article=4642&context=ijesab: 403 (5690 bytes, text/html, cf-mitigated: challenge) - The repository front end refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved and no cookie was supplied. This is a bot-protection refusal of an automated client, not an access-control decision about the item and not evidence that no lawful full text exists. The item is a conference abstract in International Journal of Exercise Science: Conference Proceedings and may well be openly readable in a browser; this pass cannot record it as obtained because this pass did not obtain it."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": "host-reachability-control",
+            "url": "https://digitalcommons.wku.edu/ijes/vol2/iss1/",
+            "repository": "TopSCHOLAR, Western Kentucky University",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (38463 bytes, text/html)",
+            "note": "Control request showing the host itself answers this client normally; the refusal above is specific to the viewcontent delivery route. Recorded so the 403 is not read as the host being unreachable.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (TopSCHOLAR, Western Kentucky University) https://digitalcommons.wku.edu/ijes/vol2/iss1/: 200 (38463 bytes, text/html) - Control request showing the host itself answers this client normally; the refusal above is specific to the viewcontent delivery route. Recorded so the 403 is not read as the host being unreachable."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -23992,22 +24100,23 @@
       "title": "Names of resistance exercises Text analysis of survey responses",
       "year": null,
       "identifiers": {
-        "internalId": "G1087"
+        "internalId": "G1087",
+        "doi": "10.51224/sportrxiv.872"
       },
       "routes": ["P1-SportRxiv"],
       "strata": ["P-SPORTRXIV-cable-fly", "P-SPORTRXIV-pec-deck"],
-      "terminalState": "awaiting-full-text",
+      "terminalState": "excluded",
       "decidedAtStage": "stage-3-full-record",
       "retrievalEvents": 2,
       "dedupKeysMatched": [
         "fuzzy:names of resistance exercises text analysis of survey responses"
       ],
       "fuzzyOnlyMerge": true,
-      "note": "SportRxiv preprint analysing the names lifters give resistance exercises; the server's search interface returned the record but no full text was retrieved for this pass.",
+      "note": "SportRxiv preprint (Nuzzo and Steele), lawful CC BY full text obtained on 2026-09-15 after the first pass recorded no open location for it. Read in full: it is a survey of what lifters call resistance exercises, analysed for 1,425 of 1,849 respondents, reporting naming practice and terminology. It reports no pectoralis major size, activation, architecture or harms outcome, so it carries no outcome in tiers 1 to 4 and no harms outcome and is excluded under E-OUT-1. Retrieving it did not narrow any absence record: it is not a study of the index or of any related condition, and its exclusion is on substance, not on access.",
       "acquisition": {
-        "accessLevel": "metadata-only",
-        "fullTextObtained": false,
-        "fullTextSource": null,
+        "accessLevel": "full-text-open",
+        "fullTextObtained": "open-access-or-repository",
+        "fullTextSource": "https://sportrxiv.org/index.php/server/preprint/download/872/1856/1774",
         "ladderStepsTried": [
           {
             "step": "oa-discovery",
@@ -24025,7 +24134,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no OpenAlex record to supply an open location",
+            "note": "no OpenAlex record to supply an open location The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - no OpenAlex record to supply an open location"
           },
@@ -24045,7 +24154,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed for this record",
+            "note": "no open repository location indexed for this record The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed for this record"
           },
@@ -24055,7 +24164,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no preprint version indexed",
+            "note": "no preprint version indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-4-preprint: not-available - no preprint version indexed"
           },
@@ -24065,15 +24174,56 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt.",
+            "note": "This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - This project operates no outbound correspondence channel and cannot send or receive an author request; recorded as not performed rather than as a failed attempt."
+          },
+          {
+            "step": "id-resolution",
+            "route": "crossref",
+            "url": "https://api.crossref.org/works/10.51224/sportrxiv.872",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (1756 bytes, application/json)",
+            "note": "DOI identity verified before any content was used. Crossref returns DOI 10.51224/sportrxiv.872, type posted-content, title \"Names of resistance exercises\", authors James L. Nuzzo and James Steele, posted 2026-05-26, licence https://creativecommons.org/licenses/by/4.0, primary resource https://sportrxiv.org/index.php/server/preprint/view/872/version/1082. The record carried no DOI before this remediation; the DOI is recorded now that it has been verified.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "id-resolution https://api.crossref.org/works/10.51224/sportrxiv.872: 200 (1756 bytes, application/json) - DOI identity verified before any content was used. Crossref returns DOI 10.51224/sportrxiv.872, type posted-content, title \"Names of resistance exercises\", authors James L. Nuzzo and James Steele, posted 2026-05-26, licence https://creativecommons.org/licenses/by/4.0, primary resource https://sportrxiv.org/index.php/server/preprint/view/872/version/1082. The record carried no DOI before this remediation; the DOI is recorded now that it has been verified."
+          },
+          {
+            "step": "ladder-4-preprint",
+            "route": "landing-page",
+            "url": "https://sportrxiv.org/index.php/server/preprint/view/872/version/1082",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (23813 bytes, text/html)",
+            "note": "The Crossref primary resource. Page title is \"Names of resistance exercises: Text analysis of survey responses | SportRxiv\", which matches this record title exactly, and the page states DOI https://doi.org/10.51224/SportRxiv.872 and carries the complete abstract. SHA-256 3ce7466f177cce375d6507442514dcf2d03125e4f65a409dca028ba65eaa32ad. This is the identity check required before the galley below could be attributed to this record.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-4-preprint https://sportrxiv.org/index.php/server/preprint/view/872/version/1082: 200 (23813 bytes, text/html) - The Crossref primary resource. Page title is \"Names of resistance exercises: Text analysis of survey responses | SportRxiv\", which matches this record title exactly, and the page states DOI https://doi.org/10.51224/SportRxiv.872 and carries the complete abstract. SHA-256 3ce7466f177cce375d6507442514dcf2d03125e4f65a409dca028ba65eaa32ad. This is the identity check required before the galley below could be attributed to this record."
+          },
+          {
+            "step": "ladder-4-preprint",
+            "route": null,
+            "url": "https://sportrxiv.org/index.php/server/preprint/download/872/1856/1774",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (293800 bytes, application/pdf)",
+            "note": "Lawful unauthenticated GET; no credentials or cookies were supplied and no challenge was solved. SHA-256 78a74ae1796debeb1e26086c51b2a5ea8a19a7f18ec968921f4a4336b73b299d. Version 1 galley of preprint 872. Full text obtained and read.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-4-preprint https://sportrxiv.org/index.php/server/preprint/download/872/1856/1774: 200 (293800 bytes, application/pdf) - Lawful unauthenticated GET; no credentials or cookies were supplied and no challenge was solved. SHA-256 78a74ae1796debeb1e26086c51b2a5ea8a19a7f18ec968921f4a4336b73b299d. Version 1 galley of preprint 872. Full text obtained and read."
+          },
+          {
+            "step": "ladder-outcome-full-text-obtained",
+            "route": null,
+            "url": "https://sportrxiv.org/index.php/server/preprint/download/872/1856/1774",
+            "attemptedAt": "2026-09-15",
+            "result": "full text obtained and read; 293800 bytes",
+            "note": "Obtained on 2026-09-15 during the SBLA-010 R2 remediation. CC BY 4.0. Read in full and screened on substance; see terminalState.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-outcome-full-text-obtained https://sportrxiv.org/index.php/server/preprint/download/872/1856/1774: full text obtained and read; 293800 bytes - Obtained on 2026-09-15 during the SBLA-010 R2 remediation. CC BY 4.0. Read in full and screened on substance; see terminalState."
           }
         ],
-        "ladderRunAt": "2026-09-13",
-        "openAccessStatus": null,
-        "license": null
-      }
+        "ladderRunAt": "2026-09-15",
+        "openAccessStatus": "green",
+        "license": "cc by 4.0"
+      },
+      "primaryReasonCode": "E-OUT-1"
     },
     {
       "recordId": "G1088",
@@ -36157,7 +36307,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           }
@@ -36200,7 +36350,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed",
+            "note": "openalex reports is_oa=false oa_status=closed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed"
           },
@@ -36220,7 +36370,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed",
+            "note": "no open repository location indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed"
           },
@@ -36230,12 +36380,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://doi.org/10.1519/1533-4287(1997)011<0163:EAOTPM>2.3.CO;2",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "403 (103 bytes, text/html, Error 403 Forbidden)",
+            "note": "The DOI resolves to http://nsca.allenpress.com/nscaonline/?request=get-abstract&doi=... which refuses this request with a bare HTTP 403 carrying no challenge marker. A 1997 article on a retired publishing platform; whether the refusal is access control or client filtering cannot be determined from the response. No full text and no abstract were obtained.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1519/1533-4287(1997)011<0163:EAOTPM>2.3.CO;2: 403 (103 bytes, text/html, Error 403 Forbidden) - The DOI resolves to http://nsca.allenpress.com/nscaonline/?request=get-abstract&doi=... which refuses this request with a bare HTTP 403 carrying no challenge marker. A 1997 article on a retired publishing platform; whether the refusal is access control or client filtering cannot be determined from the response. No full text and no abstract were obtained."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -36318,7 +36479,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (24 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0171632&type=printable: 200 (24 bytes)"
           },
@@ -36349,7 +36510,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -36361,9 +36522,20 @@
             "result": "full text obtained and read; 224661 bytes",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "full text obtained and read: https://www.ncbi.nlm.nih.gov/pmc/articles/5721175 (224661 bytes)"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0171632&type=printable",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (1183736 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 270c2ea772c61525192606ee437d9921d3b51a43256f9707b5e22f464197e707. The record was already included at full-text-open by the PubMed Central route, so the misread cost no evidence; the publisher route is recorded correctly here.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0171632&type=printable: 200 (1183736 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 270c2ea772c61525192606ee437d9921d3b51a43256f9707b5e22f464197e707. The record was already included at full-text-open by the PubMed Central route, so the misread cost no evidence; the publisher route is recorded correctly here."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -36514,7 +36686,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -36796,7 +36968,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (22 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf: 200 (22 bytes)"
           },
@@ -36827,7 +36999,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -36839,9 +37011,20 @@
             "result": "full text obtained and read; 37307 bytes",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "full text obtained and read: https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf (37307 bytes)"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (37307 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (22 bytes). SHA-256 4a4f78904dcd1bf2e497603f91ab7b680aa2f0b847f2055888f40f0f8fc7c3d5, identical to the file the pass obtained from the same URL at ladder-outcome.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/?lang=pt&format=pdf: 200 (37307 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (22 bytes). SHA-256 4a4f78904dcd1bf2e497603f91ab7b680aa2f0b847f2055888f40f0f8fc7c3d5, identical to the file the pass obtained from the same URL at ladder-outcome."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -36938,7 +37121,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -37037,7 +37220,7 @@
       "acquisition": {
         "accessLevel": "full-text-open",
         "fullTextObtained": "open-access-or-repository",
-        "fullTextSource": "https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf",
+        "fullTextSource": "https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf",
         "ladderStepsTried": [
           {
             "step": "oa-discovery",
@@ -37056,7 +37239,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (2305 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned 200 with 2296 bytes of text/html. That reproduces the recorded disposition: the response is a JavaScript interstitial, not the PDF. The byte count of an interstitial varies between clients and days; the disposition does not.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.mdpi.com/2076-3417/13/8/5203/pdf?version=1682081448: 200 (2305 bytes)"
           },
@@ -37077,7 +37260,7 @@
             "repository": "RIUCAM",
             "attemptedAt": "2026-09-13",
             "result": "200 (24 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository (RIUCAM) https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf: 200 (24 bytes)"
           },
@@ -37087,21 +37270,44 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
           {
             "step": "ladder-outcome-full-text-obtained",
             "route": null,
-            "url": "https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf",
+            "url": "https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf",
             "attemptedAt": "2026-09-13",
             "result": "full text obtained and read; 3358506 bytes",
             "attemptSource": "r1-remediation-ladder-run",
-            "verbatim": "full text obtained and read: https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf (3358506 bytes)"
+            "verbatim": "full text obtained and read: https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf (3358506 bytes)",
+            "note": "URL corrected on 2026-09-15. The first pass recorded a truncated handle URL here and in fullTextSource that returns HTTP 404. The SHA-256 of the obtained file, 8ac15532f5cf871ab6e5cb4f7384c1539f3347938a981976e1cff61066cbb50d, is unchanged and was re-verified against this corrected URL."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf",
+            "repository": "Repositorio Institucional UCAM",
+            "attemptedAt": "2026-09-15",
+            "result": "200 (3358506 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 8ac15532f5cf871ab6e5cb4f7384c1539f3347938a981976e1cff61066cbb50d. The server redirects this URL to the bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf form carrying a jsessionid and ?sequence=1, and serves the PDF there. This is the route that actually yielded the full text.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (Repositorio Institucional UCAM) https://repositorio.ucam.edu/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf: 200 (3358506 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 8ac15532f5cf871ab6e5cb4f7384c1539f3347938a981976e1cff61066cbb50d. The server redirects this URL to the bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf form carrying a jsessionid and ?sequence=1, and serves the PDF there. This is the route that actually yielded the full text."
+          },
+          {
+            "step": "ladder-3-repository",
+            "route": null,
+            "url": "https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf",
+            "repository": "Repositorio Institucional UCAM",
+            "attemptedAt": "2026-09-15",
+            "result": "404 (10885 bytes, text/html, Resource not found)",
+            "note": "This URL was recorded as fullTextSource and as the ladder-outcome URL in the first pass and does not resolve: its title segment is truncated and omits the word major. Corrected here; the working URL is the bitstream/10952/9780/1/ form above.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-3-repository (Repositorio Institucional UCAM) https://repositorio.ucam.edu/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf: 404 (10885 bytes, text/html, Resource not found) - This URL was recorded as fullTextSource and as the ladder-outcome URL in the first pass and does not resolve: its title segment is truncated and omits the word major. Corrected here; the working URL is the bitstream/10952/9780/1/ form above."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -37310,7 +37516,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           }
@@ -37418,7 +37624,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed",
+            "note": "openalex reports is_oa=false oa_status=closed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed"
           },
@@ -37438,7 +37644,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed",
+            "note": "no open repository location indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed"
           },
@@ -37448,12 +37654,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://doi.org/10.1177/17479541261457744",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "403 (5583 bytes, text/html, cf-mitigated: challenge)",
+            "note": "The DOI resolves to journals.sagepub.com, which refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved. This is a bot-protection refusal, not an observed access-control decision, and it is not evidence that no lawful full text or abstract exists.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1177/17479541261457744: 403 (5583 bytes, text/html, cf-mitigated: challenge) - The DOI resolves to journals.sagepub.com, which refused this automated client with a Cloudflare interstitial titled \"Just a moment...\". No challenge was solved. This is a bot-protection refusal, not an observed access-control decision, and it is not evidence that no lawful full text or abstract exists."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -37630,7 +37847,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -37746,7 +37963,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (24 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://www.jstage.jst.go.jp/article/jpts/37/1/37_2024-110/_pdf: 200 (24 bytes)"
           },
@@ -37777,7 +37994,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -37789,9 +38006,20 @@
             "result": "full text obtained and read; 116876 bytes",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "full text obtained and read: https://pmc.ncbi.nlm.nih.gov/articles/PMC11700571/ (116876 bytes)"
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://www.jstage.jst.go.jp/article/jpts/37/1/37_2024-110/_pdf",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (2171116 bytes, application/pdf)",
+            "note": "Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 ad4f265eef0e8b668314cd64eaf4c618ed2aac20981e63e9c2e4d7713b30ebaf. The record was already included at full-text-open by the PubMed Central route.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://www.jstage.jst.go.jp/article/jpts/37/1/37_2024-110/_pdf: 200 (2171116 bytes, application/pdf) - Re-run of the attempt recorded on 2026-09-13 as 200 (24 bytes). SHA-256 ad4f265eef0e8b668314cd64eaf4c618ed2aac20981e63e9c2e4d7713b30ebaf. The record was already included at full-text-open by the PubMed Central route."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -38017,7 +38245,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "openalex reports is_oa=false oa_status=closed",
+            "note": "openalex reports is_oa=false oa_status=closed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access: not-available - openalex reports is_oa=false oa_status=closed"
           },
@@ -38037,7 +38265,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-available",
-            "note": "no open repository location indexed",
+            "note": "no open repository location indexed The 2026-09-13 result on this rung was derived from an OpenAlex lookup, not from a request to this host. It is a metadata inference, not an observed access outcome. A direct request was made on 2026-09-15 and its observed result is recorded as a separate attempt below.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository: not-available - no open repository location indexed"
           },
@@ -38047,12 +38275,23 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://doi.org/10.1007/978-981-13-2517-5_46",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (3038 bytes, text/html, Client Challenge)",
+            "note": "The DOI resolves through idp.springer.com/transit to a page titled \"Client Challenge\". The 200 status carries a challenge page, not the chapter and not an abstract. This is a bot-protection refusal of an automated client, not an observed access-control decision.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://doi.org/10.1007/978-981-13-2517-5_46: 200 (3038 bytes, text/html, Client Challenge) - The DOI resolves through idp.springer.com/transit to a page titled \"Client Challenge\". The 200 status carries a challenge page, not the chapter and not an abstract. This is a bot-protection refusal of an automated client, not an observed access-control decision."
           }
         ],
-        "ladderRunAt": "2026-09-13",
+        "ladderRunAt": "2026-09-15",
         "openAccessStatus": null,
         "license": null
       }
@@ -38096,13 +38335,13 @@
       },
       "routes": ["C1-citation-chase"],
       "strata": ["C1-citation-chase"],
-      "terminalState": "awaiting-full-text",
-      "decidedAtStage": "stage-2-acquisition",
-      "note": "The effect of 12 variations of the bench press exercise on the EMG activity of three heads of the pectoralis major (Int J Strength Cond, 2021). Eligible on title: portion-resolved pectoralis activation across bench-press variations. No abstract and no full text were obtainable from any lawful route. Held awaiting-full-text.",
+      "terminalState": "included",
+      "decidedAtStage": "stage-3-full-record",
+      "note": "The effect of 12 variations of the bench press exercise on the EMG activity of three heads of the pectoralis major (Int J Strength Cond, 2021). Portion-resolved pectoralis activation across bench-press variations; eligible on full text. The 2026-09-13 ladder recorded this record own publisher URL as a 23-byte failure and held it awaiting-full-text. The same URL served the complete CC BY PDF on re-run, and the record was screened on its full text and included during the SBLA-010 R2 remediation.",
       "acquisition": {
-        "accessLevel": "metadata-only",
-        "fullTextObtained": false,
-        "fullTextSource": null,
+        "accessLevel": "full-text-open",
+        "fullTextObtained": "open-access-or-repository",
+        "fullTextSource": "https://journal.iusca.org/index.php/Journal/article/download/39/124",
         "ladderStepsTried": [
           {
             "step": "oa-discovery",
@@ -38121,7 +38360,7 @@
             "repository": null,
             "attemptedAt": "2026-09-13",
             "result": "200 (23 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 returned the full PDF from this same URL. The 2026-09-13 result is a redirect body that this pass recorded as a terminal failure without following it; the byte count is the redirect stub, not the resource. The original observation is kept verbatim rather than silently overwritten (SBLA-010 R2 finding M-1).",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/download/39/124: 200 (23 bytes)"
           },
@@ -38142,7 +38381,7 @@
             "repository": "DOAJ (DOAJ: Directory of Open Access Journals)",
             "attemptedAt": "2026-09-13",
             "result": "403 (5774 bytes)",
-            "note": null,
+            "note": "Re-run on 2026-09-15 reproduced HTTP 403 carrying the response header cf-mitigated: challenge and a body titled \"Just a moment...\". That is an automated-client bot-protection refusal by the index front end. It is not an access-control decision about the article and is not evidence that the article is closed.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-3-repository (DOAJ (DOAJ: Directory of Open Access Journals)) https://doaj.org/article/4230b8d4b92d4277ab79ec8bfb3b1579: 403 (5774 bytes)"
           },
@@ -38152,14 +38391,47 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": null,
+            "url": "https://journal.iusca.org/index.php/Journal/article/download/39/124",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (689102 bytes, application/pdf)",
+            "note": "Lawful unauthenticated GET with redirects followed; no credentials or cookies were supplied and no challenge was solved. SHA-256 1a01086a81ffff228a766e4a9b2813467e349e8891f8651487f7c4d32f39831e. Full text obtained and read.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/download/39/124: 200 (689102 bytes, application/pdf) - Lawful unauthenticated GET with redirects followed; no credentials or cookies were supplied and no challenge was solved. SHA-256 1a01086a81ffff228a766e4a9b2813467e349e8891f8651487f7c4d32f39831e. Full text obtained and read."
+          },
+          {
+            "step": "ladder-1-publisher-open-access",
+            "route": "landing-page",
+            "url": "https://journal.iusca.org/index.php/Journal/article/view/39",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "200 (34509 bytes, text/html)",
+            "note": "Open landing page carrying the complete abstract and the CC BY 4.0 licence statement. SHA-256 71075eb7c500ca32c6e4a832650fb0ff5c1d7b3a9e3d5b0439ee35a46202a3f9.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-1-publisher-open-access https://journal.iusca.org/index.php/Journal/article/view/39: 200 (34509 bytes, text/html) - Open landing page carrying the complete abstract and the CC BY 4.0 licence statement. SHA-256 71075eb7c500ca32c6e4a832650fb0ff5c1d7b3a9e3d5b0439ee35a46202a3f9."
+          },
+          {
+            "step": "ladder-outcome-full-text-obtained",
+            "route": null,
+            "url": "https://journal.iusca.org/index.php/Journal/article/download/39/124",
+            "repository": null,
+            "attemptedAt": "2026-09-15",
+            "result": "full text obtained and read; 689102 bytes",
+            "note": "Obtained on 2026-09-15 during the SBLA-010 R2 remediation, not during the original pass. The article is 11 pages and carries the Creative Commons Attribution (CC BY) 4.0 licence on every page.",
+            "attemptSource": "sbla-010-r2-remediation-reacquisition",
+            "verbatim": "ladder-outcome-full-text-obtained https://journal.iusca.org/index.php/Journal/article/download/39/124: full text obtained and read; 689102 bytes - Obtained on 2026-09-15 during the SBLA-010 R2 remediation, not during the original pass. The article is 11 pages and carries the Creative Commons Attribution (CC BY) 4.0 licence on every page."
           }
         ],
-        "ladderRunAt": "2026-09-13",
-        "openAccessStatus": null,
-        "license": null
+        "ladderRunAt": "2026-09-15",
+        "openAccessStatus": "diamond",
+        "license": "cc by 4.0"
       }
     },
     {
@@ -38365,7 +38637,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           }
@@ -38468,7 +38740,7 @@
             "url": null,
             "attemptedAt": "2026-09-13",
             "result": "not-performed",
-            "note": "No outbound correspondence channel exists for this project.",
+            "note": "No outbound correspondence channel exists for this project. attemptedAt on a not-performed rung is the date the ladder run reached this rung and recorded the decision not to perform it, not the date a request was sent; no request was sent. The date is carried because the integrity gate requires a real ISO date on every attempt object, so the field cannot be left null without a gate change owned by Codex.",
             "attemptSource": "r1-remediation-ladder-run",
             "verbatim": "ladder-5-author-request: not-performed - No outbound correspondence channel exists for this project."
           },
@@ -38521,10 +38793,30 @@
     }
   ],
   "governingReview": {
-    "report": "reviews/evidence/SBLA-009-r1.md",
-    "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
-    "branch": "claude-review/SBLA-009-r1",
-    "verdict": "FAIL — 1 Critical, 13 Important, 10 Minor",
-    "note": "The immutable Account-B round-one report this artifact remediates. It is recorded as a commit reference rather than as a crossLinks entry because the report lives on the reviewer branch and is not a path in this worktree; asserting it as a repository cross-link would claim a file that is not here. Retrieve it with: git show 8154f1167062403a96ee5d6ec0fc63bd50ebfd17:reviews/evidence/SBLA-009-r1.md"
+    "report": "reviews/evidence/SBLA-009-r2.md",
+    "commit": "f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46",
+    "tree": "779567bad94305ad22e28973e6067915f0d5deac",
+    "branch": "claude-review/SBLA-009-r2",
+    "verdict": "FAIL - 0 Critical, 4 Important, 13 Minor",
+    "sha256": "3428d3feb9b58bb150ac4c93375d868cabc5dc3f5597e83e50503b30a47a12b5",
+    "remediation": {
+      "task": "SBLA-010 R2 bounded remediation",
+      "branch": "claude-research/SBLA-010-r2-remediation",
+      "baseCommit": "f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46",
+      "baseTree": "779567bad94305ad22e28973e6067915f0d5deac",
+      "date": "2026-09-15",
+      "blockersAnswered": ["N-1", "N-2", "N-3", "N-4"],
+      "nextReview": "reviews/evidence/SBLA-009-r3.md (Account B, one complete-artifact recheck)"
+    },
+    "priorRounds": [
+      {
+        "report": "reviews/evidence/SBLA-009-r1.md",
+        "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
+        "branch": "claude-review/SBLA-009-r1",
+        "verdict": "FAIL - 1 Critical, 13 Important, 10 Minor",
+        "sha256": "7c829be485846c7fa71a48637c4795978d003e8d2501c77ffcc31ef671f9f46e"
+      }
+    ],
+    "note": "Both Account-B reports are ordinary files in this tree: reviews/evidence/SBLA-009-r1.md was added by integration commit 1dc1c41b96508edbd2ae7d2ebff0ca6f5a1eb3f1 and reviews/evidence/SBLA-009-r2.md by f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46. The first pass recorded the round-one report as a commit reference on the ground that it was \"not a path in this worktree\"; that was true at Account-A commit 0880d5fb and is false here, so the claim is withdrawn (SBLA-010 R2 finding M-12). Both reports remain immutable and are never edited by this role. This bundle stays at artifactVersion 2.0.0 because SBLA-010 R2 finding N-3 prescribes pinning the three drafts to atomic-claims.json@2.0.0; this governingReview block, not the version string, is what distinguishes the reviewed 2.0.0 tree from this remediated 2.0.0 tree."
   }
 }

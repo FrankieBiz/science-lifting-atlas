@@ -3,12 +3,20 @@
 - Task: SBLA-009 (§18 queue row; §14 Phase 1 Task 1.2, `appraise` stage of the §9.8 pipeline)
 - Role: Claude Research (account A) — evidence lead, not the independent reviewer
 - Base commit: `8ca59e850beb0770554074d474a3ff3a9e16710a`
-- Date: 2026-09-13
+- Date: 2026-09-13; corrected 2026-09-15 in the SBLA-010 R2 bounded remediation
 - Artifact version: 2.0.0
 - Revision: R1 bounded remediation against
   [`reviews/evidence/SBLA-009-r1.md`](../../reviews/evidence/SBLA-009-r1.md) at
   `8154f1167062403a96ee5d6ec0fc63bd50ebfd17`. Changes are listed in §7.
-- Companions, all at version 1.0.0:
+- Second revision: SBLA-010 R2 bounded remediation against
+  [`reviews/evidence/SBLA-009-r2.md`](../../reviews/evidence/SBLA-009-r2.md) at
+  `f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46` (SHA-256
+  `3428d3feb9b58bb150ac4c93375d868cabc5dc3f5597e83e50503b30a47a12b5`). Changes are
+  listed in §8. The artifact version stays 2.0.0 because that report's finding N-3
+  prescribes pinning the three drafts to `atomic-claims.json@2.0.0`.
+- Companions, all at version 2.0.0 except the evidence packet, which carries no version
+  field because its schema is strict and does not own one; its version is stated in its
+  own `synthesis` text and the gap is routed to Codex in the handoff:
   [`research/searches/SBLA-009-search-receipts.json`](../searches/SBLA-009-search-receipts.json),
   [`research/screening/SBLA-009-screening-flow.json`](../screening/SBLA-009-screening-flow.json),
   [`research/extractions/SBLA-009-source-extractions.json`](../extractions/SBLA-009-source-extractions.json),
@@ -22,8 +30,10 @@
 ## 0. What this document is
 
 This is the `appraise` stage: design-specific risk of bias and applicability for the
-76 included sources, plus the one thing appraisal is really for in this slice —
+89 included sources, plus the one thing appraisal is really for in this slice —
 saying which evidence can carry which claim type, and which cannot carry anything.
+The count was 76 in the first pass, 88 after the R1 bounded remediation, and 89 after
+the SBLA-010 R2 remediation obtained the full text of G1944.
 
 Every number quoted here comes from the extraction artifact, where it sits beside
 its locator. Nothing here is a claim; the claims are in
@@ -35,9 +45,10 @@ connects them to this appraisal is in the synthesis.
 **There is no tier-1 evidence for the index comparison, and there is no tier-1
 evidence for index exercise Y at all.**
 
-Not "weak evidence". None. After 1,361 retrievals, 1,109 unique records and a
-fly-family probe built to be exhaustive across thirty phrase variants on PubMed
-and twenty-six on Europe PMC, this pass retrieved:
+Not "weak evidence". None. After 2,343 retrieval events, 1,956 unique records, a
+fly-family probe built to be exhaustive across thirty phrase variants on PubMed and
+twenty-six on Europe PMC, and backward and forward citation chasing over the whole
+included set, this pass retrieved:
 
 - zero studies in which a **bilateral standing cable fly at shoulder height** is a
   trained condition, with or without a comparator;
@@ -129,9 +140,10 @@ can be generalised.
 
 ### 2.4 Tier 4 — activation
 
-Eighteen included sources report electromyography. Every one of them carries the
-same two qualifiers, and the second is unusual in being supported from inside this
-slice's own evidence set rather than asserted:
+Nineteen included sources report electromyography, the nineteenth being G1944, added
+in the SBLA-010 R2 remediation. Every one of them carries the same two qualifiers, and
+the second is unusual in being supported from inside this slice's own evidence set
+rather than asserted:
 
 - **§2.2 bar.** EMG amplitude is never a measurement of hypertrophy. No tier-4
   source in this pass may support a size claim.
@@ -158,6 +170,22 @@ The three press-versus-fly activation comparisons illustrate it:
 G0042 and G0077 disagree, both are abstract-only, both are small, and neither can
 be preferred on the evidence retrieved. Under rule H2 the G0077 null is recorded as
 "not enough information", not as equivalence.
+
+**G1944 — the source recovered in the R2 remediation.** Arseneault, Roy and Sercia
+(2021), twelve bench-press variations, n = 13 men, risk of bias `some concerns`,
+applicability `partially direct`. It is the most portion-resolved bench-press source in
+the pass and it carries four named defects. (a) Its design **crosses** inclination with
+grip type and grip width and loads each of the twelve cells at that cell's own 12RM, so
+no between-inclination contrast in it is an isolated inclination effect. (b) Its
+analysed sample size is ambiguous: 13 were recruited, one withdrew, and the analysed n
+is never restated. (c) Its normalisation reference is ambiguous — "the highest EMG value
+obtained during the exercises **and/or** the maximum voluntary isometric contraction" —
+so its percentages cannot be compared with MVIC-normalised studies. (d) It reports
+pairwise significance only, with no per-contrast effect size, exact p-value, mean or
+standard deviation, so no effect estimate can be taken from it. It also contradicts its
+own Abstract for the clavicular head (§3.6). What it can carry is its **null**
+statements about inclination within matched grips, and nothing else; it supports no size
+claim and no index-Y claim.
 
 ### 2.5 Q1 — anatomy and function
 
@@ -234,6 +262,24 @@ One included source is a preprint (G0798, Research Square, CC BY 4.0, posted
 SBLA-008's hard limit it can never be the sole support for a published claim. It
 is not the sole support for anything drafted here.
 
+### 3.6 G1944 — a conclusion its own table contradicts
+
+G1944's Abstract concludes that "the bench press exercise performed with a wide
+pronation grip at 0° can maximize the activation of the three heads of the PM". Its own
+Table 3 lists that exact position, HPW, among the positions of **minimum** activation
+for the **clavicular** head, and its Practical Application point 3 states that in the
+horizontal bench press "a closer grip leads to a better recruitment" of that head. The
+Abstract conclusion is therefore false of the paper for one of the three heads it claims
+to maximise.
+
+Table 3 and the Results text are the primary record and are what the extraction relies
+on. The Abstract conclusion, and the bodybuilding programming advice in Practical
+Application points 6 and 7 that rests on it, are recorded under
+`extraction.authorsInterpretation` as author interpretation and are not extracted as
+findings. This is the same handling given to G1903's Featured Application in §3.3 and
+contradiction-map rows C-12, C-14 and C-15, and for the same reason: a source that
+contradicts itself does not get to pick which half this project quotes.
+
 ## 4. Certainty, assigned per claim rather than per source
 
 §9.4 requires certainty per claim. The grades this appraisal supports, and the
@@ -283,7 +329,7 @@ across sexes in the same protocol.
   Risk of bias here is a structured judgement against the design-specific criteria
   in the eligibility plan, not a RoB 2 or ROBINS-I score. It is weaker than a
   two-rater tool-based assessment and is not presented as equivalent.
-- **L-A2.** Forty-six of the 88 included sources were appraised from their abstracts.
+- **L-A2.** Forty-six of the 89 included sources were appraised from their abstracts.
   For those, "risk of bias" is bounded by what an abstract discloses, which is
   systematically less than the full text would show. The first pass reported fifty of 76
   while also holding two sources at `metadata-only`; after the R1 acquisition ladder was
@@ -333,3 +379,19 @@ across sexes in the same protocol.
 | **M-3**  | The two StatPearls chapters are corrected from `metadata-only` to `full-text-open`; their facts always carried basis `full-text`, which was the internal contradiction M-3 identified.                                                               |
 | **M-4**  | The three `null` `extraction.language` fields are completed.                                                                                                                                                                                         |
 | **new**  | §6 gains **L-A5**, appraising the twelve sources the remediation added and naming the defect on each.                                                                                                                                                |
+
+## 8. What the SBLA-010 R2 bounded remediation changed in this appraisal
+
+Against [`reviews/evidence/SBLA-009-r2.md`](../../reviews/evidence/SBLA-009-r2.md) at
+`f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46` (FAIL — 0 Critical, 4 Important, 13 Minor).
+
+| Finding            | Change                                                                                                                                                                                                                                                                                        |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **M-3**            | The header said "Companions, all at version **1.0.0**" while every companion was at 2.0.0 and this artifact's own version was 2.0.0. Corrected, with the evidence packet's missing version field stated rather than glossed.                                                                  |
+| **N-1**            | §2.4 appraises **G1944**, the CC BY source the review proved had been recorded as unobtainable, and names its four defects: a crossed design that confounds inclination with grip and load, an ambiguous analysed sample size, an ambiguous normalisation reference, and no effect estimates. |
+| **new**            | New §3.6 records that G1944's Abstract conclusion is contradicted by its own Table 3 for the clavicular head, and gives it the same handling as G1903's Featured Application.                                                                                                                 |
+| **M-3**            | §0 and §1 carried first-pass counts — 76 included sources, 1,361 retrievals, 1,109 unique records — after the R1 remediation had changed all three. They now read 89 included sources, 2,343 retrieval events and 1,956 unique records, and §0 states the count's history.                    |
+| **I-12 follow-on** | §6 L-A2 is recomputed to forty-six of **89** included sources appraised from their abstracts. The R1 row in §7 recording "forty-six of 88" is left as the historical record of that round.                                                                                                    |
+
+**No risk-of-bias or applicability grade was raised in this round.** G1944 enters at
+`some concerns` / `partially direct` and is admitted only for its null statements.

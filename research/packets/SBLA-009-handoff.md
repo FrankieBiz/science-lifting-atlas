@@ -1,4 +1,20 @@
-# Handoff: SBLA-009 — evidence pass and draft claims, R1 bounded remediation
+# Handoff: SBLA-009 — evidence pass and draft claims, R1 and R2 bounded remediations
+
+> **Read this first.** This file now records **two** bounded remediation rounds. Sections
+> up to and including §"Acceptance criteria" are the **R1** record, preserved as written
+> on 2026-09-14 except where a block quote marks an in-place correction made on
+> 2026-09-15. The **R2** record — the round that answers
+> [`reviews/evidence/SBLA-009-r2.md`](../../reviews/evidence/SBLA-009-r2.md) and is the
+> thing Account B is being asked to recheck now — is the final section,
+> §"SBLA-010 R2 bounded remediation", and it stands alone: it repeats its own base
+> commit, scope, evidence, counts, commands and limitations so that it can be acted on
+> without reading the R1 material above it.
+>
+> Where the R1 text and the R2 section disagree, **the R2 section is current.** Three R1
+> statements were factually wrong and are struck in place: Decision 3 (on G1944),
+> Decision 6 (on the R1 report's absence from this tree and on the packet's
+> `governingReview` block), and the gate command path in §"External research-integrity
+> gate".
 
 ## Objective
 
@@ -269,6 +285,22 @@ reason code.
    text could be obtained for any of them, so nothing can be extracted. §4.5 reserves
    inclusion for records whose content was actually obtained. This lowers the headline
    inclusion count and is the honest disposition.
+
+   > **Corrected 2026-09-15 (R2 finding N-1). This decision was wrong about G1944 and
+   > the sentence "no abstract and no full text could be obtained for any of them" is
+   > withdrawn.** G1944's own recorded `ladder-1` URL,
+   > `https://journal.iusca.org/index.php/Journal/article/download/39/124`, returns
+   > HTTP 200 with a 689,102-byte `application/pdf` under CC BY 4.0, and its landing
+   > page at `.../article/view/39` returns the complete abstract. The 2026-09-13
+   > attempt recorded a 23-byte body — a redirect this pass did not follow — as a
+   > terminal failure. G1944 has been obtained, read in full, screened on its content
+   > and **included** as extraction `X-G1944`. **The decision stands for G1873, G1917
+   > and G1941**, and their ladders now record what those hosts actually returned on
+   > 2026-09-15 rather than an inference: a bare HTTP 403 from a retired publishing
+   > platform, a Cloudflare challenge, and a Springer "Client Challenge" page
+   > respectively. Two of those three are automated-client refusals, which establish
+   > nothing about whether the text is lawfully readable, and the record now says so.
+
 4. **G1006 was merged into G1022 as a deduplication event.** The DOAJ record carries
    both the Portuguese and English titles of one 2014 RBPFEX report, with an identical
    author list, year and publisher URL. This is a defect that completed retrieval
@@ -285,6 +317,24 @@ reason code.
    on the reviewer branch and is not a path in this worktree; the repository validator
    correctly rejected a cross-link claiming otherwise, so each artifact carries a
    `governingReview` block with the commit SHA and the command to retrieve it.
+
+   > **Corrected 2026-09-15 (R2 findings M-12 and M-5).** Two parts of this decision
+   > are now false and are withdrawn. **(a)** `reviews/evidence/SBLA-009-r1.md` _is_ a
+   > path in this tree: integration commit `1dc1c41b96508edbd2ae7d2ebff0ca6f5a1eb3f1`
+   > added it, and `reviews/evidence/SBLA-009-r2.md` arrived with
+   > `f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46`. The rendered Markdown links to the R1
+   > report at `research/appraisals/SBLA-009-appraisals.md:9` and
+   > `research/syntheses/SBLA-009-synthesis.md:9` therefore resolve, and this decision's
+   > claim that the report is referenced "not as a repository cross-link" was true only
+   > of the structured `crossLinks` fields. The `governingReview` blocks now record both
+   > rounds and state this. **(b)** "Each artifact carries a `governingReview` block" is
+   > false of `research/packets/sbla-009-evidence-packet.json`, which carries none.
+   > `evidencePacketSchema` in `src/lib/content/schemas.ts` is `.strict()` and owns
+   > neither a `governingReview` nor a `version` key, so this role cannot add one
+   > without editing a Codex-owned schema. The packet records the remediation in its
+   > `decisionLog` and states its version in its `synthesis` text instead, and the
+   > schema gap is routed to Codex below.
+
 7. **Source IDs were normalised to lowercase kebab case.** Two new DOI-derived IDs used
    underscores and failed `entityIdSchema`; they and the packet's exclusion IDs are now
    kebab-case throughout, with claim references updated in step.
@@ -301,21 +351,21 @@ Every finding in the R1 report, with the evidence that closes it.
 
 ### Important
 
-| ID       | Closure                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **I-1**  | **Closed.** All six references now point at the committed lowercase `research/packets/sbla-009-evidence-packet.json`: four `crossLinks.evidencePacket` entries and the two rendered Markdown links in the appraisal and synthesis headers. The accepted case-sensitive cross-link validator integrated into this base passes.                                                                                                                                                                             |
-| **I-2**  | **Closed.** DOI `10.3390/app13085203` retrieved from the RIUCAM repository (MDPI served a 2,207-byte interstitial), extracted as **G1903**, and cited on both re-derived claims and as external corroboration on absence record 1. Its PRISMA flow covers SPORTDiscus and Web of Science, partially mitigating the database gap by citation.                                                                                                                                                              |
-| **I-3**  | **Closed.** **G0062** is now linked to `claim-press-versus-fly-activation-mixed` with `role: qualifies`, supplying the order-dependence qualifier: chest-fly sternocostal activation was 100.13 % of MVIC when the fly followed the bench press and 81.47 % when it did not. That is the reason no press-versus-fly activation difference is presented as a property of the exercises.                                                                                                                    |
-| **I-4**  | **Closed.** Backward (R-048) and forward (R-049) citation chasing now exist over the included set, contributing 745 new records. Both bounds are disclosed: forward chasing is truncated at 200 citing works per seed, and the relevance expression that reduced 3,479 chased works to 841 leaves a quantified residual.                                                                                                                                                                                  |
-| **I-5**  | **Closed.** "Nobody has studied this exercise." is gone. The fly draft now reads "These searches found no study of this exercise", the registry sentence is bounded to the one registry actually queried, the closing sentence states it is "a statement about the retrieved literature, not a proof that no such study exists", and both absence records carry `boundedBy` arrays plus the 2023 review as `externalCorroboration`.                                                                       |
-| **I-6**  | **Closed on the demonstrated half, disclosed on the structural half.** Non-English vocabulary added to OpenAlex and Europe PMC (R-046, R-047) plus the DOAJ API (R-050). Both records R1 named were retrieved: `10.1590/s1517-86922007000100012` is now included as **G1896**, and `10.12820/rbafs.v.19n3p342` was read in full and excluded `E-EXP-7` with its reason. G1896 needed no machine translation — it carries an authorised English abstract. The structural gap is restated in synthesis L-7. |
-| **I-7**  | **Closed.** "Three" now appears in the claim statement, the claim qualifiers, appraisal §4, synthesis §6 and both drafts, and the qualifier names all three trials and states which one contributes direction only. The claim always cited three sources; the word was the error.                                                                                                                                                                                                                         |
-| **I-8**  | **Closed.** "Ten" now appears in all five locations. My own recount of tier-1 trials in the awaiting-full-text set is ten, matching the reviewer's independent count.                                                                                                                                                                                                                                                                                                                                     |
-| **I-9**  | **Closed.** (a) The Sihler finding is attributed to the **five** randomly selected stained muscles, not 80, in the synthesis §1.2, the muscle draft and the innervation claim; 80 is stated as the gross-dissection total. (b) The high-density EMG sample is **twenty-nine** across two independent experiments in synthesis §1.4 and the muscle draft. Both verified by me from the full texts.                                                                                                         |
-| **I-10** | **Closed.** Both qualifiers corrected from the full texts I read: PMC7384958 states "51 ± 14 years old at time of death, range 21–70 years, 9 males and 5 females"; PMC6466946 states "mean age of the cadavers was 69.3 ± 11.8 years (range: 48-90 years)". Both extraction `quality.notes` are rewritten. Recording the second **lowered** `claim-pectoralis-major-structural-variation` applicability from `partially-direct` to `indirect`.                                                           |
-| **I-11** | **Closed.** New claim `claim-fly-machine-pectoralis-rupture`, scoped to the fly machine, graded `very-low`, carrying the translation limitation and a "one case has no denominator" qualifier. The fly draft's safety section now cites it instead of the bench-press rupture claim. The `draftingRule` now states that mechanical traceability is necessary but not sufficient.                                                                                                                          |
-| **I-12** | **Closed.** X-G0042's access level is corrected to `full-text-open` and its Methods extracted from the full text I read: **"RMS EMG values were not normalized"**, electrodes ~4 cm medial to the axillary fold per SENIAM, cross-talk acknowledged with no mitigation, and the effect 16 % higher in the bench press (p = 0.027, ES 0.36) with per-phase values. The false qualifier is replaced by a statement of the un-normalised amplitude as a material limitation. X-G0315 likewise corrected.     |
-| **I-13** | **Closed on both dimensions.** _Search:_ stratum **N-RS4a** (R-044) recovers five of the six PMIDs R1 named, including both contradicting studies. _Claim:_ `claim-bench-press-inclination-shifts-regional-activation` is re-derived — the monotonic wording is withdrawn, certainty drops `moderate` → `low`, direction becomes `mixed`, and PMIDs 33049982 and 25799093 plus the 2023 meta-analysis and PMID 39764299 are all cited. Contradiction-map row **C-10** records the disagreement.           |
+| ID       | Closure                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **I-1**  | **Closed.** All six references now point at the committed lowercase `research/packets/sbla-009-evidence-packet.json`: four `crossLinks.evidencePacket` entries and the two rendered Markdown links in the appraisal and synthesis headers. The accepted case-sensitive cross-link validator integrated into this base passes.                                                                                                                                                                                                          |
+| **I-2**  | **Closed.** DOI `10.3390/app13085203` retrieved from the RIUCAM repository (MDPI served a JavaScript interstitial, recorded as 200 with 2,305 bytes in the screening flow and the extraction; a 2026-09-15 re-run of the same URL returned 200 with 2,296 bytes of `text/html`, reproducing the disposition), extracted as **G1903**, and cited on both re-derived claims and as external corroboration on absence record 1. Its PRISMA flow covers SPORTDiscus and Web of Science, partially mitigating the database gap by citation. |
+| **I-3**  | **Closed.** **G0062** is now linked to `claim-press-versus-fly-activation-mixed` with `role: qualifies`, supplying the order-dependence qualifier: chest-fly sternocostal activation was 100.13 % of MVIC when the fly followed the bench press and 81.47 % when it did not. That is the reason no press-versus-fly activation difference is presented as a property of the exercises.                                                                                                                                                 |
+| **I-4**  | **Closed.** Backward (R-048) and forward (R-049) citation chasing now exist over the included set, contributing 745 new records. Both bounds are disclosed: forward chasing is truncated at 200 citing works per seed, and the relevance expression that reduced 3,479 chased works to 841 leaves a quantified residual.                                                                                                                                                                                                               |
+| **I-5**  | **Closed.** "Nobody has studied this exercise." is gone. The fly draft now reads "These searches found no study of this exercise", the registry sentence is bounded to the one registry actually queried, the closing sentence states it is "a statement about the retrieved literature, not a proof that no such study exists", and both absence records carry `boundedBy` arrays plus the 2023 review as `externalCorroboration`.                                                                                                    |
+| **I-6**  | **Closed on the demonstrated half, disclosed on the structural half.** Non-English vocabulary added to OpenAlex and Europe PMC (R-046, R-047) plus the DOAJ API (R-050). Both records R1 named were retrieved: `10.1590/s1517-86922007000100012` is now included as **G1896**, and `10.12820/rbafs.v.19n3p342` was read in full and excluded `E-EXP-7` with its reason. G1896 needed no machine translation — it carries an authorised English abstract. The structural gap is restated in synthesis L-7.                              |
+| **I-7**  | **Closed.** "Three" now appears in the claim statement, the claim qualifiers, appraisal §4, synthesis §6 and both drafts, and the qualifier names all three trials and states which one contributes direction only. The claim always cited three sources; the word was the error.                                                                                                                                                                                                                                                      |
+| **I-8**  | **Closed.** "Ten" now appears in all five locations. My own recount of tier-1 trials in the awaiting-full-text set is ten, matching the reviewer's independent count.                                                                                                                                                                                                                                                                                                                                                                  |
+| **I-9**  | **Closed.** (a) The Sihler finding is attributed to the **five** randomly selected stained muscles, not 80, in the synthesis §1.2, the muscle draft and the innervation claim; 80 is stated as the gross-dissection total. (b) The high-density EMG sample is **twenty-nine** across two independent experiments in synthesis §1.4 and the muscle draft. Both verified by me from the full texts.                                                                                                                                      |
+| **I-10** | **Closed.** Both qualifiers corrected from the full texts I read: PMC7384958 states "51 ± 14 years old at time of death, range 21–70 years, 9 males and 5 females"; PMC6466946 states "mean age of the cadavers was 69.3 ± 11.8 years (range: 48-90 years)". Both extraction `quality.notes` are rewritten. Recording the second **lowered** `claim-pectoralis-major-structural-variation` applicability from `partially-direct` to `indirect`.                                                                                        |
+| **I-11** | **Closed.** New claim `claim-fly-machine-pectoralis-rupture`, scoped to the fly machine, graded `very-low`, carrying the translation limitation and a "one case has no denominator" qualifier. The fly draft's safety section now cites it instead of the bench-press rupture claim. The `draftingRule` now states that mechanical traceability is necessary but not sufficient.                                                                                                                                                       |
+| **I-12** | **Closed.** X-G0042's access level is corrected to `full-text-open` and its Methods extracted from the full text I read: **"RMS EMG values were not normalized"**, electrodes ~4 cm medial to the axillary fold per SENIAM, cross-talk acknowledged with no mitigation, and the effect 16 % higher in the bench press (p = 0.027, ES 0.36) with per-phase values. The false qualifier is replaced by a statement of the un-normalised amplitude as a material limitation. X-G0315 likewise corrected.                                  |
+| **I-13** | **Closed on both dimensions.** _Search:_ stratum **N-RS4a** (R-044) recovers five of the six PMIDs R1 named, including both contradicting studies. _Claim:_ `claim-bench-press-inclination-shifts-regional-activation` is re-derived — the monotonic wording is withdrawn, certainty drops `moderate` → `low`, direction becomes `mixed`, and PMIDs 33049982 and 25799093 plus the 2023 meta-analysis and PMID 39764299 are all cited. Contradiction-map row **C-10** records the disagreement.                                        |
 
 ### Minor
 
@@ -344,8 +394,13 @@ Executed from the gate's own trusted checkout against this worktree, exactly as
 instructed:
 
 ```
-node C:\s009integrity\scripts\evidence\research-integrity.mjs --root C:\src\s009fix1 --bundle SBLA-009
+node C:\src\s009integrity\scripts\evidence\research-integrity.mjs --root C:\src\s009fix1 --bundle SBLA-009
 ```
+
+> **Corrected 2026-09-15 (R2 finding M-9).** The path printed here originally read
+> `C:\s009integrity\…`, omitting `\src`, and could not run as written. The gate
+> worktree is `C:\src\s009integrity`. The recorded result is unaffected and was
+> reproduced in the R2 remediation; see §"SBLA-010 R2 bounded remediation" below.
 
 - **Before this remediation's final pass:** exit 1, with 655
   `ACQUISITION_ATTEMPT_DATE_INVALID`, 655 `ACQUISITION_ATTEMPT_RESULT_REQUIRED`, 1
@@ -441,7 +496,19 @@ paths, listed in §"Artifact inventory" above. No file under published `content/
 application code, schemas, tests, CI, release state, `reviews/` or `graphify-out/`
 belongs to this remediation.
 
+> **For the R2 round**, the base is `f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46` and the
+> changed set is **ten** paths, not eleven: `research/searches/SBLA-009-search-receipts.json`
+> was not owned by the R2 claim and was not modified. The proof is in
+> §"R2 · Checks run, with real results".
+
 ## Required reviewer action
+
+> **Superseded 2026-09-15.** The recheck requested below was performed and returned
+> **FAIL — 0 Critical, 4 Important, 13 Minor** at `reviews/evidence/SBLA-009-r2.md`. The
+> action now required is the recheck described in
+> §"R2 · What Account B should recheck", whose destination is
+> `reviews/evidence/SBLA-009-r3.md`. The list below is retained because items 1–10 remain
+> good tests of the bundle and a reviewer may reuse them.
 
 **Exactly one complete-artifact recheck** is requested, at
 `reviews/evidence/SBLA-009-r2.md`, per the stop rule in CLAUDE.md and AGENTS.md and the
@@ -497,3 +564,451 @@ the diff. At minimum:
 
 Until those conditions hold, every reader-facing file in `content-drafts/` remains
 unpublished and SBLA-010 / SBLA-011 must not promote it.
+
+---
+
+# SBLA-010 R2 bounded remediation
+
+**This section stands alone.** A reviewer with no access to any conversation, and
+without reading the R1 material above, can act on it.
+
+## R2 · Objective and authority
+
+`reviews/evidence/SBLA-009-r2.md` — the one complete-artifact recheck that followed the
+R1 bounded remediation — returned **FAIL: 0 Critical, 4 Important, 13 Minor**. It closed
+all fourteen R1 Critical and Important findings and failed the candidate on four
+narrower grounds, giving a bounded plan in its §9.
+
+This section delivers that **one bounded remediation**. Under the stop rule in CLAUDE.md
+and AGENTS.md it is followed by **exactly one** complete-artifact recheck, at
+`reviews/evidence/SBLA-009-r3.md`. No additional review layer is requested or created.
+Nothing here is accepted or published; nothing in `content/` changed.
+
+## R2 · Exact provenance
+
+| Field                   | Value                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------- |
+| Base commit (immutable) | `f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46`                                        |
+| Base tree (immutable)   | `779567bad94305ad22e28973e6067915f0d5deac`                                        |
+| Branch                  | `claude-research/SBLA-010-r2-remediation`                                         |
+| Worktree                | `C:\src\s010fix2`                                                                 |
+| Role / account          | Claude Research, Account A                                                        |
+| Date                    | 2026-09-15                                                                        |
+| Governing report        | `reviews/evidence/SBLA-009-r2.md`, SHA-256 `3428d3fe…a47a12b5`, 844 lines         |
+| Exact-path claim        | Coordination commit `e3cdf682c877eea36bfb27ae5b79f52631537ae7`, recorded by Codex |
+| Next destination        | `reviews/evidence/SBLA-009-r3.md` (Account B)                                     |
+
+HEAD, tree, branch and a clean `git status --porcelain` were verified against the
+assigned base **before** any file was written, and the Account-A claim at `e3cdf68` was
+verified to name this exact branch, worktree, base commit and the ten owned paths.
+
+The two immutable Account-B reports were read in full and **never edited**:
+`reviews/evidence/SBLA-009-r1.md` (SHA-256 `7c829be4…71f9f46e`, 1,116 lines) and
+`reviews/evidence/SBLA-009-r2.md` (SHA-256 `3428d3fe…a47a12b5`, 844 lines).
+
+## R2 · Acquisition evidence
+
+All requests were lawful, unauthenticated public GETs from Node 24.20.0's default
+`fetch` with redirects followed. **No credentials or cookies were supplied, no challenge
+was solved, no user-agent was substituted to evade filtering, no paywall was
+circumvented and no shadow library was used.** No copyrighted full text is committed;
+every document retrieved is held outside the repository. Dates are 2026-09-15 UTC.
+
+### Obtained
+
+| Record    | URL                                                                       | Result                            | SHA-256              |
+| --------- | ------------------------------------------------------------------------- | --------------------------------- | -------------------- |
+| **G1944** | `journal.iusca.org/index.php/Journal/article/download/39/124`             | 200, 689,102 B, `application/pdf` | `1a01086a…2f39831e`  |
+| **G1944** | `journal.iusca.org/index.php/Journal/article/view/39` (landing, CC BY)    | 200, 34,509 B, `text/html`        | `71075eb7…6202a3f9`  |
+| **G1087** | `sportrxiv.org/index.php/server/preprint/download/872/1856/1774`          | 200, 293,800 B, `application/pdf` | `78a74ae1…b73b299d`  |
+| **G1087** | `sportrxiv.org/index.php/server/preprint/view/872/version/1082` (landing) | 200, 23,813 B, `text/html`        | `3ce7466f…65eaa32ad` |
+| **G1087** | `api.crossref.org/works/10.51224/sportrxiv.872` (DOI identity)            | 200, 1,756 B, `application/json`  | —                    |
+| G1003     | `observatorio.fm.usp.br/handle/OPI/25022` (abstract, openly readable)     | 200, 514,144 B, `text/html`       | `3b778bc0…698667b4`  |
+
+**G1944's hash reproduces the review's recorded value exactly**
+(`1a01086a81ffff228a766e4a9b2813467e349e8891f8651487f7c4d32f39831e`), so the finding is
+independently confirmed rather than taken on trust.
+
+**G1087 DOI identity was verified before any content was attributed to the record**, as
+required. Crossref returns DOI `10.51224/sportrxiv.872`, type `posted-content`, title
+"Names of resistance exercises", authors James L. Nuzzo and James Steele, posted
+2026-05-26, licence CC BY 4.0, primary resource `…/preprint/view/872/version/1082`. That
+landing page is titled "Names of resistance exercises: Text analysis of survey responses
+| SportRxiv", matching this record's title exactly, and displays the same DOI. Only then
+was the galley at `…/download/872/1856/1774` attributed to G1087.
+
+### The 22–24-byte class, all re-run (R2 findings N-1 and M-1)
+
+Every attempt recorded as a 2xx under 6,000 bytes with a URL was re-run.
+
+| Record | Recorded 2026-09-13 | Observed 2026-09-15                           | Reading                                         |
+| ------ | ------------------- | --------------------------------------------- | ----------------------------------------------- |
+| G1944  | 200 (23 bytes)      | **200, 689,102 B, PDF**                       | Unfollowed redirect recorded as a failure       |
+| G1876  | 200 (24 bytes)      | **200, 1,183,736 B, PDF** `270c2ea7…4197e707` | Same; record already included by another route  |
+| G1896  | 200 (22 bytes)      | **200, 37,307 B, PDF** `4a4f7890…8fc7c3d5`    | Same; hash identical to the file already held   |
+| G1903  | 200 (24 bytes)      | **200, 3,358,506 B, PDF** `8ac15532…66cbb50d` | Same; this is the route that yielded the text   |
+| G1928  | 200 (24 bytes)      | **200, 2,171,116 B, PDF** `ad4f265e…3b30ebaf` | Same; record already included by another route  |
+| G0964  | 202 (2,009 bytes)   | 202, 0 B                                      | Reproduces; figshare async, nothing retrievable |
+| G1903  | 200 (2,305 bytes)   | 200, 2,296 B `text/html`                      | Reproduces; MDPI JavaScript interstitial        |
+
+**Root cause:** the acquisition client did not follow redirects, and a redirect stub was
+recorded as a terminal result. Four of the five 22–24-byte cases cost nothing because
+another route had already obtained the document. **For G1944 it cost the source**, which
+was frozen at `metadata-only` and written up as unobtainable.
+
+### The G1903 URL inversion (R2 finding M-1)
+
+| URL                                                                                              | Observed                      |
+| ------------------------------------------------------------------------------------------------ | ----------------------------- |
+| `…/bitstream/handle/10952/9780/2023_Electromyographic%20activity%20of%20the%20pectoralis.pdf`    | **404**, "Resource not found" |
+| `…/bitstream/10952/9780/1/2023_Electromyographic%20activity%20of%20the%20pectoralis%20major.pdf` | **200, 3,358,506 B, PDF**     |
+
+The first was recorded as `fullTextSource` and as the `ladder-outcome` URL; its title
+segment is truncated and omits `%20major`. Both are corrected to the working URL. The
+SHA-256 of the obtained file is unchanged and was re-verified against it.
+
+### Four access classes, now distinguished (R2 finding N-1)
+
+The review required that observed HTTP facts, metadata inference, bot protection and
+true access control be told apart. They now are, on every rung this remediation touched.
+
+- **Observed HTTP fact** — a request was made and this is what came back, with status,
+  content type, byte count and, where a file was obtained, its SHA-256.
+- **Metadata inference** — the rung was resolved from an OpenAlex or identifier lookup
+  and **no request was made to the host**. Every such `not-available` rung this
+  remediation touched now says so explicitly and is paired with a real request.
+- **Bot-protection refusal of an automated client** — evidenced by
+  `cf-mitigated: challenge` or a "Client Challenge" body. Observed for **G1084**
+  (TopSCHOLAR, 403), **G1917** (SAGE, 403), **G1941** (Springer, 200 challenge page),
+  **G1022** (DOAJ 403 and the RBPFEX publisher 403) and the **DOAJ rung of G1944** (403).
+- **True access control** — **G1003**'s deposited file returns the repository login form
+  and offers only a request-a-copy workflow; **G0968**'s aggregator states that
+  institutional authentication is required. Neither was attempted.
+- **Undetermined** — **G1873**'s DOI resolves to a retired platform returning a bare
+  HTTP 403 with no challenge marker. Recorded as undetermined rather than guessed.
+
+**No record anywhere in this bundle now says that no lawful full text exists on the
+strength of a challenge page or an unindexed open location.** Where an automated client
+was refused, the record says an automated client was refused.
+
+### Corrections to the earlier readiness lead
+
+An earlier Account-A readiness pass reported having found lawful full text for G0121,
+G0117, G1084 and G1087. That lead was treated as investigative, not as evidence, and
+re-verified. **Two of its four claims do not survive.**
+
+- **G1084** — the earlier pass's own saved response is an HTTP 403 Cloudflare challenge
+  ("Just a moment…"), not full text, and the refusal reproduced on 2026-09-15. Nothing
+  was incorporated.
+- **G0117 and G0121** — the retrieved pages are Ovid/LWW article pages carrying the
+  **abstract** with the body behind a login, not full text. Both records were already at
+  `abstract-only`, so no access level changed; what changed is that their `ladder-1` rung
+  now records an observed HTTP 200 instead of an `is_oa=false` inference.
+- **G1087** — genuine, and incorporated after independent DOI verification above.
+
+Screening substance, not retrievability, decided every disposition. The two records whose
+full text was recovered went in **opposite** directions.
+
+## R2 · The four blocking findings
+
+### N-1 — a CC BY full text recorded as unobtainable
+
+**Closed.** G1944 (Arseneault, Roy & Sercia 2021, _The Effect of 12 Variations of the
+Bench Press Exercise on the EMG Activity of Three Heads of the Pectoralis Major_, Int J
+Strength Cond, DOI `10.47206/ijsc.v1i1.39`, CC BY 4.0) was obtained, read in full and
+screened on its content. It is **included** as `X-G1944`. Its ladder, access level,
+terminal state, stage, note, licence and open-access status are corrected; handoff
+Decision 3 is struck in place; the fly draft's Provenance paragraph is rewritten.
+
+**What it actually reports, and why it does not raise anything.** Its Table 3 appears to
+favour the incline for the clavicular head and the decline for the abdominal head, but
+its design **crosses** inclination with grip type and grip width and loads each of its
+twelve cells at that cell's own 12RM, so no between-inclination contrast in it isolates
+inclination. Its own null statements are the part that does: within matched pronated
+grips it reports **no significant sternocostal difference across −15°, 0° and +30°**, and
+**no clavicular advantage for the incline at a matched wide pronated grip**. That is
+evidence **against** the sternocostal limb of
+`claim-bench-press-inclination-shifts-regional-activation`, so it was added with
+`role: contradicts` and the claim's first qualifier was **weakened**. Certainty stays
+`low`, direction stays `mixed`. It also contradicts its own Abstract for the clavicular
+head (contradiction row **C-17**, appraisal §3.6), and its analysed sample size,
+normalisation reference and absence of effect estimates are recorded as defects.
+
+G1087 was obtained the same day and **excluded** under `E-OUT-1`: it is a survey of what
+lifters call resistance exercises, analysed for 1,425 of 1,849 respondents, reporting no
+pectoralis outcome of any kind. It narrows no absence record.
+
+### N-2 — an unentailed direction
+
+**Closed.** `claim-press-versus-fly-activation-mixed` asserted a sternal difference
+"favouring the bench press". The phrase is **removed**; the claim now states the contrast
+without a direction, matching what its extraction and the synthesis had always recorded.
+
+The direction was not merely unsourced — the cited locator states the **opposite**. The
+Results text of the 2023 meta-analysis reads, twice and verbatim: _"there is no
+significant difference in the activation of the clavicular portion when comparing the PB
+with another exercise; however, there is a greater activation in the sternal pectoralis
+**in the variable exercise** (SMD = 4.04; 95% ICI 0 = 1.74; 6.35)"_. Its Abstract and
+Featured Application say the reverse.
+
+**The mechanism is now recorded** (row **C-14**, extraction quality note): the paper's
+**sign convention inverts between its contrast families**. In the inclination family a
+positive SMD favours the horizontal bench press; in the type-of-exercise family it
+favours the comparator. Carrying the first convention across to the second is exactly the
+error that was made. Because the source cannot settle its own direction, **no direction is
+taken from it** rather than the Abstract being cited — the safest disposition, and the one
+consistent with the pass's own uncertainty 9 and row C-12.
+
+**SMD 4.53 is disambiguated by its full signature** (row **C-15**). Two distinct results
+in that paper share the point estimate: Table 3's clavicular type-of-exercise row
+(95 % CI −4.22 to 13.27, I² 94.9 %, t 1.65, p 0.198) and the Figure 7 comparison of other
+exercises with the push-up (95 % CI 4.40 to 7.65, no I² or p reported). Every citation of
+4.53 now carries its confidence interval. The existing attribution to the clavicular row
+was verified correct.
+
+**Two further source-internal defects are recorded.** (a) _Decline_: Table 3 reports no
+significant decline effect in either portion and the point estimates run **opposite** to
+the prose (sternal −0.75, 95 % CI −1.85 to 0.36, p = 0.143; clavicular 2.03, 95 % CI
+−2.03 to 6.53, p = 0.218), while the Abstract Conclusions assert _"the sternal portion …
+showed greater activation with the declined variant"_ and the Featured Application asserts
+a decrease in the clavicular portion "as opposed to an increase in the sternal portion".
+(b) _Database count_: the Abstract reports a search of **"four databases"**; Methods §2.1
+names **three** and Appendix A reproduces exactly three search strings. The
+three-database reading is used, and the extraction's `designNote` now states both.
+
+### N-3 — unsatisfiable draft version pins
+
+**Closed.** All three drafts now declare `draftVersion: '2.0.0'` and
+`claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@2.0.0`, the version
+that actually contains `claim-fly-machine-pectoralis-rupture` and the post-R1 claim text.
+All 71 claim-ID references in the three drafts resolve against the pinned version, and
+every claim and absence record is cited by at least one draft.
+
+**The bundle stays at artifact version 2.0.0 by the review's own prescription** (N-3 asks
+for `@2.0.0`, not a new version). The discriminator between the reviewed 2.0.0 tree and
+this remediated 2.0.0 tree is therefore the `governingReview` block, which now names both
+rounds, this branch and this base commit, in the screening flow, the extractions and the
+claims file. `generatedAt` stays 2026-09-13 across the bundle, matching the convention the
+R1 round established and the review accepted. **If Account B considers a version bump the
+correct disposition, it is a one-line change and this section is the place to say so.**
+
+### N-4 — unbounded universal absence wording
+
+**Closed.** Both bench-press draft sentences are bound to retrieval, in the fly draft's
+corrected form:
+
+- Practical takeaway: _"Whether it builds more chest muscle than a cable fly is
+  **unknown**: **these searches retrieved no study comparing them**."_
+- Comparison section: _"**These searches retrieved no study comparing this exercise with a
+  bilateral standing cable fly at shoulder height for pectoralis major size**"_, followed
+  by the retrieval bounds and an explicit "not a proof that no such study exists, and not
+  evidence that the two exercises are equivalent".
+
+The bounds named there are the ones the review required: forward chasing truncated at 200
+citing works per seed; the title relevance filter dropping **2,638** of the 3,479 chased
+works with metadata; **80** further chased candidates for which OpenAlex returned no
+metadata at all; the non-English route inspecting only the first 50 results of each of
+eight probes; and 24 records still unread at `awaiting-full-text`, nine of which could
+bear on a press-versus-fly comparison. All five were added to
+`absence-index-cable-fly-no-evidence.boundedBy` (R2 finding **M-11**) and to
+`absence-primary-comparison-no-evidence.boundedBy`.
+
+**A sixth instance of the same defect class was found and fixed** outside the drafts:
+synthesis §4 said the gap sits "at the point where **nobody has run the study**". It now
+says these routes retrieved no such study, registered or published.
+
+## R2 · Minor findings
+
+| ID       | Disposition                                                                                                                                                                                                                                                                                                                                           |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **M-1**  | **Fixed.** All five 22–24-byte results re-run and recorded; G1903's `fullTextSource` and `ladder-outcome` URL corrected from the 404 form to the working form. Original observations kept in `verbatim`, never overwritten.                                                                                                                           |
+| **M-2**  | **Fixed.** The fly draft said "Eight fly-family records" and then enumerated five plus "three bench-press records". It now reads **nine** records that could bear on the page — **five** fly-family, **four** bench-press — out of **24** at `awaiting-full-text`.                                                                                    |
+| **M-3**  | **Fixed.** The appraisal header said "Companions, all at version 1.0.0" while every companion was 2.0.0. Corrected. Its §0 and §1 also carried first-pass counts (76 sources, 1,361 retrievals, 1,109 unique records); now 89, 2,343 and 1,956, with the history stated.                                                                              |
+| **M-4**  | **Not fixable in an owned path — routed to Codex.** The packet declares no version field. `evidencePacketSchema` is `.strict()` and does not own one, so adding it fails validation. The version is stated in the packet's `synthesis` text instead.                                                                                                  |
+| **M-5**  | **Not fixable in an owned path — routed to Codex.** The same schema constraint blocks a `governingReview` block on the packet. The remediation is recorded in the packet's `decisionLog`, and **handoff Decision 6 is corrected** to withdraw the false "each artifact" claim.                                                                        |
+| **M-6**  | **Addressed; a residue is routed to Codex.** All 90 `ladder-5-author-request` steps now state that `attemptedAt` on a not-performed rung is the date the ladder run reached it and recorded the decision, not a date a request was sent. The gate requires a real ISO date on every attempt, so the field cannot be null without a Codex gate change. |
+| **M-7**  | **Fixed.** The five records carrying `ladderNotRequiredReason` now read `decidedAtStage: stage-2-acquisition`, agreeing with their own reason text and with the field contract, which binds that field to stage-2 substantive exclusions.                                                                                                             |
+| **M-8**  | **Fixed.** The 24 awaiting-full-text register entries now hold **structured attempt objects** copied from the authoritative screening flow, not plain strings, so the register is dated when read on its own. The field contract records the shape change and why.                                                                                    |
+| **M-9**  | **Fixed.** The gate command path `C:\s009integrity\…` is corrected to `C:\src\s009integrity\…`, with the correction marked in place.                                                                                                                                                                                                                  |
+| **M-10** | **Fixed on the recorded evidence.** The handoff said MDPI "served a 2,207-byte interstitial" while the flow and the extraction both record `200 (2305 bytes)`. The handoff now cites the recorded 2,305 and adds the 2026-09-15 re-run (200, 2,296 B, `text/html`).                                                                                   |
+| **M-11** | **Fixed.** All three omitted bounds added to absence record 1, plus a fourth the review did not name (80 chased candidates with no OpenAlex metadata) and a fifth on the four challenge-refused routes.                                                                                                                                               |
+| **M-12** | **Fixed.** Decision 6 is corrected: both Account-B reports **are** paths in this tree, so the rendered Markdown links resolve and the "not a repository cross-link" claim was true only of the structured `crossLinks` fields. The `governingReview` blocks now say this.                                                                             |
+| **M-13** | **Fixed and extended.** Recorded as contradiction row **C-15** together with the database-count defect, and as extraction quality notes. The stability-contrast CI defect the review noted supports no claim and none was added.                                                                                                                      |
+
+## R2 · Before and after
+
+| Quantity                                | Before (`f67b6df`) | After     |
+| --------------------------------------- | ------------------ | --------- |
+| Unique records after deduplication      | 1,956              | 1,956     |
+| Records retrieved (retrieval events)    | 2,343              | 2,343     |
+| Duplicate retrieval events              | 387                | 387       |
+| **Excluded**                            | 1,842              | **1,843** |
+| **Awaiting full text**                  | 26                 | **24**    |
+| **Included**                            | 88                 | **89**    |
+| Extractions                             | 88                 | **89**    |
+| Packet `includedSourceIds`              | 88                 | **89**    |
+| Packet exclusions                       | 75                 | **76**    |
+| Claims / absence records                | 23 / 5             | 23 / 5    |
+| Contradiction-map rows                  | 13                 | **17**    |
+| Included sources at `metadata-only`     | 0                  | 0         |
+| Abstract-only included sources          | 46                 | 46        |
+| Draft claim-ID references (all resolve) | 71                 | 71        |
+
+**No search was re-run and no retrieval event was added**, so `recordsRetrieved`,
+`duplicateRetrievalEvents` and `uniqueRecordsAfterDeduplication` are untouched and
+equation two is unchanged. `research/searches/SBLA-009-search-receipts.json` was **not
+writable by this remediation and was not modified.**
+
+```
+equation one : 1956 = 1843 + 24 + 89     closes
+equation two : 2343 =  387 + 1956        closes
+sum(exclusionCodeCounts) = 1843          equals the excluded total
+sum(retrievalEvents ?? 1) = 2343         equals recordsRetrieved
+receipts carrying recordsRetrievedIntoScreening sum to 2343
+```
+
+**Certainty movement: none upward.** `claim-press-versus-fly-activation-mixed` stays
+`very-low` and **loses** an assertion.
+`claim-bench-press-inclination-shifts-regional-activation` stays `low` / `mixed` and its
+first qualifier is **weakened**. The one source added entered as **contradicting**
+evidence. No claim was added, no new reader-facing assertion was created, and no
+risk-of-bias or applicability grade was raised.
+
+## R2 · Checks run, with real results
+
+Runtime confirmed against the pin before anything ran: `node --version` → `v24.20.0`
+(`.node-version` = 24.20.0); `corepack pnpm --version` → `11.24.0` (`packageManager` =
+pnpm@11.24.0). The host default Node is v24.14.0 and does **not** meet the engine; the
+fnm-managed v24.20.0 was used throughout.
+
+```
+$ corepack pnpm install --frozen-lockfile     Done in 9.8s
+$ corepack pnpm validate:research
+  Research integrity passed: 1 complete bundle checked (SBLA-009).
+$ corepack pnpm verify                        EXIT=0
+```
+
+| Stage               | Result                                              |
+| ------------------- | --------------------------------------------------- |
+| `format:check`      | pass — "All matched files use Prettier code style!" |
+| `lint`              | pass — 0 errors                                     |
+| `typecheck`         | pass                                                |
+| `test`              | **17 files, 249 tests passed**                      |
+| `validate:content`  | pass — 1 record                                     |
+| `validate:graph`    | pass — 0 nodes; graph generation remains SBLA-011   |
+| `validate:research` | pass — 1 complete bundle (SBLA-009)                 |
+| `evidence:status`   | pass — 0 sources checked as of 2026-09-15           |
+| `build`             | pass — 1 page built                                 |
+| `test:portability`  | **3 files, 17 tests passed**                        |
+| `verify:foundation` | pass                                                |
+| `assets:spike`      | pass                                                |
+| `assets:decision`   | pass                                                |
+
+Changed-path proof, from this worktree:
+
+```
+$ git diff --name-status f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46
+M	content-drafts/exercises/barbell-flat-bench-press.md
+M	content-drafts/exercises/cable-fly-standing-bilateral-shoulder-height.md
+M	content-drafts/muscles/pectoralis-major.md
+M	content-drafts/syntheses/SBLA-009-atomic-claims.json
+M	research/appraisals/SBLA-009-appraisals.md
+M	research/extractions/SBLA-009-source-extractions.json
+M	research/packets/SBLA-009-handoff.md
+M	research/packets/sbla-009-evidence-packet.json
+M	research/screening/SBLA-009-screening-flow.json
+M	research/syntheses/SBLA-009-synthesis.md
+
+$ git diff --check f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46      (clean)
+```
+
+Exactly the ten claimed paths, all modifications, no additions or deletions. No path
+under `src/`, `scripts/`, `tests/`, `content/`, `.github/`, `docs/`, `reviews/`,
+`research/searches/` or `graphify-out/` appears.
+
+**Role-boundary caveat, stated as CLAUDE.md requires.** The scan above was run from this
+mutable research worktree. It is corroborating, **not** independent boundary evidence.
+`scripts/evidence/check-role-paths.mjs` was **not** run from a trusted checkout by this
+role and **no claim is made that it passed.** Codex or CI must execute it from a trusted
+checkout against this candidate with `--repository`.
+
+## R2 · Routed elsewhere, not worked around
+
+1. **Packet `version` field (M-4)** and **packet `governingReview` block (M-5)** —
+   `evidencePacketSchema` in `src/lib/content/schemas.ts` is `.strict()` and owns neither
+   key. Adding either from this role would fail validation, and the schema is Codex-owned.
+   Both are stated in the packet's `synthesis` text and `decisionLog` instead. **Codex
+   decision needed.**
+2. **`attemptedAt` on a not-performed rung (M-6 residue)** — the integrity gate requires a
+   real ISO date on every attempt object, so a `not-performed` rung cannot carry a null
+   date. The contradiction is now explained in every one of the 90 notes, but removing it
+   needs a gate change. **Codex decision needed.**
+3. **`sourceSchemaFields.study` mapping** — unchanged, still an SBLA-011/Codex item (R1
+   M-6, disclosed as L-A3).
+4. **Search-receipt observation, no edit made.**
+   `research/searches/SBLA-009-search-receipts.json` is not an owned path and was not
+   touched. For precision: **48 of its 51 receipts carry `recordsRetrievedIntoScreening`
+   and they sum to exactly 2,343.** The other three (`R-001` historical, `R-002` and
+   `R-003`) are route-level E1 **count** rows that deliberately credit no records into
+   screening; the gate skips non-count values, which is why the invariant holds. A future
+   reader should not expect all 51 to carry the field.
+
+## R2 · Limitations
+
+Stated plainly, because an author who overstates coverage is the same defect as a reviewer
+who does.
+
+1. **Point-in-time, single-client network evidence.** Every observation is one client on
+   one day. Publisher behaviour varies by client, geography and hour. Where it mattered,
+   SHA-256 was relied on rather than a status code, and G1944's hash reproduces the
+   review's exactly.
+2. **Four records could not be read because an automated client was refused**, and this
+   remediation deliberately does not claim to know whether their text is lawfully
+   readable. Solving a challenge was out of bounds and was not attempted.
+3. **No new literature search was run**, as instructed. The scope was re-acquisition of
+   records already in the flow plus correction. Recall is therefore unchanged and is
+   bounded exactly as before.
+4. **G1944 was screened and extracted by the same role in the same session that obtained
+   it.** There was no independent second screener. Its inclusion rests on a single-reader
+   judgement, disclosed here for the recheck.
+5. **The 24 awaiting-full-text records remain unread**, nine of which bear on the drafts'
+   own subject matter. Every absence statement is bounded by them.
+6. **G1944's figures were not digitised.** Its EMG values appear only in Figures 1–4; the
+   extraction takes the Results text and Table 3 and records that no effect estimate is
+   available from the source.
+7. **The 2023 meta-analysis's Table 3 is garbled by `pdftotext -layout`.** The values used
+   here were confirmed against the Results prose and against independently anchored rows,
+   not read off the rendered table; the clavicular type-of-exercise signature (−4.22;
+   13.27, 94.9, 1.65, 0.198) was read directly and matches what was already recorded.
+8. **The bundle version stays 2.0.0** while its content changed, by the review's own
+   prescription (N-3). The `governingReview` blocks carry the discriminator. If that is
+   judged wrong, it is a one-line change.
+9. **Pre-R1 statements inside the R1 change-log tables are left as historical record** (for
+   example "forty-six of 88" in synthesis §8 and appraisal §7). The current figures are in
+   §9 and §8 of those files respectively.
+
+## R2 · What Account B should recheck
+
+The destination is `reviews/evidence/SBLA-009-r3.md`. This is the **one**
+complete-artifact recheck the stop rule allows after this **one** bounded remediation.
+Review the complete ten-file candidate, not this handoff alone. At minimum:
+
+1. **Re-fetch G1944** at the URL above and confirm the SHA-256. If it differs for your
+   client, re-grade N-1 on that evidence — but note the abstract on the open landing page
+   is not subject to that caveat.
+2. **Read G1944 and falsify its screening.** Is it eligible? Is `role: contradicts` right,
+   or does it support the claim it joined? Is the confound argument honest?
+3. **Falsify the G1087 exclusion.** Read it and decide independently whether `E-OUT-1` is
+   correct, or whether a nomenclature source should have been retained for the
+   attribute/naming work.
+4. **Recompute both equations, the exclusion-code sum and the receipt sum from raw
+   `records[]`**, and confirm nothing was smoothed.
+5. **Test the N-2 fix against the source.** Read the 2023 meta-analysis's Results text and
+   Abstract and decide whether direction-neutral wording is right, or whether the
+   contradiction should be surfaced further.
+6. **Check that certainty moved only downward** and that no new assertion entered any
+   draft.
+7. **Check every "no lawful full text" statement** in the bundle against its ladder, and
+   confirm none rests on a challenge page or an unindexed open location.
+8. **Ask Codex for the trusted `check-role-paths.mjs` result.** This role did not and
+   cannot produce it.

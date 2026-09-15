@@ -33,7 +33,8 @@
     "claims[].sourceLinks[].role": "supports, qualifies, contradicts, or neutral-context.",
     "claims[].sourceLinks[].supportStrength": "direct, partially-direct, or indirect, for the claim being made rather than for the study in general.",
     "claims[].recordIds": "The screening-flow recordIds behind the sourceLinks, so a reviewer can walk back to retrieval.",
-    "absenceRecords[]": "Not claims. Explicit records that the evidence did not support a claim, kept separate so an absence is never rendered as an assertion."
+    "absenceRecords[]": "Not claims. Explicit records that the evidence did not support a claim, kept separate so an absence is never rendered as an assertion.",
+    "remediationLog": "An ordered array of remediation rounds, oldest first. Each entry names the immutable Account-B report it answers, the blocking findings it closes, the claims it touched and every certainty movement, so a reader can check that no post-hoc amendment raised certainty. The first pass wrote this field as a single object for the R1 round; the SBLA-010 R2 remediation converted it to an array so that a second round could be appended without overwriting the first."
   },
   "draftingRule": "Every statement in the three content drafts is generated from this file. A sentence in a draft that is not traceable to a claim ID here, or to the draft's own explicitly labelled definitional or provenance sections, is a defect. Mechanical traceability is necessary and not sufficient: a draft sentence must be entailed by the claim whose ID it cites, not merely adjacent to it. R1 finding I-11 was a sentence that resolved to a real claim ID whose claim said something else.",
   "claims": [
@@ -725,14 +726,15 @@
         ]
       },
       "qualifiers": [
-        "The two portions behave differently and must not be described with one sentence. The sternocostal decrease is the consistent finding; the clavicular response is not consistent across studies.",
+        "The two portions behave differently and must not be described with one sentence. The sternocostal decrease is the more consistent finding, but it is not universal: a twelve-variation study of the bench press reports no significant sternocostal difference across -15, 0 and +30 degrees within matched pronated grips, and no clavicular advantage for the incline at a matched wide pronated grip. The clavicular response is not consistent across studies.",
         "The relationship is not monotonic. In the largest single study (n = 30 trained adults across 0, 15, 30, 45 and 60 degrees) the clavicular peak is at 30 degrees, and the authors state that inclinations above 45 degrees decrease pectoralis major performance while raising anterior deltoid activation.",
         "The 2023 systematic review and meta-analysis pools four studies for the inclination contrast and reports no significant clavicular difference (standardised mean difference 0.36, 95 per cent CI -3.03 to 3.74, p = 0.81) alongside a significant sternal difference (1.80, 95 per cent CI 0.40 to 3.19, p = 0.017). Heterogeneity is extreme in both (I-squared 92.6 and 87.6 per cent), so neither pooled value is a precise estimate.",
         "One study reports no upper-pectoralis difference across any bench condition over the complete concentric contraction, with a difference appearing only in the 26 to 50 per cent contraction-duration window. A sub-phase difference is not a whole-repetition difference.",
         "One study of training beginners fixed the load at 50 per cent of the 1RM measured at 0 degrees and did not re-determine it per angle, so relative intensity varied with angle in that study.",
         "Activation is not growth. One small trial found a site-specific thickness difference in the same direction, and it is the only outcome evidence in this direction.",
         "Sample sizes range from eight to thirty. Two sources report effect sizes too large to be credible as population estimates, and only their direction is used.",
-        "Electromyography is never evidence of hypertrophy."
+        "Electromyography is never evidence of hypertrophy.",
+        "The twelve-variation study crosses inclination with grip type and grip width and loads each of its twelve cells at that cell own 12RM, so absolute load differs between cells by design. Its apparent pattern in favour of the incline for the clavicular head and of the decline for the abdominal head is carried by cells that also differ in grip, and its authors own null statements are the part of it that isolates inclination. It is used here for those null statements and not for a regional direction."
       ],
       "evidence": {
         "certainty": "low",
@@ -806,6 +808,12 @@
           "locator": "Abstract, Results (no significant pectoralis activation difference between flat, inclined and declined positions in elite athletes)",
           "role": "contradicts",
           "supportStrength": "direct"
+        },
+        {
+          "sourceId": "source-doi-10-47206-ijsc-v1i1-39",
+          "locator": "Discussion, sternocostal head paragraph (\"the present study showed no significant difference in activation of the sternocostal head between the three inclinations in both close and wide pronated grips\"); Practical Application points 1 and 2 (the incline at a wide pronated grip does not recruit the clavicular head more than the horizontal or decline at the same grip; the decline does not recruit the abdominal head more than the horizontal, p = 1.000 for the wide grip); Table 3 (maxima and minima by position); Table 1 (per-cell estimated 1RM); Methods, Subjects (n = 13 men, one withdrew)",
+          "role": "contradicts",
+          "supportStrength": "direct"
         }
       ],
       "recordIds": [
@@ -819,7 +827,8 @@
         "G1955",
         "G0118",
         "G0265",
-        "G0135"
+        "G0135",
+        "G1944"
       ],
       "rederivation": {
         "round": "R1 remediation",
@@ -1100,7 +1109,7 @@
     {
       "id": "claim-press-versus-fly-activation-mixed",
       "type": "acute-response",
-      "statement": "Acute electromyography comparing a barbell bench press with a fly-family exercise is inconsistent. One un-normalised comparison found 16 per cent higher pectoralis major activation in the press than in a dumbbell fly across the whole movement; three other comparisons, against a dumbbell fly, a machine fly and a bent-forward cable crossover, found no significant pectoralis major difference; and a 2023 meta-analysis reports a significant sternal difference favouring the bench press alongside no significant clavicular difference, with heterogeneity so high that neither pooled value is a precise estimate.",
+      "statement": "Acute electromyography comparing a barbell bench press with a fly-family exercise is inconsistent. One un-normalised comparison found 16 per cent higher pectoralis major activation in the press than in a dumbbell fly across the whole movement; three other comparisons, against a dumbbell fly, a machine fly and a bent-forward cable crossover, found no significant pectoralis major difference; and a 2023 meta-analysis reports a significant sternal difference between the bench press and its pooled comparator exercises alongside no significant clavicular difference, with heterogeneity so high that neither pooled value is a precise estimate and with the source contradicting itself about which exercise the sternal difference favours.",
       "plainLanguage": "Studies that compared chest-muscle activity between a bench press and a fly disagree. Some find the press higher, several find no difference, and the pooled evidence is too inconsistent to settle it.",
       "scope": {
         "population": "resistance-trained adult men, mixed-sex college-age lifters of varied experience, and one sample of trained men in a non-peer-reviewed thesis",
@@ -1115,7 +1124,8 @@
         "The bent-forward cable crossover comparison is an MSc thesis, is not peer-reviewed, normalised every exercise to the bench press itself so that no condition has an independent scale, and averaged the concentric and eccentric phases together. It may inform a tier-4 statement with applicability downgraded and may never be sole support.",
         "Exercise order changes the result. In a full-text source that samples the sternocostal head, chest-fly activation was 100.13 (SD 13.56) per cent of maximal voluntary isometric contraction when the fly followed the bench press and 81.47 (SD 13.09) per cent when it did not. A single press-versus-fly activation difference is therefore not a stable property of the two exercises.",
         "The 2023 meta-analysis pools six exercise-type studies whose comparators are push-ups, dumbbell exercises, elastic resistance and a chest press. No cable fly appears in any of them, so it adds no index-Y evidence.",
-        "Heterogeneity in the pooled exercise-type estimates is I-squared 98 per cent (sternal) and 94.9 per cent (clavicular), and the pooled standardised mean differences of 4.04 and 4.53 are implausibly large for surface-EMG contrasts; the review reports imputing standard deviations where studies did not report them.",
+        "Heterogeneity in the pooled exercise-type estimates is I-squared 98 per cent (sternal) and 94.9 per cent (clavicular), and the pooled standardised mean differences of 4.04 (sternal; 95 per cent CI 1.74 to 6.35) and 4.53 (clavicular; 95 per cent CI -4.22 to 13.27) are implausibly large for surface-EMG contrasts; the review reports imputing standard deviations where studies did not report them. The confidence intervals are quoted because a second and unrelated result in the same paper, the Figure 7 comparison of other exercises with the push-up, also carries SMD = 4.53 but with 95 per cent CI 4.40 to 7.65; the point estimate alone does not identify the row.",
+        "The 2023 meta-analysis contradicts itself about the direction of the sternal exercise-type difference, and no direction is taken from it here. Its Results text states, twice and verbatim, that \"there is no significant difference in the activation of the clavicular portion when comparing the PB with another exercise; however, there is a greater activation in the sternal pectoralis in the variable exercise (SMD = 4.04; 95% ICI 0 = 1.74; 6.35)\", which places the difference in the comparator exercise. Its Abstract states the opposite (\"greater activations are also seen in the original bench press vs. the comparisons\"), as does its Featured Application (\"BP is the one that most involves the pectoralis major\"). The mechanism is that the paper sign convention inverts between its contrast families: for the inclination family a positive standardised mean difference favours the horizontal bench press, and for the type-of-exercise family it favours the comparator. Table 3 alone cannot resolve the direction, and contradiction-map rows C-11 and C-12 record the conflict.",
         "Three of the four primary comparisons are null results. A null is not evidence of equivalence: none reports an equivalence margin, and the samples (n = 12 to 17) cannot exclude a moderate difference.",
         "Electromyography is never evidence of hypertrophy."
       ],
@@ -1152,7 +1162,7 @@
         },
         {
           "sourceId": "source-doi-10-3390-app13085203",
-          "locator": "Table 3, Type of exercise, Bench press vs. other variants type (sternal standardised mean difference 4.04, 95 per cent CI 1.74 to 6.35, I-squared 98, p = 0.001; clavicular 4.53, 95 per cent CI -4.22 to 13.27, I-squared 94.9, p = 0.198); Results text naming the six comparator exercise types",
+          "locator": "Table 3, Type of exercise, Bench press vs. other variants type (sternal standardised mean difference 4.04, 95 per cent CI 1.74 to 6.35, I-squared 98, t = 3.62, p = 0.001; clavicular 4.53, 95 per cent CI -4.22 to 13.27, I-squared 94.9, t = 1.65, p = 0.198); Results text accompanying Figure 6, naming the six comparator exercise types and stating that the greater sternal activation is in the variable exercise; Abstract, Results and Featured Application, which state the opposite direction. The confidence intervals identify the rows: the Figure 7 other-exercises-versus-push-up result in the same paper also reports SMD = 4.53, with 95 per cent CI 4.40 to 7.65.",
           "role": "qualifies",
           "supportStrength": "partially-direct"
         },
@@ -1301,13 +1311,18 @@
         "Of 11,765 records returned by the four PubMed composites, 911 entered record-level screening in the first pass; the remainder is a quantified residual, not a screened zero.",
         "Cochrane CENTRAL was not searched: no public API and no authenticated Search Manager session exists for this project, and no access control was circumvented.",
         "SPORTDiscus and Web of Science were not searched directly by this project. The 2023 meta-analysis above did search both.",
-        "Twenty-six records remain awaiting full text after the remediation ladder was run and recorded for every one of them.",
-        "One record, G1016, was identified in the first pass as potentially the most directly relevant press-versus-fly source and was not opened. It has now been opened and read; it is a bent-forward cable crossover whose pulley origin height is not stated and whose figure depicts a high-to-low path, so it is a related condition and not index Y. The absence survives, but it now survives on a read document."
+        "Twenty-four records remain awaiting full text after the remediation ladder was run and recorded for every one of them. Two records that the first pass held awaiting-full-text were resolved on 2026-09-15 when lawful full text was obtained: G1944 was included and G1087 was excluded on substance. Neither is a cable fly and neither narrows this absence.",
+        "One record, G1016, was identified in the first pass as potentially the most directly relevant press-versus-fly source and was not opened. It has now been opened and read; it is a bent-forward cable crossover whose pulley origin height is not stated and whose figure depicts a high-to-low path, so it is a related condition and not index Y. The absence survives, but it now survives on a read document.",
+        "Forward citation chasing was truncated: each seed was chased to a single page of at most 200 citing works, so a seed cited more than 200 times contributed only its first 200 (receipt R-049).",
+        "The citation-chase relevance filter left a large recorded residual. The union of both chases, less the seeds, was 3,559 works; OpenAlex returned metadata for 3,479; a pre-specified title relevance expression retained 841, of which 745 were new and screened. The 2,638 chased works the expression dropped were never screened and are a recorded residual, not a screened zero (receipt R-048/R-049 citationChasing note).",
+        "OpenAlex returned no metadata for 80 of the 3,559 chased candidates (3,559 minus 3,479), so those were never title-filtered and never screened.",
+        "The non-English vocabulary route was sampled, not enumerated: the first 50 results of each of eight OpenAlex probes were inspected against a route-level pool of 6,372 hits before the relevance expression was applied (receipt R-046).",
+        "Four routes returned only a bot-protection challenge to this automated client on 2026-09-15 (G1084 at TopSCHOLAR, G1917 at SAGE, G1941 at Springer, and the DOAJ rung of G1944). A challenge is a statement about this client, not about the item, so none of those four is recorded as showing that no lawful full text exists."
       ]
     },
     {
       "id": "absence-primary-comparison-no-evidence",
-      "statement": "No study comparing a barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved by any route run in this pass or in its R1 remediation. Within these routes the primary Q2 estimand, the between-condition difference in change, returned no direct evidence.",
+      "statement": "No study comparing a barbell flat bench press with any cable fly for a pectoralis major size outcome was retrieved by any route run in this pass, in its R1 remediation, or in its SBLA-010 R2 remediation. Within these routes the primary Q2 estimand, the between-condition difference in change, returned no direct evidence. This is a statement about what these searches retrieved, not a statement that no such study exists.",
       "searchesThatWouldHaveFoundIt": [
         "PubMed stratum N-RS2, pectoral concept intersected with hypertrophy outcomes and resistance training, 87 records",
         "PubMed stratum N-RS1, fly family, 77 records",
@@ -1320,8 +1335,13 @@
       "interpretation": "Under master plan section 2.2 a thin evidence base may not be converted into a confident comparative recommendation. No claim in this pass makes a press-versus-fly hypertrophy statement.",
       "governingDecision": "Anti-cherry-picking rule 7 in the eligibility plan: absence of evidence is reported as absence, never as evidence of no difference.",
       "boundedBy": [
-        "The same four retrieval limits recorded on absence record 1 apply here.",
-        "No tier-1 cable-fly hypertrophy trial appeared in any of the 848 records added by the remediation."
+        "Every retrieval limit recorded on absence-index-cable-fly-no-evidence applies here; they are not repeated in full.",
+        "No tier-1 cable-fly hypertrophy trial appeared in any of the 848 records added by the remediation.",
+        "Forward citation chasing was truncated: each seed was chased to a single page of at most 200 citing works, so a seed cited more than 200 times contributed only its first 200 (receipt R-049).",
+        "The citation-chase relevance filter left a large recorded residual. The union of both chases, less the seeds, was 3,559 works; OpenAlex returned metadata for 3,479; a pre-specified title relevance expression retained 841, of which 745 were new and screened. The 2,638 chased works the expression dropped were never screened and are a recorded residual, not a screened zero (receipt R-048/R-049 citationChasing note).",
+        "OpenAlex returned no metadata for 80 of the 3,559 chased candidates (3,559 minus 3,479), so those were never title-filtered and never screened.",
+        "The non-English vocabulary route was sampled, not enumerated: the first 50 results of each of eight OpenAlex probes were inspected against a route-level pool of 6,372 hits before the relevance expression was applied (receipt R-046).",
+        "Twenty-four records remain awaiting full text. Nine of them could bear on a press-versus-fly comparison: five fly-family records and four bench-press records reporting regional activation. None of the nine has been read, so this absence is bounded by what those nine contain."
       ]
     },
     {
@@ -1353,36 +1373,79 @@
       "governingDecision": "Master plan section 9.9: narrow claims to what the retrieved material actually supports."
     }
   ],
-  "remediationLog": {
-    "round": "R1 remediation",
-    "date": "2026-09-13",
-    "reviewedReport": "reviews/evidence/SBLA-009-r1.md at 8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
-    "claimsRederived": [
-      "claim-bench-press-inclination-shifts-regional-activation",
-      "claim-press-versus-fly-activation-mixed"
-    ],
-    "claimsCorrected": [
-      "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
-      "claim-pectoralis-major-humeral-footprint",
-      "claim-pectoralis-major-structural-variation",
-      "claim-pectoralis-major-innervation"
-    ],
-    "claimsAdded": ["claim-fly-machine-pectoralis-rupture"],
-    "absenceRecordsBounded": [
-      "absence-index-cable-fly-no-evidence",
-      "absence-primary-comparison-no-evidence"
-    ],
-    "certaintyChanges": [
-      "claim-bench-press-inclination-shifts-regional-activation: moderate -> low (inconsistency and imprecision)",
-      "claim-pectoralis-major-structural-variation: applicability partially-direct -> indirect (mean donor age 69.3 years)",
-      "claim-press-versus-fly-activation-mixed: very-low retained; the enlarged base did not raise it"
-    ]
-  },
+  "remediationLog": [
+    {
+      "round": "R1 remediation",
+      "date": "2026-09-13",
+      "reviewedReport": "reviews/evidence/SBLA-009-r1.md at 8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
+      "claimsRederived": [
+        "claim-bench-press-inclination-shifts-regional-activation",
+        "claim-press-versus-fly-activation-mixed"
+      ],
+      "claimsCorrected": [
+        "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
+        "claim-pectoralis-major-humeral-footprint",
+        "claim-pectoralis-major-structural-variation",
+        "claim-pectoralis-major-innervation"
+      ],
+      "claimsAdded": ["claim-fly-machine-pectoralis-rupture"],
+      "absenceRecordsBounded": [
+        "absence-index-cable-fly-no-evidence",
+        "absence-primary-comparison-no-evidence"
+      ],
+      "certaintyChanges": [
+        "claim-bench-press-inclination-shifts-regional-activation: moderate -> low (inconsistency and imprecision)",
+        "claim-pectoralis-major-structural-variation: applicability partially-direct -> indirect (mean donor age 69.3 years)",
+        "claim-press-versus-fly-activation-mixed: very-low retained; the enlarged base did not raise it"
+      ]
+    },
+    {
+      "round": "R2 remediation (SBLA-010)",
+      "date": "2026-09-15",
+      "reviewedReport": "reviews/evidence/SBLA-009-r2.md at f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46, SHA-256 3428d3feb9b58bb150ac4c93375d868cabc5dc3f5597e83e50503b30a47a12b5",
+      "blockersAnswered": ["N-1", "N-2", "N-3", "N-4"],
+      "claimsRederived": [],
+      "claimsCorrected": [
+        "claim-press-versus-fly-activation-mixed",
+        "claim-bench-press-inclination-shifts-regional-activation"
+      ],
+      "claimsAdded": [],
+      "absenceRecordsBounded": ["absence-index-cable-fly-no-evidence"],
+      "certaintyChanges": [
+        "claim-press-versus-fly-activation-mixed: very-low retained. The unentailed pooled direction was removed and a contradiction qualifier added; nothing was raised.",
+        "claim-bench-press-inclination-shifts-regional-activation: low retained, direction stays mixed. G1944 was added with role contradicts and the first qualifier was weakened from a consistent sternocostal decrease to a more consistent one with a named exception. This is a downward move."
+      ],
+      "sourcesAdded": [
+        "source-doi-10-47206-ijsc-v1i1-39 (G1944), CC BY 4.0, obtained 2026-09-15, cited once with role contradicts"
+      ],
+      "note": "No claim was added, no certainty was raised, and no draft sentence gained a new assertion. The only new source entered as contradicting evidence against the claim it joined. Every change is traceable to a numbered finding in the round-two report."
+    }
+  ],
   "governingReview": {
-    "report": "reviews/evidence/SBLA-009-r1.md",
-    "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
-    "branch": "claude-review/SBLA-009-r1",
-    "verdict": "FAIL — 1 Critical, 13 Important, 10 Minor",
-    "note": "The immutable Account-B round-one report this artifact remediates. It is recorded as a commit reference rather than as a crossLinks entry because the report lives on the reviewer branch and is not a path in this worktree; asserting it as a repository cross-link would claim a file that is not here. Retrieve it with: git show 8154f1167062403a96ee5d6ec0fc63bd50ebfd17:reviews/evidence/SBLA-009-r1.md"
+    "report": "reviews/evidence/SBLA-009-r2.md",
+    "commit": "f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46",
+    "tree": "779567bad94305ad22e28973e6067915f0d5deac",
+    "branch": "claude-review/SBLA-009-r2",
+    "verdict": "FAIL - 0 Critical, 4 Important, 13 Minor",
+    "sha256": "3428d3feb9b58bb150ac4c93375d868cabc5dc3f5597e83e50503b30a47a12b5",
+    "remediation": {
+      "task": "SBLA-010 R2 bounded remediation",
+      "branch": "claude-research/SBLA-010-r2-remediation",
+      "baseCommit": "f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46",
+      "baseTree": "779567bad94305ad22e28973e6067915f0d5deac",
+      "date": "2026-09-15",
+      "blockersAnswered": ["N-1", "N-2", "N-3", "N-4"],
+      "nextReview": "reviews/evidence/SBLA-009-r3.md (Account B, one complete-artifact recheck)"
+    },
+    "priorRounds": [
+      {
+        "report": "reviews/evidence/SBLA-009-r1.md",
+        "commit": "8154f1167062403a96ee5d6ec0fc63bd50ebfd17",
+        "branch": "claude-review/SBLA-009-r1",
+        "verdict": "FAIL - 1 Critical, 13 Important, 10 Minor",
+        "sha256": "7c829be485846c7fa71a48637c4795978d003e8d2501c77ffcc31ef671f9f46e"
+      }
+    ],
+    "note": "Both Account-B reports are ordinary files in this tree: reviews/evidence/SBLA-009-r1.md was added by integration commit 1dc1c41b96508edbd2ae7d2ebff0ca6f5a1eb3f1 and reviews/evidence/SBLA-009-r2.md by f67b6dff72f47bb94768e85f43f8cb4ed0fc8d46. The first pass recorded the round-one report as a commit reference on the ground that it was \"not a path in this worktree\"; that was true at Account-A commit 0880d5fb and is false here, so the claim is withdrawn (SBLA-010 R2 finding M-12). Both reports remain immutable and are never edited by this role. This bundle stays at artifactVersion 2.0.0 because SBLA-010 R2 finding N-3 prescribes pinning the three drafts to atomic-claims.json@2.0.0; this governingReview block, not the version string, is what distinguishes the reviewed 2.0.0 tree from this remediated 2.0.0 tree."
   }
 }

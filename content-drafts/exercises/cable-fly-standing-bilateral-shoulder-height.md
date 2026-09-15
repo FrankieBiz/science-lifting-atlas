@@ -1,6 +1,6 @@
 ---
 draftId: cable-fly-standing-bilateral-shoulder-height
-draftVersion: '1.0.0'
+draftVersion: '2.0.0'
 task: SBLA-009
 role: claude-research
 account: A
@@ -8,7 +8,7 @@ generatedAt: '2026-09-13'
 baseCommit: 8ca59e850beb0770554074d474a3ff3a9e16710a
 status: draft-for-independent-review
 publicationState: unpublished
-claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@1.0.0
+claimSource: content-drafts/syntheses/SBLA-009-atomic-claims.json@2.0.0
 definitionSource: research/questions/SBLA-008-vertical-slice.md section 3.2
 indexRole: Exercise Y
 evidenceState: no-direct-evidence-found
@@ -210,16 +210,41 @@ cable condition is a bent-forward crossover whose pulley origin height the metho
 not state and whose figure depicts a high-to-low path, so it is a related condition and
 not this exercise. Its numbers are reported above.
 
-Eight fly-family records remain at `awaiting-full-text` in
-`research/extractions/SBLA-009-source-extractions.json`: a Portuguese-language
-dumbbell-fly study across planes and angles whose publisher refuses this client, a
-second dumbbell-fly report across planes and labile surfaces, a Korean-language
-simulation of a pec deck machine, a Portuguese-language pec deck activation study, a
-conference report on chest-wall pain with chest flies, and three bench-press records
-bearing on regional activation. The acquisition ladder was run and recorded for every
-one of them on 2026-09-13; none yielded lawful full text. If any of them reports a cable
-fly at shoulder height, it would be the most directly relevant source located anywhere
-in this pass.
+**A source recorded as unobtainable was obtained.** One bench-press record held at
+`awaiting-full-text`, a 2021 study of twelve bench-press variations reporting the
+clavicular, sternocostal and abdominal heads separately, had been recorded as having no
+abstract and no full text available. Its own recorded publisher URL served the complete
+article, under a Creative Commons Attribution licence, when the request was repeated on
+2026-09-15: the 2026-09-13 attempt had recorded a 23-byte redirect as a terminal
+failure. It has now been read and included, and the statement that no lawful full text
+could be obtained for it is withdrawn. A second record held at `awaiting-full-text`, a
+preprint on what lifters call resistance exercises, was also obtained and read on the
+same day and was excluded on substance: it reports no pectoralis outcome of any kind.
+Neither record is a cable fly, so neither narrows this page's absence.
+
+Nine records that could bear on this page remain at `awaiting-full-text` in
+`research/extractions/SBLA-009-source-extractions.json`, out of twenty-four in total.
+**Five are fly-family**: a Portuguese-language dumbbell-fly study across planes and
+angles whose publisher refuses this client, a second dumbbell-fly report across planes
+and labile surfaces, a Korean-language simulation of a pec deck machine, a
+Portuguese-language pec deck activation study, and a conference report on chest-wall
+pain with chest flies. **Four are bench-press records bearing on regional activation.**
+The acquisition ladder was run and recorded for every one of them on 2026-09-13 and
+re-run for all nine on 2026-09-15; none has yielded lawful full text to this project.
+What stopped each one is now recorded separately, because the four outcomes are not the
+same thing. **Four were refused as automated clients** — the host returned a challenge
+page, which establishes nothing about whether the article is readable. **Two are behind
+a genuine login or subscription**, one a repository file offered only through a
+request-a-copy workflow and one a subscription aggregator. **One returns a bare refusal**
+from a retired publishing platform, and whether that is access control or client
+filtering cannot be told from the response. **Two are reachable and simply offer no full
+text**: a conference-slide citation page carrying no abstract, and an asynchronous
+deposit that never delivers a file. One of the nine, the dumbbell-fly study across
+planes and labile surfaces, did yield its complete abstract from its institutional
+repository on 2026-09-15, so it is now recorded as abstract-only rather than
+metadata-only; no claim on this page is drawn from it. If any of the nine reports a
+cable fly at shoulder height, it would be the most directly relevant source located
+anywhere in this pass.
 
 **A search defect that may have cost recall.** PubMed proximity distance 0 matches its
 two terms in either order, so `"machine fly"[tiab:~0]` retrieves "on-the-fly machine
