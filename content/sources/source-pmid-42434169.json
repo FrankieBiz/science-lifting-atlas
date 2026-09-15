@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Magee", "Marsh", "Fields", "Deck"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-42434169",
+  "identifiers": {
+    "doi": "10.7759/cureus.112354",
+    "isbn": null,
+    "pmcid": "PMC13354020",
+    "pmid": "42434169"
+  },
+  "projectSummary": "A single case establishes that the injury occurs during the index exercise. It establishes nothing about how often.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "n = 1. A case report cannot support an incidence, a rate, or a comparison between exercises."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "heavy bench press",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "A complex intratendinous rupture of the pectoralis major occurred during heavy bench pressing, and is reported with imaging and operative findings.",
+    "sampleSize": null
+  },
+  "title": "Complex Intratendinous Pectoralis Major Rupture After Heavy Bench Press.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.7759/cureus.112354",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/42434169/"
+  },
+  "year": 2026
+}

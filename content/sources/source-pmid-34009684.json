@@ -1,0 +1,49 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Setlock", "Lulic-Kuryllo", "Leonardis", "Kulik", "Lipps"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-34009684",
+  "identifiers": {
+    "doi": "10.1111/joa.13455",
+    "isbn": null,
+    "pmcid": "PMC8273609",
+    "pmid": "34009684"
+  },
+  "projectSummary": "Age and sex change the mechanical behaviour of the pectoralis major regions. This is why a statement about regional behaviour derived from a single-sex or single-age-band sample cannot be generalised without a qualifier.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only. Shear wave velocity is a stiffness proxy, not a force measurement.",
+      "Access level corrected on 2026-09-13 from abstract-only to full-text-open. The first pass stopped at the Europe PMC fullTextXML endpoint, which returns 404 for this record; ladder step 2 also names PubMed Central itself, and the article body is served there (https://pmc.ncbi.nlm.nih.gov/articles/PMC8273609/, 197623 bytes). The earlier level understated what was lawfully readable."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "between-participant",
+    "durationWeeks": null,
+    "intervention": "Shear-wave elastography of pectoralis major fibre regions during volitional contraction, across age and sex.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Ultrasound shear wave elastography acquired shear wave velocity from the clavicular and sternocostal fibre regions of 48 healthy participants: 24 younger (12 male, 12 female, mean age 25 (SD 4.1) years) and 24 older adults (12 male, 12 female).",
+    "sampleSize": null
+  },
+  "title": "Age and sex influence the activation-dependent stiffness of the pectoralis major.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1111/joa.13455",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/34009684/"
+  },
+  "year": 2021
+}

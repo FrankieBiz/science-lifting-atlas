@@ -1,0 +1,59 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "direct",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-surface-emg-limitation",
+  "plainLanguage": "The usual way of measuring chest-muscle activity with skin electrodes does not represent the whole muscle, and the measurement point effectively moves during a bench press.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "This is a methodological finding, not a finding about training.",
+    "It applies to every tier-4 activation statement in this slice, including the ones drafted here."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "surface electromyography over the pectoralis major during common shoulder tasks and the bench press"
+    ],
+    "population": "healthy adults"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Title and Abstract (standard bipolar surface EMG estimations mischaracterise pectoralis major activity)",
+      "role": "supports",
+      "sourceId": "source-pmid-33310606",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Title and Abstract (innervation-zone locations distribute medially during the bench press; offered as an explanation of conflicting activation reports)",
+      "role": "supports",
+      "sourceId": "source-pmid-30870768",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, background (the bench press inclination literature is contradictory and measurement artefact is the likely reason)",
+      "role": "supports",
+      "sourceId": "source-pmid-34644424",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "Standard bipolar surface electromyography mischaracterises pectoralis major activity in commonly performed tasks, and innervation-zone positions shift within the muscle during the bench press, so single-site surface EMG amplitude comparisons for this muscle are not reliably comparable.",
+  "type": "exercise-mechanics"
+}

@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Kim", "Jeon", "Kim", "Lee", "Kim", "Kim"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-25693862",
+  "identifiers": {
+    "doi": "10.1002/ca.22509",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "25693862"
+  },
+  "projectSummary": "Supports the existence of a separately innervated abdominal part with its own entry pattern.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; the innervation sentence is truncated in the retrievable abstract."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric dissection of neurovascular entry into the abdominal head.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Thirty-two hemithoraxes were dissected and the distribution patterns of neurovascular structures within the abdominal head of the pectoralis major were classified; entry points were measured against a horizontal line through the jugular notch and the midclavicular line.",
+    "sampleSize": null
+  },
+  "title": "Neurovascular distribution within the abdominal head of the pectoralis major muscle: Application to breast and flap surgery.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1002/ca.22509",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/25693862/"
+  },
+  "year": 2015
+}

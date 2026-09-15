@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+
+import Claim from './Claim.astro';
+
+interface Props {
+  ids: string[];
+  framing?: string;
+  preview?: boolean;
+}
+
+const { ids, framing, preview = false } = Astro.props;
+if (ids.length === 0 || new Set(ids).size !== ids.length) {
+  throw new Error('ClaimGroup requires a non-empty list of unique claim IDs.');
+}
+
+const claims = await getCollection('claims');
+const claimIds = new Set(claims.map((entry) => entry.data.id));
+for (const id of ids) {
+  if (!claimIds.has(id)) throw new Error(`Unknown claim ID: ${id}`);
+}
+
+if (framing && !claimIds.has(framing)) {
+  throw new Error(
+    'ClaimGroup framing must be an audited claim ID, not unconstrained prose.',
+  );
+}
+---
+
+<section class="evidence-claim-group" data-claim-ids={ids.join(' ')}>
+  {framing && <Claim id={framing} preview={preview} />}
+  {
+    ids
+      .filter((id) => id !== framing)
+      .map((id) => <Claim id={id} preview={preview} />)
+  }
+</section>

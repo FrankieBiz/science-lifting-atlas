@@ -1,0 +1,60 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by 4.0"
+  },
+  "authors": [
+    "López-Vivancos",
+    "González-Gálvez",
+    "Orquín-Castrillón",
+    "Vale",
+    "Marcos-Pardo"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-doi-10-3390-app13085203",
+  "identifiers": {
+    "doi": "10.3390/app13085203",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": null
+  },
+  "projectSummary": "Systematic review and meta-analysis of surface-EMG comparisons between the barbell bench press and other pectoral exercises. PRISMA-declared. Methods 2.1 and Appendix A name three databases (PubMed/MEDLINE, SPORTDiscus, Web of Science) searched to 25 March 2023, with reference-list screening; the Abstract says four. 951 publications identified, 23 studies included. Pooled with DerSimonian-Laird random or fixed effects depending on heterogeneity.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record fetched 2026-09-13; no update-to entry and no retraction notice"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Heterogeneity is extreme in every pooled estimate that matters here: I-squared 87.6 per cent and 92.6 per cent for the two inclination contrasts and 98 per cent and 94.9 per cent for the two exercise-type contrasts. A pooled standardised mean difference at that level of heterogeneity is not a precise estimate and must not be reported as one.",
+      "The pooled standardised mean differences for the exercise-type comparisons (sternal 4.04 and clavicular 4.53) are implausibly large for surface-EMG contrasts and are consistent with standard deviations having been imputed or mishandled for studies that did not report them; the paper states that standard deviations were estimated and imputed from standard errors and confidence intervals where feasible.",
+      "The source contradicts itself on the decline contrast. Table 3 reports no significant decline effect in either portion, and the point estimates run opposite to the prose: sternal standardised mean difference -0.75 (95 per cent CI -1.85 to 0.36, p = 0.143) and clavicular 2.03 (95 per cent CI -2.03 to 6.53, p = 0.218). The Abstract Conclusions nonetheless state that \"the sternal portion of pectoralis major showed greater activation with the declined variant of bench press\", and the Featured Application states that in the decline \"the decrease in the clavicular portion should be considered, as opposed to an increase in the sternal portion\". Both assert significance and a direction that Table 3 does not support in either portion. The Table and the Results text are the primary record and are what this extraction relies on.",
+      "The sign convention is not uniform across contrast families, which is the trap this source sets. For the inclination family the Results prose resolves it (\"the BP variant with the inclined bench activates less the sternal portion\"), so a positive standardised mean difference favours the horizontal bench press. For the type-of-exercise family the same prose resolves it the other way: \"there is a greater activation in the sternal pectoralis in the variable exercise (SMD = 4.04; 95% ICI 0 = 1.74; 6.35)\", so a positive standardised mean difference favours the comparator exercise, not the bench press. A reader who carries the inclination-family convention across to the type-of-exercise row inverts the direction. No direction for the type-of-exercise contrast may be taken from Table 3 alone.",
+      "No cable fly appears in any of the 23 included studies' exercise-type comparisons, which is the fact of interest for the index-Y absence.",
+      "Two distinct results in this paper both carry the point estimate SMD = 4.53 and are separated only by their full signature. (a) Table 3, Type of exercise, Bench press vs. other variants, Clavicular: SMD 4.53, 95 per cent CI -4.22 to 13.27, I-squared 94.9 per cent, t = 1.65, p = 0.198 - the row this extraction and the claims cite. (b) Results text accompanying Figure 7: \"As when comparing other exercises to push up (SMD = 4.53; 95%CI = 4.40; 7.65)\" - a different comparison with a different confidence interval and no reported I-squared or p. Any citation of SMD 4.53 must carry the confidence interval so the two cannot be confused.",
+      "The reported database count is internally inconsistent. The Abstract states that the search covered \"four databases\", while Methods 2.1 names three (PUBMED/MEDLINE, SPORT DISCUS and Web of Science) and Appendix A, Search Strategy, reproduces exactly three search strings for those same three databases. The three-database reading is taken here because it is the one the Methods and the Appendix agree on; the Abstract count is unsupported anywhere in the paper."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "between-condition, within-participant in the underlying studies",
+    "durationWeeks": null,
+    "intervention": "bench press; other pectoral exercises; bench inclination",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c", "SBLA-009 Q2"],
+    "population": "The electronic search covered PubMed/MEDLINE, SPORTDiscus and Web of Science to 25 March 2023 and yielded 951 original publications, of which 23 studies were included for systematic review and meta-analysis. Reference lists of relevant studies were additionally screened and cross-referenced by hand.",
+    "sampleSize": null
+  },
+  "title": "Electromyographic Activity of the Pectoralis Major Muscle during Traditional Bench Press and Other Variants of Pectoral Exercises: A Systematic Review and Meta-Analysis",
+  "type": "systematic-review",
+  "urls": {
+    "doi": "https://doi.org/10.3390/app13085203",
+    "primary": "https://repositorio.ucam.edu/handle/10952/9780",
+    "pubmed": null
+  },
+  "year": 2023
+}

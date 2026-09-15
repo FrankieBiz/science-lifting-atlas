@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "CC BY-NC-ND 4.0"
+  },
+  "authors": [],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-bookshelf-nbk525991",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "30252247"
+  },
+  "projectSummary": "Used only for descriptive attachment, portion and action statements where no primary source in this included set reports them as its own observation. Its innervation statement is simpler than the primary cadaveric finding retrieved in this pass, and the disagreement is recorded rather than resolved in the tertiary source's favour.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "other-non-peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "PubMed record comments-and-corrections fields plus the Crossref/Retraction Watch CSV export, fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Tertiary source. Master plan section 3.3 of the eligibility plan requires a claim to be cited to the primary study wherever one is available.",
+      "Its innervation statement conflicts with the cadaveric Sihler-stain finding that the pectoralis major is mainly innervated by the lateral pectoral nerve and that intercostal nerves contribute in every stained specimen.",
+      "Access level corrected on 2026-09-13 from metadata-only to full-text-open. The first pass stopped at the Europe PMC fullTextXML endpoint, which returns 404 for this record; ladder step 2 also names PubMed Central itself, and the article body is served there (https://www.ncbi.nlm.nih.gov/books/NBK525991/, 67303 bytes). The earlier level understated what was lawfully readable.",
+      "Language field completed on 2026-09-13: the record is published in English. The first pass left it null, which R1 finding M-4 recorded as a contracted-field completeness defect."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Tertiary anatomy reference chapter on NCBI Bookshelf.",
+    "outcomes": ["SBLA-009 Q1a", "SBLA-009 Q1b"],
+    "population": "The chapter states the origin as the anterior surface of the medial half of the clavicle, the anterior surface of the sternum, the first seven costal cartilages, the sternal end of the sixth rib, and the aponeurosis of the external oblique muscle of the anterior abdominal wall; and the insertion as the lateral lip of the intertubercular sulcus of the humerus.",
+    "sampleSize": null
+  },
+  "title": "Anatomy, Thorax, Pectoralis Major Major.",
+  "type": "book-textbook",
+  "urls": {
+    "doi": null,
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/30252247/"
+  },
+  "year": 2026
+}

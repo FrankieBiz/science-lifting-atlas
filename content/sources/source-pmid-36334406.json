@@ -1,0 +1,56 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": [
+    "Albarello",
+    "Cabral",
+    "Leitão",
+    "Halmenschlager",
+    "Lulic-Kuryllo",
+    "Matta"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-36334406",
+  "identifiers": {
+    "doi": "10.1016/j.jelekin.2022.102722",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "36334406"
+  },
+  "projectSummary": "The clearest retrieved statement that bench inclination reverses which pectoralis head is more excited. The acute cross-sectional area change is a tier-5 swelling measure and is not evidence of growth.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; thirteen men.",
+      "Acute post-exercise cross-sectional area is explicitly a tier-5 context outcome under master plan section 2.2 and must never be read as hypertrophy."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "flat bench press; 45-degree inclined bench press",
+    "outcomes": ["SBLA-009 Q1c", "SBLA-009 Q2"],
+    "population": "Thirteen men performed four sets of the flat and of the 45-degree inclined bench press. Bipolar surface EMGs were acquired from both pectoralis major heads, and panoramic ultrasound images were collected transversely to the fibres before and immediately after exercise; normalised root-mean-square amplitude and variations in cross-sectional area and muscle thickness were calculated separately for each head.",
+    "sampleSize": null
+  },
+  "title": "Non-uniform excitation of pectoralis major induced by changes in bench press inclination leads to uneven variations in the cross-sectional area measured by panoramic ultrasonography.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jelekin.2022.102722",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/36334406/"
+  },
+  "year": 2022
+}

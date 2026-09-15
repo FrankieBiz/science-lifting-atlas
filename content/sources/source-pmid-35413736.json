@@ -1,0 +1,49 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Beck", "Reinecke", "Polan", "Meyer", "Schoepp", "Burggraf"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35413736",
+  "identifiers": {
+    "doi": "10.1055/a-1754-4524",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "35413736"
+  },
+  "projectSummary": "The only retrieved record in which a pectoralis major rupture is attributed to a fly-family exercise. One case, so it establishes that the event can occur on a fly machine and nothing about how often. The translation was machine-assisted and not independently checked, so under the frozen U5/EU4 decision this cannot support a decision-critical prose claim on its own.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "n = 1, German language, read through machine-assisted translation with no second independent translation and no fluent-reader check.",
+      "The eccentric-phase and steroid statements are the authors' framing of prior literature, not observations from this case."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "chest fly machine",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "A 33-year-old patient of normal habitus sustained a humeral rupture of the pectoralis major during recreational sport. He reported sudden onset of left pectoral pain during training on the chest fly machine, together with a whip-like popping sound, followed by immediate painful restriction of movement in the left arm. There was no history of excessive weight training or anabolic steroid use.",
+    "sampleSize": null
+  },
+  "title": "[Rupture of the pectoralis major muscle in amateur athletes: a rare injury or often overlooked?].",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1055/a-1754-4524",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35413736/"
+  },
+  "year": 2022
+}

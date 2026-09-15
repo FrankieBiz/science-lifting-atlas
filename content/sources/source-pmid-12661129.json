@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Ferreira", "Büll", "Vitti"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-12661129",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "12661129"
+  },
+  "projectSummary": "Supports the statement that the clavicular portion of the pectoralis major is substantially activated during a dumbbell fly, which is the nearest activation evidence in this pass to the index cable fly.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "PubMed record comments-and-corrections fields plus the Crossref/Retraction Watch CSV export, fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Abstract-only; the report gives no numeric activation values in the retrievable text; two-channel instrumentation."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "frontal-lateral cross with dumbbells, four modalities",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Electromyographic activity of the anterior deltoid and the clavicular portion of the pectoralis major was tested in 24 male volunteers during four different modalities of the frontal-lateral cross with dumbbells. All tested exercises developed high levels of action potential for both muscles.",
+    "sampleSize": null
+  },
+  "title": "Electromyographic validation of basic exercises for physical conditioning programmes. IV. Analysis of the deltoid muscle (anterior portion) and pectoralis major muscle (clavicular portion) in frontal-lateral cross, dumbbells exercises.",
+  "type": "observational-study",
+  "urls": {
+    "doi": null,
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/12661129/"
+  },
+  "year": 2003
+}

@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Kian", "Pizzolato", "Halaki", "Ginn", "Lloyd", "Reed"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-31668905",
+  "identifiers": {
+    "doi": "10.1016/j.jbiomech.2019.109348",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "31668905"
+  },
+  "projectSummary": "Carried only as a qualifier: any statement about pectoralis major force derived from a static-optimisation model understates co-contraction, so modelled force values in this slice are treated as indirect.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "A methodological comparison, not a finding about the pectoralis major specifically."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Subject-specific neuromusculoskeletal modelling study validating static optimisation against measured activity.",
+    "outcomes": ["SBLA-009 Q1b"],
+    "population": "A subject-specific neuromusculoskeletal model of the shoulder driven entirely by measured data was compared with static optimisation, and static optimisation was found to underestimate antagonist muscle activity at the glenohumeral joint.",
+    "sampleSize": null
+  },
+  "title": "Static optimization underestimates antagonist muscle activity at the glenohumeral joint: A musculoskeletal modeling study.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jbiomech.2019.109348",
+    "primary": "https://rest.mars-prod.its.unimelb.edu.au/bitstreams/aa9158be-6831-5d3d-b7ca-eb3304f39ed8/download",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/31668905/"
+  },
+  "year": 2019
+}

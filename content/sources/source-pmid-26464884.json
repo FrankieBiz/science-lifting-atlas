@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by 3.0"
+  },
+  "authors": ["Luczak", "Bailey", "Smith", "Chen"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-26464884",
+  "identifiers": {
+    "doi": "10.1155/2013/612650",
+    "isbn": null,
+    "pmcid": "PMC4234661",
+    "pmid": "26464884"
+  },
+  "projectSummary": "Within-participant acute surface-EMG comparison of dumbbell bench, incline and shoulder presses in 12 trained and 12 novice collegiate-aged women, with the pectoralis major resolved into sternal and clavicular portions and each repetition phase analysed separately.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "NCBI PubMed and PMC records fetched 2026-09-13; no retraction or correction notice"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Female-only sample, which is a genuine applicability strength for a claim set otherwise dominated by male participants, and a limit on generalising to men.",
+      "The clavicular result is phase-specific: it holds in the eccentric phase. A phase-specific difference is not a whole-repetition difference and is recorded as phase-specific.",
+      "Surface EMG is an acute activation measure and is not evidence of hypertrophy."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "dumbbell bench press; dumbbell incline press; dumbbell shoulder press",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Surface EMG was recorded from the dominant arm of 12 collegiate-aged resistance-trained women and 12 novice resistance-trained women during dumbbell bench, incline and shoulder presses, with average EMG amplitude computed for the concentric and eccentric phases of each repetition.",
+    "sampleSize": null
+  },
+  "title": "Shoulder Muscle Activation of Novice and Resistance Trained Women during Variations of Dumbbell Press Exercises",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1155/2013/612650",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/26464884/"
+  },
+  "year": 2013
+}

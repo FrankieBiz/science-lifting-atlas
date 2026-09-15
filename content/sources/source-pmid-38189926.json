@@ -1,0 +1,55 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": [
+    "Guerra Bresson",
+    "Guiu",
+    "Werthel",
+    "Martinel",
+    "Bourcheix",
+    "Grand"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-38189926",
+  "identifiers": {
+    "doi": "10.1007/s00264-023-06083-3",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "38189926"
+  },
+  "projectSummary": "Independent confirmation that the layered description of the insertion is contested in the primary anatomical literature, which is the same disagreement the imaging-and-histology study resolves against a bilaminar enthesis.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; the study's own numeric findings were not retrievable."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric anatomical study of the distal humeral insertion.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "The paper states that the precise description of the pectoralis major distal humeral insertion remains controversial; that the distal tendon is classically described as two layers, one anterior and one posterior, regrouping at their distal edge; that most authors hold the clavicular head to participate in the anterior layer; and that others describe a more superficial termination in close relationship with the deltoid humeral insertion. Its stated objective is to make that description precise.",
+    "sampleSize": null
+  },
+  "title": "Distal insertion of the clavicular portion of pectoralis major muscle: anatomical study.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1007/s00264-023-06083-3",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/38189926/"
+  },
+  "year": 2024
+}

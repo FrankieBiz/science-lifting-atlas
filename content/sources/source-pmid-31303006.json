@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Liu", "Gowd", "Garcia", "Manderle", "Beletsky", "Nicholson"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-31303006",
+  "identifiers": {
+    "doi": "10.1177/0363546519851506",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "31303006"
+  },
+  "projectSummary": "Harms and boundary context: the injury has consequences for return to weight training that a functional score does not capture. The population is post-operative, so it is indirect for a healthy-lifter page and is never presented as rehabilitation advice.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Abstract-only; surgical case series with survey follow-up, no comparison group, no exposure denominator."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Retrospective case series with patient survey.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "A prospectively maintained institutional database was reviewed for all patients undergoing pectoralis major tendon repair from 2010 to 2016; 44 patients (73.3 per cent) were available. Patients were surveyed on pre- and postoperative sport participation, intensity, maximum weight repetitions in exercises using the pectoralis major, and ASES and SANE scores. Level of evidence 4.",
+    "sampleSize": null
+  },
+  "title": "Analysis of Return to Sport and Weight Training After Repair of the Pectoralis Major Tendon.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1177/0363546519851506",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/31303006/"
+  },
+  "year": 2019
+}

@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Brown", "Wickham", "McAndrew", "Huang"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-16458022",
+  "identifiers": {
+    "doi": "10.1016/j.jelekin.2005.10.007",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "16458022"
+  },
+  "projectSummary": "Directly ties segment-level coordination to movement direction and to moment arm, which is the mechanism behind the Q1c position that the balance between portions depends on humeral position.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only, twenty young men, isometric task."],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "Segmental surface EMG of 19 muscle segments during rapid isometric force impulses.",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Twenty male subjects, mean age 22 years, range 18-30, with no known shoulder pathology, produced rapid isometric force impulses (about 400 ms to peak) around the shoulder while timing and intensity of contraction within 19 muscle segments of the pectoralis major, deltoid and latissimus dorsi were recorded.",
+    "sampleSize": null
+  },
+  "title": "Muscles within muscles: Coordination of 19 muscle segments within three shoulder muscles during isometric motor tasks.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jelekin.2005.10.007",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/16458022/"
+  },
+  "year": 2007
+}

@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Ferreira", "Büll", "Vitti"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-12661130",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "12661130"
+  },
+  "projectSummary": "Carried because the frontal-lateral cross with dumbbells is a dumbbell fly, and this is one of very few sources reporting clavicular-portion activation during it.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "PubMed record comments-and-corrections fields plus the Crossref/Retraction Watch CSV export, fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Abstract-only; 1996-2003 two-channel instrumentation; the comparative values are not in the retrievable abstract."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "frontal-lateral cross with dumbbells; rowing",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Action potential levels for the anterior deltoid and the clavicular portion of the pectoralis major were recorded in 24 male volunteers during four modalities of rowing exercise, each with two grips, and compared with four modalities of the frontal-lateral cross with dumbbells.",
+    "sampleSize": null
+  },
+  "title": "Electromyographic validation of basic exercises for physical conditioning programmes. V. The comparison of the response in the deltoid muscle (anterior portion) and the pectoralis major muscle (clavicular portion) determined by the frontal-lateral cross, dumbbells and the rowing exercises.",
+  "type": "observational-study",
+  "urls": {
+    "doi": null,
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/12661130/"
+  },
+  "year": 2003
+}

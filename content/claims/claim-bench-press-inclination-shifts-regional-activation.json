@@ -1,0 +1,121 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "mixed",
+    "magnitude": "not-estimable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-bench-press-inclination-shifts-regional-activation",
+  "plainLanguage": "Raising the bench usually takes work away from the lower chest, though not in every study that measured it. Whether it adds work to the upper chest is not settled: the best single study suggests a peak around 30 degrees rather than a steady increase, and pooled evidence finds no clear upper-chest difference at all.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The two portions behave differently and must not be described with one sentence. The sternocostal decrease is the more consistent finding, but it is not universal: a twelve-variation study of the bench press reports no significant sternocostal difference across -15, 0 and +30 degrees within matched pronated grips, and no clavicular advantage for the incline at a matched wide pronated grip. The clavicular response is not consistent across studies.",
+    "The relationship is not monotonic. In the largest single study (n = 30 trained adults across 0, 15, 30, 45 and 60 degrees) the clavicular peak is at 30 degrees, and the authors state that inclinations above 45 degrees decrease pectoralis major performance while raising anterior deltoid activation.",
+    "The 2023 systematic review and meta-analysis pools four studies for the inclination contrast and reports no significant clavicular difference (standardised mean difference 0.36, 95 per cent CI -3.03 to 3.74, p = 0.81) alongside a significant sternal difference (1.80, 95 per cent CI 0.40 to 3.19, p = 0.017). Heterogeneity is extreme in both (I-squared 92.6 and 87.6 per cent), so neither pooled value is a precise estimate.",
+    "One study reports no upper-pectoralis difference across any bench condition over the complete concentric contraction, with a difference appearing only in the 26 to 50 per cent contraction-duration window. A sub-phase difference is not a whole-repetition difference.",
+    "One study of training beginners fixed the load at 50 per cent of the 1RM measured at 0 degrees and did not re-determine it per angle, so relative intensity varied with angle in that study.",
+    "Activation is not growth. One small trial found a site-specific thickness difference in the same direction, and it is the only outcome evidence in this direction.",
+    "Sample sizes range from eight to thirty. Two sources report effect sizes too large to be credible as population estimates, and only their direction is used.",
+    "Electromyography is never evidence of hypertrophy.",
+    "The twelve-variation study crosses inclination with grip type and grip width and loads each of its twelve cells at that cell own 12RM, so absolute load differs between cells by design. Its apparent pattern in favour of the incline for the clavicular head and of the decline for the abdominal head is carried by cells that also differ in grip, and its authors own null statements are the part of it that isolates inclination. It is used here for those null statements and not for a regional direction."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "barbell or dumbbell bench and chest press, horizontal versus inclinations measured at 15, 28, 30, 44, 45, 56 and 60 degrees, at 50 to 80 per cent of one-repetition maximum",
+      "acute surface electromyography only; no inclination claim here rests on a size outcome"
+    ],
+    "population": "resistance-trained and untrained adult men and women, and one sample of training beginners"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Table 3, Angle of inclination, Horizontal vs. inclined (sternal p = 0.017; clavicular p = 0.81); Results text",
+      "role": "qualifies",
+      "sourceId": "source-doi-10-3390-app13085203",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract and Results (clavicular peak at 30 degrees; middle and lower portions highest at 0 degrees; above 45 degrees pectoralis performance decreases)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-33049982",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (no upper-pectoralis difference across any bench condition over the complete concentric contraction; difference only in the 26 to 50 per cent window)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-25799093",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (middle and lower pectoralis output decreased with increasing angle; no significant upper-pectoralis effect reported)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-39764299",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular head greater on the incline, sternocostal greater on the flat bench, p < 0.001)",
+      "role": "supports",
+      "sourceId": "source-pmid-36334406",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular head greater at 44 and 56 degrees than at 0 degrees; no increase from 44 to 56 degrees; sternocostal greater at 44 than at 56 degrees)",
+      "role": "supports",
+      "sourceId": "source-pmid-20512064",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular head more excited on the inclined bench press; direction only)",
+      "role": "supports",
+      "sourceId": "source-pmid-31397215",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular activation greater in the incline press eccentric phase only; sternal activation greater in bench and incline than shoulder press)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-26464884",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Results, muscle thickness at the second intercostal space (incline greater than horizontal, mean difference 0.62 cm, 95 per cent CI 0.23 to 1.0, p = 0.003)",
+      "role": "supports",
+      "sourceId": "source-pmid-32922646",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract, background (the inclination literature is contradictory and measurement artefact is a likely reason)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-34644424",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (no significant pectoralis activation difference between flat, inclined and declined positions in elite athletes)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-28713459",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Discussion, sternocostal head paragraph (\"the present study showed no significant difference in activation of the sternocostal head between the three inclinations in both close and wide pronated grips\"); Practical Application points 1 and 2 (the incline at a wide pronated grip does not recruit the clavicular head more than the horizontal or decline at the same grip; the decline does not recruit the abdominal head more than the horizontal, p = 1.000 for the wide grip); Table 3 (maxima and minima by position); Table 1 (per-cell estimated 1RM); Methods, Subjects (n = 13 men, one withdrew)",
+      "role": "contradicts",
+      "sourceId": "source-doi-10-47206-ijsc-v1i1-39",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "Across the bench-press inclinations that have been measured, sternocostal pectoralis major activation falls as the bench is raised, while clavicular activation does not rise consistently: the largest single study places the clavicular peak near 30 degrees and reports reduced pectoralis performance above 45 degrees, and a 2023 meta-analysis finds no significant clavicular difference between a horizontal and an inclined bench.",
+  "type": "exercise-mechanics"
+}

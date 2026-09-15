@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Kuechle", "Newman", "Itoi", "Morrey", "An"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-9356931",
+  "identifiers": {
+    "doi": "10.1016/s1058-2746(97)70049-1",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "9356931"
+  },
+  "projectSummary": "Direct measured leverage evidence that the pectoralis major is among the principal adductors at the glenohumeral joint, and that its leverage is measured per plane and per angle rather than assumed.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; cadaveric specimens; moment arm is leverage, not contribution to a task."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric tendon-excursion moment arms during horizontal flexion and elevation.",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Instantaneous moment arms of 10 shoulder muscles were calculated from tendon excursion against glenohumeral rotation angle during horizontal flexion in the 90-degree elevation plane and during elevation in the sagittal, scapular and coronal planes.",
+    "sampleSize": null
+  },
+  "title": "Shoulder muscle moment arms during horizontal flexion and elevation.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1016/s1058-2746(97)70049-1",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/9356931/"
+  },
+  "year": 1997
+}

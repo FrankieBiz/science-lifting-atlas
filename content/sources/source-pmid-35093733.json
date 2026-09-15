@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Lulic-Kuryllo", "Negro", "Jiang", "Dickerson"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35093733",
+  "identifiers": {
+    "doi": "10.1016/j.jbiomech.2022.110966",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "35093733"
+  },
+  "projectSummary": "This is direct, portion-resolved, in vivo evidence that the regions of the pectoralis major are not activated as one unit and that which region dominates depends on the joint action and on arm elevation. It is the strongest single support in this pass for treating the muscle as regionally differentiated.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Female participants only; the companion literature reports age and sex effects on pectoralis mechanical properties, so a male-population statement is not established by this source.",
+      "Isometric tasks, not resistance-training exercises, so the transfer to a press or a fly is an inference and not a measurement.",
+      "Surface EMG over a broad, thin muscle carries a crosstalk qualifier."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "isometric shoulder tasks",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "High-density surface electromyography was used to quantify regional pectoralis major activation in twenty healthy females, with activation quantified for the clavicular, superior sternocostal and middle sternocostal regions at task-specific maxima and at submaximal force levels.",
+    "sampleSize": null
+  },
+  "title": "Differential regional pectoralis major activation indicates functional diversity in healthy females.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jbiomech.2022.110966",
+    "primary": "https://uwspace.uwaterloo.ca/bitstreams/cda9dc1e-1ac7-47dd-8dc6-c6e7a2512c80/download",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35093733/"
+  },
+  "year": 2022
+}

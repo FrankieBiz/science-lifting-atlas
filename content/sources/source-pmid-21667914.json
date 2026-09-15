@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Silverstein", "Goldberg", "Wolin"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-21667914",
+  "identifiers": {
+    "doi": "10.3928/01477447-20110427-24",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "21667914"
+  },
+  "projectSummary": "A second independent record of pectoralis major tendon rupture occurring during the index exercise. The subsequent fracture is a complication of the surgical repair and is outside this project's scope, which does not give treatment or rehabilitation advice.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "n = 1; the post-operative complication is not a training harm and is recorded but not carried into any claim."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "bench press",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "A 45-year-old man sustained an acute left pectoralis major tendon rupture at the humeral insertion while performing a bench press manoeuvre, underwent acute surgical repair, and about eight weeks postoperatively fell from standing height and sustained a proximal humerus shaft fracture through the repair site at the bone trough.",
+    "sampleSize": null
+  },
+  "title": "Proximal humerus shaft fracture after pectoralis major tendon rupture repair.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.3928/01477447-20110427-24",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/21667914/"
+  },
+  "year": 2011
+}

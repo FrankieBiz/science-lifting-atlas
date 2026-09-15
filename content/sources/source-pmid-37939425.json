@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Wolfram", "Lipps"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-37939425",
+  "identifiers": {
+    "doi": "10.1016/j.jbiomech.2023.111856",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "37939425"
+  },
+  "projectSummary": "In vivo mechanical evidence that the regions of the pectoralis major behave differently as the humerus is moved. Combined with the regional activation and moment-arm evidence, this is why the muscle page treats the muscle as regionally differentiated rather than uniform.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only, male participants only, passive rather than active behaviour."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "In vivo shear-wave elastography of pectoralis major regions during passive shoulder rotation.",
+    "outcomes": ["SBLA-009 Q1a", "SBLA-009 Q1c"],
+    "population": "Shear wave elastography assessed the stretch response of different pectoralis major regions during shoulder abduction and external rotation in 20 healthy male participants; the shoulder was passively rotated through range in 5.7-degree increments and shear wave velocity was obtained for each region, then fitted with a piecewise model giving slack angle, slack stiffness and elasticity coefficient.",
+    "sampleSize": null
+  },
+  "title": "The in vivo passive stretch response of the pectoralis major is region-specific.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jbiomech.2023.111856",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/37939425/"
+  },
+  "year": 2023
+}

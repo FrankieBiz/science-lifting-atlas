@@ -1,9 +1,14 @@
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  validateAsOfDate,
-  validateRecordGraph,
-} from '../../src/lib/content/validation.ts';
+  canonicalJson,
+  compileEvidenceGraph,
+  GraphCompilationError,
+} from '../../src/lib/graph/compiler.ts';
+import { partitionRecords } from '../../src/lib/content/registry.ts';
+import { validateAsOfDate } from '../../src/lib/content/validation.ts';
 import { loadAndValidateRecords, printIssues } from '../content/validate.mjs';
 
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
@@ -15,26 +20,53 @@ if (asOfIssues.length > 0) {
   process.exitCode = 1;
 } else {
   const loaded = await loadAndValidateRecords(repositoryRoot);
-  const claims = loaded.records
-    .filter((record) => record.kind === 'claim')
-    .map((record) => record.data);
-  const sources = loaded.records
-    .filter((record) => record.kind === 'source')
-    .map((record) => record.data);
-  const changeRecords = loaded.records
-    .filter((record) => record.kind === 'changeRecord')
-    .map((record) => record.data);
-  const issues = [
-    ...loaded.issues,
-    ...validateRecordGraph({ claims, sources, changeRecords }, { asOf }),
-  ];
-
-  if (issues.length > 0) {
-    printIssues('Graph validation', issues);
+  if (loaded.issues.length > 0) {
+    printIssues('Graph validation', loaded.issues);
     process.exitCode = 1;
   } else {
-    console.log(
-      `Graph validation passed: ${claims.length + sources.length + changeRecords.length} nodes checked; graph generation remains SBLA-011.`,
-    );
+    try {
+      const graph = compileEvidenceGraph(partitionRecords(loaded.records), {
+        asOf,
+      });
+      const expected = canonicalJson(graph);
+      const outputPath = path.join(
+        repositoryRoot,
+        'public/data/evidence-graph.v1.json',
+      );
+      let actual;
+      try {
+        actual = await readFile(outputPath, 'utf8');
+      } catch {
+        actual = null;
+      }
+      if (actual === null && graph.nodes.length === 0) {
+        console.log(
+          'Graph validation passed: 0 nodes checked; deterministic output is optional for the truthful empty state.',
+        );
+      } else if (actual !== expected) {
+        printIssues('Graph validation', [
+          {
+            code: 'GRAPH_OUTPUT_STALE',
+            path: 'public/data/evidence-graph.v1.json',
+            message:
+              'The committed graph is missing or differs from validated records.',
+            remediation:
+              'Run pnpm graph:compile and commit the deterministic output.',
+          },
+        ]);
+        process.exitCode = 1;
+      } else {
+        console.log(
+          `Graph validation passed: ${graph.nodes.length} nodes and ${graph.edges.length} edges match deterministic output.`,
+        );
+      }
+    } catch (error) {
+      if (error instanceof GraphCompilationError) {
+        printIssues('Graph validation', error.issues);
+        process.exitCode = 1;
+      } else {
+        throw error;
+      }
+    }
   }
 }

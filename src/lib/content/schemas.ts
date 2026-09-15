@@ -8,7 +8,14 @@ export const RECORD_KINDS = [
   'changeRecord',
 ] as const;
 
-export type RecordKind = (typeof RECORD_KINDS)[number];
+export const CONTENT_RECORD_KINDS = [
+  ...RECORD_KINDS,
+  'muscle',
+  'exercise',
+  'approvalManifest',
+] as const;
+
+export type RecordKind = (typeof CONTENT_RECORD_KINDS)[number];
 
 const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DOI_PATTERN = /^10\.\d{4,9}\/[a-z0-9._;()/:+-]+$/;
@@ -165,6 +172,22 @@ const commonEntityFields = {
   relationships: z.array(relationshipSchema).default([]),
 };
 
+export const contentSectionSchema = z
+  .object({
+    id: entityIdSchema,
+    title: nonEmptyTextSchema,
+    claimIds: z.array(entityIdSchema).min(1),
+  })
+  .strict()
+  .superRefine((section, context) => {
+    requireUniqueIds(
+      section.claimIds,
+      ['claimIds'],
+      'Section claim IDs',
+      context,
+    );
+  });
+
 type CommonEntityShape = {
   reviewState: z.infer<typeof reviewStateSchema>;
   publicationState: z.infer<typeof publicationStateSchema>;
@@ -292,6 +315,144 @@ export const claimSchema = z
     }
   });
 
+const pageIdentityFields = {
+  ...commonEntityFields,
+  name: nonEmptyTextSchema,
+  slug: entityIdSchema,
+  aliases: z.array(nonEmptyTextSchema),
+  summaryClaimIds: z.array(entityIdSchema).min(1),
+  sections: z.array(contentSectionSchema).min(1),
+};
+
+function validatePageClaimIds(
+  page: {
+    summaryClaimIds: string[];
+    sections: Array<{ claimIds: string[] }>;
+  },
+  context: z.RefinementCtx,
+) {
+  requireUniqueIds(
+    page.summaryClaimIds,
+    ['summaryClaimIds'],
+    'Summary claim IDs',
+    context,
+  );
+  const sectionClaimIds = page.sections.flatMap((section) => section.claimIds);
+  requireUniqueIds(
+    sectionClaimIds,
+    ['sections'],
+    'Claim IDs across page sections',
+    context,
+  );
+}
+
+export const muscleSchema = z
+  .object({
+    ...pageIdentityFields,
+    ontology: z
+      .object({
+        mesh: nonEmptyTextSchema.nullable(),
+        uberon: nonEmptyTextSchema.nullable(),
+        fma: nonEmptyTextSchema.nullable(),
+      })
+      .strict(),
+  })
+  .strict()
+  .superRefine((muscle, context) => {
+    validateCommonLifecycle(muscle, context);
+    validatePageClaimIds(muscle, context);
+  });
+
+export const exerciseSchema = z
+  .object({
+    ...pageIdentityFields,
+    equipmentIds: z.array(entityIdSchema),
+    movementPatternIds: z.array(entityIdSchema),
+    relatedEntityIds: z.array(entityIdSchema),
+    projectDefinition: z
+      .object({
+        editorial: z.literal(true),
+        included: z.array(nonEmptyTextSchema).min(1),
+        excluded: z.array(nonEmptyTextSchema),
+      })
+      .strict(),
+  })
+  .strict()
+  .superRefine((exercise, context) => {
+    validateCommonLifecycle(exercise, context);
+    validatePageClaimIds(exercise, context);
+    requireUniqueIds(
+      exercise.relatedEntityIds,
+      ['relatedEntityIds'],
+      'Related entity IDs',
+      context,
+    );
+  });
+
+const manifestEntrySchema = z
+  .object({
+    id: entityIdSchema,
+    checksum: checksumSchema,
+  })
+  .strict();
+
+export const approvalManifestSchema = z
+  .object({
+    id: entityIdSchema,
+    scopeId: entityIdSchema,
+    sourceCommit: z
+      .string()
+      .regex(/^[a-f0-9]{40}$/, 'Use a full lowercase Git commit hash'),
+    entities: z.array(manifestEntrySchema).min(1),
+    pages: z.array(manifestEntrySchema),
+    requiredReviews: z
+      .array(
+        z
+          .object({
+            id: entityIdSchema,
+            path: nonEmptyTextSchema,
+            checksum: checksumSchema,
+          })
+          .strict(),
+      )
+      .min(1),
+    ownerIdentity: nonEmptyTextSchema,
+    decision: z.enum(['approved', 'rejected']),
+    decidedAt: isoTimestampSchema,
+    integratedBy: z.literal('codex'),
+    deploymentEligible: z.boolean(),
+    supersedesManifestId: entityIdSchema.nullable(),
+  })
+  .strict()
+  .superRefine((manifest, context) => {
+    requireUniqueIds(
+      manifest.entities.map((entry) => entry.id),
+      ['entities'],
+      'Manifest entity IDs',
+      context,
+    );
+    requireUniqueIds(
+      manifest.pages.map((entry) => entry.id),
+      ['pages'],
+      'Manifest page IDs',
+      context,
+    );
+    if (manifest.deploymentEligible && manifest.decision !== 'approved') {
+      context.addIssue({
+        code: 'custom',
+        path: ['deploymentEligible'],
+        message: 'Only an approved manifest can be deployment eligible',
+      });
+    }
+    if (manifest.supersedesManifestId === manifest.id) {
+      context.addIssue({
+        code: 'custom',
+        path: ['supersedesManifestId'],
+        message: 'A manifest cannot supersede itself',
+      });
+    }
+  });
+
 const nullableIdentifier = <T extends z.ZodType>(schema: T) =>
   schema.nullable();
 
@@ -402,11 +563,15 @@ export const sourceSchema = z
   .strict()
   .superRefine((source, context) => {
     const identifiers = Object.values(source.identifiers);
-    if (!identifiers.some((value) => value !== null)) {
+    if (
+      !identifiers.some((value) => value !== null) &&
+      source.urls.primary === null
+    ) {
       context.addIssue({
         code: 'custom',
         path: ['identifiers'],
-        message: 'At least one stable source identifier is required',
+        message:
+          'At least one stable source identifier or primary repository URL is required',
       });
     }
 
@@ -581,6 +746,9 @@ export const changeRecordSchema = z
 export const recordSchemaByKind = {
   claim: claimSchema,
   source: sourceSchema,
+  muscle: muscleSchema,
+  exercise: exerciseSchema,
+  approvalManifest: approvalManifestSchema,
   evidencePacket: evidencePacketSchema,
   review: reviewRecordSchema,
   changeRecord: changeRecordSchema,
@@ -588,6 +756,9 @@ export const recordSchemaByKind = {
 
 export type ClaimRecord = z.infer<typeof claimSchema>;
 export type SourceRecord = z.infer<typeof sourceSchema>;
+export type MuscleRecord = z.infer<typeof muscleSchema>;
+export type ExerciseRecord = z.infer<typeof exerciseSchema>;
+export type ApprovalManifestRecord = z.infer<typeof approvalManifestSchema>;
 export type EvidencePacketRecord = z.infer<typeof evidencePacketSchema>;
 export type ReviewRecord = z.infer<typeof reviewRecordSchema>;
 export type ChangeRecord = z.infer<typeof changeRecordSchema>;

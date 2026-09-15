@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Mausehund", "Werkhausen", "Bartsch", "Krosshaug"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-33555823",
+  "identifiers": {
+    "doi": "10.1519/jsc.0000000000003948",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "33555823"
+  },
+  "projectSummary": "Establishes that bench press joint moments cannot be derived correctly from vertical barbell force alone, which is a methodological constraint on every modelled bench press load estimate including the one in this slice's mechanics comparison.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": [
+      "Abstract-only, so the reported moment values could not be extracted."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press variations in grip width and elbow position",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Thirty-five strength-trained adults performed a 6-8 repetition maximum set of each bench press variation. Net joint moments were complemented by strength-normalised net joint moments, determined as the ratio of bench press net joint moments to the maximum net joint moments produced during maximum voluntary isokinetic contractions, to establish elbow and shoulder muscular loads and efforts.",
+    "sampleSize": null
+  },
+  "title": "Understanding Bench Press Biomechanics-The Necessity of Measuring Lateral Barbell Forces.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1519/jsc.0000000000003948",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/33555823/"
+  },
+  "year": 2022
+}

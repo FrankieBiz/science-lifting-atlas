@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Lulic-Kuryllo", "Negro", "Jiang", "Dickerson"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-33310606",
+  "identifiers": {
+    "doi": "10.1016/j.jelekin.2020.102509",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "33310606"
+  },
+  "projectSummary": "This is the measurement-validity source that qualifies every tier-4 activation statement in this slice. A single bipolar electrode pair over a broad radiate muscle does not represent the whole muscle, which is why the portion-resolved and high-density studies carry more weight here than single-site amplitude comparisons.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": [
+      "Abstract-only. A methodological argument rather than an experimental comparison."
+    ],
+    "riskOfBias": "not-assessed"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Methodological analysis of surface EMG acquisition over the pectoralis major.",
+    "outcomes": ["SBLA-009 Q1b"],
+    "population": "The paper's stated purpose is to outline current limitations in the acquisition and characterisation of pectoralis major activation using standard bipolar surface electromyography, and its stated conclusion is that standard bipolar surface EMG estimations mischaracterise pectoralis major activity in commonly performed tasks.",
+    "sampleSize": null
+  },
+  "title": "Standard bipolar surface EMG estimations mischaracterize pectoralis major activity in commonly performed tasks.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jelekin.2020.102509",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/33310606/"
+  },
+  "year": 2021
+}

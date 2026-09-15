@@ -1,0 +1,72 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-regional-activation-varies-with-position",
+  "plainLanguage": "Change the angle your arm works at and you change which part of the chest muscle does most of the work.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "Demonstrated in activation and in spectral EMG measures, not in force contribution.",
+    "Surface electromyography over this muscle carries a measurement qualifier that its own methods literature states plainly (see claim-pectoralis-major-surface-emg-limitation).",
+    "Samples of eight to twenty-four participants."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "isometric shoulder tasks at defined elevation angles, and bench press at defined bench inclinations"
+    ],
+    "population": "healthy adults"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, Results (regional differences by task and by high versus low elevation)",
+      "role": "supports",
+      "sourceId": "source-pmid-35093733",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular head greater than sternocostal on the 45-degree incline, reversed on the flat bench, p < 0.001)",
+      "role": "supports",
+      "sourceId": "source-pmid-36334406",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular head greater at 44 and 56 degrees than at 0 degrees)",
+      "role": "supports",
+      "sourceId": "source-pmid-20512064",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract and Results (pectoralis major mean frequency higher at 90 degrees than at 135 and 180 degrees)",
+      "role": "supports",
+      "sourceId": "source-pmid-42376296",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Abstract (segment coordination influenced by movement direction and moment arm)",
+      "role": "supports",
+      "sourceId": "source-pmid-16458022",
+      "supportStrength": "partially-direct"
+    }
+  ],
+  "statement": "Which region of the pectoralis major is most active depends on the position of the humerus: regional activation differs by arm elevation angle and by the plane of the movement.",
+  "type": "function"
+}

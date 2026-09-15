@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Mancebo", "Cabral", "de Souza", "de Oliveira", "Vieira"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-30870768",
+  "identifiers": {
+    "doi": "10.1016/j.jelekin.2019.03.002",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "30870768"
+  },
+  "projectSummary": "A concrete mechanism for why bench press EMG amplitude comparisons in this literature disagree with each other. Carried into the contradiction map and used to qualify every tier-4 statement.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": ["Abstract-only, eleven participants, isometric contractions."],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "Single-differential surface EMG mapping of innervation zone position during the bench press.",
+    "outcomes": ["SBLA-009 Q1a", "SBLA-009 Q1b"],
+    "population": "Single-differential surface EMGs were collected from 15 regions along the cranial, centro-cranial, centro-caudal and caudal fibres of the pectoralis major while 11 healthy participants contracted isometrically, and innervation zones were identified visually.",
+    "sampleSize": null
+  },
+  "title": "Innervation zone locations distribute medially within the pectoralis major muscle during bench press exercise.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jelekin.2019.03.002",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/30870768/"
+  },
+  "year": 2019
+}

@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "CC BY-NC-ND 4.0"
+  },
+  "authors": [],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-bookshelf-nbk556059",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "32310519"
+  },
+  "projectSummary": "Used only for the root levels and the course of the medial pectoral nerve, paired with the primary cadaveric innervation sources.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "other-non-peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "PubMed record comments-and-corrections fields plus the Crossref/Retraction Watch CSV export, fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Tertiary source, cited alongside primary cadaveric studies rather than in place of them.",
+      "Access level corrected on 2026-09-13 from metadata-only to full-text-open. The first pass stopped at the Europe PMC fullTextXML endpoint, which returns 404 for this record; ladder step 2 also names PubMed Central itself, and the article body is served there (https://www.ncbi.nlm.nih.gov/books/NBK556059/, 67065 bytes). The earlier level understated what was lawfully readable.",
+      "Language field completed on 2026-09-13: the record is published in English. The first pass left it null, which R1 finding M-4 recorded as a contracted-field completeness defect."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Tertiary anatomy reference chapter on NCBI Bookshelf.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "The chapter states that the medial pectoral nerve arises as a branch of the medial cord of the brachial plexus with fibres originating from the eighth cervical and first thoracic nerve roots, and that it innervates the pectoralis minor and the lower half of the pectoralis major through its distal branch.",
+    "sampleSize": null
+  },
+  "title": "Anatomy, Thorax, Medial Pectoral Nerves.",
+  "type": "book-textbook",
+  "urls": {
+    "doi": null,
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/32310519/"
+  },
+  "year": 2026
+}

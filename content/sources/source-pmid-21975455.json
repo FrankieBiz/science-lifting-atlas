@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Wickham", "Brown"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-21975455",
+  "identifiers": {
+    "doi": "10.1152/jn.00049.2011",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "21975455"
+  },
+  "projectSummary": "Independent support, in a different laboratory and a different task, for the same regional-differentiation finding that the high-density and moment-arm studies report.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only, sixteen young men, ballistic isotonic task."],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "Multi-electrode surface EMG of neuromuscular compartments during ballistic shoulder adduction.",
+    "outcomes": ["SBLA-009 Q1b"],
+    "population": "Sixteen male subjects, mean age 22 years, with no known shoulder pathology, performed 40-degree coronal-plane ballistic shoulder adduction movements (movement time under 400 ms) while timing and intensity of contraction were recorded with 15 pairs of bipolar surface electrodes across the pectoralis major, deltoid and latissimus dorsi.",
+    "sampleSize": null
+  },
+  "title": "The function of neuromuscular compartments in human shoulder muscles.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1152/jn.00049.2011",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/21975455/"
+  },
+  "year": 2012
+}

@@ -1,0 +1,60 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "indirect",
+    "certainty": "low",
+    "direction": "not-applicable",
+    "magnitude": "not-estimable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-dumbbell-fly-clavicular-activation",
+  "plainLanguage": "The upper part of the chest muscle works during a dumbbell fly.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The supporting studies used two-channel instrumentation and report no numeric activation values in their retrievable text.",
+    "Electromyography measures activation, not force and not growth.",
+    "A dumbbell fly is a related condition, not the index bilateral standing cable fly at shoulder height."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "dumbbell fly performed across several modalities; loads not standardised across the source studies"
+    ],
+    "population": "healthy adult men"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract (all four modalities of the frontal-lateral cross with dumbbells developed high action-potential levels for both muscles)",
+      "role": "supports",
+      "sourceId": "source-pmid-12661129",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (clavicular pectoralis activity compared between rowing modalities and the frontal-lateral cross with dumbbells)",
+      "role": "supports",
+      "sourceId": "source-pmid-12661130",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Title and Abstract",
+      "role": "qualifies",
+      "sourceId": "source-pmid-33310606",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "The clavicular portion of the pectoralis major is activated during a dumbbell fly.",
+  "type": "acute-response"
+}

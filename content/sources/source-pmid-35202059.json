@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Schütz", "Zimmer", "Zeidler", "Plüss", "Oberhofer", "List"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35202059",
+  "identifiers": {
+    "doi": "10.3390/sports10020019",
+    "isbn": null,
+    "pmcid": "PMC8877248",
+    "pmid": "35202059"
+  },
+  "projectSummary": "This is the only retrieved study that measures the index press and a cable fly-family condition in the same participants with the same instrumentation. It is mechanical, not adaptive: nothing in it measures muscle size or strength change, so it cannot support any hypertrophy statement. The cable cross-over here is a related condition with an unreported pulley height, so it is not a measurement of index Y.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Shoulder kinematics were simplified to upper arm relative to thorax with no separate clavicle or scapula segment; the authors name this as the key limitation and note that scapular protraction matters at the end of the bench press.",
+      "Quasi-static inverse dynamics; loads set as a percentage of body weight rather than of 1RM, so intensity relative to each participant's capacity is unknown and may differ between the exercises.",
+      "The cable cross-over setup is under-reported: pulley height, stance and elbow-angle prescription are not stated, which is exactly what the index-Y definition turns on.",
+      "No electromyography, so no statement about pectoralis major activation is measured here."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press flat; bench press inclined; cable cross-over; cable pull-over",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Twenty healthy participants (10 male, 10 female), age 24.9 (SD 2.7) years, height 175.2 (SD 9.0) cm, mass 68.6 (SD 11.1) kg; inclusion 18-45 years with at least two hours per week of weight training experience; exclusion current injury or illness, previous shoulder or upper-limb surgery, neurological disorder or current medical treatment.",
+    "sampleSize": null
+  },
+  "title": "Chest Exercises: Movement and Loading of Shoulder, Elbow and Wrist Joints.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.3390/sports10020019",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35202059/"
+  },
+  "year": 2022
+}

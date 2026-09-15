@@ -1,0 +1,50 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "indirect",
+    "certainty": "very-low",
+    "direction": "not-applicable",
+    "magnitude": "not-estimable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-fly-machine-pectoralis-rupture",
+  "plainLanguage": "There is one published report of someone tearing the chest muscle off the arm bone while using a chest fly machine.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "One case has no denominator. It establishes that the injury can occur in the fly family and nothing whatever about how often, and it supports no comparison of risk between exercises.",
+    "The comparator is a chest fly machine, not the index bilateral standing cable fly at shoulder height. Nothing here transfers to the index condition.",
+    "The report is in German. The translation ladder reached step 1, the authorised English abstract on the PubMed record, and step 2, machine-assisted translation of the abstract and title. Step 3, an independent second check, was not performed, so this claim may not be the sole support for any published statement and its wording must stay at the level the abstract supports.",
+    "No full text was obtained; the extraction is abstract-only.",
+    "This is context, not medical, diagnostic or rehabilitation advice; the project does not give any."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "training on a chest fly machine, which is a related fly-family condition and not the index bilateral standing cable fly at shoulder height"
+    ],
+    "population": "one adult recreational male athlete, aged 33, of normal habitus"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, Case history (33-year-old patient of normal habitus; sudden left pectoral pain during training on the chest fly machine with a whip-like popping sound and immediate painful restriction of movement)",
+      "role": "supports",
+      "sourceId": "source-pmid-35413736",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "A single published case report describes a humeral rupture of the pectoralis major occurring while training on a chest fly machine, in a 33-year-old man of normal habitus who felt sudden pectoral pain and heard a whip-like popping sound.",
+  "type": "safety-context"
+}

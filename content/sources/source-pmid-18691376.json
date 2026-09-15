@@ -1,0 +1,49 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Ackland", "Pak", "Richardson", "Pandy"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-18691376",
+  "identifiers": {
+    "doi": "10.1111/j.1469-7580.2008.00965.x",
+    "isbn": null,
+    "pmcid": "PMC2644775",
+    "pmid": "18691376"
+  },
+  "projectSummary": "Direct mechanical evidence that the pectoralis major does not act as a single unit: its sub-regions have significantly different leverage at the glenohumeral joint. Abstract-only, so no millimetre value is carried forward.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Cadaveric, eight specimens, abstract-only. Moment arm is leverage, not force or activation.",
+      "Access level corrected on 2026-09-13 from abstract-only to full-text-open. The first pass stopped at the Europe PMC fullTextXML endpoint, which returns 404 for this record; ladder step 2 also names PubMed Central itself, and the article body is served there (https://pmc.ncbi.nlm.nih.gov/articles/PMC2644775/, 171215 bytes). The earlier level understated what was lawfully readable."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric tendon-excursion measurement of instantaneous moment arms.",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Instantaneous moment arms of 18 major muscle sub-regions crossing the glenohumeral joint were measured by the tendon-excursion method in eight entire upper-extremity cadaver specimens, during coronal-plane abduction and sagittal-plane flexion.",
+    "sampleSize": null
+  },
+  "title": "Moment arms of the muscles crossing the anatomical shoulder.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1111/j.1469-7580.2008.00965.x",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/18691376/"
+  },
+  "year": 2008
+}

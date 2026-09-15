@@ -16,6 +16,9 @@ const CROSS_LINK_ROOTS = ['content', 'content-drafts', 'research', 'reviews'];
 const KIND_BY_PREFIX = [
   ['content/claims/', 'claim'],
   ['content/sources/', 'source'],
+  ['content/muscles/', 'muscle'],
+  ['content/exercises/', 'exercise'],
+  ['content/approval-manifests/', 'approvalManifest'],
   ['content/changes/', 'changeRecord'],
   ['research/packets/', 'evidencePacket'],
   ['reviews/evidence/', 'review'],

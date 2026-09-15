@@ -1,0 +1,53 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "not stated on the repository item page"
+  },
+  "authors": ["Schanke"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-handle-1793-62857",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": null,
+    "pmid": null
+  },
+  "projectSummary": "Within-participant acute surface-EMG comparison of nine chest exercises in 14 resistance-trained men, with every exercise normalised to the barbell bench press rather than to a maximal voluntary contraction. MSc thesis, University of Wisconsin-La Crosse; grey literature, not peer-reviewed.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "other-non-peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "institutional-repository-manual-verification",
+    "statusSource": "Institutional repository item page (MINDS@UW, University of Wisconsin) fetched 2026-09-13; no withdrawal or correction notice on the item page. OpenAlex W2902661686 carries no retraction flag."
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "This is the record R1 finding C-1 identified as decisive and unopened. Its full text was obtained on 2026-09-13 from the institutional repository without authentication (21,237,276 bytes, sha256 81a2a094349a0fccd822247cf2d36b08449bffe2035d30869521049c2dc6a950) and read, including the Methods, Figure 2 and Table 2.",
+      "The attribute test was decided from the opened document. The pulley origin height is not stated in the Methods, and Figure 2 depicts a high-to-low path. Under the frozen section 3.2 table the exercise is therefore a related fly-family condition and cannot establish anything about index Y. Absence record A1 survives, but it now survives on a read document rather than on an assumption.",
+      "Risk of bias is high for three stated reasons. First, EMG was normalised to the barbell bench press itself rather than to a maximal voluntary contraction, so every value is a ratio to the comparator and no condition has an independent scale. Second, activation was averaged across the concentric and eccentric phases together, so a phase-specific difference cannot be separated. Third, the bodyweight conditions were not load-matched to the 80 per cent of one-repetition maximum used for the loaded conditions, which the thesis itself states.",
+      "Grey literature: an MSc thesis is not peer-reviewed. Under the eligibility plan it may inform a tier-4 statement with applicability downgraded, and it may not be the sole support for a published claim.",
+      "Surface EMG is an acute activation measure and is not evidence of hypertrophy.",
+      "A non-significant difference between the bench press, the peck deck and the cable crossover is not evidence of equivalence. The thesis reports no equivalence margin and n = 14 gives it little power to exclude a moderate difference; the standard deviations (plus or minus 22.0 to 30.5 per cent) are wide relative to the differences."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "barbell bench press; bent-forward cable crossovers; peck deck machine; inclined dumbbell flys; seated chest press machine; parallel dips, standard push-ups, suspended push-ups, Swiss ball push-ups",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Subjects were 14 apparently healthy male students aged 19 to 30 years (mean 23, SD 2.8), all with previous resistance-training experience, recruited from the University of Wisconsin-La Crosse.",
+    "sampleSize": null
+  },
+  "title": "Electromyographical analysis of the pectoralis major muscle during various chest exercises",
+  "type": "observational-study",
+  "urls": {
+    "doi": null,
+    "primary": "https://minds.wisc.edu/handle/1793/62857",
+    "pubmed": null
+  },
+  "year": 2012
+}

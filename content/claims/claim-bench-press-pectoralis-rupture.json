@@ -1,0 +1,78 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "indirect",
+    "certainty": "low",
+    "direction": "not-applicable",
+    "magnitude": "not-estimable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-bench-press-pectoralis-rupture",
+  "plainLanguage": "Tearing the chest muscle's tendon is a recognised injury that has been reported to happen while bench pressing.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "Case reports and pooled case series have no denominator, so nothing here supports a rate, a risk, or a comparison between exercises.",
+    "This is context, not medical, diagnostic or rehabilitation advice; the project does not give any.",
+    "The commonly repeated association with anabolic steroid use is described in the literature as lacking coherent supporting evidence."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "bench pressing, reported in individual cases and in pooled case series"
+    ],
+    "population": "adult recreational and trained lifters"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Title and case presentation (complex intratendinous rupture during heavy bench pressing)",
+      "role": "supports",
+      "sourceId": "source-pmid-42434169",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract, case description (rupture at the humeral insertion during a bench press manoeuvre)",
+      "role": "supports",
+      "sourceId": "source-pmid-21667914",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Title and Abstract (pooled analysis of 112 reported cases)",
+      "role": "supports",
+      "sourceId": "source-pmid-10795675",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Title and Results (mechanism of injury related to tear location)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-32577421",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Abstract, Results (return to sport and weight training after repair)",
+      "role": "neutral-context",
+      "sourceId": "source-pmid-31303006",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Abstract, Introduction (steroid association described but not coherently evidenced)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-35413736",
+      "supportStrength": "indirect"
+    }
+  ],
+  "statement": "Rupture of the pectoralis major tendon is reported to occur during the bench press, and published case reports describe it happening during a bench press manoeuvre.",
+  "type": "safety-context"
+}

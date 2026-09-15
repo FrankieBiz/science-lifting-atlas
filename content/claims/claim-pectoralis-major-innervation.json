@@ -1,0 +1,84 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-innervation",
+  "plainLanguage": "Two main nerves supply the chest muscle, an upper one and a lower one, but dissection studies find the pattern varies from person to person and that other nerves contribute too.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "A clean one-nerve-per-head account is a simplification: a Sihler-stained series reports the muscle mainly innervated by the lateral pectoral nerve with an intercostal contribution in every specimen.",
+    "Two independent series report three constant pectoral branches rather than two.",
+    "The 62 and 38 per cent figures for the medial nerve's course are reported in the source as attributed to earlier work, not measured there.",
+    "The intercostal contribution was established by Sihler whole-mount nerve staining on five randomly selected muscles, not on all 80 specimens. Eighty is the gross-dissection total. Any statement about intercostal contribution rests on those five.",
+    "Donor mean age in this series was 69.3 (SD 11.8) years, range 48 to 90."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": ["gross and intramuscular nerve dissection"],
+    "population": "adult cadaveric specimens"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, opening (medial nerve course proportions and territories)",
+      "role": "supports",
+      "sourceId": "source-pmid-3579399",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "StatPearls NBK556059, Introduction (medial pectoral nerve, medial cord, C8-T1, lower half of the pectoralis major)",
+      "role": "supports",
+      "sourceId": "source-bookshelf-nbk556059",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Results and Conclusion (mainly lateral pectoral nerve; intercostal contribution in all Sihler-stained specimens)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-31061824",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (three distinct pectoral nerves at trunk level in all 29 dissections)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-11040310",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (three constant branches in 26 plexuses)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-22534124",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (multiple nerve entry points identified by dissection of 20 cadavers)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-28719731",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "StatPearls NBK525991, Nerves (lateral nerve to clavicular head, medial nerve to sternocostal head)",
+      "role": "neutral-context",
+      "sourceId": "source-bookshelf-nbk525991",
+      "supportStrength": "indirect"
+    }
+  ],
+  "statement": "The pectoralis major is innervated by the pectoral nerves, with the lateral pectoral nerve supplying the proximal part of the muscle and the medial pectoral nerve the lower part; primary dissection series report substantial variation in this pattern, including three trunk-level pectoral nerves and an intercostal contribution.",
+  "type": "anatomy"
+}

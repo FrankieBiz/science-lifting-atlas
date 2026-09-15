@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Hernández-Belmonte", "Martínez-Cava", "Pallarés"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-34857426",
+  "identifiers": {
+    "doi": "10.1016/j.ultrasmedbio.2021.10.017",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "34857426"
+  },
+  "projectSummary": "Establishes that operator experience is a measurable source of error in the ultrasound method most of the tier-1 trials in this slice rely on, which is one reason the tier-1 certainty here is low.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": ["Abstract-only; used for a qualifier only."],
+    "riskOfBias": "not-assessed"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "Validity and repeatability study of panoramic ultrasound against MRI.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Both sides of the chest of 16 participants (n = 32) were assessed to quantify measurement errors in panoramic ultrasound estimation of pectoralis major anatomical cross-sectional area, during image acquisition and analysis (repeatability) and against magnetic resonance imaging (validity), and to analyse the influence of operator experience on those errors.",
+    "sampleSize": null
+  },
+  "title": "Pectoralis Cross-Sectional Area can be Accurately Measured using Panoramic Ultrasound: A Validity and Repeatability Study.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.ultrasmedbio.2021.10.017",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/34857426/"
+  },
+  "year": 2022
+}

@@ -1,0 +1,52 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by-nc-nd"
+  },
+  "authors": ["Kikuchi", "Nakazato"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-29541130",
+  "identifiers": {
+    "doi": "10.1016/j.jesf.2017.06.003",
+    "isbn": null,
+    "pmcid": "PMC5812864",
+    "pmid": "29541130"
+  },
+  "projectSummary": "The trial supports the statement that eight weeks of low-load bench press training increases pectoralis major thickness in untrained young men, and reports no detectable difference against a push-up. The identical printed pectoralis values make the between-group pectoralis comparison unusable as a numeric estimate; the within-group direction is still legible because both arms increased.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "The duplicated pectoralis major values are a data-integrity problem that the published text does not explain.",
+      "Nine participants per arm gives very low power to detect a between-group difference, and the report treats absence of a significant difference as similarity.",
+      "Post-testing at 48 hours after the last session leaves acute swelling as a plausible contaminant of a tier-1 measurement.",
+      "A protein supplement was given to both arms, which is balanced but changes the intervention from exercise alone.",
+      "Load was fixed at 40 per cent 1RM, far below the loads usually prescribed for hypertrophy."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "between-participant",
+    "durationWeeks": null,
+    "intervention": "bench press at 40 per cent 1RM; push-up with position adjusted to the same load",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Eighteen male participants, age 20.2 (SD 0.73) years, range 19-22, height 169.8 (SD 4.4) cm, weight 64.5 (SD 4.7) kg, were randomly assigned to bench press at 40 per cent 1RM (n = 9) or push-up adjusted to the same load (n = 9), twice per week for eight weeks, performed to failure with 2-min rest intervals.",
+    "sampleSize": null
+  },
+  "title": "Low-load bench press and push-up induce similar muscle hypertrophy and strength gain.",
+  "type": "randomized-trial",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jesf.2017.06.003",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/29541130/"
+  },
+  "year": 2017
+}

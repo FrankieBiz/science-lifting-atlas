@@ -1,0 +1,55 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "favors-a",
+    "magnitude": "small"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-machine-fly-increases-pectoralis-thickness",
+  "plainLanguage": "Two months of pec deck training made the chest muscle thicker than doing nothing.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "One trial. Group allocation is described but randomisation sequence, allocation concealment and blinded outcome assessment are not reported.",
+    "Muscle thickness was measured at a single supra-axillary site, so the result says nothing about regional growth.",
+    "In the same trial, fifteen minutes a day of pectoral static stretching produced a statistically indistinguishable thickness change, which constrains how confidently this result can be attributed to the resistance training specifically.",
+    "The machine butterfly is a related condition, not the index bilateral standing cable fly at shoulder height."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "machine butterfly, 5 x 10-12 at 10-12RM, 90 s rest, three times weekly for 8 weeks, against a non-training control"
+    ],
+    "population": "recreationally active adults, physically active at least twice weekly, without chest or shoulder injury or surgery in the previous six months"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Methods, intervention; Results, Muscle thickness (strength group versus control, right d = 0.533 p = 0.029, left d = 0.721 p = 0.002; intervention groups indistinguishable, right p = 0.983, left p = 0.905)",
+      "role": "supports",
+      "sourceId": "source-pmid-38240811",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (operator experience is a measurable error source in ultrasound measurement of this muscle)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-34857426",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "Eight weeks of machine butterfly training, five sets of 10 to 12 repetitions at a 10-12RM load three times weekly, increased pectoralis major muscle thickness compared with a non-training control in recreationally active adults.",
+  "type": "longitudinal-adaptation"
+}

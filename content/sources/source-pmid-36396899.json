@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Spitz", "Kataoka", "Dankel", "Bell", "Song", "Wong"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-36396899",
+  "identifiers": {
+    "doi": "10.1007/s40279-022-01790-0",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "36396899"
+  },
+  "projectSummary": "Carried only as the support for the mandatory task-specificity qualifier on every tier-2 statement in this slice. No pooled value from it is quoted, because only the abstract was read.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Abstract-only. Used for a qualifier, never for a numeric estimate."
+    ],
+    "riskOfBias": "not-assessed"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Meta-analysis of the transfer of strength adaptation beyond the trained task.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "A meta-analysis quantifying how far strength adaptation generalises from the trained task to untrained tasks.",
+    "sampleSize": null
+  },
+  "title": "Quantifying the Generality of Strength Adaptation: A Meta-Analysis.",
+  "type": "meta-analysis",
+  "urls": {
+    "doi": "https://doi.org/10.1007/s40279-022-01790-0",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/36396899/"
+  },
+  "year": 2023
+}

@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Wohlann", "Warneke", "Kalder", "Behm", "Schmidt", "Schiemann"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-38240811",
+  "identifiers": {
+    "doi": "10.1007/s00421-023-05413-y",
+    "isbn": null,
+    "pmcid": "PMC11129965",
+    "pmid": "38240811"
+  },
+  "projectSummary": "For this slice the decision-relevant arm is the machine butterfly versus the non-training control: it is the only retrieved trial in which a fly-family condition, trained alone, is compared with no pectoral exercise while pectoralis major thickness is measured with reported reliability. It says nothing about the barbell flat bench press and nothing about a cable fly.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Group allocation is described as an allocation of recruited participants; the report does not describe a randomisation sequence, allocation concealment or blinded outcome assessment.",
+      "Muscle thickness was measured at a single supra-axillary site, not by portion, so it cannot speak to regional hypertrophy.",
+      "The machine butterfly is a related condition, not index Y: it is a machine fly with a fixed movement path, not a bilateral standing cable fly at shoulder height.",
+      "Analysis is by group at post-test; dropout handling and an intention-to-treat statement are not reported in the retrieved text."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "between-participant",
+    "durationWeeks": null,
+    "intervention": "machine butterfly; static stretching; control",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Eighty-one recreationally active participants were allocated to a static stretching group, a strength-training group, or a control group. Participants with chest or shoulder injury or surgery in the previous six months, and participants already stretching the chest or shoulder daily, were excluded. All were physically active at least twice a week.",
+    "sampleSize": null
+  },
+  "title": "Influence of 8-weeks of supervised static stretching or resistance training of pectoral major muscles on maximal strength, muscle thickness and range of motion.",
+  "type": "randomized-trial",
+  "urls": {
+    "doi": "https://doi.org/10.1007/s00421-023-05413-y",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/38240811/"
+  },
+  "year": 2024
+}

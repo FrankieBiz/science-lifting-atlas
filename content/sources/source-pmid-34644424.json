@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Cabral", "de Souza", "de Oliveira", "Vieira"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-34644424",
+  "identifiers": {
+    "doi": "10.1111/sms.14082",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "34644424"
+  },
+  "projectSummary": "The same research group that mapped innervation-zone shift states here, in print, that the inclination literature is contradictory and that measurement artefact is the likely reason. This is the anchor of the contradiction map for tier-4 bench press evidence.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only; eight volunteers."],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "flat bench press; 45-degree inclined bench press",
+    "outcomes": ["SBLA-009 Q1c", "SBLA-009 Q2"],
+    "population": "Single-differential EMGs were collected from 15 regions along the cranio-caudal axis of the pectoralis major while 8 volunteers performed a set of the flat and of the 45-degree inclined bench press at 50 and 70 per cent of 1RM.",
+    "sampleSize": null
+  },
+  "title": "Non-uniform excitation of the pectoralis major muscle during flat and inclined bench press exercises.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1111/sms.14082",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/34644424/"
+  },
+  "year": 2022
+}

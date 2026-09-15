@@ -1,0 +1,56 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "indirect",
+    "certainty": "low",
+    "direction": "favors-a",
+    "magnitude": "small"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-multi-joint-versus-single-joint-programme-strength",
+  "plainLanguage": "In one study, people who trained with compound lifts gained more bench press strength than people who trained with isolation lifts, but their body composition changed the same amount.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The outcome is the exercise the multi-joint group trained and the single-joint group did not, so the difference confounds adaptation with practice of the test.",
+    "No pectoralis-specific size or strength measure was taken, so this says nothing about chest muscle growth.",
+    "The contrast is whole programmes differing in every exercise, not two chest exercises.",
+    "Both groups performed an identical concurrent soccer routine.",
+    "Strength adaptation transfers only partly beyond the trained task, which is why the task-specificity qualifier is mandatory here."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "8 weeks, three sessions weekly, work volume equated individually; multi-joint chest work was the bench press, single-joint chest work was the pec deck machine and incline dumbbell fly"
+    ],
+    "population": "36 young male amateur soccer players with no previous resistance-training experience, in pre-season"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Results and Table 2 (1RM bench press 8.1 versus 10.9 per cent, ANCOVA p < 0.05); Table 1 (exercise lists per group)",
+      "role": "supports",
+      "sourceId": "source-pmid-29312007",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Title and Abstract (generality of strength adaptation)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-36396899",
+      "supportStrength": "indirect"
+    }
+  ],
+  "statement": "In one eight-week volume-equated trial, a programme built entirely from multi-joint exercises produced a larger increase in one-repetition-maximum bench press than a programme built entirely from single-joint exercises (10.9 versus 8.1 per cent, p < 0.05), with no difference in body composition.",
+  "type": "longitudinal-adaptation"
+}

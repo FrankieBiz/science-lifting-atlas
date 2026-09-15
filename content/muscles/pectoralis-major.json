@@ -1,0 +1,51 @@
+{
+  "aliases": ["chest muscle", "pec major"],
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "pectoralis-major",
+  "name": "Pectoralis major",
+  "ontology": {
+    "fma": "FMA:9627",
+    "mesh": "D010369",
+    "uberon": "UBERON:0002381"
+  },
+  "publicationState": "unpublished",
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "sections": [
+    {
+      "claimIds": [
+        "claim-pectoralis-major-adduction",
+        "claim-pectoralis-major-regional-differentiation",
+        "claim-pectoralis-major-regional-activation-varies-with-position",
+        "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
+        "claim-pectoralis-major-attachments",
+        "claim-pectoralis-major-portions",
+        "claim-pectoralis-major-humeral-footprint",
+        "claim-pectoralis-major-enthesis-unilaminar",
+        "claim-pectoralis-major-structural-variation",
+        "claim-pectoralis-major-innervation",
+        "claim-pectoralis-major-surface-emg-limitation"
+      ],
+      "id": "reviewed-evidence",
+      "title": "Reviewed evidence"
+    }
+  ],
+  "slug": "pectoralis-major",
+  "summaryClaimIds": [
+    "claim-pectoralis-major-adduction",
+    "claim-pectoralis-major-regional-differentiation"
+  ]
+}

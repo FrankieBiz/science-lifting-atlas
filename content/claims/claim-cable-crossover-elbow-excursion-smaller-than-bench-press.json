@@ -1,0 +1,49 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "favors-a",
+    "magnitude": "large"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-cable-crossover-elbow-excursion-smaller-than-bench-press",
+  "plainLanguage": "The elbow bends and straightens much less in a cable cross-over than in a bench press.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The cable cross-over in this study is a related condition, not the index cable fly.",
+    "Elbow excursion in the cross-over rose significantly when load increased from 15 to 30 per cent of body weight, which the authors read as difficulty stabilising the elbow under heavier load.",
+    "The cable conditions showed markedly larger between-participant variation than the bench press conditions.",
+    "One study, twenty participants."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "loads of 15 and 30 per cent of body weight, laboratory motion capture"
+    ],
+    "population": "twenty healthy adults aged 18 to 45 with weight-training experience"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Table 2 and Results 3.2 (elbow flexion-extension range of motion and moment; significance p < 0.0125)",
+      "role": "supports",
+      "sourceId": "source-pmid-35202059",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "At matched external loads, elbow flexion-extension range of motion was far smaller in a standing cable cross-over than in a flat barbell bench press: 21.8 (SD 10.9) degrees against 79.5 (SD 6.2) degrees at 15 per cent of body weight.",
+  "type": "exercise-mechanics"
+}

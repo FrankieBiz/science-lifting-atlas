@@ -1,0 +1,46 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "indirect",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-structural-variation",
+  "plainLanguage": "Roughly one chest muscle in three differs in some way from the textbook description.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "One cadaveric series of 40 cadavers (22 male, 18 female) yielding 80 specimens. The donors had a mean age of 69.3 (SD 11.8) years, range 48 to 90. The first pass stated that donor age was not in the retrieved text; it is stated in the Material and Methods, and the correction is recorded.",
+    "A mean donor age of 69.3 years is a material applicability limitation for a claim about typical adult structure presented to lifters, and it is the reason applicability is now recorded as indirect rather than partially-direct.",
+    "The proportion is specific to this series and to its classification scheme."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": ["gross dissection of 80 pectoralis major specimens"],
+    "population": "40 adult cadavers of both sexes, 22 male and 18 female"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Results, proportion of typical structure and the variation classification",
+      "role": "supports",
+      "sourceId": "source-pmid-31061824",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "The typical pectoralis major configuration was observed in 63.75 per cent of 80 cadaveric specimens, with a separate clavicular portion the most frequent variation.",
+  "type": "anatomy"
+}

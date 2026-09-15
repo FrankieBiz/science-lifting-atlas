@@ -1,0 +1,60 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "mixed",
+    "magnitude": "not-estimable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-bench-press-grip-width-activation-mixed",
+  "plainLanguage": "Studies disagree about whether changing your grip width changes how hard the chest muscle works.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The two studies differ in population, load and whether the contraction was isometric or dynamic, so they are not directly comparable.",
+    "The elite-athlete null is a non-significant result in twelve participants and cannot distinguish no difference from not enough information.",
+    "The 6RM load itself did change with grip width, by 5.8 to 11.1 per cent."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "isometric holds at narrow, mid and wide grips; 6RM sets at three grip widths"
+    ],
+    "population": "healthy men and elite male bench press competitors"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, Results (supinated grip increased clavicular portion activity; narrower grip decreased sternoclavicular portion activity)",
+      "role": "supports",
+      "sourceId": "source-pmid-16095407",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (non-significant activation differences across three grip widths; 6RM loads differed by 5.8-11.1 per cent)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-28713459",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (clavicular portion activity differed between a 150 and a 50 per cent biacromial grip only in comparison with a machine press)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-37229415",
+      "supportStrength": "partially-direct"
+    }
+  ],
+  "statement": "Evidence on whether bench press grip width changes pectoralis major activation is mixed: one isometric study found grip width and forearm rotation shifted activation between the muscle's portions, while a study of national and international competitors found no significant difference in pectoralis activation across three grip widths at 6RM.",
+  "type": "exercise-mechanics"
+}

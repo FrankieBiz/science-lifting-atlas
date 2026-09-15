@@ -1,0 +1,56 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by-nc-nd"
+  },
+  "authors": [
+    "Ganokroj",
+    "Midtgaard",
+    "Elrick",
+    "Dey Hazra",
+    "Douglass",
+    "Nolte"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-36157089",
+  "identifiers": {
+    "doi": "10.1177/23259671221121333",
+    "isbn": null,
+    "pmcid": "PMC9502243",
+    "pmid": "36157089"
+  },
+  "projectSummary": "The humeral insertion of the pectoralis major and its relationship to the pectoral nerves are directly measured here in adult human cadavers. The individual measurement labels could not all be paired to their values from the retrieved text layout, so this pass uses the study for the qualitative structure of the insertion and its relation to the pectoral nerves, and does not carry any single millimetre value into a claim.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Eight male cadavers of mean age 57.9 years; no female specimens and no younger specimens.",
+      "The retrieved text linearises the results tables, so value-to-label pairing is not recoverable for every measurement. Recorded rather than guessed."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric dissection and morphometry.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Eight nonpaired fresh-frozen male cadaveric chests were dissected, mean age 57.9 years.",
+    "sampleSize": null
+  },
+  "title": "Qualitative and Quantitative Anatomy of the Humeral Attachment of the Pectoralis Major Muscle and Structures at Risk: A Cadaveric Study.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1177/23259671221121333",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/36157089/"
+  },
+  "year": 2022
+}

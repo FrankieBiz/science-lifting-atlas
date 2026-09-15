@@ -1,0 +1,49 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Coratella", "Tornatore", "Longo", "Esposito", "Cè"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-31397215",
+  "identifiers": {
+    "doi": "10.1080/17461391.2019.1655101",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "31397215"
+  },
+  "projectSummary": "Portion-resolved evidence that bench inclination shifts excitation between the clavicular and sternocostal heads, in a highly trained population. The retrievable abstract truncates before the full comparison, so only the direction for the clavicular head with incline is carried.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only and truncated; effect sizes of d = 2.78 to 7.80 in ten participants are implausibly large for a between-condition activation difference and should be treated with caution rather than quoted as an estimate.",
+      "Ten competitive bodybuilders is a small and highly selected sample."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "horizontal bench press; inclined and declined bench press; chest press machine",
+    "outcomes": ["SBLA-009 Q2", "SBLA-009 Q1c"],
+    "population": "Ten competitive bodybuilders performed four non-exhaustive repetitions at 80 per cent of the exercise-specific 1RM in the horizontal bench press, 45-degree inclined bench press, 15-degree declined bench press and a chest press machine; both concentric and eccentric phases were recorded.",
+    "sampleSize": null
+  },
+  "title": "Specific prime movers' excitation during free-weight bench press variations and chest press machine in competitive bodybuilders.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1080/17461391.2019.1655101",
+    "primary": "http://hdl.handle.net/2434/670735",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/31397215/"
+  },
+  "year": 2020
+}

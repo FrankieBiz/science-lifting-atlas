@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  id: string;
+  preview?: boolean;
+  wording?: 'plain' | 'formal';
+}
+
+const { id, preview = false, wording = 'plain' } = Astro.props;
+const claims = await getCollection('claims');
+const claim = claims.find((entry) => entry.data.id === id)?.data;
+
+if (!claim) throw new Error(`Unknown claim ID: ${id}`);
+
+const eligible =
+  claim.reviewState === 'approved' &&
+  claim.publicationState === 'published' &&
+  claim.review.ownerApprovedAt !== null &&
+  claim.approvalManifestId !== null &&
+  claim.contentChecksum !== null;
+
+if (!preview && !eligible) {
+  throw new Error(
+    `Claim ${id} is not eligible for public rendering; use preview only in a non-public review surface.`,
+  );
+}
+
+const sourceEntries = await getCollection('sources');
+const sourceById = new Map(
+  sourceEntries.map((entry) => [entry.data.id, entry.data]),
+);
+const mixed = claim.sourceLinks.some(
+  (link) => link.role === 'qualifies' || link.role === 'contradicts',
+);
+---
+
+<article
+  class="evidence-claim"
+  data-claim-id={claim.id}
+  data-review-state={claim.reviewState}
+  data-publication-state={claim.publicationState}
+>
+  <p>{wording === 'formal' ? claim.statement : claim.plainLanguage}</p>
+  {
+    mixed && (
+      <p class="evidence-claim__mixed">Evidence is mixed or qualified.</p>
+    )
+  }
+  <details>
+    <summary>Evidence and sources</summary>
+    <p>Certainty: {claim.evidence.certainty}</p>
+    <ul>
+      {
+        claim.sourceLinks.map((link) => {
+          const source = sourceById.get(link.sourceId);
+          if (!source) throw new Error(`Missing source ${link.sourceId}`);
+          const href =
+            source.urls.doi ??
+            source.urls.pubmed ??
+            source.urls.primary ??
+            undefined;
+          return (
+            <li data-source-role={link.role}>
+              {href ? <a href={href}>{source.title}</a> : source.title}
+              {' — '}
+              {link.role}; {link.locator}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </details>
+</article>

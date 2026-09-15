@@ -1,0 +1,60 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "high",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-adduction",
+  "plainLanguage": "Of all the shoulder muscles, the chest muscle has some of the best leverage for pulling the upper arm down and across the body.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "Moment arm is leverage, not force and not activation: a large moment arm does not by itself establish how much a muscle contributes to a given movement.",
+    "Measured by tendon excursion in cadaveric specimens, so it is partially direct for a living lifter.",
+    "Leverage varies by sub-region and by joint position, so a single value for the whole muscle is not meaningful."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "glenohumeral horizontal flexion and elevation in the sagittal, scapular and coronal planes"
+    ],
+    "population": "adult cadaveric upper-extremity specimens"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, Results (largest depressor and adductor moment arms in pectoralis major, latissimus dorsi and teres major)",
+      "role": "supports",
+      "sourceId": "source-pmid-9356931",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (instantaneous moment arms of 18 sub-regions in eight specimens)",
+      "role": "supports",
+      "sourceId": "source-pmid-18691376",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (internal-rotation leverage dominated by inferior subscapularis)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-21064160",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "The pectoralis major is among the muscles with the largest measured adductor moment arms at the glenohumeral joint, alongside the latissimus dorsi and teres major.",
+  "type": "function"
+}

@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Muyor", "Rodríguez-Ridao", "Oliva-Lozano"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-37229415",
+  "identifiers": {
+    "doi": "10.5114/jhk/161468",
+    "isbn": null,
+    "pmcid": "PMC10203828",
+    "pmid": "37229415"
+  },
+  "projectSummary": "A machine press differs measurably from a barbell bench press in clavicular pectoralis activation at a matched relative load. This is portion-resolved tier-4 evidence that the implement and the grip change which part of the muscle is loaded, and it supports no statement about a cable fly.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "The comparison changes body position as well as implement, so implement and trunk orientation are confounded.",
+      "Activation values near 25-30 per cent of MVIC at 60 per cent of 1RM are modest, and the between-exercise difference is small in absolute terms.",
+      "Tier-4 proxy only."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "horizontal bench press, prone grip at 150 and 50 per cent of biacromial width; seated chest press machine, three grips",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Muscle activity of the clavicular and lower pectoralis major, anterior deltoid and triceps brachii was compared during a horizontal bench press with a prone grip at 150 and 50 per cent of biacromial width and a seated chest press with neutral, prone and supine grips, in sets of 8 repetitions at 60 per cent of 1RM.",
+    "sampleSize": null
+  },
+  "title": "Comparison of Muscle Activity between the Horizontal Bench Press and the Seated Chest Press Exercises Using Several Grips.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.5114/jhk/161468",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/37229415/"
+  },
+  "year": 2023
+}

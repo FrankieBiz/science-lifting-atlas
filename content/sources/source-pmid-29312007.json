@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Paoli", "Gentil", "Moro", "Marcolin", "Bianco"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-29312007",
+  "identifiers": {
+    "doi": "10.3389/fphys.2017.01105",
+    "isbn": null,
+    "pmcid": "PMC5744434",
+    "pmid": "29312007"
+  },
+  "projectSummary": "This is the closest longitudinal programme-level analogue to the press-versus-fly question that this pass retrieved, and every axis of it is indirect. The contrast is whole programmes rather than two chest exercises; the chest single-joint work is a pec deck and an incline dumbbell fly, not a cable fly; the only upper-body outcome is 1RM bench press, which the multi-joint group practised and the single-joint group did not; and no pectoralis size measure was taken. The task-specificity qualifier is mandatory here.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "The tier-2 outcome is the exercise one group trained, so the between-group difference confounds adaptation with practice of the test.",
+      "No pectoralis-specific size or strength outcome, so the study cannot bear on tier 1 at all.",
+      "Participants were soccer players in pre-season performing an identical concurrent soccer routine, which adds an unmeasured common exposure.",
+      "Baseline height differed between groups by about 3 cm, and randomisation is described but not detailed."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "between-participant",
+    "durationWeeks": null,
+    "intervention": "multi-joint programme; single-joint programme",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Thirty-six young male amateur soccer players with no previous resistance-training experience completed 4 weeks of familiarisation and were then randomly assigned to a single-joint group (n = 18; age 23.5 (SD 2.7) years, height 182.1 (SD 5.2) cm) or a multi-joint group (n = 18; age 25.5 (SD 3.8) years, height 185.3 (SD 3.6) cm) for 8 weeks, 3 sessions per week.",
+    "sampleSize": null
+  },
+  "title": "Resistance Training with Single vs. Multi-joint Exercises at Equal Total Load Volume: Effects on Body Composition, Cardiorespiratory Fitness, and Muscle Strength.",
+  "type": "randomized-trial",
+  "urls": {
+    "doi": "https://doi.org/10.3389/fphys.2017.01105",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/29312007/"
+  },
+  "year": 2017
+}

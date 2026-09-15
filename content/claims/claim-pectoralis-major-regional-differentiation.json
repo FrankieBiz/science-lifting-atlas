@@ -1,0 +1,91 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-regional-differentiation",
+  "plainLanguage": "Different parts of the chest muscle do measurably different amounts of work, and which part works hardest depends on the movement.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The phenomenon is reported by five independent method families; the magnitudes are not comparable across them and are not pooled.",
+    "Individual samples are small, between eight and forty-eight participants or specimens.",
+    "The strongest regional activation evidence is from female participants only, while most of the exercise activation evidence is from male participants only.",
+    "Regional differentiation in activation is not by itself evidence that a region can be grown selectively by training."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "isometric and ballistic shoulder tasks, passive stretch, and cadaveric moment-arm measurement"
+    ],
+    "population": "healthy adults and adult cadaveric specimens"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, Results (middle sternocostal region activating 12-108 per cent more than clavicular and superior sternocostal regions in named tasks)",
+      "role": "supports",
+      "sourceId": "source-pmid-35093733",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (significant moment-arm differences across pectoralis major sub-regions, p < 0.01)",
+      "role": "supports",
+      "sourceId": "source-pmid-18691376",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Results (heterogeneous surface EMG across the breadth of the muscle during ballistic adduction)",
+      "role": "supports",
+      "sourceId": "source-pmid-21975455",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (independent segmental control during isometric shoulder actions)",
+      "role": "supports",
+      "sourceId": "source-pmid-20870556",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (coordination of 19 muscle segments by movement direction, line of action and moment arm)",
+      "role": "supports",
+      "sourceId": "source-pmid-16458022",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (region-specific in vivo passive stretch response)",
+      "role": "supports",
+      "sourceId": "source-pmid-37939425",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (material properties differ between sternocostal and clavicular fibre regions)",
+      "role": "supports",
+      "sourceId": "source-pmid-28823503",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (activation-dependent stiffness differs by sex and changes with age)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-34009684",
+      "supportStrength": "partially-direct"
+    }
+  ],
+  "statement": "The regions of the pectoralis major are not activated or loaded as one unit: measured moment arms, regional electromyography and tissue-stiffness measurement each show that its sub-regions differ from one another.",
+  "type": "function"
+}

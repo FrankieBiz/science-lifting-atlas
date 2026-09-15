@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Pretterklieber", "Metka", "Klöppel", "Pretterklieber"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35196672",
+  "identifiers": {
+    "doi": "10.1097/prs.0000000000008814",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "35196672"
+  },
+  "projectSummary": "Contributes the specific finding that the abdominal part has an identifiable, separately traceable nerve supply, which supports treating the muscle as having more than two functionally separable parts.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only, formalin-fixed specimens."],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric macroscopic dissection of the nerve supply to the abdominal part.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Fifty pectoralis major muscles and their supplying nerve branches, from 27 formalin-fixed anatomical specimens, were studied by macroscopic dissection to identify the position, intramuscular course and target of the branches innervating the abdominal part.",
+    "sampleSize": null
+  },
+  "title": "Extramuscular and Intramuscular Course of the Nerve Innervating the Abdominal Part of the Pectoralis Major Muscle: An Anatomical Study with Regard to Transaxillary Endoscopic Subpectoral Breast Augmentation.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1097/prs.0000000000008814",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35196672/"
+  },
+  "year": 2022
+}

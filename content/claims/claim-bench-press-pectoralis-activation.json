@@ -1,0 +1,66 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "direct",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-bench-press-pectoralis-activation",
+  "plainLanguage": "The chest muscle works during a barbell bench press, both its upper and lower parts.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "Electromyography measures activation, not force and not growth; master plan section 2.2 prohibits presenting it as a measurement of hypertrophy.",
+    "Surface EMG over this muscle carries the measurement qualifier in claim-pectoralis-major-surface-emg-limitation.",
+    "Samples of twelve to thirty-five participants, mostly male."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "barbell flat bench press at loads from 60 per cent of 1RM to 10RM"
+    ],
+    "population": "resistance-trained adults"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Methods and Results (pectoralis major sampled at clavicular 15 and 60 per cent and sternocostal 15 and 60 per cent during 10RM bench press)",
+      "role": "supports",
+      "sourceId": "source-pmid-40269203",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract and Results (pectoralis major EMG during 6RM competition-style bench press)",
+      "role": "supports",
+      "sourceId": "source-pmid-28713459",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract and Results (clavicular and lower pectoralis major during horizontal bench press at 60 per cent 1RM)",
+      "role": "supports",
+      "sourceId": "source-pmid-37229415",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Title and Abstract",
+      "role": "qualifies",
+      "sourceId": "source-pmid-33310606",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "The pectoralis major is measurably activated during the barbell flat bench press, at both its clavicular and sternocostal regions.",
+  "type": "acute-response"
+}

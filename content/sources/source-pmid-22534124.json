@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["David", "Balaguer", "Baque", "Peretti", "Valla", "Lebreton"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-22534124",
+  "identifiers": {
+    "doi": "10.1016/j.bjps.2012.03.032",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "22534124"
+  },
+  "projectSummary": "A second independent cadaveric series reporting three constant pectoral nerve branches rather than two, which is the same disagreement with tertiary descriptions recorded above.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only, fresh cadavers."],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric dissection of the pectoral nerves.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Twenty-six brachial plexuses from 15 fresh cadavers were dissected and the origins, locations, courses and branches of the pectoral nerves were recorded. Three constant branches were found.",
+    "sampleSize": null
+  },
+  "title": "The anatomy of the pectoral nerves and its significance in breast augmentation, axillary dissection and pectoral muscle flaps.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.bjps.2012.03.032",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/22534124/"
+  },
+  "year": 2012
+}

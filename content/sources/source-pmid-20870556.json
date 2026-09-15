@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Paton", "Brown"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-20870556",
+  "identifiers": {
+    "doi": "10.1016/1050-6411(94)90017-5",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "20870556"
+  },
+  "projectSummary": "The earliest of the retrieved segmental-EMG studies and the origin of the functional-differentiation line of evidence. Carried as corroboration, not as the primary support.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only, eight male subjects, 1994."],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "Segmental surface EMG during isometric shoulder actions.",
+    "outcomes": ["SBLA-009 Q1b"],
+    "population": "Six miniature surface electrode pairs were placed along the origin of the pectoralis major in eight male subjects, and EMG was recorded during isometric shoulder actions in various planes at two contraction intensities; integrated and normalised waveforms were compared statistically to test whether motor units within individual muscular segments are independently controlled.",
+    "sampleSize": null
+  },
+  "title": "An electromyographic analysis of functional differentiation in human pectoralis major muscle.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/1050-6411(94)90017-5",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/20870556/"
+  },
+  "year": 1994
+}

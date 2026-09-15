@@ -1,0 +1,58 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-enthesis-unilaminar",
+  "plainLanguage": "A study that imaged and then sectioned the same fourteen shoulders found a single-layer attachment, not the two-layer attachment usually described.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "One series of fourteen specimens.",
+    "The finding concerns the enthesis; the authors are explicit that a layered structure elsewhere in the tendon is not excluded.",
+    "This contradicts the layered description repeated in reference works, and the contradiction is unresolved in the primary literature."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": ["the enthesis specifically, not the whole tendon"],
+    "population": "adult cadaveric specimens"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Results and Conclusion, enthesis histology",
+      "role": "supports",
+      "sourceId": "source-pmid-32169467",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Purpose (records that the layered description remains controversial)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-38189926",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract, background (records that there is little consensus on musculotendinous architecture)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-19291757",
+      "supportStrength": "indirect"
+    }
+  ],
+  "statement": "In one cadaveric series using ultrasound, MRI and histology on the same fourteen specimens, the pectoralis major humeral enthesis was unilaminar and fibrocartilaginous in every specimen, and none of the three methods identified the tendon layers that the standard description reports.",
+  "type": "anatomy"
+}

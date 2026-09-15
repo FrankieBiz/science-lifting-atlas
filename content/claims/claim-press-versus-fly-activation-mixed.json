@@ -1,0 +1,97 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "indirect",
+    "certainty": "very-low",
+    "direction": "mixed",
+    "magnitude": "not-estimable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-press-versus-fly-activation-mixed",
+  "plainLanguage": "Studies that compared chest-muscle activity between a bench press and a fly disagree. Some find the press higher, several find no difference, and the pooled evidence is too inconsistent to settle it.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "None of these comparators is index Y. Two are dumbbell flies, one is a pec deck machine fly, and one is a bent-forward cable crossover whose pulley origin height is not stated and whose figure depicts a high-to-low path. Under the frozen section 3.2 table each is a distinct condition that is not pooled with the index bilateral standing cable fly at shoulder height.",
+    "The one comparison that reports a difference did not normalise its EMG to any reference contraction. The authors state this and justify it as a within-subject comparison between similar exercises. Un-normalised amplitude cannot be pooled with normalised studies and cannot be read as effort relative to capacity. The first pass recorded these methods as unverifiable; the full text was obtained on 2026-09-13 and they are recorded here.",
+    "The bent-forward cable crossover comparison is an MSc thesis, is not peer-reviewed, normalised every exercise to the bench press itself so that no condition has an independent scale, and averaged the concentric and eccentric phases together. It may inform a tier-4 statement with applicability downgraded and may never be sole support.",
+    "Exercise order changes the result. In a full-text source that samples the sternocostal head, chest-fly activation was 100.13 (SD 13.56) per cent of maximal voluntary isometric contraction when the fly followed the bench press and 81.47 (SD 13.09) per cent when it did not. A single press-versus-fly activation difference is therefore not a stable property of the two exercises.",
+    "The 2023 meta-analysis pools six exercise-type studies whose comparators are push-ups, dumbbell exercises, elastic resistance and a chest press. No cable fly appears in any of them, so it adds no index-Y evidence.",
+    "Heterogeneity in the pooled exercise-type estimates is I-squared 98 per cent (sternal) and 94.9 per cent (clavicular), and the pooled standardised mean differences of 4.04 (sternal; 95 per cent CI 1.74 to 6.35) and 4.53 (clavicular; 95 per cent CI -4.22 to 13.27) are implausibly large for surface-EMG contrasts; the review reports imputing standard deviations where studies did not report them. The confidence intervals are quoted because a second and unrelated result in the same paper, the Figure 7 comparison of other exercises with the push-up, also carries SMD = 4.53 but with 95 per cent CI 4.40 to 7.65; the point estimate alone does not identify the row.",
+    "The 2023 meta-analysis contradicts itself about the direction of the sternal exercise-type difference, and no direction is taken from it here. Its Results text states, twice and verbatim, that \"there is no significant difference in the activation of the clavicular portion when comparing the PB with another exercise; however, there is a greater activation in the sternal pectoralis in the variable exercise (SMD = 4.04; 95% ICI 0 = 1.74; 6.35)\", which places the difference in the comparator exercise. Its Abstract states the opposite (\"greater activations are also seen in the original bench press vs. the comparisons\"), as does its Featured Application (\"BP is the one that most involves the pectoralis major\"). The mechanism is that the paper sign convention inverts between its contrast families: for the inclination family a positive standardised mean difference favours the horizontal bench press, and for the type-of-exercise family it favours the comparator. Table 3 alone cannot resolve the direction, and contradiction-map rows C-11 and C-12 record the conflict.",
+    "Three of the four primary comparisons are null results. A null is not evidence of equivalence: none reports an equivalence margin, and the samples (n = 12 to 17) cannot exclude a moderate difference.",
+    "Electromyography is never evidence of hypertrophy."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "six-repetition-maximum, ten-repetition-maximum and 80 per cent of one-repetition maximum loads",
+      "comparators are a dumbbell fly, a machine fly or pec deck, and a bent-forward cable crossover; none is the index bilateral standing cable fly at shoulder height"
+    ],
+    "population": "resistance-trained adult men, mixed-sex college-age lifters of varied experience, and one sample of trained men in a non-peer-reviewed thesis"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Results, Pectoralis major (16 per cent higher in the barbell bench press across the whole movement, p = 0.027, effect size 0.36); Methods, EMG processing (RMS values not normalised); Discussion, Limitations (cross-talk acknowledged, no mitigation described)",
+      "role": "supports",
+      "sourceId": "source-pmid-33239937",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract, Results (no significant difference in motor unit activation across the three lifts; shorter relative time of activation in the dumbbell fly)",
+      "role": "contradicts",
+      "sourceId": "source-pmid-15903389",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (authorised English), Results (no differences in pectoralis major or anterior deltoid activity between the barbell bench press and the machine fly in 13 trained men at 10RM)",
+      "role": "contradicts",
+      "sourceId": "source-doi-10-1590-s1517-86922007000100012",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Table 2, page 14, and Results, page 13 (bent-forward cable crossovers 93 per cent of the barbell bench press, SD 22.0, not significantly different; peck deck 98 per cent, SD 26.4, not significantly different; inclined dumbbell flys 69 per cent, SD 30.5, significantly lower)",
+      "role": "contradicts",
+      "sourceId": "source-handle-1793-62857",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Table 3, Type of exercise, Bench press vs. other variants type (sternal standardised mean difference 4.04, 95 per cent CI 1.74 to 6.35, I-squared 98, t = 3.62, p = 0.001; clavicular 4.53, 95 per cent CI -4.22 to 13.27, I-squared 94.9, t = 1.65, p = 0.198); Results text accompanying Figure 6, naming the six comparator exercise types and stating that the greater sternal activation is in the variable exercise; Abstract, Results and Featured Application, which state the opposite direction. The confidence intervals identify the rows: the Figure 7 other-exercises-versus-push-up result in the same paper also reports SMD = 4.53, with 95 per cent CI 4.40 to 7.65.",
+      "role": "qualifies",
+      "sourceId": "source-doi-10-3390-app13085203",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract; Results and Table 1 (chest-fly sternocostal pectoralis major 100.13 per cent MVIC in sequence A versus 81.47 per cent in sequence B; significant main effect of sequence)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-25713681",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Methods (bench press and dumbbell fly at 50 per cent 1RM; per-exercise pectoralis values not reported in the retrievable abstract)",
+      "role": "neutral-context",
+      "sourceId": "source-pmid-35599468",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Title and Abstract (surface-EMG amplitude limitations)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-33310606",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "Acute electromyography comparing a barbell bench press with a fly-family exercise is inconsistent. One un-normalised comparison found 16 per cent higher pectoralis major activation in the press than in a dumbbell fly across the whole movement; three other comparisons, against a dumbbell fly, a machine fly and a bent-forward cable crossover, found no significant pectoralis major difference; and a 2023 meta-analysis reports a significant sternal difference between the bench press and its pooled comparator exercises alongside no significant clavicular difference, with heterogeneity so high that neither pooled value is a precise estimate and with the source contradicting itself about which exercise the sternal difference favours.",
+  "type": "acute-response"
+}

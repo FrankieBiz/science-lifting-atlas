@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "scielo open access"
+  },
+  "authors": ["Rocha Júnior", "Gentil", "Oliveira", "do Carmo"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-doi-10-1590-s1517-86922007000100012",
+  "identifiers": {
+    "doi": "10.1590/s1517-86922007000100012",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": null
+  },
+  "projectSummary": "Within-participant acute surface-EMG comparison of the barbell bench press and the machine fly (pec deck) at 10-repetition maximum in 13 trained men.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record fetched 2026-09-13; no update-to entry"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "This is the fourth press-versus-fly-family EMG comparison in the evidence base and the first non-English one. It entered screening only through the remediation non-English route; R1 finding I-6 identified it as a demonstrated recall loss.",
+      "The comparator is a pec deck machine, not a cable fly. It is a related condition and cannot establish anything about index Y.",
+      "The result for the pectoralis major is a null between the two exercises, which is a contradiction to the direction reported by the two English-language dumbbell-fly comparisons, and it is recorded as such rather than smoothed.",
+      "A null between conditions is not evidence of equivalence; the study is small and reports no equivalence margin."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "supino reto com barra (barbell bench press); crucifixo na máquina (machine fly / pec deck)",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Electromyographic activity of the pectoralis major, anterior deltoid and triceps brachii was compared in 13 trained men during 10 maximum repetitions of the barbell bench press and of the machine fly.",
+    "sampleSize": null
+  },
+  "title": "Comparação entre a atividade EMG do peitoral maior, deltóide anterior e tríceps braquial durante os exercícios supino reto e crucifixo",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1590/s1517-86922007000100012",
+    "primary": "https://www.scielo.br/j/rbme/a/wZB7qVqH98pXGzH9p4kyg5Q/",
+    "pubmed": null
+  },
+  "year": 2007
+}

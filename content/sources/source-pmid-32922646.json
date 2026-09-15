@@ -1,0 +1,58 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": [
+    "Chaves",
+    "Rocha-JÚnior",
+    "EncarnaÇÃo",
+    "Martins-Costa",
+    "Freitas",
+    "Coelho"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-32922646",
+  "identifiers": {
+    "doi": "10.70252/fdnb1158",
+    "isbn": null,
+    "pmcid": "PMC7449336",
+    "pmid": "32922646"
+  },
+  "projectSummary": "This trial supports two distinct statements: that eight weeks of bench-press-only training changes pectoralis major thickness in untrained men, and that the change is not uniform across measurement sites. It cannot speak to a cable fly, and its once-weekly frequency is unusually low.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Only 30 of 47 randomised participants contributed muscle thickness data, and the report does not state why the remaining 17 did not.",
+      "Once-weekly training is at the low end of prescribed frequencies and limits generalisation.",
+      "Site labels are intercostal spaces on the rib cage, not clavicular and sternocostal heads, so the regional statement is site-specific rather than portion-specific.",
+      "There is no non-training control arm, so the within-group change cannot be separated from time, familiarisation and measurement drift."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "between-participant",
+    "durationWeeks": null,
+    "intervention": "horizontal bench press; incline bench press; combination",
+    "outcomes": ["SBLA-009 Q2", "SBLA-009 Q1c"],
+    "population": "Forty-seven untrained men were randomly assigned to a horizontal bench press group (n = 15), an incline bench press group (n = 15), or a combination group (n = 17). Training was once per week for eight weeks with the number of sets equalised across groups.",
+    "sampleSize": null
+  },
+  "title": "Effects of Horizontal and Incline Bench Press on Neuromuscular Adaptations in Untrained Young Men.",
+  "type": "randomized-trial",
+  "urls": {
+    "doi": "https://doi.org/10.70252/fdnb1158",
+    "primary": "https://doi.org/10.70252/fdnb1158",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/32922646/"
+  },
+  "year": 2020
+}

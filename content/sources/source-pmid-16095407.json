@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Lehman"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-16095407",
+  "identifiers": {
+    "doi": "10.1519/r-15024.1",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "16095407"
+  },
+  "projectSummary": "Portion-resolved evidence that grip width and forearm rotation change the balance of activation within the pectoralis major during a bench press. Isometric holds, not full repetitions.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; twelve men; isometric holds rather than dynamic repetitions; the elite-athlete study found no significant grip-width effect on pectoralis activation, and both are carried."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "flat bench press with varied grip width and forearm rotation",
+    "outcomes": ["SBLA-009 Q2", "SBLA-009 Q1c"],
+    "population": "The myoelectric signal of the sternoclavicular and clavicular portions of the pectoralis major, the biceps brachii and the lateral head of the triceps brachii was collected in 12 healthy men during an isometric hold of five different bench press exercises, varying grip width (narrow, mid, wide) and supination or pronation.",
+    "sampleSize": null
+  },
+  "title": "The influence of grip width and forearm pronation/supination on upper-body myoelectric activity during the flat bench press.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1519/r-15024.1",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/16095407/"
+  },
+  "year": 2005
+}

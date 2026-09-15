@@ -1,0 +1,53 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "moderate",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-humeral-footprint",
+  "plainLanguage": "Where the chest muscle attaches to the arm bone, the attachment is long from top to bottom but very narrow from side to side.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "Fourteen specimens in one series. The donors were 51 (SD 14) years old at time of death, range 21 to 70 years, 9 male and 5 female. The first pass stated that donor age and sex were not in the retrieved text; they are stated in the Materials and Methods, and the correction is recorded.",
+    "Cadaveric measurement, so it is partially direct for a living lifter, and a mean donor age of 51 years is older than the site audience."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "fresh-frozen whole upper extremities, imaged and then dissected"
+    ],
+    "population": "adult cadaveric specimens"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Results, footprint dimensions and tendon lengths",
+      "role": "supports",
+      "sourceId": "source-pmid-32169467",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Methods and Results, width of the humeral insertion measured in total and by head in eight cadavers",
+      "role": "supports",
+      "sourceId": "source-pmid-36157089",
+      "supportStrength": "partially-direct"
+    }
+  ],
+  "statement": "At the humerus the pectoralis major tendon has a tall, narrow footprint, measured in fourteen cadaveric specimens at 75 mm (SD 9) superior-inferior by 7 mm (SD 1) medial-lateral, with the clavicular head tendon shorter than the sternal head tendon.",
+  "type": "anatomy"
+}

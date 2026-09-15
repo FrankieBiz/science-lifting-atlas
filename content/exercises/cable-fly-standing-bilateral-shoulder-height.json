@@ -1,0 +1,53 @@
+{
+  "aliases": ["standing cable fly", "bilateral cable fly"],
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "equipmentIds": [],
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "cable-fly-standing-bilateral-shoulder-height",
+  "movementPatternIds": [],
+  "name": "Bilateral standing cable fly at shoulder height",
+  "projectDefinition": {
+    "editorial": true,
+    "excluded": [
+      "Machine, dumbbell, unilateral, low-to-high, high-to-low, seated, and lying fly variations."
+    ],
+    "included": [
+      "Project-scoped bilateral standing cable fly with the handles travelling at shoulder height."
+    ]
+  },
+  "publicationState": "unpublished",
+  "relatedEntityIds": ["pectoralis-major", "barbell-flat-bench-press"],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "sections": [
+    {
+      "claimIds": [
+        "claim-cable-crossover-shoulder-moment-larger-than-bench-press",
+        "claim-cable-crossover-elbow-excursion-smaller-than-bench-press",
+        "claim-machine-fly-increases-pectoralis-thickness",
+        "claim-dumbbell-fly-clavicular-activation",
+        "claim-press-versus-fly-activation-mixed",
+        "claim-fly-machine-pectoralis-rupture"
+      ],
+      "id": "reviewed-evidence",
+      "title": "Reviewed evidence"
+    }
+  ],
+  "slug": "cable-fly-standing-bilateral-shoulder-height",
+  "summaryClaimIds": [
+    "claim-cable-crossover-shoulder-moment-larger-than-bench-press",
+    "claim-cable-crossover-elbow-excursion-smaller-than-bench-press"
+  ]
+}

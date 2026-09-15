@@ -1,0 +1,57 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "direct",
+    "certainty": "established-descriptive-fact",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-portions",
+  "plainLanguage": "The chest muscle is usually described as having an upper part from the collarbone and a larger lower part from the breastbone and ribs, plus a small lowest part.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The sternocostal head is described as having between two and seven distinct segments, so a two-part division is a simplification.",
+    "The abdominal part has its own traceable nerve supply, which supports treating it as a separable division."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": ["descriptive division of the intact muscle"],
+    "population": "adult humans"
+  },
+  "sourceLinks": [
+    {
+      "locator": "StatPearls NBK525991, Introduction (two heads; sternocostal head with two to seven segments)",
+      "role": "supports",
+      "sourceId": "source-bookshelf-nbk525991",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract, Methods (nerve branches to the abdominal part traced in 50 muscles from 27 specimens)",
+      "role": "supports",
+      "sourceId": "source-pmid-35196672",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (neurovascular entry points and distribution within the abdominal head, 32 hemithoraxes)",
+      "role": "supports",
+      "sourceId": "source-pmid-25693862",
+      "supportStrength": "partially-direct"
+    }
+  ],
+  "statement": "The pectoralis major is conventionally divided into a clavicular portion and a sternocostal portion, named for their origins, with an abdominal part described as a third division.",
+  "type": "anatomy"
+}

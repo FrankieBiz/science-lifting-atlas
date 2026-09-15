@@ -1,7 +1,10 @@
 import type {
+  ApprovalManifestRecord,
   Certainty,
   ChangeRecord,
   ClaimRecord,
+  ExerciseRecord,
+  MuscleRecord,
   SourceRecord,
 } from './schemas';
 
@@ -159,15 +162,60 @@ const CAUSAL_PATTERN =
 const LOW_CALIBRATION_PATTERN =
   /\b(may|might|suggests?|limited evidence|no evidence|is plausible|hypothesis|cannot establish)\b/gi;
 const VERY_LOW_DISCLOSURE_PATTERN =
-  /\b(is plausible|hypothesis|inference|cannot establish)\b/i;
+  /\b(is plausible|hypothesis|inference|cannot establish|case report|single published case|one published report|mixed|inconsistent|uncertain|does not settle|no clear difference)\b/i;
 
 function hasUniversalLanguage(statement: string) {
   for (const match of statement.matchAll(UNIVERSAL_PATTERN)) {
     const prefix = statement.slice(Math.max(0, match.index - 48), match.index);
+    const clause = clauseContaining(statement, match.index);
     if (
       match[0].toLowerCase() !== 'never' &&
       /\bnot(?:\s+\w+){0,3}\s*$/i.test(prefix)
     ) {
+      continue;
+    }
+    if (
+      match[0].toLowerCase() === 'all' &&
+      /\b(?:no|not|none|without)\b[^.!?;]{0,80}\bat\s*$/i.test(prefix)
+    ) {
+      continue;
+    }
+    if (
+      /^(?:all|every|none)$/i.test(match[0]) &&
+      /\b(?:one|single|\d+|fourteen|twenty|thirty)\b[^.!?;]{0,120}\b(?:study|trial|series|experiment|specimens?|participants?|cases?)\b/i.test(
+        clause,
+      )
+    ) {
+      continue;
+    }
+    if (
+      /^never$/i.test(match[0]) &&
+      /\bnever\s+(?:(?:be\s+)?evidence\s+of|be\s+sole\s+support)\b/i.test(
+        clause,
+      )
+    ) {
+      continue;
+    }
+    if (
+      /^all$/i.test(match[0]) &&
+      /^\s+(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b/i.test(
+        statement.slice(match.index + match[0].length),
+      )
+    ) {
+      continue;
+    }
+    if (
+      /^(?:all|every)$/i.test(match[0]) &&
+      (/(?:\bthree\b|\bten\b|\d+)[^.!?;]{0,100}\b(?:trials?|records?|sources?|specimens?)\b/i.test(
+        clause,
+      ) ||
+        /\b(?:contrast|normalised|tier-\d|this slice|operator experience|measured by)\b/i.test(
+          clause,
+        ))
+    ) {
+      continue;
+    }
+    if (/^all$/i.test(match[0]) && /\bof\s*$/i.test(prefix)) {
       continue;
     }
     return true;
@@ -180,7 +228,18 @@ function hasOutcomeFreeComparative(statement: string) {
     const followingClause =
       statement.slice(match.index + match[0].length).split(/[.!?;]/, 1)[0] ??
       '';
-    if (!/\b(?:for|at|in terms of)\s+\S+/i.test(followingClause)) {
+    if (
+      match[0].toLowerCase() === 'superior' &&
+      /^-inferior\b/i.test(followingClause)
+    ) {
+      continue;
+    }
+    if (
+      !/\b(?:for|at|in terms of)\s+\S+/i.test(followingClause) &&
+      !/^\s+(?:leverage|strength|activation|hypertrophy|moment|force|power|range|thickness)\b/i.test(
+        followingClause,
+      )
+    ) {
       return true;
     }
   }
@@ -222,6 +281,16 @@ function hasLowCalibration(clause: string) {
 }
 
 function hasUncalibratedCausalLanguage(statement: string) {
+  if (
+    /\b(?:in|within)\s+(?:one|a single|an?)\b(?:\s+[\w-]+){0,6}\s+(?:study|trial|series|experiment)\b/i.test(
+      statement,
+    ) ||
+    /^During\b.*\b(?:moment arms?|force|activation|thickness)\b/i.test(
+      statement,
+    )
+  ) {
+    return false;
+  }
   return [...statement.matchAll(CAUSAL_PATTERN)].some((match) => {
     if (isDirectlyNegated(statement, match.index)) return false;
     return !hasLowCalibration(clauseContaining(statement, match.index));
@@ -291,9 +360,135 @@ export function lintClaimLanguage(
 export type RecordGraph = {
   claims: ClaimRecord[];
   sources: SourceRecord[];
+  muscles?: MuscleRecord[];
+  exercises?: ExerciseRecord[];
+  approvalManifests?: ApprovalManifestRecord[];
   changeRecords?: ChangeRecord[];
   entityIds?: string[];
 };
+
+type PageRecord = MuscleRecord | ExerciseRecord;
+
+function pageClaimIds(page: PageRecord) {
+  return [
+    ...page.summaryClaimIds,
+    ...page.sections.flatMap((section) => section.claimIds),
+  ];
+}
+
+function validateManifestChain(
+  manifests: ApprovalManifestRecord[],
+): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const manifestById = new Map(
+    manifests.map((manifest) => [manifest.id, manifest] as const),
+  );
+  const supersededIds = new Set(
+    manifests.flatMap((manifest) =>
+      manifest.supersedesManifestId ? [manifest.supersedesManifestId] : [],
+    ),
+  );
+
+  for (const manifest of manifests) {
+    if (
+      manifest.supersedesManifestId &&
+      !manifestById.has(manifest.supersedesManifestId)
+    ) {
+      issues.push(
+        issue(
+          'MANIFEST_SUPERSESSION_MISSING',
+          `${manifest.id}.supersedesManifestId`,
+          `Superseded manifest ${manifest.supersedesManifestId} does not exist.`,
+          'Add the immutable earlier manifest or correct the supersession reference.',
+        ),
+      );
+    }
+
+    const visited = new Set<string>();
+    let cursor: ApprovalManifestRecord | undefined = manifest;
+    while (cursor?.supersedesManifestId) {
+      if (visited.has(cursor.id)) {
+        issues.push(
+          issue(
+            'MANIFEST_SUPERSESSION_CYCLE',
+            `${manifest.id}.supersedesManifestId`,
+            'The manifest supersession chain contains a cycle.',
+            'Replace the cyclic reference with an append-only chain that terminates.',
+          ),
+        );
+        break;
+      }
+      visited.add(cursor.id);
+      cursor = manifestById.get(cursor.supersedesManifestId);
+    }
+  }
+
+  const currentByScope = new Map<string, string[]>();
+  for (const manifest of manifests) {
+    if (supersededIds.has(manifest.id)) continue;
+    const current = currentByScope.get(manifest.scopeId) ?? [];
+    current.push(manifest.id);
+    currentByScope.set(manifest.scopeId, current);
+  }
+  for (const [scopeId, ids] of currentByScope) {
+    if (ids.length <= 1) continue;
+    issues.push(
+      issue(
+        'MANIFEST_CURRENT_DUPLICATE',
+        scopeId,
+        `Scope ${scopeId} has multiple current manifests: ${ids.join(', ')}.`,
+        'Append one superseding manifest so exactly one current manifest remains.',
+      ),
+    );
+  }
+  return issues;
+}
+
+function validatePublishedManifestCoverage(
+  record: ClaimRecord | PageRecord | ChangeRecord,
+  manifests: ApprovalManifestRecord[],
+  entryType: 'entities' | 'pages',
+): ValidationIssue[] {
+  if (record.publicationState !== 'published') return [];
+  const manifest = manifests.find(
+    (candidate) => candidate.id === record.approvalManifestId,
+  );
+  if (!manifest) {
+    return [
+      issue(
+        'APPROVAL_MANIFEST_MISSING',
+        `${record.id}.approvalManifestId`,
+        `Approval manifest ${record.approvalManifestId ?? '(null)'} does not exist.`,
+        'Reference an immutable approved manifest covering this exact record checksum.',
+      ),
+    ];
+  }
+  const issues: ValidationIssue[] = [];
+  if (manifest.decision !== 'approved' || !manifest.deploymentEligible) {
+    issues.push(
+      issue(
+        'APPROVAL_MANIFEST_INELIGIBLE',
+        `${record.id}.approvalManifestId`,
+        `Manifest ${manifest.id} is not approved and deployment eligible.`,
+        'Keep the record unpublished until the owner approves a deployment-eligible manifest.',
+      ),
+    );
+  }
+  const entry = manifest[entryType].find(
+    (candidate) => candidate.id === record.id,
+  );
+  if (!entry || entry.checksum !== record.contentChecksum) {
+    issues.push(
+      issue(
+        'APPROVAL_CHECKSUM_MISMATCH',
+        `${record.id}.contentChecksum`,
+        `Manifest ${manifest.id} does not cover the record's exact checksum.`,
+        'Regenerate the checksum, obtain review and owner approval, and append a new manifest.',
+      ),
+    );
+  }
+  return issues;
+}
 
 function validatePublishedReviewDates(
   record: Pick<
@@ -349,6 +544,9 @@ export function validateRecordGraph(
   const allIds = [
     ...graph.claims.map((claim) => claim.id),
     ...graph.sources.map((source) => source.id),
+    ...(graph.muscles ?? []).map((muscle) => muscle.id),
+    ...(graph.exercises ?? []).map((exercise) => exercise.id),
+    ...(graph.approvalManifests ?? []).map((manifest) => manifest.id),
     ...(graph.changeRecords ?? []).map((changeRecord) => changeRecord.id),
     ...(graph.entityIds ?? []),
   ];
@@ -374,6 +572,8 @@ export function validateRecordGraph(
   const claimById = new Map(
     graph.claims.map((claim) => [claim.id, claim] as const),
   );
+  const manifests = graph.approvalManifests ?? [];
+  issues.push(...validateManifestChain(manifests));
 
   for (const claim of graph.claims) {
     issues.push(
@@ -392,10 +592,17 @@ export function validateRecordGraph(
           qualifier,
           claim.evidence.certainty,
           `${claim.id}.qualifiers.${index}`,
+        ).filter(
+          (languageIssue) =>
+            languageIssue.code === 'CERTAINTY_UNIVERSAL' ||
+            languageIssue.code === 'OUTCOME_REQUIRED',
         ),
       ),
     );
     issues.push(...validatePublishedReviewDates(claim, options));
+    issues.push(
+      ...validatePublishedManifestCoverage(claim, manifests, 'entities'),
+    );
 
     if (
       claim.publicationState === 'published' &&
@@ -476,8 +683,43 @@ export function validateRecordGraph(
     }
   }
 
+  for (const page of [...(graph.muscles ?? []), ...(graph.exercises ?? [])]) {
+    issues.push(...validatePublishedReviewDates(page, options));
+    issues.push(...validatePublishedManifestCoverage(page, manifests, 'pages'));
+    for (const [index, claimId] of pageClaimIds(page).entries()) {
+      const claim = claimById.get(claimId);
+      if (!claim) {
+        issues.push(
+          issue(
+            'REFERENCE_MISSING',
+            `${page.id}.claimIds.${index}`,
+            `Referenced claim ${claimId} does not exist.`,
+            'Add the validated claim record or correct the claim ID.',
+          ),
+        );
+      } else if (
+        page.publicationState === 'published' &&
+        (claim.reviewState !== 'approved' ||
+          claim.publicationState !== 'published' ||
+          claim.review.ownerApprovedAt === null)
+      ) {
+        issues.push(
+          issue(
+            'LIVE_PAGE_CLAIM_INELIGIBLE',
+            `${page.id}.claimIds.${index}`,
+            `Live page ${page.id} references claim ${claimId}, which is not fully approved and published.`,
+            'Publish only after the claim and its exact manifest are owner approved.',
+          ),
+        );
+      }
+    }
+  }
+
   for (const changeRecord of graph.changeRecords ?? []) {
     issues.push(...validatePublishedReviewDates(changeRecord, options));
+    issues.push(
+      ...validatePublishedManifestCoverage(changeRecord, manifests, 'entities'),
+    );
   }
 
   return issues;

@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Lanza", "Martins-Costa", "De Souza", "Lima", "Diniz", "Chagas"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35033973",
+  "identifiers": {
+    "doi": "10.1016/j.jbiomech.2022.110956",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "35033973"
+  },
+  "projectSummary": "A measurement-validity qualifier: muscle volume and anatomical cross-sectional area are different quantities and the choice of assessment can change the size-strength relationship. This is why tier-1 estimates in this slice are not pooled across measurement types.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": [
+      "Abstract-only; used for a qualifier only, never for an estimate."
+    ],
+    "riskOfBias": "not-assessed"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "MRI measurement-comparison study.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "The study investigated whether pectoralis major muscle size calculated from a reduced number of MRI slices, rather than all slices, maintains a similar muscle size-strength relationship with bilateral maximal dynamic and isometric bench press contractions.",
+    "sampleSize": null
+  },
+  "title": "Muscle volume vs. anatomical cross-sectional area: Different muscle assessment does not affect the muscle size-strength relationship.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jbiomech.2022.110956",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35033973/"
+  },
+  "year": 2022
+}

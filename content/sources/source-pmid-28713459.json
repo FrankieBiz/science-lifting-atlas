@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by-nc-nd"
+  },
+  "authors": ["Saeterbakken", "Mo", "Scott", "Andersen"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-28713459",
+  "identifiers": {
+    "doi": "10.1515/hukin-2017-0047",
+    "isbn": null,
+    "pmcid": "PMC5504579",
+    "pmid": "28713459"
+  },
+  "projectSummary": "In elite bench press athletes at 6RM, pectoralis major activation did not differ significantly across grip width or bench inclination, while the load lifted did. This is a null result on a variable the training literature often treats as decisive, and it is reported here with the same prominence as a positive one.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Twelve elite competitors is a small and highly selected sample; the population is at the edge of the eligible band for a general recommendation.",
+      "Non-significance in a sample of twelve cannot distinguish no difference from not enough information; master plan rule H2 applies.",
+      "Whole-muscle pectoralis major sampling, not portion-resolved."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "competition-style flat bench press, wide grip; medium and narrow grip on a flat bench; inclined and declined bench with wide grip",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Twelve bench press athletes competing at national and international level performed 6RM sets. EMG was measured in the pectoralis major, anterior and posterior deltoid, biceps brachii, triceps brachii and latissimus dorsi.",
+    "sampleSize": null
+  },
+  "title": "The Effects of Bench Press Variations in Competitive Athletes on Muscle Activity and Performance.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1515/hukin-2017-0047",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/28713459/"
+  },
+  "year": 2017
+}

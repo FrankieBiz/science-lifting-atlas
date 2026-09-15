@@ -1,0 +1,56 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": [
+    "Sousa",
+    "de Farias",
+    "de Amorim Batista",
+    "de Oliveira",
+    "Pirauá",
+    "Beltrão"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35599468",
+  "identifiers": {
+    "doi": "10.3233/bmr-210243",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "35599468"
+  },
+  "projectSummary": "A third press-versus-fly activation dataset, at a submaximal matched relative load. Carried for the contradiction map alongside the other two.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; the per-exercise pectoralis values are not in the retrievable abstract.",
+      "Participants were screened for scapular dyskinesis, which is a movement-pattern finding rather than a diagnosed pathology; all were asymptomatic."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press; dumbbell fly",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Twenty-eight physically active men were allocated to a control group (n = 14) and a scapular dyskinesis group (n = 14), all asymptomatic. They performed six repetitions of three seconds of the bench press and the dumbbell fly at 50 per cent of 1RM, on a bench and on a Swiss ball.",
+    "sampleSize": null
+  },
+  "title": "Activation of upper limb muscles in subjects with scapular dyskinesis during bench-press and dumbbell fly on stable and unstable surfaces.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.3233/bmr-210243",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35599468/"
+  },
+  "year": 2022
+}

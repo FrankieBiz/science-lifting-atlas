@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Lauver", "Cayot", "Scheuermann"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-25799093",
+  "identifiers": {
+    "doi": "10.1080/17461391.2015.1022605",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "25799093"
+  },
+  "projectSummary": "Within-participant acute surface-EMG comparison of four bench angles (0, 30, 45 and -15 degrees) at 65 per cent of one-repetition maximum in 14 resistance-trained males, with each contraction phase subdivided into four 25 per cent contraction-duration windows.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "NCBI PubMed record fetched 2026-09-13; no retraction or correction notice"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": [
+      "Abstract only. The acquisition ladder was run in full on 2026-09-13 and returned no lawful full text; the publisher is closed to this client and no repository or PMC copy exists.",
+      "The headline result is a partial null: no upper-pectoralis difference across any bench condition over the complete concentric contraction, with differences appearing only in the 26 to 50 per cent contraction-duration window. A whole-contraction null and a sub-phase difference are different findings and must not be reported interchangeably.",
+      "This record is the second of the two studies R1 finding I-13 identified as absent from the first pass. It entered screening here through the amended portion-terminology stratum N-RS4a.",
+      "Surface EMG is an acute activation measure and is not evidence of hypertrophy."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press at four angles",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Fourteen healthy resistance-trained males (age 21.4 (SD 0.4) years) performed one set of six repetitions of a free-weight barbell bench press at 0, 30, 45 and -15 degree bench angles at 65 per cent of one-repetition maximum.",
+    "sampleSize": null
+  },
+  "title": "Influence of bench angle on upper extremity muscular activation during bench press exercise",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1080/17461391.2015.1022605",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/25799093/"
+  },
+  "year": 2016
+}

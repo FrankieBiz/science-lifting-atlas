@@ -1,0 +1,53 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": [
+    "Lanza",
+    "Martins-Costa",
+    "de Almeida",
+    "de Souza",
+    "Diniz",
+    "Lima"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-37675501",
+  "identifiers": {
+    "doi": "10.23736/s0022-4707.23.15090-0",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "37675501"
+  },
+  "projectSummary": "A second measurement-validity qualifier: the imaging plane changes the cross-sectional area obtained for this muscle. Tier-1 values measured on different planes are not interchangeable.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": ["Abstract-only; used for a qualifier only."],
+    "riskOfBias": "not-assessed"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "MRI plane-comparison study.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "The study asked whether pectoralis major and triceps brachii anatomical cross-sectional area calculated from different MRI planes presents a similar muscle size-strength relationship, noting that these muscles are often acquired and analysed on the axial plane.",
+    "sampleSize": null
+  },
+  "title": "Pectoralis major and triceps brachii cross-sectional area measured on different planes: the effect on the muscle size-strength relationship.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.23736/s0022-4707.23.15090-0",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/37675501/"
+  },
+  "year": 2023
+}

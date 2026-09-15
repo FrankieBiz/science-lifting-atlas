@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by-nc-nd"
+  },
+  "authors": ["Synovec", "Shaw", "Hattaway", "Wilson", "Chabak", "Parada"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-32577421",
+  "identifiers": {
+    "doi": "10.1177/2325967120925019",
+    "isbn": null,
+    "pmcid": "PMC7288815",
+    "pmid": "32577421"
+  },
+  "projectSummary": "Supports the general statement that mechanism and tear location are related, in a young active population. The individual mechanisms were not extracted into a count in this pass.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Military cohort, retrospective imaging review, no denominator of exposure."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Retrospective MRI series in an active-duty military cohort.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "MRI of pectoralis major injuries in an active-duty military cohort found that the mechanism of injury was related to the location of the tear.",
+    "sampleSize": null
+  },
+  "title": "Magnetic Resonance Imaging of Pectoralis Major Injuries in an Active Duty Military Cohort: Mechanism Affects Tear Location.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1177/2325967120925019",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/32577421/"
+  },
+  "year": 2020
+}

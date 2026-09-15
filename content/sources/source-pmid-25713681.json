@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Soncin", "Pennone", "Guimarães", "Mezêncio", "Amadio", "Serrão"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-25713681",
+  "identifiers": {
+    "doi": "10.2478/hukin-2014-0127",
+    "isbn": null,
+    "pmcid": "PMC4327372",
+    "pmid": "25713681"
+  },
+  "projectSummary": "The usable fact for this slice is narrower than the paper's own claim: the sternocostal head of the pectoralis major is strongly activated during a chest fly, and how strongly depends on what preceded it. Because the published per-exercise values are entangled with sequence, this source cannot give a clean bench-press-versus-chest-fly activation contrast.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Participants are described as youth men with strength-training experience; exact ages are not in the retrieved text, so the age-band eligibility is recorded as unverified.",
+      "Only the sternocostal head was sampled, so nothing follows about the clavicular portion.",
+      "Normalisation to MVIC with values reaching 100 per cent of MVIC during a dynamic set indicates that the MVIC reference did not bound the dynamic activity, which limits between-exercise comparison.",
+      "The implements used for the bench press and the chest fly are not specified."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press; chest fly",
+    "outcomes": ["SBLA-009 Q2", "SBLA-009 Q1b"],
+    "population": "Surface EMG was recorded from the sternocostal head of the pectoralis major, the anterior deltoid and the long head of the triceps brachii, normalised to maximal voluntary isometric contraction, during two opposite exercise sequences, each of three sets of 8RM.",
+    "sampleSize": null
+  },
+  "title": "Influence of exercise order on electromyographic activity during upper body resistance training.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.2478/hukin-2014-0127",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/25713681/"
+  },
+  "year": 2014
+}

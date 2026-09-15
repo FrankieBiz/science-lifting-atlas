@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Çabuk", "Ulupınar", "İnce", "İnaç", "Yılmaz", "Ateş"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-42376296",
+  "identifiers": {
+    "doi": "10.3389/fbioe.2026.1821665",
+    "isbn": null,
+    "pmcid": "PMC13311252",
+    "pmid": "42376296"
+  },
+  "projectSummary": "Pectoralis major EMG characteristics change with humeral elevation angle. This is Q1c evidence in the frequency domain rather than the amplitude domain, so it demonstrates position dependence without quantifying a change in contribution to torque.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Mean frequency is a spectral property influenced by fibre conduction velocity, fatigue and electrode geometry; it is not a measure of force contribution.",
+      "Whole-muscle pectoralis sampling at a single electrode site, so no portion resolution.",
+      "Eight participants per testing group."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "standardised arm elevation at 90, 135 and 180 degrees",
+    "outcomes": ["SBLA-009 Q1c"],
+    "population": "Surface EMG was recorded from the anterior, middle and posterior deltoid, infraspinatus, latissimus dorsi, serratus anterior, pectoralis major and the external obliques during a standardised arm-elevation strength test at 90, 135 and 180 degrees. Pectoralis major electrodes were placed in the neutral arm position 3.5 cm medial to the anterior axillary line. Twenty-four participants were tested in three groups of eight to distribute testing load.",
+    "sampleSize": null
+  },
+  "title": "Shoulder angle effects on neuromuscular activation and rapid force production: sEMG time-frequency and force-time analyses.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.3389/fbioe.2026.1821665",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/42376296/"
+  },
+  "year": 2026
+}

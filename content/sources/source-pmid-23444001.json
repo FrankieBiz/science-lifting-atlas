@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Sim", "Hwang", "Huan", "Hwang", "Kim", "Chung"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-23444001",
+  "identifiers": {
+    "doi": "10.1007/s00266-013-0091-7",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "23444001"
+  },
+  "projectSummary": "Direct measured attachment evidence for the abdominal part, located against a named bony landmark.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; a single-ancestry cadaveric sample, which the paper itself states."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric morphometry and tensile testing of the abdominal head.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "In 20 hemithoraxes of fresh Korean cadavers, the width, thickness and location of the origin of the abdominal head of the pectoralis major were measured in relation to the seventh rib-costal cartilage junction, and a force gauge measured the force needed to detach the abdominal head from its origin.",
+    "sampleSize": null
+  },
+  "title": "Anatomy and tensile strength of the abdominal head of the pectoralis major muscle in relation to transaxillary breast augmentation.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1007/s00266-013-0091-7",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/23444001/"
+  },
+  "year": 2013
+}

@@ -1,0 +1,59 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-bench-press-shoulder-moment-arm-decreases",
+  "plainLanguage": "As the bar goes up, the leverage the weight has over the shoulder falls the whole way, while the leverage over the elbow is smallest at the hardest point of the lift.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "Ten elite powerlifters in a 1989 study; competition technique may not generalise to a recreational lifter.",
+    "Joint moments computed from vertical barbell force alone are incomplete: lateral barbell forces must be measured, and technique and expertise change the moments obtained."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "bench press at about 80 per cent of maximum, at maximum, and at a failed supramaximal load, in a simulated competition setting"
+    ],
+    "population": "elite male powerlifters"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Abstract, Results (shoulder and elbow moment arms through the ascent and the sticking region)",
+      "role": "supports",
+      "sourceId": "source-pmid-2779404",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Title and Abstract (lateral barbell forces must be measured)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-33555823",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Abstract (net joint moments differ by training expertise and sex)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-35157403",
+      "supportStrength": "direct"
+    }
+  ],
+  "statement": "During the ascent of a barbell bench press the moment arm of the bar about the shoulder axis decreases continuously, while the moment arm about the elbow axis reaches its minimum at the sticking region.",
+  "type": "exercise-mechanics"
+}

@@ -1,0 +1,52 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Solstad", "Andersen", "Shaw", "Hoel", "Vonheim", "Saeterbakken"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-33239937",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": "PMC7675616",
+    "pmid": "33239937"
+  },
+  "projectSummary": "The most direct retrieved press-versus-fly activation contrast. It is a dumbbell fly, not a cable fly, and it is a tier-4 acute proxy: master plan section 2.2 forbids reading it as a hypertrophy comparison.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "PubMed record comments-and-corrections fields plus the Crossref/Retraction Watch CSV export, fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only, so normalisation reference, electrode placement and crosstalk handling could not be verified; the repository's own methods source says standard bipolar surface EMG mischaracterises this muscle.",
+      "The load is 6RM in each exercise, so the absolute external load differs between conditions by design.",
+      "Whole-muscle pectoralis sampling; no portion resolution.",
+      "Access level corrected on 2026-09-13 from abstract-only to full-text-open. The first pass stopped at the Europe PMC fullTextXML endpoint, which returns 404 for this record; ladder step 2 also names PubMed Central itself, and the article body is served there (https://pmc.ncbi.nlm.nih.gov/articles/PMC7675616/, 175892 bytes). The earlier level understated what was lawfully readable.",
+      "Amplitude was compared without normalisation to any reference contraction. Un-normalised RMS amplitude is comparable within a subject between two similar exercises, which is what the authors claim, but it cannot be read as a measure of how hard the muscle worked relative to its capacity, and it cannot be pooled with normalised studies. This is a material methodological limitation that the first pass recorded as unverifiable."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "barbell bench press; dumbbell flyes",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Seventeen resistance-trained men, age 22.9 (SD 1.8) years, height 1.80 (SD 0.06) m, body mass 80.0 (SD 8.3) kg, with 4.8 (SD 2.0) years of resistance-training experience.",
+    "sampleSize": null
+  },
+  "title": "A Comparison of Muscle Activation between Barbell Bench Press and Dumbbell Flyes in Resistance-Trained Males.",
+  "type": "observational-study",
+  "urls": {
+    "doi": null,
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/33239937/"
+  },
+  "year": 2020
+}

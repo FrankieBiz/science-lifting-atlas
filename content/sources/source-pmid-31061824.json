@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by"
+  },
+  "authors": ["Haładaj", "Wysiadecki", "Clarke", "Polguj", "Topol"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-31061824",
+  "identifiers": {
+    "doi": "10.1155/2019/6212039",
+    "isbn": null,
+    "pmcid": "PMC6466946",
+    "pmid": "31061824"
+  },
+  "projectSummary": "Two usable facts: roughly a third of specimens departed from the textbook configuration, which bounds how categorically the muscle page may describe structure; and intercostal nerve contribution was present in every stained specimen, which complicates the simple lateral-nerve-to-clavicular-head, medial-nerve-to-sternocostal-head account found in tertiary references.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "The full text states the donor demographics: 40 cadavers of both sexes (22 males, 18 females), yielding 80 pectoralis major specimens; mean age 69.3 (SD 11.8) years, range 48 to 90 years. The first pass recorded donor age as not stated; it is stated, and the correction is recorded here.",
+      "A mean donor age of 69.3 years is a material applicability limitation for any claim about typical adult structure presented to lifters, and it is now stated rather than suppressed.",
+      "The attachment description in the introduction is background attributed to another source and must not be cited as this study findings.",
+      "The Sihler intramuscular staining sub-study was performed on five randomly selected muscles, not on all 80 specimens. Eighty is the gross-dissection total. Any statement about intercostal contribution to innervation rests on those five."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric dissection with Sihler intramuscular nerve staining.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Forty cadavers of both sexes (22 male, 18 female) gave 80 pectoralis major specimens.",
+    "sampleSize": null
+  },
+  "title": "Anatomical Variations of the Pectoralis Major Muscle: Notes on Their Impact on Pectoral Nerve Innervation Patterns and Discussion on Their Clinical Relevance.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1155/2019/6212039",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/31061824/"
+  },
+  "year": 2019
+}

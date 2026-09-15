@@ -1,0 +1,54 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by 4.0"
+  },
+  "authors": ["Arseneault", "Roy", "Sercia"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-doi-10-47206-ijsc-v1i1-39",
+  "identifiers": {
+    "doi": "10.47206/ijsc.v1i1.39",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": null
+  },
+  "projectSummary": "The most portion-resolved bench-press variation study retrieved in this pass, and the record SBLA-010 R2 finding N-1 proved had been recorded as unobtainable while its own publisher URL served the complete CC BY PDF. Its bearing on claim-bench-press-inclination-shifts-regional-activation is mainly restrictive: within matched pronated grips it reports no significant sternocostal difference across the three inclinations, which is evidence against the claim sternocostal limb, and it reports no clavicular advantage for the incline at matched wide pronated grip. Its apparent incline-favours-clavicular and decline-favours-abdominal pattern in Table 3 is carried by cells that also differ in grip type and width and in absolute load, so it cannot be read as an inclination effect. It supports no hypertrophy statement and no index-Y statement.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-15",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-15",
+    "statusMethod": "publisher-landing-page",
+    "statusSource": "Publisher landing page https://journal.iusca.org/index.php/Journal/article/view/39 fetched 2026-09-15 (HTTP 200, 34509 bytes): article live, no retraction, correction or expression-of-concern notice displayed. DOAJ indexes the journal; its article page refused this automated client with a Cloudflare challenge and could not be read."
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "The source contradicts itself on its own headline conclusion. The Abstract states that \"the bench press exercise performed with a wide pronation grip at 0 degrees can maximize the activation of the three heads of the PM\", but Table 3 lists that same position (HPW) among the positions of MINIMUM activation for the clavicular head, and Practical Application point 3 states that in the horizontal bench press \"a closer grip leads to a better recruitment\" of the clavicular head. The Abstract conclusion is not supported by the paper for the clavicular head. Table 3 and the Results text are the primary record and are what this extraction relies on.",
+      "Inclination is confounded with grip in the design. The twelve cells vary inclination, grip type and grip width together, and each cell was loaded at its own 12RM, so absolute load differs between cells by design (Table 1 ranges from 57.1 kg for the incline supinated close grip to 84.9 kg for the horizontal and decline wide pronated grips, and the Discussion reports a strength difference of almost 18 kg between pronated and supinated grips). A between-inclination contrast read off Table 3 is therefore not an isolated inclination effect.",
+      "The analysed sample size is ambiguous. Methods, Subjects states that \"data were collected from 13 male subjects\" and that \"one subject was, however, forced to leave the study for medical reasons\". The paper does not restate the analysed n, so whether the ANOVA ran on 13 or 12 participants cannot be determined from the text.",
+      "The normalisation reference is ambiguous. Methods state that \"the data were normalized (in percentage) according to the highest EMG value obtained during the exercises and/or the maximum voluntary isometric contraction for each muscle, respectively.\" An \"and/or\" reference does not identify which denominator was used, so the reported percentages cannot be compared with studies normalised to MVIC alone.",
+      "Results are reported as pairwise significance only. Significant differences are enumerated as position-versus-position statements with a single alpha (p = 0.05) and Bonferroni post hoc; no per-contrast effect size, exact p-value, mean or standard deviation is tabulated for any EMG outcome, and the underlying values appear only in Figures 1 to 4. No effect estimate can be extracted from this source.",
+      "Surface electromyography is not evidence of hypertrophy. The authors offer bodybuilding programming advice in Practical Application points 6 and 7; that is an author interpretation of an acute activation measurement and is not extractable as an outcome.",
+      "Single-session acute measurement in 13 trained men aged about 31 years; a tier-4 acute proxy with no size, strength or harms outcome."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "between-condition, within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press; bench inclination, grip width and grip type",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Data were collected from 13 male subjects (age 31.1 (SD 6.3) years, height 179.5 (SD 10.2) cm, weight 88.8 (SD 14.4) kg, biacromial width 41.9 (SD 2.0) cm, resistance-training experience 12.2 (SD 6.0) years). One subject left the study for medical reasons; the analysed n is not restated.",
+    "sampleSize": null
+  },
+  "title": "The Effect of 12 Variations of the Bench Press Exercise on the EMG Activity of Three Heads of the Pectoralis Major",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.47206/ijsc.v1i1.39",
+    "primary": "https://journal.iusca.org/index.php/Journal/article/view/39",
+    "pubmed": null
+  },
+  "year": 2021
+}

@@ -1,0 +1,46 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Ackland", "Pandy"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-21064160",
+  "identifiers": {
+    "doi": "10.1002/jor.21269",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "21064160"
+  },
+  "projectSummary": "Establishes that internal-rotation leverage at the glenohumeral joint is dominated by the subscapularis rather than by the pectoralis major, which qualifies any statement that the pectoralis major is an internal rotator.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Cadaveric, eight specimens, abstract-only."],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric tendon-excursion measurement of axial-rotation moment arms.",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Instantaneous moment arms of 18 major muscle sub-regions crossing the glenohumeral joint were measured in axial rotation of the humerus during coronal-plane abduction and sagittal-plane flexion, by the tendon-excursion method in eight entire upper-extremity cadaver specimens.",
+    "sampleSize": null
+  },
+  "title": "Moment arms of the shoulder muscles during axial rotation.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1002/jor.21269",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/21064160/"
+  },
+  "year": 2011
+}

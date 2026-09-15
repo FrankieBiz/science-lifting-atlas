@@ -1,0 +1,50 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": null
+  },
+  "authors": ["Huang", "Wong", "Haghighi", "Wan", "Du", "Chang"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-32169467",
+  "identifiers": {
+    "doi": "10.1016/j.jse.2019.12.020",
+    "isbn": null,
+    "pmcid": "PMC7384958",
+    "pmid": "32169467"
+  },
+  "projectSummary": "This is a direct contradiction of a widely repeated structural description, established with three independent methods in the same specimens. It is carried into the contradiction map and it constrains how the muscle page may describe the insertion.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Fourteen fresh-frozen whole upper-extremity cadaveric specimens. The full text states the donor demographics: 51 (SD 14) years old at time of death, range 21 to 70 years, 9 males and 5 females, 6 left and 8 right shoulders. The first pass recorded these as not stated; they are stated, and the correction is recorded here.",
+      "The finding concerns the enthesis specifically, not the whole tendon, and the authors are explicit about that boundary.",
+      "A mean donor age of 51 years with a range to 70 is a real applicability limit for a page written for lifters, and it is now stated rather than suppressed."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric imaging and histology of the pectoralis major tendon and its enthesis.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Fourteen fresh-frozen whole upper-extremity specimens underwent MRI and ultrasound imaging of the pectoralis major muscle, tendon and enthesis, followed by dissection and histology.",
+    "sampleSize": null
+  },
+  "title": "Pectoralis major tendon and enthesis: anatomic, magnetic resonance imaging, ultrasonographic, and histologic investigation.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1016/j.jse.2019.12.020",
+    "primary": "https://www.ncbi.nlm.nih.gov/pmc/articles/7384958",
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/32169467/"
+  },
+  "year": 2020
+}

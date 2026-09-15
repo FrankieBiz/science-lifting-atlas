@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Aszmann", "Rab", "Kamolz", "Frey"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-11040310",
+  "identifiers": {
+    "doi": "10.1053/jhsu.2000.17818",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "11040310"
+  },
+  "projectSummary": "A three-nerve description of pectoral innervation observed in all 29 dissections, which does not match the two-nerve account in the tertiary references. Carried into the contradiction map.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; a terminology difference between 'superior pectoral nerve' and the lateral/medial naming cannot be resolved without the full text."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric topographic and histomorphometric study of the pectoral nerves.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Twenty-nine brachial plexuses from 13 embalmed and 5 fresh cadavers were examined under x3.5 loupe magnification, with nerve biopsy specimens harvested in 5 fresh cadavers for histomorphometry.",
+    "sampleSize": null
+  },
+  "title": "The anatomy of the pectoral nerves and their significance in brachial plexus reconstruction.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1053/jhsu.2000.17818",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/11040310/"
+  },
+  "year": 2000
+}

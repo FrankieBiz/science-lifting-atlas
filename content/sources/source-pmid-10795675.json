@@ -1,0 +1,49 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Bak", "Cameron", "Henderson"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-10795675",
+  "identifiers": {
+    "doi": "10.1007/s001670050197",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "10795675"
+  },
+  "projectSummary": "Carried as harms context for the existence and reported circumstances of the injury. Because only the abstract was read, no proportion from it is quoted, and a pooled case series has no denominator of exposed lifters in any event.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "indirect",
+    "notes": [
+      "Abstract-only, published in 2000, and a pooled case series cannot yield an incidence.",
+      "Case-report pooling is subject to strong reporting bias toward unusual presentations."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Pooled analysis of published cases of pectoralis major rupture.",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "A meta-analysis of 112 reported cases of rupture of the pectoralis major.",
+    "sampleSize": null
+  },
+  "title": "Rupture of the pectoralis major: a meta-analysis of 112 cases.",
+  "type": "meta-analysis",
+  "urls": {
+    "doi": "https://doi.org/10.1007/s001670050197",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/10795675/"
+  },
+  "year": 2000
+}

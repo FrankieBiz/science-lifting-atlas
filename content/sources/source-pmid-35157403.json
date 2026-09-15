@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Mausehund", "Krosshaug"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-35157403",
+  "identifiers": {
+    "doi": "10.1519/jsc.0000000000004191",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "35157403"
+  },
+  "projectSummary": "Establishes that bench press joint loading is not a fixed property of the exercise: it varies with the lifter's technique, expertise and sex. Any mechanical statement about the bench press therefore needs a technique qualifier.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": [
+      "Abstract-only, so the reported moment values could not be extracted."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "between-participant",
+    "durationWeeks": null,
+    "intervention": "bench press",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Thirty-four healthy adults, 12 powerlifters (6 women, 6 men) and 22 recreational lifters (9 women, 13 men), performed a 6-8 repetition maximum set of the bench press while elbow and shoulder net joint moments, moment arms and EMG of six upper-extremity muscles were measured.",
+    "sampleSize": null
+  },
+  "title": "Understanding Bench Press Biomechanics-Training Expertise and Sex Affect Lifting Technique and Net Joint Moments.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1519/jsc.0000000000004191",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/35157403/"
+  },
+  "year": 2023
+}

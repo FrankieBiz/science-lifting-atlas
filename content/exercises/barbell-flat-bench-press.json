@@ -1,0 +1,61 @@
+{
+  "aliases": ["flat bench press", "barbell bench press"],
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "equipmentIds": [],
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "barbell-flat-bench-press",
+  "movementPatternIds": [],
+  "name": "Barbell flat bench press",
+  "projectDefinition": {
+    "editorial": true,
+    "excluded": [
+      "Smith-machine, machine, dumbbell, incline, decline, floor, partial-range, accommodating-resistance, unilateral, and bodyweight presses."
+    ],
+    "included": [
+      "Project-scoped free-weight barbell press performed supine on a horizontal bench at 0° ± 5°."
+    ]
+  },
+  "publicationState": "unpublished",
+  "relatedEntityIds": [
+    "pectoralis-major",
+    "cable-fly-standing-bilateral-shoulder-height"
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "sections": [
+    {
+      "claimIds": [
+        "claim-bench-press-pectoralis-activation",
+        "claim-bench-press-inclination-shifts-regional-activation",
+        "claim-pectoralis-major-hypertrophy-with-chest-resistance-training",
+        "claim-pectoralis-major-surface-emg-limitation",
+        "claim-bench-press-shoulder-moment-arm-decreases",
+        "claim-bench-press-grip-width-activation-mixed",
+        "claim-multi-joint-versus-single-joint-programme-strength",
+        "claim-bench-press-pectoralis-rupture",
+        "claim-cable-crossover-shoulder-moment-larger-than-bench-press",
+        "claim-cable-crossover-elbow-excursion-smaller-than-bench-press",
+        "claim-press-versus-fly-activation-mixed"
+      ],
+      "id": "reviewed-evidence",
+      "title": "Reviewed evidence"
+    }
+  ],
+  "slug": "barbell-flat-bench-press",
+  "summaryClaimIds": [
+    "claim-bench-press-pectoralis-activation",
+    "claim-bench-press-inclination-shifts-regional-activation"
+  ]
+}

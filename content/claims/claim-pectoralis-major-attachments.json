@@ -1,0 +1,57 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "direct",
+    "certainty": "established-descriptive-fact",
+    "direction": "not-applicable",
+    "magnitude": "not-applicable"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-pectoralis-major-attachments",
+  "plainLanguage": "The chest muscle runs from the collarbone, breastbone and upper rib cartilages to a narrow attachment on the upper arm bone.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The attachment description is taken from an authoritative reference chapter; the primary cadaveric studies in this evidence set measured the humeral end rather than re-describing the origins.",
+    "About a third of dissected specimens depart from this configuration in some way (see claim-pectoralis-major-structural-variation)."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": ["gross anatomy of the intact muscle"],
+    "population": "adult humans"
+  },
+  "sourceLinks": [
+    {
+      "locator": "StatPearls, Anatomy, Thorax, Pectoralis Major, Bookshelf NBK525991, Introduction and summary; last update 24 July 2023",
+      "role": "supports",
+      "sourceId": "source-bookshelf-nbk525991",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Introduction, first paragraph (the paper's cited background description, attributed there to its own reference 1)",
+      "role": "neutral-context",
+      "sourceId": "source-pmid-31061824",
+      "supportStrength": "indirect"
+    },
+    {
+      "locator": "Abstract, Methods (origin of the abdominal head measured against the seventh rib-costal cartilage junction)",
+      "role": "supports",
+      "sourceId": "source-pmid-23444001",
+      "supportStrength": "partially-direct"
+    }
+  ],
+  "statement": "The pectoralis major arises from the anterior surface of the medial half of the clavicle, the anterior surface of the sternum, the upper costal cartilages and the aponeurosis of the external oblique, and inserts on the lateral lip of the intertubercular sulcus of the humerus.",
+  "type": "anatomy"
+}

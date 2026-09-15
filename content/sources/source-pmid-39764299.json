@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by-nc-nd 4.0"
+  },
+  "authors": ["Ohya", "Nakamura", "Kimura"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-39764299",
+  "identifiers": {
+    "doi": "10.1589/jpts.37.48",
+    "isbn": null,
+    "pmcid": "PMC11700571",
+    "pmid": "39764299"
+  },
+  "projectSummary": "Within-participant acute surface-EMG comparison of bench angles in 15 male training beginners at 50 per cent of one-repetition maximum measured at 0 degrees.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "NCBI PubMed and PMC records fetched 2026-09-13; no retraction or correction notice"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Beginners with under one year of training experience; the population is less applicable to the site's trained-lifter audience than the trained-participant studies.",
+      "Load was fixed at 50 per cent of the 1RM measured at 0 degrees and was not re-determined at each angle, so the relative load differs between angles. That confounds activation with relative intensity and is the main reason risk of bias is recorded as high.",
+      "The abstract reports significant angle effects for the middle and lower pectoralis major but reports no significant upper-pectoralis effect, which is itself relevant to the clavicular question.",
+      "Surface EMG is an acute activation measure and is not evidence of hypertrophy."
+    ],
+    "riskOfBias": "high"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press at different angles",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Fifteen male students with under one year of training experience (age 21.27 (SD 0.458) years, height 1.73 m, weight 64.03 (SD 6.504) kg) performed bench presses at various angles at 50 per cent of the one-repetition maximum measured at a bench angle of 0 degrees.",
+    "sampleSize": null
+  },
+  "title": "Comparison of muscle activities during bench press at different angles in beginners",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1589/jpts.37.48",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/39764299/"
+  },
+  "year": 2025
+}

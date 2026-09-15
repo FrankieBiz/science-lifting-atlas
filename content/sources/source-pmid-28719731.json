@@ -1,0 +1,55 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": [
+    "Franz",
+    "Klaas",
+    "Schumann",
+    "Frankewitsch",
+    "Filler",
+    "Behringer"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-28719731",
+  "identifiers": {
+    "doi": "10.1002/mus.25748",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "28719731"
+  },
+  "projectSummary": "Supports the statement that the pectoralis major receives multiple separate nerve entry points rather than a single one, which is the structural basis for independent regional control.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; the per-muscle counts in the retrievable abstract are truncated before the pectoralis major value is stated explicitly."
+    ],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Cadaveric dissection of nerve entry points compared with electrically determined motor points.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Nerve entry points of the biceps brachii, trapezius, latissimus dorsi, pectoralis major and pectoralis minor were identified by dissection of 20 human cadavers and compared with motor points previously obtained by electrical stimulation; the number of nerve entry points was 2 in biceps brachii, 1 in pectoralis minor, 4 in trapezius and 3 in the remaining muscles reported.",
+    "sampleSize": null
+  },
+  "title": "Anatomical versus functional motor points of selected upper body muscles.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1002/mus.25748",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/28719731/"
+  },
+  "year": 2018
+}

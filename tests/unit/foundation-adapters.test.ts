@@ -32,8 +32,10 @@ async function createAdapterFixture() {
     copyScript('scripts/foundation/foundation-mode.mjs', root),
     copyScript('scripts/foundation/scan-records.mjs', root),
     copyScript('scripts/graph/validate.mjs', root),
+    copyScript('src/lib/content/registry.ts', root),
     copyScript('src/lib/content/schemas.ts', root),
     copyScript('src/lib/content/validation.ts', root),
+    copyScript('src/lib/graph/compiler.ts', root),
   ]);
   await Promise.all([
     mkdir(path.join(root, 'content/claims'), { recursive: true }),
@@ -99,8 +101,10 @@ beforeAll(async () => {
     copyScript('scripts/foundation/foundation-mode.mjs'),
     copyScript('scripts/foundation/scan-records.mjs'),
     copyScript('scripts/graph/validate.mjs'),
+    copyScript('src/lib/content/registry.ts'),
     copyScript('src/lib/content/schemas.ts'),
     copyScript('src/lib/content/validation.ts'),
+    copyScript('src/lib/graph/compiler.ts'),
   ]);
 
   await Promise.all([

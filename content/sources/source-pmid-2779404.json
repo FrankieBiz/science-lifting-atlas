@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Elliott", "Wilson", "Kerr"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-2779404",
+  "identifiers": {
+    "doi": null,
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "2779404"
+  },
+  "projectSummary": "Measured evidence that the external demand of the bench press is not constant through the repetition: the shoulder moment arm falls continuously as the bar rises. This is the mechanical statement the exercise page makes about the press, and it is the direct counterpart to the changing-demand statement made for cable resistance.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "PubMed record comments-and-corrections fields plus the Crossref/Retraction Watch CSV export, fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; ten elite powerlifters, 1989; competition technique may not generalise to recreational lifters."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press",
+    "outcomes": ["SBLA-009 Q2"],
+    "population": "Ten elite powerlifters were analysed in a simulated competition environment using three-dimensional cinematography and surface electromyography while bench pressing approximately 80 per cent of maximum, a maximal load, and an unsuccessful supramaximal attempt.",
+    "sampleSize": null
+  },
+  "title": "A biomechanical analysis of the sticking region in the bench press.",
+  "type": "observational-study",
+  "urls": {
+    "doi": null,
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/2779404/"
+  },
+  "year": 1989
+}

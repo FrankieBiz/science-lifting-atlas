@@ -1,0 +1,51 @@
+{
+  "access": {
+    "level": "full-text-open",
+    "license": "cc by 4.0"
+  },
+  "authors": ["Rodríguez-Ridao", "Antequera-Vique", "Martín-Fuentes", "Muyor"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-33049982",
+  "identifiers": {
+    "doi": "10.3390/ijerph17197339",
+    "isbn": null,
+    "pmcid": "PMC7579505",
+    "pmid": "33049982"
+  },
+  "projectSummary": "Within-participant acute surface-EMG comparison of five bench inclinations (0, 15, 30, 45 and 60 degrees) at 60 per cent of one-repetition maximum in 30 trained adults, with the pectoralis major resolved into upper, middle and lower portions.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "NCBI PubMed and PMC records fetched 2026-09-13; no retraction or correction notice"
+  },
+  "quality": {
+    "applicability": "direct",
+    "notes": [
+      "Surface EMG is an acute activation measure and is not evidence of hypertrophy.",
+      "Portion assignment is by electrode site over the upper, middle and lower pectoralis major; it is a regional sampling of one muscle, not an independently validated compartment boundary.",
+      "This record is one of the two studies R1 finding I-13 identified as absent from the first pass and contradicting the inclination claim as it was then worded. It entered screening here through the amended portion-terminology stratum N-RS4a.",
+      "The relationship across bench angle is non-monotonic and reverses above 45 degrees, which is inside the range the first-pass claim asserted."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "bench press at five inclinations",
+    "outcomes": ["SBLA-009 Q1b", "SBLA-009 Q1c"],
+    "population": "Thirty trained adults performed the bench press at 0, 15, 30, 45 and 60 degrees of bench inclination at 60 per cent of one-repetition maximum, with surface EMG recorded from the upper, middle and lower portions of the pectoralis major, the anterior deltoid and the medial head of the triceps brachii.",
+    "sampleSize": null
+  },
+  "title": "Effect of Five Bench Inclinations on the Electromyographic Activity of the Pectoralis Major, Anterior Deltoid, and Triceps Brachii during the Bench Press Exercise",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.3390/ijerph17197339",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/33049982/"
+  },
+  "year": 2020
+}

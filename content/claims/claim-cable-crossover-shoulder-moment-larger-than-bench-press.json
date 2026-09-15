@@ -1,0 +1,62 @@
+{
+  "approvalManifestId": null,
+  "contentChecksum": null,
+  "evidence": {
+    "applicability": "partially-direct",
+    "certainty": "low",
+    "direction": "favors-b",
+    "magnitude": "moderate"
+  },
+  "history": {
+    "createdAt": "2026-09-13T00:00:00Z",
+    "updatedAt": "2026-09-15T22:53:00Z"
+  },
+  "id": "claim-cable-crossover-shoulder-moment-larger-than-bench-press",
+  "plainLanguage": "For the same relative load, a standing cable cross-over put a larger turning force on the shoulder joint than a flat barbell bench press.",
+  "publicationState": "unpublished",
+  "qualifiers": [
+    "The cable cross-over in this study is not the index cable fly: pulley height was not reported, the elbow angle was not prescribed and stance was not described, so it is a related condition.",
+    "Loads were set as a percentage of body weight rather than of 1RM, so the relative intensity of the two exercises is unknown and may differ.",
+    "The shoulder was modelled as the humerus relative to the thorax with no separate scapula, which the authors name as their key limitation.",
+    "A joint moment is an external mechanical demand, not a muscle force and not a growth stimulus.",
+    "One study, twenty participants."
+  ],
+  "relationships": [],
+  "review": {
+    "auditedBy": "claude-review",
+    "integratedBy": "codex",
+    "lastReviewedAt": "2026-09-15",
+    "ownerApprovedAt": null,
+    "researchedBy": "claude-research",
+    "reviewDueAt": "2027-09-15"
+  },
+  "reviewState": "approved",
+  "scope": {
+    "conditions": [
+      "loads of 15 and 30 per cent of body weight, six repetitions per condition, laboratory motion capture with cable load cells"
+    ],
+    "population": "twenty healthy adults aged 18 to 45 with at least two hours per week of weight-training experience, ten male and ten female"
+  },
+  "sourceLinks": [
+    {
+      "locator": "Table 1 and Results 3.1 (maximum absolute shoulder moments, significance p < 0.0125)",
+      "role": "supports",
+      "sourceId": "source-pmid-35202059",
+      "supportStrength": "direct"
+    },
+    {
+      "locator": "Title and Abstract (bench press joint moments require lateral barbell force measurement)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-33555823",
+      "supportStrength": "partially-direct"
+    },
+    {
+      "locator": "Abstract (static optimisation underestimates antagonist activity at the glenohumeral joint)",
+      "role": "qualifies",
+      "sourceId": "source-pmid-31668905",
+      "supportStrength": "indirect"
+    }
+  ],
+  "statement": "At matched external loads of 15 and 30 per cent of body weight, a standing cable cross-over produced significantly larger maximum absolute shoulder joint moments than a flat barbell bench press: 0.650 (SD 0.113) against 0.442 (SD 0.046) Nm/kg at 15 per cent of body weight, and 1.026 (SD 0.192) against 0.760 (SD 0.079) Nm/kg at 30 per cent.",
+  "type": "exercise-mechanics"
+}

@@ -1,0 +1,53 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": [
+    "Fung",
+    "Wong",
+    "Ravichandiran",
+    "Agur",
+    "Rindlisbacher",
+    "Elmaraghy"
+  ],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-19291757",
+  "identifiers": {
+    "doi": "10.1002/ca.20784",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "19291757"
+  },
+  "projectSummary": "A third independent statement that the architecture of this muscle is not settled in the primary literature. Carried as a boundary on how categorically the muscle page may describe internal structure.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": ["Abstract-only, eleven embalmed specimens."],
+    "riskOfBias": "not-applicable"
+  },
+  "study": {
+    "comparator": "not-applicable",
+    "durationWeeks": null,
+    "intervention": "Three-dimensional cadaveric modelling of muscle and tendon architecture.",
+    "outcomes": ["SBLA-009 Q1a"],
+    "population": "Eleven formalin-embalmed cadaveric specimens were examined: five (2 male, 3 female) were serially dissected, digitised and modelled in three dimensions, and six (4 male, 2 female) were dissected.",
+    "sampleSize": null
+  },
+  "title": "Three-dimensional study of pectoralis major muscle and tendon architecture.",
+  "type": "anatomy-reference",
+  "urls": {
+    "doi": "https://doi.org/10.1002/ca.20784",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/19291757/"
+  },
+  "year": 2009
+}

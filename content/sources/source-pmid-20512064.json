@@ -1,0 +1,48 @@
+{
+  "access": {
+    "level": "abstract-only",
+    "license": null
+  },
+  "authors": ["Trebs", "Brandenburg", "Pitney"],
+  "conflicts": null,
+  "funding": null,
+  "id": "source-pmid-20512064",
+  "identifiers": {
+    "doi": "10.1519/jsc.0b013e3181ddfae7",
+    "isbn": null,
+    "pmcid": null,
+    "pmid": "20512064"
+  },
+  "projectSummary": "A dose-like relationship between bench angle and clavicular-head activation, measured with exercise-specific loads. Consistent in direction with the inclination studies above.",
+  "publication": {
+    "nextStatusCheckAt": "2026-10-13",
+    "stage": "peer-reviewed",
+    "status": "current",
+    "statusCheckedAt": "2026-09-13",
+    "statusMethod": "doi-crossref-retraction-watch",
+    "statusSource": "Crossref REST API works record plus the Crossref/Retraction Watch CSV export, both fetched 2026-09-13"
+  },
+  "quality": {
+    "applicability": "partially-direct",
+    "notes": [
+      "Abstract-only; fifteen male subjects; the exercise is described as a chest press rather than a barbell bench press specifically."
+    ],
+    "riskOfBias": "some-concerns"
+  },
+  "study": {
+    "comparator": "within-participant",
+    "durationWeeks": null,
+    "intervention": "flat bench press at 0 degrees; 28, 44 and 56 degrees",
+    "outcomes": ["SBLA-009 Q1c", "SBLA-009 Q2"],
+    "population": "Fifteen healthy male subjects performed the chest press at 0 (flat bench), 28, 44 and 56 degrees above horizontal, using 70 per cent of their respective one-repetition maximum for each angle, while EMG was recorded.",
+    "sampleSize": null
+  },
+  "title": "An electromyography analysis of 3 muscles surrounding the shoulder joint during the performance of a chest press exercise at several angles.",
+  "type": "observational-study",
+  "urls": {
+    "doi": "https://doi.org/10.1519/jsc.0b013e3181ddfae7",
+    "primary": null,
+    "pubmed": "https://pubmed.ncbi.nlm.nih.gov/20512064/"
+  },
+  "year": 2010
+}
