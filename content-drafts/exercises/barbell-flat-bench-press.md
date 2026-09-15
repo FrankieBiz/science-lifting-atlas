@@ -83,9 +83,12 @@ exercise `[claim-bench-press-shoulder-moment-arm-decreases]`.
 ## Setup variables that change what is loaded
 
 **Bench angle.** The two parts of the muscle do not behave the same way, and one
-sentence cannot describe both. As the bench is raised, sternocostal (lower) activation
-falls — that is the consistent finding across the studies retrieved and across a 2023
-meta-analysis `[claim-bench-press-inclination-shifts-regional-activation]`.
+sentence cannot describe both. The sternocostal (lower) activation decrease as the
+bench is raised is the more consistent of the two regional findings, but it is not
+universal: a twelve-variation study reported no significant sternocostal difference
+across -15, 0 and +30 degrees within matched pronated grips, while a 2023 meta-analysis
+found a significant sternal difference
+`[claim-bench-press-inclination-shifts-regional-activation]`.
 
 What happens to the clavicular (upper) portion is **not settled**. The largest single
 study, thirty trained adults measured at 0, 15, 30, 45 and 60 degrees, puts the upper
@@ -97,9 +100,10 @@ appearing only in the middle quarter of the movement. The 2023 meta-analysis fin
 significant clavicular difference between a horizontal and an inclined bench at all
 `[claim-bench-press-inclination-shifts-regional-activation]`.
 
-So the useful reading is that raising the bench reliably takes work away from the lower
-chest, and that any upper-chest gain is smaller, less consistent, and probably does not
-keep increasing as the bench gets steeper. One small trial found a matching
+So the useful reading is that raising the bench usually takes work away from the lower
+chest, though not in every study that measured it, and that any upper-chest gain is
+smaller, less consistent, and probably does not keep increasing as the bench gets
+steeper. One small trial found a matching
 site-specific thickness difference after eight weeks at the upper measurement site, and
 that is the only outcome evidence in this direction
 `[claim-bench-press-inclination-shifts-regional-activation]`. The researchers who have
