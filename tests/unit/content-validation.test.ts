@@ -419,6 +419,48 @@ describe('certainty-language calibration', () => {
     expect(lintClaimLanguage(statement, 'low')).toEqual([]);
   });
 
+  it.each([
+    'This is not always true and all lifters gain size.',
+    'The response is not uniform and all lifters gain size.',
+    'It is not settled but everyone responds.',
+    'The finding is not robust yet all humans respond.',
+    'This is not always true, and all lifters gain size.',
+    'This is not always true; all lifters gain size.',
+    'This is not always true. All lifters gain size.',
+  ])('binds a negation to its matched universal token: %s', (statement) => {
+    expect(
+      lintClaimLanguage(statement, 'moderate').map((issue) => issue.code),
+    ).toContain('CERTAINTY_UNIVERSAL');
+  });
+
+  it.each([
+    'Not all lifters gain size.',
+    'This is not always true.',
+    'The effect is not universally observed.',
+  ])('keeps a directly negated universal calibrated: %s', (statement) => {
+    expect(lintClaimLanguage(statement, 'moderate')).toEqual([]);
+  });
+
+  it.each([
+    'Limited evidence suggests a change but volume causes strength.',
+    'Limited evidence suggests a change, but volume causes strength.',
+    'Limited evidence suggests a change; volume causes strength.',
+    'Limited evidence suggests a change. Volume causes strength.',
+    'Limited evidence suggests a change, and volume causes strength.',
+    'This is a hypothesis about the fly, so heavy loading causes growth.',
+    'The data cannot establish a dose, but the bench press causes hypertrophy.',
+    'There is no evidence for the crossover, yet the press causes growth.',
+    'The result may be an artefact, however heavy loading produces hypertrophy.',
+    'It is plausible that the sample was small, although training prevents atrophy.',
+  ])(
+    'binds single-token causal calibration to its assertion: %s',
+    (statement) => {
+      expect(
+        lintClaimLanguage(statement, 'low').map((issue) => issue.code),
+      ).toContain('CERTAINTY_OVERSTATED');
+    },
+  );
+
   it('keeps every promoted statement and plain-language field calibrated', async () => {
     const claimFiles = (await readdir(claimsUrl)).filter((name) =>
       name.endsWith('.json'),

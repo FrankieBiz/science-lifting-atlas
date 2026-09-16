@@ -194,7 +194,16 @@ function hasUniversalLanguage(statement: string) {
   for (const match of statement.matchAll(UNIVERSAL_PATTERN)) {
     const prefix = statement.slice(Math.max(0, match.index - 48), match.index);
     const token = match[0].toLowerCase();
-    if (token !== 'never' && /\bnot(?:\s+\w+){0,3}\s*$/i.test(prefix)) {
+    const negation = /\bnot(?:\s+\w+){0,3}\s*$/i.exec(prefix);
+    if (
+      token !== 'never' &&
+      negation &&
+      !crossesAssertionBoundary(
+        prefix,
+        negation.index + 'not'.length,
+        prefix.length,
+      )
+    ) {
       continue;
     }
     if (
@@ -383,18 +392,6 @@ function crossesAssertionBoundary(text: string, from: number, to: number) {
   return boundary !== null && boundary.index < to;
 }
 
-function hasLowCalibration(clause: string) {
-  for (const match of clause.matchAll(LOW_CALIBRATION_PATTERN)) {
-    const token = match[0].toLowerCase();
-    if (token === 'may' || token === 'might') {
-      const suffix = clause.slice(match.index + match[0].length);
-      if (/^\s*,?\s*\d/.test(suffix)) continue;
-    }
-    return true;
-  }
-  return false;
-}
-
 function lastLowCalibrationEnd(text: string, limit: number) {
   let end = -1;
   for (const match of text.matchAll(LOW_CALIBRATION_PATTERN)) {
@@ -449,10 +446,26 @@ function hasUncalibratedCausalLanguage(statement: string) {
     ) {
       return false;
     }
-    return !(
-      causalMatches.length === 1 &&
-      hasLowCalibration(clauseContaining(statement, match.index))
-    );
+    if (causalMatches.length === 1) {
+      const trailingCalibrationEnd = lastLowCalibrationEnd(
+        clause,
+        clause.length,
+      );
+      const causalTokenEnd = tokenOffset + match[0].length;
+      if (trailingCalibrationEnd > causalTokenEnd) {
+        const crossesBoundary = crossesAssertionBoundary(
+          clause,
+          causalTokenEnd,
+          trailingCalibrationEnd,
+        );
+        const explicitResultVariability =
+          /\band\s+results\s+(?:may|might)\b/i.test(
+            clause.slice(causalTokenEnd, trailingCalibrationEnd),
+          );
+        if (!crossesBoundary || explicitResultVariability) return false;
+      }
+    }
+    return true;
   });
 }
 
