@@ -44,4 +44,37 @@ This sentence makes a factual assertion without a claim record.
       'MDX_CLAIM_GROUP_IDS_MISSING',
     ]);
   });
+
+  it('rejects publication preview attributes', () => {
+    const issues = lintMdxClaims(`<Claim id="claim-a" preview />
+
+<ClaimGroup ids={['claim-a']} preview />
+`);
+
+    expect(issues.map((issue) => issue.code)).toEqual([
+      'MDX_PREVIEW_FORBIDDEN',
+      'MDX_PREVIEW_FORBIDDEN',
+    ]);
+  });
+
+  it('recursively rejects unsafe syntax inside allowed containers', () => {
+    const issues = lintMdxClaims(`<Editorial>
+  <div>raw</div>
+  {globalThis.process.env.SECRET}
+  <Callout>unsupported</Callout>
+</Editorial>
+
+<Claim id="claim-a"><span>discarded</span></Claim>
+
+<ClaimGroup ids={['claim-a']}><Widget /></ClaimGroup>
+`);
+
+    expect(issues.map((issue) => issue.code)).toEqual(
+      expect.arrayContaining([
+        'MDX_RAW_HTML',
+        'MDX_MODULE_SYNTAX_UNSUPPORTED',
+        'MDX_COMPONENT_UNSUPPORTED',
+      ]),
+    );
+  });
 });

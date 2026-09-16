@@ -1,10 +1,11 @@
-import { createHash } from 'node:crypto';
-
 import type { ContentRegistry } from '../content/registry.ts';
+import { compareCodepoint, recordChecksum } from '../content/checksum.ts';
 import {
   validateRecordGraph,
   type ValidationIssue,
 } from '../content/validation.ts';
+
+export { canonicalJson, recordChecksum } from '../content/checksum.ts';
 
 export type EvidenceGraphNode = {
   id: string;
@@ -48,24 +49,6 @@ export class GraphCompilationError extends Error {
   }
 }
 
-function canonicalize(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalize);
-  if (!value || typeof value !== 'object') return value;
-  return Object.fromEntries(
-    Object.entries(value)
-      .sort(([left], [right]) => left.localeCompare(right))
-      .map(([key, child]) => [key, canonicalize(child)]),
-  );
-}
-
-export function canonicalJson(value: unknown) {
-  return `${JSON.stringify(canonicalize(value), null, 2)}\n`;
-}
-
-export function recordChecksum(value: unknown) {
-  return createHash('sha256').update(canonicalJson(value)).digest('hex');
-}
-
 function pageClaimIds(page: {
   summaryClaimIds: string[];
   sections: Array<{ claimIds: string[] }>;
@@ -76,8 +59,17 @@ function pageClaimIds(page: {
   ];
 }
 
-function edgeKey(edge: EvidenceGraphEdge) {
-  return [edge.from, edge.type, edge.to, edge.locator ?? ''].join('\u0000');
+function compareEdges(left: EvidenceGraphEdge, right: EvidenceGraphEdge) {
+  for (const [leftPart, rightPart] of [
+    [left.from, right.from],
+    [left.type, right.type],
+    [left.to, right.to],
+    [left.locator ?? '', right.locator ?? ''],
+  ] as const) {
+    const comparison = compareCodepoint(leftPart, rightPart);
+    if (comparison !== 0) return comparison;
+  }
+  return 0;
 }
 
 export function compileEvidenceGraph(
@@ -129,7 +121,11 @@ export function compileEvidenceGraph(
       label: manifest.scopeId,
       recordChecksum: recordChecksum(manifest),
     })),
-  ].sort((left, right) => left.id.localeCompare(right.id));
+  ].sort(
+    (left, right) =>
+      compareCodepoint(left.id, right.id) ||
+      compareCodepoint(left.kind, right.kind),
+  );
 
   const edges: EvidenceGraphEdge[] = [
     ...registry.claims.flatMap((claim) =>
@@ -148,7 +144,7 @@ export function compileEvidenceGraph(
         type: 'contains-claim',
       })),
     ),
-  ].sort((left, right) => edgeKey(left).localeCompare(edgeKey(right)));
+  ].sort(compareEdges);
 
   const checkedDates = registry.sources.flatMap((source) =>
     source.publication.statusCheckedAt

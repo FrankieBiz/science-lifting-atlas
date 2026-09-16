@@ -7,6 +7,7 @@ import type {
   MuscleRecord,
   SourceRecord,
 } from './schemas';
+import { recordContentChecksum } from './checksum.ts';
 
 export type ValidationIssue = {
   code: string;
@@ -168,28 +169,34 @@ function hasUniversalLanguage(statement: string) {
   for (const match of statement.matchAll(UNIVERSAL_PATTERN)) {
     const prefix = statement.slice(Math.max(0, match.index - 48), match.index);
     const clause = clauseContaining(statement, match.index);
-    if (
-      match[0].toLowerCase() !== 'never' &&
-      /\bnot(?:\s+\w+){0,3}\s*$/i.test(prefix)
-    ) {
+    const token = match[0].toLowerCase();
+    if (token !== 'never' && /\bnot(?:\s+\w+){0,3}\s*$/i.test(prefix)) {
       continue;
     }
     if (
-      match[0].toLowerCase() === 'all' &&
+      token === 'all' &&
       /\b(?:no|not|none|without)\b[^.!?;]{0,80}\bat\s*$/i.test(prefix)
     ) {
       continue;
     }
     if (
-      /^(?:all|every|none)$/i.test(match[0]) &&
-      /\b(?:one|single|\d+|fourteen|twenty|thirty)\b[^.!?;]{0,120}\b(?:study|trial|series|experiment|specimens?|participants?|cases?)\b/i.test(
+      token === 'every' &&
+      /\b(?:study|trial|series|experiment)\b[^.!?;]{0,100}\breports?\b[^.!?;]{0,180}\bevery\s+(?:specimen|participant|case)\b/i.test(
         clause,
       )
     ) {
       continue;
     }
     if (
-      /^never$/i.test(match[0]) &&
+      token === 'every' &&
+      /\b(?:\d+|fourteen|twenty|thirty)\s+(?:specimens?|participants?|cases?)\b[^.!?;]{0,120}\bevery\s+(?:specimen|participant|case)\b/i.test(
+        clause,
+      )
+    ) {
+      continue;
+    }
+    if (
+      token === 'never' &&
       /\bnever\s+(?:(?:be\s+)?evidence\s+of|be\s+sole\s+support)\b/i.test(
         clause,
       )
@@ -197,25 +204,51 @@ function hasUniversalLanguage(statement: string) {
       continue;
     }
     if (
-      /^all$/i.test(match[0]) &&
-      /^\s+(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b/i.test(
-        statement.slice(match.index + match[0].length),
+      token === 'all' &&
+      /\b(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b[^.!?;]{0,80}\b(?:studies|trials|series|experiments|specimens|participants|cases|sources|records)\b[^.!?;]{0,80},\s*all\b/i.test(
+        clause,
       )
     ) {
       continue;
     }
     if (
-      /^(?:all|every)$/i.test(match[0]) &&
-      (/(?:\bthree\b|\bten\b|\d+)[^.!?;]{0,100}\b(?:trials?|records?|sources?|specimens?)\b/i.test(
-        clause,
-      ) ||
-        /\b(?:contrast|normalised|tier-\d|this slice|operator experience|measured by)\b/i.test(
-          clause,
-        ))
+      token === 'all' &&
+      /^\s+(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b/i.test(
+        statement.slice(match.index + match[0].length),
+      ) &&
+      /\b(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b[^.!?;]{0,100}\b(?:studies|trials|series|experiments|specimens|participants|cases|sources|records)\b/i.test(
+        statement.slice(0, match.index),
+      )
     ) {
       continue;
     }
-    if (/^all$/i.test(match[0]) && /\bof\s*$/i.test(prefix)) {
+    if (
+      token === 'all' &&
+      /,[^.!?;]{0,100}\band\b[^.!?;]{0,100}\sall\s+(?:change|vary|differ)\b/i.test(
+        clause,
+      )
+    ) {
+      continue;
+    }
+    if (
+      token === 'all' &&
+      /\bof all the\s+[\w-]+\s+(?:muscles|joints|bones|tendons)\b/i.test(clause)
+    ) {
+      continue;
+    }
+    if (
+      token === 'every' &&
+      /\bevery\s+tier-\d+\b[^.!?;]{0,100}\bin this slice\b/i.test(clause)
+    ) {
+      continue;
+    }
+    if (
+      token === 'every' &&
+      (/\b(?:contrast|programmes?|protocols?)\b[^.!?;]{0,100}\bdiffering in every\s+(?:exercise|condition)\b/i.test(
+        clause,
+      ) ||
+        /\bnormalised every\s+(?:exercise|condition|value)\b/i.test(clause))
+    ) {
       continue;
     }
     return true;
@@ -235,10 +268,10 @@ function hasOutcomeFreeComparative(statement: string) {
       continue;
     }
     if (
-      !/\b(?:for|at|in terms of)\s+\S+/i.test(followingClause) &&
-      !/^\s+(?:leverage|strength|activation|hypertrophy|moment|force|power|range|thickness)\b/i.test(
+      !/\b(?:for|at|in terms of)\s+(?!everything\b|anything\b|nothing\b)\S+/i.test(
         followingClause,
-      )
+      ) &&
+      !/^\s+leverage\s+for\s+\S+/i.test(followingClause)
     ) {
       return true;
     }
@@ -281,19 +314,34 @@ function hasLowCalibration(clause: string) {
 }
 
 function hasUncalibratedCausalLanguage(statement: string) {
-  if (
-    /\b(?:in|within)\s+(?:one|a single|an?)\b(?:\s+[\w-]+){0,6}\s+(?:study|trial|series|experiment)\b/i.test(
-      statement,
-    ) ||
-    /^During\b.*\b(?:moment arms?|force|activation|thickness)\b/i.test(
-      statement,
-    )
-  ) {
-    return false;
-  }
-  return [...statement.matchAll(CAUSAL_PATTERN)].some((match) => {
+  const causalMatches = [...statement.matchAll(CAUSAL_PATTERN)];
+  return causalMatches.some((match) => {
     if (isDirectlyNegated(statement, match.index)) return false;
-    return !hasLowCalibration(clauseContaining(statement, match.index));
+    const clause = clauseContaining(statement, match.index);
+    if (
+      /^\s*(?:in|within)\s+(?:one|a single|an?)\b(?:\s+[\w-]+){0,6}\s+(?:study|trial|series|experiment)\b/i.test(
+        clause,
+      ) &&
+      /\d/.test(clause)
+    ) {
+      return false;
+    }
+    if (
+      /^\s*During the (?:ascent|descent)\b/i.test(clause) &&
+      /\bmoment arm\b/i.test(clause) &&
+      /\b(?:shoulder|elbow) axis\b/i.test(clause) &&
+      [...clause.matchAll(CAUSAL_PATTERN)].length <= 1
+    ) {
+      return false;
+    }
+    const clauseStart = statement.lastIndexOf('.', match.index - 1) + 1;
+    if (hasLowCalibration(statement.slice(clauseStart, match.index))) {
+      return false;
+    }
+    return !(
+      causalMatches.length === 1 &&
+      hasLowCalibration(clauseContaining(statement, match.index))
+    );
   });
 }
 
@@ -447,6 +495,7 @@ function validateManifestChain(
 function validatePublishedManifestCoverage(
   record: ClaimRecord | PageRecord | ChangeRecord,
   manifests: ApprovalManifestRecord[],
+  supersededManifestIds: ReadonlySet<string>,
   entryType: 'entities' | 'pages',
 ): ValidationIssue[] {
   if (record.publicationState !== 'published') return [];
@@ -464,6 +513,16 @@ function validatePublishedManifestCoverage(
     ];
   }
   const issues: ValidationIssue[] = [];
+  if (supersededManifestIds.has(manifest.id)) {
+    issues.push(
+      issue(
+        'APPROVAL_MANIFEST_SUPERSEDED',
+        `${record.id}.approvalManifestId`,
+        `Approval manifest ${manifest.id} has been superseded and is not current.`,
+        'Bind the record to the one current owner-approved manifest for its scope.',
+      ),
+    );
+  }
   if (manifest.decision !== 'approved' || !manifest.deploymentEligible) {
     issues.push(
       issue(
@@ -477,7 +536,18 @@ function validatePublishedManifestCoverage(
   const entry = manifest[entryType].find(
     (candidate) => candidate.id === record.id,
   );
-  if (!entry || entry.checksum !== record.contentChecksum) {
+  const computedChecksum = recordContentChecksum(record);
+  if (record.contentChecksum !== computedChecksum) {
+    issues.push(
+      issue(
+        'CONTENT_CHECKSUM_MISMATCH',
+        `${record.id}.contentChecksum`,
+        'The record checksum does not match its canonical content.',
+        'Recompute the canonical checksum, obtain review and owner approval, and append a new manifest.',
+      ),
+    );
+  }
+  if (!entry || entry.checksum !== computedChecksum) {
     issues.push(
       issue(
         'APPROVAL_CHECKSUM_MISMATCH',
@@ -573,6 +643,11 @@ export function validateRecordGraph(
     graph.claims.map((claim) => [claim.id, claim] as const),
   );
   const manifests = graph.approvalManifests ?? [];
+  const supersededManifestIds = new Set(
+    manifests.flatMap((manifest) =>
+      manifest.supersedesManifestId ? [manifest.supersedesManifestId] : [],
+    ),
+  );
   issues.push(...validateManifestChain(manifests));
 
   for (const claim of graph.claims) {
@@ -601,7 +676,12 @@ export function validateRecordGraph(
     );
     issues.push(...validatePublishedReviewDates(claim, options));
     issues.push(
-      ...validatePublishedManifestCoverage(claim, manifests, 'entities'),
+      ...validatePublishedManifestCoverage(
+        claim,
+        manifests,
+        supersededManifestIds,
+        'entities',
+      ),
     );
 
     if (
@@ -685,7 +765,14 @@ export function validateRecordGraph(
 
   for (const page of [...(graph.muscles ?? []), ...(graph.exercises ?? [])]) {
     issues.push(...validatePublishedReviewDates(page, options));
-    issues.push(...validatePublishedManifestCoverage(page, manifests, 'pages'));
+    issues.push(
+      ...validatePublishedManifestCoverage(
+        page,
+        manifests,
+        supersededManifestIds,
+        'pages',
+      ),
+    );
     for (const [index, claimId] of pageClaimIds(page).entries()) {
       const claim = claimById.get(claimId);
       if (!claim) {
@@ -718,7 +805,12 @@ export function validateRecordGraph(
   for (const changeRecord of graph.changeRecords ?? []) {
     issues.push(...validatePublishedReviewDates(changeRecord, options));
     issues.push(
-      ...validatePublishedManifestCoverage(changeRecord, manifests, 'entities'),
+      ...validatePublishedManifestCoverage(
+        changeRecord,
+        manifests,
+        supersededManifestIds,
+        'entities',
+      ),
     );
   }
 

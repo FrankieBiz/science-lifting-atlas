@@ -1,4 +1,5 @@
 import { realpathSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { lstat, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -166,6 +167,69 @@ async function resolveExactRepositoryPath(root, relativePath) {
   }
 
   return { state: 'exact', actualPath: actualSegments.join('/') };
+}
+
+/**
+ * @param {string} root
+ * @param {Array<import('../../src/lib/content/schemas.ts').ApprovalManifestRecord>} manifests
+ */
+export async function validateRequiredReviewArtifacts(root, manifests) {
+  const issues = [];
+
+  for (const manifest of manifests) {
+    for (const review of manifest.requiredReviews) {
+      const resolution = await resolveExactRepositoryPath(root, review.path);
+      const issuePath = `${manifest.id}.requiredReviews.${review.id}`;
+
+      if (resolution.state !== 'exact' || !resolution.actualPath) {
+        issues.push(
+          issue(
+            resolution.state === 'case-mismatch'
+              ? 'MANIFEST_REVIEW_PATH_CASE_MISMATCH'
+              : 'MANIFEST_REVIEW_PATH_MISSING',
+            issuePath,
+            resolution.state === 'case-mismatch'
+              ? `Required review ${review.path} differs from tracked path ${resolution.actualPath} by letter case.`
+              : `Required review ${review.path} does not resolve to an exact repository path.`,
+            resolution.state === 'case-mismatch'
+              ? `Use the exact repository casing ${resolution.actualPath}.`
+              : 'Add the immutable review artifact at the recorded path or correct the manifest.',
+          ),
+        );
+        continue;
+      }
+
+      const absolutePath = path.join(root, resolution.actualPath);
+      const stats = await lstat(absolutePath);
+      if (!stats.isFile()) {
+        issues.push(
+          issue(
+            'MANIFEST_REVIEW_NOT_REGULAR_FILE',
+            issuePath,
+            `Required review ${review.path} is not a regular file.`,
+            'Replace it with the checked-in immutable review report.',
+          ),
+        );
+        continue;
+      }
+
+      const checksum = createHash('sha256')
+        .update(await readFile(absolutePath))
+        .digest('hex');
+      if (checksum !== review.checksum) {
+        issues.push(
+          issue(
+            'MANIFEST_REVIEW_CHECKSUM_MISMATCH',
+            issuePath,
+            `Required review ${review.path} does not match checksum ${review.checksum}.`,
+            'Record the exact immutable review checksum and obtain owner approval for a new manifest.',
+          ),
+        );
+      }
+    }
+  }
+
+  return issues;
 }
 
 /** @param {string} root */
@@ -337,6 +401,15 @@ export async function loadAndValidateRecords(root = repositoryRoot) {
 
     records.push({ kind, path: relativePath, data: result.data });
   }
+
+  issues.push(
+    ...(await validateRequiredReviewArtifacts(
+      root,
+      records
+        .filter((record) => record.kind === 'approvalManifest')
+        .map((record) => record.data),
+    )),
+  );
 
   issues.push(...(await validateCrossLinks(root)));
 

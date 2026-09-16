@@ -3,11 +3,10 @@ import { getCollection } from 'astro:content';
 
 interface Props {
   id: string;
-  preview?: boolean;
   wording?: 'plain' | 'formal';
 }
 
-const { id, preview = false, wording = 'plain' } = Astro.props;
+const { id, wording = 'plain' } = Astro.props;
 const claims = await getCollection('claims');
 const claim = claims.find((entry) => entry.data.id === id)?.data;
 
@@ -20,10 +19,8 @@ const eligible =
   claim.approvalManifestId !== null &&
   claim.contentChecksum !== null;
 
-if (!preview && !eligible) {
-  throw new Error(
-    `Claim ${id} is not eligible for public rendering; use preview only in a non-public review surface.`,
-  );
+if (!eligible) {
+  throw new Error(`Claim ${id} is not eligible for public rendering.`);
 }
 
 const sourceEntries = await getCollection('sources');

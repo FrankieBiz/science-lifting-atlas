@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 
 import type { ContentRegistry } from '../../src/lib/content/registry';
+import { compareCodepoint } from '../../src/lib/content/checksum';
 import type { ClaimRecord, SourceRecord } from '../../src/lib/content/schemas';
 import {
   canonicalJson,
@@ -68,5 +69,29 @@ describe('SBLA-011 evidence graph compiler', () => {
     expect(() =>
       compileEvidenceGraph(registry, { asOf: '2026-09-15' }),
     ).toThrow(GraphCompilationError);
+  });
+
+  it('uses a locale-independent total order for shuffled inputs', async () => {
+    const firstRegistry = await registryFixture();
+    const secondClaim = structuredClone(firstRegistry.claims[0]!);
+    secondClaim.id = 'claim-pec-major-hypertrophy';
+    const secondSource = structuredClone(firstRegistry.sources[0]!);
+    secondSource.id = 'source-pec-major-hypertrophy';
+    secondClaim.sourceLinks[0]!.sourceId = secondSource.id;
+    firstRegistry.claims.push(secondClaim);
+    firstRegistry.sources.push(secondSource);
+
+    const shuffled = structuredClone(firstRegistry);
+    shuffled.claims.reverse();
+    shuffled.sources.reverse();
+
+    expect(compareCodepoint('claim-humeral', 'claim-hypertrophy')).toBe(-1);
+    expect(
+      canonicalJson(
+        compileEvidenceGraph(firstRegistry, { asOf: '2026-09-15' }),
+      ),
+    ).toBe(
+      canonicalJson(compileEvidenceGraph(shuffled, { asOf: '2026-09-15' })),
+    );
   });
 });

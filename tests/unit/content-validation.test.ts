@@ -252,6 +252,82 @@ describe('certainty-language calibration', () => {
     ).toContain('CERTAINTY_UNIVERSAL');
   });
 
+  it.each([
+    [
+      'Every lifter gains pectoralis size from bench pressing, measured by ultrasound.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'All lifters should expect pectoralis growth in this slice.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'Every trainee benefits from the bench press contrast.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'All lifters gain size regardless of operator experience.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'Every athlete improves when normalised to bodyweight.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'All lifters respond identically in tier-1 programmes.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'All 100 lifters in the general population gain pectoralis size.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'Bench pressing works for the vast majority of all lifters.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'In 20 participants, every human being who trains gains muscle.',
+      'moderate',
+      'CERTAINTY_UNIVERSAL',
+    ],
+    [
+      'Wide grip increases activation by 40% and causes hypertrophy; this was seen in one study.',
+      'low',
+      'CERTAINTY_OVERSTATED',
+    ],
+    [
+      'During training, the bench press increases force, improves strength and prevents injury.',
+      'low',
+      'CERTAINTY_OVERSTATED',
+    ],
+    [
+      'Wide grip increases activation by 40% and produces greater hypertrophy, though results may vary.',
+      'low',
+      'CERTAINTY_OVERSTATED',
+    ],
+    [
+      'The bench press is better for everything.',
+      'moderate',
+      'OUTCOME_REQUIRED',
+    ],
+    ['The bench press is superior strength.', 'moderate', 'OUTCOME_REQUIRED'],
+  ] as const)(
+    'rejects the SBLA-011 R1 adversarial overclaim: %s',
+    (statement, certainty, expectedCode) => {
+      expect(
+        lintClaimLanguage(statement, certainty).map((issue) => issue.code),
+      ).toContain(expectedCode);
+    },
+  );
+
   it('does not treat a directly negated causal result as an overclaim', () => {
     expect(
       lintClaimLanguage(

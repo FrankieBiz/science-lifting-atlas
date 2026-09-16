@@ -6,10 +6,9 @@ import Claim from './Claim.astro';
 interface Props {
   ids: string[];
   framing?: string;
-  preview?: boolean;
 }
 
-const { ids, framing, preview = false } = Astro.props;
+const { ids, framing } = Astro.props;
 if (ids.length === 0 || new Set(ids).size !== ids.length) {
   throw new Error('ClaimGroup requires a non-empty list of unique claim IDs.');
 }
@@ -28,10 +27,6 @@ if (framing && !claimIds.has(framing)) {
 ---
 
 <section class="evidence-claim-group" data-claim-ids={ids.join(' ')}>
-  {framing && <Claim id={framing} preview={preview} />}
-  {
-    ids
-      .filter((id) => id !== framing)
-      .map((id) => <Claim id={id} preview={preview} />)
-  }
+  {framing && <Claim id={framing} />}
+  {ids.filter((id) => id !== framing).map((id) => <Claim id={id} />)}
 </section>

@@ -191,6 +191,68 @@ by its schema.
 
 ## Graph integrity
 
+### `CONTENT_CHECKSUM_MISMATCH`
+
+- Rejected: a published record's stored checksum is not the SHA-256 of its
+  canonical content with only `contentChecksum` normalized to null.
+- Minimal failing example: edit a claim statement after its checksum was
+  approved.
+- Remediation: Recompute the checksum, obtain review and owner approval, and
+  append a new manifest.
+
+### `APPROVAL_MANIFEST_MISSING`
+
+- Rejected: a published record names no existing approval manifest.
+- Minimal failing example: `approvalManifestId: "approval-missing"`.
+- Remediation: Reference the immutable manifest that covers the exact record.
+
+### `APPROVAL_MANIFEST_INELIGIBLE`
+
+- Rejected: the referenced manifest is rejected or not deployment eligible.
+- Minimal failing example: `decision: "rejected"` with a published record.
+- Remediation: Keep the record unpublished until an eligible manifest exists.
+
+### `APPROVAL_MANIFEST_SUPERSEDED`
+
+- Rejected: a published record is still bound to a manifest replaced by a
+  later manifest in the same chain.
+- Minimal failing example: manifest B supersedes A while the record names A.
+- Remediation: Bind the record to the one current owner-approved manifest.
+
+### `APPROVAL_CHECKSUM_MISMATCH`
+
+- Rejected: the current manifest does not contain the record's computed
+  canonical checksum.
+- Minimal failing example: the manifest echoes an old or author-supplied digest.
+- Remediation: Review the exact current content and append a manifest containing
+  its computed checksum.
+
+### `MANIFEST_REVIEW_PATH_MISSING`
+
+- Rejected: a required review path is invalid or does not exist exactly.
+- Minimal failing example: `reviews/releases/missing-r1.md`.
+- Remediation: Add the immutable report at the exact path or correct the
+  manifest.
+
+### `MANIFEST_REVIEW_PATH_CASE_MISMATCH`
+
+- Rejected: a required review path differs from the tracked path by letter case.
+- Minimal failing example: `Reviews/releases/report.md` for tracked `reviews/`.
+- Remediation: Use the exact repository path casing.
+
+### `MANIFEST_REVIEW_NOT_REGULAR_FILE`
+
+- Rejected: a required review resolves to a directory, link, or special entry.
+- Minimal failing example: `requiredReviews[].path` names a directory.
+- Remediation: Reference a checked-in regular review file.
+
+### `MANIFEST_REVIEW_CHECKSUM_MISMATCH`
+
+- Rejected: the SHA-256 of the required review file differs from the manifest.
+- Minimal failing example: edit a review report after its digest was recorded.
+- Remediation: Preserve the immutable report and record its exact digest in a
+  newly approved manifest.
+
 ### `ID_DUPLICATE`
 
 - Rejected: the same ID occurs in more than one claim, source, or entity record.
