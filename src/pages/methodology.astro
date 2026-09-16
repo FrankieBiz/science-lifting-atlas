@@ -1,0 +1,68 @@
+---
+import AtlasLayout from '../layouts/AtlasLayout.astro';
+---
+
+<AtlasLayout
+  title="Methodology"
+  description="How the Science-Based Lifting Atlas scopes, reviews, and publishes evidence."
+  current="methodology"
+>
+  <article class="method-page">
+    <header class="method-page__header">
+      <p class="kicker">Methodology / living document</p>
+      <h1>How the atlas earns a statement.</h1>
+      <p>
+        This project is produced with AI systems under human product ownership.
+        AI review is not credentialed expert or peer review. The workflow is
+        designed to make that constraint visible and auditable.
+      </p>
+    </header>
+
+    <aside class="method-page__notice" aria-label="Publication status">
+      <strong>No scientific claim is public yet.</strong>
+      <span>
+        The first evidence slice passed independent AI review but remains
+        publication-locked until owner approval and an immutable manifest.
+      </span>
+    </aside>
+
+    <div class="method-page__grid">
+      <section aria-labelledby="roles-title">
+        <p class="method-page__number">01</p>
+        <h2 id="roles-title">Separated roles</h2>
+        <p>
+          Claude Research gathers and extracts evidence. Codex implements the
+          system and integrates approved records. A distinct Claude account
+          audits the candidate without repairing what it reviews.
+        </p>
+      </section>
+      <section aria-labelledby="claims-title">
+        <p class="method-page__number">02</p>
+        <h2 id="claims-title">Atomic claims</h2>
+        <p>
+          Factual prose is stored as structured claims with source locators,
+          certainty, applicability, limitations, review dates, and lifecycle
+          state. Pages reuse those records rather than rewriting the facts.
+        </p>
+      </section>
+      <section aria-labelledby="conflict-title">
+        <p class="method-page__number">03</p>
+        <h2 id="conflict-title">Conflict stays visible</h2>
+        <p>
+          Supporting, qualifying, and contradictory sources remain linked to the
+          claim. Disagreement is resolved from sources or by weakening or
+          withholding the claim—not by averaging reviewer confidence.
+        </p>
+      </section>
+      <section aria-labelledby="publish-title">
+        <p class="method-page__number">04</p>
+        <h2 id="publish-title">Fail-closed publication</h2>
+        <p>
+          Public rendering requires an approved record, explicit owner approval,
+          an immutable manifest, a matching content checksum, and current source
+          status. Missing any one of them blocks the page.
+        </p>
+      </section>
+    </div>
+  </article>
+</AtlasLayout>

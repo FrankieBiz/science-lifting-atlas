@@ -1,0 +1,38 @@
+---
+const stages = [
+  ['01', 'Question scoped', 'The exact decision and population are bounded.'],
+  ['02', 'Sources traced', 'Each statement keeps its locator and limitations.'],
+  ['03', 'Claims challenged', 'A separate AI account attempts to falsify it.'],
+  ['04', 'Owner gated', 'Nothing becomes public without explicit approval.'],
+] as const;
+---
+
+<section
+  id="evidence-system"
+  class="evidence-rail"
+  aria-labelledby="evidence-title"
+>
+  <div class="section-heading">
+    <p class="kicker">Evidence is interface</p>
+    <h2 id="evidence-title">A visible chain, not a trust badge.</h2>
+    <p>
+      The atlas separates a source, its extracted result, the project’s
+      interpretation, and practical language. Uncertainty stays attached at
+      every step.
+    </p>
+  </div>
+
+  <ol class="evidence-rail__steps">
+    {
+      stages.map(([index, title, description]) => (
+        <li>
+          <span class="evidence-rail__index">{index}</span>
+          <div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>

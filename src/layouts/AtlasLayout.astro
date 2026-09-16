@@ -1,0 +1,47 @@
+---
+import SiteHeader from '../components/sbla-012/SiteHeader.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  current?: 'home' | 'methodology';
+  noindex?: boolean;
+}
+
+const { title, description, current, noindex = false } = Astro.props;
+const pageTitle =
+  title === 'Science-Based Lifting Atlas'
+    ? title
+    : `${title} · Science-Based Lifting Atlas`;
+const rootHref = Astro.url.pathname === '/' ? './' : '../';
+const evidenceHref = `${rootHref}#evidence-system`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="theme-color" content="#091118" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader current={current} rootHref={rootHref} />
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Science-Based Lifting Atlas</p>
+      <nav aria-label="Footer navigation">
+        <a href={`${rootHref}methodology/`}>Methodology</a>
+        <a href={evidenceHref}>Evidence process</a>
+        <span>Prototype · 2026</span>
+      </nav>
+    </footer>
+  </body>
+</html>

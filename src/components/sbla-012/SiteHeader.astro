@@ -1,0 +1,40 @@
+---
+interface Props {
+  current?: 'home' | 'methodology' | undefined;
+  rootHref: string;
+}
+
+const { current, rootHref } = Astro.props;
+const evidenceHref = `${rootHref}#evidence-system`;
+---
+
+<header class="site-header" aria-label="Site header">
+  <a
+    class="brand"
+    href={rootHref}
+    aria-label="Science-Based Lifting Atlas, home"
+  >
+    <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18"></circle>
+      <path d="M12 23c3-7 7-10 16-8M13 27c5 2 10 1 15-4"></path>
+    </svg>
+    <span>
+      <strong>Science-Based</strong>
+      <span>Lifting Atlas</span>
+    </span>
+  </a>
+
+  <nav aria-label="Primary navigation">
+    <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}
+      >Atlas</a
+    >
+    <a href={evidenceHref}>Evidence</a>
+    <a
+      href={`${rootHref}methodology/`}
+      aria-current={current === 'methodology' ? 'page' : undefined}
+      >Methodology</a
+    >
+  </nav>
+
+  <a class="header-action" href={`${rootHref}#journeys`}>Begin exploring</a>
+</header>
