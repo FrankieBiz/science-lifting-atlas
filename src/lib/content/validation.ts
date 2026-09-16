@@ -164,11 +164,35 @@ const LOW_CALIBRATION_PATTERN =
   /\b(may|might|suggests?|limited evidence|no evidence|is plausible|hypothesis|cannot establish)\b/gi;
 const VERY_LOW_DISCLOSURE_PATTERN =
   /\b(is plausible|hypothesis|inference|cannot establish|case report|single published case|one published report|mixed|inconsistent|uncertain|does not settle|no clear difference)\b/i;
+const NEW_ASSERTION_BOUNDARY =
+  /;|\b(?:and|but|while|whereas|though|although|however|yet|so)\s+(?!(?:\w+ly\s+)?(?:increases?|decreases?|causes?|prevents?|produces?|improves?|enhances?|reduces?|leads?\s+to|results?\s+in)\b)/gi;
+const COUNT_TOKEN_SOURCE =
+  'one|two|three|four|five|six|seven|eight|nine|ten|fourteen|twenty|thirty|\\d+';
+const COUNT_VALUES: Readonly<Record<string, number>> = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
+  ten: 10,
+  fourteen: 14,
+  twenty: 20,
+  thirty: 30,
+};
+
+function countValue(token: string) {
+  const normalized = token.toLowerCase();
+  if (/^\d+$/.test(normalized)) return Number(normalized);
+  return COUNT_VALUES[normalized] ?? null;
+}
 
 function hasUniversalLanguage(statement: string) {
   for (const match of statement.matchAll(UNIVERSAL_PATTERN)) {
     const prefix = statement.slice(Math.max(0, match.index - 48), match.index);
-    const clause = clauseContaining(statement, match.index);
     const token = match[0].toLowerCase();
     if (token !== 'never' && /\bnot(?:\s+\w+){0,3}\s*$/i.test(prefix)) {
       continue;
@@ -179,77 +203,108 @@ function hasUniversalLanguage(statement: string) {
     ) {
       continue;
     }
-    if (
-      token === 'every' &&
-      /\b(?:study|trial|series|experiment)\b[^.!?;]{0,100}\breports?\b[^.!?;]{0,180}\bevery\s+(?:specimen|participant|case)\b/i.test(
-        clause,
-      )
-    ) {
-      continue;
-    }
-    if (
-      token === 'every' &&
-      /\b(?:\d+|fourteen|twenty|thirty)\s+(?:specimens?|participants?|cases?)\b[^.!?;]{0,120}\bevery\s+(?:specimen|participant|case)\b/i.test(
-        clause,
-      )
-    ) {
-      continue;
+    const clausePrefix = clausePrefixBefore(statement, match.index);
+    const clauseSuffix = clauseSuffixAfter(
+      statement,
+      match.index + match[0].length,
+    );
+    if (token === 'every') {
+      const scopedStudy =
+        /\b(?:study|trial|series|experiment)\b[^.!?;]{0,100}\breports?\b(?:(?!\b(?:always|never|guarantees?|everyone|universally|all|every|invariably)\b|\bwithout\s+exception\b|\b100\s*%).){0,180}$/i.test(
+          clausePrefix,
+        );
+      if (
+        scopedStudy &&
+        /^\s+(?:specimen|participant|case)\b/i.test(clauseSuffix)
+      ) {
+        continue;
+      }
+      const scopedSample = new RegExp(
+        String.raw`\b(?:\d+|fourteen|twenty|thirty)\s+(specimens?|participants?|cases?)\b(?:(?!\b(?:always|never|guarantees?|everyone|universally|all|every|invariably)\b|\bwithout\s+exception\b|\b100\s*%).){0,120}\bevery$`,
+        'i',
+      ).exec(`${clausePrefix}${match[0]}`);
+      const scopedNoun = /^\s+(specimen|participant|case)\b/i.exec(
+        clauseSuffix,
+      );
+      if (
+        scopedSample &&
+        scopedNoun &&
+        scopedSample[1]?.replace(/s$/i, '').toLowerCase() ===
+          scopedNoun[1]?.toLowerCase()
+      ) {
+        continue;
+      }
+      if (/^\s+tier-\d+\b[^.!?;]{0,100}\bin this slice\b/i.test(clauseSuffix)) {
+        continue;
+      }
+      if (
+        /\bdiffering in\s*$/i.test(clausePrefix) &&
+        /^\s+(?:exercise|condition)\b/i.test(clauseSuffix)
+      ) {
+        continue;
+      }
+      if (
+        /\bnormalised\s*$/i.test(clausePrefix) &&
+        /^\s+(?:exercise|condition|value)\b/i.test(clauseSuffix)
+      ) {
+        continue;
+      }
     }
     if (
       token === 'never' &&
-      /\bnever\s+(?:(?:be\s+)?evidence\s+of|be\s+sole\s+support)\b/i.test(
-        clause,
+      /^\s+(?:(?:be\s+)?evidence\s+of|be\s+sole\s+support)\b/i.test(
+        clauseSuffix,
       )
     ) {
       continue;
     }
     if (
       token === 'all' &&
-      /\b(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b[^.!?;]{0,80}\b(?:studies|trials|series|experiments|specimens|participants|cases|sources|records)\b[^.!?;]{0,80},\s*all\b/i.test(
-        clause,
+      /\bof\s*$/i.test(clausePrefix) &&
+      /^\s+the\s+[\w-]+\s+(?:muscles|joints|bones|tendons)\b/i.test(
+        clauseSuffix,
       )
     ) {
       continue;
     }
-    if (
-      token === 'all' &&
-      /^\s+(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b/i.test(
-        statement.slice(match.index + match[0].length),
-      ) &&
-      /\b(?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b[^.!?;]{0,100}\b(?:studies|trials|series|experiments|specimens|participants|cases|sources|records)\b/i.test(
-        statement.slice(0, match.index),
-      )
-    ) {
-      continue;
-    }
-    if (
-      token === 'all' &&
-      /,[^.!?;]{0,100}\band\b[^.!?;]{0,100}\sall\s+(?:change|vary|differ)\b/i.test(
-        clause,
-      )
-    ) {
-      continue;
-    }
-    if (
-      token === 'all' &&
-      /\bof all the\s+[\w-]+\s+(?:muscles|joints|bones|tendons)\b/i.test(clause)
-    ) {
-      continue;
-    }
-    if (
-      token === 'every' &&
-      /\bevery\s+tier-\d+\b[^.!?;]{0,100}\bin this slice\b/i.test(clause)
-    ) {
-      continue;
-    }
-    if (
-      token === 'every' &&
-      (/\b(?:contrast|programmes?|protocols?)\b[^.!?;]{0,100}\bdiffering in every\s+(?:exercise|condition)\b/i.test(
-        clause,
-      ) ||
-        /\bnormalised every\s+(?:exercise|condition|value)\b/i.test(clause))
-    ) {
-      continue;
+    if (token === 'all') {
+      if (
+        new RegExp(
+          `\\b(?:${COUNT_TOKEN_SOURCE})\\b[^.!?;]{0,80}\\b(?:studies|trials|series|experiments|specimens|participants|cases|sources|records)\\b[^.!?;]{0,80},\\s*$`,
+          'i',
+        ).test(clausePrefix) &&
+        /^\s+(?:small\b|in\b)/i.test(clauseSuffix)
+      ) {
+        continue;
+      }
+      const referencedCount = new RegExp(
+        `^\\s+(${COUNT_TOKEN_SOURCE})\\b`,
+        'i',
+      ).exec(clauseSuffix)?.[1];
+      if (referencedCount) {
+        const enumeratedCounts = statement
+          .slice(0, match.index)
+          .matchAll(
+            new RegExp(
+              `\\b(${COUNT_TOKEN_SOURCE})\\b[^.!?;]{0,100}\\b(?:studies|trials|series|experiments|specimens|participants|cases|sources|records)\\b`,
+              'gi',
+            ),
+          );
+        if (
+          [...enumeratedCounts].some(
+            (enumerated) =>
+              countValue(enumerated[1] ?? '') === countValue(referencedCount),
+          )
+        ) {
+          continue;
+        }
+      }
+      if (
+        /,[^.!?;]{0,100}\band\b[^.!?;]{0,100}\s*$/i.test(clausePrefix) &&
+        /^\s+(?:change|vary|differ)\b/i.test(clauseSuffix)
+      ) {
+        continue;
+      }
     }
     return true;
   }
@@ -301,6 +356,33 @@ function clauseContaining(statement: string, matchIndex: number) {
   return statement.slice(clauseStart + 1, clauseEnd);
 }
 
+function clausePrefixBefore(statement: string, matchIndex: number) {
+  const clauseStart = Math.max(
+    statement.lastIndexOf('.', matchIndex - 1),
+    statement.lastIndexOf(';', matchIndex - 1),
+    statement.lastIndexOf('!', matchIndex - 1),
+    statement.lastIndexOf('?', matchIndex - 1),
+  );
+  return statement.slice(clauseStart + 1, matchIndex);
+}
+
+function clauseSuffixAfter(statement: string, matchEnd: number) {
+  const clauseEnds = ['.', ';', '!', '?']
+    .map((separator) => statement.indexOf(separator, matchEnd))
+    .filter((index) => index >= 0);
+  const clauseEnd =
+    clauseEnds.length > 0 ? Math.min(...clauseEnds) : statement.length;
+  return statement.slice(matchEnd, clauseEnd);
+}
+
+function crossesAssertionBoundary(text: string, from: number, to: number) {
+  if (to < from) return true;
+  NEW_ASSERTION_BOUNDARY.lastIndex = from;
+  const boundary = NEW_ASSERTION_BOUNDARY.exec(text);
+  NEW_ASSERTION_BOUNDARY.lastIndex = 0;
+  return boundary !== null && boundary.index < to;
+}
+
 function hasLowCalibration(clause: string) {
   for (const match of clause.matchAll(LOW_CALIBRATION_PATTERN)) {
     const token = match[0].toLowerCase();
@@ -313,16 +395,39 @@ function hasLowCalibration(clause: string) {
   return false;
 }
 
+function lastLowCalibrationEnd(text: string, limit: number) {
+  let end = -1;
+  for (const match of text.matchAll(LOW_CALIBRATION_PATTERN)) {
+    if (match.index >= limit) break;
+    const token = match[0].toLowerCase();
+    if (token === 'may' || token === 'might') {
+      const suffix = text.slice(match.index + match[0].length);
+      if (/^\s*,?\s*\d/.test(suffix)) continue;
+    }
+    end = match.index + match[0].length;
+  }
+  return end;
+}
+
 function hasUncalibratedCausalLanguage(statement: string) {
   const causalMatches = [...statement.matchAll(CAUSAL_PATTERN)];
   return causalMatches.some((match) => {
     if (isDirectlyNegated(statement, match.index)) return false;
     const clause = clauseContaining(statement, match.index);
-    if (
-      /^\s*(?:in|within)\s+(?:one|a single|an?)\b(?:\s+[\w-]+){0,6}\s+(?:study|trial|series|experiment)\b/i.test(
+    const clausePrefix = clausePrefixBefore(statement, match.index);
+    const tokenOffset = clausePrefix.length;
+    const singleTrialPreamble =
+      /^\s*(?:in|within)\s+(?:one|a single|an?)\b(?:\s+[\w-]+){0,6}\s+(?:study|trial|series|experiment)\b/i.exec(
         clause,
-      ) &&
-      /\d/.test(clause)
+      );
+    if (
+      singleTrialPreamble &&
+      /\d/.test(clause) &&
+      !crossesAssertionBoundary(
+        clause,
+        singleTrialPreamble[0].length,
+        tokenOffset,
+      )
     ) {
       return false;
     }
@@ -335,7 +440,13 @@ function hasUncalibratedCausalLanguage(statement: string) {
       return false;
     }
     const clauseStart = statement.lastIndexOf('.', match.index - 1) + 1;
-    if (hasLowCalibration(statement.slice(clauseStart, match.index))) {
+    const sentence = statement.slice(clauseStart);
+    const sentenceTokenOffset = match.index - clauseStart;
+    const calibrationEnd = lastLowCalibrationEnd(sentence, sentenceTokenOffset);
+    if (
+      calibrationEnd >= 0 &&
+      !crossesAssertionBoundary(sentence, calibrationEnd, sentenceTokenOffset)
+    ) {
       return false;
     }
     return !(

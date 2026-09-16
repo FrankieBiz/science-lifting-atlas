@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 
 import { describe, expect, it } from 'vitest';
 
@@ -14,6 +14,7 @@ import type {
 } from '../../src/lib/content/schemas';
 
 const fixtureUrl = new URL('../fixtures/evidence-schemas/', import.meta.url);
+const claimsUrl = new URL('../../content/claims/', import.meta.url);
 
 async function readJson<T>(name: string): Promise<T> {
   return JSON.parse(await readFile(new URL(name, fixtureUrl), 'utf8')) as T;
@@ -327,6 +328,118 @@ describe('certainty-language calibration', () => {
       ).toContain(expectedCode);
     },
   );
+
+  it.each([
+    [
+      'In 20 participants, every participant gained size.',
+      'In 20 participants, every participant gained size, and every lifter everywhere benefits.',
+    ],
+    [
+      'Of all the shoulder muscles, the pectoralis has leverage for adduction.',
+      'Of all the shoulder muscles, the pectoralis has leverage for adduction, and all lifters gain size.',
+    ],
+    [
+      'The response was not observed in every study.',
+      'The response was not observed in every study, and every lifter gains from it.',
+    ],
+    [
+      'Five studies, all in trained men, report a change.',
+      'Five studies, all in trained men, show all lifters gain size.',
+    ],
+    [
+      'Every tier-1 programme in this slice works.',
+      'Every tier-1 programme in this slice works, and every lifter gains from it.',
+    ],
+    [
+      'The study reports that every specimen behaved this way.',
+      'The study reports that every specimen behaved this way, so every athlete will too.',
+    ],
+    [
+      'Normalised every value.',
+      'Normalised every value, we conclude every athlete improves.',
+    ],
+    [
+      'Ten trials were located. The acquisition ladder was recorded for all ten.',
+      'Ten trials were located. The acquisition ladder was recorded for all ten, and all humans respond.',
+    ],
+    [
+      'At three sites, the imaging plane, the measurement site and operator experience all change the number obtained.',
+      'At three sites, the imaging plane, the measurement site and operator experience all change the number obtained, and all lifters gain size.',
+    ],
+    [
+      'Electromyography is never evidence of hypertrophy.',
+      'Electromyography is never evidence of hypertrophy, and the bench press never fails for any lifter.',
+    ],
+    [
+      'The contrast is whole programmes differing in every exercise.',
+      'The contrast is whole programmes differing in every exercise, and every lifter gains size.',
+    ],
+  ])(
+    'does not let a scoped phrase launder a joined universal: %s',
+    (scopedPart, joinedStatement) => {
+      expect(lintClaimLanguage(scopedPart, 'moderate')).toEqual([]);
+      expect(
+        lintClaimLanguage(joinedStatement, 'moderate').map(
+          (issue) => issue.code,
+        ),
+      ).toContain('CERTAINTY_UNIVERSAL');
+    },
+  );
+
+  it.each([
+    'In 20 participants, every participant gained size. Every lifter everywhere benefits.',
+    'In 20 participants, every participant gained size; every lifter everywhere benefits.',
+    'Across seven trials, all 7 trials agree that all humans respond.',
+    'Five studies, all lifters gain size.',
+    'The measured factors all change for every athlete.',
+  ])('rejects the R2 certainty-laundering control: %s', (statement) => {
+    expect(
+      lintClaimLanguage(statement, 'moderate').map((issue) => issue.code),
+    ).toContain('CERTAINTY_UNIVERSAL');
+  });
+
+  it.each([
+    'In one eight-week trial of 20 trained men, wide grip increases activation by 40 per cent and bench pressing prevents shoulder injury.',
+    'In one trial of 30 participants, the incline press produces a larger increase in strength and the flat press prevents injury.',
+    'Bench pressing may cause hypertrophy, and wide grip increases activation by 40 per cent.',
+  ])(
+    'does not let scoped causal wording launder a new assertion: %s',
+    (statement) => {
+      expect(
+        lintClaimLanguage(statement, 'low').map((issue) => issue.code),
+      ).toContain('CERTAINTY_OVERSTATED');
+    },
+  );
+
+  it.each([
+    'In one trial of 24 men, the incline press increases clavicular activation and reduces sternal activation.',
+    'In one trial of 24 men, the press increases activation and significantly reduces fatigue.',
+    'Limited evidence suggests wide grip may increase activation and reduce fatigue.',
+  ])('keeps same-assertion causal outcomes calibrated: %s', (statement) => {
+    expect(lintClaimLanguage(statement, 'low')).toEqual([]);
+  });
+
+  it('keeps every promoted statement and plain-language field calibrated', async () => {
+    const claimFiles = (await readdir(claimsUrl)).filter((name) =>
+      name.endsWith('.json'),
+    );
+    expect(claimFiles).toHaveLength(23);
+
+    for (const name of claimFiles) {
+      const claim = JSON.parse(
+        await readFile(new URL(name, claimsUrl), 'utf8'),
+      ) as ClaimRecord;
+      for (const [field, text] of [
+        ['statement', claim.statement],
+        ['plainLanguage', claim.plainLanguage],
+      ] as const) {
+        expect(
+          lintClaimLanguage(text, claim.evidence.certainty),
+          `${claim.id}.${field}`,
+        ).toEqual([]);
+      }
+    }
+  });
 
   it('does not treat a directly negated causal result as an overclaim', () => {
     expect(
