@@ -25,6 +25,15 @@ The queue in master plan section 18 runs `SBLA-001` through `SBLA-020`. Work the
 queue in order. Do not skip ahead, and do not silently combine a queue item with
 later architecture, licensing, evidence-schema, anatomy, or homepage work.
 
+**Owner hold recorded 2026-09-17:** production Blender, glTF/media-pipeline,
+anatomy-engine, and interactive 3D work in SBLA-013 through SBLA-015 must not
+start until the human owner explicitly releases the hold in a new repository
+decision. Continue SBLA-012's static archetypes, evidence journey, responsive
+design, accessibility, and formative usability work. Do not lower the intended
+3D quality target, substitute a rushed body asset, install Blender, or treat the
+current evaluation render as production approval while the hold is active. See
+`docs/product/design/SBLA-012-anatomy-production-hold.md`.
+
 Foundation-stage validators intentionally reject content records until the
 schema tasks that own them are complete. A validator that rejects your new file
 is usually correct; confirm the owning task before changing the validator.

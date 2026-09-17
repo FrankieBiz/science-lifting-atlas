@@ -1769,6 +1769,18 @@ Every gate packet should fit on one page and contain: decision, evidence, screen
 
 This manifest is the authoritative operational queue and resolves any ambiguity in the narrative phases. Do not skip ahead. Every task starts from the reviewed commit named by its dependency and ends with the standard handoff packet. `pnpm verify` is required wherever a repository implementation exists; a failed required check blocks handoff.
 
+**Temporary owner hold — recorded 2026-09-17:** complete SBLA-012, but do not
+begin SBLA-013, SBLA-014, or SBLA-015 until the human owner explicitly releases
+the hold through a new committed decision. The hold covers Blender installation
+and production work, manual or scripted mesh modification, glTF/GLB production,
+3D materials/lighting, anatomy-engine implementation, and interactive 3D
+integration. It does not reduce the final Clinical Cinematic quality target or
+authorize a lower-quality substitute. While active, work remains on SBLA-012's
+static page archetypes, accessible semantic presentation, evidence journey,
+responsive visual system, and formative usability gate. The exact boundary and
+restart conditions are recorded in
+[`SBLA-012-anatomy-production-hold.md`](design/SBLA-012-anatomy-production-hold.md).
+
 | ID | Owner → reviewer/approver | Depends on | Required outputs | Verification and pass condition |
 |---|---|---|---|---|
 | SBLA-001 | Codex → Claude Review | Master plan | Repository baseline; root configs; command contract; documented clean-checkout setup | `pnpm install --frozen-lockfile && pnpm verify`; clean checkout passes |

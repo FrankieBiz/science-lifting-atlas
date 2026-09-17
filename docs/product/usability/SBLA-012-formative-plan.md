@@ -5,6 +5,12 @@ Artifact under test: `codex/SBLA-012-realistic-static-slice`
 Required sample: 3–5 representative lifters or coaches  
 Owner gate: results, Critical fixes, and visual direction require owner approval
 
+Production Blender and interactive 3D work are intentionally excluded under the
+owner hold recorded 2026-09-17. Participants evaluate the authoritative static,
+semantic journey; they must not be shown a rushed 3D substitute or told that the
+evaluation render represents final anatomy quality. See
+[`SBLA-012-anatomy-production-hold.md`](../design/SBLA-012-anatomy-production-hold.md).
+
 ## Purpose
 
 Test whether the first realistic static slice makes the product's central
@@ -17,6 +23,11 @@ The current public-safe build contains only the home and methodology
 archetypes. Muscle, exercise, and source tasks begin only after the local-only
 prototype gate can render reviewed records without including those routes in a
 normal build.
+
+The test may assess whether people understand where an eventual body explorer
+fits, but it does not evaluate mesh quality, orbit/selection behavior, materials,
+lighting, or 3D performance. Those questions remain deferred with SBLA-013
+through SBLA-015.
 
 ## Participants
 
