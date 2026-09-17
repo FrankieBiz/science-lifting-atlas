@@ -43,7 +43,8 @@ The exact candidate was checked on 2026-09-17 before recruitment:
   smallest rendered text measured 12 px in the inspected muscle page.
 - A keyboard-only rehearsal reached the skip link, moved focus into `main`,
   followed the primary home action, opened the first native evidence disclosure,
-  and reached its first source link without pointer input.
+  and followed its first source link into the research dossier without pointer
+  input.
 - With reduced motion active, the browser matched the reduced-motion media
   query, document scrolling changed to `auto`, and transition duration resolved
   to 0.01 ms.
