@@ -5,7 +5,7 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  current?: 'home' | 'methodology';
+  current?: 'home' | 'entity' | 'methodology';
   noindex?: boolean;
 }
 
@@ -14,7 +14,8 @@ const pageTitle =
   title === 'Science-Based Lifting Atlas'
     ? title
     : `${title} · Science-Based Lifting Atlas`;
-const rootHref = Astro.url.pathname === '/' ? './' : '../';
+const routeDepth = Astro.url.pathname.split('/').filter(Boolean).length;
+const rootHref = routeDepth === 0 ? './' : '../'.repeat(routeDepth);
 const evidenceHref = `${rootHref}#evidence-trace`;
 ---
 

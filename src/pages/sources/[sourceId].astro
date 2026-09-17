@@ -1,0 +1,140 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+import PrototypeBanner from '../../components/sbla-012/PrototypeBanner.astro';
+import AtlasLayout from '../../layouts/AtlasLayout.astro';
+import {
+  classifyPreviewRecord,
+  prototypePreviewEnabled,
+} from '../../lib/presentation/sbla012';
+
+type Source = CollectionEntry<'sources'>['data'];
+type ReferencingClaim = Readonly<{
+  id: string;
+  statement: string;
+  role: string;
+}>;
+
+export async function getStaticPaths() {
+  const prototypeEnabled = prototypePreviewEnabled(process.env);
+  if (!prototypeEnabled) return [];
+
+  const [claims, sources] = await Promise.all([
+    getCollection('claims'),
+    getCollection('sources'),
+  ]);
+  const prototypeClaims = claims.filter(
+    (entry) =>
+      classifyPreviewRecord(entry.data, prototypeEnabled) === 'prototype',
+  );
+
+  return sources.flatMap((entry) => {
+    const referencingClaims = prototypeClaims.flatMap((claim) =>
+      claim.data.sourceLinks
+        .filter((link) => link.sourceId === entry.data.id)
+        .map((link) => ({
+          id: claim.data.id,
+          statement: claim.data.statement,
+          role: link.role,
+        })),
+    );
+    if (referencingClaims.length === 0) return [];
+    return [
+      {
+        params: { sourceId: entry.data.id },
+        props: { source: entry.data, referencingClaims },
+      },
+    ];
+  });
+}
+
+interface Props {
+  source: Source;
+  referencingClaims: ReferencingClaim[];
+}
+
+const { source, referencingClaims } = Astro.props;
+const externalHref =
+  source.urls.doi ?? source.urls.pubmed ?? source.urls.primary;
+---
+
+<AtlasLayout
+  title={source.title}
+  description="Local review prototype source record."
+  current="entity"
+  noindex
+>
+  <PrototypeBanner />
+  <article class="source-page">
+    <header class="source-page__header">
+      <div>
+        <p class="micro-label">
+          Source record / {source.type.replaceAll('-', ' ')}
+        </p>
+        <h1>{source.title}</h1>
+      </div>
+      <dl>
+        <div><dt>Year</dt><dd>{source.year}</dd></div>
+        <div>
+          <dt>Access</dt><dd>{source.access.level.replaceAll('-', ' ')}</dd>
+        </div>
+        <div><dt>Status</dt><dd>{source.publication.status}</dd></div>
+        <div><dt>Checked</dt><dd>{source.publication.statusCheckedAt}</dd></div>
+      </dl>
+    </header>
+
+    <section
+      class="source-page__summary"
+      aria-labelledby="source-summary-title"
+    >
+      <p class="micro-label">Project extraction</p>
+      <h2 id="source-summary-title">What this source contributes.</h2>
+      <p>{source.projectSummary}</p>
+      {
+        externalHref && (
+          <a href={externalHref}>Open the primary source record ↗</a>
+        )
+      }
+    </section>
+
+    <section class="source-page__methods" aria-labelledby="methods-title">
+      <header>
+        <p class="micro-label">Study register</p>
+        <h2 id="methods-title">Context before conclusion.</h2>
+      </header>
+      <dl>
+        <div><dt>Population</dt><dd>{source.study.population}</dd></div>
+        <div><dt>Intervention</dt><dd>{source.study.intervention}</dd></div>
+        <div><dt>Comparator</dt><dd>{source.study.comparator}</dd></div>
+        <div><dt>Risk of bias</dt><dd>{source.quality.riskOfBias}</dd></div>
+      </dl>
+      <ul>{source.quality.notes.map((note) => <li>{note}</li>)}</ul>
+    </section>
+
+    <section class="source-page__claims" aria-labelledby="claims-title">
+      <header>
+        <p class="micro-label">
+          Reverse evidence trace / {
+            String(referencingClaims.length).padStart(2, '0')
+          }
+        </p>
+        <h2 id="claims-title">Claims that depend on this record.</h2>
+      </header>
+      <ol>
+        {
+          referencingClaims.map((claim, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <>
+                  <strong>{claim.role}</strong>
+                  <p>{claim.statement}</p>
+                </>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </article>
+</AtlasLayout>

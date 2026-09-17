@@ -1,0 +1,42 @@
+---
+import bodyPoster from '../../../assets/derived/bodyparts3d/sbla005-poster.webp?url';
+
+interface Props {
+  category: string;
+  index: string;
+  name: string;
+  descriptor: string;
+}
+
+const { category, index, name, descriptor } = Astro.props;
+---
+
+<header class="entity-hero">
+  <div class="entity-hero__title">
+    <p class="micro-label">{category} / {index}</p>
+    <h1>{name}</h1>
+    <p>{descriptor}</p>
+  </div>
+
+  <figure class="entity-hero__specimen" aria-label="Pectoral-region specimen">
+    <svg viewBox="0 0 520 620" aria-hidden="true">
+      <ellipse cx="260" cy="310" rx="200" ry="270"></ellipse>
+      <ellipse cx="260" cy="310" rx="150" ry="220"></ellipse>
+      <path d="M260 40v540M40 310h440"></path>
+      <path
+        class="entity-hero__focus"
+        d="M175 212c38-34 69-29 85-10 16-19 47-24 85 10l-16 88c-36 21-60 15-69-3-9 18-33 24-69 3Z"
+      ></path>
+    </svg>
+    <img
+      src={bodyPoster}
+      width="720"
+      height="960"
+      alt="BodyParts3D anterior muscular-system evaluation render with the pectoral region emphasized."
+    />
+    <figcaption>
+      <span>Pectoral region</span>
+      <small>Static evaluation plate · 3D production on hold</small>
+    </figcaption>
+  </figure>
+</header>

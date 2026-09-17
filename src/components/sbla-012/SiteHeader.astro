@@ -1,6 +1,6 @@
 ---
 interface Props {
-  current?: 'home' | 'methodology' | undefined;
+  current?: 'home' | 'entity' | 'methodology' | undefined;
   rootHref: string;
 }
 
@@ -19,7 +19,12 @@ const evidenceHref = `${rootHref}#evidence-trace`;
   </a>
 
   <nav aria-label="Primary navigation">
-    <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}>
+    <a
+      href={rootHref}
+      aria-current={current === 'home' || current === 'entity'
+        ? 'page'
+        : undefined}
+    >
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 3v18M8 5l4-2 4 2M7 9l5 2 5-2M8 20l4-3 4 3"></path>
       </svg>

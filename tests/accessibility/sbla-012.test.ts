@@ -34,4 +34,18 @@ describe('SBLA-012 static-slice accessibility contract', () => {
     expect(styles).toContain('@media (prefers-reduced-motion: reduce)');
     expect(styles).toContain('animation-iteration-count: 1 !important');
   });
+
+  it('marks every local evidence archetype as noindex and visibly unpublished', async () => {
+    const paths = [
+      'src/pages/muscles/[slug].astro',
+      'src/pages/exercises/[slug].astro',
+      'src/pages/sources/[sourceId].astro',
+    ];
+
+    for (const path of paths) {
+      const page = await read(path);
+      expect(page).toContain('<PrototypeBanner />');
+      expect(page).toContain('noindex');
+    }
+  });
 });

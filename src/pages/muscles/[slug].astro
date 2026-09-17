@@ -1,0 +1,137 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+import EntitySpecimen from '../../components/sbla-012/EntitySpecimen.astro';
+import PrototypeBanner from '../../components/sbla-012/PrototypeBanner.astro';
+import PrototypeClaim from '../../components/sbla-012/PrototypeClaim.astro';
+import AtlasLayout from '../../layouts/AtlasLayout.astro';
+import {
+  classifyPreviewRecord,
+  prototypePreviewEnabled,
+} from '../../lib/presentation/sbla012';
+
+type Muscle = CollectionEntry<'muscles'>['data'];
+type RelatedExercise = Readonly<{ name: string; slug: string }>;
+
+export async function getStaticPaths() {
+  const prototypeEnabled = prototypePreviewEnabled(process.env);
+  if (!prototypeEnabled) return [];
+
+  const [muscles, exercises] = await Promise.all([
+    getCollection('muscles'),
+    getCollection('exercises'),
+  ]);
+
+  return muscles
+    .filter(
+      (entry) =>
+        classifyPreviewRecord(entry.data, prototypeEnabled) === 'prototype',
+    )
+    .map((entry) => ({
+      params: { slug: entry.data.slug },
+      props: {
+        muscle: entry.data,
+        relatedExercises: exercises
+          .filter((exercise) =>
+            exercise.data.relatedEntityIds.includes(entry.data.id),
+          )
+          .map((exercise) => ({
+            name: exercise.data.name,
+            slug: exercise.data.slug,
+          })),
+      },
+    }));
+}
+
+interface Props {
+  muscle: Muscle;
+  relatedExercises: RelatedExercise[];
+}
+
+const { muscle, relatedExercises } = Astro.props;
+const allClaimIds = muscle.sections.flatMap((section) => section.claimIds);
+const detailClaimIds = allClaimIds.filter(
+  (claimId) => !muscle.summaryClaimIds.includes(claimId),
+);
+---
+
+<AtlasLayout
+  title={muscle.name}
+  description={`Local review prototype for the ${muscle.name} evidence journey.`}
+  current="entity"
+  noindex
+>
+  <PrototypeBanner />
+  <article class="entity-page">
+    <EntitySpecimen
+      category="Structure"
+      index="01"
+      name={muscle.name}
+      descriptor="A reviewed anatomical structure traced from practical language to bounded claims and exact sources."
+    />
+
+    <section class="entity-register" aria-labelledby="register-title">
+      <div>
+        <p class="micro-label">Specimen register</p>
+        <h2 id="register-title">Identity before interpretation.</h2>
+      </div>
+      <dl>
+        <div><dt>FMA</dt><dd>{muscle.ontology.fma}</dd></div>
+        <div><dt>UBERON</dt><dd>{muscle.ontology.uberon}</dd></div>
+        <div><dt>MeSH</dt><dd>{muscle.ontology.mesh}</dd></div>
+        <div><dt>Review due</dt><dd>{muscle.review.reviewDueAt}</dd></div>
+      </dl>
+    </section>
+
+    <section class="entity-summary" aria-labelledby="summary-title">
+      <header>
+        <p class="micro-label">Practical orientation</p>
+        <h2 id="summary-title">Start with the bounded claims.</h2>
+        <p>
+          Reviewed by an independent AI account. Not owner-approved or public.
+        </p>
+      </header>
+      <div class="entity-summary__claims">
+        {muscle.summaryClaimIds.map((id) => <PrototypeClaim id={id} />)}
+      </div>
+    </section>
+
+    <section class="evidence-spine" aria-labelledby="evidence-spine-title">
+      <header>
+        <p class="micro-label">
+          Evidence spine / {String(allClaimIds.length).padStart(2, '0')}
+        </p>
+        <h2 id="evidence-spine-title">
+          Follow every statement down to its limits.
+        </h2>
+      </header>
+      <ol>
+        {
+          detailClaimIds.map((id, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <PrototypeClaim id={id} />
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <nav class="connected-register" aria-labelledby="connected-title">
+      <div>
+        <p class="micro-label">Connected specimens</p>
+        <h2 id="connected-title">Trace the structure into movement.</h2>
+      </div>
+      <ol>
+        {
+          relatedExercises.map((exercise, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <a href={`../../exercises/${exercise.slug}/`}>{exercise.name}</a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </article>
+</AtlasLayout>

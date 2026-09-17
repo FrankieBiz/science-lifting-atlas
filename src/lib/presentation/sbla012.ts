@@ -22,7 +22,8 @@ type PreviewRecordLifecycle = Readonly<{
   publicationState: string;
   approvalManifestId: string | null;
   contentChecksum: string | null;
-  ownerApprovedAt: string | null;
+  ownerApprovedAt?: string | null;
+  review?: Readonly<{ ownerApprovedAt: string | null }>;
 }>;
 
 export type PresentationEligibility = 'public' | 'prototype' | 'blocked';
@@ -39,10 +40,12 @@ export function classifyPreviewRecord(
   record: PreviewRecordLifecycle,
   prototypeEnabled: boolean,
 ): PresentationEligibility {
+  const ownerApprovedAt =
+    record.ownerApprovedAt ?? record.review?.ownerApprovedAt ?? null;
   const publicEligible =
     record.reviewState === 'approved' &&
     record.publicationState === 'published' &&
-    record.ownerApprovedAt !== null &&
+    ownerApprovedAt !== null &&
     record.approvalManifestId !== null &&
     record.contentChecksum !== null;
 
@@ -52,7 +55,7 @@ export function classifyPreviewRecord(
     prototypeEnabled &&
     record.reviewState === 'approved' &&
     record.publicationState === 'unpublished' &&
-    record.ownerApprovedAt === null &&
+    ownerApprovedAt === null &&
     record.approvalManifestId === null &&
     record.contentChecksum === null;
 

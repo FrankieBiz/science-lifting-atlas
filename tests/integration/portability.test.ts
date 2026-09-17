@@ -1,6 +1,6 @@
 import type { Server } from 'node:http';
-import { stat } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { readdir, stat } from 'node:fs/promises';
+import { relative, resolve, sep } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { serveStaticDirectory } from '../../scripts/portability/static-server.mjs';
@@ -81,34 +81,57 @@ describe('build artifact portability', () => {
     expect(html).toContain('Evidence-first resistance training anatomy');
   });
 
-  it('keeps and serves every homepage resource inside both deployment mounts', async () => {
+  it('keeps and serves every page resource inside both deployment mounts', async () => {
     const deployments = [
-      { pageUrl: `${requireUrl(rootUrl, 'root')}/`, mount: '/' },
+      { baseUrl: `${requireUrl(rootUrl, 'root')}/`, mount: '/' },
       {
-        pageUrl: `${requireUrl(subpathUrl, 'subpath')}/science-lifting-atlas/`,
+        baseUrl: `${requireUrl(subpathUrl, 'subpath')}/science-lifting-atlas/`,
         mount: '/science-lifting-atlas/',
       },
     ];
+    const routes = await collectHtmlRoutes(DIST);
 
     for (const deployment of deployments) {
-      const page = await fetch(deployment.pageUrl);
-      expect(page.status).toBe(200);
-      const references = collectSameOriginResourceReferences(
-        await page.text(),
-        page.url,
-      );
-      expect(references.length).toBeGreaterThan(0);
+      const pages = await Promise.all(
+        routes.map(async (route) => {
+          const pageUrl = new URL(route, deployment.baseUrl);
+          const page = await fetch(pageUrl);
+          expect(page.status, `${pageUrl} must resolve`).toBe(200);
+          const references = collectSameOriginResourceReferences(
+            await page.text(),
+            page.url,
+          );
+          expect(
+            references.length,
+            `${pageUrl} must expose a resource`,
+          ).toBeGreaterThan(0);
 
-      for (const reference of references) {
-        expect(
-          isPathInsideMount(reference.url.pathname, deployment.mount),
-          `${reference.attribute} resource ${reference.raw} must remain inside ${deployment.mount}`,
-        ).toBe(true);
-        expect(
-          (await fetch(reference.url)).status,
-          `${reference.attribute} resource ${reference.raw} must resolve under ${deployment.mount}`,
-        ).toBe(200);
+          return { pageUrl, references };
+        }),
+      );
+      const resources = new Map<string, string>();
+
+      for (const { pageUrl, references } of pages) {
+        for (const reference of references) {
+          expect(
+            isPathInsideMount(reference.url.pathname, deployment.mount),
+            `${pageUrl}: ${reference.attribute} resource ${reference.raw} must remain inside ${deployment.mount}`,
+          ).toBe(true);
+          resources.set(
+            reference.url.href,
+            `${pageUrl}: ${reference.attribute} resource ${reference.raw}`,
+          );
+        }
       }
+
+      await Promise.all(
+        [...resources].map(async ([url, context]) => {
+          expect(
+            (await fetch(url)).status,
+            `${context} must resolve under ${deployment.mount}`,
+          ).toBe(200);
+        }),
+      );
     }
   });
 
@@ -119,34 +142,81 @@ describe('build artifact portability', () => {
     expect(response.status).toBe(200);
   });
 
-  it('keeps same-origin navigation inside both deployment mounts', async () => {
+  it('keeps every page navigation inside both deployment mounts', async () => {
     const deployments = [
-      { pageUrl: `${requireUrl(rootUrl, 'root')}/`, mount: '/' },
+      { baseUrl: `${requireUrl(rootUrl, 'root')}/`, mount: '/' },
       {
-        pageUrl: `${requireUrl(subpathUrl, 'subpath')}/science-lifting-atlas/`,
+        baseUrl: `${requireUrl(subpathUrl, 'subpath')}/science-lifting-atlas/`,
         mount: '/science-lifting-atlas/',
       },
     ];
+    const routes = await collectHtmlRoutes(DIST);
 
     for (const deployment of deployments) {
-      const page = await fetch(deployment.pageUrl);
-      const references = collectSameOriginNavigationReferences(
-        await page.text(),
-        page.url,
+      const pages = await Promise.all(
+        routes.map(async (route) => {
+          const pageUrl = new URL(route, deployment.baseUrl);
+          const page = await fetch(pageUrl);
+          expect(page.status, `${pageUrl} must resolve`).toBe(200);
+          const references = collectSameOriginNavigationReferences(
+            await page.text(),
+            page.url,
+          );
+
+          expect(
+            references.length,
+            `${pageUrl} must expose navigation`,
+          ).toBeGreaterThan(0);
+
+          return { pageUrl, references };
+        }),
       );
+      const destinations = new Map<string, string>();
 
-      expect(references.length).toBeGreaterThan(0);
-
-      for (const reference of references) {
-        expect(
-          isPathInsideMount(reference.url.pathname, deployment.mount),
-          `navigation ${reference.raw} must remain inside ${deployment.mount}`,
-        ).toBe(true);
-        expect((await fetch(reference.url)).status).toBe(200);
+      for (const { pageUrl, references } of pages) {
+        for (const reference of references) {
+          expect(
+            isPathInsideMount(reference.url.pathname, deployment.mount),
+            `${pageUrl}: navigation ${reference.raw} must remain inside ${deployment.mount}`,
+          ).toBe(true);
+          destinations.set(
+            reference.url.href,
+            `${pageUrl}: navigation ${reference.raw}`,
+          );
+        }
       }
+
+      await Promise.all(
+        [...destinations].map(async ([url, context]) => {
+          expect((await fetch(url)).status, `${context} must resolve`).toBe(
+            200,
+          );
+        }),
+      );
     }
-  });
+  }, 15_000);
 });
+
+async function collectHtmlRoutes(directory: string): Promise<string[]> {
+  const entries = await readdir(directory, {
+    recursive: true,
+    withFileTypes: true,
+  });
+
+  return entries
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
+    .map((entry) => {
+      const file = resolve(entry.parentPath, entry.name);
+      const path = relative(directory, file).split(sep).join('/');
+      const route =
+        path === 'index.html' ? '' : path.replace(/index\.html$/u, '');
+      return route
+        .split('/')
+        .map((segment) => encodeURIComponent(segment))
+        .join('/');
+    })
+    .sort();
+}
 
 function requireUrl(value: string | undefined, label: string): string {
   if (!value) throw new Error(`The ${label} portability server did not start.`);

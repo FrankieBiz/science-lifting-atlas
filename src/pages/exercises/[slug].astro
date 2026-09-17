@@ -1,0 +1,178 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+import EntitySpecimen from '../../components/sbla-012/EntitySpecimen.astro';
+import PrototypeBanner from '../../components/sbla-012/PrototypeBanner.astro';
+import PrototypeClaim from '../../components/sbla-012/PrototypeClaim.astro';
+import AtlasLayout from '../../layouts/AtlasLayout.astro';
+import {
+  classifyPreviewRecord,
+  prototypePreviewEnabled,
+} from '../../lib/presentation/sbla012';
+
+type Exercise = CollectionEntry<'exercises'>['data'];
+type RelatedEntity = Readonly<{
+  kind: 'exercise' | 'muscle';
+  name: string;
+  slug: string;
+}>;
+
+export async function getStaticPaths() {
+  const prototypeEnabled = prototypePreviewEnabled(process.env);
+  if (!prototypeEnabled) return [];
+
+  const [exercises, muscles] = await Promise.all([
+    getCollection('exercises'),
+    getCollection('muscles'),
+  ]);
+  const exerciseById = new Map(
+    exercises.map((entry) => [entry.data.id, entry.data]),
+  );
+  const muscleById = new Map(
+    muscles.map((entry) => [entry.data.id, entry.data]),
+  );
+
+  return exercises
+    .filter(
+      (entry) =>
+        classifyPreviewRecord(entry.data, prototypeEnabled) === 'prototype',
+    )
+    .map((entry) => ({
+      params: { slug: entry.data.slug },
+      props: {
+        exercise: entry.data,
+        relatedEntities: entry.data.relatedEntityIds.flatMap(
+          (id): RelatedEntity[] => {
+            const muscle = muscleById.get(id);
+            if (muscle)
+              return [
+                {
+                  kind: 'muscle' as const,
+                  name: muscle.name,
+                  slug: muscle.slug,
+                },
+              ];
+            const exercise = exerciseById.get(id);
+            if (exercise)
+              return [
+                {
+                  kind: 'exercise' as const,
+                  name: exercise.name,
+                  slug: exercise.slug,
+                },
+              ];
+            return [];
+          },
+        ),
+      },
+    }));
+}
+
+interface Props {
+  exercise: Exercise;
+  relatedEntities: RelatedEntity[];
+}
+
+const { exercise, relatedEntities } = Astro.props;
+const allClaimIds = exercise.sections.flatMap((section) => section.claimIds);
+const detailClaimIds = allClaimIds.filter(
+  (claimId) => !exercise.summaryClaimIds.includes(claimId),
+);
+---
+
+<AtlasLayout
+  title={exercise.name}
+  description={`Local review prototype for the ${exercise.name} evidence journey.`}
+  current="entity"
+  noindex
+>
+  <PrototypeBanner />
+  <article class="entity-page">
+    <EntitySpecimen
+      category="Exercise"
+      index="02"
+      name={exercise.name}
+      descriptor="A precisely scoped movement record. The page separates what was studied from what a lifter may infer."
+    />
+
+    <section class="scope-ledger" aria-labelledby="scope-title">
+      <header>
+        <p class="micro-label">Scope ledger</p>
+        <h2 id="scope-title">
+          Define the movement before reading the evidence.
+        </h2>
+      </header>
+      <div>
+        <section>
+          <p class="scope-ledger__state">Included</p>
+          <ul>
+            {exercise.projectDefinition.included.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+        <section>
+          <p class="scope-ledger__state scope-ledger__state--excluded">
+            Excluded
+          </p>
+          <ul>
+            {exercise.projectDefinition.excluded.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="entity-summary" aria-labelledby="summary-title">
+      <header>
+        <p class="micro-label">Reviewed orientation</p>
+        <h2 id="summary-title">What the evidence can support.</h2>
+        <p>
+          These statements remain unpublished until explicit owner approval.
+        </p>
+      </header>
+      <div class="entity-summary__claims">
+        {exercise.summaryClaimIds.map((id) => <PrototypeClaim id={id} />)}
+      </div>
+    </section>
+
+    <section class="evidence-spine" aria-labelledby="evidence-spine-title">
+      <header>
+        <p class="micro-label">
+          Evidence spine / {String(allClaimIds.length).padStart(2, '0')}
+        </p>
+        <h2 id="evidence-spine-title">
+          Claims first. Sources one disclosure away.
+        </h2>
+      </header>
+      <ol>
+        {
+          detailClaimIds.map((id, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <PrototypeClaim id={id} />
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <nav class="connected-register" aria-labelledby="connected-title">
+      <div>
+        <p class="micro-label">Connected records</p>
+        <h2 id="connected-title">Keep following the graph.</h2>
+      </div>
+      <ol>
+        {
+          relatedEntities.map((entity, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <a
+                href={`../../${entity.kind === 'muscle' ? 'muscles' : 'exercises'}/${entity.slug}/`}
+              >
+                {entity.name}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </article>
+</AtlasLayout>

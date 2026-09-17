@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+
+import {
+  classifyPreviewRecord,
+  prototypePreviewEnabled,
+} from '../../lib/presentation/sbla012';
+
+interface Props {
+  id: string;
+  sourceBaseHref?: string;
+}
+
+const { id, sourceBaseHref = '../../sources/' } = Astro.props;
+const prototypeEnabled = prototypePreviewEnabled(process.env);
+const claims = await getCollection('claims');
+const claim = claims.find((entry) => entry.data.id === id)?.data;
+
+if (!claim) throw new Error(`Unknown prototype claim ID: ${id}`);
+if (classifyPreviewRecord(claim, prototypeEnabled) !== 'prototype') {
+  throw new Error(`Claim ${id} is not eligible for prototype rendering.`);
+}
+
+const sourceEntries = await getCollection('sources');
+const sourceById = new Map(
+  sourceEntries.map((entry) => [entry.data.id, entry.data]),
+);
+const qualified = claim.sourceLinks.some(
+  (link) => link.role === 'qualifies' || link.role === 'contradicts',
+);
+---
+
+<article class="prototype-claim" data-claim-id={claim.id}>
+  <header>
+    <p class="micro-label">{claim.type.replaceAll('-', ' ')}</p>
+    <span>{claim.evidence.certainty} certainty</span>
+  </header>
+  <p class="prototype-claim__statement">{claim.plainLanguage}</p>
+  {
+    qualified && (
+      <p class="prototype-claim__qualified">Qualified or mixed evidence</p>
+    )
+  }
+  <details>
+    <summary>Scope, limitations, and sources</summary>
+    <div class="prototype-claim__detail">
+      <div>
+        <h3>Applies to</h3>
+        <p>{claim.scope.population}</p>
+        <ul>
+          {claim.scope.conditions.map((condition) => <li>{condition}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Read with care</h3>
+        <ul>
+          {claim.qualifiers.map((qualifier) => <li>{qualifier}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Source trail</h3>
+        <ol>
+          {
+            claim.sourceLinks.map((link) => {
+              const source = sourceById.get(link.sourceId);
+              if (!source) throw new Error(`Missing source ${link.sourceId}`);
+              return (
+                <li data-source-role={link.role}>
+                  <a href={`${sourceBaseHref}${source.id}/`}>{source.title}</a>
+                  <span>
+                    {link.role} · {link.locator}
+                  </span>
+                </li>
+              );
+            })
+          }
+        </ol>
+      </div>
+    </div>
+  </details>
+</article>

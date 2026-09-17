@@ -33,6 +33,9 @@ describe('SBLA-012 clinical-cinematic visual contract', () => {
       '.focus-index',
       '.claim-vault',
       '.evidence-trace',
+      '.entity-hero',
+      '.prototype-claim',
+      '.evidence-spine',
     ]) {
       expect(styles).not.toMatch(
         new RegExp(

@@ -38,3 +38,17 @@ test('the methodology route discloses AI roles and the publication gate', async 
     page.getByRole('heading', { name: 'Fail-closed publication' }),
   ).toBeVisible();
 });
+
+test('the ordinary build excludes every unpublished prototype route', async ({
+  request,
+}) => {
+  for (const route of [
+    '/muscles/pectoralis-major/',
+    '/exercises/barbell-flat-bench-press/',
+    '/exercises/cable-fly-standing-bilateral-shoulder-height/',
+    '/sources/source-pmid-9356931/',
+  ]) {
+    const response = await request.get(route);
+    expect(response.status(), route).toBe(404);
+  }
+});

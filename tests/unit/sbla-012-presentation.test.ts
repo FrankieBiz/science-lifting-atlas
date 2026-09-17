@@ -40,6 +40,25 @@ describe('SBLA-012 presentation contract', () => {
     expect(classifyPreviewRecord(reviewedUnpublished, true)).toBe('prototype');
   });
 
+  it('reads owner approval from the canonical nested review lifecycle', () => {
+    const canonicalLifecycle = {
+      reviewState: reviewedUnpublished.reviewState,
+      publicationState: reviewedUnpublished.publicationState,
+      approvalManifestId: reviewedUnpublished.approvalManifestId,
+      contentChecksum: reviewedUnpublished.contentChecksum,
+    };
+
+    expect(
+      classifyPreviewRecord(
+        {
+          ...canonicalLifecycle,
+          review: { ownerApprovedAt: null },
+        },
+        true,
+      ),
+    ).toBe('prototype');
+  });
+
   it('requires an exact local-only preview sentinel and refuses CI', () => {
     expect(prototypePreviewEnabled({})).toBe(false);
     expect(

@@ -1,6 +1,9 @@
 ---
 import posterUrl from '../../assets/derived/bodyparts3d/sbla005-poster.webp?url';
 import AtlasLayout from '../layouts/AtlasLayout.astro';
+import { prototypePreviewEnabled } from '../lib/presentation/sbla012';
+
+const prototypeEnabled = prototypePreviewEnabled(process.env);
 ---
 
 <AtlasLayout
@@ -61,7 +64,15 @@ import AtlasLayout from '../layouts/AtlasLayout.astro';
 
     <aside class="focus-index" aria-labelledby="focus-title">
       <p class="micro-label">Current focus</p>
-      <h2 id="focus-title">Pectoralis major</h2>
+      <h2 id="focus-title">
+        {
+          prototypeEnabled ? (
+            <a href="./muscles/pectoralis-major/">Pectoralis major</a>
+          ) : (
+            'Pectoralis major'
+          )
+        }
+      </h2>
       <ol>
         <li aria-current="true"><span>01</span> Reviewed structure</li>
         <li><span>02</span> Flat press</li>
@@ -119,14 +130,32 @@ import AtlasLayout from '../layouts/AtlasLayout.astro';
       <li>
         <span class="trace-number">01</span>
         <span class="trace-type">Structure</span>
-        <strong>Pectoralis major</strong>
+        <strong>
+          {
+            prototypeEnabled ? (
+              <a href="./muscles/pectoralis-major/">Pectoralis major</a>
+            ) : (
+              'Pectoralis major'
+            )
+          }
+        </strong>
         <small>Reviewed · unpublished</small>
       </li>
       <li class="trace-arrow" aria-hidden="true">→</li>
       <li>
         <span class="trace-number">02</span>
         <span class="trace-type">Exercise</span>
-        <strong>Barbell flat bench press</strong>
+        <strong>
+          {
+            prototypeEnabled ? (
+              <a href="./exercises/barbell-flat-bench-press/">
+                Barbell flat bench press
+              </a>
+            ) : (
+              'Barbell flat bench press'
+            )
+          }
+        </strong>
         <small>Scope · mechanics · limits</small>
       </li>
       <li class="trace-arrow" aria-hidden="true">→</li>
