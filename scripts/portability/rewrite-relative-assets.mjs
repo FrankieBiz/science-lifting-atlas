@@ -32,7 +32,7 @@ export async function rewriteRelativeAssetUrls(outputDirectory) {
       const relativeRoot = relative(dirname(file), root).split(sep).join('/');
       const prefix = relativeRoot ? `${relativeRoot}/assets/` : './assets/';
       const html = await readFile(file, 'utf8');
-      const rewritten = html.replaceAll('./assets/', prefix);
+      const rewritten = html.replace(/(["'])\.\/assets\//gu, `$1${prefix}`);
 
       if (rewritten !== html) await writeFile(file, rewritten, 'utf8');
     }),

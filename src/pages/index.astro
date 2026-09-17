@@ -12,7 +12,7 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
   current="home"
 >
   <section class="museum-hero" aria-labelledby="page-title">
-    <div class="museum-utility" aria-label="Atlas status">
+    <div class="museum-utility" role="status" aria-label="Atlas status">
       <p>Specimen H-01 <span>·</span> Muscular system</p>
       <p>
         <span class="status-light" aria-hidden="true"></span> Prototype / publication
@@ -29,7 +29,11 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
       </p>
     </div>
 
-    <div class="specimen" aria-label="Anterior muscular-system specimen">
+    <div
+      class="specimen"
+      role="img"
+      aria-label="Anterior muscular-system specimen"
+    >
       <div class="specimen__halo" aria-hidden="true"></div>
       <img
         src={posterUrl}
@@ -57,8 +61,8 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
         <strong>[ slice · 01 ]</strong>
       </div>
       <p class="specimen__caption">
-        BodyParts3D 4.0 · licensed evaluation render<br />2D fallback is
-        authoritative
+        BodyParts3D, © The Database Center for Life Science licensed under CC
+        Attribution 4.0 International<br />2D fallback is authoritative
       </p>
     </div>
 

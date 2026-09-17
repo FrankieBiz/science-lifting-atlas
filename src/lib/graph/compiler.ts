@@ -155,3 +155,54 @@ export function compileEvidenceGraph(
 
   return { schemaVersion: 1, sourceStatusSnapshot, nodes, edges };
 }
+
+/**
+ * Produce the deployable graph as the publication-safe closure of the complete
+ * validated registry. Internal compilation still includes reviewed drafts so
+ * integrity checks can reason about them; the public artifact never does.
+ */
+export function compilePublicEvidenceGraph(
+  registry: ContentRegistry,
+  options: { asOf: string },
+): EvidenceGraphBundle {
+  const graph = compileEvidenceGraph(registry, options);
+  const publicClaims = registry.claims.filter(
+    (claim) => claim.publicationState === 'published',
+  );
+  const publicPages = [...registry.muscles, ...registry.exercises].filter(
+    (page) => page.publicationState === 'published',
+  );
+  const publicSourceIds = new Set(
+    publicClaims.flatMap((claim) =>
+      claim.sourceLinks.map((link) => link.sourceId),
+    ),
+  );
+  const publicManifestIds = new Set(
+    [...publicClaims, ...publicPages].flatMap((record) =>
+      record.approvalManifestId ? [record.approvalManifestId] : [],
+    ),
+  );
+  const publicNodeIds = new Set([
+    ...publicClaims.map((claim) => claim.id),
+    ...publicPages.map((page) => page.id),
+    ...publicSourceIds,
+    ...publicManifestIds,
+  ]);
+  const publicSources = registry.sources.filter((source) =>
+    publicSourceIds.has(source.id),
+  );
+  const checkedDates = publicSources.flatMap((source) =>
+    source.publication.statusCheckedAt
+      ? [source.publication.statusCheckedAt]
+      : [],
+  );
+
+  return {
+    schemaVersion: 1,
+    sourceStatusSnapshot: checkedDates.sort().at(-1) ?? null,
+    nodes: graph.nodes.filter((node) => publicNodeIds.has(node.id)),
+    edges: graph.edges.filter(
+      (edge) => publicNodeIds.has(edge.from) && publicNodeIds.has(edge.to),
+    ),
+  };
+}

@@ -11,22 +11,53 @@ import {
 type Source = CollectionEntry<'sources'>['data'];
 type ReferencingClaim = Readonly<{
   id: string;
-  statement: string;
+  plainLanguage: string;
   role: string;
+  entities: ReadonlyArray<{
+    href: string;
+    label: string;
+  }>;
 }>;
 
 export async function getStaticPaths() {
   const prototypeEnabled = prototypePreviewEnabled(process.env);
   if (!prototypeEnabled) return [];
 
-  const [claims, sources] = await Promise.all([
+  const [claims, sources, muscles, exercises] = await Promise.all([
     getCollection('claims'),
     getCollection('sources'),
+    getCollection('muscles'),
+    getCollection('exercises'),
   ]);
   const prototypeClaims = claims.filter(
     (entry) =>
       classifyPreviewRecord(entry.data, prototypeEnabled) === 'prototype',
   );
+  const entitiesByClaimId = new Map<
+    string,
+    Array<{ href: string; label: string }>
+  >();
+
+  for (const entity of [
+    ...muscles.map((entry) => ({ kind: 'muscles', data: entry.data })),
+    ...exercises.map((entry) => ({ kind: 'exercises', data: entry.data })),
+  ]) {
+    if (classifyPreviewRecord(entity.data, prototypeEnabled) !== 'prototype') {
+      continue;
+    }
+    const claimIds = new Set([
+      ...entity.data.summaryClaimIds,
+      ...entity.data.sections.flatMap((section) => section.claimIds),
+    ]);
+    for (const claimId of claimIds) {
+      const backlinks = entitiesByClaimId.get(claimId) ?? [];
+      backlinks.push({
+        href: `../../${entity.kind}/${entity.data.slug}/#claim-${claimId}`,
+        label: entity.data.name,
+      });
+      entitiesByClaimId.set(claimId, backlinks);
+    }
+  }
 
   return sources.flatMap((entry) => {
     const referencingClaims = prototypeClaims.flatMap((claim) =>
@@ -34,8 +65,9 @@ export async function getStaticPaths() {
         .filter((link) => link.sourceId === entry.data.id)
         .map((link) => ({
           id: claim.data.id,
-          statement: claim.data.statement,
+          plainLanguage: claim.data.plainLanguage,
           role: link.role,
+          entities: entitiesByClaimId.get(claim.data.id) ?? [],
         })),
     );
     if (referencingClaims.length === 0) return [];
@@ -128,7 +160,12 @@ const externalHref =
               <div>
                 <>
                   <strong>{claim.role}</strong>
-                  <p>{claim.statement}</p>
+                  <p>{claim.plainLanguage}</p>
+                  <nav aria-label={`Return to records for ${claim.id}`}>
+                    {claim.entities.map((entity) => (
+                      <a href={entity.href}>Return to {entity.label} ↗</a>
+                    ))}
+                  </nav>
                 </>
               </div>
             </li>

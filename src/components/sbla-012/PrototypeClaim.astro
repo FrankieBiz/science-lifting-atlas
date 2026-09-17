@@ -30,7 +30,11 @@ const qualified = claim.sourceLinks.some(
 );
 ---
 
-<article class="prototype-claim" data-claim-id={claim.id}>
+<article
+  class="prototype-claim"
+  id={`claim-${claim.id}`}
+  data-claim-id={claim.id}
+>
   <header>
     <p class="micro-label">{claim.type.replaceAll('-', ' ')}</p>
     <span>{claim.evidence.certainty} certainty</span>

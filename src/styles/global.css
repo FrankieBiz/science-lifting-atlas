@@ -169,7 +169,7 @@ a {
 
 .rail-index {
   margin: 3rem 1.8rem 2rem;
-  color: #60717b;
+  color: #8296a3;
   font-size: 0.52rem;
   letter-spacing: 0.24em;
   line-height: 1.9;
@@ -402,7 +402,7 @@ main,
   z-index: 5;
   inset: auto auto 3.5rem 8%;
   margin: 0;
-  color: #60717b;
+  color: #8296a3;
   font-size: 0.48rem;
   letter-spacing: 0.13em;
   line-height: 1.8;
@@ -449,7 +449,7 @@ main,
   display: grid;
   grid-template-columns: 2rem 1fr;
   padding: 0.35rem 0 0.35rem 1rem;
-  color: #60717b;
+  color: #8296a3;
   font-size: 0.56rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -613,7 +613,7 @@ main,
 
 .view-register li {
   padding-block: 0.33rem;
-  color: #60717b;
+  color: #8296a3;
   font-size: 0.5rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -670,7 +670,7 @@ main,
 .trace-number,
 .trace-type,
 .evidence-trace small {
-  color: #60717b;
+  color: #8296a3;
   font-size: 0.49rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -722,7 +722,7 @@ main,
   padding-inline: 3rem;
   border-top: 1px solid rgb(183 195 200 / 14%);
   background: #050a0e;
-  color: #60717b;
+  color: #8296a3;
   font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.13em;
@@ -1168,7 +1168,7 @@ main,
 .evidence-spine > ol > li > span,
 .source-page__claims ol > li > span {
   padding-top: 2rem;
-  color: #617681;
+  color: #8296a3;
   font-family: var(--font-mono);
   font-size: 0.55rem;
   letter-spacing: 0.12em;
@@ -1193,7 +1193,7 @@ main,
 
 .connected-register li span {
   padding-block: 1.4rem;
-  color: #617681;
+  color: #8296a3;
   font-family: var(--font-mono);
   font-size: 0.55rem;
 }
@@ -1268,6 +1268,21 @@ main,
   max-width: 62rem;
   margin-bottom: 0;
   color: #9bacb5;
+}
+
+.source-page__claims nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.source-page__claims nav a {
+  color: var(--signal-300);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 @media (hover: hover) {
@@ -1487,15 +1502,14 @@ main,
 }
 
 @media (max-width: 44rem) {
-  .rail-brand span,
-  .site-rail nav svg {
+  .rail-brand span {
     display: none;
   }
 
   .site-rail nav a {
     min-height: 4.2rem;
     padding-inline: 0.75rem;
-    font-size: 0.52rem;
+    font-size: 0.68rem;
   }
 
   .rail-brand {
@@ -1546,16 +1560,14 @@ main,
   }
 
   .specimen__caption {
-    display: none;
+    inset: auto 1.25rem 1rem;
+    max-width: 26rem;
+    font-size: 0.55rem;
   }
 
   .focus-index {
     inset: auto 1.25rem 20rem;
     width: auto;
-  }
-
-  .focus-index ol {
-    display: none;
   }
 
   .focus-index__notice {

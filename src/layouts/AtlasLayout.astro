@@ -33,7 +33,7 @@ const evidenceHref = `${rootHref}#evidence-trace`;
   <body class:list={[current && `page-${current}`]}>
     <a class="skip-link" href="#main">Skip to content</a>
     <SiteHeader current={current} rootHref={rootHref} />
-    <main id="main">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <footer class="site-footer">

@@ -52,3 +52,20 @@ test('the ordinary build excludes every unpublished prototype route', async ({
     expect(response.status(), route).toBe(404);
   }
 });
+
+test('the ordinary build excludes unpublished records from its public graph', async ({
+  request,
+}) => {
+  const response = await request.get('/data/evidence-graph.v1.json');
+  expect(response.status()).toBe(200);
+
+  const graph = (await response.json()) as {
+    nodes: Array<{ publicationState?: string; label: string }>;
+  };
+  expect(graph.nodes).not.toContainEqual(
+    expect.objectContaining({ publicationState: 'unpublished' }),
+  );
+  expect(JSON.stringify(graph)).not.toContain(
+    'Studies disagree about whether changing your grip width',
+  );
+});

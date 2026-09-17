@@ -8,6 +8,7 @@ import type { ClaimRecord, SourceRecord } from '../../src/lib/content/schemas';
 import {
   canonicalJson,
   compileEvidenceGraph,
+  compilePublicEvidenceGraph,
   GraphCompilationError,
 } from '../../src/lib/graph/compiler';
 
@@ -69,6 +70,23 @@ describe('SBLA-011 evidence graph compiler', () => {
     expect(() =>
       compileEvidenceGraph(registry, { asOf: '2026-09-15' }),
     ).toThrow(GraphCompilationError);
+  });
+
+  it('excludes reviewed but unpublished records from the public graph', async () => {
+    const registry = await registryFixture();
+    const graph = compilePublicEvidenceGraph(registry, {
+      asOf: '2026-09-15',
+    });
+
+    expect(graph).toEqual({
+      schemaVersion: 1,
+      sourceStatusSnapshot: null,
+      nodes: [],
+      edges: [],
+    });
+    expect(canonicalJson(graph)).not.toContain(
+      registry.claims[0]!.plainLanguage,
+    );
   });
 
   it('uses a locale-independent total order for shuffled inputs', async () => {
