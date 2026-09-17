@@ -8,12 +8,14 @@ test('the static home journey exposes evidence status without unpublished claim 
   await page.goto('/');
 
   await expect(
-    page.getByRole('heading', { name: 'Strength, mapped to evidence.' }),
+    page.getByRole('heading', { name: 'Understand what moves you.' }),
   ).toBeVisible();
   await expect(page.getByText('Reviewed claims')).toBeVisible();
   await expect(page.getByText('Public claims')).toBeVisible();
   await expect(
-    page.getByText('Scientific content remains locked pending owner approval.'),
+    page.getByText(
+      'Scientific prose is withheld until explicit owner approval.',
+    ),
   ).toBeVisible();
   await expect(page.locator('a[href^="/muscles/"]')).toHaveCount(0);
   await expect(page.locator('a[href^="/exercises/"]')).toHaveCount(0);

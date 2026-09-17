@@ -15,7 +15,7 @@ const pageTitle =
     ? title
     : `${title} · Science-Based Lifting Atlas`;
 const rootHref = Astro.url.pathname === '/' ? './' : '../';
-const evidenceHref = `${rootHref}#evidence-system`;
+const evidenceHref = `${rootHref}#evidence-trace`;
 ---
 
 <!doctype html>
@@ -29,14 +29,14 @@ const evidenceHref = `${rootHref}#evidence-system`;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <body class:list={[current && `page-${current}`]}>
     <a class="skip-link" href="#main">Skip to content</a>
     <SiteHeader current={current} rootHref={rootHref} />
     <main id="main">
       <slot />
     </main>
     <footer class="site-footer">
-      <p>Science-Based Lifting Atlas</p>
+      <p>Science-Based Lifting Atlas · evidence before certainty</p>
       <nav aria-label="Footer navigation">
         <a href={`${rootHref}methodology/`}>Methodology</a>
         <a href={evidenceHref}>Evidence process</a>

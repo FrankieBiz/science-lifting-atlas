@@ -1,5 +1,5 @@
 ---
-import EvidenceRail from '../components/sbla-012/EvidenceRail.astro';
+import posterUrl from '../../assets/derived/bodyparts3d/sbla005-poster.webp?url';
 import AtlasLayout from '../layouts/AtlasLayout.astro';
 ---
 
@@ -8,112 +8,137 @@ import AtlasLayout from '../layouts/AtlasLayout.astro';
   description="Evidence-first resistance training anatomy — a visual evidence graph."
   current="home"
 >
-  <section class="hero" aria-labelledby="page-title">
-    <div class="hero__copy">
-      <p class="kicker">Anatomy · mechanics · evidence</p>
-      <h1 id="page-title">Strength, mapped to evidence.</h1>
-      <p class="hero__lede">
-        Explore how a structure moves, how exercises load it, and what the
-        available research can—and cannot—support.
+  <section class="museum-hero" aria-labelledby="page-title">
+    <div class="museum-utility" aria-label="Atlas status">
+      <p>Specimen H-01 <span>·</span> Muscular system</p>
+      <p>
+        <span class="status-light" aria-hidden="true"></span> Prototype / publication
+        locked
       </p>
-      <div class="hero__actions">
-        <a class="button button--primary" href="#journeys">Explore the slice</a>
-        <a class="button button--quiet" href="./methodology/">Read the method</a
-        >
-      </div>
-      <dl class="hero__ledger" aria-label="Current evidence-system status">
-        <div><dt>Reviewed claims</dt><dd>23</dd></div>
-        <div><dt>Linked sources</dt><dd>68</dd></div>
-        <div><dt>Public claims</dt><dd>0</dd></div>
-      </dl>
     </div>
 
-    <div class="atlas-plate" aria-label="Abstract anatomical torso plate">
-      <p class="atlas-plate__label">Plate 01 / anterior torso</p>
+    <div class="hero-statement">
+      <p class="micro-label">Structure → movement → evidence</p>
+      <h1 id="page-title">Understand<br />what moves you.</h1>
+      <p class="hero-statement__subline">
+        A visual atlas for tracing resistance-training questions back to the
+        claims, limits, and sources underneath them.
+      </p>
+    </div>
+
+    <div class="specimen" aria-label="Anterior muscular-system specimen">
+      <div class="specimen__halo" aria-hidden="true"></div>
+      <img
+        src={posterUrl}
+        width="800"
+        height="1000"
+        alt="BodyParts3D anterior muscular-system render used as a non-interactive two-dimensional fallback."
+      />
       <svg
-        viewBox="0 0 520 680"
-        role="img"
-        aria-labelledby="plate-title plate-desc"
+        class="specimen__registration"
+        viewBox="0 0 720 760"
+        aria-hidden="true"
       >
-        <title id="plate-title">Abstract anterior torso study</title>
-        <desc id="plate-desc">
-          A restrained line drawing marks the chest region as the first atlas
-          focus. It is decorative and does not convey anatomical detail.
-        </desc>
-        <defs>
-          <linearGradient id="torso-fill" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#182c36"></stop>
-            <stop offset="1" stop-color="#0b151c"></stop>
-          </linearGradient>
-          <radialGradient id="focus-fill">
-            <stop offset="0" stop-color="#e18476" stop-opacity=".78"></stop>
-            <stop offset="1" stop-color="#d86f61" stop-opacity=".14"></stop>
-          </radialGradient>
-        </defs>
+        <ellipse cx="360" cy="342" rx="242" ry="310"></ellipse>
+        <ellipse cx="360" cy="342" rx="184" ry="258"></ellipse>
+        <path d="M360 20v80M360 584v156M90 342h90M540 342h90"></path>
         <path
-          class="atlas-plate__body"
-          d="M214 35c-28 10-46 36-47 69-1 28 10 51 27 65-13 25-35 39-77 57-37 15-57 51-61 104l-13 206c-3 53 23 89 70 108 45 19 92 24 147 24s102-5 147-24c47-19 73-55 70-108l-13-206c-4-53-24-89-61-104-42-18-64-32-77-57 17-14 28-37 27-65-1-33-19-59-47-69-27-10-65-10-92 0Z"
+          class="focus-shape"
+          d="M281 251c35-18 61-13 77 10v74c-41 13-72-3-93-49 2-15 7-27 16-35Zm158 0c-35-18-61-13-77 10v74c41 13 72-3 93-49-2-15-7-27-16-35Z"
         ></path>
-        <path class="atlas-plate__sternum" d="M260 175v277"></path>
-        <path class="atlas-plate__rib" d="M260 205c-62-22-117-6-153 39"></path>
-        <path class="atlas-plate__rib" d="M260 205c62-22 117-6 153 39"></path>
-        <path
-          class="atlas-plate__focus"
-          d="M249 208c-56-31-116-12-142 36 30 70 77 92 142 70Z"></path>
-        <path
-          class="atlas-plate__focus"
-          d="M271 208c56-31 116-12 142 36-30 70-77 92-142 70Z"></path>
-        <circle class="atlas-plate__node" cx="384" cy="250" r="5"></circle>
-        <path class="atlas-plate__leader" d="M389 250h79"></path>
+        <path class="focus-line" d="M447 279h126l28-34"></path>
+        <circle class="focus-node" cx="447" cy="279" r="5"></circle>
       </svg>
-      <div class="atlas-plate__annotation" aria-hidden="true">
+      <div class="specimen__label">
         <span>Pectoral region</span>
-        <strong>First review slice</strong>
+        <strong>[ slice · 01 ]</strong>
       </div>
-      <p class="atlas-plate__gate">
-        <span aria-hidden="true"></span>
-        Scientific content remains locked pending owner approval.
+      <p class="specimen__caption">
+        BodyParts3D 4.0 · licensed evaluation render<br />2D fallback is
+        authoritative
       </p>
     </div>
-  </section>
 
-  <section id="journeys" class="journeys" aria-labelledby="journeys-title">
-    <div class="section-heading section-heading--compact">
-      <p class="kicker">One question, several routes</p>
-      <h2 id="journeys-title">Enter where your decision begins.</h2>
-    </div>
-    <div class="journey-grid">
-      <article>
-        <span>01 / Structure</span>
-        <h3>Start with anatomy</h3>
-        <p>
-          Move from a trainable structure to function, exercises, and the claims
-          behind both.
-        </p>
-        <strong>Preview locked</strong>
-      </article>
-      <article>
-        <span>02 / Exercise</span>
-        <h3>Start with a lift</h3>
-        <p>
-          Inspect mechanics, scope, related structures, uncertainty, and direct
-          source trails.
-        </p>
-        <strong>Preview locked</strong>
-      </article>
-      <article>
-        <span>03 / Evidence</span>
-        <h3>Start with a source</h3>
-        <p>
-          See the study record, its limitations, and every project claim that
-          relies on it.
-        </p>
-        <a href="./methodology/"
-          >How review works <span aria-hidden="true">→</span></a
+    <aside class="focus-index" aria-labelledby="focus-title">
+      <p class="micro-label">Current focus</p>
+      <h2 id="focus-title">Pectoralis major</h2>
+      <ol>
+        <li aria-current="true"><span>01</span> Reviewed structure</li>
+        <li><span>02</span> Flat press</li>
+        <li><span>03</span> Cable fly</li>
+      </ol>
+      <p class="focus-index__notice">
+        Scientific prose is withheld until explicit owner approval.
+      </p>
+    </aside>
+
+    <aside class="claim-vault" aria-labelledby="vault-title">
+      <div class="claim-vault__heading">
+        <p><strong>23</strong> reviewed claims</p>
+        <span aria-hidden="true">→</span>
+      </div>
+      <div class="claim-vault__body">
+        <div class="vault-glyph" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div>
+          <h2 id="vault-title">Claim preview locked</h2>
+          <p>Reviewed evidence appears after owner approval.</p>
+        </div>
+      </div>
+      <p class="claim-vault__status">
+        <svg viewBox="0 0 16 16" aria-hidden="true"
+          ><rect x="3" y="7" width="10" height="7" rx="1"></rect><path
+            d="M5 7V5a3 3 0 0 1 6 0v2"></path></svg
         >
-      </article>
+        No public claims
+      </p>
+    </aside>
+
+    <div class="view-register" aria-hidden="true">
+      <span class="view-register__figure"></span>
+      <ol>
+        <li aria-current="true">Anterior</li>
+        <li>Lateral</li>
+        <li>Posterior</li>
+        <li>Deep</li>
+      </ol>
     </div>
   </section>
 
-  <EvidenceRail />
+  <section
+    id="evidence-trace"
+    class="evidence-trace"
+    aria-labelledby="trace-title"
+  >
+    <header>
+      <p class="micro-label">How the atlas reads</p>
+      <h2 id="trace-title">Evidence trace</h2>
+    </header>
+    <ol>
+      <li>
+        <span class="trace-number">01</span>
+        <span class="trace-type">Structure</span>
+        <strong>Pectoralis major</strong>
+        <small>Reviewed · unpublished</small>
+      </li>
+      <li class="trace-arrow" aria-hidden="true">→</li>
+      <li>
+        <span class="trace-number">02</span>
+        <span class="trace-type">Exercise</span>
+        <strong>Barbell flat bench press</strong>
+        <small>Scope · mechanics · limits</small>
+      </li>
+      <li class="trace-arrow" aria-hidden="true">→</li>
+      <li>
+        <span class="trace-number">03</span>
+        <span class="trace-type">Source</span>
+        <strong>Source record</strong>
+        <small class="trace-locked">Publication locked</small>
+      </li>
+    </ol>
+    <a href="./methodology/"
+      >Read the methodology <span aria-hidden="true">↗</span></a
+    >
+  </section>
 </AtlasLayout>

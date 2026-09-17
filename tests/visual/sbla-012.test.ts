@@ -24,14 +24,15 @@ describe('SBLA-012 clinical-cinematic visual contract', () => {
   it('defines desktop, tablet, and narrow reflow behavior without hiding content', async () => {
     const styles = await readFile('src/styles/global.css', 'utf8');
 
-    expect(styles).toContain('@media (max-width: 64rem)');
-    expect(styles).toContain('@media (max-width: 48rem)');
-    expect(styles).toContain('@media (max-width: 30rem)');
+    expect(styles).toContain('@media (max-width: 82rem)');
+    expect(styles).toContain('@media (max-width: 62rem)');
+    expect(styles).toContain('@media (max-width: 44rem)');
     for (const selector of [
-      '.hero__copy',
-      '.atlas-plate',
-      '.journey-grid',
-      '.evidence-rail',
+      '.hero-statement',
+      '.specimen',
+      '.focus-index',
+      '.claim-vault',
+      '.evidence-trace',
     ]) {
       expect(styles).not.toMatch(
         new RegExp(

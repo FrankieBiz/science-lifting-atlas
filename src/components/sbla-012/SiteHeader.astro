@@ -5,36 +5,49 @@ interface Props {
 }
 
 const { current, rootHref } = Astro.props;
-const evidenceHref = `${rootHref}#evidence-system`;
+const evidenceHref = `${rootHref}#evidence-trace`;
 ---
 
-<header class="site-header" aria-label="Site header">
+<header class="site-rail" aria-label="Site header">
   <a
-    class="brand"
+    class="rail-brand"
     href={rootHref}
     aria-label="Science-Based Lifting Atlas, home"
   >
-    <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
-      <circle cx="20" cy="20" r="18"></circle>
-      <path d="M12 23c3-7 7-10 16-8M13 27c5 2 10 1 15-4"></path>
-    </svg>
-    <span>
-      <strong>Science-Based</strong>
-      <span>Lifting Atlas</span>
-    </span>
+    <strong>Atlas</strong>
+    <span>Human movement<br />in context</span>
   </a>
 
   <nav aria-label="Primary navigation">
-    <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}
-      >Atlas</a
-    >
-    <a href={evidenceHref}>Evidence</a>
+    <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3v18M8 5l4-2 4 2M7 9l5 2 5-2M8 20l4-3 4 3"></path>
+      </svg>
+      <span>Atlas</span>
+    </a>
+    <a href={evidenceHref}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M3 5.5C6 4 9 4.5 12 7v13c-3-2.5-6-3-9-1.5ZM21 5.5c-3-1.5-6-1-9 1.5v13c3-2.5 6-3 9-1.5Z"
+        ></path>
+      </svg>
+      <span>Evidence</span>
+    </a>
     <a
       href={`${rootHref}methodology/`}
       aria-current={current === 'methodology' ? 'page' : undefined}
-      >Methodology</a
     >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h3"></path>
+      </svg>
+      <span>Method</span>
+    </a>
   </nav>
 
-  <a class="header-action" href={`${rootHref}#journeys`}>Begin exploring</a>
+  <div class="rail-note" aria-hidden="true">
+    <span></span>
+    <p>Better questions.<br />Stronger evidence.</p>
+  </div>
+
+  <p class="rail-index">MMXXVI<br />SBLA · 012</p>
 </header>

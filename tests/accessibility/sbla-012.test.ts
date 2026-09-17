@@ -17,12 +17,14 @@ describe('SBLA-012 static-slice accessibility contract', () => {
     expect(header).toContain('aria-label="Primary navigation"');
   });
 
-  it('gives the abstract plate a text alternative without implying anatomy detail', async () => {
+  it('gives the lawful 2D fallback a direct text alternative', async () => {
     const home = await read('src/pages/index.astro');
 
-    expect(home).toContain('role="img"');
-    expect(home).toContain('aria-labelledby="plate-title plate-desc"');
-    expect(home).toContain('does not convey anatomical detail');
+    expect(home).toContain('<img');
+    expect(home).toContain(
+      'BodyParts3D anterior muscular-system render used as a non-interactive two-dimensional fallback.',
+    );
+    expect(home).toMatch(/2D fallback is\s+authoritative/);
   });
 
   it('provides visible focus treatment and reduced-motion behavior', async () => {
