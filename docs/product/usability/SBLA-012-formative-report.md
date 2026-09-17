@@ -41,6 +41,12 @@ The exact candidate was checked on 2026-09-17 before recruitment:
   inspected at desktop and 390 × 844 mobile widths.
 - The mobile muscle and source pages had no horizontal document overflow. The
   smallest rendered text measured 12 px in the inspected muscle page.
+- A keyboard-only rehearsal reached the skip link, moved focus into `main`,
+  followed the primary home action, opened the first native evidence disclosure,
+  and reached its first source link without pointer input.
+- With reduced motion active, the browser matched the reduced-motion media
+  query, document scrolling changed to `auto`, and transition duration resolved
+  to 0.01 ms.
 - The muscle record uses a visibly attributed static evaluation plate. The
   exercise record uses a separate movement schematic and does not imply that
   the anatomy fallback is an exercise demonstration.
