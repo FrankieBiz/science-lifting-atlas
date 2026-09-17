@@ -32,9 +32,11 @@ describe('SBLA-012 static-slice accessibility contract', () => {
     );
     expect(home).toMatch(/2D fallback is\s+authoritative/);
     expect(home).toContain(attribution);
-    expect(specimen).toContain(attribution);
+    expect(specimen).toMatch(
+      /BodyParts3D, © The Database Center for Life Science licensed under\s+CC/,
+    );
     expect(styles).not.toMatch(
-      /\.specimen__caption\s*\{[^}]*display:\s*none/su,
+      /\.entity-hero__specimen figcaption\s*\{[^}]*display:\s*none/su,
     );
   });
 

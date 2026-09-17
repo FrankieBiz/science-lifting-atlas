@@ -28,6 +28,13 @@ const sourceById = new Map(
 const qualified = claim.sourceLinks.some(
   (link) => link.role === 'qualifies' || link.role === 'contradicts',
 );
+const certaintyClass = claim.evidence.certainty
+  .toLowerCase()
+  .replaceAll(/[^a-z0-9]+/gu, '-');
+const certaintyLabel =
+  claim.evidence.certainty === 'established-descriptive-fact'
+    ? 'established fact'
+    : claim.evidence.certainty.replaceAll('-', ' ');
 ---
 
 <article
@@ -37,7 +44,9 @@ const qualified = claim.sourceLinks.some(
 >
   <header>
     <p class="micro-label">{claim.type.replaceAll('-', ' ')}</p>
-    <span>{claim.evidence.certainty} certainty</span>
+    <span class={`claim-certainty claim-certainty--${certaintyClass}`}>
+      <i aria-hidden="true"></i>{certaintyLabel} certainty
+    </span>
   </header>
   <p class="prototype-claim__statement">{claim.plainLanguage}</p>
   {
@@ -46,7 +55,9 @@ const qualified = claim.sourceLinks.some(
     )
   }
   <details>
-    <summary>Scope, limitations, and sources</summary>
+    <summary
+      ><span>Inspect evidence</span><span aria-hidden="true">+</span></summary
+    >
     <div class="prototype-claim__detail">
       <div>
         <h3>Applies to</h3>

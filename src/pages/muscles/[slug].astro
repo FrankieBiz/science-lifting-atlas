@@ -70,10 +70,24 @@ const detailClaimIds = allClaimIds.filter(
       descriptor="A reviewed anatomical structure traced from practical language to bounded claims and exact sources."
     />
 
+    <section class="entity-summary" aria-labelledby="summary-title">
+      <header>
+        <p class="micro-label">Key takeaways</p>
+        <h2 id="summary-title">What this means for training.</h2>
+        <p>
+          Start with the useful answer. Open any takeaway to inspect who it
+          applies to, where it breaks down, and the sources underneath it.
+        </p>
+      </header>
+      <div class="entity-summary__claims">
+        {muscle.summaryClaimIds.map((id) => <PrototypeClaim id={id} />)}
+      </div>
+    </section>
+
     <section class="entity-register" aria-labelledby="register-title">
       <div>
-        <p class="micro-label">Specimen register</p>
-        <h2 id="register-title">Identity before interpretation.</h2>
+        <p class="micro-label">Anatomy details</p>
+        <h2 id="register-title">Identity and review record.</h2>
       </div>
       <dl>
         <div><dt>FMA</dt><dd>{muscle.ontology.fma}</dd></div>
@@ -83,26 +97,13 @@ const detailClaimIds = allClaimIds.filter(
       </dl>
     </section>
 
-    <section class="entity-summary" aria-labelledby="summary-title">
-      <header>
-        <p class="micro-label">Practical orientation</p>
-        <h2 id="summary-title">Start with the bounded claims.</h2>
-        <p>
-          Reviewed by an independent AI account. Not owner-approved or public.
-        </p>
-      </header>
-      <div class="entity-summary__claims">
-        {muscle.summaryClaimIds.map((id) => <PrototypeClaim id={id} />)}
-      </div>
-    </section>
-
     <section class="evidence-spine" aria-labelledby="evidence-spine-title">
       <header>
         <p class="micro-label">
-          Evidence spine / {String(allClaimIds.length).padStart(2, '0')}
+          Evidence by question / {String(allClaimIds.length).padStart(2, '0')}
         </p>
         <h2 id="evidence-spine-title">
-          Follow every statement down to its limits.
+          Inspect the claims behind the takeaway.
         </h2>
       </header>
       <ol>
@@ -119,8 +120,8 @@ const detailClaimIds = allClaimIds.filter(
 
     <nav class="connected-register" aria-labelledby="connected-title">
       <div>
-        <p class="micro-label">Connected specimens</p>
-        <h2 id="connected-title">Trace the structure into movement.</h2>
+        <p class="micro-label">Related movements</p>
+        <h2 id="connected-title">Exercises that load it.</h2>
       </div>
       <ol>
         {

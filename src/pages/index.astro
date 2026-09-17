@@ -1,9 +1,18 @@
 ---
 import posterUrl from '../../assets/derived/bodyparts3d/sbla005-poster.webp?url';
+import { getCollection } from 'astro:content';
 import AtlasLayout from '../layouts/AtlasLayout.astro';
 import { prototypePreviewEnabled } from '../lib/presentation/sbla012';
 
 const prototypeEnabled = prototypePreviewEnabled(process.env);
+const [claims, sources, exercises] = await Promise.all([
+  getCollection('claims'),
+  getCollection('sources'),
+  getCollection('exercises'),
+]);
+const reviewedClaimCount = claims.filter(
+  ({ data }) => data.reviewState === 'approved',
+).length;
 ---
 
 <AtlasLayout
@@ -11,44 +20,49 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
   description="Evidence-first resistance training anatomy — a visual evidence graph."
   current="home"
 >
-  <section class="museum-hero" aria-labelledby="page-title">
-    <div class="museum-utility" role="status" aria-label="Atlas status">
-      <p>Specimen H-01 <span>·</span> Muscular system</p>
-      <p>
-        <span class="status-light" aria-hidden="true"></span> Prototype / publication
-        locked
+  <section class="home-hero" aria-labelledby="page-title">
+    <div class="home-hero__copy">
+      <p class="micro-label">An evidence system for resistance training</p>
+      <h1 id="page-title">Know what<br />you’re <em>training.</em></h1>
+      <p class="home-hero__lede">
+        Trace a muscle to the movements that train it—and every practical
+        takeaway back to its exact evidence, limits, and uncertainty.
       </p>
+      <div class="home-hero__actions">
+        {
+          prototypeEnabled ? (
+            <a
+              class="button button--primary"
+              href="./muscles/pectoralis-major/"
+            >
+              Explore the first evidence chain <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span class="button button--disabled" aria-disabled="true">
+              First evidence chain in review
+            </span>
+          )
+        }
+        <a class="button button--quiet" href="./methodology/">
+          See how claims are built
+        </a>
+      </div>
+      <dl class="home-hero__metrics" aria-label="Current atlas status">
+        <div><dt>{reviewedClaimCount}</dt><dd>reviewed claims</dd></div>
+        <div><dt>{sources.length}</dt><dd>source records</dd></div>
+        <div><dt>{exercises.length}</dt><dd>movement records</dd></div>
+      </dl>
     </div>
 
-    <div class="hero-statement">
-      <p class="micro-label">Structure → movement → evidence</p>
-      <h1 id="page-title">Understand<br />what moves you.</h1>
-      <p class="hero-statement__subline">
-        A visual atlas for tracing resistance-training questions back to the
-        claims, limits, and sources underneath them.
-      </p>
-    </div>
-
-    <div
-      class="specimen"
-      role="img"
-      aria-label="Anterior muscular-system specimen"
-    >
-      <div class="specimen__halo" aria-hidden="true"></div>
+    <figure class="home-hero__visual">
+      <div class="home-hero__visual-grid" aria-hidden="true"></div>
       <img
         src={posterUrl}
         width="800"
         height="1000"
         alt="BodyParts3D anterior muscular-system render used as a non-interactive two-dimensional fallback."
       />
-      <svg
-        class="specimen__registration"
-        viewBox="0 0 720 760"
-        aria-hidden="true"
-      >
-        <ellipse cx="360" cy="342" rx="242" ry="310"></ellipse>
-        <ellipse cx="360" cy="342" rx="184" ry="258"></ellipse>
-        <path d="M360 20v80M360 584v156M90 342h90M540 342h90"></path>
+      <svg viewBox="0 0 720 760" aria-hidden="true">
         <path
           class="focus-shape"
           d="M281 251c35-18 61-13 77 10v74c-41 13-72-3-93-49 2-15 7-27 16-35Zm158 0c-35-18-61-13-77 10v74c41 13 72-3 93-49-2-15-7-27-16-35Z"
@@ -56,69 +70,28 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
         <path class="focus-line" d="M447 279h126l28-34"></path>
         <circle class="focus-node" cx="447" cy="279" r="5"></circle>
       </svg>
-      <div class="specimen__label">
-        <span>Pectoral region</span>
-        <strong>[ slice · 01 ]</strong>
-      </div>
-      <p class="specimen__caption">
-        BodyParts3D, © The Database Center for Life Science licensed under CC
-        Attribution 4.0 International<br />2D fallback is authoritative
-      </p>
-    </div>
-
-    <aside class="focus-index" aria-labelledby="focus-title">
-      <p class="micro-label">Current focus</p>
-      <h2 id="focus-title">
-        {
-          prototypeEnabled ? (
-            <a href="./muscles/pectoralis-major/">Pectoralis major</a>
-          ) : (
-            'Pectoralis major'
-          )
-        }
-      </h2>
-      <ol>
-        <li aria-current="true"><span>01</span> Reviewed structure</li>
-        <li><span>02</span> Flat press</li>
-        <li><span>03</span> Cable fly</li>
-      </ol>
-      <p class="focus-index__notice">
-        Scientific prose is withheld until explicit owner approval.
-      </p>
-    </aside>
-
-    <aside class="claim-vault" aria-labelledby="vault-title">
-      <div class="claim-vault__heading">
-        <p><strong>23</strong> reviewed claims</p>
-        <span aria-hidden="true">→</span>
-      </div>
-      <div class="claim-vault__body">
-        <div class="vault-glyph" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </div>
+      <div class="home-hero__focus-card">
+        <p>Current slice <span>01</span></p>
+        <h2>
+          {
+            prototypeEnabled ? (
+              <a href="./muscles/pectoralis-major/">Pectoralis major</a>
+            ) : (
+              'Pectoralis major'
+            )
+          }
+        </h2>
         <div>
-          <h2 id="vault-title">Claim preview locked</h2>
-          <p>Reviewed evidence appears after owner approval.</p>
+          <span>Structure</span><span>{exercises.length} movements</span><span
+            >{reviewedClaimCount} claims</span
+          >
         </div>
       </div>
-      <p class="claim-vault__status">
-        <svg viewBox="0 0 16 16" aria-hidden="true"
-          ><rect x="3" y="7" width="10" height="7" rx="1"></rect><path
-            d="M5 7V5a3 3 0 0 1 6 0v2"></path></svg
-        >
-        No public claims
-      </p>
-    </aside>
-
-    <div class="view-register" aria-hidden="true">
-      <span class="view-register__figure"></span>
-      <ol>
-        <li aria-current="true">Anterior</li>
-        <li>Lateral</li>
-        <li>Posterior</li>
-        <li>Deep</li>
-      </ol>
-    </div>
+      <figcaption class="home-hero__attribution">
+        BodyParts3D, © The Database Center for Life Science licensed under CC
+        Attribution 4.0 International · 2D fallback is authoritative
+      </figcaption>
+    </figure>
   </section>
 
   <section
@@ -127,8 +100,12 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
     aria-labelledby="trace-title"
   >
     <header>
-      <p class="micro-label">How the atlas reads</p>
-      <h2 id="trace-title">Evidence trace</h2>
+      <p class="micro-label">One connected answer</p>
+      <h2 id="trace-title">From anatomy to evidence.</h2>
+      <p>
+        The Atlas is not an exercise list. It is a chain you can inspect in
+        either direction.
+      </p>
     </header>
     <ol>
       <li>
@@ -143,12 +120,11 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
             )
           }
         </strong>
-        <small>Reviewed · unpublished</small>
+        <small>What it is and what it does</small>
       </li>
-      <li class="trace-arrow" aria-hidden="true">→</li>
       <li>
         <span class="trace-number">02</span>
-        <span class="trace-type">Exercise</span>
+        <span class="trace-type">Movement</span>
         <strong>
           {
             prototypeEnabled ? (
@@ -160,18 +136,46 @@ const prototypeEnabled = prototypePreviewEnabled(process.env);
             )
           }
         </strong>
-        <small>Scope · mechanics · limits</small>
+        <small>Scope, mechanics, and limits</small>
       </li>
-      <li class="trace-arrow" aria-hidden="true">→</li>
       <li>
         <span class="trace-number">03</span>
-        <span class="trace-type">Source</span>
-        <strong>Source record</strong>
-        <small class="trace-locked">Publication locked</small>
+        <span class="trace-type">Evidence</span>
+        <strong>Claim-level source trail</strong>
+        <small>Certainty, qualifiers, exact locators</small>
       </li>
     </ol>
-    <a href="./methodology/"
-      >Read the methodology <span aria-hidden="true">↗</span></a
-    >
+  </section>
+
+  <section class="home-principles" aria-labelledby="principles-title">
+    <header>
+      <p class="micro-label">Built for skeptical lifters</p>
+      <h2 id="principles-title">Useful first. Auditable always.</h2>
+    </header>
+    <div>
+      <article>
+        <span>01</span>
+        <h3>Practical language</h3>
+        <p>
+          Start with the answer a lifter needs, without pretending it is
+          universal.
+        </p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Visible uncertainty</h3>
+        <p>
+          Mixed evidence and important limits stay attached to the takeaway.
+        </p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Exact source trails</h3>
+        <p>
+          Every scientific statement can be followed back to the records behind
+          it.
+        </p>
+      </article>
+    </div>
   </section>
 </AtlasLayout>

@@ -8,11 +8,10 @@ test('serves a useful static atlas shell without client JavaScript', async ({
   await page.goto('/');
 
   await expect(
-    page.getByRole('heading', { name: 'Understand what moves you.' }),
+    page.getByRole('heading', { name: 'Know what you’re training.' }),
   ).toBeVisible();
+  await expect(page.getByText('First evidence chain in review')).toBeVisible();
   await expect(
-    page.getByText(
-      'Scientific prose is withheld until explicit owner approval.',
-    ),
+    page.getByRole('heading', { name: 'From anatomy to evidence.' }),
   ).toBeVisible();
 });

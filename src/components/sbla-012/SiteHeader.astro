@@ -8,46 +8,36 @@ const { current, rootHref } = Astro.props;
 const evidenceHref = `${rootHref}#evidence-trace`;
 ---
 
-<header class="site-rail" aria-label="Site header">
+<header class="site-header" aria-label="Site header">
   <a
-    class="rail-brand"
+    class="site-brand"
     href={rootHref}
     aria-label="Science-Based Lifting Atlas, home"
   >
-    <strong>Atlas</strong>
-    <span>Human movement<br />in context</span>
+    <span class="site-brand__mark" aria-hidden="true">SB</span>
+    <span class="site-brand__name">
+      <strong>Science-Based</strong>
+      <small>Lifting Atlas</small>
+    </span>
   </a>
 
   <nav aria-label="Primary navigation">
     <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}>
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3v18M8 5l4-2 4 2M7 9l5 2 5-2M8 20l4-3 4 3"></path>
-      </svg>
-      <span>Atlas</span>
+      <span>Explore</span>
     </a>
     <a href={evidenceHref}>
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M3 5.5C6 4 9 4.5 12 7v13c-3-2.5-6-3-9-1.5ZM21 5.5c-3-1.5-6-1-9 1.5v13c3-2.5 6-3 9-1.5Z"
-        ></path>
-      </svg>
       <span>Evidence</span>
     </a>
     <a
       href={`${rootHref}methodology/`}
       aria-current={current === 'methodology' ? 'page' : undefined}
     >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h3"></path>
-      </svg>
-      <span>Method</span>
+      <span>How it works</span>
     </a>
   </nav>
 
-  <div class="rail-note" aria-hidden="true">
-    <span></span>
-    <p>Better questions.<br />Stronger evidence.</p>
+  <div class="site-header__status">
+    <span aria-hidden="true"></span>
+    Slice 01 · review build
   </div>
-
-  <p class="rail-index">MMXXVI<br />SBLA · 012</p>
 </header>

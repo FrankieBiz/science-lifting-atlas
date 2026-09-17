@@ -9,38 +9,93 @@ interface Props {
 }
 
 const { category, index, name, descriptor } = Astro.props;
+const isExercise = category.toLowerCase() === 'exercise';
 ---
 
 <header class="entity-hero">
   <div class="entity-hero__title">
-    <p class="micro-label">{category} / {index}</p>
+    <p class="micro-label"><span>{index}</span> {category}</p>
     <h1>{name}</h1>
     <p>{descriptor}</p>
+    <div class="entity-hero__signals" aria-label="Record status">
+      <span>Evidence linked</span>
+      <span>Static anatomy</span>
+      <span>Stable route</span>
+    </div>
   </div>
 
-  <figure class="entity-hero__specimen" aria-label="Pectoral-region specimen">
-    <svg viewBox="0 0 520 620" aria-hidden="true">
-      <ellipse cx="260" cy="310" rx="200" ry="270"></ellipse>
-      <ellipse cx="260" cy="310" rx="150" ry="220"></ellipse>
-      <path d="M260 40v540M40 310h440"></path>
-      <path
-        class="entity-hero__focus"
-        d="M175 212c38-34 69-29 85-10 16-19 47-24 85 10l-16 88c-36 21-60 15-69-3-9 18-33 24-69 3Z"
-      ></path>
-    </svg>
-    <img
-      src={bodyPoster}
-      width="720"
-      height="960"
-      alt="BodyParts3D anterior muscular-system evaluation render with the pectoral region emphasized."
-    />
+  <figure
+    class:list={[
+      'entity-hero__specimen',
+      isExercise && 'entity-hero__specimen--exercise',
+    ]}
+  >
+    {
+      isExercise ? (
+        <svg
+          class="movement-diagram"
+          viewBox="0 0 640 520"
+          role="img"
+          aria-label="Abstract static movement-path diagram for the exercise record."
+        >
+          <path
+            class="movement-diagram__bench"
+            d="M150 356h340M216 356l-42 92M426 356l42 92"
+          />
+          <path
+            class="movement-diagram__body"
+            d="M229 324c44-56 138-66 190-10l-14 37H216Z"
+          />
+          <path
+            class="movement-diagram__bar"
+            d="M92 193h456M116 166v54M524 166v54"
+          />
+          <path
+            class="movement-diagram__arm"
+            d="M244 294l-45-91M396 294l45-91"
+          />
+          <path class="movement-diagram__path" d="M201 258V174M439 258V174" />
+          <circle cx="199" cy="202" r="8" />
+          <circle cx="441" cy="202" r="8" />
+        </svg>
+      ) : (
+        <>
+          <svg viewBox="0 0 520 620" aria-hidden="true">
+            <ellipse cx="260" cy="310" rx="200" ry="270" />
+            <ellipse cx="260" cy="310" rx="150" ry="220" />
+            <path d="M260 40v540M40 310h440" />
+            <path
+              class="entity-hero__focus"
+              d="M175 212c38-34 69-29 85-10 16-19 47-24 85 10l-16 88c-36 21-60 15-69-3-9 18-33 24-69 3Z"
+            />
+          </svg>
+          <img
+            src={bodyPoster}
+            width="720"
+            height="960"
+            alt="BodyParts3D anterior muscular-system evaluation render with the pectoral region emphasized."
+          />
+        </>
+      )
+    }
     <figcaption>
-      <span>Pectoral region</span>
-      <small>Static evaluation plate · 3D production on hold</small>
-      <small>
-        BodyParts3D, © The Database Center for Life Science licensed under CC
-        Attribution 4.0 International
-      </small>
+      {
+        isExercise ? (
+          <>
+            <span>Movement definition · static schematic</span>
+            <small>Direction only · not a technique prescription</small>
+          </>
+        ) : (
+          <>
+            <span>Visual context · pectoral region</span>
+            <small>Static evaluation plate · authoritative 2D fallback</small>
+            <small>
+              BodyParts3D, © The Database Center for Life Science licensed under
+              CC Attribution 4.0 International
+            </small>
+          </>
+        )
+      }
     </figcaption>
   </figure>
 </header>

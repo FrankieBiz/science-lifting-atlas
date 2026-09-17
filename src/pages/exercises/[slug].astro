@@ -97,10 +97,8 @@ const detailClaimIds = allClaimIds.filter(
 
     <section class="scope-ledger" aria-labelledby="scope-title">
       <header>
-        <p class="micro-label">Scope ledger</p>
-        <h2 id="scope-title">
-          Define the movement before reading the evidence.
-        </h2>
+        <p class="micro-label">Record definition</p>
+        <h2 id="scope-title">What this exercise record includes.</h2>
       </header>
       <div>
         <section>
@@ -122,10 +120,11 @@ const detailClaimIds = allClaimIds.filter(
 
     <section class="entity-summary" aria-labelledby="summary-title">
       <header>
-        <p class="micro-label">Reviewed orientation</p>
-        <h2 id="summary-title">What the evidence can support.</h2>
+        <p class="micro-label">Key takeaways</p>
+        <h2 id="summary-title">What the evidence supports.</h2>
         <p>
-          These statements remain unpublished until explicit owner approval.
+          Open any takeaway to inspect its population, limitations, and exact
+          source trail.
         </p>
       </header>
       <div class="entity-summary__claims">
@@ -136,11 +135,9 @@ const detailClaimIds = allClaimIds.filter(
     <section class="evidence-spine" aria-labelledby="evidence-spine-title">
       <header>
         <p class="micro-label">
-          Evidence spine / {String(allClaimIds.length).padStart(2, '0')}
+          Evidence by question / {String(allClaimIds.length).padStart(2, '0')}
         </p>
-        <h2 id="evidence-spine-title">
-          Claims first. Sources one disclosure away.
-        </h2>
+        <h2 id="evidence-spine-title">The claims behind this movement.</h2>
       </header>
       <ol>
         {
@@ -156,8 +153,8 @@ const detailClaimIds = allClaimIds.filter(
 
     <nav class="connected-register" aria-labelledby="connected-title">
       <div>
-        <p class="micro-label">Connected records</p>
-        <h2 id="connected-title">Keep following the graph.</h2>
+        <p class="micro-label">Related anatomy</p>
+        <h2 id="connected-title">Follow the movement back.</h2>
       </div>
       <ol>
         {

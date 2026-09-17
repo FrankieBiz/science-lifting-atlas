@@ -8,18 +8,26 @@ test('the static home journey exposes evidence status without unpublished claim 
   await page.goto('/');
 
   await expect(
-    page.getByRole('heading', { name: 'Understand what moves you.' }),
+    page.getByRole('heading', { level: 1, name: 'Know what you’re training.' }),
   ).toBeVisible();
-  await expect(page.getByText('Reviewed claims')).toBeVisible();
-  await expect(page.getByText('Public claims')).toBeVisible();
   await expect(
-    page.getByText(
-      'Scientific prose is withheld until explicit owner approval.',
-    ),
+    page.getByRole('heading', { name: 'From anatomy to evidence.' }),
   ).toBeVisible();
-  await expect(page.locator('a[href^="/muscles/"]')).toHaveCount(0);
-  await expect(page.locator('a[href^="/exercises/"]')).toHaveCount(0);
-  await expect(page.locator('a[href^="/sources/"]')).toHaveCount(0);
+  await expect(
+    page.getByRole('heading', { name: 'Useful first. Auditable always.' }),
+  ).toBeVisible();
+
+  const atlasStatus = page.locator('dl[aria-label="Current atlas status"]');
+  await expect(atlasStatus.getByText('reviewed claims')).toBeVisible();
+  await expect(atlasStatus.getByText('movement records')).toBeVisible();
+  await expect(page.getByText('First evidence chain in review')).toBeVisible();
+
+  await expect(
+    page.getByRole('navigation', { name: 'Primary navigation' }),
+  ).toBeVisible();
+  await expect(page.locator('a[href*="/muscles/"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="/exercises/"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="/sources/"]')).toHaveCount(0);
 });
 
 test('the methodology route discloses AI roles and the publication gate', async ({
