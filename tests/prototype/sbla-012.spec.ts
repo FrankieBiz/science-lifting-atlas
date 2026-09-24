@@ -1,12 +1,45 @@
 import { expect, test } from '@playwright/test';
 
-test('the local evidence journey links a muscle, movement, claim, and source', async ({
+test('the homepage reflows across phone and tablet widths', async ({
+  page,
+}) => {
+  for (const width of [320, 390, 705, 768, 990]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto('/');
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+      `viewport ${width}`,
+    ).toBeLessThanOrEqual(width);
+  }
+});
+
+test('record navigation takes the reader directly to takeaways and evidence', async ({
+  page,
+}) => {
+  for (const route of [
+    '/muscles/pectoralis-major/',
+    '/exercises/barbell-flat-bench-press/',
+  ]) {
+    await page.goto(route);
+    await page
+      .getByRole('link', { name: 'Key takeaways', exact: true })
+      .click();
+    await expect(page).toHaveURL(/#summary-title$/);
+    await expect(page.locator('#summary-title')).toBeInViewport();
+    await page.goto(route);
+    await page
+      .getByRole('link', { name: 'Explore evidence', exact: true })
+      .click();
+    await expect(page).toHaveURL(/#evidence-spine-title$/);
+    await expect(page.locator('#evidence-spine-title')).toBeInViewport();
+  }
+});
+
+test('the local evidence journey links a muscle, claim, and source', async ({
   page,
 }) => {
   await page.goto('/');
-  await page
-    .getByRole('link', { name: 'Explore the first evidence chain' })
-    .click();
+  await page.getByRole('link', { name: 'Explore the atlas' }).click();
   await expect(page).toHaveURL(/\/muscles\/pectoralis-major\/$/);
   await expect(page.getByLabel('Prototype publication status')).toContainText(
     'not approved for publication',
@@ -72,9 +105,7 @@ test('keyboard, mobile reflow, and reduced motion preserve the evidence path', a
       ),
     )
     .toBe(true);
-  await page
-    .getByRole('link', { name: 'Explore the first evidence chain' })
-    .click();
+  await page.getByRole('link', { name: 'Explore the atlas' }).click();
   await expect
     .poll(() =>
       page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),

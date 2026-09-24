@@ -8,20 +8,21 @@ interface Props {
   descriptor: string;
 }
 
-const { category, index, name, descriptor } = Astro.props;
+const { category, name, descriptor } = Astro.props;
 const isExercise = category.toLowerCase() === 'exercise';
 ---
 
 <header class="entity-hero">
   <div class="entity-hero__title">
-    <p class="micro-label"><span>{index}</span> {category}</p>
+    <p class="micro-label">{category} record</p>
     <h1>{name}</h1>
     <p>{descriptor}</p>
-    <div class="entity-hero__signals" aria-label="Record status">
-      <span>Evidence linked</span>
-      <span>Static anatomy</span>
-      <span>Stable route</span>
-    </div>
+    <nav class="entity-hero__signals" aria-label="On this record">
+      <a class="button button--primary" href="#summary-title">Key takeaways</a>
+      <a class="button button--quiet" href="#evidence-spine-title"
+        >Explore evidence <span aria-hidden="true">›</span></a
+      >
+    </nav>
   </div>
 
   <figure
@@ -60,20 +61,11 @@ const isExercise = category.toLowerCase() === 'exercise';
         </svg>
       ) : (
         <>
-          <svg viewBox="0 0 520 620" aria-hidden="true">
-            <ellipse cx="260" cy="310" rx="200" ry="270" />
-            <ellipse cx="260" cy="310" rx="150" ry="220" />
-            <path d="M260 40v540M40 310h440" />
-            <path
-              class="entity-hero__focus"
-              d="M175 212c38-34 69-29 85-10 16-19 47-24 85 10l-16 88c-36 21-60 15-69-3-9 18-33 24-69 3Z"
-            />
-          </svg>
           <img
             src={bodyPoster}
             width="720"
             height="960"
-            alt="BodyParts3D anterior muscular-system evaluation render with the pectoral region emphasized."
+            alt="BodyParts3D anterior muscular-system evaluation render for anatomical context."
           />
         </>
       )

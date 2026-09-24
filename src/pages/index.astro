@@ -13,20 +13,46 @@ const [claims, sources, exercises] = await Promise.all([
 const reviewedClaimCount = claims.filter(
   ({ data }) => data.reviewState === 'approved',
 ).length;
+const records = [
+  {
+    category: 'Muscle',
+    title: 'Pectoralis major',
+    description:
+      'Anatomical identity, practical takeaways, and the evidence behind them.',
+    href: './muscles/pectoralis-major/',
+    icon: 'anatomy',
+  },
+  {
+    category: 'Exercise',
+    title: 'Barbell flat bench press',
+    description:
+      'A defined movement, with its findings and limitations in context.',
+    href: './exercises/barbell-flat-bench-press/',
+    icon: 'barbell',
+  },
+  {
+    category: 'Exercise',
+    title: 'Standing cable fly',
+    description:
+      'The bilateral, shoulder-height variation. A precise scope for a clearer answer.',
+    href: './exercises/cable-fly-standing-bilateral-shoulder-height/',
+    icon: 'cable',
+  },
+];
 ---
 
 <AtlasLayout
   title="Science-Based Lifting Atlas"
-  description="Evidence-first resistance training anatomy — a visual evidence graph."
+  description="Explore resistance-training anatomy, movements, and the evidence behind each takeaway."
   current="home"
 >
   <section class="home-hero" aria-labelledby="page-title">
     <div class="home-hero__copy">
-      <p class="micro-label">An evidence system for resistance training</p>
-      <h1 id="page-title">Know what<br />you’re <em>training.</em></h1>
+      <p class="micro-label">The science of strength, connected.</p>
+      <h1 id="page-title">Know what<br />you’re training.</h1>
       <p class="home-hero__lede">
-        Trace a muscle to the movements that train it—and every practical
-        takeaway back to its exact evidence, limits, and uncertainty.
+        Explore the anatomy. Understand the movement. Follow every takeaway back
+        to its evidence.
       </p>
       <div class="home-hero__actions">
         {
@@ -35,7 +61,7 @@ const reviewedClaimCount = claims.filter(
               class="button button--primary"
               href="./muscles/pectoralis-major/"
             >
-              Explore the first evidence chain <span aria-hidden="true">↗</span>
+              Explore the atlas
             </a>
           ) : (
             <span class="button button--disabled" aria-disabled="true">
@@ -43,9 +69,9 @@ const reviewedClaimCount = claims.filter(
             </span>
           )
         }
-        <a class="button button--quiet" href="./methodology/">
-          See how claims are built
-        </a>
+        <a class="button button--quiet" href="./methodology/"
+          >How it works <span aria-hidden="true">›</span></a
+        >
       </div>
       <dl class="home-hero__metrics" aria-label="Current atlas status">
         <div><dt>{reviewedClaimCount}</dt><dd>reviewed claims</dd></div>
@@ -53,45 +79,99 @@ const reviewedClaimCount = claims.filter(
         <div><dt>{exercises.length}</dt><dd>movement records</dd></div>
       </dl>
     </div>
-
     <figure class="home-hero__visual">
-      <div class="home-hero__visual-grid" aria-hidden="true"></div>
+      <div class="study-label">
+        <span>Anatomy study</span><span>Static evaluation plate</span>
+      </div>
       <img
         src={posterUrl}
         width="800"
         height="1000"
         alt="BodyParts3D anterior muscular-system render used as a non-interactive two-dimensional fallback."
+        fetchpriority="high"
       />
-      <svg viewBox="0 0 720 760" aria-hidden="true">
-        <path
-          class="focus-shape"
-          d="M281 251c35-18 61-13 77 10v74c-41 13-72-3-93-49 2-15 7-27 16-35Zm158 0c-35-18-61-13-77 10v74c41 13 72-3 93-49-2-15-7-27-16-35Z"
-        ></path>
-        <path class="focus-line" d="M447 279h126l28-34"></path>
-        <circle class="focus-node" cx="447" cy="279" r="5"></circle>
-      </svg>
       <div class="home-hero__focus-card">
-        <p>Current slice <span>01</span></p>
+        <p>Inside the first collection</p>
         <h2>
           {
             prototypeEnabled ? (
-              <a href="./muscles/pectoralis-major/">Pectoralis major</a>
+              <a href="./muscles/pectoralis-major/">
+                Pectoralis major <span aria-hidden="true">›</span>
+              </a>
             ) : (
               'Pectoralis major'
             )
           }
         </h2>
-        <div>
-          <span>Structure</span><span>{exercises.length} movements</span><span
-            >{reviewedClaimCount} claims</span
-          >
-        </div>
       </div>
       <figcaption class="home-hero__attribution">
         BodyParts3D, © The Database Center for Life Science licensed under CC
-        Attribution 4.0 International · 2D fallback is authoritative
+        Attribution 4.0 International · 2D fallback is authoritative. Evaluation
+        image.
       </figcaption>
     </figure>
+  </section>
+
+  <section class="home-collection" aria-labelledby="collection-title">
+    <header>
+      <div>
+        <p class="micro-label">A focused place to begin</p><h2
+          id="collection-title"
+        >
+          Explore the first chapter.
+        </h2>
+      </div>
+      <p>
+        One muscle. Two movements.<br />Every connection open to inspection.
+      </p>
+    </header>
+    <div class="collection-grid">
+      {
+        records.map((record) => (
+          <article class="collection-card">
+            <svg
+              class="collection-card__icon"
+              viewBox="0 0 48 48"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              {record.icon === 'anatomy' ? (
+                <>
+                  <path d="M24 8v32M12 10c-6 4-6 16 0 21l12 9 12-9c6-5 6-17 0-21" />
+                  <path d="M11 15c6-3 9 0 13 5 4-5 7-8 13-5M10 24c6-1 10 2 14 6 4-4 8-7 14-6" />
+                </>
+              ) : record.icon === 'barbell' ? (
+                <>
+                  <path d="M14 24h20M5 19v10M43 19v10" />
+                  <rect x="8" y="12" width="6" height="24" rx="2" />
+                  <rect x="34" y="12" width="6" height="24" rx="2" />
+                </>
+              ) : (
+                <>
+                  <path d="M6 8v32M42 8v32M6 12l14 12M42 12L28 24" />
+                  <circle cx="24" cy="27" r="5" />
+                  <path d="M6 36h7M35 36h7" />
+                </>
+              )}
+            </svg>
+            <p class="micro-label">{record.category}</p>
+            <h3>{record.title}</h3>
+            <p>{record.description}</p>
+            {prototypeEnabled ? (
+              <a href={record.href} aria-label={`Explore ${record.title}`}>
+                Explore record <span aria-hidden="true">›</span>
+              </a>
+            ) : (
+              <span>In review</span>
+            )}
+          </article>
+        ))
+      }
+    </div>
   </section>
 
   <section
@@ -100,33 +180,32 @@ const reviewedClaimCount = claims.filter(
     aria-labelledby="trace-title"
   >
     <header>
-      <p class="micro-label">One connected answer</p>
-      <h2 id="trace-title">From anatomy to evidence.</h2>
+      <p class="micro-label">Follow the connection</p>
+      <h2 id="trace-title">From anatomy<br />to evidence.</h2>
       <p>
-        The Atlas is not an exercise list. It is a chain you can inspect in
-        either direction.
+        Start with a structure or a movement. Follow the claim to its source,
+        with the limits and uncertainty always in view.
       </p>
     </header>
     <ol>
       <li>
-        <span class="trace-number">01</span>
-        <span class="trace-type">Structure</span>
-        <strong>
-          {
+        <span class="trace-number">1</span><span class="trace-type"
+          >Structure</span
+        ><strong
+          >{
             prototypeEnabled ? (
               <a href="./muscles/pectoralis-major/">Pectoralis major</a>
             ) : (
               'Pectoralis major'
             )
-          }
-        </strong>
-        <small>What it is and what it does</small>
+          }</strong
+        ><small>What it is and what the record covers</small>
       </li>
       <li>
-        <span class="trace-number">02</span>
-        <span class="trace-type">Movement</span>
-        <strong>
-          {
+        <span class="trace-number">2</span><span class="trace-type"
+          >Movement</span
+        ><strong
+          >{
             prototypeEnabled ? (
               <a href="./exercises/barbell-flat-bench-press/">
                 Barbell flat bench press
@@ -134,46 +213,72 @@ const reviewedClaimCount = claims.filter(
             ) : (
               'Barbell flat bench press'
             )
-          }
-        </strong>
-        <small>Scope, mechanics, and limits</small>
+          }</strong
+        ><small>Scope, findings, and important limits</small>
       </li>
       <li>
-        <span class="trace-number">03</span>
-        <span class="trace-type">Evidence</span>
-        <strong>Claim-level source trail</strong>
-        <small>Certainty, qualifiers, exact locators</small>
+        <span class="trace-number">3</span><span class="trace-type"
+          >Evidence</span
+        ><strong>Claim-level source trail</strong><small
+          >Certainty, qualifiers, and exact locators</small
+        >
       </li>
     </ol>
   </section>
 
   <section class="home-principles" aria-labelledby="principles-title">
     <header>
-      <p class="micro-label">Built for skeptical lifters</p>
-      <h2 id="principles-title">Useful first. Auditable always.</h2>
+      <p class="micro-label">Clarity at every step</p><h2 id="principles-title">
+        Useful first.<br />Auditable always.
+      </h2>
     </header>
     <div>
       <article>
-        <span>01</span>
-        <h3>Practical language</h3>
-        <p>
-          Start with the answer a lifter needs, without pretending it is
-          universal.
+        <svg
+          viewBox="0 0 32 32"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+          ><path d="M6 6h20v15H14l-6 5v-5H6Z"></path><path d="M11 11h10M11 16h7"
+          ></path></svg
+        >
+        <h3>Practical language</h3><p>
+          Start with a useful takeaway. Read the detail when you want to go
+          deeper.
         </p>
       </article>
       <article>
-        <span>02</span>
-        <h3>Visible uncertainty</h3>
-        <p>
-          Mixed evidence and important limits stay attached to the takeaway.
+        <svg
+          viewBox="0 0 32 32"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+          ><circle cx="16" cy="16" r="11"></circle><path d="M16 10v7M16 21v.5"
+          ></path></svg
+        >
+        <h3>Visible uncertainty</h3><p>
+          Mixed evidence and important limits stay attached to the answer.
         </p>
       </article>
       <article>
-        <span>03</span>
-        <h3>Exact source trails</h3>
-        <p>
-          Every scientific statement can be followed back to the records behind
-          it.
+        <svg
+          viewBox="0 0 32 32"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+          ><path
+            d="m12 19-2 2a5 5 0 0 1-7-7l6-6a5 5 0 0 1 7 0M20 13l2-2a5 5 0 0 1 7 7l-6 6a5 5 0 0 1-7 0M11 21l10-10"
+          ></path></svg
+        >
+        <h3>Exact source trails</h3><p>
+          Inspect the source, its role, and the precise location behind each
+          claim.
         </p>
       </article>
     </div>

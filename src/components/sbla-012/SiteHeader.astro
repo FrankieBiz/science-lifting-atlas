@@ -3,7 +3,6 @@ interface Props {
   current?: 'home' | 'entity' | 'methodology' | undefined;
   rootHref: string;
 }
-
 const { current, rootHref } = Astro.props;
 const evidenceHref = `${rootHref}#evidence-trace`;
 ---
@@ -14,30 +13,31 @@ const evidenceHref = `${rootHref}#evidence-trace`;
     href={rootHref}
     aria-label="Science-Based Lifting Atlas, home"
   >
-    <span class="site-brand__mark" aria-hidden="true">SB</span>
-    <span class="site-brand__name">
-      <strong>Science-Based</strong>
-      <small>Lifting Atlas</small>
+    <span class="site-brand__mark" aria-hidden="true">
+      <svg
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="m5 25 11-19 11 19M10 18h12M12 25l4-7 4 7"></path></svg
+      >
     </span>
+    <span class="site-brand__name"
+      ><strong>Lifting Atlas</strong><small>Science, connected.</small></span
+    >
   </a>
-
   <nav aria-label="Primary navigation">
-    <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}>
-      <span>Explore</span>
-    </a>
-    <a href={evidenceHref}>
-      <span>Evidence</span>
-    </a>
+    <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}
+      >Explore</a
+    >
+    <a href={evidenceHref}>Evidence</a>
     <a
       href={`${rootHref}methodology/`}
       aria-current={current === 'methodology' ? 'page' : undefined}
+      >How it works</a
     >
-      <span>How it works</span>
-    </a>
   </nav>
-
-  <div class="site-header__status">
-    <span aria-hidden="true"></span>
-    Slice 01 · review build
-  </div>
+  <div class="site-header__status">Research preview</div>
 </header>

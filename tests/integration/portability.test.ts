@@ -78,7 +78,7 @@ describe('build artifact portability', () => {
     expect(response.status).toBe(200);
     const html = await response.text();
     expect(html).toContain('Science-Based Lifting Atlas');
-    expect(html).toContain('Evidence-first resistance training anatomy');
+    expect(html).toContain('Explore resistance-training anatomy');
   });
 
   it('keeps and serves every page resource inside both deployment mounts', async () => {
