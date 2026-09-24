@@ -19,19 +19,15 @@ describe('SBLA-012 static-slice accessibility contract', () => {
 
   it('gives the lawful 2D fallback a direct text alternative', async () => {
     const [home, specimen, styles] = await Promise.all([
-      read('src/pages/index.astro'),
+      read('src/components/sbla-013/AnatomyExplorer.astro'),
       read('src/components/sbla-012/EntitySpecimen.astro'),
       read('src/styles/global.css'),
     ]);
-    const attribution =
-      'BodyParts3D, © The Database Center for Life Science licensed under CC';
 
     expect(home).toContain('<img');
-    expect(home).toContain(
-      'BodyParts3D anterior muscular-system render used as a non-interactive two-dimensional fallback.',
-    );
-    expect(home).toMatch(/2D fallback is\s+authoritative/);
-    expect(home).toContain(attribution);
+    expect(home).toContain('Static BodyParts3D muscular anatomy reference.');
+    expect(home).toContain('data-anatomy-poster');
+    expect(home).toContain('BodyParts3D © DBCLS');
     expect(specimen).toMatch(
       /BodyParts3D, © The Database Center for Life Science licensed under\s+CC/,
     );

@@ -1,0 +1,1360 @@
+{
+  "source": {
+    "dataset": "BodyParts3D 4.0",
+    "adaptation": {
+      "repository": "https://github.com/slorksmo/Human-Atlas",
+      "commit": "5bb5713aab18d7fe9380c3339eb09f173491ea06",
+      "files": {
+        "atlas.json": "d6979fc62cf18fa4f08a9e6efae8fdac9ec383c5a1f3c757920125ac758429fe",
+        "body-1.bin": "aa077a4675f0d0dd3c9b0af39dc8cf6bcb348c3bf7d283478d4206ce30a5a0de",
+        "body-3.bin": "6febb76b50423331f66802a63bb43f04f99ce08129837015910eed43d0719268",
+        "body-10.bin": "4a959d998acd35cf88518a0f2f8ab99b42d9f69c7ce0d6a814df315eeac807ac",
+        "body-2.bin": "4b3acfc35b91e4427eaca0e3be897d33f144354342ae0e52a2328b582ca8bdbe",
+        "body-4.bin": "0509e6c996fe5b935ace770a5dbf2d83a474330b7e541a844052a080bbf814bb",
+        "body-5.bin": "32a967198ffed45839968228898f3d246c67f86fb26892c3ae270be30e2f1149"
+      }
+    },
+    "attribution": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+    "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+    "historicNotice": "Source OBJ comments retain a CC BY-SA 2.1 Japan notice; preserve this notice pending legal review."
+  },
+  "model": {
+    "path": "assets/derived/bodyparts3d/anatomy-explorer.glb",
+    "bytes": 2965672,
+    "sha256": "4573baabdc50844959cb69e85eb20deba380c95476ab33db7f1e4e6279a10b81"
+  },
+  "optimization": {
+    "tool": "meshoptimizer",
+    "version": "1.2.0",
+    "targetRatio": 0.3,
+    "maximumRelativeError": 0.002
+  },
+  "entities": [
+    {
+      "id": "biceps-brachii",
+      "name": "Biceps brachii",
+      "partIds": ["FJ1478", "FJ1478M", "FJ1512", "FJ1512M"]
+    },
+    {
+      "id": "brachialis",
+      "name": "Brachialis",
+      "partIds": ["FJ1486", "FJ1486M"]
+    },
+    {
+      "id": "brachioradialis",
+      "name": "Brachioradialis",
+      "partIds": ["FJ1487", "FJ1487M"]
+    },
+    {
+      "id": "deltoid-regions",
+      "name": "Deltoid",
+      "partIds": ["FJ1467", "FJ1467M", "FJ1468", "FJ1468M", "FJ1513", "FJ1513M"]
+    },
+    {
+      "id": "external-oblique",
+      "name": "External oblique",
+      "partIds": ["FJ1452", "FJ1452M"]
+    },
+    {
+      "id": "forearm-flexors-extensors",
+      "name": "Forearm flexors extensors",
+      "partIds": [
+        "FJ1472",
+        "FJ1472M",
+        "FJ1475",
+        "FJ1475M",
+        "FJ1484",
+        "FJ1484M",
+        "FJ1487",
+        "FJ1487M",
+        "FJ1489",
+        "FJ1489M",
+        "FJ1490",
+        "FJ1490M",
+        "FJ1491",
+        "FJ1491M",
+        "FJ1492",
+        "FJ1492M",
+        "FJ1493",
+        "FJ1493M",
+        "FJ1494",
+        "FJ1494M",
+        "FJ1495",
+        "FJ1495M",
+        "FJ1496",
+        "FJ1496M",
+        "FJ1497",
+        "FJ1497M",
+        "FJ1498",
+        "FJ1498M",
+        "FJ1499",
+        "FJ1499M",
+        "FJ1502",
+        "FJ1502M",
+        "FJ1503",
+        "FJ1503M",
+        "FJ1505",
+        "FJ1505M",
+        "FJ1517",
+        "FJ1517M"
+      ]
+    },
+    {
+      "id": "gastrocnemius-heads",
+      "name": "Gastrocnemius",
+      "partIds": ["FJ1394", "FJ1394M", "FJ1397", "FJ1397M"]
+    },
+    {
+      "id": "gluteus-maximus",
+      "name": "Gluteus maximus",
+      "partIds": ["FJ1418", "FJ1418M"]
+    },
+    {
+      "id": "gluteus-medius",
+      "name": "Gluteus medius",
+      "partIds": ["FJ1419", "FJ1419M"]
+    },
+    {
+      "id": "gluteus-minimus",
+      "name": "Gluteus minimus",
+      "partIds": ["FJ1420", "FJ1420M"]
+    },
+    {
+      "id": "hamstrings",
+      "name": "Hamstrings",
+      "partIds": [
+        "FJ1395",
+        "FJ1395M",
+        "FJ1435",
+        "FJ1435M",
+        "FJ1436",
+        "FJ1436M",
+        "FJ1444",
+        "FJ1444M"
+      ]
+    },
+    {
+      "id": "hip-adductors",
+      "name": "Hip adductors",
+      "partIds": ["FJ1401", "FJ1401M", "FJ1402", "FJ1402M", "FJ1403", "FJ1403M"]
+    },
+    {
+      "id": "major-hip-flexors",
+      "name": "Major hip flexors",
+      "partIds": ["FJ1422", "FJ1422M", "FJ1431", "FJ1431M"]
+    },
+    {
+      "id": "pectoralis-major",
+      "name": "Pectoralis major",
+      "partIds": ["FJ1446", "FJ1446M", "FJ1447", "FJ1447M", "FJ1464", "FJ1464M"]
+    },
+    {
+      "id": "quadriceps",
+      "name": "Quadriceps",
+      "partIds": [
+        "FJ1433",
+        "FJ1433M",
+        "FJ1441",
+        "FJ1441M",
+        "FJ1442",
+        "FJ1442M",
+        "FJ1443",
+        "FJ1443M"
+      ]
+    },
+    {
+      "id": "rhomboids",
+      "name": "Rhomboids",
+      "partIds": ["FJ1536", "FJ1536M", "FJ1537", "FJ1537M"]
+    },
+    {
+      "id": "rotator-cuff",
+      "name": "Rotator cuff",
+      "partIds": [
+        "FJ1500",
+        "FJ1500M",
+        "FJ1504",
+        "FJ1504M",
+        "FJ1506",
+        "FJ1506M",
+        "FJ1508",
+        "FJ1508M"
+      ]
+    },
+    {
+      "id": "soleus",
+      "name": "Soleus",
+      "partIds": ["FJ1437", "FJ1437M"]
+    },
+    {
+      "id": "spinal-erectors",
+      "name": "Spinal erectors",
+      "partIds": [
+        "FJ1526",
+        "FJ1526M",
+        "FJ1527",
+        "FJ1527M",
+        "FJ1528",
+        "FJ1528M",
+        "FJ1533",
+        "FJ1533M",
+        "FJ1534",
+        "FJ1534M",
+        "FJ1535",
+        "FJ1535M",
+        "FJ1543M",
+        "FJ1544",
+        "FJ1544M"
+      ]
+    },
+    {
+      "id": "teres-major",
+      "name": "Teres major",
+      "partIds": ["FJ1507", "FJ1507M"]
+    },
+    {
+      "id": "tibialis-anterior",
+      "name": "Tibialis anterior",
+      "partIds": ["FJ1439", "FJ1439M"]
+    },
+    {
+      "id": "trapezius-regions",
+      "name": "Trapezius",
+      "partIds": ["FJ1520", "FJ1520M", "FJ1521", "FJ1521M", "FJ1554", "FJ1554M"]
+    },
+    {
+      "id": "triceps-brachii",
+      "name": "Triceps brachii",
+      "partIds": ["FJ1477", "FJ1477M", "FJ1479", "FJ1479M", "FJ1480", "FJ1480M"]
+    }
+  ],
+  "parts": [
+    {
+      "id": "FJ1394",
+      "name": "Lateral head of right gastrocnemius",
+      "sourceVertices": 482,
+      "vertices": 296,
+      "triangles": 588,
+      "relativeError": 0.0019938829354941845
+    },
+    {
+      "id": "FJ1394M",
+      "name": "Lateral head of left gastrocnemius",
+      "sourceVertices": 487,
+      "vertices": 297,
+      "triangles": 590,
+      "relativeError": 0.001999913016334176
+    },
+    {
+      "id": "FJ1395",
+      "name": "Long head of right biceps femoris",
+      "sourceVertices": 718,
+      "vertices": 318,
+      "triangles": 632,
+      "relativeError": 0.001997685991227627
+    },
+    {
+      "id": "FJ1395M",
+      "name": "Long head of left biceps femoris",
+      "sourceVertices": 726,
+      "vertices": 322,
+      "triangles": 640,
+      "relativeError": 0.001978064887225628
+    },
+    {
+      "id": "FJ1397",
+      "name": "Medial head of right gastrocnemius",
+      "sourceVertices": 647,
+      "vertices": 378,
+      "triangles": 744,
+      "relativeError": 0.0019875436555594206
+    },
+    {
+      "id": "FJ1397M",
+      "name": "Medial head of left gastrocnemius",
+      "sourceVertices": 644,
+      "vertices": 376,
+      "triangles": 740,
+      "relativeError": 0.001987320138141513
+    },
+    {
+      "id": "FJ1401",
+      "name": "Right adductor brevis",
+      "sourceVertices": 503,
+      "vertices": 228,
+      "triangles": 452,
+      "relativeError": 0.0019673570059239864
+    },
+    {
+      "id": "FJ1401M",
+      "name": "Left adductor brevis",
+      "sourceVertices": 507,
+      "vertices": 226,
+      "triangles": 448,
+      "relativeError": 0.0019482749048620462
+    },
+    {
+      "id": "FJ1402",
+      "name": "Right adductor longus",
+      "sourceVertices": 408,
+      "vertices": 208,
+      "triangles": 416,
+      "relativeError": 0.00197821413166821
+    },
+    {
+      "id": "FJ1402M",
+      "name": "Left adductor longus",
+      "sourceVertices": 410,
+      "vertices": 213,
+      "triangles": 426,
+      "relativeError": 0.001994543010368943
+    },
+    {
+      "id": "FJ1403",
+      "name": "Right adductor magnus",
+      "sourceVertices": 1786,
+      "vertices": 727,
+      "triangles": 1450,
+      "relativeError": 0.001949964207597077
+    },
+    {
+      "id": "FJ1403M",
+      "name": "Left adductor magnus",
+      "sourceVertices": 1801,
+      "vertices": 727,
+      "triangles": 1450,
+      "relativeError": 0.0019940193742513657
+    },
+    {
+      "id": "FJ1418",
+      "name": "Right gluteus maximus",
+      "sourceVertices": 1328,
+      "vertices": 576,
+      "triangles": 1144,
+      "relativeError": 0.0019949867855757475
+    },
+    {
+      "id": "FJ1418M",
+      "name": "Left gluteus maximus",
+      "sourceVertices": 1336,
+      "vertices": 574,
+      "triangles": 1140,
+      "relativeError": 0.0019894654396921396
+    },
+    {
+      "id": "FJ1419",
+      "name": "Right gluteus medius",
+      "sourceVertices": 1129,
+      "vertices": 626,
+      "triangles": 1240,
+      "relativeError": 0.00195424840785563
+    },
+    {
+      "id": "FJ1419M",
+      "name": "Left gluteus medius",
+      "sourceVertices": 1126,
+      "vertices": 625,
+      "triangles": 1238,
+      "relativeError": 0.001998049905523658
+    },
+    {
+      "id": "FJ1420",
+      "name": "Right gluteus minimus",
+      "sourceVertices": 1346,
+      "vertices": 634,
+      "triangles": 1264,
+      "relativeError": 0.001988334348425269
+    },
+    {
+      "id": "FJ1420M",
+      "name": "Left gluteus minimus",
+      "sourceVertices": 1350,
+      "vertices": 637,
+      "triangles": 1270,
+      "relativeError": 0.001987423514947295
+    },
+    {
+      "id": "FJ1422",
+      "name": "Right iliacus",
+      "sourceVertices": 1475,
+      "vertices": 599,
+      "triangles": 1198,
+      "relativeError": 0.001999895554035902
+    },
+    {
+      "id": "FJ1422M",
+      "name": "Left iliacus",
+      "sourceVertices": 1478,
+      "vertices": 605,
+      "triangles": 1210,
+      "relativeError": 0.0019509893609210849
+    },
+    {
+      "id": "FJ1431",
+      "name": "Right psoas major",
+      "sourceVertices": 1401,
+      "vertices": 625,
+      "triangles": 1234,
+      "relativeError": 0.0019677034579217434
+    },
+    {
+      "id": "FJ1431M",
+      "name": "Left psoas major",
+      "sourceVertices": 1378,
+      "vertices": 617,
+      "triangles": 1218,
+      "relativeError": 0.001984106143936515
+    },
+    {
+      "id": "FJ1433",
+      "name": "Right rectus femoris",
+      "sourceVertices": 910,
+      "vertices": 360,
+      "triangles": 724,
+      "relativeError": 0.0019470943370833993
+    },
+    {
+      "id": "FJ1433M",
+      "name": "Left rectus femoris",
+      "sourceVertices": 918,
+      "vertices": 362,
+      "triangles": 728,
+      "relativeError": 0.0019704813603311777
+    },
+    {
+      "id": "FJ1435",
+      "name": "Right semimembranosus",
+      "sourceVertices": 664,
+      "vertices": 305,
+      "triangles": 606,
+      "relativeError": 0.0019934747833758593
+    },
+    {
+      "id": "FJ1435M",
+      "name": "Left semimembranosus",
+      "sourceVertices": 659,
+      "vertices": 298,
+      "triangles": 592,
+      "relativeError": 0.001993238227441907
+    },
+    {
+      "id": "FJ1436",
+      "name": "Right semitendinosus",
+      "sourceVertices": 638,
+      "vertices": 228,
+      "triangles": 452,
+      "relativeError": 0.0019813377875834703
+    },
+    {
+      "id": "FJ1436M",
+      "name": "Left semitendinosus",
+      "sourceVertices": 624,
+      "vertices": 221,
+      "triangles": 438,
+      "relativeError": 0.0019599569495767355
+    },
+    {
+      "id": "FJ1437",
+      "name": "Right soleus",
+      "sourceVertices": 792,
+      "vertices": 397,
+      "triangles": 794,
+      "relativeError": 0.0019995728507637978
+    },
+    {
+      "id": "FJ1437M",
+      "name": "Left soleus",
+      "sourceVertices": 778,
+      "vertices": 394,
+      "triangles": 788,
+      "relativeError": 0.001987716183066368
+    },
+    {
+      "id": "FJ1439",
+      "name": "Right tibialis anterior",
+      "sourceVertices": 1116,
+      "vertices": 368,
+      "triangles": 672,
+      "relativeError": 0.001959859626367688
+    },
+    {
+      "id": "FJ1439M",
+      "name": "Left tibialis anterior",
+      "sourceVertices": 1113,
+      "vertices": 367,
+      "triangles": 670,
+      "relativeError": 0.0019385230261832476
+    },
+    {
+      "id": "FJ1441",
+      "name": "Right vastus intermedius",
+      "sourceVertices": 840,
+      "vertices": 354,
+      "triangles": 704,
+      "relativeError": 0.0019660084508359432
+    },
+    {
+      "id": "FJ1441M",
+      "name": "Left vastus intermedius",
+      "sourceVertices": 839,
+      "vertices": 353,
+      "triangles": 702,
+      "relativeError": 0.0019746420439332724
+    },
+    {
+      "id": "FJ1442",
+      "name": "Right vastus lateralis",
+      "sourceVertices": 1091,
+      "vertices": 488,
+      "triangles": 964,
+      "relativeError": 0.001981171779334545
+    },
+    {
+      "id": "FJ1442M",
+      "name": "Left vastus lateralis",
+      "sourceVertices": 1080,
+      "vertices": 481,
+      "triangles": 950,
+      "relativeError": 0.001968983793631196
+    },
+    {
+      "id": "FJ1443",
+      "name": "Right vastus medialis",
+      "sourceVertices": 784,
+      "vertices": 383,
+      "triangles": 758,
+      "relativeError": 0.001991349970921874
+    },
+    {
+      "id": "FJ1443M",
+      "name": "Left vastus medialis",
+      "sourceVertices": 776,
+      "vertices": 388,
+      "triangles": 768,
+      "relativeError": 0.00199892302043736
+    },
+    {
+      "id": "FJ1444",
+      "name": "Short head of right biceps femoris",
+      "sourceVertices": 456,
+      "vertices": 205,
+      "triangles": 406,
+      "relativeError": 0.001989042619243264
+    },
+    {
+      "id": "FJ1444M",
+      "name": "Short head of left biceps femoris",
+      "sourceVertices": 450,
+      "vertices": 195,
+      "triangles": 386,
+      "relativeError": 0.001989030046388507
+    },
+    {
+      "id": "FJ1446",
+      "name": "Abdominal part of right pectoralis major",
+      "sourceVertices": 563,
+      "vertices": 330,
+      "triangles": 656,
+      "relativeError": 0.0019559457432478666
+    },
+    {
+      "id": "FJ1446M",
+      "name": "Abdominal part of left pectoralis major",
+      "sourceVertices": 564,
+      "vertices": 328,
+      "triangles": 652,
+      "relativeError": 0.0019630189053714275
+    },
+    {
+      "id": "FJ1447",
+      "name": "Clavicular part of right pectoralis major",
+      "sourceVertices": 917,
+      "vertices": 454,
+      "triangles": 892,
+      "relativeError": 0.0019935311283916235
+    },
+    {
+      "id": "FJ1447M",
+      "name": "Clavicular part of left pectoralis major",
+      "sourceVertices": 922,
+      "vertices": 456,
+      "triangles": 896,
+      "relativeError": 0.001984745031222701
+    },
+    {
+      "id": "FJ1452",
+      "name": "Right external oblique",
+      "sourceVertices": 17145,
+      "vertices": 4027,
+      "triangles": 7994,
+      "relativeError": 0.0019972682930529118
+    },
+    {
+      "id": "FJ1452M",
+      "name": "Left external oblique",
+      "sourceVertices": 17116,
+      "vertices": 4001,
+      "triangles": 7942,
+      "relativeError": 0.0019965427927672863
+    },
+    {
+      "id": "FJ1464",
+      "name": "Sternocostal part of right pectoralis major",
+      "sourceVertices": 3278,
+      "vertices": 1595,
+      "triangles": 3190,
+      "relativeError": 0.001991751603782177
+    },
+    {
+      "id": "FJ1464M",
+      "name": "Sternocostal part of left pectoralis major",
+      "sourceVertices": 3271,
+      "vertices": 1604,
+      "triangles": 3208,
+      "relativeError": 0.0019501587375998497
+    },
+    {
+      "id": "FJ1467",
+      "name": "Acromial part of right deltoid",
+      "sourceVertices": 545,
+      "vertices": 314,
+      "triangles": 628,
+      "relativeError": 0.0019855438731610775
+    },
+    {
+      "id": "FJ1467M",
+      "name": "Acromial part of left deltoid",
+      "sourceVertices": 544,
+      "vertices": 316,
+      "triangles": 632,
+      "relativeError": 0.001993949292227626
+    },
+    {
+      "id": "FJ1468",
+      "name": "Clavicular part of right deltoid",
+      "sourceVertices": 2121,
+      "vertices": 660,
+      "triangles": 1420,
+      "relativeError": 0.0019326998153701425
+    },
+    {
+      "id": "FJ1468M",
+      "name": "Clavicular part of left deltoid",
+      "sourceVertices": 2143,
+      "vertices": 662,
+      "triangles": 1424,
+      "relativeError": 0.001971582183614373
+    },
+    {
+      "id": "FJ1472",
+      "name": "Right extensor carpi ulnaris",
+      "sourceVertices": 2167,
+      "vertices": 596,
+      "triangles": 1084,
+      "relativeError": 0.001735728234052658
+    },
+    {
+      "id": "FJ1472M",
+      "name": "Left extensor carpi ulnaris",
+      "sourceVertices": 2185,
+      "vertices": 597,
+      "triangles": 1082,
+      "relativeError": 0.0019486623350530863
+    },
+    {
+      "id": "FJ1475",
+      "name": "Right flexor digitorum superficialis",
+      "sourceVertices": 1998,
+      "vertices": 695,
+      "triangles": 1398,
+      "relativeError": 0.0019979390781372786
+    },
+    {
+      "id": "FJ1475M",
+      "name": "Left flexor digitorum superficialis",
+      "sourceVertices": 1993,
+      "vertices": 689,
+      "triangles": 1386,
+      "relativeError": 0.001999025931581855
+    },
+    {
+      "id": "FJ1477",
+      "name": "Lateral head of right triceps brachii",
+      "sourceVertices": 656,
+      "vertices": 359,
+      "triangles": 714,
+      "relativeError": 0.0019400347955524921
+    },
+    {
+      "id": "FJ1477M",
+      "name": "Lateral head of left triceps brachii",
+      "sourceVertices": 661,
+      "vertices": 358,
+      "triangles": 712,
+      "relativeError": 0.0019370706286281347
+    },
+    {
+      "id": "FJ1478",
+      "name": "Long head of right biceps brachii",
+      "sourceVertices": 466,
+      "vertices": 213,
+      "triangles": 422,
+      "relativeError": 0.0019510287092998624
+    },
+    {
+      "id": "FJ1478M",
+      "name": "Long head of left biceps brachii",
+      "sourceVertices": 457,
+      "vertices": 214,
+      "triangles": 428,
+      "relativeError": 0.001950350939296186
+    },
+    {
+      "id": "FJ1479",
+      "name": "Long head of right triceps brachii",
+      "sourceVertices": 504,
+      "vertices": 253,
+      "triangles": 502,
+      "relativeError": 0.001977727748453617
+    },
+    {
+      "id": "FJ1479M",
+      "name": "Long head of left triceps brachii",
+      "sourceVertices": 504,
+      "vertices": 247,
+      "triangles": 490,
+      "relativeError": 0.001987780211493373
+    },
+    {
+      "id": "FJ1480",
+      "name": "Medial head of right triceps brachii",
+      "sourceVertices": 325,
+      "vertices": 172,
+      "triangles": 340,
+      "relativeError": 0.0019976042676717043
+    },
+    {
+      "id": "FJ1480M",
+      "name": "Medial head of left triceps brachii",
+      "sourceVertices": 325,
+      "vertices": 173,
+      "triangles": 342,
+      "relativeError": 0.00199759635142982
+    },
+    {
+      "id": "FJ1484",
+      "name": "Right abductor pollicis longus",
+      "sourceVertices": 655,
+      "vertices": 254,
+      "triangles": 512,
+      "relativeError": 0.0019851650577038527
+    },
+    {
+      "id": "FJ1484M",
+      "name": "Left abductor pollicis longus",
+      "sourceVertices": 657,
+      "vertices": 256,
+      "triangles": 516,
+      "relativeError": 0.0019637004006654024
+    },
+    {
+      "id": "FJ1486",
+      "name": "Right brachialis",
+      "sourceVertices": 630,
+      "vertices": 304,
+      "triangles": 616,
+      "relativeError": 0.0019704371225088835
+    },
+    {
+      "id": "FJ1486M",
+      "name": "Left brachialis",
+      "sourceVertices": 621,
+      "vertices": 302,
+      "triangles": 612,
+      "relativeError": 0.0019718019757419825
+    },
+    {
+      "id": "FJ1487",
+      "name": "Right brachioradialis",
+      "sourceVertices": 1012,
+      "vertices": 394,
+      "triangles": 784,
+      "relativeError": 0.0019779528956860304
+    },
+    {
+      "id": "FJ1487M",
+      "name": "Left brachioradialis",
+      "sourceVertices": 991,
+      "vertices": 379,
+      "triangles": 754,
+      "relativeError": 0.001985587878152728
+    },
+    {
+      "id": "FJ1489",
+      "name": "Right extensor carpi radialis brevis",
+      "sourceVertices": 585,
+      "vertices": 215,
+      "triangles": 430,
+      "relativeError": 0.0019659376703202724
+    },
+    {
+      "id": "FJ1489M",
+      "name": "Left extensor carpi radialis brevis",
+      "sourceVertices": 560,
+      "vertices": 215,
+      "triangles": 430,
+      "relativeError": 0.0019963933154940605
+    },
+    {
+      "id": "FJ1490",
+      "name": "Right extensor carpi radialis longus",
+      "sourceVertices": 528,
+      "vertices": 210,
+      "triangles": 412,
+      "relativeError": 0.0019974245224148035
+    },
+    {
+      "id": "FJ1490M",
+      "name": "Left extensor carpi radialis longus",
+      "sourceVertices": 537,
+      "vertices": 205,
+      "triangles": 402,
+      "relativeError": 0.001996396342292428
+    },
+    {
+      "id": "FJ1491",
+      "name": "Right extensor digiti minimi",
+      "sourceVertices": 304,
+      "vertices": 130,
+      "triangles": 256,
+      "relativeError": 0.0019363819155842066
+    },
+    {
+      "id": "FJ1491M",
+      "name": "Left extensor digiti minimi",
+      "sourceVertices": 310,
+      "vertices": 131,
+      "triangles": 258,
+      "relativeError": 0.0019354521064087749
+    },
+    {
+      "id": "FJ1492",
+      "name": "Right extensor digitorum",
+      "sourceVertices": 1313,
+      "vertices": 422,
+      "triangles": 876,
+      "relativeError": 0.001995877595618367
+    },
+    {
+      "id": "FJ1492M",
+      "name": "Left extensor digitorum",
+      "sourceVertices": 1305,
+      "vertices": 421,
+      "triangles": 874,
+      "relativeError": 0.0019710410851985216
+    },
+    {
+      "id": "FJ1493",
+      "name": "Right extensor indicis",
+      "sourceVertices": 426,
+      "vertices": 166,
+      "triangles": 324,
+      "relativeError": 0.0017673642141744494
+    },
+    {
+      "id": "FJ1493M",
+      "name": "Left extensor indicis",
+      "sourceVertices": 431,
+      "vertices": 168,
+      "triangles": 328,
+      "relativeError": 0.0019196842331439257
+    },
+    {
+      "id": "FJ1494",
+      "name": "Right extensor pollicis brevis",
+      "sourceVertices": 497,
+      "vertices": 206,
+      "triangles": 408,
+      "relativeError": 0.001991307595744729
+    },
+    {
+      "id": "FJ1494M",
+      "name": "Left extensor pollicis brevis",
+      "sourceVertices": 491,
+      "vertices": 208,
+      "triangles": 412,
+      "relativeError": 0.0018600511830300093
+    },
+    {
+      "id": "FJ1495",
+      "name": "Right extensor pollicis longus",
+      "sourceVertices": 613,
+      "vertices": 212,
+      "triangles": 432,
+      "relativeError": 0.0018911075312644243
+    },
+    {
+      "id": "FJ1495M",
+      "name": "Left extensor pollicis longus",
+      "sourceVertices": 623,
+      "vertices": 214,
+      "triangles": 436,
+      "relativeError": 0.0019890046678483486
+    },
+    {
+      "id": "FJ1496",
+      "name": "Right flexor carpi radialis",
+      "sourceVertices": 299,
+      "vertices": 135,
+      "triangles": 266,
+      "relativeError": 0.0019346324261277914
+    },
+    {
+      "id": "FJ1496M",
+      "name": "Left flexor carpi radialis",
+      "sourceVertices": 300,
+      "vertices": 133,
+      "triangles": 262,
+      "relativeError": 0.0019520765636116266
+    },
+    {
+      "id": "FJ1497",
+      "name": "Right flexor digitorum profundus",
+      "sourceVertices": 1520,
+      "vertices": 562,
+      "triangles": 1120,
+      "relativeError": 0.0019169842125847936
+    },
+    {
+      "id": "FJ1497M",
+      "name": "Left flexor digitorum profundus",
+      "sourceVertices": 1521,
+      "vertices": 563,
+      "triangles": 1122,
+      "relativeError": 0.0019608866423368454
+    },
+    {
+      "id": "FJ1498",
+      "name": "Right flexor pollicis longus",
+      "sourceVertices": 1311,
+      "vertices": 372,
+      "triangles": 792,
+      "relativeError": 0.0019169708248227835
+    },
+    {
+      "id": "FJ1498M",
+      "name": "Left flexor pollicis longus",
+      "sourceVertices": 1322,
+      "vertices": 375,
+      "triangles": 798,
+      "relativeError": 0.001974029466509819
+    },
+    {
+      "id": "FJ1499",
+      "name": "Right flexor digitorum superficialis",
+      "sourceVertices": 329,
+      "vertices": 163,
+      "triangles": 322,
+      "relativeError": 0.001952917198650539
+    },
+    {
+      "id": "FJ1499M",
+      "name": "Left flexor digitorum superficialis",
+      "sourceVertices": 328,
+      "vertices": 164,
+      "triangles": 324,
+      "relativeError": 0.001952909049578011
+    },
+    {
+      "id": "FJ1500",
+      "name": "Right infraspinatus muscle",
+      "sourceVertices": 528,
+      "vertices": 261,
+      "triangles": 518,
+      "relativeError": 0.001994219608604908
+    },
+    {
+      "id": "FJ1500M",
+      "name": "Left infraspinatus muscle",
+      "sourceVertices": 510,
+      "vertices": 263,
+      "triangles": 522,
+      "relativeError": 0.001731972093693912
+    },
+    {
+      "id": "FJ1502",
+      "name": "Right palmaris longus",
+      "sourceVertices": 2090,
+      "vertices": 647,
+      "triangles": 1346,
+      "relativeError": 0.001957186032086611
+    },
+    {
+      "id": "FJ1502M",
+      "name": "Left palmaris longus",
+      "sourceVertices": 2094,
+      "vertices": 648,
+      "triangles": 1348,
+      "relativeError": 0.001945393974892795
+    },
+    {
+      "id": "FJ1503",
+      "name": "Right pronator quadratus",
+      "sourceVertices": 1724,
+      "vertices": 602,
+      "triangles": 1256,
+      "relativeError": 0.0019786979537457228
+    },
+    {
+      "id": "FJ1503M",
+      "name": "Left pronator quadratus",
+      "sourceVertices": 1737,
+      "vertices": 608,
+      "triangles": 1264,
+      "relativeError": 0.0019995856564491987
+    },
+    {
+      "id": "FJ1504",
+      "name": "Right subscapularis",
+      "sourceVertices": 2368,
+      "vertices": 675,
+      "triangles": 1462,
+      "relativeError": 0.0019846668001264334
+    },
+    {
+      "id": "FJ1504M",
+      "name": "Left subscapularis",
+      "sourceVertices": 2342,
+      "vertices": 674,
+      "triangles": 1460,
+      "relativeError": 0.0019745694007724524
+    },
+    {
+      "id": "FJ1505",
+      "name": "Right supinator",
+      "sourceVertices": 1229,
+      "vertices": 572,
+      "triangles": 1136,
+      "relativeError": 0.0019741912838071585
+    },
+    {
+      "id": "FJ1505M",
+      "name": "Left supinator",
+      "sourceVertices": 1253,
+      "vertices": 574,
+      "triangles": 1140,
+      "relativeError": 0.001976016676053405
+    },
+    {
+      "id": "FJ1506",
+      "name": "Right supraspinatus",
+      "sourceVertices": 622,
+      "vertices": 276,
+      "triangles": 544,
+      "relativeError": 0.0018333729822188616
+    },
+    {
+      "id": "FJ1506M",
+      "name": "Left supraspinatus",
+      "sourceVertices": 627,
+      "vertices": 278,
+      "triangles": 548,
+      "relativeError": 0.0019997325725853443
+    },
+    {
+      "id": "FJ1507",
+      "name": "Right teres major",
+      "sourceVertices": 775,
+      "vertices": 345,
+      "triangles": 682,
+      "relativeError": 0.0017481803661212325
+    },
+    {
+      "id": "FJ1507M",
+      "name": "Left teres major",
+      "sourceVertices": 783,
+      "vertices": 345,
+      "triangles": 682,
+      "relativeError": 0.001774180680513382
+    },
+    {
+      "id": "FJ1508",
+      "name": "Right teres minor",
+      "sourceVertices": 316,
+      "vertices": 183,
+      "triangles": 362,
+      "relativeError": 0.0019073226721957326
+    },
+    {
+      "id": "FJ1508M",
+      "name": "Left teres minor",
+      "sourceVertices": 307,
+      "vertices": 180,
+      "triangles": 356,
+      "relativeError": 0.001966088078916073
+    },
+    {
+      "id": "FJ1512",
+      "name": "Short head of right biceps brachii",
+      "sourceVertices": 1035,
+      "vertices": 362,
+      "triangles": 744,
+      "relativeError": 0.0019794716499745846
+    },
+    {
+      "id": "FJ1512M",
+      "name": "Short head of left biceps brachii",
+      "sourceVertices": 1032,
+      "vertices": 358,
+      "triangles": 736,
+      "relativeError": 0.0019947548862546682
+    },
+    {
+      "id": "FJ1513",
+      "name": "Spinal part of right deltoid",
+      "sourceVertices": 1063,
+      "vertices": 490,
+      "triangles": 984,
+      "relativeError": 0.0019917930476367474
+    },
+    {
+      "id": "FJ1513M",
+      "name": "Spinal part of left deltoid",
+      "sourceVertices": 1078,
+      "vertices": 491,
+      "triangles": 986,
+      "relativeError": 0.0019914950244128704
+    },
+    {
+      "id": "FJ1517",
+      "name": "Right extensor carpi ulnaris",
+      "sourceVertices": 662,
+      "vertices": 226,
+      "triangles": 460,
+      "relativeError": 0.001922719064168632
+    },
+    {
+      "id": "FJ1517M",
+      "name": "Left extensor carpi ulnaris",
+      "sourceVertices": 666,
+      "vertices": 224,
+      "triangles": 456,
+      "relativeError": 0.0019246352603659034
+    },
+    {
+      "id": "FJ1520",
+      "name": "Ascending part of right trapezius",
+      "sourceVertices": 2787,
+      "vertices": 1092,
+      "triangles": 2152,
+      "relativeError": 0.0019500510534271598
+    },
+    {
+      "id": "FJ1520M",
+      "name": "Ascending part of left trapezius",
+      "sourceVertices": 2752,
+      "vertices": 1085,
+      "triangles": 2142,
+      "relativeError": 0.001977753359824419
+    },
+    {
+      "id": "FJ1521",
+      "name": "Descending part of right trapezius",
+      "sourceVertices": 2394,
+      "vertices": 1142,
+      "triangles": 2282,
+      "relativeError": 0.0019514980958774686
+    },
+    {
+      "id": "FJ1521M",
+      "name": "Descending part of left trapezius",
+      "sourceVertices": 2380,
+      "vertices": 1145,
+      "triangles": 2288,
+      "relativeError": 0.0019525516545400023
+    },
+    {
+      "id": "FJ1526",
+      "name": "Right iliocostalis cervicis",
+      "sourceVertices": 988,
+      "vertices": 399,
+      "triangles": 782,
+      "relativeError": 0.001861665165051818
+    },
+    {
+      "id": "FJ1526M",
+      "name": "Left iliocostalis cervicis",
+      "sourceVertices": 988,
+      "vertices": 402,
+      "triangles": 788,
+      "relativeError": 0.0019404791528359056
+    },
+    {
+      "id": "FJ1527",
+      "name": "Right iliocostalis lumborum",
+      "sourceVertices": 3264,
+      "vertices": 1059,
+      "triangles": 2074,
+      "relativeError": 0.001939424080774188
+    },
+    {
+      "id": "FJ1527M",
+      "name": "Left iliocostalis lumborum",
+      "sourceVertices": 3278,
+      "vertices": 1054,
+      "triangles": 2064,
+      "relativeError": 0.0019959497731179
+    },
+    {
+      "id": "FJ1528",
+      "name": "Right iliocostalis thoracis",
+      "sourceVertices": 1684,
+      "vertices": 624,
+      "triangles": 1248,
+      "relativeError": 0.001937674474902451
+    },
+    {
+      "id": "FJ1528M",
+      "name": "Left iliocostalis thoracis",
+      "sourceVertices": 1703,
+      "vertices": 642,
+      "triangles": 1284,
+      "relativeError": 0.001950905192643404
+    },
+    {
+      "id": "FJ1533",
+      "name": "Right longissimus capitis",
+      "sourceVertices": 860,
+      "vertices": 349,
+      "triangles": 694,
+      "relativeError": 0.0019396677380427718
+    },
+    {
+      "id": "FJ1533M",
+      "name": "Left longissimus capitis",
+      "sourceVertices": 867,
+      "vertices": 349,
+      "triangles": 694,
+      "relativeError": 0.0019385447958484292
+    },
+    {
+      "id": "FJ1534",
+      "name": "Right longissimus cervicis",
+      "sourceVertices": 1065,
+      "vertices": 411,
+      "triangles": 818,
+      "relativeError": 0.0019689227920025587
+    },
+    {
+      "id": "FJ1534M",
+      "name": "Left longissimus cervicis",
+      "sourceVertices": 1056,
+      "vertices": 414,
+      "triangles": 824,
+      "relativeError": 0.0019998259376734495
+    },
+    {
+      "id": "FJ1535",
+      "name": "Right longissimus thoracis",
+      "sourceVertices": 5774,
+      "vertices": 1809,
+      "triangles": 3686,
+      "relativeError": 0.0019232967169955373
+    },
+    {
+      "id": "FJ1535M",
+      "name": "Left longissimus thoracis",
+      "sourceVertices": 5816,
+      "vertices": 1824,
+      "triangles": 3720,
+      "relativeError": 0.0019347924971953034
+    },
+    {
+      "id": "FJ1536",
+      "name": "Right rhomboid major",
+      "sourceVertices": 1824,
+      "vertices": 769,
+      "triangles": 1530,
+      "relativeError": 0.0019858975429087877
+    },
+    {
+      "id": "FJ1536M",
+      "name": "Left rhomboid major",
+      "sourceVertices": 1806,
+      "vertices": 768,
+      "triangles": 1528,
+      "relativeError": 0.0019414352718740702
+    },
+    {
+      "id": "FJ1537",
+      "name": "Right rhomboid minor",
+      "sourceVertices": 645,
+      "vertices": 327,
+      "triangles": 650,
+      "relativeError": 0.0019446255173534155
+    },
+    {
+      "id": "FJ1537M",
+      "name": "Left rhomboid minor",
+      "sourceVertices": 644,
+      "vertices": 319,
+      "triangles": 634,
+      "relativeError": 0.0019969213753938675
+    },
+    {
+      "id": "FJ1543M",
+      "name": "Spinalis",
+      "sourceVertices": 792,
+      "vertices": 313,
+      "triangles": 630,
+      "relativeError": 0.001992461970075965
+    },
+    {
+      "id": "FJ1544",
+      "name": "Right spinalis thoracis",
+      "sourceVertices": 2063,
+      "vertices": 692,
+      "triangles": 1368,
+      "relativeError": 0.0019949700217694044
+    },
+    {
+      "id": "FJ1544M",
+      "name": "Left spinalis thoracis",
+      "sourceVertices": 2048,
+      "vertices": 686,
+      "triangles": 1356,
+      "relativeError": 0.001997800776734948
+    },
+    {
+      "id": "FJ1554",
+      "name": "Transverse part of right trapezius",
+      "sourceVertices": 1989,
+      "vertices": 882,
+      "triangles": 1756,
+      "relativeError": 0.0019951709546148777
+    },
+    {
+      "id": "FJ1554M",
+      "name": "Transverse part of left trapezius",
+      "sourceVertices": 1981,
+      "vertices": 887,
+      "triangles": 1766,
+      "relativeError": 0.0019911830313503742
+    },
+    {
+      "id": "FJ2810",
+      "name": "Skin",
+      "sourceVertices": 22902,
+      "vertices": 6711,
+      "triangles": 13422,
+      "relativeError": 0.0008277609013020992
+    }
+  ],
+  "absentEntityIds": [
+    "latissimus-dorsi",
+    "rectus-abdominis",
+    "internal-oblique",
+    "transversus-abdominis",
+    "multifidus"
+  ]
+}

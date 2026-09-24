@@ -1,5 +1,5 @@
 ---
-import posterUrl from '../../assets/derived/bodyparts3d/sbla005-poster.webp?url';
+import AnatomyExplorer from '../components/sbla-013/AnatomyExplorer.astro';
 import { getCollection } from 'astro:content';
 import AtlasLayout from '../layouts/AtlasLayout.astro';
 import { prototypePreviewEnabled } from '../lib/presentation/sbla012';
@@ -46,10 +46,10 @@ const records = [
   description="Explore resistance-training anatomy, movements, and the evidence behind each takeaway."
   current="home"
 >
-  <section class="home-hero" aria-labelledby="page-title">
+  <section class="home-hero home-hero--explorer" aria-labelledby="page-title">
     <div class="home-hero__copy">
       <p class="micro-label">The science of strength, connected.</p>
-      <h1 id="page-title">Know what<br />you’re training.</h1>
+      <h1 id="page-title">Know what you’re training.</h1>
       <p class="home-hero__lede">
         Explore the anatomy. Understand the movement. Follow every takeaway back
         to its evidence.
@@ -73,43 +73,13 @@ const records = [
           >How it works <span aria-hidden="true">›</span></a
         >
       </div>
-      <dl class="home-hero__metrics" aria-label="Current atlas status">
-        <div><dt>{reviewedClaimCount}</dt><dd>reviewed claims</dd></div>
-        <div><dt>{sources.length}</dt><dd>source records</dd></div>
-        <div><dt>{exercises.length}</dt><dd>movement records</dd></div>
-      </dl>
     </div>
-    <figure class="home-hero__visual">
-      <div class="study-label">
-        <span>Anatomy study</span><span>Static evaluation plate</span>
-      </div>
-      <img
-        src={posterUrl}
-        width="800"
-        height="1000"
-        alt="BodyParts3D anterior muscular-system render used as a non-interactive two-dimensional fallback."
-        fetchpriority="high"
-      />
-      <div class="home-hero__focus-card">
-        <p>Inside the first collection</p>
-        <h2>
-          {
-            prototypeEnabled ? (
-              <a href="./muscles/pectoralis-major/">
-                Pectoralis major <span aria-hidden="true">›</span>
-              </a>
-            ) : (
-              'Pectoralis major'
-            )
-          }
-        </h2>
-      </div>
-      <figcaption class="home-hero__attribution">
-        BodyParts3D, © The Database Center for Life Science licensed under CC
-        Attribution 4.0 International · 2D fallback is authoritative. Evaluation
-        image.
-      </figcaption>
-    </figure>
+    <AnatomyExplorer prototypeEnabled={prototypeEnabled} />
+    <dl class="home-hero__metrics" aria-label="Current atlas status">
+      <div><dt>{reviewedClaimCount}</dt><dd>reviewed claims</dd></div>
+      <div><dt>{sources.length}</dt><dd>source records</dd></div>
+      <div><dt>{exercises.length}</dt><dd>movement records</dd></div>
+    </dl>
   </section>
 
   <section class="home-collection" aria-labelledby="collection-title">

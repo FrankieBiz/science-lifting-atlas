@@ -1,0 +1,475 @@
+---
+import modelUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer.glb?url';
+import posterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
+import manifest from '../../../docs/licenses/anatomy-explorer-manifest.json';
+import '../../styles/anatomy-explorer.css';
+
+interface Props {
+  prototypeEnabled: boolean;
+}
+const { prototypeEnabled } = Astro.props;
+const entities = manifest.entities;
+---
+
+<section
+  class="anatomy-explorer"
+  id="anatomy-explorer"
+  aria-label="Interactive anatomy explorer"
+  data-model-url={modelUrl}
+>
+  <header class="anatomy-explorer__heading">
+    <h2>Explore the body.</h2><p>Select a muscle. See how it fits.</p>
+  </header>
+  <div class="anatomy-explorer__stage" data-stage>
+    <div class="anatomy-explorer__stage-heading">
+      <div><span class="anatomy-explorer__live-dot"></span>Human anatomy</div>
+      <span>Muscular system</span>
+    </div>
+    <img
+      data-anatomy-poster
+      class="anatomy-explorer__poster"
+      src={posterUrl}
+      alt="Static BodyParts3D muscular anatomy reference."
+      width="720"
+      height="960"
+      fetchpriority="high"
+    />
+    <canvas
+      data-anatomy-canvas
+      aria-label="Interactive body. Drag to rotate; use the muscle list to select a structure."
+      tabindex="0"
+      hidden></canvas>
+    <div class="anatomy-explorer__load">
+      <button type="button" data-load>Load interactive anatomy</button>
+    </div>
+    <div
+      class="anatomy-explorer__view-controls"
+      aria-label="Body viewing controls"
+    >
+      <button
+        type="button"
+        data-view="front"
+        aria-label="Front view"
+        aria-pressed="true"
+        disabled>Front</button
+      >
+      <button
+        type="button"
+        data-view="back"
+        aria-label="Back view"
+        aria-pressed="false"
+        disabled>Back</button
+      >
+      <span></span>
+      <button type="button" data-zoom="in" aria-label="Zoom in" disabled
+        >+</button
+      >
+      <button type="button" data-zoom="out" aria-label="Zoom out" disabled
+        >−</button
+      >
+      <button type="button" data-reset aria-label="Reset model" disabled
+        >Reset</button
+      >
+    </div>
+    <p class="anatomy-explorer__status" data-explorer-status role="status">
+      Interactive anatomy loads as you explore
+    </p>
+    <span class="anatomy-explorer__gesture"
+      >Drag to rotate · scroll to zoom</span
+    >
+  </div>
+  <aside class="anatomy-explorer__sidebar" aria-label="Muscle selection">
+    <header><h2>Muscles</h2><span>{entities.length} groups</span></header>
+    <label class="anatomy-explorer__search">
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"
+        ><circle cx="8.5" cy="8.5" r="5.5"></circle><path d="m13 13 4 4"
+        ></path></svg
+      >
+      <input
+        type="search"
+        aria-label="Find a muscle"
+        placeholder="Find a muscle"
+        autocomplete="off"
+      />
+    </label>
+    <div class="anatomy-explorer__muscles" aria-label="Available muscle groups">
+      {
+        entities.map((entity) => (
+          <button
+            type="button"
+            data-muscle={entity.id}
+            data-parts={entity.partIds.join(',')}
+            aria-pressed={entity.id === 'pectoralis-major' ? 'true' : 'false'}
+            disabled
+          >
+            <>
+              <span>{entity.name}</span>
+              <span aria-hidden="true">›</span>
+            </>
+          </button>
+        ))
+      }
+      <p data-no-results hidden>No matching muscles.</p>
+    </div>
+    <div class="anatomy-explorer__selection">
+      <span class="anatomy-explorer__selection-label">Selected structure</span>
+      <h3 data-selected-name>Pectoralis major</h3>
+      <p>
+        Choose a muscle to see it in context, or isolate it for a closer look.
+      </p>
+      <button
+        class="anatomy-explorer__isolate"
+        data-isolate
+        type="button"
+        aria-pressed="false"
+        disabled>Isolate muscle</button
+      >
+      {
+        prototypeEnabled && (
+          <a data-evidence-link href="./muscles/pectoralis-major/">
+            Explore the evidence <span aria-hidden="true">›</span>
+          </a>
+        )
+      }
+    </div>
+  </aside>
+  <footer class="anatomy-explorer__source">
+    BodyParts3D © DBCLS · <a
+      href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
+      >CC BY 4.0</a
+    > · 23 mapped muscle groups. Some structures are not represented.
+  </footer>
+</section>
+
+<script>
+  import type {
+    Mesh,
+    MeshStandardMaterial,
+    PerspectiveCamera,
+    WebGLRenderer,
+    Object3D,
+  } from 'three';
+
+  const root = document.querySelector<HTMLElement>('.anatomy-explorer');
+  if (root) {
+    const stage = root.querySelector<HTMLElement>('[data-stage]')!;
+    const canvas = root.querySelector<HTMLCanvasElement>('canvas')!;
+    const poster = root.querySelector<HTMLImageElement>(
+      '[data-anatomy-poster]',
+    )!;
+    const load = root.querySelector<HTMLButtonElement>('[data-load]')!;
+    const status = root.querySelector<HTMLElement>('[data-explorer-status]')!;
+    const name = root.querySelector<HTMLElement>('[data-selected-name]')!;
+    const isolateButton =
+      root.querySelector<HTMLButtonElement>('[data-isolate]')!;
+    const evidence = root.querySelector<HTMLAnchorElement>(
+      '[data-evidence-link]',
+    );
+    const muscleButtons = [
+      ...root.querySelectorAll<HTMLButtonElement>('[data-muscle]'),
+    ];
+    const groups = muscleButtons.map((button) => ({
+      id: button.dataset.muscle!,
+      name: button.firstElementChild!.textContent!,
+      parts: button.dataset.parts!.split(','),
+      button,
+    }));
+    const muscleMeshes: Mesh[] = [];
+    let selected = 'pectoralis-major';
+    let isolated = false;
+    let renderer: WebGLRenderer | undefined;
+    let camera: PerspectiveCamera | undefined;
+    let skin: Object3D | undefined;
+    let loading = false;
+    let ready = false;
+    let draw = () => {};
+    const updateSelection = () => {
+      const group = groups.find((item) => item.id === selected)!;
+      name.textContent = group.name;
+      for (const item of groups)
+        item.button.setAttribute('aria-pressed', String(item.id === selected));
+      if (evidence) evidence.hidden = selected !== 'pectoralis-major';
+      for (const mesh of muscleMeshes) {
+        const active = group.parts.includes(mesh.userData.sourceId);
+        mesh.visible = !isolated || active;
+        const material = mesh.material as MeshStandardMaterial;
+        material.color.set(active ? '#de776e' : '#a9988c');
+        material.emissive.set(active ? '#38110e' : '#000000');
+      }
+      if (skin) skin.visible = !isolated;
+      isolateButton.setAttribute('aria-pressed', String(isolated));
+      draw();
+    };
+    for (const group of groups) {
+      group.button.disabled = false;
+      group.button.addEventListener('click', () => {
+        selected = group.id;
+        updateSelection();
+      });
+    }
+    root
+      .querySelector<HTMLInputElement>('input[type="search"]')!
+      .addEventListener('input', (event) => {
+        const query = (event.target as HTMLInputElement).value
+          .trim()
+          .toLowerCase();
+        let count = 0;
+        for (const group of groups) {
+          const visible = group.name.toLowerCase().includes(query);
+          group.button.hidden = !visible;
+          if (visible) count++;
+        }
+        root.querySelector<HTMLElement>('[data-no-results]')!.hidden =
+          count > 0;
+      });
+    const fallback = () => {
+      ready = false;
+      loading = false;
+      canvas.hidden = true;
+      poster.hidden = false;
+      load.hidden = false;
+      status.textContent = 'Static view · interactive anatomy unavailable';
+      root
+        .querySelectorAll<HTMLButtonElement>(
+          '[data-view], [data-zoom], [data-reset], [data-isolate]',
+        )
+        .forEach((button) => {
+          button.disabled = true;
+        });
+      renderer?.dispose();
+    };
+    const start = async () => {
+      if (loading || ready) return;
+      loading = true;
+      load.hidden = true;
+      status.textContent = 'Loading anatomy…';
+      try {
+        const [THREE, { GLTFLoader }, { OrbitControls }] = await Promise.all([
+          import('three'),
+          import('three/addons/loaders/GLTFLoader.js'),
+          import('three/addons/controls/OrbitControls.js'),
+        ]);
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+          powerPreference: 'low-power',
+          preserveDrawingBuffer: true,
+        });
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 0.9;
+        const scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(32, 1, 0.01, 30);
+        camera.position.set(0, 0.88, 3.45);
+        const controls = new OrbitControls(camera, canvas);
+        controls.target.set(0, 0.86, 0);
+        controls.enablePan = false;
+        controls.minDistance = 0.6;
+        controls.maxDistance = 5;
+        controls.minPolarAngle = 0.25;
+        controls.maxPolarAngle = Math.PI - 0.25;
+        controls.update();
+        scene.add(new THREE.HemisphereLight(0xeaf3ff, 0x48404b, 1.5));
+        const key = new THREE.DirectionalLight(0xfff5ec, 2.2);
+        key.position.set(-3, 4, 5);
+        scene.add(key);
+        const rim = new THREE.DirectionalLight(0xb8d5ff, 2.2);
+        rim.position.set(3, 2, -3);
+        scene.add(rim);
+        const fill = new THREE.DirectionalLight(0xffffff, 1);
+        fill.position.set(2, 0.5, 4);
+        scene.add(fill);
+        const model = await new GLTFLoader().loadAsync(root.dataset.modelUrl!);
+        muscleMeshes.length = 0;
+        model.scene.traverse((object) => {
+          if (!(object as Mesh).isMesh) return;
+          const mesh = object as Mesh;
+          const material = mesh.material as MeshStandardMaterial;
+          mesh.userData.sourceId = mesh.userData.sourceId ?? material.name;
+          mesh.geometry.computeVertexNormals();
+          material.metalness = 0.05;
+          material.roughness = 0.48;
+          if (mesh.userData.sourceId === 'FJ2810') {
+            skin = mesh;
+            material.transparent = true;
+            material.opacity = 0.085;
+            material.depthWrite = false;
+            material.color.set('#ccd6df');
+            mesh.renderOrder = 1;
+          } else {
+            muscleMeshes.push(mesh);
+          }
+        });
+        scene.add(model.scene);
+        draw = () => {
+          if (renderer && camera && ready) renderer.render(scene, camera);
+        };
+        const resize = () => {
+          if (!camera || !renderer) return;
+          const { width, height } = stage.getBoundingClientRect();
+          renderer.setSize(width, height, false);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          draw();
+        };
+        const observer = new ResizeObserver(resize);
+        observer.observe(stage);
+        controls.addEventListener('change', draw);
+        const reset = (back = false) => {
+          if (!camera) return;
+          camera.position.set(0, 0.88, back ? -3.45 : 3.45);
+          controls.target.set(0, 0.86, 0);
+          controls.update();
+          root
+            .querySelectorAll<HTMLButtonElement>('[data-view]')
+            .forEach((button) =>
+              button.setAttribute(
+                'aria-pressed',
+                String(button.dataset.view === (back ? 'back' : 'front')),
+              ),
+            );
+          draw();
+        };
+        root
+          .querySelectorAll<HTMLButtonElement>('[data-view]')
+          .forEach((button) => {
+            button.onclick = () => reset(button.dataset.view === 'back');
+          });
+        root
+          .querySelectorAll<HTMLButtonElement>('[data-zoom]')
+          .forEach((button) => {
+            button.onclick = () => {
+              if (!camera) return;
+              const direction = camera.position.clone().sub(controls.target);
+              const distance = THREE.MathUtils.clamp(
+                direction.length() *
+                  (button.dataset.zoom === 'in' ? 0.8 : 1.25),
+                0.6,
+                5,
+              );
+              camera.position
+                .copy(controls.target)
+                .add(direction.setLength(distance));
+              controls.update();
+              draw();
+            };
+          });
+        root.querySelector<HTMLButtonElement>('[data-reset]')!.onclick = () => {
+          isolated = false;
+          updateSelection();
+          reset();
+        };
+        isolateButton.onclick = () => {
+          isolated = !isolated;
+          updateSelection();
+        };
+        const raycaster = new THREE.Raycaster();
+        let down = { x: 0, y: 0 };
+        canvas.onpointerdown = (event) => {
+          down = { x: event.clientX, y: event.clientY };
+        };
+        canvas.onpointerup = (event) => {
+          if (
+            !camera ||
+            Math.hypot(event.clientX - down.x, event.clientY - down.y) > 5
+          )
+            return;
+          const rect = canvas.getBoundingClientRect();
+          raycaster.setFromCamera(
+            new THREE.Vector2(
+              ((event.clientX - rect.left) / rect.width) * 2 - 1,
+              (-(event.clientY - rect.top) / rect.height) * 2 + 1,
+            ),
+            camera,
+          );
+          const hit = raycaster.intersectObjects(
+            muscleMeshes.filter((mesh) => mesh.visible),
+            false,
+          )[0];
+          if (!hit) return;
+          const group = groups.find((item) =>
+            item.parts.includes(hit.object.userData.sourceId),
+          );
+          if (group) {
+            selected = group.id;
+            updateSelection();
+          }
+        };
+        canvas.onkeydown = (event) => {
+          if (
+            !camera ||
+            !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(
+              event.key,
+            )
+          )
+            return;
+          event.preventDefault();
+          const offset = camera.position.clone().sub(controls.target);
+          const spherical = new THREE.Spherical().setFromVector3(offset);
+          spherical.theta +=
+            event.key === 'ArrowLeft'
+              ? -0.15
+              : event.key === 'ArrowRight'
+                ? 0.15
+                : 0;
+          spherical.phi = THREE.MathUtils.clamp(
+            spherical.phi +
+              (event.key === 'ArrowUp'
+                ? -0.1
+                : event.key === 'ArrowDown'
+                  ? 0.1
+                  : 0),
+            0.25,
+            Math.PI - 0.25,
+          );
+          camera.position
+            .copy(controls.target)
+            .add(offset.setFromSpherical(spherical));
+          controls.update();
+          draw();
+        };
+        canvas.addEventListener(
+          'webglcontextlost',
+          (event) => {
+            event.preventDefault();
+            controls.dispose();
+            observer.disconnect();
+            fallback();
+          },
+          { once: true },
+        );
+        ready = true;
+        loading = false;
+        canvas.hidden = false;
+        poster.hidden = true;
+        status.textContent = 'Ready to explore';
+        root
+          .querySelectorAll<HTMLButtonElement>(
+            '[data-view], [data-zoom], [data-reset], [data-isolate]',
+          )
+          .forEach((button) => {
+            button.disabled = false;
+          });
+        resize();
+        updateSelection();
+      } catch {
+        fallback();
+      }
+    };
+    load.addEventListener('click', start);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            void start();
+          }
+        },
+        { rootMargin: '100px' },
+      );
+      observer.observe(root);
+    }
+  }
+</script>
