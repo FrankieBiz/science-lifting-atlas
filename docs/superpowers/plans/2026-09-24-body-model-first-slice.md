@@ -18,23 +18,23 @@ Playwright.
 
 ## 1. Decision and asset
 
-- [ ] Record owner-directed bounded model choice and the still-pending review
+- [x] Record owner-directed bounded model choice and the still-pending review
       gates in the repository decision and hold documents.
-- [ ] Write the asset contract test and observe its missing-artifact failure.
-- [ ] Add the pinned source reader and deterministic seven-mesh GLB builder.
-- [ ] Generate the asset and manifest; confirm the asset contract passes.
+- [x] Write the asset contract test and observe its missing-artifact failure.
+- [x] Add the pinned source reader and deterministic seven-mesh GLB builder.
+- [x] Generate the asset and manifest; confirm the asset contract passes.
 
 ## 2. Page integration
 
-- [ ] Write the prototype journey check and observe the absent-control failure.
-- [ ] Add the opt-in viewer component to the pectoralis page.
-- [ ] Style the model card for desktop, tablet, and phone, including no-script
+- [x] Write the prototype journey check and observe the absent-control failure.
+- [x] Add the opt-in viewer component to the pectoralis page.
+- [x] Style the model card for desktop, tablet, and phone, including no-script
       and load-failure messaging.
-- [ ] Confirm the browser journey and inspect the model visually.
+- [x] Confirm the browser journey and inspect the model visually.
 
 ## 3. Handoff
 
-- [ ] Run all repository gates required for the touched work and record their
+- [x] Run all repository gates required for the touched work and record their
       exact results.
-- [ ] Write the bounded handoff, close the claim, commit, and push the branch.
-- [ ] Leave the local preview on the new model page for owner inspection.
+- [x] Write the bounded handoff, close the claim, commit, and push the branch.
+- [x] Leave the local preview on the new model page for owner inspection.
