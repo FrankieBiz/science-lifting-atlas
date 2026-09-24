@@ -1,4 +1,5 @@
 ---
+import MuscleGuide from './MuscleGuide.astro';
 import modelUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer.glb?url';
 import posterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
 import manifest from '../../../docs/licenses/anatomy-explorer-manifest.json';
@@ -139,6 +140,7 @@ const entities = manifest.entities;
       >CC BY 4.0</a
     > · 23 mapped muscle groups. Some structures are not represented.
   </footer>
+  {prototypeEnabled && <MuscleGuide />}
 </section>
 
 <script>
@@ -186,6 +188,11 @@ const entities = manifest.entities;
     const updateSelection = () => {
       const group = groups.find((item) => item.id === selected)!;
       name.textContent = group.name;
+      document.dispatchEvent(
+        new CustomEvent('atlas:muscle-selected', {
+          detail: { id: group.id, name: group.name },
+        }),
+      );
       for (const item of groups)
         item.button.setAttribute('aria-pressed', String(item.id === selected));
       if (evidence) evidence.hidden = selected !== 'pectoralis-major';

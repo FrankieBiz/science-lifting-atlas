@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import PrototypeClaim from '../sbla-012/PrototypeClaim.astro';
+import '../../styles/muscle-guide.css';
+
+const sections = [
+  {
+    id: 'overview',
+    title: 'Overview',
+    intro: 'Get to know the structure.',
+    claims: [
+      'claim-pectoralis-major-attachments',
+      'claim-pectoralis-major-portions',
+    ],
+  },
+  {
+    id: 'movement',
+    title: 'Movement',
+    intro: 'Understand its mechanical role.',
+    claims: ['claim-pectoralis-major-adduction'],
+  },
+  {
+    id: 'training',
+    title: 'Training',
+    intro: 'Explore what the evidence measures.',
+    claims: [
+      'claim-pectoralis-major-hypertrophy-with-chest-resistance-training',
+      'claim-pectoralis-major-surface-emg-limitation',
+    ],
+  },
+  {
+    id: 'injuries',
+    title: 'Injury context',
+    intro: 'Reported pectoralis injuries during bench pressing.',
+    claims: ['claim-bench-press-pectoralis-rupture'],
+  },
+];
+const claims = await getCollection('claims');
+const injury = claims.find(
+  ({ data }) => data.id === 'claim-bench-press-pectoralis-rupture',
+)!.data;
+---
+
+<section
+  class="muscle-guide"
+  data-muscle-guide
+  aria-labelledby="muscle-guide-title"
+>
+  <header class="muscle-guide__header">
+    <div>
+      <p class="micro-label">A closer look</p><h2
+        id="muscle-guide-title"
+        data-guide-name
+        tabindex="-1"
+      >
+        Pectoralis major
+      </h2>
+    </div>
+    <span class="muscle-guide__badge">Local review · unpublished science</span>
+  </header>
+  <p class="muscle-guide__intro">
+    Explore the anatomy. Understand the research. Follow each claim to its
+    source.
+  </p>
+  <div data-guide-empty hidden>
+    <p>
+      This muscle’s detailed guide is not yet available. You can still explore
+      its shape and position in the model.
+    </p><p>Choose Pectoralis major to preview the first evidence guide.</p>
+  </div>
+  <div data-guide-content>
+    <nav
+      class="muscle-guide__tabs"
+      aria-label="Muscle guide sections"
+      data-guide-tabs
+    >
+      {
+        sections.map((section) => (
+          <a
+            id={`guide-tab-${section.id}`}
+            href={`#guide-panel-${section.id}`}
+            data-guide-tab={section.id}
+          >
+            {section.title}
+          </a>
+        ))
+      }
+    </nav>
+    {
+      sections.map((section) => (
+        <section
+          class="muscle-guide__panel"
+          id={`guide-panel-${section.id}`}
+          data-guide-panel={section.id}
+          aria-labelledby={`guide-tab-${section.id}`}
+        >
+          <h3>{section.intro}</h3>
+          {section.id === 'injuries' && (
+            <aside class="muscle-guide__context">
+              <p>{injury.qualifiers[0]}</p>
+              <p>{injury.qualifiers[1]}</p>
+            </aside>
+          )}
+          <div class="muscle-guide__cards">
+            {section.claims.map((id) => (
+              <PrototypeClaim id={id} sourceBaseHref="./sources/" />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</section>
+<script>
+  const guide = document.querySelector<HTMLElement>('[data-muscle-guide]');
+  if (guide) {
+    const tabs = [
+      ...guide.querySelectorAll<HTMLAnchorElement>('[data-guide-tab]'),
+    ];
+    const panels = [
+      ...guide.querySelectorAll<HTMLElement>('[data-guide-panel]'),
+    ];
+    const content = guide.querySelector<HTMLElement>('[data-guide-content]')!;
+    const empty = guide.querySelector<HTMLElement>('[data-guide-empty]')!;
+    const heading = guide.querySelector<HTMLElement>('[data-guide-name]')!;
+    guide.querySelector('[data-guide-tabs]')!.setAttribute('role', 'tablist');
+    const activate = (index: number) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(index === i));
+        tab.tabIndex = index === i ? 0 : -1;
+        panels[i]!.hidden = index !== i;
+      });
+    };
+    tabs.forEach((tab, index) => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panels[index]!.id);
+      panels[index]!.setAttribute('role', 'tabpanel');
+      panels[index]!.tabIndex = 0;
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        activate(index);
+      });
+      tab.addEventListener('keydown', (event) => {
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft')
+          next = (index + tabs.length - 1) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        activate(next);
+        tabs[next]!.focus();
+      });
+    });
+    const hashIndex = panels.findIndex(
+      (panel) => `#${panel.id}` === location.hash,
+    );
+    activate(hashIndex < 0 ? 0 : hashIndex);
+    const select = (id: string, name: string) => {
+      const focusWasInside = content.contains(document.activeElement);
+      heading.textContent = name;
+      content.hidden = id !== 'pectoralis-major';
+      empty.hidden = !content.hidden;
+      if (content.hidden && focusWasInside) heading.focus();
+    };
+    const selected = document.querySelector<HTMLElement>(
+      '[data-muscle][aria-pressed="true"]',
+    );
+    if (selected)
+      select(
+        selected.dataset.muscle!,
+        selected.firstElementChild!.textContent!,
+      );
+    document.addEventListener('atlas:muscle-selected', (event) => {
+      const { id, name } = (event as CustomEvent<{ id: string; name: string }>)
+        .detail;
+      select(id, name);
+    });
+  }
+</script>

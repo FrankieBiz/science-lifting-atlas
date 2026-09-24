@@ -72,3 +72,12 @@ test('anatomy workspace fits a narrow screen and survives a failed model request
     page.getByRole('button', { name: 'Load interactive anatomy' }),
   ).toBeVisible();
 });
+
+test('production excludes unpublished muscle guide claims from HTML', async ({
+  request,
+}) => {
+  const html = await (await request.get('/')).text();
+  expect(html).not.toContain('data-muscle-guide');
+  expect(html).not.toContain('claim-bench-press-pectoralis-rupture');
+  expect(html).not.toContain('claim-pectoralis-major-adduction');
+});

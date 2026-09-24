@@ -1,0 +1,128 @@
+.muscle-guide {
+  grid-column: 1 / -1;
+  margin-top: 1.5rem;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  background: #f7f5f1;
+  border: 1px solid #e4dfd7;
+  border-radius: 1.5rem;
+  min-width: 0;
+  color: #282621;
+}
+.muscle-guide [hidden] {
+  display: none !important;
+}
+.muscle-guide__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.muscle-guide__header h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 0.5rem 0;
+}
+.muscle-guide__badge {
+  font-size: 0.75rem;
+  border: 1px solid #d5c8b5;
+  color: #66533c;
+  padding: 0.5rem 0.75rem;
+  border-radius: 2rem;
+}
+.muscle-guide__intro {
+  color: #655f55;
+  max-width: 48rem;
+  line-height: 1.7;
+  margin: 1rem 0 1.8rem;
+}
+.muscle-guide__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #ded8ce;
+}
+.muscle-guide__tabs a {
+  color: #575047;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+}
+.muscle-guide__tabs a[aria-selected='true'] {
+  background: #302c27;
+  color: #fff;
+}
+.muscle-guide :focus-visible {
+  outline: 3px solid #a34b42;
+  outline-offset: 4px;
+}
+.muscle-guide__panel {
+  padding-top: 1.5rem;
+  min-width: 0;
+}
+.muscle-guide__panel > h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0 0 1.5rem;
+}
+.muscle-guide__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr));
+  align-items: start;
+  gap: 1rem;
+}
+.muscle-guide .prototype-claim {
+  background: #fffdf9;
+  border: 1px solid #e4dfd7;
+  border-radius: 1rem;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.muscle-guide .prototype-claim__statement {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.muscle-guide .prototype-claim header {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.muscle-guide .claim-certainty {
+  font-size: 0.75rem;
+}
+.muscle-guide details {
+  border-top: 1px solid #e4dfd7;
+  padding-top: 1rem;
+}
+.muscle-guide summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  min-height: 2rem;
+}
+.muscle-guide .prototype-claim__detail {
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.muscle-guide .prototype-claim__detail li {
+  margin-bottom: 0.8rem;
+}
+.muscle-guide .prototype-claim__detail li span {
+  display: block;
+  color: #655f55;
+}
+.muscle-guide .prototype-claim__detail a {
+  color: #93463f;
+}
+.muscle-guide__context {
+  max-width: 65ch;
+  border-left: 3px solid #b17864;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+}
