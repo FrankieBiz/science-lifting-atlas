@@ -53,3 +53,30 @@ human comprehension. No participant sessions took place. The next steps are
 independent review of the exact candidate and owner inspection of the visual
 direction. The anatomy-production hold remains active regardless of SBLA-012
 acceptance.
+
+## Visual redesign recheck — 2026-09-24
+
+Implementation candidate: `ebfc4d432cc16011b6c6a13c02c5c6b6f964c834`.
+
+- `pnpm verify` passed on the pinned runtime: 323 unit tests, five accessibility
+  contract checks, four visual contract checks, 17 portability checks, all
+  validation gates, and a two-route normal build.
+- `pnpm test:e2e` passed all five Chromium checks.
+- `pnpm test:prototype` passed all six Chromium checks with JavaScript disabled.
+  Added checks cover takeaway/evidence anchors and homepage reflow at 320, 390,
+  705, 768, and 990 px widths.
+- Builder browser inspection covered home, muscle, exercise, source, and
+  methodology layouts on desktop and phone. Additional narrow checks covered
+  320 px, and a tablet check covered 768 px.
+- A technical diff check identified homepage overflow at 705 and 768 px. The
+  regression test reproduced 781 px document width at a 705 px viewport. The
+  hero now stacks at tablet widths, uses shrinkable grid columns, and passes
+  the reflow test. No unresolved technical finding remains from that check.
+- An initial portability assertion expected the previous homepage description;
+  it was updated to the new description and all 17 portability checks passed.
+  A formatting failure in the work ledger was corrected before the final run.
+
+The technical diff check is a builder preflight, not the required independent
+Claude acceptance review. The visual contract tests do not compare screenshots;
+the browser inspection above is separately recorded. Owner visual approval
+and independent acceptance remain pending.
