@@ -48,7 +48,9 @@ Codex may continue the ordered SBLA-012 work on:
 - semantic SVG/text and static-image fallback contracts;
 - keyboard, screen-reader, reduced-motion, reflow, and no-JavaScript behavior;
 - desktop and mobile visual regression coverage;
-- the 3–5 participant formative usability study and resulting critical fixes;
+- the owner-directed static acceptance checks and resulting critical fixes
+  (the 3–5 participant requirement was removed on 2026-09-24; see
+  `../gates/SBLA-012-usability-decision.md`);
 - documentation and handoff material needed for independent Claude review; and
 - non-3D performance and portability measurement.
 

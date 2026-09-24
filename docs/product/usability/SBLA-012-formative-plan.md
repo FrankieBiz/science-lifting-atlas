@@ -1,5 +1,10 @@
 # SBLA-012 formative usability plan
 
+> **Superseded 2026-09-24 by owner decision.** The 3–5 participant requirement
+> below is retained as historical planning context and is no longer an SBLA-012
+> acceptance gate. See the [owner decision](../gates/SBLA-012-usability-decision.md)
+> and [current static acceptance plan](SBLA-012-static-acceptance.md).
+
 Status: **planned; no participant sessions completed**  
 Artifact under test: `codex/SBLA-012-realistic-static-slice`  
 Required sample: 3–5 representative lifters or coaches  

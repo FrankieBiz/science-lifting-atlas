@@ -2,16 +2,23 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-**SBLA-001 through SBLA-006 are accepted.** Distinct Account-B Claude Review
-passed the exact SBLA-006 candidate with zero Critical and zero Important
-findings on 2026-09-09. The repository now contains the verified static shell,
-stable command contract, license inventory, lawful checksum-pinned anatomy
-sample, deterministic asset spike, complete BodyParts3D candidate benchmark,
-mesh mapping, feasibility evidence, and weighted scorecard, but no scientific
-content or public evidence claim. Gate A records an accepted 2D-authoritative
-hybrid with bounded BodyParts3D enhancement and no purchase; production entity
-and evidence schemas begin in SBLA-007. The canonical product and execution requirements live in
+**SBLA-001 through SBLA-011 have passed their required queue reviews.**
+SBLA-012 is the current static vertical-slice task. The repository contains
+reviewed but unpublished records for one muscle, two exercises, 23 claims, and
+68 sources, along with the schemas, evidence gates, graph compiler, and local
+prototype page archetypes. The ordinary build still emits no public scientific
+claim or entity route because owner publication approval is absent. The
+accepted asset direction is 2D/text authoritative, with BodyParts3D limited to
+optional enhancement; no asset was purchased. The canonical product and
+execution requirements live in
 [`docs/product/master-plan.md`](docs/product/master-plan.md).
+
+On 2026-09-24 the owner removed SBLA-012's 3–5 participant gate. The static
+acceptance checks and remaining independent-review/owner-approval steps are
+recorded in
+[`SBLA-012-static-acceptance.md`](docs/product/usability/SBLA-012-static-acceptance.md).
+The owner hold on production anatomy work for SBLA-013 through SBLA-015 remains
+active.
 
 ## Prerequisites
 
@@ -28,6 +35,7 @@ pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm verify
 pnpm test:e2e
+pnpm test:prototype # local-only unpublished review build
 ```
 
 On Linux CI, install Chromium system dependencies with:
@@ -38,22 +46,25 @@ pnpm exec playwright install --with-deps chromium
 
 ## Commands
 
-| Command                 | Foundation-stage behavior                                                                                                                                                                |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm dev`              | Run the Astro development server.                                                                                                                                                        |
-| `pnpm build`            | Generate the static production output.                                                                                                                                                   |
-| `pnpm preview`          | Preview the most recent static build.                                                                                                                                                    |
-| `pnpm verify`           | Run formatting, linting, type checking, unit tests, stage-aware content/graph/evidence checks, the production build, repository contract, asset scorecard, and Gate A decision contract. |
-| `pnpm test:portability` | Serve the existing static output with a bare `node:http` server. For direct use, run `pnpm build && pnpm test:portability`; `pnpm verify` already builds first.                          |
-| `pnpm test:e2e`         | Build and test the static output in Chromium, including JavaScript-disabled behavior.                                                                                                    |
-| `pnpm test:a11y`        | Check the executable foundation accessibility contract. Later tasks expand this into the full accessibility matrix.                                                                      |
-| `pnpm test:visual`      | Check deterministic viewport definitions. Later tasks add screenshot baselines.                                                                                                          |
-| `pnpm test:performance` | Check that the master-plan budgets are represented. Later tasks measure actual bundles and assets.                                                                                       |
-| `pnpm evidence:status`  | Report zero sources in foundation mode. It fails closed if source records appear before SBLA-007/SBLA-011 implement their schemas and status checks.                                     |
+| Command                 | Current behavior                                                                                                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`              | Run the Astro development server.                                                                                                                                            |
+| `pnpm build`            | Generate the static production output.                                                                                                                                       |
+| `pnpm preview`          | Preview the most recent static build.                                                                                                                                        |
+| `pnpm verify`           | Run formatting, linting, type checking, unit tests, content/graph/evidence checks, the production build, repository contract, asset scorecard, and Gate A decision contract. |
+| `pnpm test:portability` | Serve the existing static output with a bare `node:http` server. For direct use, run `pnpm build && pnpm test:portability`; `pnpm verify` already builds first.              |
+| `pnpm test:e2e`         | Build and test the static output in Chromium, including JavaScript-disabled behavior.                                                                                        |
+| `pnpm test:prototype`   | Check the local-only unpublished static journey in Chromium with JavaScript disabled; refuses CI and production environments.                                                |
+| `pnpm test:a11y`        | Check the executable static-slice accessibility contract.                                                                                                                    |
+| `pnpm test:visual`      | Check the current visual token and layout contract; screenshot baselines remain future work.                                                                                 |
+| `pnpm test:performance` | Check that the master-plan budgets are represented. Later tasks measure actual bundles and assets.                                                                           |
+| `pnpm evidence:status`  | Validate the 68 recorded source statuses and due dates; live network acquisition remains later work.                                                                         |
 
 ## Current boundaries
 
-- Do not add scientific or anatomy records yet; foundation validators intentionally reject them.
+- Do not publish the reviewed vertical-slice records without an owner-approved
+  manifest and the evidence gate. The normal build deliberately excludes their
+  routes and graph data.
 - Agent roles, branch/worktree rules, the current-work ledger, the handoff template, and Claude environment readiness are defined in [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md), and [`docs/runbooks/`](docs/runbooks/). The canonical structured policy is [`docs/runbooks/operating-policy.json`](docs/runbooks/operating-policy.json). Claim your task in [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md) before editing; restricted Claude roles ask Codex to record their exact-path claim.
 - Both Claude accounts passed the readiness test recorded in [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md); SBLA-002 no longer blocks SBLA-008.
 - SBLA-003 establishes the accepted architecture/provider ADRs, dated free-tier
@@ -83,6 +94,8 @@ pnpm exec playwright install --with-deps chromium
   preserved at `reviews/releases/SBLA-006-r2.md` and returned PASS with zero
   Critical and zero Important findings after 47 adversarial mutations and a
   live primary-license check.
-- SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
+- SBLA-007 and SBLA-011 replaced foundation-mode adapters with validated
+  evidence/content/graph pipelines. SBLA-011 Round 4 returned PASS with zero
+  Critical and zero Important findings for the final criterion-13 repair.
 
 Work follows the authoritative SBLA-001–SBLA-020 queue in master plan §18.

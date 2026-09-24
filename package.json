@@ -18,6 +18,7 @@
     "typecheck": "astro check",
     "test": "vitest run tests/unit",
     "test:e2e": "playwright test",
+    "test:prototype": "playwright test --config playwright.prototype.config.ts",
     "test:a11y": "vitest run tests/accessibility",
     "test:visual": "vitest run tests/visual",
     "test:performance": "vitest run tests/performance",

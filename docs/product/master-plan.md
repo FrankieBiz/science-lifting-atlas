@@ -1334,10 +1334,15 @@ completion percentage before SBLA-017 measures vertical-slice throughput and
 the owner approves the revised effort estimate. Until then, queue counts are
 process progress, not a proxy for delivered product value.
 
-If 3–5 representative SBLA-012 participants cannot be recruited after a
-documented reasonable effort, mark the task blocked and return the recruitment
-decision to the owner. A smaller convenience check may inform design but does
-not satisfy the queue gate unless a new owner-approved ADR changes it.
+**SBLA-012 owner revision (2026-09-24):** The owner removed the 3–5 participant
+formative-usability gate. The static slice instead requires a local prototype
+walkthrough of find, understand, verify, share, and methodology routes; browser
+checks for keyboard, mobile reflow, reduced motion, publication boundaries, and
+stable links; the existing automated gates; independent review; and owner
+approval of the visual direction. Automated checks demonstrate behavior, not
+human comprehension. This revision does not change the later launch beta or the
+SBLA-013–015 anatomy-production hold. See
+[`SBLA-012-usability-decision.md`](gates/SBLA-012-usability-decision.md).
 
 Every task uses these repository commands after Task SBLA-001 defines them:
 
@@ -1777,7 +1782,7 @@ and production work, manual or scripted mesh modification, glTF/GLB production,
 integration. It does not reduce the final Clinical Cinematic quality target or
 authorize a lower-quality substitute. While active, work remains on SBLA-012's
 static page archetypes, accessible semantic presentation, evidence journey,
-responsive visual system, and formative usability gate. The exact boundary and
+responsive visual system, and static acceptance gate. The exact boundary and
 restart conditions are recorded in
 [`SBLA-012-anatomy-production-hold.md`](design/SBLA-012-anatomy-production-hold.md).
 
@@ -1794,7 +1799,7 @@ restart conditions are recorded in
 | SBLA-009 | Claude Research → Claude Review | 008 | Search, screening, extraction, appraisal, synthesis, and draft claims for one muscle/two exercises | Artifacts complete; no memory-only evidence; exact locators present |
 | SBLA-010 | Claude Review → Claude Research remediation | 009 | Full citation-entailment and adversarial review for every claim | All criteria PASS; disputed/unsupported claims removed or remain blocked |
 | SBLA-011 | Codex → Claude Review | 007,010 | Approved vertical-slice content, graph compiler, MDX claim components, AST lint, status checks | `pnpm evidence:status && pnpm verify`; no uncited factual prose or broken refs |
-| SBLA-012 | Codex → Claude Review → Owner | 011 | Design tokens and realistic home/muscle/exercise/source/methodology archetypes; small formative usability report for the first realistic static vertical slice | `pnpm test:a11y && pnpm test:visual && pnpm verify`; 3–5 representative lifters/coaches attempt find/understand/verify/share tasks; Critical journey blockers are fixed before owner approval; owner approves direction |
+| SBLA-012 | Codex → Claude Review → Owner | 011 | Design tokens and realistic home/muscle/exercise/source/methodology archetypes; static acceptance record for the first realistic vertical slice | `pnpm test:a11y && pnpm test:visual && pnpm verify && pnpm test:e2e && pnpm test:prototype`; local prototype journeys cover find/understand/verify/share/methodology, keyboard, mobile, reduced motion, stable links, and publication boundaries; Critical blockers are fixed before independent review; owner approves visual direction |
 | SBLA-013 | Codex → Claude Review | 006,012 | Production Blender/glTF/media pipeline and versioned manifests | Deterministic checksums/mapping; budgets pass; `pnpm test:performance` |
 | SBLA-014 | Codex → Claude Review | 013 | Anatomy-engine reducer/state tests, scene, selection, layers, URL state, semantic tree | Unit/E2E tests pass; mouse/touch/keyboard parity; `pnpm verify` |
 | SBLA-015 | Codex → Claude Review → Owner | 014 | Complete accessible 3D vertical slice plus no-WebGL/low-power fallbacks | Full journey passes E2E, AA matrix, visual and performance gates; owner approves |

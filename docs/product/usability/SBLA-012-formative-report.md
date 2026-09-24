@@ -1,5 +1,11 @@
 # SBLA-012 formative usability report
 
+> **Superseded 2026-09-24 by owner decision.** This document preserves the
+> preflight and the fact that no participant sessions occurred. Its open
+> participant rows are no longer acceptance blockers. See the
+> [owner decision](../gates/SBLA-012-usability-decision.md) and the
+> [current static acceptance record](SBLA-012-static-acceptance.md).
+
 Status: **recruitment pending; required participant gate not yet satisfied**  
 Candidate under test: `9515aa0` (`codex/SBLA-012-realistic-static-slice`)  
 Required sample: 3–5 representative lifters or coaches  
