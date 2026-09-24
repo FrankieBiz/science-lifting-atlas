@@ -3,6 +3,7 @@ const modelUrl = '../../assets/sbla013-pectoralis.glb';
 ---
 
 <section
+  id="body-model"
   class="body-model"
   aria-labelledby="body-model-title"
   data-model-url={modelUrl}
@@ -97,9 +98,11 @@ const modelUrl = '../../assets/sbla013-pectoralis.glb';
           'An adult male body surface with both pectoralis major muscles highlighted in rose.',
         );
         viewer.setAttribute('camera-controls', '');
+        viewer.setAttribute('disable-pan', '');
         viewer.setAttribute('interaction-prompt', 'none');
         viewer.setAttribute('camera-orbit', initialOrbit);
         viewer.setAttribute('camera-target', initialTarget);
+        viewer.setAttribute('field-of-view', '30deg');
         viewer.setAttribute('exposure', '0.8');
         viewer.setAttribute('shadow-intensity', '0');
         viewer.addEventListener(
@@ -116,6 +119,8 @@ const modelUrl = '../../assets/sbla013-pectoralis.glb';
             status.textContent =
               'The 3D model could not load. The static anatomy image above remains available.';
             loadButton.disabled = false;
+            loadButton.hidden = false;
+            resetButton.hidden = true;
             viewer.remove();
             placeholder.hidden = false;
           },
@@ -125,19 +130,20 @@ const modelUrl = '../../assets/sbla013-pectoralis.glb';
         stage.prepend(viewer);
         viewer.setAttribute('src', url);
         loadButton.hidden = true;
-        resetButton.addEventListener('click', async () => {
+        resetButton.onclick = async () => {
           const controlledViewer = viewer as HTMLElement & {
             cameraOrbit: string;
+            cameraTarget: string;
+            fieldOfView: string;
             updateComplete: Promise<boolean>;
             jumpCameraToGoal: () => void;
           };
-          controlledViewer.cameraOrbit = '0deg 75deg 4.801m';
-          await controlledViewer.updateComplete;
           controlledViewer.cameraOrbit = initialOrbit;
-          viewer.setAttribute('camera-target', initialTarget);
+          controlledViewer.cameraTarget = initialTarget;
+          controlledViewer.fieldOfView = '30deg';
           await controlledViewer.updateComplete;
           controlledViewer.jumpCameraToGoal();
-        });
+        };
       } catch {
         status.textContent =
           'The 3D viewer could not start. The static anatomy image above remains available.';
