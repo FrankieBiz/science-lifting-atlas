@@ -64,5 +64,8 @@
     "vitest": "4.1.11",
     "yaml": "2.9.0",
     "zod": "4.5.2"
+  },
+  "dependencies": {
+    "@google/model-viewer": "4.3.1"
   }
 }

@@ -1,0 +1,34 @@
+{
+  "status": "local-owner-review-prototype; not production acceptance",
+  "source": {
+    "dataset": "BodyParts3D 4.0",
+    "adaptation": {
+      "repository": "https://github.com/slorksmo/Human-Atlas",
+      "commit": "5bb5713aab18d7fe9380c3339eb09f173491ea06",
+      "files": {
+        "atlas.json": "d6979fc62cf18fa4f08a9e6efae8fdac9ec383c5a1f3c757920125ac758429fe",
+        "body-1.bin": "aa077a4675f0d0dd3c9b0af39dc8cf6bcb348c3bf7d283478d4206ce30a5a0de",
+        "body-3.bin": "6febb76b50423331f66802a63bb43f04f99ce08129837015910eed43d0719268",
+        "body-10.bin": "4a959d998acd35cf88518a0f2f8ab99b42d9f69c7ce0d6a814df315eeac807ac"
+      }
+    },
+    "attribution": "BodyParts3D, \u00a9 The Database Center for Life Science licensed under CC Attribution 4.0 International",
+    "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+    "historicNotice": "Source OBJ comments retain a CC BY-SA 2.1 Japan notice; preserve this notice pending legal review."
+  },
+  "selectedPartIds": [
+    "FJ2810",
+    "FJ1446",
+    "FJ1446M",
+    "FJ1447",
+    "FJ1447M",
+    "FJ1464",
+    "FJ1464M"
+  ],
+  "model": {
+    "path": "assets/derived/bodyparts3d/sbla013-pectoralis.glb",
+    "bytes": 1251304,
+    "sha256": "eb153315295908627d1b09f2ffd8555c28378291492f39b1853677c09ca013be"
+  },
+  "coverageLimits": "Complete adult male body-surface silhouette with only six pectoralis major parts highlighted; no other selectable muscles or exercise motion."
+}

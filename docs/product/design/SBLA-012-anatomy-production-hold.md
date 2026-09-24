@@ -5,6 +5,12 @@ Recorded: **2026-09-17**
 Authority: **human owner**  
 Applies to: **SBLA-013, SBLA-014, and SBLA-015**
 
+On 2026-09-24, the owner separately directed a bounded model selection and
+integration preview. The seven-mesh BodyParts3D local review prototype is
+recorded in `../gates/SBLA-013-model-selection-decision.md`. This exception
+permits that specific unpublished study only; it does not release this hold,
+complete SBLA-013, or reorder SBLA-013 through SBLA-015 production acceptance.
+
 ## Decision
 
 The Science-Based Lifting Atlas will pursue an extremely high-quality body and

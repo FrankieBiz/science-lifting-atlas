@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 import EntitySpecimen from '../../components/sbla-012/EntitySpecimen.astro';
+import BodyModelViewer from '../../components/sbla-013/BodyModelViewer.astro';
 import PrototypeBanner from '../../components/sbla-012/PrototypeBanner.astro';
 import PrototypeClaim from '../../components/sbla-012/PrototypeClaim.astro';
 import AtlasLayout from '../../layouts/AtlasLayout.astro';
@@ -69,6 +70,8 @@ const detailClaimIds = allClaimIds.filter(
       name={muscle.name}
       descriptor="A reviewed anatomical structure traced from practical language to bounded claims and exact sources."
     />
+
+    {muscle.slug === 'pectoralis-major' && <BodyModelViewer />}
 
     <section class="entity-summary" aria-labelledby="summary-title">
       <header>

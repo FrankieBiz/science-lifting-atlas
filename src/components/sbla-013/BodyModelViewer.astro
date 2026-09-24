@@ -1,0 +1,148 @@
+---
+const modelUrl = '../../assets/sbla013-pectoralis.glb';
+---
+
+<section
+  class="body-model"
+  aria-labelledby="body-model-title"
+  data-model-url={modelUrl}
+>
+  <div class="body-model__intro">
+    <div>
+      <p class="micro-label">Anatomy study / 01</p>
+      <h2 id="body-model-title">See the structure in context.</h2>
+      <p>
+        Explore a complete body silhouette with the left and right pectoralis
+        major highlighted. The anatomical mesh is a visual reference; the
+        reviewed takeaways and sources are below.
+      </p>
+      <div class="body-model__key" aria-label="Model colors">
+        <span
+          ><i class="body-model__swatch body-model__swatch--muscle"
+          ></i>Pectoralis major</span
+        >
+        <span
+          ><i class="body-model__swatch body-model__swatch--body"></i>Body
+          surface</span
+        >
+      </div>
+      <button
+        class="button button--primary body-model__load"
+        type="button"
+        hidden
+      >
+        Explore body in 3D <span aria-hidden="true">↗</span>
+      </button>
+      <p class="body-model__hint">
+        Loads on request · drag to rotate · scroll or pinch to zoom
+      </p>
+      <p class="body-model__fallback">
+        The static anatomy image above and all evidence remain available if 3D
+        viewing is unavailable.
+      </p>
+    </div>
+    <div
+      class="body-model__stage"
+      aria-label="Interactive pectoralis major anatomy model"
+    >
+      <div class="body-model__placeholder" aria-hidden="true">
+        <span>3D</span>
+        <p>Move around the anatomy</p>
+      </div>
+      <p class="body-model__status" role="status" aria-live="polite"></p>
+      <button class="body-model__reset" type="button" hidden>Reset view</button>
+    </div>
+  </div>
+  <p class="body-model__credit">
+    BodyParts3D 4.0, © The Database Center for Life Science, CC BY 4.0.
+    Source-specific study model; additional source and historical license notes
+    are recorded in the asset manifest.
+  </p>
+</section>
+
+<script>
+  const initialOrbit = '0deg 75deg 4.8m';
+  const initialTarget = '0m 0.9m 0m';
+
+  for (const card of document.querySelectorAll<HTMLElement>('.body-model')) {
+    const loadButton =
+      card.querySelector<HTMLButtonElement>('.body-model__load');
+    const resetButton =
+      card.querySelector<HTMLButtonElement>('.body-model__reset');
+    const stage = card.querySelector<HTMLElement>('.body-model__stage');
+    const placeholder = card.querySelector<HTMLElement>(
+      '.body-model__placeholder',
+    );
+    const status = card.querySelector<HTMLElement>('.body-model__status');
+    const url = card.dataset.modelUrl;
+    if (
+      !loadButton ||
+      !resetButton ||
+      !stage ||
+      !placeholder ||
+      !status ||
+      !url
+    )
+      continue;
+    loadButton.hidden = false;
+
+    loadButton.addEventListener('click', async () => {
+      loadButton.disabled = true;
+      status.textContent = 'Loading 3D model…';
+      try {
+        await import('@google/model-viewer');
+        const viewer = document.createElement('model-viewer');
+        viewer.setAttribute(
+          'alt',
+          'An adult male body surface with both pectoralis major muscles highlighted in rose.',
+        );
+        viewer.setAttribute('camera-controls', '');
+        viewer.setAttribute('interaction-prompt', 'none');
+        viewer.setAttribute('camera-orbit', initialOrbit);
+        viewer.setAttribute('camera-target', initialTarget);
+        viewer.setAttribute('exposure', '0.8');
+        viewer.setAttribute('shadow-intensity', '0');
+        viewer.addEventListener(
+          'load',
+          () => {
+            status.textContent = '3D model ready';
+            resetButton.hidden = false;
+          },
+          { once: true },
+        );
+        viewer.addEventListener(
+          'error',
+          () => {
+            status.textContent =
+              'The 3D model could not load. The static anatomy image above remains available.';
+            loadButton.disabled = false;
+            viewer.remove();
+            placeholder.hidden = false;
+          },
+          { once: true },
+        );
+        placeholder.hidden = true;
+        stage.prepend(viewer);
+        viewer.setAttribute('src', url);
+        loadButton.hidden = true;
+        resetButton.addEventListener('click', async () => {
+          const controlledViewer = viewer as HTMLElement & {
+            cameraOrbit: string;
+            updateComplete: Promise<boolean>;
+            jumpCameraToGoal: () => void;
+          };
+          controlledViewer.cameraOrbit = '0deg 75deg 4.801m';
+          await controlledViewer.updateComplete;
+          controlledViewer.cameraOrbit = initialOrbit;
+          viewer.setAttribute('camera-target', initialTarget);
+          await controlledViewer.updateComplete;
+          controlledViewer.jumpCameraToGoal();
+        });
+      } catch {
+        status.textContent =
+          'The 3D viewer could not start. The static anatomy image above remains available.';
+        loadButton.disabled = false;
+      }
+    });
+  }
+</script>
