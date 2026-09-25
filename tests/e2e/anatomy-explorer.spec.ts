@@ -78,6 +78,10 @@ test('production excludes unpublished muscle guide claims from HTML', async ({
 }) => {
   const html = await (await request.get('/')).text();
   expect(html).not.toContain('data-muscle-guide');
+  expect(html).not.toContain('data-learning-check');
+  expect(html).not.toContain(
+    'Can these case reports establish an injury rate?',
+  );
   expect(html).not.toContain('claim-bench-press-pectoralis-rupture');
   expect(html).not.toContain('claim-pectoralis-major-adduction');
 });

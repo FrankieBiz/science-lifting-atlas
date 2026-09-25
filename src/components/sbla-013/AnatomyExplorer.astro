@@ -125,6 +125,24 @@ const entities = manifest.entities;
         aria-pressed="false"
         disabled>Isolate muscle</button
       >
+      <button
+        class="anatomy-explorer__isolate"
+        type="button"
+        data-focus
+        disabled>Focus muscle</button
+      >
+      <details class="anatomy-explorer__help">
+        <summary>How to explore</summary><p>
+          Select a muscle from the list or body. Focus brings it closer and
+          isolates it. Drag to rotate, or focus the model and use arrow keys.
+          Reset restores the full body.
+        </p>
+      </details>
+      {
+        prototypeEnabled && (
+          <a href="#muscle-guide-title">Open learning guide</a>
+        )
+      }
       {
         prototypeEnabled && (
           <a data-evidence-link href="./muscles/pectoralis-major/">
@@ -179,6 +197,8 @@ const entities = manifest.entities;
     const muscleMeshes: Mesh[] = [];
     let selected = 'pectoralis-major';
     let isolated = false;
+    let focused = false;
+    let focusSelection = () => {};
     let renderer: WebGLRenderer | undefined;
     let camera: PerspectiveCamera | undefined;
     let skin: Object3D | undefined;
@@ -205,6 +225,7 @@ const entities = manifest.entities;
       }
       if (skin) skin.visible = !isolated;
       isolateButton.setAttribute('aria-pressed', String(isolated));
+      if (focused) focusSelection();
       draw();
     };
     for (const group of groups) {
@@ -230,6 +251,7 @@ const entities = manifest.entities;
           count > 0;
       });
     const fallback = () => {
+      focused = false;
       ready = false;
       loading = false;
       canvas.hidden = true;
@@ -238,7 +260,7 @@ const entities = manifest.entities;
       status.textContent = 'Static view · interactive anatomy unavailable';
       root
         .querySelectorAll<HTMLButtonElement>(
-          '[data-view], [data-zoom], [data-reset], [data-isolate]',
+          '[data-view], [data-zoom], [data-reset], [data-isolate], [data-focus]',
         )
         .forEach((button) => {
           button.disabled = true;
@@ -326,6 +348,8 @@ const entities = manifest.entities;
         controls.addEventListener('change', draw);
         const reset = (back = false) => {
           if (!camera) return;
+          focused = false;
+          status.textContent = 'Ready to explore';
           camera.position.set(0, 0.88, back ? -3.45 : 3.45);
           controls.target.set(0, 0.86, 0);
           controls.update();
@@ -367,6 +391,46 @@ const entities = manifest.entities;
           isolated = false;
           updateSelection();
           reset();
+          status.textContent = 'Ready to explore';
+        };
+        focusSelection = () => {
+          if (!camera) return;
+          const group = groups.find((item) => item.id === selected)!;
+          const bounds = new THREE.Box3();
+          model.scene.updateMatrixWorld(true);
+          muscleMeshes
+            .filter((mesh) => group.parts.includes(mesh.userData.sourceId))
+            .forEach((mesh) => bounds.expandByObject(mesh));
+          if (bounds.isEmpty()) return;
+          const center = bounds.getCenter(new THREE.Vector3());
+          const size = bounds.getSize(new THREE.Vector3());
+          const halfFov = THREE.MathUtils.degToRad(camera.fov / 2);
+          const limitingFov = Math.min(
+            halfFov,
+            Math.atan(Math.tan(halfFov) * camera.aspect),
+          );
+          const distance = THREE.MathUtils.clamp(
+            (size.length() / 2 / Math.sin(limitingFov)) * 1.15,
+            controls.minDistance,
+            controls.maxDistance,
+          );
+          const direction = camera.position
+            .clone()
+            .sub(controls.target)
+            .normalize();
+          controls.target.copy(center);
+          camera.position.copy(center).addScaledVector(direction, distance);
+          controls.update();
+          root
+            .querySelectorAll('[data-view]')
+            .forEach((button) => button.setAttribute('aria-pressed', 'false'));
+          status.textContent = `Focused on ${group.name}${isolated ? ' · isolated view' : ''}`;
+          draw();
+        };
+        root.querySelector<HTMLButtonElement>('[data-focus]')!.onclick = () => {
+          focused = true;
+          isolated = true;
+          updateSelection();
         };
         isolateButton.onclick = () => {
           isolated = !isolated;
@@ -454,7 +518,7 @@ const entities = manifest.entities;
         status.textContent = 'Ready to explore';
         root
           .querySelectorAll<HTMLButtonElement>(
-            '[data-view], [data-zoom], [data-reset], [data-isolate]',
+            '[data-view], [data-zoom], [data-reset], [data-isolate], [data-focus]',
           )
           .forEach((button) => {
             button.disabled = false;

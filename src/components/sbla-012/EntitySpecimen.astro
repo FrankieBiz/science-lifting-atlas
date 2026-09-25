@@ -6,9 +6,10 @@ interface Props {
   index: string;
   name: string;
   descriptor: string;
+  definition?: string[];
 }
 
-const { category, name, descriptor } = Astro.props;
+const { category, name, descriptor, definition = [] } = Astro.props;
 const isExercise = category.toLowerCase() === 'exercise';
 ---
 
@@ -33,32 +34,16 @@ const isExercise = category.toLowerCase() === 'exercise';
   >
     {
       isExercise ? (
-        <svg
-          class="movement-diagram"
-          viewBox="0 0 640 520"
-          role="img"
-          aria-label="Abstract static movement-path diagram for the exercise record."
-        >
-          <path
-            class="movement-diagram__bench"
-            d="M150 356h340M216 356l-42 92M426 356l42 92"
-          />
-          <path
-            class="movement-diagram__body"
-            d="M229 324c44-56 138-66 190-10l-14 37H216Z"
-          />
-          <path
-            class="movement-diagram__bar"
-            d="M92 193h456M116 166v54M524 166v54"
-          />
-          <path
-            class="movement-diagram__arm"
-            d="M244 294l-45-91M396 294l45-91"
-          />
-          <path class="movement-diagram__path" d="M201 258V174M439 258V174" />
-          <circle cx="199" cy="202" r="8" />
-          <circle cx="441" cy="202" r="8" />
-        </svg>
+        <div class="exercise-definition-preview">
+          <p class="micro-label">What you’ll explore</p>
+          <h2>{name}</h2>
+          <ul>
+            {definition.slice(0, 3).map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <a href="#scope-title">Read the full movement definition</a>
+        </div>
       ) : (
         <>
           <img
@@ -74,8 +59,10 @@ const isExercise = category.toLowerCase() === 'exercise';
       {
         isExercise ? (
           <>
-            <span>Movement definition · static schematic</span>
-            <small>Direction only · not a technique prescription</small>
+            <span>Movement scope</span>
+            <small>
+              Read what this record includes before applying its findings
+            </small>
           </>
         ) : (
           <>
@@ -91,3 +78,37 @@ const isExercise = category.toLowerCase() === 'exercise';
     </figcaption>
   </figure>
 </header>
+
+<style>
+  .entity-hero__specimen--exercise {
+    height: auto;
+    min-height: 28rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .entity-hero__specimen--exercise figcaption {
+    position: static;
+    margin-top: auto;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .exercise-definition-preview {
+    padding: clamp(1.25rem, 4vw, 3rem);
+    align-self: center;
+    width: 100%;
+  }
+  .exercise-definition-preview h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.2;
+  }
+  .exercise-definition-preview ul {
+    padding-left: 1.25rem;
+    line-height: 1.7;
+  }
+  .exercise-definition-preview li {
+    margin-block: 1rem;
+  }
+  .exercise-definition-preview a {
+    text-underline-offset: 0.25em;
+  }
+</style>

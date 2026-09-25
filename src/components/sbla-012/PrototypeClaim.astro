@@ -1,4 +1,5 @@
 ---
+import LearningCheck from '../sbla-013/LearningCheck.astro';
 import { getCollection } from 'astro:content';
 
 import {
@@ -93,4 +94,9 @@ const certaintyLabel =
       </div>
     </div>
   </details>
+  <LearningCheck
+    claimId={claim.id}
+    statement={claim.plainLanguage}
+    qualifiers={claim.qualifiers}
+  />
 </article>

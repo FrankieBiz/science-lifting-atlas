@@ -67,8 +67,12 @@ const injury = claims.find(
       This muscle’s detailed guide is not yet available. You can still explore
       its shape and position in the model.
     </p><p>Choose Pectoralis major to preview the first evidence guide.</p>
+    <button type="button" data-guide-return hidden
+      >Learn about Pectoralis major</button
+    >
   </div>
   <div data-guide-content>
+    <p data-guide-step class="muscle-guide__step" hidden>Section 1 of 4</p>
     <nav
       class="muscle-guide__tabs"
       aria-label="Muscle guide sections"
@@ -109,6 +113,18 @@ const injury = claims.find(
         </section>
       ))
     }
+    <nav
+      class="muscle-guide__sequence"
+      aria-label="Learning sequence"
+      data-guide-sequence
+      hidden
+    >
+      <button type="button" data-guide-previous>Previous section</button>
+      <button type="button" data-guide-next>Next section</button>
+      <a data-guide-finish href="./muscles/pectoralis-major/" hidden
+        >Continue to the full muscle record</a
+      >
+    </nav>
   </div>
 </section>
 <script>
@@ -124,13 +140,53 @@ const injury = claims.find(
     const empty = guide.querySelector<HTMLElement>('[data-guide-empty]')!;
     const heading = guide.querySelector<HTMLElement>('[data-guide-name]')!;
     guide.querySelector('[data-guide-tabs]')!.setAttribute('role', 'tablist');
+    let currentSection = 0;
+    const step = guide.querySelector<HTMLElement>('[data-guide-step]')!;
+    const previous = guide.querySelector<HTMLButtonElement>(
+      '[data-guide-previous]',
+    )!;
+    const next = guide.querySelector<HTMLButtonElement>('[data-guide-next]')!;
+    const finish = guide.querySelector<HTMLElement>('[data-guide-finish]')!;
+    step.hidden = false;
+    guide.querySelector<HTMLElement>('[data-guide-sequence]')!.hidden = false;
+    const returnButton = guide.querySelector<HTMLButtonElement>(
+      '[data-guide-return]',
+    )!;
+    returnButton.hidden = false;
+    returnButton.addEventListener('click', () => {
+      const search = document.querySelector<HTMLInputElement>(
+        '.anatomy-explorer input[type="search"]',
+      );
+      if (search) {
+        search.value = '';
+        search.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+
+      document
+        .querySelector<HTMLButtonElement>('[data-muscle="pectoralis-major"]')
+        ?.click();
+      heading.focus();
+    });
     const activate = (index: number) => {
+      currentSection = index;
+      step.textContent = `Section ${index + 1} of ${tabs.length}`;
+      previous.disabled = index === 0;
+      next.hidden = index === tabs.length - 1;
+      finish.hidden = !next.hidden;
       tabs.forEach((tab, i) => {
         tab.setAttribute('aria-selected', String(index === i));
         tab.tabIndex = index === i ? 0 : -1;
         panels[i]!.hidden = index !== i;
       });
     };
+    previous.addEventListener('click', () => {
+      activate(Math.max(0, currentSection - 1));
+      panels[currentSection]!.focus();
+    });
+    next.addEventListener('click', () => {
+      activate(Math.min(tabs.length - 1, currentSection + 1));
+      panels[currentSection]!.focus();
+    });
     tabs.forEach((tab, index) => {
       tab.setAttribute('role', 'tab');
       tab.setAttribute('aria-controls', panels[index]!.id);

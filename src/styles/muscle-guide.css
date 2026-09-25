@@ -126,3 +126,34 @@
   margin-bottom: 1.5rem;
   line-height: 1.65;
 }
+
+.muscle-guide__step {
+  font-size: 0.8rem;
+  color: #655f55;
+}
+.muscle-guide__sequence {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #ded8ce;
+}
+.muscle-guide__sequence button,
+.muscle-guide__sequence a,
+[data-guide-return] {
+  padding: 0.75rem 1rem;
+  border: 1px solid #b9b2a8;
+  border-radius: 0.6rem;
+  background: white;
+  color: #282621;
+  min-height: 44px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.muscle-guide__sequence button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

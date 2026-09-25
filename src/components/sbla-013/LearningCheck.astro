@@ -1,0 +1,132 @@
+---
+import { learningChecks } from '../../lib/presentation/learning-checks';
+interface Props {
+  claimId: string;
+  statement: string;
+  qualifiers: string[];
+}
+const { claimId, statement, qualifiers } = Astro.props;
+const check = learningChecks[claimId];
+const feedback = check
+  ? check.qualifier === undefined
+    ? statement
+    : qualifiers[check.qualifier]
+  : '';
+---
+
+{
+  check && (
+    <section
+      class="learning-check"
+      data-learning-check
+      data-answer={check.answer}
+      aria-label="Check your understanding"
+    >
+      <p class="learning-check__label">Check your understanding</p>
+      <h4>{check.question}</h4>
+      <div class="learning-check__options" data-check-options hidden>
+        {check.options.map((option, index) => (
+          <button type="button" data-check-option={index} aria-pressed="false">
+            {option}
+          </button>
+        ))}
+      </div>
+      <p data-check-feedback role="status" class="learning-check__feedback" />
+      <details data-check-reveal>
+        <summary>Reveal answer</summary>
+        <div data-static-answer>
+          <>
+            <p>
+              <strong>{check.options[check.answer]}</strong>
+            </p>
+            <p>{feedback}</p>
+            <p>Open “Inspect evidence” above to read the sources and limits.</p>
+          </>
+        </div>
+      </details>
+    </section>
+  )
+}
+<script>
+  document
+    .querySelectorAll<HTMLElement>('[data-learning-check]')
+    .forEach((check) => {
+      const options = [
+        ...check.querySelectorAll<HTMLButtonElement>('[data-check-option]'),
+      ];
+      check.querySelector<HTMLElement>('[data-check-options]')!.hidden = false;
+      const feedback = check.querySelector<HTMLElement>(
+        '[data-check-feedback]',
+      )!;
+      const reveal = check.querySelector<HTMLDetailsElement>(
+        '[data-check-reveal]',
+      )!;
+      options.forEach((button) =>
+        button.addEventListener('click', () => {
+          const correct = button.dataset.checkOption === check.dataset.answer;
+          options.forEach((option) =>
+            option.setAttribute('aria-pressed', String(option === button)),
+          );
+          feedback.textContent = correct
+            ? 'Correct. Read the explanation below.'
+            : 'Try another answer, or reveal the explanation below.';
+          check.dataset.result = correct ? 'correct' : 'retry';
+          reveal.open = correct;
+        }),
+      );
+    });
+</script>
+<style is:global>
+  .learning-check {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: #edf3f8;
+    color: #203b50;
+  }
+  .learning-check__label {
+    font-size: 0.75rem;
+    font-weight: 650;
+    margin: 0 0 0.75rem;
+  }
+  .learning-check h4 {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+  .learning-check__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .learning-check [hidden] {
+    display: none !important;
+  }
+  .learning-check button {
+    min-height: 44px;
+    border: 1px solid #9cacb8;
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    background: white;
+    color: #203b50;
+    font: inherit;
+    cursor: pointer;
+  }
+  .learning-check button[aria-pressed='true'] {
+    background: #203b50;
+    color: white;
+  }
+  .learning-check :focus-visible {
+    outline: 3px solid #31678b;
+    outline-offset: 3px;
+  }
+  .learning-check__feedback {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .learning-check details {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+</style>
