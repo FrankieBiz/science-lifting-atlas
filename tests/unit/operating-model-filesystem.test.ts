@@ -15,6 +15,8 @@ beforeAll(async () => {
   const excludedRoots = new Set([
     '.astro',
     '.git',
+    '.playwright-mcp',
+    '.pnpm-store',
     '.worktrees',
     'coverage',
     'dist',

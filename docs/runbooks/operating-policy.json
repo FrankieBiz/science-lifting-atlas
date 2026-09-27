@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "authority": {
     "merge": "codex",
     "staleClaimClearance": "codex",
@@ -12,7 +12,8 @@
     "restrictedRoleDiffBase": "reviewed-artifact-commit",
     "claimRecordLocation": "codex-coordination-branch",
     "reviewClaimCloses": "immutable-review-report-commit",
-    "failedReviewOpens": "bounded-remediation-claim"
+    "failedReviewOpens": "bounded-remediation-claim",
+    "handoffMachineFacts": "generated-by-pnpm-handoff"
   },
   "qualityControl": {
     "defaultIndependentReviewCount": 1,
@@ -22,13 +23,37 @@
     "additionalPreReviewRequiresNamedMaterialRisk": true,
     "failedReviewAction": "bounded-remediation-then-full-artifact-recheck",
     "progressUnit": "accepted-capabilities-and-user-journey-proof",
-    "overallPercentAllowedAfter": "SBLA-017-observed-throughput-and-owner-approved-estimate"
+    "overallPercentAllowedAfter": "SBLA-017-observed-throughput-and-owner-approved-estimate",
+    "reviewTiers": {
+      "evidence": "every-claim-rounds-continue-while-science-findings-open",
+      "publish": "one-review-per-change-set-round-cap",
+      "build": "automated-checks-and-milestone-gate-review"
+    },
+    "nonEvidenceRoundCap": 2,
+    "roundCapExceededAction": "owner-written-accept-narrow-or-drop",
+    "lintBypassFindingSeverity": "minor-with-fixture-unless-approved-content-exploits-it",
+    "evidencePipelineTiers": {
+      "descriptive": "two-authoritative-sources-locators-citation-entailment",
+      "mechanistic": "saved-targeted-search-extraction-entailment-contradiction-search",
+      "outcome": "full-section-9-8-pipeline"
+    }
   },
   "roleIdentity": {
     "claudeResearchAccount": "A",
     "claudeReviewAccount": "B",
     "requiresDistinctClaudeTeamAccounts": true,
-    "sameAccountSessionSatisfiesReview": false
+    "sameAccountSessionSatisfiesReview": false,
+    "codexRoleMayBeFilledBy": "codex-or-claude-code-session-not-authoring-or-reviewing-the-artifact",
+    "claudeRoleEnvironment": "repository-capable-claude-code-worktree"
+  },
+  "delivery": {
+    "lanes": {
+      "product": ["SBLA-012", "SBLA-016"],
+      "evidence": ["SBLA-017", "SBLA-018", "SBLA-019"],
+      "anatomy3d": ["SBLA-013", "SBLA-014", "SBLA-015"]
+    },
+    "authoritativeAnatomyPath": "2d",
+    "betaGateMayFollow": "SBLA-018"
   },
   "writeBoundaries": {
     "codex": null,

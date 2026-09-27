@@ -11,7 +11,7 @@
 **Recommended stack:** pnpm workspace; Astro with TypeScript; React islands for complex interaction; Three.js through React Three Fiber for 3D; Zod-validated YAML/MDX content; build-time graph generation; Pagefind for static search; Vitest, Playwright, axe-core, and Lighthouse CI; GitHub Actions; Cloudflare Pages plus R2 or an equivalent free-tier static host/object store.
 
 **Planning date:** 2026-08-29  
-**Project status:** Planning approved; implementation not started  
+**Project status:** SBLA-001–SBLA-011 accepted; parallel delivery under ADR 0007 from SBLA-012 (2026-09-27)  
 **Primary audience:** Serious lifters  
 **Secondary audience:** Coaches and personal trainers  
 **Business model at launch:** Free; no monetization  
@@ -650,6 +650,19 @@ Each stage writes a separate artifact. A downstream stage may not overwrite upst
 12. **Publish:** Codex integrates records only after all gates pass.
 13. **Monitor:** Re-run searches and status checks on schedule.
 
+**Claim-tier pipeline (ADR 0007 D4, owner-approved 2026-09-27).** Stages 2–7
+scale with claim risk:
+
+| Claim types | Stages required |
+|---|---|
+| `anatomy`/`function` at `established-descriptive-fact` certainty | Two or more authoritative sources, exact locators, then stages 8–13. No systematic search or screening. |
+| `exercise-mechanics`, `acute-response`, `safety-context` | Saved targeted search, extraction, contradiction search, then stages 8–13. |
+| `longitudinal-adaptation`, comparative claims, and any claim a practical takeaway rests on | All thirteen stages. |
+
+Every claim still receives independent citation-entailment review. A claim
+contradicted during review moves to the full pipeline. Search and screening
+records are kept once per wave and topic and reused across records.
+
 ### 9.9 Full-text and copyright rules
 
 - Metadata may be stored where provider terms permit.
@@ -907,7 +920,6 @@ Astro content collections support schema validation and references and can gener
 ```text
 science-lifting-atlas/
 ├── AGENTS.md
-├── CLAUDE.md
 ├── README.md
 ├── package.json
 ├── pnpm-workspace.yaml
@@ -1175,7 +1187,7 @@ A muscle or exercise page is publishable only when:
 - Practical takeaways match the certainty level.
 - Uncertainty and limitations are visible.
 - Related entity links are valid.
-- 3D mapping or accessible visual fallback exists.
+- 3D mapping or accessible visual fallback exists. The authoritative 2D plate satisfies this requirement (Gate A, ADR 0007 D5); 3D is never a publication prerequisite.
 - Mobile, keyboard, and screen-reader flows pass.
 - Page archetype visual regression is approved.
 - Performance budgets pass.
@@ -1327,6 +1339,18 @@ Once that required review passes, do not add
 review layers unless a newly discovered material risk changes the acceptance
 scope.
 
+**Risk tiers (ADR 0007, owner-approved 2026-09-27):** Evidence-tier work
+(claims, citations, certainty, syntheses) reviews every claim, and rounds
+continue while science findings remain open. Publish-tier code (gates,
+manifests, validators, claim components) receives one review per change set.
+Build-tier work (UI, tooling, CI, docs, runbooks, asset pipeline) relies on
+automated checks and builder self-check and is reviewed at owner Gates B, C, and
+E. Outside the evidence tier there is no third review round: unresolved Critical
+or Important findings after the recheck go to the owner to accept with recorded
+risk, narrow, or drop. Automated prose lints are safety nets; a newly found
+bypass wording is a Minor finding with a fixture unless approved content
+exploits it.
+
 **Progress protocol (owner-approved direction 2026-09-05):** Report accepted §18 queue
 gates, the demonstrated state of the central user journey, the current shippable
 capability, blockers, and the next proof. Do not report a single overall product
@@ -1397,7 +1421,7 @@ Complete this gate before SBLA-008. Do not assume a Claude Team web account has 
 
 **Web/chat-only fallback:** Codex creates a versioned task bundle containing the master plan, schemas, assigned artifacts, source metadata, and only those full-text files whose license/access terms and the owner's authorization permit upload to that service. The owner uploads the bundle and downloads Claude's returned Markdown/YAML files. Codex places returned files into permitted draft/review paths, records their original checksums, validates them as untrusted input, and commits them. If restricted full text cannot lawfully be uploaded, that Claude account may not review claims dependent on it; use a repository/local environment with lawful access or exclude/narrow the claim. Never paste secrets, Git credentials, private keys, or deployment tokens into chat.
 
-Record environment type, Git remote/credential method, source-transfer method, allowed directories, readiness result, and fallback in `docs/runbooks/claude-environments.md`. SBLA-008 is blocked until both Claude roles pass or the fallback is demonstrated end-to-end.
+Record environment type, Git remote/credential method, source-transfer method, allowed directories, readiness result, and fallback in the environment record in `AGENTS.md` (moved there from the retired `docs/runbooks/claude-environments.md`). SBLA-008 is blocked until both Claude roles pass or the fallback is demonstrated end-to-end.
 
 ---
 
@@ -1611,6 +1635,11 @@ Use pectoralis major plus a flat press and a cable/fly variation as the represen
 
 Use small batches. Never produce the entire catalog before review.
 
+Under ADR 0007, each wave applies the §9.8 claim-tier pipeline, reuses search
+and screening records across the wave's records, and publishes with the
+authoritative 2D plates without waiting for the 3D lane. A public beta (Gate E)
+may follow Wave 1.
+
 **Wave order:**
 
 1. Chest and shoulders.
@@ -1758,7 +1787,7 @@ The owner should make only the following high-leverage decisions:
 2. **Gate B — Vertical slice:** Approve the muscle/exercise/evidence experience before scaling content.
 3. **Gate C — Visual system:** Approve the Clinical Cinematic design on desktop and mobile.
 4. **Gate D — Scope:** Approve final muscle and exercise catalog after production estimates are measured.
-5. **Gate E — Beta:** Approve release candidate after science, accessibility, performance, license, and UX audits.
+5. **Gate E — Beta:** Approve a public beta after science, accessibility, performance, license, and UX audits. Under ADR 0007 D6 the beta may follow SBLA-018 (Wave 1) with the product lane complete and 3D optional; later waves ship as owner-approved increments.
 6. **Gate F — Launch:** Approve public deployment and methodology disclosures.
 
 Every gate packet should fit on one page and contain: decision, evidence, screenshots/links, risks, cost, recommendation, and explicit yes/no choices.
@@ -1767,7 +1796,7 @@ Every gate packet should fit on one page and contain: decision, evidence, screen
 
 ## 18. First 20 tasks in exact order
 
-This manifest is the authoritative operational queue and resolves any ambiguity in the narrative phases. Do not skip ahead. Every task starts from the reviewed commit named by its dependency and ends with the standard handoff packet. `pnpm verify` is required wherever a repository implementation exists; a failed required check blocks handoff.
+This manifest is the authoritative operational queue and resolves any ambiguity in the narrative phases. From SBLA-012 the queue runs in three lanes (ADR 0007 D5): Product (012 → 016), Evidence (017 → 018 → 019), and 3D (013 → 014 → 015). A task may start once the dependencies listed in its row are accepted; do not skip ahead within a lane. The Codex role may be held by Codex or by a Claude Code session that neither authored nor reviews the artifact (ADR 0007 D8). Every task starts from the reviewed commit named by its dependency and ends with the standard handoff packet. `pnpm verify` is required wherever a repository implementation exists; a failed required check blocks handoff.
 
 | ID | Owner → reviewer/approver | Depends on | Required outputs | Verification and pass condition |
 |---|---|---|---|---|
@@ -1786,11 +1815,11 @@ This manifest is the authoritative operational queue and resolves any ambiguity 
 | SBLA-013 | Codex → Claude Review | 006,012 | Production Blender/glTF/media pipeline and versioned manifests | Deterministic checksums/mapping; budgets pass; `pnpm test:performance` |
 | SBLA-014 | Codex → Claude Review | 013 | Anatomy-engine reducer/state tests, scene, selection, layers, URL state, semantic tree | Unit/E2E tests pass; mouse/touch/keyboard parity; `pnpm verify` |
 | SBLA-015 | Codex → Claude Review → Owner | 014 | Complete accessible 3D vertical slice plus no-WebGL/low-power fallbacks | Full journey passes E2E, AA matrix, visual and performance gates; owner approves |
-| SBLA-016 | Codex → Claude Review | 011,015 | Search, synonyms/disambiguation, related graph traversal, two-entity comparison | Search query suite and comparison citation tests pass; `pnpm verify` |
-| SBLA-017 | Claude Research → Claude Review → Owner | 010,015,016 | Final catalog/coverage matrix, observed throughput, revised effort estimate | Every record justified; owner approves batch size and scope |
-| SBLA-018 | Claude Research → Claude Review; Codex integrates; Owner approves batch | 017 | Content Wave 1 complete through every evidence gate plus exact batch manifest | Every claim reviewed; owner-approved checksums recorded; pages pass DoD; `pnpm evidence:status && pnpm verify` |
+| SBLA-016 | Codex → Claude Review | 011,012 | Search, synonyms/disambiguation, related graph traversal, two-entity comparison | Search query suite and comparison citation tests pass; `pnpm verify` |
+| SBLA-017 | Claude Research → Claude Review → Owner | 010 | Final catalog/coverage matrix, observed throughput, revised effort estimate | Every record justified; owner approves batch size and scope |
+| SBLA-018 | Claude Research → Claude Review; Codex integrates; Owner approves batch | 012,017 | Content Wave 1 complete through every evidence gate plus exact batch manifest | Every claim reviewed; owner-approved checksums recorded; pages pass DoD; `pnpm evidence:status && pnpm verify` |
 | SBLA-019 | Same role chain as 018 | 018 | Remaining owner-approved waves, each independently committed and reviewed | Each exact batch manifest is owner-approved before publication; no placeholders; full coverage report |
-| SBLA-020 | Codex + Claude Review → Owner | 019 | Release candidate, conformance/license/science/security/performance reports, emergency drill, rollback artifact | All Section 12.4 and Section 19 mandatory gates pass; owner signs go/no-go |
+| SBLA-020 | Codex + Claude Review → Owner | 016,019; 015 if 3D ships | Release candidate, conformance/license/science/security/performance reports, emergency drill, rollback artifact | All Section 12.4 and Section 19 mandatory gates pass; owner signs go/no-go |
 
 **Handoff destinations:** Builder tasks end in `reviews/releases/<task-id>-handoff.md`; evidence tasks end in `research/packets/<task-id>-handoff.md`; review tasks end in their discipline-specific `reviews/` path and cite the exact commit/checksum reviewed. The next task may start only from the commit named in the approved prior handoff.
 

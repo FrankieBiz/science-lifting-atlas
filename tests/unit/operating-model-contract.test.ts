@@ -22,7 +22,7 @@ function completeDocFileContents() {
   contents.set(
     'docs/runbooks/operating-policy.json',
     JSON.stringify({
-      schemaVersion: 1,
+      schemaVersion: 2,
       authority: {
         merge: 'codex',
         staleClaimClearance: 'codex',
@@ -36,6 +36,7 @@ function completeDocFileContents() {
         claimRecordLocation: 'codex-coordination-branch',
         reviewClaimCloses: 'immutable-review-report-commit',
         failedReviewOpens: 'bounded-remediation-claim',
+        handoffMachineFacts: 'generated-by-pnpm-handoff',
       },
       qualityControl: {
         defaultIndependentReviewCount: 1,
@@ -47,12 +48,39 @@ function completeDocFileContents() {
         progressUnit: 'accepted-capabilities-and-user-journey-proof',
         overallPercentAllowedAfter:
           'SBLA-017-observed-throughput-and-owner-approved-estimate',
+        reviewTiers: {
+          evidence: 'every-claim-rounds-continue-while-science-findings-open',
+          publish: 'one-review-per-change-set-round-cap',
+          build: 'automated-checks-and-milestone-gate-review',
+        },
+        nonEvidenceRoundCap: 2,
+        roundCapExceededAction: 'owner-written-accept-narrow-or-drop',
+        lintBypassFindingSeverity:
+          'minor-with-fixture-unless-approved-content-exploits-it',
+        evidencePipelineTiers: {
+          descriptive: 'two-authoritative-sources-locators-citation-entailment',
+          mechanistic:
+            'saved-targeted-search-extraction-entailment-contradiction-search',
+          outcome: 'full-section-9-8-pipeline',
+        },
       },
       roleIdentity: {
         claudeResearchAccount: 'A',
         claudeReviewAccount: 'B',
         requiresDistinctClaudeTeamAccounts: true,
         sameAccountSessionSatisfiesReview: false,
+        codexRoleMayBeFilledBy:
+          'codex-or-claude-code-session-not-authoring-or-reviewing-the-artifact',
+        claudeRoleEnvironment: 'repository-capable-claude-code-worktree',
+      },
+      delivery: {
+        lanes: {
+          product: ['SBLA-012', 'SBLA-016'],
+          evidence: ['SBLA-017', 'SBLA-018', 'SBLA-019'],
+          anatomy3d: ['SBLA-013', 'SBLA-014', 'SBLA-015'],
+        },
+        authoritativeAnatomyPath: '2d',
+        betaGateMayFollow: 'SBLA-018',
       },
       writeBoundaries: {
         codex: null,
@@ -70,14 +98,13 @@ describe('agent operating-model contract', () => {
     expect(REQUIRED_OPERATING_PATHS).toEqual(
       expect.arrayContaining([
         'AGENTS.md',
-        'CLAUDE.md',
         'docs/runbooks/handoff-template.md',
         'docs/runbooks/current-work.md',
         'docs/runbooks/branch-and-worktree.md',
-        'docs/runbooks/claude-environments.md',
         'docs/runbooks/operating-policy.json',
         'docs/product/master-plan.md',
         'docs/adr/0006-execution-quality-and-validation-gates.md',
+        'docs/adr/0007-throughput-and-parallel-delivery.md',
       ]),
     );
   });
@@ -89,12 +116,11 @@ describe('agent operating-model contract', () => {
     });
 
     expect(issues).toContain('missing required operating path: AGENTS.md');
-    expect(issues).toContain('missing required operating path: CLAUDE.md');
     expect(issues).toContain(
       'missing required operating path: docs/runbooks/current-work.md',
     );
     expect(issues).toContain(
-      'missing required operating path: docs/runbooks/claude-environments.md',
+      'missing required operating path: docs/adr/0007-throughput-and-parallel-delivery.md',
     );
   });
 
@@ -286,10 +312,6 @@ describe('agent operating-model contract', () => {
       'AGENTS.md',
       `One independent acceptance review is the default\nSBLA-017\n${threshold}`,
     );
-    fileContents.set(
-      'CLAUDE.md',
-      `one independent acceptance review\n${threshold}`,
-    );
     fileContents.set('docs/product/master-plan.md', threshold);
     fileContents.set(
       'docs/adr/0006-execution-quality-and-validation-gates.md',
@@ -298,7 +320,6 @@ describe('agent operating-model contract', () => {
 
     for (const filePath of [
       'AGENTS.md',
-      'CLAUDE.md',
       'docs/product/master-plan.md',
       'docs/adr/0006-execution-quality-and-validation-gates.md',
     ]) {
@@ -384,6 +405,81 @@ describe('agent operating-model contract', () => {
       }),
     ).toContain(
       'operating document contains prohibited content: docs/runbooks/current-work.md -> claim stays open until independent review',
+    );
+  });
+
+  it('enforces the ADR 0007 round cap and risk tiers as structured policy', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.qualityControl.nonEvidenceRoundCap = 5;
+    policy.qualityControl.reviewTiers.evidence = 'sampled';
+    policy.qualityControl.lintBypassFindingSeverity = 'important';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toEqual(
+      expect.arrayContaining([
+        'operating policy qualityControl.nonEvidenceRoundCap must equal 2',
+        'operating policy qualityControl.reviewTiers.evidence must equal every-claim-rounds-continue-while-science-findings-open',
+        'operating policy qualityControl.lintBypassFindingSeverity must equal minor-with-fixture-unless-approved-content-exploits-it',
+      ]),
+    );
+  });
+
+  it('keeps 3D off the content critical path', () => {
+    const fileContents = completeDocFileContents();
+    const policy = JSON.parse(
+      fileContents.get('docs/runbooks/operating-policy.json') ?? '{}',
+    );
+    policy.delivery.lanes.evidence = ['SBLA-015', 'SBLA-017', 'SBLA-018'];
+    policy.delivery.authoritativeAnatomyPath = '3d';
+    fileContents.set(
+      'docs/runbooks/operating-policy.json',
+      JSON.stringify(policy),
+    );
+
+    expect(
+      validateOperatingModel({
+        existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+        fileContents,
+      }),
+    ).toEqual(
+      expect.arrayContaining([
+        'operating policy delivery.lanes.evidence must equal ["SBLA-017","SBLA-018","SBLA-019"]',
+        'operating policy delivery.authoritativeAnatomyPath must equal 2d',
+      ]),
+    );
+  });
+
+  it('rejects an ADR 0007 that is not accepted or drops every-claim review', () => {
+    const fileContents = completeDocFileContents();
+    const adrPath = 'docs/adr/0007-throughput-and-parallel-delivery.md';
+    fileContents.set(
+      adrPath,
+      (fileContents.get(adrPath) ?? '')
+        .replace('- Status: Accepted', '- Status: Proposed')
+        .replace('Every claim is still independently checked.', ''),
+    );
+
+    const issues = validateOperatingModel({
+      existingPaths: new Set(REQUIRED_OPERATING_PATHS),
+      fileContents,
+    });
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        `operating document missing required content: ${adrPath} -> - Status: Accepted`,
+        `operating document missing required content: ${adrPath} -> Every claim is still independently checked.`,
+      ]),
     );
   });
 });

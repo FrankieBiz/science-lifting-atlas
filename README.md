@@ -2,15 +2,18 @@
 
 An evidence-first, static web atlas for resistance-training anatomy, exercise mechanics, and claim-level source inspection.
 
-**SBLA-001 through SBLA-006 are accepted.** Distinct Account-B Claude Review
-passed the exact SBLA-006 candidate with zero Critical and zero Important
-findings on 2026-09-09. The repository now contains the verified static shell,
-stable command contract, license inventory, lawful checksum-pinned anatomy
-sample, deterministic asset spike, complete BodyParts3D candidate benchmark,
-mesh mapping, feasibility evidence, and weighted scorecard, but no scientific
-content or public evidence claim. Gate A records an accepted 2D-authoritative
-hybrid with bounded BodyParts3D enhancement and no purchase; production entity
-and evidence schemas begin in SBLA-007. The canonical product and execution requirements live in
+**SBLA-001 through SBLA-011 are accepted.** The repository contains the
+static shell, command contract, license inventory, the Gate A 2D-authoritative
+anatomy decision, validated evidence schemas, and one reviewed evidence slice:
+pectoralis major, barbell flat bench press, and standing cable fly, with 23
+approved claims and 68 sources compiled into a deterministic evidence graph.
+Those claims are not yet published; publication needs owner approval of an
+exact batch manifest.
+
+From SBLA-012 onward, work follows
+[ADR 0007](docs/adr/0007-throughput-and-parallel-delivery.md): risk-tiered
+review and three parallel lanes (Product, Evidence, 3D). The canonical product
+and execution requirements live in
 [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
 ## Prerequisites
@@ -49,40 +52,14 @@ pnpm exec playwright install --with-deps chromium
 | `pnpm test:a11y`        | Check the executable foundation accessibility contract. Later tasks expand this into the full accessibility matrix.                                                                      |
 | `pnpm test:visual`      | Check deterministic viewport definitions. Later tasks add screenshot baselines.                                                                                                          |
 | `pnpm test:performance` | Check that the master-plan budgets are represented. Later tasks measure actual bundles and assets.                                                                                       |
-| `pnpm evidence:status`  | Report zero sources in foundation mode. It fails closed if source records appear before SBLA-007/SBLA-011 implement their schemas and status checks.                                     |
+| `pnpm evidence:status`  | Report identifier, retraction, and freshness status for every source record; fails closed on a stale or retracted source.                                                                |
+| `pnpm handoff`          | Print or `--write` the machine-generated handoff facts: base, commit, tree, changed paths, and real `--run` check results.                                                               |
 
 ## Current boundaries
 
-- Do not add scientific or anatomy records yet; foundation validators intentionally reject them.
-- Agent roles, branch/worktree rules, the current-work ledger, the handoff template, and Claude environment readiness are defined in [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md), and [`docs/runbooks/`](docs/runbooks/). The canonical structured policy is [`docs/runbooks/operating-policy.json`](docs/runbooks/operating-policy.json). Claim your task in [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md) before editing; restricted Claude roles ask Codex to record their exact-path claim.
-- Both Claude accounts passed the readiness test recorded in [`docs/runbooks/claude-environments.md`](docs/runbooks/claude-environments.md); SBLA-002 no longer blocks SBLA-008.
-- SBLA-003 establishes the accepted architecture/provider ADRs, dated free-tier
-  model, and same-artifact second-host portability proof. Account-B Round 1 is preserved at
-  `reviews/releases/SBLA-003-r1.md`, with its same-session late finding preserved
-  separately at `reviews/releases/SBLA-003-r1-addendum.md`. The combined six
-  Important and six Minor findings have bounded, freshly verified repairs. The
-  final pre-review `<noscript>` fallback observation is also repaired and
-  verified. Round 2 is preserved at `reviews/releases/SBLA-003-r2.md` and
-  returned PASS with zero Critical and zero Important findings; owner approval
-  was recorded on 2026-09-05.
-- SBLA-004's accepted license inventory, lawful sample, coverage evaluator, and
-  deterministic spike are recorded in `reviews/releases/SBLA-004-handoff.md`.
-  Account-B Round 2 is preserved at `reviews/releases/SBLA-004-r2.md` and
-  returned PASS with zero Critical and zero Important findings.
-- SBLA-005's accepted benchmark is recorded in
-  `reviews/releases/SBLA-005-handoff.md`; its measured 73/100 remains a
-  recommendation, not an asset selection. Account-B Round 1 is preserved at
-  `reviews/releases/SBLA-005-r1.md` and returned PASS with zero Critical and
-  zero Important findings.
-- SBLA-006's owner-delegated Gate A candidate approves original,
-  evidence-reviewed 2D/vector and text as the authoritative path for all 28
-  targets, with BodyParts3D 4.0 limited to optional 3D enhancement for 23 mapped
-  targets. The five missing targets remain 2D-only, cost is $0, and no
-  commercial asset is purchased. See
-  `docs/product/gates/SBLA-006-asset-decision.md`. Account-B Round 2 is
-  preserved at `reviews/releases/SBLA-006-r2.md` and returned PASS with zero
-  Critical and zero Important findings after 47 adversarial mutations and a
-  live primary-license check.
-- SBLA-007 and SBLA-011 replace foundation-mode adapters with validated evidence/content/graph pipelines.
+- Publish nothing without an owner-approved batch manifest; the claim components fail closed.
+- Agent roles, review tiers, Claude environments, branch/worktree rules, the current-work ledger, and the handoff template are defined in [`AGENTS.md`](AGENTS.md) and [`docs/runbooks/`](docs/runbooks/). The canonical structured policy is [`docs/runbooks/operating-policy.json`](docs/runbooks/operating-policy.json). Claim your task in [`docs/runbooks/current-work.md`](docs/runbooks/current-work.md) before editing; the session holding the Codex role records restricted-role claims.
+- Generate handoff facts with `pnpm handoff <task-id> --base <commit>`.
+- Accepted history and every review round are preserved under [`reviews/`](reviews/); decisions are in [`docs/adr/`](docs/adr/) and [`docs/product/gates/`](docs/product/gates/).
 
 Work follows the authoritative SBLA-001–SBLA-020 queue in master plan §18.

@@ -15,15 +15,27 @@ Read before doing anything:
 
 1. `docs/product/master-plan.md` — canonical product, evidence, and execution
    plan. Section 18 is the authoritative task queue.
+   [`docs/adr/0007-throughput-and-parallel-delivery.md`](docs/adr/0007-throughput-and-parallel-delivery.md)
+   sets the current review tiers and delivery lanes.
 2. `docs/runbooks/current-work.md` — who owns what right now.
 3. `docs/runbooks/branch-and-worktree.md` — how to claim isolated work.
 4. The approved handoff for the task your task depends on.
 
 ## Repository stage
 
-The queue in master plan section 18 runs `SBLA-001` through `SBLA-020`. Work the
-queue in order. Do not skip ahead, and do not silently combine a queue item with
-later architecture, licensing, evidence-schema, anatomy, or homepage work.
+The queue in master plan section 18 runs `SBLA-001` through `SBLA-020`.
+`SBLA-001` through `SBLA-011` are accepted. From `SBLA-012` onward, work runs in
+three parallel lanes, each in its own order:
+
+| Lane     | Tasks, in order                      | Note                                                          |
+| -------- | ------------------------------------ | ------------------------------------------------------------- |
+| Product  | `SBLA-012` → `SBLA-016`              | Design system and page archetypes, then search and comparison |
+| Evidence | `SBLA-017` → `SBLA-018` → `SBLA-019` | Catalog, then content waves; publishes with 2D anatomy plates |
+| 3D       | `SBLA-013` → `SBLA-014` → `SBLA-015` | Optional enhancement; never blocks content publication        |
+
+A task starts only when its section 18 dependencies are accepted. Do not skip
+ahead within a lane, and do not silently combine a queue item with work another
+task owns.
 
 Foundation-stage validators intentionally reject content records until the
 schema tasks that own them are complete. A validator that rejects your new file
@@ -36,6 +48,11 @@ is usually correct; confirm the owning task before changing the validator.
 | Codex           | Architecture, schemas, tooling, UI, tests, CI, release, integration | Anything in the repository     | —                                                                              |
 | Claude Research | Research questions, extraction, synthesis, claim and page drafts    | `research/`, `content-drafts/` | Application code, schemas, published `content/`, CI, release state, `reviews/` |
 | Claude Review   | Independent citation, UX, and release audits                        | `reviews/`                     | Everything else, including the artifact under review                           |
+
+**Codex** names a role, not a vendor. The Codex role may be filled by Codex or
+by a Claude Code session on an account that neither authored nor reviews the
+artifact in question. Whichever session holds the role inherits every Codex
+authority and restriction below.
 
 Three rules follow from that table and are not negotiable:
 
@@ -59,6 +76,38 @@ merge concurrent edits without reading the diff.
    [`docs/runbooks/handoff-template.md`](docs/runbooks/handoff-template.md).
 6. Stop at the review gate. Do not self-accept.
 
+## Review tiers
+
+Review effort follows risk. See ADR 0007 D1–D3.
+
+| Tier         | Scope                                                                                 | Independent review                                                                       |
+| ------------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| E — Evidence | Claims, citations, certainty, syntheses                                               | Every claim is independently reviewed. Rounds continue while science findings stay open. |
+| P — Publish  | Code that decides what becomes public: gates, manifests, validators, claim components | One review per change set                                                                |
+| B — Build    | UI, tooling, CI, docs, runbooks, asset pipeline                                       | Automated checks and builder self-check; reviewed at owner gates B, C, and E             |
+
+There is no third review round outside the evidence tier. If Critical or
+Important findings remain after the recheck, the owner decides in writing:
+accept with recorded risk, narrow scope, or drop the item.
+
+Lints are safety nets, not proofs. A new wording that slips past an automated
+prose lint is a Minor finding with a fixture for the next change. It blocks only
+when approved content actually exploits it.
+
+Review reports lead with a findings table and target 1,500 words outside the
+evidence tier.
+
+## Evidence pipeline tiers
+
+| Claim types                                                                                | Pipeline                                                                      |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| `anatomy` and `function` claims at `established-descriptive-fact` certainty                | Two or more authoritative sources, exact locators, citation-entailment review |
+| `exercise-mechanics`, `acute-response`, `safety-context`                                   | Saved targeted search, extraction, citation entailment, contradiction search  |
+| `longitudinal-adaptation`, comparative claims, and any claim a practical takeaway rests on | Full master plan §9.8 pipeline                                                |
+
+A claim contradicted during review moves to the full pipeline. Search and
+screening records are kept once per wave and topic and reused across records.
+
 ## Review stop rule and progress reporting
 
 One independent acceptance review is the default for each milestone. Builder
@@ -77,7 +126,9 @@ slice throughput and the owner approves the revised estimate.
 
 Handoff destinations:
 
-- Builder tasks end in `reviews/releases/<task-id>-handoff.md`.
+- Builder tasks end in `reviews/releases/<task-id>-handoff.md`. Generate the
+  commit, tree, changed-path, and check-result facts with
+  `pnpm handoff <task-id> --base <commit>`; never copy hashes by hand.
 - Evidence tasks end in `research/packets/<task-id>-handoff.md`.
 - Review reports are append-only at `reviews/<discipline>/<task-id>-r<number>.md`
   and cite the exact commit reviewed. A new round never overwrites an old one.
@@ -97,9 +148,39 @@ rename or remove them.
 | `pnpm test:visual`      | Deterministic visual snapshots                                                                                 |
 | `pnpm test:performance` | Bundle and asset budgets                                                                                       |
 | `pnpm evidence:status`  | Source identifier, retraction, and freshness checks                                                            |
+| `pnpm handoff`          | Machine-generated handoff facts: base, commit, tree, changed paths, and real check results                     |
 
 A required check that fails blocks the handoff. Record the real output; never
 describe a check you did not run.
+
+## Claude roles and environments
+
+Claude Research and Claude Review each run as a repository-capable Claude Code
+session in its own worktree, on distinct Claude Team accounts (Research on
+account A, Review on account B). A same-account session never satisfies
+independent review.
+
+- Claude Research writes only `research/` and `content-drafts/`.
+- Claude Review writes only its one pre-claimed, append-only report under
+  `reviews/`.
+- Neither role writes the ledger. The session holding the Codex role records
+  the exact-path claim on the restricted role's behalf when it starts the task
+  (Codex records the exact-path claim on every restricted-role task), so the
+  owner never carries a claim between tools.
+- Before handoff, run
+  `node scripts/foundation/check-role-paths.mjs <role> --base <commit>`
+  (Claude Review adds `--allowed-path <report>`).
+
+Environment record, kept current here:
+
+| Field                  | Claude Research                                          | Claude Review                                                          |
+| ---------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Environment type       | Claude Code, repository worktree                         | Claude Code, repository worktree                                       |
+| Git remote             | `origin` over the owner's authenticated HTTPS/SSH        | `origin` over the owner's authenticated HTTPS/SSH                      |
+| Source-transfer method | Lawful sources fetched in-session; no uploads            | Same sources, fetched independently                                    |
+| Allowed directories    | `research/`, `content-drafts/`                           | Exact `reviews/<discipline>/<task>-r<n>.md`                            |
+| Readiness result       | PASS 2026-08-31 at `f2e0f005`; trusted boundary passed   | PASS 2026-08-31 at `555d6dd`; SBLA-002 R5 acceptance PASS at `9c53820` |
+| Fallback               | Chat-only bundle per master plan §13.9, emergencies only | Chat-only bundle per master plan §13.9, emergencies only               |
 
 ## Runtime
 

@@ -5,6 +5,7 @@ export const REQUIRED_SCRIPTS = Object.freeze([
   'test:visual',
   'test:performance',
   'evidence:status',
+  'handoff',
 ]);
 
 export const EXPECTED_PACKAGE_MANAGER = 'pnpm@11.24.0';

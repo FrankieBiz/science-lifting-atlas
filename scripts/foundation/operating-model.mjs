@@ -1,13 +1,12 @@
 export const REQUIRED_OPERATING_PATHS = Object.freeze([
   'AGENTS.md',
-  'CLAUDE.md',
   'docs/runbooks/handoff-template.md',
   'docs/runbooks/current-work.md',
   'docs/runbooks/branch-and-worktree.md',
-  'docs/runbooks/claude-environments.md',
   'docs/runbooks/operating-policy.json',
   'docs/product/master-plan.md',
   'docs/adr/0006-execution-quality-and-validation-gates.md',
+  'docs/adr/0007-throughput-and-parallel-delivery.md',
 ]);
 
 const OPERATING_POLICY_PATH = 'docs/runbooks/operating-policy.json';
@@ -48,22 +47,17 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'one bounded remediation',
     'recheck the complete artifact once',
     'SBLA-017',
-  ]),
-  'CLAUDE.md': Object.freeze([
-    'docs/product/master-plan.md',
-    'docs/runbooks/handoff-template.md',
-    'Claude Research',
-    'Claude Review',
-    'content-drafts/',
-    'reviews/',
+    'docs/adr/0007-throughput-and-parallel-delivery.md',
+    'Every claim is independently reviewed',
+    'There is no third review round outside the evidence tier',
+    'Lints are safety nets',
     'Codex records the exact-path claim on',
-    'one independent milestone acceptance review',
-    'zero unresolved Critical and Important findings',
-    'their impact and follow-up destination are recorded',
-    'named material risk',
-    'claim-level review',
-    'one bounded remediation',
-    'one complete-artifact recheck',
+    'Environment type',
+    'Git remote',
+    'Source-transfer method',
+    'Allowed directories',
+    'Readiness result',
+    'Fallback',
   ]),
   'docs/runbooks/current-work.md': Object.freeze([
     'Base commit',
@@ -82,15 +76,6 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'A builder claim closes when its immutable handoff is committed.',
     'Codex records the exact append-only report path',
   ]),
-  'docs/runbooks/claude-environments.md': Object.freeze([
-    'Environment type',
-    'Git remote',
-    'Source-transfer method',
-    'Allowed directories',
-    'Readiness result',
-    'Fallback',
-    'SBLA-008',
-  ]),
   'docs/product/master-plan.md': Object.freeze([
     'one independent acceptance review',
     'zero unresolved Critical and Important findings',
@@ -98,6 +83,8 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'one bounded remediation followed by one complete-artifact recheck',
     'SBLA-017 measures vertical-slice throughput',
     'owner approves the revised effort estimate',
+    'Every claim still receives independent citation-entailment review',
+    'The authoritative 2D plate satisfies this requirement',
   ]),
   'docs/adr/0006-execution-quality-and-validation-gates.md': Object.freeze([
     'one independent acceptance review',
@@ -107,16 +94,16 @@ export const REQUIRED_DOC_SNIPPETS = Object.freeze({
     'SBLA-017 records observed throughput',
     'approves the revised estimate',
   ]),
+  'docs/adr/0007-throughput-and-parallel-delivery.md': Object.freeze([
+    '- Status: Accepted',
+    'Every claim is still independently checked.',
+    'There is no third round.',
+    'Tier E claim review, not the lint, remains the guarantee.',
+  ]),
 });
 
 export const FORBIDDEN_DOC_SNIPPETS = Object.freeze({
   'AGENTS.md': Object.freeze([
-    'Claude Review may merge',
-    'Claude Research may merge',
-    'Claude Review may clear stale',
-    'Claude Research may clear stale',
-  ]),
-  'CLAUDE.md': Object.freeze([
     'Claude Review may merge',
     'Claude Research may merge',
     'Claude Review may clear stale',
@@ -135,7 +122,7 @@ export const FORBIDDEN_DOC_SNIPPETS = Object.freeze({
 });
 
 const REQUIRED_POLICY_FIELDS = Object.freeze({
-  schemaVersion: 1,
+  schemaVersion: 2,
   'authority.merge': 'codex',
   'authority.staleClaimClearance': 'codex',
   'authority.contentPromotion': 'codex',
@@ -146,6 +133,7 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'lifecycle.claimRecordLocation': 'codex-coordination-branch',
   'lifecycle.reviewClaimCloses': 'immutable-review-report-commit',
   'lifecycle.failedReviewOpens': 'bounded-remediation-claim',
+  'lifecycle.handoffMachineFacts': 'generated-by-pnpm-handoff',
   'qualityControl.defaultIndependentReviewCount': 1,
   'qualityControl.passRequiresZeroCritical': true,
   'qualityControl.passRequiresZeroImportant': true,
@@ -156,10 +144,38 @@ const REQUIRED_POLICY_FIELDS = Object.freeze({
   'qualityControl.progressUnit': 'accepted-capabilities-and-user-journey-proof',
   'qualityControl.overallPercentAllowedAfter':
     'SBLA-017-observed-throughput-and-owner-approved-estimate',
+  'qualityControl.reviewTiers.evidence':
+    'every-claim-rounds-continue-while-science-findings-open',
+  'qualityControl.reviewTiers.publish': 'one-review-per-change-set-round-cap',
+  'qualityControl.reviewTiers.build':
+    'automated-checks-and-milestone-gate-review',
+  'qualityControl.nonEvidenceRoundCap': 2,
+  'qualityControl.roundCapExceededAction':
+    'owner-written-accept-narrow-or-drop',
+  'qualityControl.lintBypassFindingSeverity':
+    'minor-with-fixture-unless-approved-content-exploits-it',
+  'qualityControl.evidencePipelineTiers.descriptive':
+    'two-authoritative-sources-locators-citation-entailment',
+  'qualityControl.evidencePipelineTiers.mechanistic':
+    'saved-targeted-search-extraction-entailment-contradiction-search',
+  'qualityControl.evidencePipelineTiers.outcome': 'full-section-9-8-pipeline',
   'roleIdentity.claudeResearchAccount': 'A',
   'roleIdentity.claudeReviewAccount': 'B',
   'roleIdentity.requiresDistinctClaudeTeamAccounts': true,
   'roleIdentity.sameAccountSessionSatisfiesReview': false,
+  'roleIdentity.codexRoleMayBeFilledBy':
+    'codex-or-claude-code-session-not-authoring-or-reviewing-the-artifact',
+  'roleIdentity.claudeRoleEnvironment':
+    'repository-capable-claude-code-worktree',
+  'delivery.authoritativeAnatomyPath': '2d',
+  'delivery.betaGateMayFollow': 'SBLA-018',
+});
+
+/** ADR 0007 D5 lanes; compared as exact ordered lists. */
+const REQUIRED_DELIVERY_LANES = Object.freeze({
+  product: Object.freeze(['SBLA-012', 'SBLA-016']),
+  evidence: Object.freeze(['SBLA-017', 'SBLA-018', 'SBLA-019']),
+  anatomy3d: Object.freeze(['SBLA-013', 'SBLA-014', 'SBLA-015']),
 });
 
 const REQUIRED_POLICY_KEYS = Object.freeze({
@@ -169,6 +185,7 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'lifecycle',
     'roleIdentity',
     'qualityControl',
+    'delivery',
     'writeBoundaries',
   ]),
   authority: Object.freeze([
@@ -184,12 +201,15 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'claimRecordLocation',
     'reviewClaimCloses',
     'failedReviewOpens',
+    'handoffMachineFacts',
   ]),
   roleIdentity: Object.freeze([
     'claudeResearchAccount',
     'claudeReviewAccount',
     'requiresDistinctClaudeTeamAccounts',
     'sameAccountSessionSatisfiesReview',
+    'codexRoleMayBeFilledBy',
+    'claudeRoleEnvironment',
   ]),
   qualityControl: Object.freeze([
     'defaultIndependentReviewCount',
@@ -200,7 +220,24 @@ const REQUIRED_POLICY_KEYS = Object.freeze({
     'failedReviewAction',
     'progressUnit',
     'overallPercentAllowedAfter',
+    'reviewTiers',
+    'nonEvidenceRoundCap',
+    'roundCapExceededAction',
+    'lintBypassFindingSeverity',
+    'evidencePipelineTiers',
   ]),
+  reviewTiers: Object.freeze(['evidence', 'publish', 'build']),
+  evidencePipelineTiers: Object.freeze([
+    'descriptive',
+    'mechanistic',
+    'outcome',
+  ]),
+  delivery: Object.freeze([
+    'lanes',
+    'authoritativeAnatomyPath',
+    'betaGateMayFollow',
+  ]),
+  lanes: Object.freeze(['product', 'evidence', 'anatomy3d']),
   writeBoundaries: Object.freeze(['codex', 'claude-research', 'claude-review']),
 });
 
@@ -263,6 +300,26 @@ function validateStructuredPolicy(policy) {
       REQUIRED_POLICY_KEYS.qualityControl,
     ],
     [
+      'qualityControl.reviewTiers',
+      valueAtPath(policy, 'qualityControl.reviewTiers'),
+      REQUIRED_POLICY_KEYS.reviewTiers,
+    ],
+    [
+      'qualityControl.evidencePipelineTiers',
+      valueAtPath(policy, 'qualityControl.evidencePipelineTiers'),
+      REQUIRED_POLICY_KEYS.evidencePipelineTiers,
+    ],
+    [
+      'delivery',
+      valueAtPath(policy, 'delivery'),
+      REQUIRED_POLICY_KEYS.delivery,
+    ],
+    [
+      'delivery.lanes',
+      valueAtPath(policy, 'delivery.lanes'),
+      REQUIRED_POLICY_KEYS.lanes,
+    ],
+    [
       'writeBoundaries',
       valueAtPath(policy, 'writeBoundaries'),
       REQUIRED_POLICY_KEYS.writeBoundaries,
@@ -294,6 +351,15 @@ function validateStructuredPolicy(policy) {
     if (JSON.stringify(actual) !== JSON.stringify(expected)) {
       issues.push(
         `operating policy writeBoundaries.${role} must equal ${JSON.stringify(expected)}`,
+      );
+    }
+  }
+
+  for (const [lane, expected] of Object.entries(REQUIRED_DELIVERY_LANES)) {
+    const actual = valueAtPath(policy, `delivery.lanes.${lane}`);
+    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+      issues.push(
+        `operating policy delivery.lanes.${lane} must equal ${JSON.stringify(expected)}`,
       );
     }
   }
