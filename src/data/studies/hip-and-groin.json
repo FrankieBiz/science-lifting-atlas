@@ -15,17 +15,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42805650/"
       },
       {
-        "pmid": "42796364",
-        "title": "Periostitis of the Pubic Symphysis in Inguinal and Femoral Hernia: An Uninterpreted Source of Chronic Groin Pain.",
-        "authors": "Muraviev SY, Akulov ZA, Sukhanova MA, et al.",
-        "journal": "Medicina (Kaunas)",
-        "date": "2026-09-12",
-        "displayDate": "2026 Sep 12",
-        "type": "Review",
-        "doi": "10.3390/medicina62091758",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42796364/"
-      },
-      {
         "pmid": "42704670",
         "title": "Hip and groin pain in physically active adults with a focus on terminology, clinical examination and imaging: A formal ESSKA-EHPA-ESMA Consensus.",
         "authors": "Hölmich P, Weir A, Papadopoulou T, et al.",
@@ -35,28 +24,6 @@
         "type": null,
         "doi": "10.1002/ksa.70565",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42704670/"
-      },
-      {
-        "pmid": "42758160",
-        "title": "Risk Factors Associated With Hospital-Acquired Pressure Injuries in Patients Undergoing Surgical Hip Fracture Repair.",
-        "authors": "Zhao Y, Alderden J, Missbrenner N, et al.",
-        "journal": "J Wound Ostomy Continence Nurs",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep-Oct 01",
-        "type": null,
-        "doi": "10.1097/WON.0000000000001311",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42758160/"
-      },
-      {
-        "pmid": "42723340",
-        "title": "Association Between Preoperative Frailty and Postoperative Acute Kidney Injury, Complications, and Resource Utilization in Older Patients Undergoing Hip Fracture Surgery.",
-        "authors": "Yonekura H, Fujii T, Okazawa Y, et al.",
-        "journal": "Geriatr Gerontol Int",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep",
-        "type": null,
-        "doi": "10.1111/ggi.70834",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42723340/"
       },
       {
         "pmid": "42611566",
@@ -90,17 +57,6 @@
         "type": "Systematic review",
         "doi": "10.4085/1062-6050-0715.25",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42564996/"
-      },
-      {
-        "pmid": "42661187",
-        "title": "Associated factors of nerve injury post-total hip arthroplasty: a meta-analysis.",
-        "authors": "An Y, Kong Y, Li D, et al.",
-        "journal": "BMC Musculoskelet Disord",
-        "date": "2026-07-29",
-        "displayDate": "2026 Jul 29",
-        "type": "Meta-analysis",
-        "doi": "10.1186/s12891-026-10286-1",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42661187/"
       },
       {
         "pmid": "42487629",
@@ -178,28 +134,6 @@
         "type": null,
         "doi": "10.1007/s00402-026-06399-w",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42397447/"
-      },
-      {
-        "pmid": "42392440",
-        "title": "Minimizing chronic groin pain after inguinal hernia surgery: an augmented evidence review.",
-        "authors": "Alviar-Ortiz M, Tocci NX, Chen DC, et al.",
-        "journal": "J Gastrointest Surg",
-        "date": "2026-07-02",
-        "displayDate": "2026 Jul 2",
-        "type": "Review",
-        "doi": "10.1016/j.gassur.2026.102505",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42392440/"
-      },
-      {
-        "pmid": "42391555",
-        "title": "Labral Hypoplasia by Preoperative Magnetic Resonance Imaging Predicts Higher Revision and Arthroplasty Risk After Hip Arthroscopy for Femoroacetabular Impingement Syndrome at 10 Year Follow-Up.",
-        "authors": "Berzolla E, Chen L, Messina J, et al.",
-        "journal": "Arthroscopy",
-        "date": "2026-07-02",
-        "displayDate": "2026 Jul 2",
-        "type": null,
-        "doi": "10.1002/arj.70404",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42391555/"
       },
       {
         "pmid": "42411000",
@@ -334,6 +268,61 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42311003/"
       },
       {
+        "pmid": "42303876",
+        "title": "Rate of functional recovery after hip arthroscopy for femoroacetabular impingement syndrome: patient-reported outcomes at three, six, and twelve months.",
+        "authors": "Seijas R, Vázquez M, Barastegui D, et al.",
+        "journal": "Int Orthop",
+        "date": "2026-06-17",
+        "displayDate": "2026 Jun 17",
+        "type": null,
+        "doi": "10.1007/s00264-026-06912-1",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42303876/"
+      },
+      {
+        "pmid": "42299824",
+        "title": "Spinopelvic mobility and rotational morphology in patients with femoroacetabular impingement-like hip pain without classical imaging findings.",
+        "authors": "Kurk MB, Keskin A, Tuzel M, et al.",
+        "journal": "Knee Surg Sports Traumatol Arthrosc",
+        "date": "2026-06-16",
+        "displayDate": "2026 Jun 16",
+        "type": null,
+        "doi": "10.1002/ksa.70494",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42299824/"
+      },
+      {
+        "pmid": "42267387",
+        "title": "The Effect of Preoperative Symptom Duration on 10-Year Outcomes After Hip Arthroscopy for Femoroacetabular Impingement Syndrome: A Matched Analysis.",
+        "authors": "Hu EY, Bi AS, Cervantes JE, et al.",
+        "journal": "Am J Sports Med",
+        "date": "2026-06-10",
+        "displayDate": "2026 Jun 10",
+        "type": null,
+        "doi": "10.1177/03635465261449800",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42267387/"
+      },
+      {
+        "pmid": "42237855",
+        "title": "Short-Term Outcomes Following Periportal Versus Interportal Capsulotomy With Closure in Nondysplastic Women Undergoing Hip Arthroscopy for Femoroacetabular Impingement.",
+        "authors": "Johnson BT, Metz AK, Puzzitiello RN, et al.",
+        "journal": "Am J Sports Med",
+        "date": "2026-06-04",
+        "displayDate": "2026 Jun 4",
+        "type": null,
+        "doi": "10.1177/03635465261448227",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42237855/"
+      },
+      {
+        "pmid": "42214891",
+        "title": "Validation of a simplified modeling approach to predict strain in the cartilage and labrum of the hip with application to femoroacetabular impingement syndrome.",
+        "authors": "Hudson LT, Schuring LL, Vargas BL, et al.",
+        "journal": "J Biomech",
+        "date": "2026-05-26",
+        "displayDate": "2026 May 26",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2026.113384",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42214891/"
+      },
+      {
         "pmid": "42170846",
         "title": "A 3-dimensional MRI analysis of the in vivo femoral head centre translation in multiple static hip joint positions in subjects with femoroacetabular impingement.",
         "authors": "Bachmann D, Beringer L, Komnik I, et al.",
@@ -354,17 +343,6 @@
         "type": null,
         "doi": "10.1016/j.jelekin.2026.103178",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42208112/"
-      },
-      {
-        "pmid": "42125839",
-        "title": "Beyond arthroplasty conversion: Rethinking failure after hip arthroscopy for femoroacetabular impingement syndrome.",
-        "authors": "Qu X, Yi M, Yang D, et al.",
-        "journal": "Knee Surg Sports Traumatol Arthrosc",
-        "date": "2026-05-13",
-        "displayDate": "2026 May 13",
-        "type": null,
-        "doi": "10.1002/ksa.70440",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42125839/"
       },
       {
         "pmid": "42112587",
@@ -411,6 +389,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42090442/"
       },
       {
+        "pmid": "42033065",
+        "title": "Hip Arthroscopy With Periportal Capsulotomy for Femoroacetabular Impingement Syndrome Shows Clinically Meaningful Outcomes Improvement at Midterm 5-Year Follow-Up.",
+        "authors": "Chen KY, Pepic L, Brumm ZG, et al.",
+        "journal": "Arthroscopy",
+        "date": "2026-04-24",
+        "displayDate": "2026 Apr 24",
+        "type": null,
+        "doi": "10.1002/arj.70179",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42033065/"
+      },
+      {
         "pmid": "42033034",
         "title": "Ultrasound-Guided Hip Injections for Osteoarthritis, Femoroacetabular Impingement Syndrome, and Extra-articular Pathology With Ketorolac Provide Greater Pain Relief and Similar Duration of Action Compared With Corticosteroids.",
         "authors": "Chen KY, Brumm ZG, Wong SE, et al.",
@@ -453,6 +442,17 @@
         "type": "Case report",
         "doi": "10.1097/JSM.0000000000001437",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41913293/"
+      },
+      {
+        "pmid": "42023525",
+        "title": "Development of the D-FLLIP classification for ipsilateral floating hip and knee injuries.",
+        "authors": "Altamirano-Cruz MA, Hernández-Aceves F, Rodríguez-Lara SQ, et al.",
+        "journal": "Rev Esp Cir Ortop Traumatol",
+        "date": "2026-03-25",
+        "displayDate": "2026 Mar 25",
+        "type": null,
+        "doi": "10.1016/j.recot.2026.03.013",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42023525/"
       },
       {
         "pmid": "41869770",
@@ -532,15 +532,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41640078/"
       },
       {
-        "pmid": "41481400",
-        "title": "Association of acute kidney injury stages with in-hospital and long-term mortality in older adults with hip fractures.",
-        "authors": "Rho JK, Kwon SS, Jang BW, et al.",
-        "journal": "Ann Med",
-        "date": "2026-01-02",
-        "displayDate": "2026 Jan 2",
-        "type": null,
-        "doi": "10.1080/07853890.2025.2608456",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41481400/"
+        "pmid": "42209051",
+        "title": "Hip Preservation Considerations in the Female Athlete: Femoroacetabular Impingement, Dysplasia, and Borderline Hip Dysplasia.",
+        "authors": "Lucas AD, Barhorst EE, Wagner KR, et al.",
+        "journal": "Clin Sports Med",
+        "date": "2025-12-22",
+        "displayDate": "2025 Dec 22",
+        "type": "Review",
+        "doi": "10.1016/j.csm.2025.10.001",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42209051/"
       },
       {
         "pmid": "41605724",
@@ -555,39 +555,6 @@
       }
     ],
     "rehab": [
-      {
-        "pmid": "42764365",
-        "title": "Changes in health-related quality of life: a longitudinal registry study among over 15,000 participants of a digital education and exercise therapy for knee and hip osteoarthritis using EQ-5D-5L.",
-        "authors": "Kiadaliri A, Dell'Isola A, Mahmoudian A, et al.",
-        "journal": "Health Qual Life Outcomes",
-        "date": "2026-09-19",
-        "displayDate": "2026 Sep 19",
-        "type": null,
-        "doi": "10.1186/s12955-026-02634-5",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42764365/"
-      },
-      {
-        "pmid": "42414961",
-        "title": "In safe hands - patients with knee and hip osteoarthritis expectations and experience of physical therapist-led triage in a secondary care setting.",
-        "authors": "Gustavsson L, Broman D, Beischer S, et al.",
-        "journal": "BMC Musculoskelet Disord",
-        "date": "2026-07-07",
-        "displayDate": "2026 Jul 7",
-        "type": null,
-        "doi": "10.1186/s12891-026-10179-3",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42414961/"
-      },
-      {
-        "pmid": "40876934",
-        "title": "Image-guided alcohol neurolysis for treatment of chronic hip pain secondary to avascular necrosis.",
-        "authors": "Alomari A, Kanjanapanang N, Peng P, et al.",
-        "journal": "Reg Anesth Pain Med",
-        "date": "2026-07-06",
-        "displayDate": "2026 Jul 6",
-        "type": null,
-        "doi": "10.1136/rapm-2025-106915",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40876934/"
-      },
       {
         "pmid": "42381613",
         "title": "Early-Stage Symptomatic Hip Osteoarthritis: A Window of Opportunity.",
@@ -633,39 +600,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42150314/"
       },
       {
-        "pmid": "42061873",
-        "title": "Total hip arthroplasty compared with conservative treatment with a self-directed exercise programme in moderate-to-severe hip osteoarthritis: a randomized controlled trial.",
-        "authors": "Talonpoika A, Karttunen L, Jaroma A, et al.",
-        "journal": "Bone Joint J",
-        "date": "2026-05-01",
-        "displayDate": "2026 May 1",
-        "type": "Randomized trial",
-        "doi": "10.1302/0301-620X.108B5.BJJ-2025-0858.R2",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42061873/"
-      },
-      {
-        "pmid": "42026166",
-        "title": "Transarterial Embolization for the Treatment of Symptomatic Hip Osteoarthritis.",
-        "authors": "Fleckenstein FN, Maleitzke T, Oehme S, et al.",
-        "journal": "Cardiovasc Intervent Radiol",
-        "date": "2026-04-23",
-        "displayDate": "2026 Apr 23",
-        "type": null,
-        "doi": "10.1007/s00270-026-04448-w",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42026166/"
-      },
-      {
-        "pmid": "41995949",
-        "title": "Chronic groin pain in hernia practice: diagnosis, mechanisms, and management.",
-        "authors": "Sheen AJ, McGregor HP",
-        "journal": "Hernia",
-        "date": "2026-04-17",
-        "displayDate": "2026 Apr 17",
-        "type": "Review",
-        "doi": "10.1007/s10029-026-03672-0",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41995949/"
-      },
-      {
         "pmid": "41706544",
         "title": "Moderators of the Effects of Exercise and Manual Therapy for People With Knee and Hip Osteoarthritis: A Secondary Analysis of a Randomized Clinical Trial.",
         "authors": "Ribeiro DC, Lamb SE, Abbott JH",
@@ -708,17 +642,6 @@
         "type": null,
         "doi": "10.1038/s41598-026-44774-0",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41927688/"
-      },
-      {
-        "pmid": "42686160",
-        "title": "Exploring Experiences of People With Hip Osteoarthritis Who Participated in a Multicomponent Lifestyle Intervention Involving Exercise and Weight Loss Diet Delivered via Telehealth: A Qualitative Study.",
-        "authors": "Lawford BJ, Campbell PK, Graham B, et al.",
-        "journal": "JOSPT Open",
-        "date": "2026-04-01",
-        "displayDate": "2026 Apr",
-        "type": null,
-        "doi": "10.2519/josptopen.2026.0197",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42686160/"
       },
       {
         "pmid": "41830496",
@@ -886,17 +809,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41236571/"
       },
       {
-        "pmid": "41194184",
-        "title": "Lived experiences of individuals with femoroacetabular impingement syndrome: a qualitative investigation.",
-        "authors": "Sullivan L, Vriese H, Williams E, et al.",
-        "journal": "J Orthop Surg Res",
-        "date": "2025-11-05",
-        "displayDate": "2025 Nov 5",
-        "type": null,
-        "doi": "10.1186/s13018-025-06362-2",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41194184/"
-      },
-      {
         "pmid": "41165671",
         "title": "Hip Pain and Mobility Deficits-Hip Osteoarthritis: Revision 2025.",
         "authors": "Koc TA Jr, Cibulka M, Enseki KR, et al.",
@@ -952,17 +864,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41057802/"
       },
       {
-        "pmid": "41056730",
-        "title": "\"I think there is something not right in my body\": Beliefs and attitudes of active adults with hip/groin pain towards hip crepitus - A qualitative study.",
-        "authors": "Serighelli F, Snowdon DA, Barton CJ, et al.",
-        "journal": "Musculoskelet Sci Pract",
-        "date": "2025-10-01",
-        "displayDate": "2025 Oct 1",
-        "type": null,
-        "doi": "10.1016/j.msksp.2025.103427",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41056730/"
-      },
-      {
         "pmid": "41138648",
         "title": "Heavy slow resistance training combined with patient education in patients with gluteal tendinopathy: A feasibility study.",
         "authors": "Grigat JM, Kjeldsen T, Jørgensen SL, et al.",
@@ -972,6 +873,17 @@
         "type": null,
         "doi": "10.1016/j.msksp.2025.103425",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41138648/"
+      },
+      {
+        "pmid": "40995847",
+        "title": "Conservative interventions for managing exercise-related musculoskeletal groin pain.",
+        "authors": "Siqueira APP, Hespanhol L, Oliveira AJ, et al.",
+        "journal": "Cochrane Database Syst Rev",
+        "date": "2025-09-25",
+        "displayDate": "2025 Sep 25",
+        "type": null,
+        "doi": "10.1002/14651858.CD016137",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40995847/"
       },
       {
         "pmid": "41316589",
@@ -1007,6 +919,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41101919/"
       },
       {
+        "pmid": "40759020",
+        "title": "Efficacy of a Very-Low-Calorie Weight Loss Diet Plus Exercise Compared With Exercise Alone on Hip Osteoarthritis Pain : A Randomized Controlled Trial.",
+        "authors": "Hall M, Hinman RS, Knox G, et al.",
+        "journal": "Ann Intern Med",
+        "date": "2025-08-05",
+        "displayDate": "2025 Aug 5",
+        "type": "Randomized trial",
+        "doi": "10.7326/ANNALS-25-00045",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40759020/"
+      },
+      {
         "pmid": "40754309",
         "title": "Factors associated with treatment failure after hip arthroscopic surgery for the patient with femoroacetabular impingement secondary to Legg-Calvé-Perthes disease.",
         "authors": "Negayama T, Nishimura H, Murata Y, et al.",
@@ -1016,6 +939,28 @@
         "type": null,
         "doi": "10.1016/j.jisako.2025.100937",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40754309/"
+      },
+      {
+        "pmid": "40720687",
+        "title": "Novel Patient Intake Survey for the Diagnosis and Management of Hip Osteoarthritis.",
+        "authors": "Liu J, Callanan T, Daher M, et al.",
+        "journal": "R I Med J (2013)",
+        "date": "2025-08-01",
+        "displayDate": "2025 Aug 1",
+        "type": null,
+        "doi": null,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40720687/"
+      },
+      {
+        "pmid": "40699605",
+        "title": "An Exercise Therapists' Guide to Neuromuscular Exercise for People With Knee or Hip Osteoarthritis.",
+        "authors": "Roos EM, Kroman S, Ageberg E",
+        "journal": "J Orthop Sports Phys Ther",
+        "date": "2025-08-01",
+        "displayDate": "2025 Aug",
+        "type": null,
+        "doi": "10.2519/jospt.2025.13041",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40699605/"
       },
       {
         "pmid": "40753994",
@@ -1029,6 +974,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40753994/"
       },
       {
+        "pmid": "40731035",
+        "title": "Hip muscle changes in femoroacetabular impingement: a systematic review and meta-analysis.",
+        "authors": "Zhang W, Chen L, Tong P",
+        "journal": "J Orthop Surg Res",
+        "date": "2025-07-29",
+        "displayDate": "2025 Jul 29",
+        "type": "Meta-analysis",
+        "doi": "10.1186/s13018-025-06135-x",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40731035/"
+      },
+      {
         "pmid": "40712915",
         "title": "Booster sessions for maintaining the effect of neuromuscular exercise and progressive resistance training in hip osteoarthritis: 12-month follow-up from a multicenter cluster-randomized controlled trial.",
         "authors": "Kjeldsen T, Dalgas U, Skou ST, et al.",
@@ -1038,17 +994,6 @@
         "type": "Randomized trial",
         "doi": "10.1016/j.joca.2025.07.012",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40712915/"
-      },
-      {
-        "pmid": "40684865",
-        "title": "Midterm clinical outcomes and risk factor for conversion to total hip arthroplasty after arthroscopic treatment for femoroacetabular impingement syndrome in individuals over 40 years of age.",
-        "authors": "Nakashima H, Murata Y, Takada S, et al.",
-        "journal": "J ISAKOS",
-        "date": "2025-07-18",
-        "displayDate": "2025 Jul 18",
-        "type": null,
-        "doi": "10.1016/j.jisako.2025.100929",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40684865/"
       },
       {
         "pmid": "41101916",
@@ -1073,6 +1018,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40641275/"
       },
       {
+        "pmid": "40651796",
+        "title": "Research priorities for physical activity and exercise management of people with knee and hip osteoarthritis: A multi-stage international priority-setting study from the OARSI Rehabilitation Discussion Group.",
+        "authors": "Bennell KL, Nelligan RK, Pardo JJ, et al.",
+        "journal": "Osteoarthritis Cartilage",
+        "date": "2025-07-10",
+        "displayDate": "2025 Jul 10",
+        "type": null,
+        "doi": "10.1016/j.joca.2025.07.006",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40651796/"
+      },
+      {
         "pmid": "40700815",
         "title": "Changes in outcomes following exercise and education in individuals with single-site pain versus multi-site pain; an analysis of 31,276 patients with knee or hip osteoarthritis.",
         "authors": "Cunningham J, Almousa S, Roos EM, et al.",
@@ -1082,6 +1038,17 @@
         "type": null,
         "doi": "10.1016/j.msksp.2025.103386",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40700815/"
+      },
+      {
+        "pmid": "40616355",
+        "title": "Minimal Clinically Important Differences in Conservative Treatment Versus Hip Arthroscopy for Femoroacetabular Impingement Syndrome: A Frequentist Meta-Analysis of RCTs.",
+        "authors": "Ramadanov N, Lettner J, Voss M, et al.",
+        "journal": "Orthop Surg",
+        "date": "2025-07-05",
+        "displayDate": "2025 Jul 5",
+        "type": "Meta-analysis",
+        "doi": "10.1111/os.70097",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40616355/"
       },
       {
         "pmid": "40632063",
@@ -1095,6 +1062,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40632063/"
       },
       {
+        "pmid": "40481734",
+        "title": "Short-term Outcomes of Hip Arthroscopy for the Treatment of Femoroacetabular Impingement and Labral Tears in Underweight Patients.",
+        "authors": "Quesada-Jimenez R, Keane JC, Kahana-Rojkind AH, et al.",
+        "journal": "Am J Sports Med",
+        "date": "2025-06-07",
+        "displayDate": "2025 Jun 7",
+        "type": null,
+        "doi": "10.1177/03635465251343299",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40481734/"
+      },
+      {
+        "pmid": "40345630",
+        "title": "Editorial Commentary: Sagittal Plane Alignment Impacts Hip Femoroacetabular Impingement and Hip Dysplasia: Patients May Benefit From Physical Therapy by Changing Anterior Pelvic Tilt.",
+        "authors": "Ochiai DH",
+        "journal": "Arthroscopy",
+        "date": "2025-05-07",
+        "displayDate": "2025 May 7",
+        "type": null,
+        "doi": "10.1016/j.arthro.2025.04.046",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40345630/"
+      },
+      {
         "pmid": "39819138",
         "title": "Association of Preoperative Walking Speed With 1-Year Outcomes After Hip Arthroscopy for Femoroacetabular Impingement Syndrome.",
         "authors": "Jan K, Alvero AB, Vogel MJ, et al.",
@@ -1104,6 +1093,17 @@
         "type": null,
         "doi": "10.1177/19417381241309918",
         "url": "https://pubmed.ncbi.nlm.nih.gov/39819138/"
+      },
+      {
+        "pmid": "40963665",
+        "title": "Optimizing resistance training for pain management in knee and hip osteoarthritis: a pairwise and dose-response meta-analysis.",
+        "authors": "Liu W, Yin M, Li H",
+        "journal": "Front Public Health",
+        "date": "2025-01-01",
+        "displayDate": "2025",
+        "type": "Meta-analysis",
+        "doi": "10.3389/fpubh.2025.1623679",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40963665/"
       }
     ],
     "training": [
@@ -1174,17 +1174,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42686152/"
       },
       {
-        "pmid": "41888964",
-        "title": "Multifocal motor neuropathy secondary to gluten intolerance: a case report.",
-        "authors": "Haddouali K, Simma K, Bellakhdar S, et al.",
-        "journal": "J Med Case Rep",
-        "date": "2026-03-26",
-        "displayDate": "2026 Mar 26",
-        "type": "Case report",
-        "doi": "10.1186/s13256-026-05968-2",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41888964/"
-      },
-      {
         "pmid": "41673842",
         "title": "The effects of combined balance and perturbation training on gluteal muscle activity and hip kinematics in women with patellofemoral pain syndrome: a randomized controlled trial.",
         "authors": "Zare Bidoki F, Haj Lotfalian M",
@@ -1194,17 +1183,6 @@
         "type": "Randomized trial",
         "doi": "10.1186/s12891-026-09610-6",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41673842/"
-      },
-      {
-        "pmid": "42550745",
-        "title": "Feasibility and Effects of a Soft-Wearable Robotic Suit Assisting Hip Extension in Older Adults: A Pilot Study.",
-        "authors": "Shin HI, Lee HS, Yun NY, et al.",
-        "journal": "IEEE Trans Neural Syst Rehabil Eng",
-        "date": "2026-01-01",
-        "displayDate": "2026",
-        "type": null,
-        "doi": "10.1109/TNSRE.2026.3719626",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42550745/"
       },
       {
         "pmid": "42433387",
@@ -1240,17 +1218,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41289886/"
       },
       {
-        "pmid": "41297381",
-        "title": "The effect of experimentally-induced gluteal muscle paralysis on joint kinematics, reaction forces and dynamic balance performance during lunges.",
-        "authors": "Meisterhans M, Dimitriou D, Fasser MR, et al.",
-        "journal": "Gait Posture",
-        "date": "2025-11-21",
-        "displayDate": "2025 Nov 21",
-        "type": null,
-        "doi": "10.1016/j.gaitpost.2025.110061",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41297381/"
-      },
-      {
         "pmid": "41057880",
         "title": "Can isokinetic muscle strength training with hip abduction and adduction improve muscle strength, balance, and gait in patients with functional ankle instability? A randomized controlled trial.",
         "authors": "Wang B, Chu F, Zhang Q, et al.",
@@ -1271,17 +1238,6 @@
         "type": "Randomized trial",
         "doi": "10.1002/ejsc.70048",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40960470/"
-      },
-      {
-        "pmid": "40939027",
-        "title": "The effects of hip abductor fatigue on gait instability in older adults.",
-        "authors": "Shelton AD, Mercer VS, Saul KR, et al.",
-        "journal": "J Neurophysiol",
-        "date": "2025-09-12",
-        "displayDate": "2025 Sep 12",
-        "type": null,
-        "doi": "10.1152/jn.00465.2024",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40939027/"
       },
       {
         "pmid": "40616971",
@@ -1504,17 +1460,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/39053662/"
       },
       {
-        "pmid": "39024986",
-        "title": "Normalization of the hip abductors rate of activation during a voluntary step task in older adults: Reliability and differences among approaches.",
-        "authors": "Lanza MB, Frakes N, Gray VL",
-        "journal": "Gait Posture",
-        "date": "2024-07-09",
-        "displayDate": "2024 Jul 9",
-        "type": null,
-        "doi": "10.1016/j.gaitpost.2024.07.005",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/39024986/"
-      },
-      {
         "pmid": "38871064",
         "title": "High Rate of Concomitant Lumbo-Sacral Spine Pathology in the Setting of Hip Abductor Tendon Repair.",
         "authors": "Uppstrom TJ, Siljander BR, Menta SV, et al.",
@@ -1592,6 +1537,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/38280014/"
       },
       {
+        "pmid": "39093087",
+        "title": "Efficacy of hip abductors exercise training combined with repetitive transcranial magnetic stimulation on knee osteoarthritis: A randomized controlled trial.",
+        "authors": "Cheng C, Wang J, Yang K, et al.",
+        "journal": "Technol Health Care",
+        "date": "2024-01-01",
+        "displayDate": "2024",
+        "type": "Randomized trial",
+        "doi": "10.3233/THC-240456",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39093087/"
+      },
+      {
         "pmid": "37815265",
         "title": "Acute Effect of Dynamic and Gluteal Resistance Exercise Warm-up Protocols on Jump Landing Mechanics in College-Aged Females.",
         "authors": "Rauseo ML, Feairheller DL, LaRoche DP, et al.",
@@ -1601,6 +1557,17 @@
         "type": null,
         "doi": "10.1519/JSC.0000000000004618",
         "url": "https://pubmed.ncbi.nlm.nih.gov/37815265/"
+      },
+      {
+        "pmid": "37616534",
+        "title": "Synergistic Dominance Induced by Hip Extension Exercise Alters Biomechanics and Muscular Activity During Sprinting and Suggests a Potential Link to Hamstring Strain.",
+        "authors": "Iguchi J, Hojo T, Fujisawa Y, et al.",
+        "journal": "J Strength Cond Res",
+        "date": "2023-09-01",
+        "displayDate": "2023 Sep 1",
+        "type": null,
+        "doi": "10.1519/JSC.0000000000004484",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37616534/"
       },
       {
         "pmid": "37593805",
@@ -1614,6 +1581,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/37593805/"
       },
       {
+        "pmid": "37949594",
+        "title": "Influence of hip flexion angle on strength and gluteal muscle activities in the clinical pilates clamshell exercise.",
+        "authors": "Lim EAYY, Yeo RYT, Kwok BC",
+        "journal": "J Bodyw Mov Ther",
+        "date": "2023-08-25",
+        "displayDate": "2023 Aug 25",
+        "type": null,
+        "doi": "10.1016/j.jbmt.2023.04.091",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37949594/"
+      },
+      {
         "pmid": "37370023",
         "title": "Can gluteal muscle activation discriminate functional performance in moderately trained women? - A cross-sectional study.",
         "authors": "Souza MSA, Valadao VMA, Teruyu AI, et al.",
@@ -1623,6 +1601,28 @@
         "type": null,
         "doi": "10.1080/14763141.2023.2228281",
         "url": "https://pubmed.ncbi.nlm.nih.gov/37370023/"
+      },
+      {
+        "pmid": "37309814",
+        "title": "The effect of experimentally induced gluteal muscle weakness on joint kinematics, reaction forces, and dynamic balance performance during deep bilateral squats.",
+        "authors": "Dimitriou D, Meisterhans M, Geissmann M, et al.",
+        "journal": "J Orthop Res",
+        "date": "2023-06-25",
+        "displayDate": "2023 Jun 25",
+        "type": null,
+        "doi": "10.1002/jor.25644",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37309814/"
+      },
+      {
+        "pmid": "37225173",
+        "title": "Effect of Bridge Exercise Duration on Lateral Abdominal Muscle Thickness and Gluteus Maximus Activation.",
+        "authors": "Kellis E, Konstantopoulos A, Ellinoudis A",
+        "journal": "J Sport Rehabil",
+        "date": "2023-05-24",
+        "displayDate": "2023 May 24",
+        "type": null,
+        "doi": "10.1123/jsr.2022-0286",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37225173/"
       },
       {
         "pmid": "37212292",
@@ -1660,17 +1660,6 @@
     ],
     "mechanics": [
       {
-        "pmid": "42592817",
-        "title": "Association Between Cervical Range of Motion and Swallowing Speed in Older Women After Total Hip Arthroplasty: A Cross-Sectional Study.",
-        "authors": "Nakamura K, Nagami S, Shimizu A, et al.",
-        "journal": "Physiother Res Int",
-        "date": "2026-10-01",
-        "displayDate": "2026 Oct",
-        "type": null,
-        "doi": "10.1002/pri.70319",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42592817/"
-      },
-      {
         "pmid": "42687355",
         "title": "Biomechanics of Copenhagen Adduction Exercise and Eccentric Hip Adductor Exercises on a Novel Isokinetic Dynamometer With Within-Session Repeatability.",
         "authors": "Marušič J, Cvjetičanin O, Supej M, et al.",
@@ -1691,28 +1680,6 @@
         "type": null,
         "doi": "10.1002/ejsc.70217",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42639742/"
-      },
-      {
-        "pmid": "42635818",
-        "title": "Effect of periprosthetic greater trochanter fractures (Vancouver AG) on primary stability of the femoral stem in total hip arthroplasty: a biomechanical micromotion analysis.",
-        "authors": "Bruder J, Goronzi M, Cavalcanti Kußmaul A, et al.",
-        "journal": "Eur J Trauma Emerg Surg",
-        "date": "2026-08-24",
-        "displayDate": "2026 Aug 24",
-        "type": null,
-        "doi": "10.1007/s00068-026-03308-z",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42635818/"
-      },
-      {
-        "pmid": "42566565",
-        "title": "An interpretable multimodal biomechanical-radiological model for predicting fixation failure in osteoporotic hip fractures: A retrospective cohort study.",
-        "authors": "Li H, Zhao H",
-        "journal": "Medicine (Baltimore)",
-        "date": "2026-08-07",
-        "displayDate": "2026 Aug 7",
-        "type": null,
-        "doi": "10.1097/MD.0000000000049988",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42566565/"
       },
       {
         "pmid": "42551219",
@@ -1737,50 +1704,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42546476/"
       },
       {
-        "pmid": "42492441",
-        "title": "Gait kinematics and hip disability after intertrochanteric fracture surgery: Is there a relationship?",
-        "authors": "Carvalho A, Vanrenterghem J, Veiga N, et al.",
-        "journal": "Gait Posture",
-        "date": "2026-07-21",
-        "displayDate": "2026 Jul 21",
-        "type": null,
-        "doi": "10.1016/j.gaitpost.2026.110291",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42492441/"
-      },
-      {
-        "pmid": "42455207",
-        "title": "Comparison of pediatric proximal femoral locking plates and dynamic hip screws in the fixation of pediatric intertrochanteric fractures, a biomechanical study.",
-        "authors": "Wang JH, Shih CA, Wang CH, et al.",
-        "journal": "Arch Orthop Trauma Surg",
-        "date": "2026-07-15",
-        "displayDate": "2026 Jul 15",
-        "type": null,
-        "doi": "10.1007/s00402-026-06414-0",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42455207/"
-      },
-      {
-        "pmid": "42439991",
-        "title": "Single lag screw cephalomedullary nail angle-anatomy mismatch is associated with immediate postoperative malreduction after intertrochanteric hip fracture fixation.",
-        "authors": "Fisher N, Hammond B, Lashgari A, et al.",
-        "journal": "Eur J Orthop Surg Traumatol",
-        "date": "2026-07-13",
-        "displayDate": "2026 Jul 13",
-        "type": null,
-        "doi": "10.1007/s00590-026-04872-1",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42439991/"
-      },
-      {
-        "pmid": "42426843",
-        "title": "Low-energy hip fracture in a socially withdrawn and physically inactive teenager highlighting the age-independent role of mechanical loading and nutrition: a case report.",
-        "authors": "Cetinkaya M, Mejdahl M, Krüger J, et al.",
-        "journal": "J Med Case Rep",
-        "date": "2026-07-09",
-        "displayDate": "2026 Jul 9",
-        "type": "Case report",
-        "doi": "10.1186/s13256-026-06258-7",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42426843/"
-      },
-      {
         "pmid": "42410524",
         "title": "Comparison of hip abduction range of motion and strength and ankle dorsiflexion in older adults with and without a history of falls.",
         "authors": "Al-Sayyid Salman ZAAN, Roshani S",
@@ -1801,17 +1724,6 @@
         "type": null,
         "doi": "10.1016/j.jbiomech.2026.113449",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42419038/"
-      },
-      {
-        "pmid": "42400315",
-        "title": "Biomechanical Assessment of Functional Tasks Beyond Level Walking Following Total Hip Arthroplasty: A Scoping Review.",
-        "authors": "M'barki H, Lavoie-Hudon A, Gagnon M, et al.",
-        "journal": "J Orthop Res",
-        "date": "2026-07-01",
-        "displayDate": "2026 Jul",
-        "type": null,
-        "doi": "10.1002/jor.70245",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42400315/"
       },
       {
         "pmid": "42387858",
@@ -1836,50 +1748,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42337183/"
       },
       {
-        "pmid": "42269362",
-        "title": "Affected-side hip flexion recovery is associated with gait-speed gain during early inpatient rehabilitation after hip fracture: A pilot prospective biomechanical analysis.",
-        "authors": "So J, Park S, Cho Y, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-06-08",
-        "displayDate": "2026 Jun 8",
-        "type": null,
-        "doi": "10.1016/j.clinbiomech.2026.106892",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42269362/"
-      },
-      {
-        "pmid": "42246966",
-        "title": "Hook plate fixation and the importance of anatomical reduction in periprosthetic hip fractures: a retrospective single-centre study at a United Kingdom District General Hospital.",
-        "authors": "Boucher A, Jha G, Mahmoud S, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-06-05",
-        "displayDate": "2026 Jun 5",
-        "type": null,
-        "doi": "10.1007/s00264-026-06880-6",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42246966/"
-      },
-      {
-        "pmid": "42281086",
-        "title": "How Angular Mismatch and Surface Topography in Modular Head-Stem Taper Junctions in Total Hip Replacements Affects Fretting-Corrosion and Motion Under Uni-Axial Loading.",
-        "authors": "Wade A, Beadling AR, Jones D, et al.",
-        "journal": "Sensors (Basel)",
-        "date": "2026-06-04",
-        "displayDate": "2026 Jun 4",
-        "type": null,
-        "doi": "10.3390/s26113571",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42281086/"
-      },
-      {
-        "pmid": "42240755",
-        "title": "Elevated-rim liner positioning in total hip arthroplasty: a compromise between dislocation biomechanics and range of motion.",
-        "authors": "Feng T, Zhang C, He D, et al.",
-        "journal": "Med Biol Eng Comput",
-        "date": "2026-06-04",
-        "displayDate": "2026 Jun 4",
-        "type": null,
-        "doi": "10.1007/s11517-026-03601-4",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42240755/"
-      },
-      {
         "pmid": "42245140",
         "title": "Effects of an 8-Week Core Training Program on Lumbopelvic-Hip Muscle Function and Pitching Biomechanics in Adolescent Pitchers.",
         "authors": "Oyama S, Palmer T, Laudner K",
@@ -1900,28 +1768,6 @@
         "type": "Review",
         "doi": "10.1016/j.csm.2026.03.008",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42686341/"
-      },
-      {
-        "pmid": "42217845",
-        "title": "The effect of hip offset reconstruction on gait biomechanics following total hip arthroplasty for 12 months.",
-        "authors": "Watabe T, Muramatsu R, Kawahara R, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-05-27",
-        "displayDate": "2026 May 27",
-        "type": null,
-        "doi": "10.1016/j.clinbiomech.2026.106883",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42217845/"
-      },
-      {
-        "pmid": "42176750",
-        "title": "Early Postoperative Gait Metrics After Superior Transverse Anatomic Reconstruction (STAR) versus Direct Anterior Total Hip Arthroplasty: A Prospective Comparative Study.",
-        "authors": "Burgio C, Zepeda KE, Vachhani S, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-05-22",
-        "displayDate": "2026 May 22",
-        "type": null,
-        "doi": "10.1016/j.arth.2026.05.057",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42176750/"
       },
       {
         "pmid": "42140167",
@@ -1979,72 +1825,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42141913/"
       },
       {
-        "pmid": "42037478",
-        "title": "Kinetic Biomarkers of Cumulative Loading and Daily Step Count as Predictors of Functional Recovery Following Primary Unilateral Total Hip Arthroplasty.",
-        "authors": "Christensen JC, Judd DL, Thomsen-Freitas PB, et al.",
-        "journal": "J Orthop Res",
-        "date": "2026-05-01",
-        "displayDate": "2026 May",
-        "type": null,
-        "doi": "10.1002/jor.70203",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42037478/"
-      },
-      {
-        "pmid": "42122452",
-        "title": "Analysis of Gait Biomechanics in Patients After Total Hip and Knee Arthroplasty Using Low-Cost Sensors: An Observational Repeated-Measures Study.",
-        "authors": "Atelšek L, Sašek M, Kozinc Ž",
-        "journal": "Sensors (Basel)",
-        "date": "2026-04-28",
-        "displayDate": "2026 Apr 28",
-        "type": null,
-        "doi": "10.3390/s26092731",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42122452/"
-      },
-      {
-        "pmid": "41045141",
-        "title": "Improved prediction of hip fracture using multi-faceted biomechanical computed tomography.",
-        "authors": "Keaveny TM, Adams AL, Orwoll ES, et al.",
-        "journal": "J Bone Miner Res",
-        "date": "2026-04-26",
-        "displayDate": "2026 Apr 26",
-        "type": null,
-        "doi": "10.1093/jbmr/zjaf139",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41045141/"
-      },
-      {
-        "pmid": "42119246",
-        "title": "Primary stability of uncemented standard versus intermediate revision stems in hip arthroplasty: A biomechanical in vitro study.",
-        "authors": "Hax J, Zderic I, Gueorguiev B, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-04-22",
-        "displayDate": "2026 Apr 22",
-        "type": null,
-        "doi": "10.1016/j.clinbiomech.2026.106862",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42119246/"
-      },
-      {
-        "pmid": "42066743",
-        "title": "Modular necks restore safe range of motion in total hip arthroplasty with extreme femoral version.",
-        "authors": "Habe Y, Hamada H, Ando W, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-04-22",
-        "displayDate": "2026 Apr 22",
-        "type": null,
-        "doi": "10.1016/j.clinbiomech.2026.106860",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42066743/"
-      },
-      {
-        "pmid": "42019109",
-        "title": "Biomechanical benefits of hip protectors and compliant flooring for hip fracture prevention: A systematic and quantitative analysis.",
-        "authors": "Lim K, Park J, Lee S, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-04-20",
-        "displayDate": "2026 Apr 20",
-        "type": "Meta-analysis",
-        "doi": "10.1016/j.clinbiomech.2026.106851",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42019109/"
-      },
-      {
         "pmid": "42008863",
         "title": "Sex-specific, subject-specific modeling reveals anatomical drivers of hip adductor moment arms.",
         "authors": "Steininger KM, McCain EM, Shea BS, et al.",
@@ -2067,28 +1847,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42364234/"
       },
       {
-        "pmid": "41942154",
-        "title": "Occupational biomechanical risk factors for hip and knee arthroplasty incidence: a register-based cohort study in male construction workers.",
-        "authors": "Gustafsson K, Wahlström J, Stjernbrandt A, et al.",
-        "journal": "BMJ Open",
-        "date": "2026-04-06",
-        "displayDate": "2026 Apr 6",
-        "type": null,
-        "doi": "10.1136/bmjopen-2025-107604",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41942154/"
-      },
-      {
-        "pmid": "41991411",
-        "title": "Anatomic Mapping of the Inferior Branch of the Superior Gluteal Nerve: Implications for Revision Total Hip Arthroplasty.",
-        "authors": "Thota PK, Robertson TS, Velasco BT, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-04-01",
-        "displayDate": "2026 Apr 1",
-        "type": null,
-        "doi": "10.1016/j.arth.2026.03.062",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41991411/"
-      },
-      {
         "pmid": "41936179",
         "title": "The relationship between hip joint morphology and hip range of motion in circus performers with hip-related pain - A Cross-sectional Study.",
         "authors": "O'Brien MJM, King MG, Munro D, et al.",
@@ -2098,28 +1856,6 @@
         "type": null,
         "doi": "10.1016/j.ptsp.2026.101917",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41936179/"
-      },
-      {
-        "pmid": "41955713",
-        "title": "Hip, knee, and ankle running kinematics during stance for anterior cruciate ligament reconstruction patients.",
-        "authors": "Lee H, Remmel A, Oh M, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-03-31",
-        "displayDate": "2026 Mar 31",
-        "type": null,
-        "doi": "10.1016/j.clinbiomech.2026.106826",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41955713/"
-      },
-      {
-        "pmid": "41894857",
-        "title": "Paretic limb biomechanical response to hip exoskeleton limb assistance strategies during walking for individuals post-stroke.",
-        "authors": "Stewart KM, Sawicki GS, Young AJ, et al.",
-        "journal": "J Biomech",
-        "date": "2026-03-21",
-        "displayDate": "2026 Mar 21",
-        "type": null,
-        "doi": "10.1016/j.jbiomech.2026.113259",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41894857/"
       },
       {
         "pmid": "41910967",
@@ -2155,6 +1891,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41793837/"
       },
       {
+        "pmid": "41668095",
+        "title": "Effect of hip bracing on stair walking biomechanics and pain in patients with mild-to-moderate hip osteoarthritis: an intervention study.",
+        "authors": "Steingrebe H, Ehmann H, Sell S, et al.",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2026-02-11",
+        "displayDate": "2026 Feb 11",
+        "type": null,
+        "doi": "10.1186/s12891-026-09587-2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41668095/"
+      },
+      {
+        "pmid": "41671961",
+        "title": "The hip adduction moment as a proxy for joint loading: a comparison between walking and running.",
+        "authors": "Subasinghe Arachchige RSS, Mclean T, Cheung RTH",
+        "journal": "J Biomech",
+        "date": "2026-02-07",
+        "displayDate": "2026 Feb 7",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2026.113200",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41671961/"
+      },
+      {
+        "pmid": "41636049",
+        "title": "Impact of CT-based 3D modelling on hip joint anatomical measurements: a comparative study with 2D methods.",
+        "authors": "Otugüzel M, Subaşı İÖ, Tanoğlu O",
+        "journal": "Hip Int",
+        "date": "2026-02-04",
+        "displayDate": "2026 Feb 4",
+        "type": null,
+        "doi": "10.1177/11207000251415004",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41636049/"
+      },
+      {
         "pmid": "41549491",
         "title": "A Biomechanical Analysis of Lead Hip Flexion in Professional Baseball Pitchers.",
         "authors": "Manzi J, Dowling B, Chow J, et al.",
@@ -2177,50 +1946,281 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41530991/"
       },
       {
-        "pmid": "41534617",
-        "title": "Preoperative Hip Flexion and Extension Range of Motion and Global Sagittal Alignment Affect Sagittal Spino-pelvic Alignment in Patients Undergoing Total Hip Arthroplasty.",
-        "authors": "Matsuki Y, Imagama T, Kawakami T, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-01-12",
-        "displayDate": "2026 Jan 12",
+        "pmid": "41504835",
+        "title": "A soft hip exoskeleton biomimetic assistance method incorporating dual‑pretension and biomechanics‑based force modeling.",
+        "authors": "Sun L, Lu W, Wang W, et al.",
+        "journal": "Med Biol Eng Comput",
+        "date": "2026-01-08",
+        "displayDate": "2026 Jan 8",
         "type": null,
-        "doi": "10.1016/j.arth.2026.01.029",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41534617/"
+        "doi": "10.1007/s11517-025-03508-6",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41504835/"
       },
       {
-        "pmid": "40935324",
-        "title": "Association between dynamic hip motion during gait and passive hip range of motion and muscle strength before and after total hip arthroplasty.",
-        "authors": "Matsuo H, Kubota M, Watabe Y, et al.",
-        "journal": "Orthop Traumatol Surg Res",
+        "pmid": "41493863",
+        "title": "Decreased Hip Strength Leads to Altered Dynamic Motion Biomechanics in Healthy Female Athletes.",
+        "authors": "Freemyer B, Takata A, Kim Y, et al.",
+        "journal": "J Strength Cond Res",
+        "date": "2026-01-02",
+        "displayDate": "2026 Jan 2",
+        "type": null,
+        "doi": "10.1519/JSC.0000000000005327",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41493863/"
+      },
+      {
+        "pmid": "41838482",
+        "title": "Biomechanical Stability of the Hip Is Impacted by Choice of Partial or Complete Closure of the Capsule Following a Periportal Capsulotomy: An In Vivo Time-Zero Comparison.",
+        "authors": "Puzzitiello RN, Johnson BT, Khalil AZ, et al.",
+        "journal": "Arthroscopy",
+        "date": "2026-01-01",
+        "displayDate": "2026 Jan",
+        "type": null,
+        "doi": "10.1002/arj.70006",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41838482/"
+      },
+      {
+        "pmid": "41685827",
+        "title": "Anatomical variations of hip acetabulum and femoral head-neck junction may predispose to clinical consequences: a case-based discussion of complex morphological interactions.",
+        "authors": "Bocheński W, Mostowy M, Pękala P, et al.",
+        "journal": "Folia Morphol (Warsz)",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": "Case report",
+        "doi": "10.5603/fm.109706",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41685827/"
+      },
+      {
+        "pmid": "41388923",
+        "title": "Acoustic Prediction and Biomechanical Validation of Primary Stability in Uncemented Short-Stem Hip Prostheses: An Experimental Study.",
+        "authors": "Jahnke A, Schreynemackers S, Tawous A, et al.",
+        "journal": "J Orthop Res",
+        "date": "2026-01-01",
+        "displayDate": "2026 Jan",
+        "type": null,
+        "doi": "10.1002/jor.70108",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41388923/"
+      },
+      {
+        "pmid": "41370869",
+        "title": "Three-dimensional hip and knee loading during the Copenhagen adductor exercise.",
+        "authors": "Dæhlin TE, Dmytriieva D, Rutherford E, et al.",
+        "journal": "J Biomech",
+        "date": "2025-12-08",
+        "displayDate": "2025 Dec 8",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2025.113116",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41370869/"
+      },
+      {
+        "pmid": "41411505",
+        "title": "Selective Osteotomy Combined With Anatomic Hip Restoration for Hartofilakidis B-C Hip Dysplasia: Long-Term Results.",
+        "authors": "Ruangsomboon P, Ruangsomboon O, Awirotananon K, et al.",
+        "journal": "J Am Acad Orthop Surg Glob Res Rev",
+        "date": "2025-12-01",
+        "displayDate": "2025 Dec 1",
+        "type": null,
+        "doi": "10.5435/JAAOSGlobal-D-24-00398",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41411505/"
+      },
+      {
+        "pmid": "41217466",
+        "title": "Hip Biomechanical and Functional Changes Following Transobturator Tape Surgery for Stress Urinary Incontinence.",
+        "authors": "Hasan M, Zamstein O, Herman A, et al.",
+        "journal": "Int Urogynecol J",
+        "date": "2025-11-11",
+        "displayDate": "2025 Nov 11",
+        "type": null,
+        "doi": "10.1007/s00192-025-06249-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41217466/"
+      },
+      {
+        "pmid": "41194745",
+        "title": "Biomechanical Evaluation of a Novel Bionic Hip Prosthesis Designed for Optimized Load Transfer and Initial Stability.",
+        "authors": "Ding Z, Zhang L, Wu X, et al.",
+        "journal": "Orthop Surg",
+        "date": "2025-11-06",
+        "displayDate": "2025 Nov 6",
+        "type": null,
+        "doi": "10.1111/os.70193",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41194745/"
+      },
+      {
+        "pmid": "41102350",
+        "title": "Targeted hip abductor fatigue alters trunk and lower limb biomechanics during Single-Leg landing.",
+        "authors": "Harato K, Nishizawa K, Imai S, et al.",
+        "journal": "Sci Rep",
+        "date": "2025-10-16",
+        "displayDate": "2025 Oct 16",
+        "type": null,
+        "doi": "10.1038/s41598-025-20279-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41102350/"
+      },
+      {
+        "pmid": "40930544",
+        "title": "Proximal core strengthening training for anterior cruciate ligament injury prevention with biomechanical improvements in knee/hip kinematics and strength gains: a systematic review and meta-analysis of low-certainty evidence.",
+        "authors": "Xiao J, Feng C, Chu J, et al.",
+        "journal": "BMJ Open",
         "date": "2025-09-09",
         "displayDate": "2025 Sep 9",
-        "type": null,
-        "doi": "10.1016/j.otsr.2025.104419",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40935324/"
+        "type": "Meta-analysis",
+        "doi": "10.1136/bmjopen-2024-093009",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40930544/"
       },
       {
-        "pmid": "39966703",
-        "title": "Biomechanical properties of tetrahedral microstructure for design of the porous stem in total hip arthroplasty.",
-        "authors": "Wang Y, Chen J, Li C, et al.",
-        "journal": "Comput Methods Biomech Biomed Engin",
-        "date": "2025-02-18",
-        "displayDate": "2025 Feb 18",
+        "pmid": "41072114",
+        "title": "Joint contact behavior in the native, ligamentum teres deficient and surgically reconstructed hip: A biomechanics study.",
+        "authors": "Chen JH, Al'Khafaji I, Ernstbrunner L, et al.",
+        "journal": "Clin Biomech (Bristol)",
+        "date": "2025-09-07",
+        "displayDate": "2025 Sep 7",
         "type": null,
-        "doi": "10.1080/10255842.2025.2466225",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/39966703/"
+        "doi": "10.1016/j.clinbiomech.2025.106666",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41072114/"
+      },
+      {
+        "pmid": "41384469",
+        "title": "Measuring sagittal plane hip and knee joint kinematics during swing phase: reliability of a webcam-based approach.",
+        "authors": "Ahn JH, Park HK, Baek CY",
+        "journal": "Acta Bioeng Biomech",
+        "date": "2025-09-01",
+        "displayDate": "2025 Sep 1",
+        "type": null,
+        "doi": "10.37190/abb/214163",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41384469/"
+      },
+      {
+        "pmid": "40912202",
+        "title": "Impact of post-bariatric lipoabdominoplasty on knee and hip function: A biomechanical and symptomatic analysis.",
+        "authors": "Tambasco D, Albanese R, Tomaselli F, et al.",
+        "journal": "J Plast Reconstr Aesthet Surg",
+        "date": "2025-08-29",
+        "displayDate": "2025 Aug 29",
+        "type": null,
+        "doi": "10.1016/j.bjps.2025.08.027",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40912202/"
+      },
+      {
+        "pmid": "40605408",
+        "title": "Using Dynamic Joint Space During Physiological Loading to Objectively Measure Hip Stability.",
+        "authors": "Godbold E, Luck C, Johnson C, et al.",
+        "journal": "J Orthop Res",
+        "date": "2025-07-02",
+        "displayDate": "2025 Jul 2",
+        "type": null,
+        "doi": "10.1002/jor.70011",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40605408/"
+      },
+      {
+        "pmid": "40537128",
+        "title": "Hip Muscle Activity and Frontal Plane Lower Extremity Kinematics in Long-Distance Runners With Plantar Fasciitis.",
+        "authors": "Kongtong W, Khongprasert S",
+        "journal": "J Appl Biomech",
+        "date": "2025-06-09",
+        "displayDate": "2025 Jun 9",
+        "type": null,
+        "doi": "10.1123/jab.2023-0296",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40537128/"
+      },
+      {
+        "pmid": "40465522",
+        "title": "The training and detraining effects of 8-week dynamic stretching of hip flexors on hip range of motion, pain, and physical performance in male professional football players with low back pain. A randomized controlled trial.",
+        "authors": "Iranmanesh M, Shafiei Nikou S, Saadatian A, et al.",
+        "journal": "J Sports Sci",
+        "date": "2025-06-04",
+        "displayDate": "2025 Jun 4",
+        "type": "Randomized trial",
+        "doi": "10.1080/02640414.2025.2513163",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40465522/"
+      },
+      {
+        "pmid": "40442523",
+        "title": "Unveiling the kinetic harmony between the hip and spine through Roussouly classification in healthy volunteers.",
+        "authors": "Sakamoto M, Takemoto M, Kim Y, et al.",
+        "journal": "Eur Spine J",
+        "date": "2025-05-29",
+        "displayDate": "2025 May 29",
+        "type": null,
+        "doi": "10.1007/s00586-025-08979-7",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40442523/"
+      },
+      {
+        "pmid": "40021069",
+        "title": "Posterior Pelvic Tilt Allows for Increased Hip Motion, While Anterior Pelvic Tilt Decreases Joint Stress: A Systematic Review of Biomechanical and Motion Analyses.",
+        "authors": "Kuhns BD, Kahana-Rojkind AH, Parsa A, et al.",
+        "journal": "Arthroscopy",
+        "date": "2025-02-26",
+        "displayDate": "2025 Feb 26",
+        "type": "Systematic review",
+        "doi": "10.1016/j.arthro.2025.02.021",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40021069/"
+      },
+      {
+        "pmid": "40010367",
+        "title": "Normative Hip Range of Motion and Strength Profiles of Uninjured Baseball Athletes: A Systematic Review.",
+        "authors": "Kennedy SM, Hannon JP, Morrow RM, et al.",
+        "journal": "J Sport Rehabil",
+        "date": "2025-02-25",
+        "displayDate": "2025 Feb 25",
+        "type": "Systematic review",
+        "doi": "10.1123/jsr.2024-0311",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40010367/"
+      },
+      {
+        "pmid": "39914395",
+        "title": "Treatment Order and Retention of Self-Myofascial Release and Static Stretching on Passive Hip Flexion Range of Motion.",
+        "authors": "Long BC",
+        "journal": "J Sport Rehabil",
+        "date": "2025-02-06",
+        "displayDate": "2025 Feb 6",
+        "type": null,
+        "doi": "10.1123/jsr.2024-0196",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39914395/"
+      },
+      {
+        "pmid": "39772935",
+        "title": "The effects of age and sex on active and passive hip range of motion in individuals with alkaptonuria.",
+        "authors": "Taylor S, Dobbin N, Imrich R, et al.",
+        "journal": "Disabil Rehabil",
+        "date": "2025-01-08",
+        "displayDate": "2025 Jan 8",
+        "type": null,
+        "doi": "10.1080/09638288.2024.2447363",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39772935/"
+      },
+      {
+        "pmid": "40794698",
+        "title": "Investigating the impact of dehydration and hydration on In-Vivo hip soft tissue biomechanics.",
+        "authors": "Khorami F, Foroutan Y, Sparrey CJ",
+        "journal": "PLoS One",
+        "date": "2025-01-01",
+        "displayDate": "2025",
+        "type": null,
+        "doi": "10.1371/journal.pone.0328054",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40794698/"
+      },
+      {
+        "pmid": "39277543",
+        "title": "Hip Range of Motion and Strength in Young Pre-Professionals Ballet Dancers Versus Non-Dancers.",
+        "authors": "Eleftheraki A, Oviedo GR, Massó-Ortigosa N",
+        "journal": "J Dance Med Sci",
+        "date": "2024-09-14",
+        "displayDate": "2024 Sep 14",
+        "type": null,
+        "doi": "10.1177/1089313X241281642",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39277543/"
       }
     ]
   },
   "totals": {
-    "injuries": 2881,
-    "rehab": 968,
-    "training": 278,
-    "mechanics": 1854
+    "injuries": 2601,
+    "rehab": 900,
+    "training": 262,
+    "mechanics": 1154
   },
   "queries": {
-    "injuries": "(\"femoroacetabular impingement\"[ti] OR \"hip labral\"[ti] OR \"gluteal tendinopathy\"[ti] OR \"greater trochanteric pain\"[ti] OR \"groin pain\"[ti] OR \"adductor strain\"[ti] OR (hip[ti] AND injur*[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "rehab": "((\"hip pain\"[ti] OR \"hip osteoarthritis\"[ti] OR \"femoroacetabular impingement\"[ti] OR \"gluteal tendinopathy\"[ti] OR \"groin pain\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "training": "((glute*[ti] OR \"hip extens*\"[ti] OR \"hip abduct*\"[ti] OR \"hip thrust\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract",
-    "mechanics": "(hip[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract"
+    "injuries": "(\"femoroacetabular impingement\"[ti] OR \"hip labral\"[ti] OR \"gluteal tendinopathy\"[ti] OR \"greater trochanteric pain\"[ti] OR \"groin pain\"[ti] OR \"adductor strain\"[ti] OR (hip[ti] AND injur*[ti]) OR \"athletic pubalgia\"[ti] OR \"adductor-related\"[ti] OR \"hip flexor strain\"[ti] NOT kidney[ti] NOT \"pressure injur*\"[ti] NOT fractur*[ti] NOT arthroplasty[ti] NOT hernia[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "rehab": "((\"hip pain\"[ti] OR \"hip osteoarthritis\"[ti] OR \"femoroacetabular impingement\"[ti] OR \"gluteal tendinopathy\"[ti] OR \"groin pain\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti]) NOT qualitative[ti] NOT \"lived experience*\"[ti] NOT perception*[ti] NOT registry[ti] NOT expectations[ti] NOT neurolysis[ti] NOT embolization[ti] NOT hernia[ti] NOT arthroplasty[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "training": "((gluteus[ti] OR gluteal[ti] OR glutes[ti] OR \"hip extens*\"[ti] OR \"hip abduct*\"[ti] OR \"hip thrust\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab]) NOT robot*[ti] NOT paralysis[ti] NOT \"older adults\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "mechanics": "(hip[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti]) NOT arthroplasty[ti] NOT fractur*[ti] NOT fixation[ti] NOT screw*[ti] NOT plate*[ti] NOT reconstruction[ti] NOT nerve*[ti] NOT stroke[ti] NOT inpatient[ti] NOT \"total hip\"[ti]) AND humans[mh] AND english[la] AND hasabstract"
   }
 }
