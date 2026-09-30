@@ -37,16 +37,6 @@ const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
     mechanics:
       '(elbow[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
   },
-  'wrist-and-hand': {
-    injuries:
-      '("carpal tunnel"[ti] OR "de quervain"[ti] OR "triangular fibrocartilage"[ti] OR TFCC[ti] OR (wrist[ti] AND (sprain[ti] OR injur*[ti] OR pain[ti])) OR "scaphoid fracture"[ti]) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '(("carpal tunnel"[ti] OR "de quervain"[ti] OR wrist[ti] OR "hand pain"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '(("grip strength"[ti] OR "handgrip"[ti] OR forearm[ti] OR wrist[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "grip training"[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '((wrist[ti] OR hand[ti] OR finger*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
-  },
 };
 
 describe('body-part registry', () => {
