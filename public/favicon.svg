@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#151b22" />
+      <stop offset="70%" stop-color="#0b0e11" />
+      <stop offset="100%" stop-color="#06080a" />
+    </radialGradient>
+    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="subtleGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient id="tissueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0887d" />
+      <stop offset="50%" stop-color="#d46a5f" />
+      <stop offset="100%" stop-color="#993241" />
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c5d5e0" />
+      <stop offset="100%" stop-color="#6e808d" />
+    </linearGradient>
+    <linearGradient id="axisGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8e3d7" stop-opacity="0" />
+      <stop offset="15%" stop-color="#e8e3d7" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#e8e3d7" stop-opacity="0.85" />
+      <stop offset="85%" stop-color="#e8e3d7" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#e8e3d7" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="coreLight" cx="38%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffb8b0" />
+      <stop offset="35%" stop-color="#d46a5f" />
+      <stop offset="100%" stop-color="#801e23" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background container -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  <rect width="510" height="510" x="1" y="1" rx="111" fill="none" stroke="#8ea0ad" stroke-opacity="0.2" stroke-width="2" />
+
+  <!-- Outer Calibration Circle -->
+  <circle cx="256" cy="256" r="212" fill="none" stroke="#8ea0ad" stroke-opacity="0.14" stroke-width="1.5" stroke-dasharray="4 8" />
+
+  <!-- Coordinate Registration Ticks -->
+  <path d="M 256 30 L 256 44 M 256 468 L 256 482 M 30 256 L 44 256 M 468 256 L 482 256" stroke="#6aafa3" stroke-width="2.5" stroke-opacity="0.65" stroke-linecap="round" />
+
+  <!-- Subtle anatomical egg contour -->
+  <ellipse cx="256" cy="256" rx="160" ry="192" fill="#d46a5f" fill-opacity="0.04" />
+
+  <!-- Outer Tilted Orbit (-12 deg) -->
+  <g transform="rotate(-12 256 256)">
+    <ellipse cx="256" cy="256" rx="182" ry="218" fill="none" stroke="url(#silverGrad)" stroke-width="2.2" stroke-opacity="0.48" />
+    <circle cx="74" cy="256" r="5" fill="#8ea0ad" />
+    <circle cx="438" cy="256" r="5" fill="#8ea0ad" />
+  </g>
+
+  <!-- Inner Tilted Orbit (+18 deg) in Tissue Red -->
+  <g transform="rotate(18 256 256)">
+    <ellipse cx="256" cy="256" rx="140" ry="178" fill="none" stroke="url(#tissueGrad)" stroke-width="2.8" stroke-opacity="0.7" />
+    <circle cx="116" cy="256" r="4.5" fill="#d46a5f" />
+    <circle cx="396" cy="256" r="4.5" fill="#d46a5f" />
+  </g>
+
+  <!-- Central Observational Axis -->
+  <line x1="256" y1="60" x2="256" y2="452" stroke="url(#axisGrad)" stroke-width="1.5" />
+  <line x1="242" y1="128" x2="270" y2="128" stroke="#e8e3d7" stroke-opacity="0.35" stroke-width="1" />
+  <line x1="246" y1="192" x2="266" y2="192" stroke="#e8e3d7" stroke-opacity="0.35" stroke-width="1" />
+  <line x1="246" y1="320" x2="266" y2="320" stroke="#e8e3d7" stroke-opacity="0.35" stroke-width="1" />
+  <line x1="242" y1="384" x2="270" y2="384" stroke="#e8e3d7" stroke-opacity="0.35" stroke-width="1" />
+
+  <!-- Anatomical 'S' Vector Monogram -->
+  <path d="M 294 182 C 294 150 272 134 244 134 C 212 134 194 156 194 190 C 194 244 318 238 318 314 C 318 356 284 378 244 378 C 208 378 186 356 184 324"
+        fill="none" stroke="#e8e3d7" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Luminous Tissue Core -->
+  <circle cx="256" cy="252" r="30" fill="#d46a5f" fill-opacity="0.38" filter="url(#coreGlow)" />
+  <circle cx="256" cy="252" r="15" fill="url(#coreLight)" filter="url(#subtleGlow)" />
+  <circle cx="253" cy="249" r="4" fill="#ffffff" fill-opacity="0.95" />
+</svg>
