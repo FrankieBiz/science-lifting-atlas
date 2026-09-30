@@ -8,7 +8,7 @@ const region: BodyPart = {
   status: 'published',
   tagline: 'Seven vertebrae holding up your head.',
   whatItDoes:
-    'The neck, or cervical spine, supports the head and lets it nod, turn, and tilt. It also protects the spinal cord and the nerves that run to the shoulders and arms. Deep neck muscles hold the vertebrae steady, while larger muscles such as the upper trapezius link the neck to the shoulder blade. In lifting, the neck holds the head steady under heavy loads.',
+    'The neck, or cervical spine, supports the head and lets it nod, turn, and tilt. It protects the spinal cord and the nerves that run to the shoulders and arms. Deep neck muscles steady the vertebrae, while larger muscles such as the upper trapezius connect the neck to the shoulder blades. Together, they help stabilize the head and upper body during lifts that load the shoulders and arms.',
   keyParts: [
     'Seven cervical vertebrae (C1–C7) and their discs',
     'Deep neck flexors and extensors',
@@ -18,22 +18,22 @@ const region: BodyPart = {
   commonInjuries: [
     {
       name: 'Non-specific neck pain',
-      summary:
-        'The most common type: pain and stiffness without a single identifiable structural cause.',
+      summary: 'Pain or stiffness without one clear structural cause.',
     },
     {
-      name: 'Pinched nerve in the neck (cervical radiculopathy)',
+      name: 'Pinched neck nerve (cervical radiculopathy)',
       summary:
-        'A pinched nerve root causing pain, tingling, or weakness down the arm.',
+        'Pressure or irritation at a neck nerve root can cause pain, tingling, numbness, or weakness that travels into the arm.',
     },
     {
-      name: 'Whiplash (whiplash-associated disorders)',
+      name: 'Whiplash (whiplash-associated disorder)',
       summary:
-        'Neck pain after a sudden acceleration-deceleration injury, such as a car collision.',
+        'A quick back-and-forth or sideways movement of the head can strain neck tissues and lead to pain and stiffness.',
     },
     {
-      name: 'Neck muscle strain',
-      summary: 'Acute pain after an awkward movement or sudden load.',
+      name: 'Muscle strain',
+      summary:
+        'An overstretched neck muscle can cause sudden pain and tenderness after a quick movement or heavy effort.',
     },
   ],
   safetyNote:
@@ -55,9 +55,9 @@ const region: BodyPart = {
     ),
     category(
       'training',
-      'Neck muscle strength, endurance, and exercise.',
-      '("neck strength*"[ti] OR "neck muscle*"[ti] OR "neck exercise*"[ti] OR "neck strengthening"[ti] OR "neck training"[ti] OR "neck resistance"[ti] OR "deep neck flexor*"[ti] OR "craniocervical flexion"[ti] OR "cervical muscle*"[ti] OR "cervical strength*"[ti] OR "cervical exercise*"[ti] OR "isometric neck"[ti] OR ("upper trapezius"[ti] AND (exercis*[ti] OR strength*[ti] OR training[ti] OR activ*[ti]))) NOT cancer[ti] NOT carcinoma[ti] NOT "head and neck"[ti] NOT headache[ti] NOT migraine[ti] NOT "trigger point*"[ti] NOT botulinum*[ti] NOT "dry needling"[ti] NOT surgery[ti] NOT dysphagia[ti] NOT femoral[ti] NOT pregnan*[ti] NOT twin[ti] NOT IUD[ti] NOT cervix[ti] NOT uterine[ti] NOT morphology[ti] NOT density[ti] NOT "disc herniation"[ti] NOT indomethacin[ti]',
-      /neck|cervical|whiplash|trapezius|radiculopathy|craniocervical/i,
+      'Neck and upper-trapezius strength training.',
+      '("neck muscle"[ti] OR "cervical muscle"[ti] OR "neck strength"[ti] OR "neck strengthening"[ti] OR "upper trapezius"[ti]) AND (training[ti] OR exercise[ti] OR strengthening[ti] OR strength[ti]) NOT femor*[ti] NOT radiotherap*[ti] NOT cancer*[ti] NOT oncol*[ti]',
+      /neck|cervical|whiplash|trapezius|radiculopathy/i,
     ),
     category(
       'mechanics',

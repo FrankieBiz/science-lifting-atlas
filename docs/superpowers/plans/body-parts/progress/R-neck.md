@@ -1,46 +1,72 @@
 # R-neck — Neck region (revision)
 
-Branch: bp/R-neck-finish (includes bp/R-neck) · Base: e26d026 · Head: 8ca9684 (plus this note) · Agent: Claude Sonnet 5.5, finishing a Lane L task that Luna had stopped as BLOCKED (plan §11), under the owner's "fully autonomous" direction
-
-## Status: DONE (the training block is resolved, no exception needed)
-
-Luna's earlier note (kept in history, replaced by this one) stopped after five previews because the training query was only about 15/20 on topic. The cause was the query shape: it searched `neck`/`cervical` broadly and then tried to exclude unrelated papers. I replaced it with a query built from neck-muscle phrases instead, so nothing needs excluding except a few stray hits. Previews of the new query were run twice; the second passed.
+Branch: `bp/R-neck` · Base: `e26d026` · Head: `bd81aae` (plus this note) · Agent: GPT-6 Luna (Lane L)
 
 ## Done
 
-- Text re-read against §7: injury names plain-first ("Pinched nerve in the neck (cervical radiculopathy)", "Whiplash (whiplash-associated disorders)", "Neck muscle strain"); added a lifting sentence to the overview. The safety note is unchanged; Luna checked it against MedlinePlus neck-pain and emergency-room guidance (links in her preserved note, see git history of `bp/R-neck`).
-- Training query rebuilt around neck-muscle phrases; `mustMatch` for training also accepts "craniocervical". Blurb is now "Neck muscle strength, endurance, and exercise."
-- Mechanics query uses Luna's version: `("cervical spine" OR "cervical vertebrae" OR "cervical kinematics") AND MECH`.
-- Injuries and rehab queries unchanged (20/20 clearly on topic in Luna's and my previews).
-- `src/data/studies/neck.json` refetched, 50 studies per category.
-- Plate and hotspot unchanged (front `50, 17.5`, zoom 2.4).
+- Re-read the overview against §7. Added the lifting connection, removed an unsupported frequency statement from the non-specific neck pain summary, and made the injury names plain-first with clinical terms in parentheses: "Pinched neck nerve (cervical radiculopathy)" and "Whiplash (whiplash-associated disorder)."
+- Kept the required safety note for neck pain after impact and neurological warning signs.
+- Kept the front plate and hotspot at `50, 17.5` (plate zoom `2.4`). `python3 scripts/body-parts/mark-points.py neck` confirms the ring is centered on the neck.
+- Tuned all four PubMed categories and fetched `src/data/studies/neck.json`: 50 studies in each category.
+- Removed neck's T1-era query snapshot from `tests/unit/body-parts-registry.test.ts`, following the prior owner-directed region revisions. The test still checks the unchanged original queries for regions not yet revised.
 
 ## Final PubMed totals and preview results
 
-| Category  | PubMed total | mustMatch hit rate (20 newest) | Spot check of the 20 newest                                                                                                                                                                                                               |
-| --------- | ------------ | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| injuries  | 4,904        | 20/20                          | 20/20 on topic per Luna's check; I did not re-read the titles                                                                                                                                                                             |
-| rehab     | 1,676        | 20/20                          | 20/20 on topic per Luna's check; I did not re-read the titles                                                                                                                                                                             |
-| training  | 705          | 20/20                          | 18/20 on topic (neck strengthening trials, neck muscle endurance and activation, neck-specific exercise); 2 marginal (cervical-muscle morphology in an adolescent-athlete volume method paper; a pillow-height and muscle-function trial) |
-| mechanics | 541          | 20/20                          | 20/20 on cervical-spine structure, movement or mechanics per Luna's check; I did not re-read the titles                                                                                                                                   |
+| Category  | PubMed total | `mustMatch` hit rate (20 newest) | Spot check of the 20 newest                                                                                |
+| --------- | ------------ | -------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| injuries  | 4,904        | 20/20                            | 20/20 on topic (neck pain, cervical radiculopathy, whiplash, or neck strain)                               |
+| rehab     | 1,676        | 20/20                            | 19/20 on topic; 1 marginal cervical chiropractic case with a history of artery compromise                  |
+| training  | 141          | 20/20                            | 20/20 on topic (neck strength, cervical muscle strength, neck-specific training, and upper-trapezius work) |
+| mechanics | 541          | 20/20                            | 19/20 on topic; 1 marginal paper focused on a computational localization method for cervical anatomy       |
+
+The training total is below 150 but above 60, using the plan's allowance for
+narrow regions. Its title terms require neck or cervical muscle strength and
+training rather than matching the ambiguous standalone word `cervical`.
 
 ## Query changes
 
-- training: from the seed `(neck OR cervical OR "upper trapezius") AND (resistance/strength training OR strengthening)` to neck-muscle phrases (`"neck strength*"`, `"neck muscle*"`, `"neck exercise*"`, `"deep neck flexor*"`, `"craniocervical flexion"`, `"cervical muscle*"`, `"cervical exercise*"`, `"isometric neck"`, and `"upper trapezius"` with exercise/strength/training/activity), with `NOT cancer NOT carcinoma NOT "head and neck" NOT headache NOT migraine NOT "trigger point*" NOT botulinum* NOT "dry needling" NOT surgery NOT dysphagia NOT femoral NOT pregnan* NOT twin NOT IUD NOT cervix NOT uterine NOT morphology NOT density NOT "disc herniation" NOT indomethacin`. The first version returned femoral-neck and uterine-cervix papers; those exclusions came from it. The training query no longer uses the shared `TRAIN` constant.
-- mechanics: from `("cervical spine" OR neck) AND MECH` to Luna's narrower cervical-spine phrases.
-- Not a plan deviation: the query is broader than "strength training" (it includes neck muscle function and endurance), but every title is about neck muscles, which is what the page promises.
+- Injuries and rehab remained at their existing queries; both cleared the
+  relevance checks.
+- Training now requires a title match for neck muscle, cervical muscle, neck
+  strength, neck strengthening, or upper trapezius, plus a title match for
+  training/exercise/strength. Excludes `femor*`, radiotherapy, cancer, and
+  oncology to remove femoral-neck and cancer-care drift.
+- Mechanics now uses `"cervical spine"`, `"cervical vertebrae"`, or
+  `"cervical kinematics"` with the shared `MECH` pattern. This removes the
+  femoral, aortic, and other unrelated uses of "neck" from the newest-title
+  sample.
+- `mustMatch` stayed as specified in §6.
+
+## Medical reference check
+
+Injury summaries and the safety note were checked against [MedlinePlus neck
+pain guidance](https://medlineplus.gov/ency/article/003025.htm), [MedlinePlus
+emergency-room guidance](https://medlineplus.gov/ency/patientinstructions/000593.htm),
+and [NHS whiplash guidance](https://www.nhs.uk/conditions/whiplash/). Wording
+stays general and does not include treatment advice.
 
 ## Checks (real output)
 
-- pnpm format && pnpm verify: exit 0 on Node v24.20.0 (0 type errors; 28 unit files passed).
-- pnpm test:e2e: not run: sandbox blocks browsers.
+- Node.js `v24.20.0`; pnpm `11.24.0`.
+- `pnpm format && pnpm verify`: passed. Astro check reported 0 errors,
+  warnings, or hints; 28 unit suites/418 tests passed; accessibility 2
+  suites/5 tests passed; visual 2 suites/4 tests passed; portability 3
+  suites/17 tests passed; content, graph, research, evidence, build,
+  foundation, and asset-decision checks passed. Build emitted the existing
+  large-chunk warning.
+- `pnpm test:e2e`: 18 passed.
+- `git diff --check`: passed.
 
 ## Deviations from the plan
 
-- **Lane crossing:** a Lane L task finished by Lane S because the owner directed autonomous operation and Luna's task had stopped.
-- **Test edit outside the R-task file list:** removed the `neck` entry from `QUERY_SNAPSHOT` in `tests/unit/body-parts-registry.test.ts` (queries changed on purpose); Luna had noted this same test as the reason her exploratory edits failed.
-- The 5-preview limit was Luna's; I did not count a fresh budget as reopening a closed rule. I recorded the approach change and only adopted the new query because it passed the 18/20 bar.
-- Owner review: injury wording stays as written (Luna's MedlinePlus check covers the safety note; the injury summaries are general).
+- **Owner-directed continuation:** after the initial five previews failed the
+  title relevance threshold, the owner directed Lane L to continue toward
+  completion. Further previews found a focused query that meets the title
+  relevance target and the narrow-region count allowance.
+- **Test edit outside the R-task file list:** removed only the neck entry from
+  `QUERY_SNAPSHOT` in `tests/unit/body-parts-registry.test.ts`, consistent with
+  the already merged owner-directed R-knee, R-ankle-and-foot, and R-hip-and-
+  groin revisions. No behavior assertions were changed.
 
 ## Needs from other tasks / owner
 
