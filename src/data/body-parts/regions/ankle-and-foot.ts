@@ -57,7 +57,7 @@ const region: BodyPart = {
       'training',
       'Calf and ankle strength training.',
       `(calf[ti] OR "triceps surae"[ti] OR "plantar flexor*"[ti] OR gastrocnemius[ti] OR soleus[ti]) AND ${TRAIN}`,
-      /ankle|foot|feet|achilles|plantar|heel|toe|talus|calcane|subtalar/i,
+      /ankle|foot|feet|achilles|plantar|heel|toe|talus|calcane|subtalar|calf|gastrocnem|soleus|triceps surae/i,
     ),
     category(
       'mechanics',

@@ -62,7 +62,7 @@ const region: BodyPart = {
       'training',
       'Quadriceps, hamstring, and squat research.',
       `(quadriceps[ti] OR hamstring*[ti] OR squat*[ti] OR "knee extens*"[ti] OR "leg press"[ti]) AND ${TRAIN}`,
-      /knee|ACL|cruciate|menisc|patell|squat|leg press|tibiofemoral|iliotibial/i,
+      /knee|ACL|cruciate|menisc|patell|squat|leg press|tibiofemoral|iliotibial|quadricep|hamstring|leg (curl|extension)/i,
     ),
     category(
       'mechanics',

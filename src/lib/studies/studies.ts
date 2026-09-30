@@ -1,6 +1,8 @@
 // Pure helpers for turning PubMed esummary records into study list entries.
 // Used by the fetch script (scripts/studies/fetch.mjs) and the pages.
 
+import type { CategoryId } from '../../data/body-parts/types.ts';
+
 export interface Study {
   pmid: string;
   title: string;
@@ -17,11 +19,16 @@ export interface Study {
 
 export interface StudyFile {
   slug: string;
+  /** YYYY-MM-DD */
   fetchedAt: string;
-  categories: Record<string, Study[]>;
+  categories: Record<CategoryId, Study[]>;
+  /** PubMed match count per category. */
+  totals: Record<CategoryId, number>;
+  /** Exact PubMed term used per category. */
+  queries: Record<CategoryId, string>;
 }
 
-interface SummaryRecord {
+export interface SummaryRecord {
   uid?: string;
   title?: string;
   source?: string;
@@ -174,4 +181,32 @@ export function dateParts(study: Pick<Study, 'date' | 'displayDate'>): {
     month: precision >= 2 ? (MONTH_LABELS[Number(month) - 1] ?? null) : null,
     day: precision >= 3 ? String(Number(day)) : null,
   };
+}
+
+const REVIEW_TYPES = new Set([
+  'Meta-analysis',
+  'Systematic review',
+  'Review',
+  'Guideline',
+]);
+const TRIAL_TYPES = new Set(['Randomized trial', 'Clinical trial']);
+
+/** Coarse study kind for the list filter. Trial protocols and case reports are "other". */
+export function studyKind(type: string | null): 'review' | 'trial' | 'other' {
+  if (type && REVIEW_TYPES.has(type)) return 'review';
+  if (type && TRIAL_TYPES.has(type)) return 'trial';
+  return 'other';
+}
+
+/** PubMed search for a term, newest first. */
+export function pubmedSearchUrl(query: string): string {
+  return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(query)}&sort=date`;
+}
+
+/** Studies whose title does not match the category's relevance pattern. */
+export function relevanceMisses(
+  studies: readonly Study[],
+  mustMatch: RegExp,
+): Study[] {
+  return studies.filter((study) => !mustMatch.test(study.title));
 }
