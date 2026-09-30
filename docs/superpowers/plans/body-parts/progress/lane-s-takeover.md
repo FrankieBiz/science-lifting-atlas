@@ -15,3 +15,4 @@ for its merge and `git branch --list 'bp/R-*'` for an open branch.
 Each merged region is removed from the QUERY_SNAPSHOT in
 `tests/unit/body-parts-registry.test.ts` by its R task, because revised
 queries intentionally differ from the T1 originals.
+| Q1 | scripts written; browser run BLOCKED, see Q1.md |

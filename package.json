@@ -42,7 +42,8 @@
     "assets:conversion:contract": "vitest run tests/unit/asset-conversion.test.ts",
     "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write",
     "studies:fetch": "NODE_USE_ENV_PROXY=1 node scripts/studies/fetch.mjs",
-    "studies:preview": "NODE_USE_ENV_PROXY=1 node scripts/studies/preview.mjs"
+    "studies:preview": "NODE_USE_ENV_PROXY=1 node scripts/studies/preview.mjs",
+    "qa:screens": "node scripts/qa/screens.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

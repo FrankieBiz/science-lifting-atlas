@@ -14,10 +14,6 @@ import { MUSCLE_REGIONS } from '../../src/data/body-parts/muscle-map.ts';
 import { plateImageStyle } from '../../src/lib/body-parts/plate.ts';
 import { validateBodyPart } from '../../src/lib/body-parts/validate.ts';
 
-/** PubMed terms as they were before the registry split (must never drift). */
-// Regions are removed from this snapshot when their R task deliberately revises the queries.
-const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {};
-
 describe('body-part registry', () => {
   it('has one file per region, in REGION_ORDER', () => {
     expect(ALL_BODY_PARTS.map((part) => part.slug)).toEqual([...REGION_ORDER]);
@@ -59,16 +55,6 @@ describe('body-part registry', () => {
         ),
       ) as { slug: string };
       expect(file.slug).toBe(part.slug);
-    }
-  });
-
-  it('keeps the original PubMed queries for the existing regions', () => {
-    for (const [slug, queries] of Object.entries(QUERY_SNAPSHOT)) {
-      const part = ALL_BODY_PARTS.find((p) => p.slug === slug);
-      expect(part, slug).toBeDefined();
-      expect(
-        Object.fromEntries(part!.categories.map((c) => [c.id, c.query])),
-      ).toEqual(queries);
     }
   });
 });
