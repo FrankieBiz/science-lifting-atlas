@@ -4,17 +4,6 @@
   "categories": {
     "injuries": [
       {
-        "pmid": "42618042",
-        "title": "Chemical Characterization and Mechanism Analysis of Ganjianglingzhu Decoction in the Treatment of Low Back Pain Based on UPLC-Q-TOF-MS/MS and Network Pharmacology.",
-        "authors": "Chen B, Li P, Shi J, et al.",
-        "journal": "Rapid Commun Mass Spectrom",
-        "date": "2026-11-15",
-        "displayDate": "2026 Nov 15",
-        "type": null,
-        "doi": "10.1002/rcm.70167",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42618042/"
-      },
-      {
         "pmid": "42802597",
         "title": "Predicting Clinical Improvement in Chronic Low Back Pain Using Exercise-Induced IVIM Perfusion: Threshold Evaluation and Disability-Dependent Effects.",
         "authors": "Dupuis F, Berry DB, Havandjian L, et al.",
@@ -70,17 +59,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41326201/"
       },
       {
-        "pmid": "42759032",
-        "title": "Ayurvedic Treatment for Lumbar Disc Herniation With Radiculopathy: Protocol for a Randomized Controlled Trial.",
-        "authors": "P S A, Rai AK, Sharma BS, et al.",
-        "journal": "JMIR Res Protoc",
-        "date": "2026-09-18",
-        "displayDate": "2026 Sep 18",
-        "type": "Randomized trial",
-        "doi": "10.2196/82936",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42759032/"
-      },
-      {
         "pmid": "42747539",
         "title": "The effects of balneotherapy on chronic low back pain, functional status, and rowing performance in athletes.",
         "authors": "Gáti T, Tefner IK, Hodosi K, et al.",
@@ -112,17 +90,6 @@
         "type": null,
         "doi": "10.1097/MD.0000000000050593",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42736754/"
-      },
-      {
-        "pmid": "42736733",
-        "title": "A machine learning model integrating radiomics and clinical factors to predict recurrence risk after rehabilitation in lumbar disc herniation.",
-        "authors": "Qi Y, Feng Y, Xing X, et al.",
-        "journal": "Medicine (Baltimore)",
-        "date": "2026-09-11",
-        "displayDate": "2026 Sep 11",
-        "type": null,
-        "doi": "10.1097/MD.0000000000050454",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42736733/"
       },
       {
         "pmid": "42730662",
@@ -189,28 +156,6 @@
         "type": null,
         "doi": null,
         "url": "https://pubmed.ncbi.nlm.nih.gov/42804305/"
-      },
-      {
-        "pmid": "42804297",
-        "title": "Implications of the CMS Ambulatory Specialty Model for Low Back Pain for Interventional Pain Management: The Good, The Bad, And The Ugly.",
-        "authors": "Manchikanti L, Sanapati MR, Soin A, et al.",
-        "journal": "Pain Physician",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep",
-        "type": "Review",
-        "doi": null,
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42804297/"
-      },
-      {
-        "pmid": "42771844",
-        "title": "Prevalence of Low Back Pain and Associated Factors Among Family Caregivers of Patients With Disabilities in Shenzhen, China: A Cross-Sectional Study Based on Binary Logistic Regression Modelling.",
-        "authors": "Sun YJ, Dai L, Xiong J, et al.",
-        "journal": "Nurs Open",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep",
-        "type": null,
-        "doi": "10.1002/nop2.70787",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42771844/"
       },
       {
         "pmid": "42730496",
@@ -334,26 +279,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42657933/"
       },
       {
-        "pmid": "42623775",
-        "title": "Have conflicts of interest in manual therapy trials for low back pain been transparent? A meta-epidemiological review.",
-        "authors": "Subialka JA, Peterson S, Halpert B, et al.",
-        "journal": "Musculoskelet Sci Pract",
-        "date": "2026-08-18",
-        "displayDate": "2026 Aug 18",
-        "type": "Review",
-        "doi": "10.1016/j.msksp.2026.103640",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42623775/"
-      },
-      {
-        "pmid": "42628377",
-        "title": "Cross-cultural adaptation and measurement properties of the Back pain Knowledge and beliefs Survey (BacKS) for Chinese adults with or without Low Back Pain.",
-        "authors": "Zhao S, Lin LG, Corrêa L, et al.",
-        "journal": "Musculoskelet Sci Pract",
-        "date": "2026-08-17",
-        "displayDate": "2026 Aug 17",
-        "type": null,
-        "doi": "10.1016/j.msksp.2026.103638",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42628377/"
+        "pmid": "42371634",
+        "title": "Mindfulness-Based Group Medical Visits for Persons With Chronic Low Back Pain: A Randomized Clinical Trial.",
+        "authors": "Morone NE, Faurot KR, Weinberg J, et al.",
+        "journal": "JAMA Intern Med",
+        "date": "2026-09-01",
+        "displayDate": "2026 Sep 1",
+        "type": "Randomized trial",
+        "doi": "10.1001/jamainternmed.2026.2186",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42371634/"
       },
       {
         "pmid": "42561493",
@@ -365,6 +299,17 @@
         "type": "Meta-analysis",
         "doi": "10.1016/j.neuchi.2026.101867",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42561493/"
+      },
+      {
+        "pmid": "42560474",
+        "title": "Lumbar spinal stenosis in axial spondyloarthritis and chronic low back pain: a cross-sectional magnetic resonance imaging study with clinical dimensions.",
+        "authors": "Kılıç G, Kılıç E, Yurdaışık I, et al.",
+        "journal": "Clin Rheumatol",
+        "date": "2026-08-06",
+        "displayDate": "2026 Aug 6",
+        "type": null,
+        "doi": "10.1007/s10067-026-08334-1",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42560474/"
       },
       {
         "pmid": "42546593",
@@ -389,15 +334,37 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42551333/"
       },
       {
-        "pmid": "42413735",
-        "title": "Bisphenol a exposure induces low back pain associated with intervertebral disc degeneration via BIRC3-mediated nucleus pulposus cell senescence.",
-        "authors": "Kang T, Huang H, Liu D, et al.",
-        "journal": "Toxicol Appl Pharmacol",
+        "pmid": "42480335",
+        "title": "Slumped sitting posture is associated with chronic low back pain amongst older adults in long-term care facilities: a cross-sectional study.",
+        "authors": "Chan YL, Leung SL, Chau WW, et al.",
+        "journal": "Geriatr Nurs",
         "date": "2026-07-21",
         "displayDate": "2026 Jul 21",
         "type": null,
-        "doi": "10.1016/j.taap.2026.117938",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42413735/"
+        "doi": "10.1016/j.gerinurse.2026.104185",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42480335/"
+      },
+      {
+        "pmid": "42419416",
+        "title": "Occlusal byte and Mézières postural therapy improve pain and performance in elite rhythmic gymnasts with low back pain.",
+        "authors": "Qorri E, Todri J, Lena O",
+        "journal": "Complement Ther Med",
+        "date": "2026-07-08",
+        "displayDate": "2026 Jul 8",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.ctim.2026.103406",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42419416/"
+      },
+      {
+        "pmid": "42413324",
+        "title": "Physical activity and exercise for the management of chronic low back pain as a component of multimorbidity: from problem to practice.",
+        "authors": "Jones MD, Pinto RZ, Ferreira ML, et al.",
+        "journal": "Braz J Phys Ther",
+        "date": "2026-07-07",
+        "displayDate": "2026 Jul 7",
+        "type": "Review",
+        "doi": "10.1016/j.bjpt.2026.101621",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42413324/"
       },
       {
         "pmid": "42367161",
@@ -433,6 +400,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42320822/"
       },
       {
+        "pmid": "42276534",
+        "title": "What factors influence ratings of Global Perceived Effect by individuals with low back pain and physiotherapists?",
+        "authors": "Ebrahimi Z, Kuspinar A, Packham TL, et al.",
+        "journal": "J Pain",
+        "date": "2026-06-11",
+        "displayDate": "2026 Jun 11",
+        "type": null,
+        "doi": "10.1016/j.jpain.2026.106348",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42276534/"
+      },
+      {
         "pmid": "42284831",
         "title": "Effectiveness of telerehabilitation in managing chronic low back pain: a pragmatic randomized controlled non-inferiority trial.",
         "authors": "Alahmri F, Alkhawajah HA, Nuhmani S, et al.",
@@ -444,26 +422,59 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42284831/"
       },
       {
-        "pmid": "42263860",
-        "title": "Racial and ethnic disparities in healthcare affordability, access, and provider concordance for low back pain: an all of us cross-sectional analysis.",
-        "authors": "Nassar JE, Ammar LA, Knebel A, et al.",
+        "pmid": "42219090",
+        "title": "Vertebral endplate bone marrow lesion composition: relation to Modic change classification and associations with chronic low back pain.",
+        "authors": "Bonnheim NB, Brumm Z, Link TM, et al.",
         "journal": "Spine J",
-        "date": "2026-06-09",
-        "displayDate": "2026 Jun 9",
+        "date": "2026-05-30",
+        "displayDate": "2026 May 30",
         "type": null,
-        "doi": "10.1016/j.spinee.2026.06.008",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42263860/"
+        "doi": "10.1016/j.spinee.2026.05.002",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42219090/"
       },
       {
-        "pmid": "42191512",
-        "title": "Text Network Analysis of Global Literature on Self-Management of Low Back Pain.",
-        "authors": "Park J, Noh W, Kim K",
-        "journal": "Pain Manag Nurs",
-        "date": "2026-05-26",
-        "displayDate": "2026 May 26",
-        "type": "Review",
-        "doi": "10.1016/j.pmn.2026.04.013",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42191512/"
+        "pmid": "42176466",
+        "title": "Associations of modic changes, multifidus degeneration, and host factors with reoperation for recurrent lumbar disc herniation after microdiscectomy: a propensity-matched case-control study.",
+        "authors": "Ayhan B, Yıldırım ME",
+        "journal": "J Clin Neurosci",
+        "date": "2026-05-23",
+        "displayDate": "2026 May 23",
+        "type": null,
+        "doi": "10.1016/j.jocn.2026.112107",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42176466/"
+      },
+      {
+        "pmid": "42168050",
+        "title": "Comment on Matsuyama et al. : A clinical study of ten-year prognosis in patients with lumbar disc herniation treated with condoliase in a phase III trial.",
+        "authors": "Maji C, Srinivasan H, Biradar A, et al.",
+        "journal": "J Orthop Sci",
+        "date": "2026-05-22",
+        "displayDate": "2026 May 22",
+        "type": null,
+        "doi": "10.1016/j.jos.2026.02.017",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42168050/"
+      },
+      {
+        "pmid": "42125858",
+        "title": "Standing work and low back pain: An experimental analysis of risk factors.",
+        "authors": "Osorio-Vasco J, Rojas-Mora J, Barrera-Causil C, et al.",
+        "journal": "Work",
+        "date": "2026-05-13",
+        "displayDate": "2026 May 13",
+        "type": null,
+        "doi": "10.1177/10519815261438027",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42125858/"
+      },
+      {
+        "pmid": "42134260",
+        "title": "Increased gluteus medius activation during sustained walking in chronic low back pain: A compensatory strategy for mediolateral postural control.",
+        "authors": "Sornkaew K, Punyaphing K, Wongonta T, et al.",
+        "journal": "Gait Posture",
+        "date": "2026-05-12",
+        "displayDate": "2026 May 12",
+        "type": null,
+        "doi": "10.1016/j.gaitpost.2026.110218",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42134260/"
       },
       {
         "pmid": "41991146",
@@ -530,17 +541,6 @@
         "type": "Trial protocol",
         "doi": "10.3389/fneur.2026.1850645",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42787033/"
-      },
-      {
-        "pmid": "42766617",
-        "title": "Prevalence, associated factors, and machine learning classification of low back pain among postmenopausal women attending rehabilitation and physiotherapy facilities in Bangladesh.",
-        "authors": "Islam MF, Faruque MO, Alauddin M, et al.",
-        "journal": "PLoS One",
-        "date": "2026-01-01",
-        "displayDate": "2026",
-        "type": null,
-        "doi": "10.1371/journal.pone.0355864",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42766617/"
       },
       {
         "pmid": "42755658",
@@ -666,17 +666,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42563705/"
       },
       {
-        "pmid": "42453003",
-        "title": "Development of the Core Outcome Set for Herbal Medicine Treatment of Lumbar Disc Herniation (COS-HM-LDH) in Korean Medicine Practice.",
-        "authors": "Kim SD, Yang C, Shin KM, et al.",
-        "journal": "J Evid Based Med",
-        "date": "2026-07-15",
-        "displayDate": "2026 Jul 15",
-        "type": "Systematic review",
-        "doi": "10.1111/jebm.70169",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42453003/"
-      },
-      {
         "pmid": "42295944",
         "title": "Low Back Pain: A Review.",
         "authors": "Cashin AG, Chou R, Weimer MB, et al.",
@@ -686,17 +675,6 @@
         "type": "Review",
         "doi": "10.1001/jama.2026.9631",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42295944/"
-      },
-      {
-        "pmid": "42413324",
-        "title": "Physical activity and exercise for the management of chronic low back pain as a component of multimorbidity: from problem to practice.",
-        "authors": "Jones MD, Pinto RZ, Ferreira ML, et al.",
-        "journal": "Braz J Phys Ther",
-        "date": "2026-07-07",
-        "displayDate": "2026 Jul 7",
-        "type": "Review",
-        "doi": "10.1016/j.bjpt.2026.101621",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42413324/"
       },
       {
         "pmid": "42398934",
@@ -853,17 +831,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42320455/"
       },
       {
-        "pmid": "42276534",
-        "title": "What factors influence ratings of Global Perceived Effect by individuals with low back pain and physiotherapists?",
-        "authors": "Ebrahimi Z, Kuspinar A, Packham TL, et al.",
-        "journal": "J Pain",
-        "date": "2026-06-11",
-        "displayDate": "2026 Jun 11",
-        "type": null,
-        "doi": "10.1016/j.jpain.2026.106348",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42276534/"
-      },
-      {
         "pmid": "42208097",
         "title": "Heatwrap and exercise in acute low back pain: a multi-arm randomised controlled trial.",
         "authors": "Côté-Picard C, Tittley J, Mailloux C, et al.",
@@ -919,17 +886,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42142824/"
       },
       {
-        "pmid": "42134260",
-        "title": "Increased gluteus medius activation during sustained walking in chronic low back pain: A compensatory strategy for mediolateral postural control.",
-        "authors": "Sornkaew K, Punyaphing K, Wongonta T, et al.",
-        "journal": "Gait Posture",
-        "date": "2026-05-12",
-        "displayDate": "2026 May 12",
-        "type": null,
-        "doi": "10.1016/j.gaitpost.2026.110218",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42134260/"
-      },
-      {
         "pmid": "42142427",
         "title": "Clinical efficacy of court-type traditional Thai massage and acupuncture for low back pain management: a randomized controlled trial.",
         "authors": "Siriyong T, Mangkang J, Yotmadee P",
@@ -963,6 +919,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42264815/"
       },
       {
+        "pmid": "41985017",
+        "title": "Percutaneous electrical nerve stimulation as alternative to nerve blocks for the diagnosis of facet joint syndrome in patients with non-specific chronic low back pain: a clinical trial protocol.",
+        "authors": "Valera-Calero JA, Sánchez-Jorge S, Vicente-Campos D, et al.",
+        "journal": "Pain Manag",
+        "date": "2026-04-15",
+        "displayDate": "2026 Apr 15",
+        "type": "Trial protocol",
+        "doi": "10.1080/17581869.2026.2660325",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41985017/"
+      },
+      {
+        "pmid": "41990574",
+        "title": "Effects of a home-based telerehabilitation exercise program in non-specific chronic low back pain: Integration of clinical scales and wearable sensor assessment.",
+        "authors": "Caramia F, Pérez-Espallargas L, D'Angelantonio E, et al.",
+        "journal": "Clin Biomech (Bristol)",
+        "date": "2026-04-11",
+        "displayDate": "2026 Apr 11",
+        "type": null,
+        "doi": "10.1016/j.clinbiomech.2026.106846",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41990574/"
+      },
+      {
         "pmid": "41921058",
         "title": "Surgical Treatment of Recurrent Lumbar Disc Herniation: To Fuse or Not To Fuse: A Single-Center Analysis of Clinical and Radiographic Characteristics and Surgical Outcomes of 450 Patients.",
         "authors": "Fischer G, Kilian E, Schömig F, et al.",
@@ -994,6 +972,17 @@
         "type": "Systematic review",
         "doi": "10.1177/10519815261423506",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41854392/"
+      },
+      {
+        "pmid": "41834720",
+        "title": "Effect of hamstring-targeted physiotherapy on low back pain and muscle viscoelastic properties in elite adolescent rowers: A single-blind randomized controlled trial.",
+        "authors": "Sekibağ OA, Hantal Ş",
+        "journal": "J Back Musculoskelet Rehabil",
+        "date": "2026-03-16",
+        "displayDate": "2026 Mar 16",
+        "type": "Randomized trial",
+        "doi": "10.1177/10538127261432694",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41834720/"
       },
       {
         "pmid": "41812784",
@@ -1040,6 +1029,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41622769/"
       },
       {
+        "pmid": "41579124",
+        "title": "Symptom Trajectories of People With Low Back Pain Presenting to the Emergency Department: Insights From the BACK TrAC Digital Care Pathway.",
+        "authors": "King MG, Alousis N, Collins T, et al.",
+        "journal": "J Emerg Nurs",
+        "date": "2026-01-24",
+        "displayDate": "2026 Jan 24",
+        "type": null,
+        "doi": "10.1016/j.jen.2025.12.016",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41579124/"
+      },
+      {
         "pmid": "41530991",
         "title": "Effects of different neuromuscular electrical stimulation techniques applied to the multifidus muscle on the kinematics of the spine, pelvis, and hip during sit-to-stand in individuals with chronic nonspecific Low back pain.",
         "authors": "Yılmaz Uras D, Akalan NE, Kuchimov SN, et al.",
@@ -1049,6 +1049,17 @@
         "type": "Randomized trial",
         "doi": "10.1080/09638288.2026.2614294",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41530991/"
+      },
+      {
+        "pmid": "41504255",
+        "title": "System responsiveness and health literacy in return-to-work challenges for individuals with chronic low back pain: a qualitative study.",
+        "authors": "Frydenlund G, Hansen A, O'Neill S, et al.",
+        "journal": "Disabil Rehabil",
+        "date": "2026-01-08",
+        "displayDate": "2026 Jan 8",
+        "type": null,
+        "doi": "10.1080/09638288.2025.2610497",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41504255/"
       },
       {
         "pmid": "41255277",
@@ -1082,17 +1093,6 @@
         "type": "Randomized trial",
         "doi": "10.1371/journal.pone.0355692",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42659623/"
-      },
-      {
-        "pmid": "42479776",
-        "title": "Prediction of factors contributing to Pain Intensity among low back pain patients: A comparative machine learning frameworks (Random Forest versus XGBoost).",
-        "authors": "Algamdi MM, Alghamdi AH",
-        "journal": "PLoS One",
-        "date": "2026-01-01",
-        "displayDate": "2026",
-        "type": null,
-        "doi": "10.1371/journal.pone.0354370",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42479776/"
       },
       {
         "pmid": "40539621",
@@ -1227,17 +1227,6 @@
         "type": null,
         "doi": "10.2519/jospt.2026.0201",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41476429/"
-      },
-      {
-        "pmid": "41186069",
-        "title": "Machine Learning Techniques for Identifying Lifestyle Factors Associated With Low Back Pain in Adults Aged 50 and Older Using Data From the Korean National Health and Nutrition Examination Survey.",
-        "authors": "Ko S, Yang H, Kim N, et al.",
-        "journal": "Nurs Health Sci",
-        "date": "2025-12-01",
-        "displayDate": "2025 Dec",
-        "type": null,
-        "doi": "10.1111/nhs.70248",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41186069/"
       },
       {
         "pmid": "41927188",
@@ -1559,17 +1548,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/38632115/"
       },
       {
-        "pmid": "38400495",
-        "title": "Regression-Based Machine Learning for Predicting Lifting Movement Pattern Change in People with Low Back Pain.",
-        "authors": "Phan TC, Pranata A, Farragher J, et al.",
-        "journal": "Sensors (Basel)",
-        "date": "2024-02-19",
-        "displayDate": "2024 Feb 19",
-        "type": null,
-        "doi": "10.3390/s24041337",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/38400495/"
-      },
-      {
         "pmid": "39845683",
         "title": "The effect of blood flow restriction training on core muscle strength and pain in male collegiate athletes with chronic non-specific low back pain.",
         "authors": "Liu Y, Liu J, Liu M, et al.",
@@ -1647,6 +1625,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/37729509/"
       },
       {
+        "pmid": "37487581",
+        "title": "Effects of Resistance Training of Upper Limb and Trunk Muscles on Soccer Instep Kick Kinematics.",
+        "authors": "de Assis MA, Santos TRT, Fonseca ST, et al.",
+        "journal": "J Appl Biomech",
+        "date": "2023-07-24",
+        "displayDate": "2023 Jul 24",
+        "type": "Randomized trial",
+        "doi": "10.1123/jab.2022-0323",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37487581/"
+      },
+      {
+        "pmid": "36932459",
+        "title": "Effects of a concurrent exercise training program on low back and sciatic pain and pain disability in late pregnancy.",
+        "authors": "Aparicio VA, Marín-Jiménez N, Flor-Alemany M, et al.",
+        "journal": "Scand J Med Sci Sports",
+        "date": "2023-03-23",
+        "displayDate": "2023 Mar 23",
+        "type": null,
+        "doi": "10.1111/sms.14353",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36932459/"
+      },
+      {
         "pmid": "36205564",
         "title": "Conservative management for lumbar radiculopathy based on the stage of the disorder: a Delphi study.",
         "authors": "Thoomes E, Falla D, Cleland JA, et al.",
@@ -1660,103 +1660,15 @@
     ],
     "mechanics": [
       {
-        "pmid": "41533624",
-        "title": "Reducing Lumbar Extensor Exertion in Lifting Tasks With a Powered Back Exosuit.",
-        "authors": "Cullen I, Nuesslein C, Young A",
-        "journal": "IEEE Trans Biomed Eng",
-        "date": "2026-10-01",
-        "displayDate": "2026 Oct",
-        "type": null,
-        "doi": "10.1109/TBME.2026.3653879",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41533624/"
-      },
-      {
-        "pmid": "42675942",
-        "title": "Passive Stretching and Explosive Jumps Acutely Reduce Spinal Reflex Excitability and Alter Sit-To-Stand Biomechanics in Active Adults.",
-        "authors": "McCauley SA, Mann KJ, Cannon J, et al.",
-        "journal": "J Musculoskelet Neuronal Interact",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep 1",
-        "type": "Randomized trial",
-        "doi": "10.22540/JMNI-26-392",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42675942/"
-      },
-      {
-        "pmid": "42796273",
-        "title": "The Effects of Thoracic Flexibility Exercise on Pain, Range of Motion, Spinal Alignment, Proprioception, and Neck Disability Index in Neck Pain Patients with Forward Head Posture: A Randomized Controlled Trial.",
-        "authors": "Kim C, Park D",
-        "journal": "Medicina (Kaunas)",
-        "date": "2026-08-31",
-        "displayDate": "2026 Aug 31",
-        "type": "Randomized trial",
-        "doi": "10.3390/medicina62091666",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42796273/"
-      },
-      {
-        "pmid": "42675098",
-        "title": "Development and evaluation of a multi-axis loading simulator for the spine, pelvis, and lumbosacral region.",
-        "authors": "Wendler T, Heilmann R, Müller H, et al.",
-        "journal": "Sci Rep",
-        "date": "2026-08-31",
-        "displayDate": "2026 Aug 31",
-        "type": null,
-        "doi": "10.1038/s41598-026-68816-9",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42675098/"
-      },
-      {
-        "pmid": "42673772",
-        "title": "Effect of muscle deactivation in the kinematic responses of cervical spine under emergency ejection - Finite element simulation.",
-        "authors": "Wen J, Hu X, Liang M, et al.",
+        "pmid": "42617536",
+        "title": "Lumbar multifidus layers stiffness during static stretching measured by shear wave elastography.",
+        "authors": "Albuquerque Brandão MC, Palmieri DC, Oliveira Meireles VB, et al.",
         "journal": "J Biomech",
-        "date": "2026-08-31",
-        "displayDate": "2026 Aug 31",
+        "date": "2026-08-13",
+        "displayDate": "2026 Aug 13",
         "type": null,
-        "doi": "10.1016/j.jbiomech.2026.113548",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42673772/"
-      },
-      {
-        "pmid": "42784261",
-        "title": "Sacroiliac Joint Anatomical Variants and Their Association with Spinopelvic Alignment: A Whole-Spine CT Study.",
-        "authors": "Ozkan E, Ozdemir M, Zontur HH, et al.",
-        "journal": "Tomography",
-        "date": "2026-08-27",
-        "displayDate": "2026 Aug 27",
-        "type": null,
-        "doi": "10.3390/tomography12090123",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42784261/"
-      },
-      {
-        "pmid": "42645578",
-        "title": "Cervical range of motion and patient-reported outcomes in patients undergoing surgical treatment for degenerative pathology of the subaxial cervical spine (C3-C7).",
-        "authors": "Cornali C, Riva C, Belotti F, et al.",
-        "journal": "Neurol Sci",
-        "date": "2026-08-26",
-        "displayDate": "2026 Aug 26",
-        "type": null,
-        "doi": "10.1007/s10072-026-09346-0",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42645578/"
-      },
-      {
-        "pmid": "41543139",
-        "title": "QCT-based geometric, densitometric, and biomechanical properties of the aging human thoracolumbar spine.",
-        "authors": "Xu J, Hemmatazad H, Indermaur M, et al.",
-        "journal": "J Bone Miner Res",
-        "date": "2026-08-21",
-        "displayDate": "2026 Aug 21",
-        "type": null,
-        "doi": "10.1093/jbmr/zjag008",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41543139/"
-      },
-      {
-        "pmid": "42616110",
-        "title": "Formaldehyde embalming alters biomechanical strain of human cervical spinal dura mater: quantification and implications from paired fresh-frozen and embalmed specimens.",
-        "authors": "Yang H, Xie SY, Liao LQ, et al.",
-        "journal": "Surg Radiol Anat",
-        "date": "2026-08-19",
-        "displayDate": "2026 Aug 19",
-        "type": null,
-        "doi": "10.1007/s00276-026-03982-z",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42616110/"
+        "doi": "10.1016/j.jbiomech.2026.113523",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42617536/"
       },
       {
         "pmid": "42566805",
@@ -1770,28 +1682,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42566805/"
       },
       {
-        "pmid": "42482570",
-        "title": "Accurate automated 3D lumbar spine reconstruction from biplanar X-rays using multi-task deep learning and anatomy-aware optimization.",
-        "authors": "Yu W, Zhu Z, Wang C, et al.",
-        "journal": "Med Phys",
-        "date": "2026-08-01",
-        "displayDate": "2026 Aug",
-        "type": null,
-        "doi": "10.1002/mp.70570",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42482570/"
-      },
-      {
-        "pmid": "42581354",
-        "title": "Optimizing lumbar therapy: a biomechanical study of oblique pulling manipulation under different postures.",
-        "authors": "Wang Y, Yu A, Jin L, et al.",
-        "journal": "BMC Complement Med Ther",
-        "date": "2026-07-27",
-        "displayDate": "2026 Jul 27",
-        "type": null,
-        "doi": "10.1186/s12906-026-05477-1",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42581354/"
-      },
-      {
         "pmid": "42485865",
         "title": "Effect of thoracolumbar fascia morphology on lumbar stiffness and rotation under prescribed myofascial loading: A finite element analysis.",
         "authors": "Raczek C, Driscoll M",
@@ -1801,28 +1691,6 @@
         "type": null,
         "doi": "10.1016/j.jmbbm.2026.107561",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42485865/"
-      },
-      {
-        "pmid": "42478055",
-        "title": "Biomechanical effects of structural optimization on the ball-and-socket lumbar artificial disc: A finite element study.",
-        "authors": "Yan J, Guan L, Li Y, et al.",
-        "journal": "Proc Inst Mech Eng H",
-        "date": "2026-07-20",
-        "displayDate": "2026 Jul 20",
-        "type": null,
-        "doi": "10.1177/09544119261467211",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42478055/"
-      },
-      {
-        "pmid": "42464836",
-        "title": "Anatomical Feasibility and Morphometric Analysis of Cortical Bone Trajectory Screw Fixation in the Pediatric Lumbar Spine Using Computed Tomography.",
-        "authors": "Xuan J, Zhang ZG, Chen Y, et al.",
-        "journal": "Ann Ital Chir",
-        "date": "2026-07-14",
-        "displayDate": "2026 Jul 14",
-        "type": null,
-        "doi": "10.62713/aic.4529",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42464836/"
       },
       {
         "pmid": "42437709",
@@ -1836,48 +1704,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42437709/"
       },
       {
-        "pmid": "42343443",
-        "title": "Biomechanical advances in oblique lateral lumbar interbody fusion using different interbody cages.",
-        "authors": "Bieshanbieke Y, Xie F, Yan B",
-        "journal": "J Orthop Surg Res",
-        "date": "2026-06-25",
-        "displayDate": "2026 Jun 25",
-        "type": "Review",
-        "doi": "10.1186/s13018-026-07051-4",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42343443/"
-      },
-      {
-        "pmid": "42337273",
-        "title": "Biomechanical effects of endoscopic ULBD in a reduced‑stiffness lumbar spine model: focus on endplate stress and hypothesis‑generating risk indicators (a finite element analysis).",
-        "authors": "Wei W, Liu Z, Zhou X, et al.",
-        "journal": "Sci Rep",
-        "date": "2026-06-23",
-        "displayDate": "2026 Jun 23",
+        "pmid": "42356773",
+        "title": "Movement-Based Low Back Pain Subgroups Using Motion Tape Strain Data with Biomechanical and Causal Feature Engineering.",
+        "authors": "Lalwani A, Gombatto SP, Velazquez Y, et al.",
+        "journal": "Sensors (Basel)",
+        "date": "2026-06-15",
+        "displayDate": "2026 Jun 15",
         "type": null,
-        "doi": "10.1038/s41598-026-57880-w",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42337273/"
-      },
-      {
-        "pmid": "42310416",
-        "title": "Effect of different positions of lumbar traction on pain, function, and range of motion in adults with non-specific low back pain: a randomized clinical trial.",
-        "authors": "Mahmoud WS, Alhowimel A, Almotery A, et al.",
-        "journal": "Sci Rep",
-        "date": "2026-06-17",
-        "displayDate": "2026 Jun 17",
-        "type": "Randomized trial",
-        "doi": "10.1038/s41598-026-58460-8",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42310416/"
-      },
-      {
-        "pmid": "42322743",
-        "title": "Ultrasound versus surgical anatomical landmarks for localization of the spinal accessory and suprascapular nerves in posterior nerve transfer: A comparative clinical study.",
-        "authors": "Jerome JTJ, Surendran G, Thirumagal K",
-        "journal": "J Plast Reconstr Aesthet Surg",
-        "date": "2026-06-11",
-        "displayDate": "2026 Jun 11",
-        "type": null,
-        "doi": "10.1016/j.bjps.2026.06.005",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42322743/"
+        "doi": "10.3390/s26123800",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42356773/"
       },
       {
         "pmid": "42243899",
@@ -1889,28 +1724,6 @@
         "type": null,
         "doi": "10.1186/s13018-026-06955-5",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42243899/"
-      },
-      {
-        "pmid": "42235183",
-        "title": "Thoracolumbar spinal cord perfusion: Clinical anatomy of radiculomedullary arteries and surgical risk zones.",
-        "authors": "Kapetanakis S, Charatsi D, Katzi F, et al.",
-        "journal": "Morphologie",
-        "date": "2026-06-03",
-        "displayDate": "2026 Jun 3",
-        "type": "Review",
-        "doi": "10.1016/j.morpho.2026.101126",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42235183/"
-      },
-      {
-        "pmid": "42234397",
-        "title": "Changes in retroperitoneal anatomy of the lumbar spine in supine, prone, and lateral lumbar spine MRIs.",
-        "authors": "Pompa-Hogan BM, Mason GB, Fisher MWA, et al.",
-        "journal": "Spine Deform",
-        "date": "2026-06-03",
-        "displayDate": "2026 Jun 3",
-        "type": null,
-        "doi": "10.1007/s43390-025-01194-w",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42234397/"
       },
       {
         "pmid": "42233507",
@@ -1935,28 +1748,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42190132/"
       },
       {
-        "pmid": "42167597",
-        "title": "Predicting mechanical failure in spinal metastases: from clinical scores to patient-specific biomechanical modeling.",
-        "authors": "Anzalone L, Follet H, Meynard A, et al.",
-        "journal": "Neurochirurgie",
-        "date": "2026-05-20",
-        "displayDate": "2026 May 20",
-        "type": "Review",
-        "doi": "10.1016/j.neuchi.2026.101830",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42167597/"
-      },
-      {
-        "pmid": "42167593",
-        "title": "Incidence of vertebral pedicle fracture occurrence in thoracic and lumbar spine trauma. A CT-scan anatomical assessment.",
-        "authors": "Gadoin D, Dagher M, Flouzat Lachaniette CH, et al.",
-        "journal": "Neurochirurgie",
-        "date": "2026-05-20",
-        "displayDate": "2026 May 20",
-        "type": null,
-        "doi": "10.1016/j.neuchi.2026.101833",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42167593/"
-      },
-      {
         "pmid": "42143807",
         "title": "Estimation of dynamic spinal loads during manual lifting using smartphone-based markerless motion capture.",
         "authors": "Salehi M, Taheri A, Kim JH",
@@ -1966,17 +1757,6 @@
         "type": null,
         "doi": "10.1016/j.apergo.2026.104823",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42143807/"
-      },
-      {
-        "pmid": "42241807",
-        "title": "Anatomic feasibility of intercostal-to-femoral and ulnar-to-sciatic nerve transfers for lower extremity neurotization after traumatic spinal cord injury.",
-        "authors": "Gutama B, Cornely RM, Gergoudis F, et al.",
-        "journal": "J Plast Reconstr Aesthet Surg",
-        "date": "2026-05-13",
-        "displayDate": "2026 May 13",
-        "type": "Review",
-        "doi": "10.1016/j.bjps.2026.05.025",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42241807/"
       },
       {
         "pmid": "42139815",
@@ -2001,37 +1781,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42086794/"
       },
       {
-        "pmid": "42061763",
-        "title": "Functional evaluation in adult spinal deformity can be reduced to 3 key kinematic parameters that can sufficiently predict health-related quality of life outcomes: an observational prospective study.",
-        "authors": "Mekhael E, Rachkidi R, Nassim N, et al.",
-        "journal": "Spine J",
-        "date": "2026-04-28",
-        "displayDate": "2026 Apr 28",
-        "type": null,
-        "doi": "10.1016/j.spinee.2026.04.025",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42061763/"
-      },
-      {
-        "pmid": "42033887",
-        "title": "Healthy morphological variability in sagittal alignment modulates loading patterns in musculoskeletal spine modelling.",
-        "authors": "Borrelli S, Benna V, Putame G, et al.",
-        "journal": "Comput Biol Med",
-        "date": "2026-04-24",
-        "displayDate": "2026 Apr 24",
-        "type": null,
-        "doi": "10.1016/j.compbiomed.2026.111704",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42033887/"
-      },
-      {
-        "pmid": "42091433",
-        "title": "Influence of Conscious Sedation Versus Spinal Anesthesia on Range of Motion and Pain Scores Following Manipulation Under Anesthesia After Total Knee Arthroplasty.",
-        "authors": "Kutzer KM, Ruderman LV, Jing C, et al.",
-        "journal": "J Arthroplasty",
+        "pmid": "41964504",
+        "title": "The Effects of Lumbar Delayed Onset Muscle Soreness on Clinical, Biomechanical and Neuromuscular Outcomes: A Systematic Review and Meta-Analysis.",
+        "authors": "Ducas J, Véret C, Gauthier-Wong É, et al.",
+        "journal": "Eur J Pain",
         "date": "2026-04-01",
-        "displayDate": "2026 Apr 1",
-        "type": null,
-        "doi": "10.1016/j.arth.2026.03.057",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42091433/"
+        "displayDate": "2026 Apr",
+        "type": "Meta-analysis",
+        "doi": "10.1002/ejp.70264",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41964504/"
       },
       {
         "pmid": "41869828",
@@ -2056,92 +1814,257 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42264858/"
       },
       {
-        "pmid": "41593845",
-        "title": "Spinal Epidural Abscess in Children With Anatomical Anomalies of the Spine: Case Series and Literature Review.",
-        "authors": "Regev A, Pratt LT, Roth J, et al.",
-        "journal": "Pediatr Infect Dis J",
-        "date": "2026-01-28",
-        "displayDate": "2026 Jan 28",
-        "type": "Review",
-        "doi": "10.1097/INF.0000000000005168",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41593845/"
-      },
-      {
-        "pmid": "41485206",
-        "title": "The effect of pushing and pulling movements when propulsion a manual wheelchair on upper limb kinematics and muscle activity in people with spinal cord injury.",
-        "authors": "Kim S, Park J, Eun SD, et al.",
-        "journal": "Disabil Rehabil Assist Technol",
-        "date": "2026-01-04",
-        "displayDate": "2026 Jan 4",
+        "pmid": "41689880",
+        "title": "BackTracker: Machine learning to identify kinematic phenotypes for personalised exercise management in non-specific low back pain.",
+        "authors": "Liu Z, Hicks Y, Sheeran L",
+        "journal": "Int J Med Inform",
+        "date": "2026-02-07",
+        "displayDate": "2026 Feb 7",
         "type": null,
-        "doi": "10.1080/17483107.2025.2610353",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41485206/"
+        "doi": "10.1016/j.ijmedinf.2026.106335",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41689880/"
       },
       {
-        "pmid": "42597459",
-        "title": "Clinically complete spinal cord injury is not always anatomically complete.",
-        "authors": "Serratrice N",
-        "journal": "Front Neurol",
+        "pmid": "41605292",
+        "title": "Does lumbar vertebra bone microstructure relate to combined loading fracture tolerance and inform fracture initiation site?",
+        "authors": "Tushak SK, Chernyavskiy P, Gates B, et al.",
+        "journal": "Bone",
+        "date": "2026-01-26",
+        "displayDate": "2026 Jan 26",
+        "type": null,
+        "doi": "10.1016/j.bone.2026.117806",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41605292/"
+      },
+      {
+        "pmid": "41575293",
+        "title": "Associations of Low-Back Fatigue and Pain with Trunk Motor Variability in Repetitive Lifting: A Scoping Review.",
+        "authors": "Srinivasan D, Shayan AM, Luger T, et al.",
+        "journal": "IISE Trans Occup Ergon Hum Factors",
+        "date": "2026-01-23",
+        "displayDate": "2026 Jan 23",
+        "type": null,
+        "doi": "10.1080/24725838.2026.2616635",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41575293/"
+      },
+      {
+        "pmid": "41559209",
+        "title": "Relationship between pelvic incidence and hip, pelvic, and lumbar motion during squatting in healthy individuals with high and low pelvic incidence.",
+        "authors": "Fukushima K, Tsutsumi M, Nakata A, et al.",
+        "journal": "Sci Rep",
+        "date": "2026-01-20",
+        "displayDate": "2026 Jan 20",
+        "type": null,
+        "doi": "10.1038/s41598-026-36815-5",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41559209/"
+      },
+      {
+        "pmid": "41597445",
+        "title": "Influence of Posture, Spinal Level, Gender and Muscle Activation on Biomechanical Properties of Lumbar Erector Spinae in Healthy Young Adults.",
+        "authors": "Hsieh YL, Lin HY, Chien A",
+        "journal": "Medicina (Kaunas)",
+        "date": "2026-01-13",
+        "displayDate": "2026 Jan 13",
+        "type": null,
+        "doi": "10.3390/medicina62010159",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41597445/"
+      },
+      {
+        "pmid": "41501813",
+        "title": "A predictive model for classifying low back pain status based on lumbopelvic kinematics measured using inertial measurement units: a cross-sectional study.",
+        "authors": "Kongoun S, Klahan K, Rujirek N, et al.",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2026-01-07",
+        "displayDate": "2026 Jan 7",
+        "type": null,
+        "doi": "10.1186/s12891-026-09488-4",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41501813/"
+      },
+      {
+        "pmid": "41768000",
+        "title": "Biomechanical Comparisons of Two Types of Tuina in Treating Lumbar Disc Herniation: A Finite Element Analysis.",
+        "authors": "Huang FF, Qiu MW, Wu WM, et al.",
+        "journal": "Pain Res Manag",
         "date": "2026-01-01",
         "displayDate": "2026",
-        "type": "Review",
-        "doi": "10.3389/fneur.2026.1882708",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42597459/"
+        "type": "Clinical trial",
+        "doi": "10.1155/prm/6643204",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41768000/"
       },
       {
-        "pmid": "42497145",
-        "title": "Association between cervical spine clinical active range of motion and pain or disability in people with neuromusculoskeletal neck pain: A systematic review and meta-analysis.",
-        "authors": "Soltanabadi S, Vatandoost S, Bayattork M, et al.",
-        "journal": "PLoS One",
+        "pmid": "41666078",
+        "title": "Personalized Robotic Lumbar Rehabilitation Based on Medical-Imaging-Assisted Musculoskeletal Biomechanical Modeling.",
+        "authors": "Wang J, Cui J, Ouyang H, et al.",
+        "journal": "IEEE Trans Neural Syst Rehabil Eng",
         "date": "2026-01-01",
         "displayDate": "2026",
-        "type": "Meta-analysis",
-        "doi": "10.1371/journal.pone.0353504",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42497145/"
+        "type": null,
+        "doi": "10.1109/TNSRE.2026.3663395",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41666078/"
       },
       {
-        "pmid": "42283584",
-        "title": "Biomechanical Comparison of Lumbar, Sacral and Iliac Screw Strain with the Novel Eiffel Tower Configuration Versus Conventional Pelvic Fixation in Adult Spinal Deformity Surgery.",
-        "authors": "Ha A, Yerukhimov A, Kim J, et al.",
-        "journal": "J Surg Orthop Adv",
+        "pmid": "41479346",
+        "title": "High Demand Loading Conditions and Their Effect on Polyethylene Stresses in Lumbar Total Joint Replacement: Implications for Spine Wear Protocols.",
+        "authors": "Kurtz SM, Rundell SA, Spece H, et al.",
+        "journal": "J Orthop Res",
         "date": "2026-01-01",
-        "displayDate": "2026 Summer",
+        "displayDate": "2026 Jan",
         "type": null,
-        "doi": null,
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42283584/"
+        "doi": "10.1002/jor.70115",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41479346/"
       },
       {
-        "pmid": "41428064",
-        "title": "Pediatric lumbar spine MRI: structural imaging findings and anatomical variants associated with disc herniation.",
-        "authors": "Yılmaz Ş, Bulut H, Emrahoğlu ME",
-        "journal": "Eur Spine J",
-        "date": "2025-12-22",
-        "displayDate": "2025 Dec 22",
+        "pmid": "41423531",
+        "title": "Biomechanical Impact of Titanium Cage Tilt in the Sagittal Plane in Lumbar Total Spondylectomy: a Finite Element Analysis.",
+        "authors": "Han Y, Ren X, Wang S, et al.",
+        "journal": "Ann Biomed Eng",
+        "date": "2025-12-21",
+        "displayDate": "2025 Dec 21",
         "type": null,
-        "doi": "10.1007/s00586-025-09691-2",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41428064/"
+        "doi": "10.1007/s10439-025-03950-5",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41423531/"
       },
       {
-        "pmid": "41331770",
-        "title": "Biomechanical effects of spinal orthoses on the trunk during a sit-to-stand-to-sit task.",
-        "authors": "Haworth L, Stainton P, Danes-Daetz C, et al.",
-        "journal": "Prosthet Orthot Int",
-        "date": "2025-12-03",
-        "displayDate": "2025 Dec 3",
+        "pmid": "41471643",
+        "title": "Quantitative Assessment of Biomechanical Deviations in Hybrid III Dummy Response Caused by Accessory Lumbar Supports.",
+        "authors": "Górniak W",
+        "journal": "Sensors (Basel)",
+        "date": "2025-12-17",
+        "displayDate": "2025 Dec 17",
         "type": null,
-        "doi": "10.1097/PXR.0000000000000508",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41331770/"
+        "doi": "10.3390/s25247647",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41471643/"
       },
       {
-        "pmid": "41136712",
-        "title": "Enhanced Vertebra-GNN: A Graph-Based Deep Learning Framework for Anatomically Informed Spinal Disease Classification.",
-        "authors": "Kılıç Ş",
-        "journal": "J Imaging Inform Med",
-        "date": "2025-10-24",
-        "displayDate": "2025 Oct 24",
+        "pmid": "41408624",
+        "title": "Impact of lamina preservation height during posterior decompression on lumbar biomechanical stress distribution: a finite element study.",
+        "authors": "Gong W, Xue C, Fei J, et al.",
+        "journal": "BMC Surg",
+        "date": "2025-12-17",
+        "displayDate": "2025 Dec 17",
         "type": null,
-        "doi": "10.1007/s10278-025-01696-z",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41136712/"
+        "doi": "10.1186/s12893-025-03434-2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41408624/"
+      },
+      {
+        "pmid": "41418504",
+        "title": "Lumbar spine passive stiffness correlates to peak lumbar spine angle following postural perturbations.",
+        "authors": "Lowery JSM, Conway EJ, Fewster KM",
+        "journal": "J Biomech",
+        "date": "2025-12-13",
+        "displayDate": "2025 Dec 13",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2025.113129",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41418504/"
+      },
+      {
+        "pmid": "41468231",
+        "title": "Are There Cumulative Changes in Lumbar Spine Passive Stiffness Throughout a Week of Prolonged Seated Work?",
+        "authors": "Davidson JM, Callaghan JP",
+        "journal": "J Appl Biomech",
+        "date": "2025-12-11",
+        "displayDate": "2025 Dec 11",
+        "type": null,
+        "doi": "10.1123/jab.2024-0325",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41468231/"
+      },
+      {
+        "pmid": "41385866",
+        "title": "An artificial neural network to estimate detailed active-passive spinal loads during static lifting activities for a standardized anthropometry.",
+        "authors": "Mohammadi H, Arjmand N",
+        "journal": "J Biomech",
+        "date": "2025-12-08",
+        "displayDate": "2025 Dec 8",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2025.113115",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41385866/"
+      },
+      {
+        "pmid": "41360004",
+        "title": "Does the Directive to Avoid Low Back Flexion Hinder Physical Performance? Examining Isometric Strength in Postures Adopted During Light Mass Lifting.",
+        "authors": "Pinto BL, Beach TAC, Callaghan JP",
+        "journal": "Hum Factors",
+        "date": "2025-12-08",
+        "displayDate": "2025 Dec 8",
+        "type": null,
+        "doi": "10.1177/00187208251404836",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41360004/"
+      },
+      {
+        "pmid": "41964920",
+        "title": "Pain, function, contractile properties, and spinal kinematics in adult females with and without non-specific chronic low back pain: a comparative and correlational study.",
+        "authors": "Lee H, Jeong Y, Joo H, et al.",
+        "journal": "Acta Bioeng Biomech",
+        "date": "2025-12-01",
+        "displayDate": "2025 Dec 1",
+        "type": null,
+        "doi": "10.37190/abb/214209",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41964920/"
+      },
+      {
+        "pmid": "41344149",
+        "title": "Spinal range of motion during different swim strokes in people with chronic low back pain: a randomised crossover trial.",
+        "authors": "Wareham DM, Hancock MJ, Graham PL, et al.",
+        "journal": "Musculoskelet Sci Pract",
+        "date": "2025-12-01",
+        "displayDate": "2025 Dec 1",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.msksp.2025.103464",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41344149/"
+      },
+      {
+        "pmid": "41368068",
+        "title": "The Effects of Different Coronal Plane Angulations during Foraminoplasty on Lumbar Stability: A Combined Clinical and Biomechanical Study.",
+        "authors": "Wu Z, He J, Cheng H, et al.",
+        "journal": "Clin Orthop Surg",
+        "date": "2025-11-13",
+        "displayDate": "2025 Nov 13",
+        "type": null,
+        "doi": "10.4055/cios24189",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41368068/"
+      },
+      {
+        "pmid": "41237477",
+        "title": "Comparison of six degree-of-freedom pure moment and non-uniform, physiologically-derived spinal loading at quasi-static and dynamic rates using a six-axis joint motion simulator.",
+        "authors": "McGregor M, Thompson C, McLachlin S",
+        "journal": "J Biomech",
+        "date": "2025-11-04",
+        "displayDate": "2025 Nov 4",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2025.113054",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41237477/"
+      },
+      {
+        "pmid": "41188184",
+        "title": "Reducing lumbar spine loading in Russian bar porters: a case study.",
+        "authors": "Cossin M, Schmidt P, Gilet F, et al.",
+        "journal": "Sports Biomech",
+        "date": "2025-11-04",
+        "displayDate": "2025 Nov 4",
+        "type": null,
+        "doi": "10.1080/14763141.2025.2578348",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41188184/"
+      },
+      {
+        "pmid": "41316555",
+        "title": "Effects of hydrotherapy kinetic chain exercises on muscle coactivation, pain management, and quality of life in men with chronic low back pain. Randomized clinical trial.",
+        "authors": "Ashoury H, Yalfani A",
+        "journal": "J Bodyw Mov Ther",
+        "date": "2025-10-27",
+        "displayDate": "2025 Oct 27",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.jbmt.2025.10.025",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41316555/"
+      },
+      {
+        "pmid": "41143986",
+        "title": "By the end of the puerperium: Kinematic assessment of lumbar spine range of motion after experiencing cesarean or vaginal birth.",
+        "authors": "Ali MG, Mamoon RS, Auais M, et al.",
+        "journal": "J Back Musculoskelet Rehabil",
+        "date": "2025-10-27",
+        "displayDate": "2025 Oct 27",
+        "type": null,
+        "doi": "10.1177/10538127251384023",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41143986/"
       },
       {
         "pmid": "41048162",
@@ -2155,48 +2078,125 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41048162/"
       },
       {
-        "pmid": "41031811",
-        "title": "Anatomy of the Long Thoracic Nerve in Relation to Thoracotomy for Spinal Approaches: How to Avoid Nerve Injury?",
-        "authors": "Khadanovich A, Benes M, Kaiser R, et al.",
-        "journal": "Oper Neurosurg",
-        "date": "2025-10-01",
-        "displayDate": "2025 Oct 1",
-        "type": null,
-        "doi": "10.1227/ons.0000000000001800",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41031811/"
+        "pmid": "40974606",
+        "title": "DMA Clinical Pilates(TM) exercises improved clinical and biomechanical outcomes for adults with nonspecific chronic low back pain: a randomized controlled trial.",
+        "authors": "Kwok BC, Lim JXL, Wong JKH, et al.",
+        "journal": "Disabil Rehabil",
+        "date": "2025-09-20",
+        "displayDate": "2025 Sep 20",
+        "type": "Randomized trial",
+        "doi": "10.1080/09638288.2025.2563762",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40974606/"
       },
       {
-        "pmid": "40562995",
-        "title": "Abdominal wall tension after spinal deformity correction compromises postoperative biomechanics and may contribute to proximal junctional kyphosis.",
-        "authors": "Jolas E, Galbusera F, Fekete TF, et al.",
+        "pmid": "40880062",
+        "title": "Patient-specific biomechanical modeling of intraoperative scoliosis correction on the 2-year outcomes for thoracolumbar/lumbar vertebral body tethering.",
+        "authors": "Gay M, Cobetto N, Caouette C, et al.",
+        "journal": "Spine Deform",
+        "date": "2025-08-29",
+        "displayDate": "2025 Aug 29",
+        "type": null,
+        "doi": "10.1007/s43390-025-01166-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40880062/"
+      },
+      {
+        "pmid": "40879490",
+        "title": "Trajectory-based analysis of spinal kinematics during forward bending in non-specific chronic low back pain subgroups: A smartphone 2D video tracking.",
+        "authors": "Yoo HI, Ahn IK, Kwon OY",
+        "journal": "J Back Musculoskelet Rehabil",
+        "date": "2025-08-29",
+        "displayDate": "2025 Aug 29",
+        "type": null,
+        "doi": "10.1177/10538127251372010",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40879490/"
+      },
+      {
+        "pmid": "40866225",
+        "title": "Investigation of perioperative changes in sciatic nerve stiffness in patients with lumbar disc herniation using shear wave elastography: A longitudinal cohort study.",
+        "authors": "Shoji R, Iwabuchi M, Ito T, et al.",
+        "journal": "Fukushima J Med Sci",
+        "date": "2025-08-26",
+        "displayDate": "2025 Aug 26",
+        "type": null,
+        "doi": "10.5387/fms.24-00060",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40866225/"
+      },
+      {
+        "pmid": "40856413",
+        "title": "Paired Biomechanical Comparison of Cortical and Traditional Pedicle Screw Constructs Under Cyclic Loading in a Severely Destabilized Lumbar Spine Model.",
+        "authors": "Swinford ST, Yoseph ET, Johnston TR, et al.",
+        "journal": "Spine (Phila Pa 1976)",
+        "date": "2025-08-26",
+        "displayDate": "2025 Aug 26",
+        "type": null,
+        "doi": "10.1097/BRS.0000000000005483",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40856413/"
+      },
+      {
+        "pmid": "40658229",
+        "title": "Responsiveness of the Japanese version of the lumbar stiffness disability index.",
+        "authors": "Furuya H, Hirohata K, Mitomo S, et al.",
         "journal": "Eur Spine J",
-        "date": "2025-06-26",
-        "displayDate": "2025 Jun 26",
+        "date": "2025-07-14",
+        "displayDate": "2025 Jul 14",
         "type": null,
-        "doi": "10.1007/s00586-025-09063-w",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40562995/"
+        "doi": "10.1007/s00586-025-09120-4",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40658229/"
       },
       {
-        "pmid": "40289521",
-        "title": "Biomechanical effects of upper articular process resection proportion on lumbar after transforaminal endoscopic spine system surgery.",
-        "authors": "Liu H, Zhang A, Chen H, et al.",
-        "journal": "Comput Methods Biomech Biomed Engin",
-        "date": "2025-04-27",
-        "displayDate": "2025 Apr 27",
+        "pmid": "40325503",
+        "title": "Pretapping Is Not Effective in Preventing Pedicle Fractures in Lumbar Spinal Instrumentation: A Biomechanical Cadaveric Study.",
+        "authors": "Bauer DE, Mari Major L, Wigger O, et al.",
+        "journal": "Spine (Phila Pa 1976)",
+        "date": "2025-05-05",
+        "displayDate": "2025 May 5",
         "type": null,
-        "doi": "10.1080/10255842.2025.2495252",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40289521/"
+        "doi": "10.1097/BRS.0000000000005384",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40325503/"
       },
       {
-        "pmid": "40007414",
-        "title": "Biomechanical modeling and assessment of patient positioning to facilitate spinal deformity instrumentation.",
-        "authors": "Wang X, Imbleau-Chagnon G, Caouette C, et al.",
-        "journal": "Comput Methods Biomech Biomed Engin",
-        "date": "2025-02-26",
-        "displayDate": "2025 Feb 26",
+        "pmid": "40181701",
+        "title": "Do lumbar spine kinematics contribute to individual low back pain development in habitual sitting?",
+        "authors": "Davidson JM, Callaghan JP",
+        "journal": "Ergonomics",
+        "date": "2025-04-04",
+        "displayDate": "2025 Apr 4",
         "type": null,
-        "doi": "10.1080/10255842.2025.2470796",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40007414/"
+        "doi": "10.1080/00140139.2025.2481608",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40181701/"
+      },
+      {
+        "pmid": "39955671",
+        "title": "A fatigue failure framework for the assessment of highly variable low back loading using inertial motion capture - a case study.",
+        "authors": "Nail-Ulloa I, Zabala M, Pool N, et al.",
+        "journal": "Ergonomics",
+        "date": "2025-02-16",
+        "displayDate": "2025 Feb 16",
+        "type": null,
+        "doi": "10.1080/00140139.2025.2460695",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39955671/"
+      },
+      {
+        "pmid": "39881436",
+        "title": "The effects of age, fitness, and health on the passive stiffness of the intact low back and its impact on seated work in a healthy, working, female population.",
+        "authors": "Diesbourg TL, Hemmerich A, Dumas GA",
+        "journal": "Ergonomics",
+        "date": "2025-01-29",
+        "displayDate": "2025 Jan 29",
+        "type": null,
+        "doi": "10.1080/00140139.2025.2456529",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39881436/"
+      },
+      {
+        "pmid": "39641666",
+        "title": "Impact of sacroiliac interosseous ligament tension and laxity on lumbar spine biomechanics under vertical vibration: a finite element study.",
+        "authors": "Yu S, Zheng S, Gao Y, et al.",
+        "journal": "Comput Methods Biomech Biomed Engin",
+        "date": "2024-12-06",
+        "displayDate": "2024 Dec 6",
+        "type": null,
+        "doi": "10.1080/10255842.2024.2437661",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39641666/"
       },
       {
         "pmid": "39632504",
@@ -2212,15 +2212,15 @@
     ]
   },
   "totals": {
-    "injuries": 16974,
-    "rehab": 5957,
-    "training": 227,
-    "mechanics": 3738
+    "injuries": 16373,
+    "rehab": 5852,
+    "training": 223,
+    "mechanics": 1404
   },
   "queries": {
-    "injuries": "(\"low back pain\"[ti] OR \"lumbar disc herniation\"[ti] OR sciatica[ti] OR spondylolysis[ti] OR (lumbar[ti] AND strain[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "rehab": "((\"low back pain\"[ti] OR sciatica[ti] OR \"lumbar disc\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "training": "((\"low back\"[ti] OR lumbar[ti] OR deadlift*[ti] OR \"trunk muscle*\"[ti] OR \"back extensor*\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"weight lifting\"[tiab] OR weightlifting[tiab] OR powerlifting[tiab])) AND humans[mh] AND english[la] AND hasabstract",
-    "mechanics": "((\"lumbar spine\"[ti] OR lumbar[ti] OR spine[ti] OR spinal[ti]) AND (lifting[ti] OR deadlift*[ti] OR squat*[ti] OR (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti]))) AND humans[mh] AND english[la] AND hasabstract"
+    "injuries": "(\"low back pain\"[ti] OR \"lumbar disc herniation\"[ti] OR sciatica[ti] OR spondylolysis[ti] OR (lumbar[ti] AND strain[ti]) NOT decoction[ti] NOT herbal[ti] NOT \"machine learning\"[ti] NOT prevalence[ti] NOT \"cross-cultural\"[ti] NOT \"conflicts of interest\"[ti] NOT affordability[ti] NOT disparities[ti] NOT \"text network\"[ti] NOT \"job satisfaction\"[ti] NOT caregivers[ti] NOT bisphenol[ti] NOT radiomics[ti] NOT Ayurvedic[ti] NOT \"CMS\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "rehab": "((\"low back pain\"[ti] OR sciatica[ti] OR \"lumbar disc\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti]) NOT decoction[ti] NOT herbal[ti] NOT \"machine learning\"[ti] NOT prevalence[ti] NOT \"cross-cultural\"[ti] NOT \"conflicts of interest\"[ti] NOT affordability[ti] NOT disparities[ti] NOT \"text network\"[ti] NOT \"job satisfaction\"[ti] NOT caregivers[ti] NOT bisphenol[ti] NOT radiomics[ti] NOT Ayurvedic[ti] NOT \"CMS\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "training": "((\"low back\"[ti] OR lumbar[ti] OR deadlift*[ti] OR \"trunk muscle*\"[ti] OR \"back extensor*\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"weight lifting\"[tiab] OR weightlifting[tiab] OR powerlifting[tiab]) NOT astronaut*[ti] NOT \"machine learning\"[ti] NOT lifestyle[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "mechanics": "((\"lumbar spine\"[ti] OR lumbar[ti] OR \"low back\"[ti] OR \"spinal loading\"[ti] OR \"spinal load*\"[ti] OR \"lumbar spinal\"[ti]) AND (lifting[ti] OR deadlift*[ti] OR squat*[ti] OR biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR loading[ti] OR \"range of motion\"[ti] OR stiffness[ti]) NOT cervical[ti] NOT thoracic[ti] NOT surgery[ti] NOT surgical[ti] NOT exosuit[ti] NOT reconstruction[ti] NOT radiograph*[ti] NOT aging[ti] NOT embalming[ti] NOT deformity[ti] NOT arterial[ti] NOT protocol[ti] NOT fusion[ti] NOT interbody[ti] NOT endoscopic[ti] NOT arthroplasty[ti] NOT \"ball-and-socket\"[ti] NOT traction[ti] NOT manipulation[ti]) AND humans[mh] AND english[la] AND hasabstract"
   }
 }

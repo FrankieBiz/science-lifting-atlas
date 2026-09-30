@@ -47,16 +47,6 @@ const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
     mechanics:
       '((wrist[ti] OR hand[ti] OR finger*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
   },
-  'lower-back': {
-    injuries:
-      '("low back pain"[ti] OR "lumbar disc herniation"[ti] OR sciatica[ti] OR spondylolysis[ti] OR (lumbar[ti] AND strain[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '(("low back pain"[ti] OR sciatica[ti] OR "lumbar disc"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '(("low back"[ti] OR lumbar[ti] OR deadlift*[ti] OR "trunk muscle*"[ti] OR "back extensor*"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "weight lifting"[tiab] OR weightlifting[tiab] OR powerlifting[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '(("lumbar spine"[ti] OR lumbar[ti] OR spine[ti] OR spinal[ti]) AND (lifting[ti] OR deadlift*[ti] OR squat*[ti] OR (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti]))) AND humans[mh] AND english[la] AND hasabstract',
-  },
 };
 
 describe('body-part registry', () => {
