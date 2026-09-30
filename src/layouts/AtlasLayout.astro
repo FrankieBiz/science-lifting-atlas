@@ -17,6 +17,12 @@ const pageTitle =
 const routeDepth = Astro.url.pathname.split('/').filter(Boolean).length;
 const rootHref = routeDepth === 0 ? './' : '../'.repeat(routeDepth);
 const evidenceHref = `${rootHref}#evidence-trace`;
+// Optional: set PUBLIC_SITE_URL at build time (for example
+// https://example.org) to emit absolute social-image URLs and a canonical
+// link. Without it the output stays relative so the build works anywhere.
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL ?? '').replace(/\/+$/, '');
+const socialImage = (file: string) =>
+  siteUrl ? `${siteUrl}/${file}` : `${rootHref}${file}`;
 ---
 
 <!doctype html>
@@ -28,6 +34,11 @@ const evidenceHref = `${rootHref}#evidence-trace`;
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
+    {
+      siteUrl && (
+        <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
+      )
+    }
     <link rel="icon" type="image/svg+xml" href={`${rootHref}favicon.svg`} />
     <link rel="alternate icon" href={`${rootHref}favicon.ico`} />
     <link
@@ -39,11 +50,11 @@ const evidenceHref = `${rootHref}#evidence-trace`;
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${rootHref}og-image.png`} />
+    <meta property="og:image" content={socialImage('og-image.png')} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${rootHref}twitter-image.png`} />
+    <meta name="twitter:image" content={socialImage('twitter-image.png')} />
     <title>{pageTitle}</title>
   </head>
   <body class:list={[current && `page-${current}`]}>

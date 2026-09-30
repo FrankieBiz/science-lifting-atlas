@@ -125,8 +125,11 @@ describe('digital assets contract', () => {
     expect(content).toContain('href={`${rootHref}apple-touch-icon.png`}');
     expect(content).toContain('rel="apple-touch-icon"');
     expect(content).toContain('href={`${rootHref}site.webmanifest`}');
-    expect(content).toContain('content={`${rootHref}og-image.png`}');
-    expect(content).toContain('content={`${rootHref}twitter-image.png`}');
+    // Social images go through socialImage(), which stays depth-relative
+    // unless PUBLIC_SITE_URL is set at build time.
+    expect(content).toContain("content={socialImage('og-image.png')}");
+    expect(content).toContain("content={socialImage('twitter-image.png')}");
+    expect(content).toContain('`${rootHref}${file}`');
   });
 
   it('renders every icon edge-to-edge: no white page margin, art not clipped', async () => {
