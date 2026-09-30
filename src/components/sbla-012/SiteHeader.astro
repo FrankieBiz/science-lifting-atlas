@@ -1,6 +1,6 @@
 ---
 interface Props {
-  current?: 'home' | 'entity' | 'methodology' | undefined;
+  current?: 'home' | 'entity' | 'methodology' | 'body' | undefined;
   rootHref: string;
 }
 const { current, rootHref } = Astro.props;
@@ -31,6 +31,10 @@ const evidenceHref = `${rootHref}#evidence-trace`;
   <nav aria-label="Primary navigation">
     <a href={rootHref} aria-current={current === 'home' ? 'page' : undefined}
       >Explore</a
+    >
+    <a
+      href={`${rootHref}#body-parts`}
+      aria-current={current === 'body' ? 'page' : undefined}>Body parts</a
     >
     <a href={evidenceHref}>Evidence</a>
     <a

@@ -20,11 +20,12 @@ copying assumed limits from model memory.
 | ------------------------------------------------------ | -------------------------------------------------------- | --------------------------------------------- |
 | [0001](0001-static-first-architecture.md)              | Static-first application architecture                    | Accepted                                      |
 | [0002](0002-content-data-and-graph.md)                 | Content data model and graph generation                  | Accepted                                      |
-| [0003](0003-hosting-and-asset-delivery.md)             | Hosting and asset delivery                               | Accepted                                      |
+| [0003](0003-hosting-and-asset-delivery.md)              | Hosting and asset delivery                               | Accepted                                      |
 | [0004](0004-analytics.md)                              | Analytics in Release 1                                   | Accepted                                      |
 | [0005](0005-zero-cost-infrastructure-model.md)         | $0/month infrastructure model at three traffic scenarios | Accepted                                      |
 | [0006](0006-execution-quality-and-validation-gates.md) | Execution quality and validation gates                   | Accepted (review-count rules amended by 0007) |
 | [0007](0007-throughput-and-parallel-delivery.md)       | Throughput, risk-tiered review, and parallel delivery    | Accepted                                      |
+| [0010](0010-body-part-directory.md)                     | Body-part directory outside the claim pipeline           | Accepted                                      |
 
 ## Recorded external facts
 

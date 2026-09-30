@@ -35,12 +35,16 @@
     "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm test:a11y && pnpm test:visual && pnpm content:slice:check && pnpm validate:content && pnpm lint:content-prose && pnpm validate:graph && pnpm validate:research && pnpm evidence:status && pnpm build && pnpm test:portability && pnpm verify:foundation && pnpm assets:spike && pnpm assets:decision",
     "test:portability": "vitest run --config vitest.portability.config.ts",
     "assets:spike": "node scripts/assets/spike.mjs",
+    "assets:capture-posters": "node scripts/assets/capture-posters.mjs",
     "assets:decision": "node scripts/assets/decision.mjs",
     "assets:benchmark": "node scripts/assets/benchmark.mjs",
     "assets:coverage": "node scripts/assets/coverage.mjs",
     "assets:mesh-map": "node scripts/assets/mesh-map.mjs",
     "assets:conversion:contract": "vitest run tests/unit/asset-conversion.test.ts",
-    "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write"
+    "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write",
+    "studies:fetch": "NODE_USE_ENV_PROXY=1 node scripts/studies/fetch.mjs",
+    "studies:preview": "NODE_USE_ENV_PROXY=1 node scripts/studies/preview.mjs",
+    "qa:screens": "node scripts/qa/screens.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

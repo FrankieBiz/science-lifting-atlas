@@ -50,6 +50,9 @@ Foundation-stage validators intentionally reject content records until the
 schema tasks that own them are complete. A validator that rejects your new file
 is usually correct; confirm the owning task before changing the validator.
 
+Body-part directory pages follow ADR 0010 and its plan; they are outside the
+claim pipeline.
+
 ## Roles and write boundaries
 
 | Role            | Owns                                                                | May write                      | Must never write                                                               |

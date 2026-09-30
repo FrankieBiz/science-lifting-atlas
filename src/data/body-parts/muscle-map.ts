@@ -1,0 +1,27 @@
+// Explorer muscle id -> region slugs, most specific first. The first slug that
+// is published wins, so links work before and after new regions ship.
+export const MUSCLE_REGIONS: Record<string, readonly string[]> = {
+  'pectoralis-major': ['chest', 'shoulder'],
+  'deltoid-regions': ['shoulder'],
+  'rotator-cuff': ['shoulder'],
+  'teres-major': ['shoulder'],
+  rhomboids: ['upper-back', 'shoulder'],
+  'trapezius-regions': ['upper-back', 'neck'],
+  'biceps-brachii': ['elbow'],
+  brachialis: ['elbow'],
+  brachioradialis: ['elbow'],
+  'triceps-brachii': ['elbow'],
+  'forearm-flexors-extensors': ['wrist-and-hand'],
+  'external-oblique': ['abdomen-and-core', 'lower-back'],
+  'spinal-erectors': ['lower-back'],
+  'gluteus-maximus': ['hip-and-groin'],
+  'gluteus-medius': ['hip-and-groin'],
+  'gluteus-minimus': ['hip-and-groin'],
+  'major-hip-flexors': ['hip-and-groin'],
+  'hip-adductors': ['hip-and-groin'],
+  quadriceps: ['thigh', 'knee'],
+  hamstrings: ['thigh', 'knee'],
+  'gastrocnemius-heads': ['lower-leg', 'ankle-and-foot'],
+  soleus: ['lower-leg', 'ankle-and-foot'],
+  'tibialis-anterior': ['lower-leg', 'ankle-and-foot'],
+};

@@ -1,0 +1,149 @@
+---
+import frontPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
+import backPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster-back.png?url';
+import {
+  BODY_PARTS,
+  GROUPS,
+  bodyPartsInGroup,
+} from '../../data/body-parts/index.ts';
+import type { PosterPoint, PosterView } from '../../data/body-parts/types.ts';
+import {
+  figureAspect,
+  mapImageStyle,
+  mapPoint,
+} from '../../lib/body-parts/body-map.ts';
+import '../../styles/body-map.css';
+
+const figures = [
+  { view: 'front', label: 'Front', poster: frontPosterUrl },
+  { view: 'back', label: 'Back', poster: backPosterUrl },
+] as const;
+
+function spotsFor(view: PosterView) {
+  return BODY_PARTS.flatMap((part) =>
+    part.hotspots
+      .filter((point) => point.view === view)
+      .map((point: PosterPoint) => ({ part, point })),
+  );
+}
+---
+
+<div class="body-map" data-body-map>
+  <div
+    class="body-map__toggle"
+    role="group"
+    aria-label="Choose body view"
+    data-body-toggle
+  >
+    {
+      figures.map(({ view, label }, index) => (
+        <button
+          type="button"
+          data-view-toggle={view}
+          aria-pressed={index === 0 ? 'true' : 'false'}
+        >
+          {label}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="body-map__layout">
+    <div class="body-map__figures">
+      {
+        figures.map(({ view, label, poster }, index) => {
+          const imageStyle = mapImageStyle(view);
+          return (
+            <figure
+              class="body-map__figure"
+              data-body-figure={view}
+              data-active={index === 0 ? 'true' : 'false'}
+              style={`--body-figure-aspect: ${figureAspect(view)}`}
+            >
+              <div class="body-map__frame">
+                <img
+                  src={poster}
+                  alt=""
+                  aria-hidden="true"
+                  width="862"
+                  height="672"
+                  loading="eager"
+                  style={`width: ${imageStyle.width.toFixed(3)}%; left: ${imageStyle.left.toFixed(3)}%; top: ${imageStyle.top.toFixed(3)}%`}
+                />
+                <div class="body-map__spots">
+                  {spotsFor(view).map(({ part, point }) => {
+                    const position = mapPoint(point);
+                    return (
+                      <a
+                        class="body-map__spot"
+                        href={`./body/${part.slug}/`}
+                        style={`left: ${position.left.toFixed(3)}%; top: ${position.top.toFixed(3)}%`}
+                      >
+                        <span class="body-map__dot" aria-hidden="true" />
+                        <span class="body-map__label">{part.name}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+              <figcaption>{label} view</figcaption>
+            </figure>
+          );
+        })
+      }
+    </div>
+
+    <nav class="body-map__index" aria-label="Body parts by region">
+      {
+        GROUPS.map((group) => (
+          <section aria-labelledby={`body-map-${group.id}`}>
+            <h3 id={`body-map-${group.id}`}>{group.label}</h3>
+            <ul>
+              {bodyPartsInGroup(group.id).map((part) => (
+                <li>
+                  <a href={`./body/${part.slug}/`}>{part.name}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </nav>
+  </div>
+
+  <p class="body-map__attribution">
+    BodyParts3D © DBCLS · <a
+      href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
+      >CC BY 4.0</a
+    >
+  </p>
+</div>
+
+<script>
+  const maps = document.querySelectorAll<HTMLElement>('[data-body-map]');
+  for (const map of maps) {
+    const figures = map.querySelectorAll<HTMLElement>('[data-body-figure]');
+    const buttons =
+      map.querySelectorAll<HTMLButtonElement>('[data-view-toggle]');
+    const setView = (view: 'front' | 'back') => {
+      map.dataset.enhanced = 'true';
+      for (const figure of figures) {
+        figure.dataset.active = String(figure.dataset.bodyFigure === view);
+      }
+      for (const button of buttons) {
+        button.setAttribute(
+          'aria-pressed',
+          String(button.dataset.viewToggle === view),
+        );
+      }
+    };
+
+    setView('front');
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const view = button.dataset.viewToggle;
+        if (view === 'front' || view === 'back') setView(view);
+      });
+    }
+  }
+</script>

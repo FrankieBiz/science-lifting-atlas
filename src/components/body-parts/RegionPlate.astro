@@ -1,0 +1,47 @@
+---
+import frontPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
+import backPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster-back.png?url';
+import type { BodyPart } from '../../data/body-parts/index.ts';
+import { POSTERS, plateImageStyle } from '../../lib/body-parts/plate.ts';
+
+interface Props {
+  part: BodyPart;
+  variant: 'hero' | 'card';
+}
+
+const { part, variant } = Astro.props;
+// The plate crops the poster so the region sits at the centre.
+const plateRatio = variant === 'hero' ? 5 / 4 : 3 / 4;
+const zoom = variant === 'hero' ? part.plate.zoom : part.plate.zoom * 0.85;
+const view = part.plate.view;
+const posterUrl = view === 'back' ? backPosterUrl : frontPosterUrl;
+const { width, left, top } = plateImageStyle(
+  part.plate,
+  zoom,
+  plateRatio,
+  POSTERS[view],
+);
+---
+
+<figure
+  class:list={['region-plate', `region-plate--${variant}`]}
+  style={`--plate-ratio: ${1 / plateRatio}`}
+>
+  <img
+    src={posterUrl}
+    alt=""
+    width={POSTERS[view].width}
+    height={POSTERS[view].height}
+    loading={variant === 'hero' ? 'eager' : 'lazy'}
+    style={`width: ${width.toFixed(2)}%; left: ${left.toFixed(2)}%; top: ${top.toFixed(2)}%`}
+  />
+  <span class="region-plate__ring" aria-hidden="true"></span>
+  {
+    variant === 'hero' && (
+      <figcaption>
+        <span class="region-plate__dot" aria-hidden="true" />
+        {part.name} · {view} view
+      </figcaption>
+    )
+  }
+</figure>

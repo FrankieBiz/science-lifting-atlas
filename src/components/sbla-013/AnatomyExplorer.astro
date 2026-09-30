@@ -1,5 +1,6 @@
 ---
 import MuscleGuide from './MuscleGuide.astro';
+import { bodyPartForMuscle } from '../../data/body-parts/index.ts';
 import modelUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer.glb?url';
 import posterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
 import manifest from '../../../docs/licenses/anatomy-explorer-manifest.json';
@@ -9,7 +10,13 @@ interface Props {
   prototypeEnabled: boolean;
 }
 const { prototypeEnabled } = Astro.props;
-const entities = manifest.entities;
+const entities = manifest.entities.map((entity) => ({
+  ...entity,
+  region: bodyPartForMuscle(entity.id),
+}));
+const initialRegion = entities.find(
+  (entity) => entity.id === 'pectoralis-major',
+)?.region;
 ---
 
 <section
@@ -100,6 +107,8 @@ const entities = manifest.entities;
             type="button"
             data-muscle={entity.id}
             data-parts={entity.partIds.join(',')}
+            data-region-slug={entity.region?.slug}
+            data-region-name={entity.region?.name}
             aria-pressed={entity.id === 'pectoralis-major' ? 'true' : 'false'}
             disabled
           >
@@ -118,6 +127,18 @@ const entities = manifest.entities;
       <p>
         Choose a muscle to see it in context, or isolate it for a closer look.
       </p>
+      {
+        initialRegion && (
+          <a
+            class="anatomy-explorer__region"
+            data-region-link
+            href={`./body/${initialRegion.slug}/`}
+          >
+            {initialRegion.name}: overview, injuries &amp; research{' '}
+            <span aria-hidden="true">›</span>
+          </a>
+        )
+      }
       <button
         class="anatomy-explorer__isolate"
         data-isolate
@@ -189,6 +210,8 @@ const entities = manifest.entities;
     );
     const guideLink =
       root.querySelector<HTMLAnchorElement>('[data-guide-link]');
+    const regionLink =
+      root.querySelector<HTMLAnchorElement>('[data-region-link]');
     const muscleButtons = [
       ...root.querySelectorAll<HTMLButtonElement>('[data-muscle]'),
     ];
@@ -221,6 +244,11 @@ const entities = manifest.entities;
         item.button.setAttribute('aria-pressed', String(item.id === selected));
       if (evidence) evidence.hidden = selected !== 'pectoralis-major';
       if (guideLink) guideLink.hidden = selected !== 'pectoralis-major';
+      const { regionSlug, regionName } = group.button.dataset;
+      if (regionLink && regionSlug && regionName) {
+        regionLink.href = `./body/${regionSlug}/`;
+        regionLink.firstChild!.textContent = `${regionName}: overview, injuries & research `;
+      }
       for (const mesh of muscleMeshes) {
         const active = group.parts.includes(mesh.userData.sourceId);
         mesh.visible = !isolated || active;

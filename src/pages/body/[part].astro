@@ -1,0 +1,372 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import RegionPlate from '../../components/body-parts/RegionPlate.astro';
+import {
+  BODY_PARTS,
+  GROUPS,
+  bodyPartsInGroup,
+  type BodyPart,
+} from '../../data/body-parts/index.ts';
+import AtlasLayout from '../../layouts/AtlasLayout.astro';
+import { loadStudies, studyCount } from '../../lib/studies/load';
+import {
+  dateParts,
+  pubmedSearchUrl,
+  studyKind,
+} from '../../lib/studies/studies';
+import '../../styles/body-parts.css';
+
+export const getStaticPaths = (() =>
+  BODY_PARTS.map((part) => ({
+    params: { part: part.slug },
+    props: { part },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  part: BodyPart;
+}
+
+const { part } = Astro.props;
+const { fetchedAt, categories, totals, queries } = loadStudies(part.slug);
+const total = studyCount(part.slug);
+const updated = new Date(`${fetchedAt}T12:00:00Z`).toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+const moreGroups = GROUPS.map((group) => ({
+  ...group,
+  parts: bodyPartsInGroup(group.id).filter((other) => other.slug !== part.slug),
+})).filter((group) => group.parts.length > 0);
+---
+
+<AtlasLayout
+  title={part.name}
+  description={`${part.name}: what it does, common injuries, and the latest research, newest first.`}
+  current="body"
+>
+  <div class="region-page">
+    <section class="region-hero" aria-labelledby="page-title">
+      <div class="region-hero__copy">
+        <nav class="region-crumbs" aria-label="Breadcrumb">
+          <a href="../../#body-parts">Body parts</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{part.name}</span>
+        </nav>
+        <h1 id="page-title">{part.name}</h1>
+        <p class="region-hero__lede">{part.tagline}</p>
+        <div class="region-hero__actions">
+          <a class="button button--primary" href="#research">
+            Read the research
+          </a>
+          <a class="button button--quiet" href="#injuries"
+            >Common injuries <span aria-hidden="true">›</span></a
+          >
+        </div>
+        <dl class="region-hero__metrics">
+          <div><dt>{total}</dt><dd>studies</dd></div>
+          <div><dt>{part.categories.length}</dt><dd>categories</dd></div>
+          <div>
+            <dt>{part.commonInjuries.length}</dt><dd>common injuries</dd>
+          </div>
+        </dl>
+      </div>
+      <RegionPlate part={part} variant="hero" />
+    </section>
+
+    <section class="region-overview" aria-labelledby="overview-title">
+      <div class="region-overview__inner">
+        <div class="region-overview__text">
+          <p class="micro-label">Overview</p>
+          <h2 id="overview-title">What it does.</h2>
+          <p>{part.whatItDoes}</p>
+        </div>
+        <aside class="region-card" aria-labelledby="parts-title">
+          <h3 id="parts-title">Main parts</h3>
+          <ul>{part.keyParts.map((item) => <li>{item}</li>)}</ul>
+        </aside>
+      </div>
+    </section>
+
+    <section
+      id="injuries"
+      class="region-injuries"
+      aria-labelledby="injuries-title"
+    >
+      <header>
+        <p class="micro-label">When it goes wrong</p>
+        <h2 id="injuries-title">Common injuries.</h2>
+      </header>
+      <ol class="injury-grid">
+        {
+          part.commonInjuries.map((injury, index) => (
+            <li class="injury-card">
+              <span class="injury-card__index">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3>{injury.name}</h3>
+              <p>{injury.summary}</p>
+            </li>
+          ))
+        }
+      </ol>
+      {
+        part.safetyNote ? (
+          <p class="region-note region-note--safety">{part.safetyNote}</p>
+        ) : (
+          <p class="region-note">
+            General information, not a diagnosis. See a clinician for pain that
+            is severe, keeps getting worse, or comes with numbness or weakness.
+          </p>
+        )
+      }
+    </section>
+
+    <section
+      id="research"
+      class="region-research"
+      aria-labelledby="research-title"
+    >
+      <header class="region-research__head">
+        <div>
+          <p class="micro-label">The research</p>
+          <h2 id="research-title">Newest first.</h2>
+        </div>
+        <p>
+          The latest studies from PubMed, sorted by publication date. Updated
+          <time datetime={fetchedAt}>{updated}</time>.
+        </p>
+      </header>
+
+      <nav class="study-tabs" aria-label="Study categories" data-study-tabs>
+        {
+          part.categories.map((category, index) => (
+            <a
+              href={`#studies-${category.id}`}
+              data-tab={category.id}
+              aria-current={index === 0 ? 'true' : undefined}
+            >
+              {category.label}
+              <span>{categories[category.id]?.length ?? 0}</span>
+            </a>
+          ))
+        }
+      </nav>
+
+      <div
+        class="study-filter"
+        role="group"
+        aria-label="Study type"
+        data-study-filter
+        hidden
+      >
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="review" aria-pressed="false">
+          Reviews
+        </button>
+        <button type="button" data-filter="trial" aria-pressed="false">
+          Trials
+        </button>
+      </div>
+
+      {
+        part.categories.map((category) => (
+          <section
+            class="study-panel"
+            id={`studies-${category.id}`}
+            data-panel={category.id}
+            aria-labelledby={`heading-${category.id}`}
+          >
+            <header>
+              <h3 id={`heading-${category.id}`}>{category.label}</h3>
+              <p>{category.blurb}</p>
+              <p class="study-panel__count">
+                <strong>{(categories[category.id] ?? []).length}</strong> newest
+                of {(totals[category.id] ?? 0).toLocaleString('en-US')} on
+                PubMed ·{' '}
+                <a
+                  href={pubmedSearchUrl(queries[category.id])}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  See all <span aria-hidden="true">↗</span>
+                  <span class="visually-hidden">(opens in a new tab)</span>
+                </a>
+              </p>
+            </header>
+            <ol class="study-list">
+              {(categories[category.id] ?? []).map((study) => {
+                const when = dateParts(study);
+                return (
+                  <li data-kind={studyKind(study.type)}>
+                    <a
+                      class="study-row"
+                      href={study.url}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <time class="study-row__date" datetime={study.date}>
+                        <span>{when.month ?? '—'}</span>
+                        <strong>{when.day ?? when.year}</strong>
+                        {when.day && <span>{when.year}</span>}
+                      </time>
+                      <span class="study-row__body">
+                        {study.type && (
+                          <span class="study-row__type">{study.type}</span>
+                        )}
+                        <span class="study-row__title">{study.title}</span>
+                        <span class="study-row__meta">
+                          {study.authors} · {study.journal}
+                        </span>
+                      </span>
+                      <span class="study-row__go">
+                        PubMed <span aria-hidden="true">↗</span>
+                        <span class="visually-hidden">
+                          (opens in a new tab)
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+            <p class="study-empty" data-empty hidden>
+              No <span data-kind-label /> among the newest{' '}
+              {(categories[category.id] ?? []).length}.{' '}
+              <a
+                href={pubmedSearchUrl(queries[category.id])}
+                target="_blank"
+                rel="noopener"
+              >
+                See all on PubMed <span aria-hidden="true">↗</span>
+                <span class="visually-hidden">(opens in a new tab)</span>
+              </a>
+            </p>
+            <button class="study-more" type="button" data-more hidden />
+          </section>
+        ))
+      }
+      <p class="region-note">
+        Studies are listed automatically from PubMed searches and are not
+        individually vetted. Open a study to read its abstract and full details.
+      </p>
+    </section>
+
+    <nav class="region-more" aria-labelledby="more-title">
+      <h2 id="more-title">Explore another body part.</h2>
+      {
+        moreGroups.map((group) => (
+          <div class="region-more__group">
+            <h3>{group.label}</h3>
+            <ul>
+              {group.parts.map((other) => (
+                <li>
+                  <a href={`../${other.slug}/`}>
+                    {other.name} <span aria-hidden="true">›</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+  </div>
+</AtlasLayout>
+
+<script>
+  // Progressive enhancement. Without JavaScript every study stays visible.
+  // With it: category links become tabs, a type filter appears, and each list
+  // shows 10 rows at a time with "Show more".
+  const nav = document.querySelector<HTMLElement>('[data-study-tabs]');
+  if (nav) {
+    const tabs = [...nav.querySelectorAll<HTMLAnchorElement>('[data-tab]')];
+    const panels = [...document.querySelectorAll<HTMLElement>('[data-panel]')];
+    const bar = document.querySelector<HTMLElement>('[data-study-filter]')!;
+    const buttons = [...bar.querySelectorAll<HTMLButtonElement>('button')];
+    const limits = new Map<HTMLElement, number>();
+    let kind = 'all';
+
+    const render = (panel: HTMLElement) => {
+      const rows = [...panel.querySelectorAll<HTMLElement>('li[data-kind]')];
+      const shown = rows.filter(
+        (r) => kind === 'all' || r.dataset.kind === kind,
+      );
+      const limit = limits.get(panel) ?? 10;
+      for (const row of rows) row.hidden = true;
+      shown.forEach((row, i) => (row.hidden = i >= limit));
+      const empty = panel.querySelector<HTMLElement>('[data-empty]')!;
+      empty.hidden = shown.length > 0;
+      empty.querySelector('[data-kind-label]')!.textContent =
+        kind === 'review' ? 'reviews' : 'trials';
+      const more = panel.querySelector<HTMLButtonElement>('[data-more]')!;
+      const left = shown.length - limit;
+      more.hidden = left <= 0;
+      more.textContent = `Show more · ${left} left`;
+      return shown;
+    };
+
+    const show = (id: string, moveFocus = false) => {
+      for (const tab of tabs) {
+        const active = tab.dataset.tab === id;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        if (active && moveFocus) tab.focus();
+      }
+      for (const panel of panels) {
+        panel.hidden = panel.dataset.panel !== id;
+        if (!panel.hidden) {
+          limits.delete(panel);
+          render(panel);
+        }
+      }
+    };
+
+    nav.setAttribute('role', 'tablist');
+    for (const tab of tabs) {
+      tab.setAttribute('role', 'tab');
+      tab.removeAttribute('aria-current');
+      tab.setAttribute('aria-controls', `studies-${tab.dataset.tab}`);
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        show(tab.dataset.tab!);
+      });
+      tab.addEventListener('keydown', (event) => {
+        const step =
+          event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+        if (!step) return;
+        event.preventDefault();
+        const next = (tabs.indexOf(tab) + step + tabs.length) % tabs.length;
+        show(tabs[next]!.dataset.tab!, true);
+      });
+    }
+    for (const panel of panels) {
+      panel.setAttribute('role', 'tabpanel');
+      panel.querySelector('[data-more]')!.addEventListener('click', () => {
+        const limit = limits.get(panel) ?? 10;
+        limits.set(panel, limit + 20);
+        render(panel)[limit]?.querySelector('a')?.focus();
+      });
+    }
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        kind = button.dataset.filter!;
+        for (const b of buttons) {
+          b.setAttribute('aria-pressed', String(b === button));
+        }
+        limits.clear();
+        for (const panel of panels) render(panel);
+      });
+    }
+    bar.hidden = false;
+    const fromHash = location.hash.replace('#studies-', '');
+    show(
+      tabs.some((tab) => tab.dataset.tab === fromHash)
+        ? fromHash
+        : tabs[0]!.dataset.tab!,
+    );
+    nav.dataset.enhanced = 'true';
+  }
+</script>
