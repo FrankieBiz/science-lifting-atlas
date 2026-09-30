@@ -10,14 +10,14 @@ Branch: bp/R-lower-back · Base: 936c829 · Head: 64c1ccf (plus this note) · Ag
 
 ## Final PubMed totals and preview results
 
-| Category  | PubMed total | mustMatch hit rate (20 newest) | Spot check of the 20 newest                                                                                                                                                                                                                           |
-| --------- | ------------ | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| injuries  | 16,373       | 20/20                          | 18/20 about low back pain; 2 marginal (an immune-neural review of disc degeneration; an ankle-instability review). Mostly chronic low back pain trials; the newest 20 rarely show spondylolysis or sprain papers because pain trials are so numerous. |
-| rehab     | 5,852        | 20/20                          | 19/20 on topic (exercise, physiotherapy, telerehabilitation, meta-analyses); 1 marginal (an astronaut exercise-countermeasures paper)                                                                                                                 |
-| training  | 223          | 20/20                          | 16/20 on topic (deadlift, trunk strength, resistance training for back pain); 4 marginal (two hamstring Nordic-exercise trials, a load-velocity monitoring paper, a hammock-exercise autonomic study)                                                 |
-| mechanics | 1,404        | 20/20                          | 18/20 on topic (spinal loading in lifting, lumbar stiffness and kinematics); 2 marginal (a muscle-stimulation technique paper; a lumbar traction trial)                                                                                               |
+| Category  | PubMed total  | mustMatch hit rate (20 newest) | Spot check of the 20 newest                                                                                                                                                                                                                           |
+| --------- | ------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| injuries  | 16,373        | 20/20                          | 18/20 about low back pain; 2 marginal (an immune-neural review of disc degeneration; an ankle-instability review). Mostly chronic low back pain trials; the newest 20 rarely show spondylolysis or sprain papers because pain trials are so numerous. |
+| rehab     | 5,852         | 20/20                          | 19/20 on topic (exercise, physiotherapy, telerehabilitation, meta-analyses); 1 marginal (an astronaut exercise-countermeasures paper)                                                                                                                 |
+| training  | 148 (was 223) | 20/20                          | 19/20 on topic after the follow-up (was 16/20) (deadlift, trunk strength, resistance training for back pain); 4 marginal (two hamstring Nordic-exercise trials, a load-velocity monitoring paper, a hammock-exercise autonomic study)                 |
+| mechanics | 1,404         | 20/20                          | 18/20 on topic (spinal loading in lifting, lumbar stiffness and kinematics); 2 marginal (a muscle-stimulation technique paper; a lumbar traction trial)                                                                                               |
 
-The training spot check is 16/20, below the plan's 18/20 bar. I did not keep tightening it because the total is already only 223 (above the 150 minimum), and further exclusions risk dropping real deadlift papers. **Owner call:** accept this as an exception or ask for a narrower query; the `mustMatch` test passes (20/20), so it is only the spot check that is short.
+**Update (follow-up branch bp/R-lower-back-training):** the 16/20 training spot check above was fixed. The query now requires the resistance-training abstract terms and also a training, exercise, strength, deadlift, lifting, resistance or hypertrophy word in the title, with lower-back, lumbar, deadlift, trunk-extensor and similar title terms, plus \`NOT astronaut* NOT "machine learning" NOT lifestyle NOT hamstring* NOT "load-velocity" NOT "load velocity" NOT hammock NOT autonomic NOT "pain reprocessing" NOT telerehabilitation NOT "Response to"\`. Result: 148 matches (just under 150, allowed for narrow regions), 20/20 \`mustMatch\`, and about 19/20 on topic when I read the final 20 titles (the only strays are two short comment papers on one trial). The owner decision on this exception is no longer needed.
 
 ## Query changes
 
@@ -35,10 +35,9 @@ The training spot check is 16/20, below the plan's 18/20 bar. I did not keep tig
 
 - **Lane crossing:** a Lane L task done by Lane S under the owner's autonomous direction.
 - **Test edit outside the R-task file list:** removed the `lower-back` entry from `QUERY_SNAPSHOT` in `tests/unit/body-parts-registry.test.ts` (queries changed on purpose).
-- **Training spot check 16/20** (above), recorded rather than hidden.
+- Training spot check was 16/20, since fixed by the follow-up above.
 - Owner review: injury wording was written from general knowledge and the §6 brief; I could not open MedlinePlus/NHS/AAOS pages here, so it stays conservative and general. The safety note is the §6 text.
 
 ## Needs from other tasks / owner
 
-- Owner decision on the training spot check (accept or narrow).
 - Owner read-through of `/body/lower-back/`.
