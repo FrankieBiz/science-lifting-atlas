@@ -15,6 +15,7 @@ import { plateImageStyle } from '../../src/lib/body-parts/plate.ts';
 import { validateBodyPart } from '../../src/lib/body-parts/validate.ts';
 
 /** PubMed terms as they were before the registry split (must never drift). */
+// Regions are removed from this snapshot when their R task deliberately revises the queries.
 const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
   shoulder: {
     injuries:
@@ -85,16 +86,6 @@ const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
       '((quadriceps[ti] OR hamstring*[ti] OR squat*[ti] OR "knee extens*"[ti] OR "leg press"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "resistance exercise"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract',
     mechanics:
       '(knee[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
-  },
-  'ankle-and-foot': {
-    injuries:
-      '("ankle sprain"[ti] OR "achilles tendinopathy"[ti] OR "achilles tendon rupture"[ti] OR "plantar fasciitis"[ti] OR "plantar heel pain"[ti] OR "ankle instability"[ti]) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '(("ankle sprain"[ti] OR achilles[ti] OR "plantar fasciitis"[ti] OR "plantar heel pain"[ti] OR "ankle instability"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '((calf[ti] OR "triceps surae"[ti] OR "plantar flexor*"[ti] OR gastrocnemius[ti] OR soleus[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "resistance exercise"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '((ankle[ti] OR foot[ti] OR achilles[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
   },
 };
 
