@@ -140,7 +140,9 @@ const entities = manifest.entities;
       </details>
       {
         prototypeEnabled && (
-          <a href="#muscle-guide-title">Open learning guide</a>
+          <a data-guide-link href="#muscle-guide-title">
+            Read Pectoralis major guide
+          </a>
         )
       }
       {
@@ -185,6 +187,8 @@ const entities = manifest.entities;
     const evidence = root.querySelector<HTMLAnchorElement>(
       '[data-evidence-link]',
     );
+    const guideLink =
+      root.querySelector<HTMLAnchorElement>('[data-guide-link]');
     const muscleButtons = [
       ...root.querySelectorAll<HTMLButtonElement>('[data-muscle]'),
     ];
@@ -216,6 +220,7 @@ const entities = manifest.entities;
       for (const item of groups)
         item.button.setAttribute('aria-pressed', String(item.id === selected));
       if (evidence) evidence.hidden = selected !== 'pectoralis-major';
+      if (guideLink) guideLink.hidden = selected !== 'pectoralis-major';
       for (const mesh of muscleMeshes) {
         const active = group.parts.includes(mesh.userData.sourceId);
         mesh.visible = !isolated || active;

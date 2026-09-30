@@ -31,9 +31,8 @@ test.describe('learning usability', () => {
       'true',
     );
     await page.locator('[data-muscle="biceps-brachii"]').click();
-    await guide
-      .getByRole('button', { name: 'Learn about Pectoralis major' })
-      .click();
+    await expect(guide.locator('[data-guide-empty]')).toBeVisible();
+    await page.locator('[data-muscle="pectoralis-major"]').click();
     await expect(
       page.locator('[data-muscle="pectoralis-major"]'),
     ).toHaveAttribute('aria-pressed', 'true');

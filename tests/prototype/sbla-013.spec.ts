@@ -72,10 +72,11 @@ test('a failed model request preserves the static route and offers retry', async
 
 test('the static anatomy and evidence remain with JavaScript disabled', async ({
   browser,
+  baseURL,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4322/muscles/pectoralis-major/');
+  await page.goto(`${baseURL}/muscles/pectoralis-major/`);
   await expect(page.locator('.entity-hero__specimen img')).toBeVisible();
   await expect(
     page.getByText(

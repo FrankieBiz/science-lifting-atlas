@@ -39,7 +39,9 @@ test('the local evidence journey links a muscle, claim, and source', async ({
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: 'Explore the atlas' }).click();
+  await page.getByRole('link', { name: 'Explore the body' }).click();
+  await expect(page).toHaveURL(/#anatomy-explorer$/);
+  await page.getByRole('link', { name: 'Explore the evidence' }).click();
   await expect(page).toHaveURL(/\/muscles\/pectoralis-major\/$/);
   await expect(page.getByLabel('Prototype publication status')).toContainText(
     'not approved for publication',
@@ -105,7 +107,8 @@ test('keyboard, mobile reflow, and reduced motion preserve the evidence path', a
       ),
     )
     .toBe(true);
-  await page.getByRole('link', { name: 'Explore the atlas' }).click();
+  await page.getByRole('link', { name: 'Explore the body' }).click();
+  await expect(page).toHaveURL(/#anatomy-explorer$/);
   await expect
     .poll(() =>
       page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
