@@ -77,16 +77,6 @@ const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
     mechanics:
       '(hip[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
   },
-  knee: {
-    injuries:
-      '("anterior cruciate ligament"[ti] OR ACL[ti] OR meniscus[ti] OR meniscal[ti] OR "patellofemoral pain"[ti] OR "patellar tendinopathy"[ti]) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '(("anterior cruciate ligament"[ti] OR ACL[ti] OR "knee osteoarthritis"[ti] OR "patellofemoral pain"[ti] OR "patellar tendinopathy"[ti] OR meniscal[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '((quadriceps[ti] OR hamstring*[ti] OR squat*[ti] OR "knee extens*"[ti] OR "leg press"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "resistance exercise"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '(knee[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
-  },
 };
 
 describe('body-part registry', () => {
