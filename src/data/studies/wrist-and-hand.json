@@ -125,6 +125,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42619208/"
       },
       {
+        "pmid": "42658720",
+        "title": "Examining the role of insulin-like growth factor 1 in the pathophysiology of carpal tunnel syndrome: a Mendelian randomization study.",
+        "authors": "Wood AJ, Lovegrove CE, Furniss D, et al.",
+        "journal": "Int J Epidemiol",
+        "date": "2026-08-18",
+        "displayDate": "2026 Aug 18",
+        "type": null,
+        "doi": "10.1093/ije/dyag173",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42658720/"
+      },
+      {
+        "pmid": "42653270",
+        "title": "Discordance Between Ultrasonographic and Clinical Outcomes After Corticosteroid Injection in Sjögren's Disease-Associated Carpal Tunnel Syndrome.",
+        "authors": "Kościńska-Shukla I, Szarmach A, Chylińska M, et al.",
+        "journal": "Int J Mol Sci",
+        "date": "2026-08-14",
+        "displayDate": "2026 Aug 14",
+        "type": null,
+        "doi": "10.3390/ijms27167266",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42653270/"
+      },
+      {
+        "pmid": "42587074",
+        "title": "Forearm position-dependent variations in the carpal tunnel safe zone: an ultrasonographic anatomical rationale for a pronation-based injection concept.",
+        "authors": "Adıgüzel İF, Öztürk EK",
+        "journal": "Surg Radiol Anat",
+        "date": "2026-08-12",
+        "displayDate": "2026 Aug 12",
+        "type": null,
+        "doi": "10.1007/s00276-026-03961-4",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42587074/"
+      },
+      {
         "pmid": "42560480",
         "title": "Multilevel evaluation of the median nerve in carpal tunnel syndrome using microvascular doppler ultrasonography.",
         "authors": "Özer BM, Çelikyay F, Dal Erdoğan S, et al.",
@@ -134,6 +167,61 @@
         "type": null,
         "doi": "10.1007/s00256-026-05337-6",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42560480/"
+      },
+      {
+        "pmid": "42543875",
+        "title": "Atherogenic Burden and Remnant Cholesterol Associate With Electrophysiological Severity in Carpal Tunnel Syndrome.",
+        "authors": "Aksoy Gündoğdu A, Çiçekli E, Kotan D",
+        "journal": "Brain Behav",
+        "date": "2026-08-01",
+        "displayDate": "2026 Aug",
+        "type": null,
+        "doi": "10.1002/brb3.71637",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42543875/"
+      },
+      {
+        "pmid": "42538788",
+        "title": "Neural Recovery After Carpal Tunnel Release: A Systematic Review With Meta-Analysis.",
+        "authors": "Sobeeh MG, Elsisy M, Abozaid EM, et al.",
+        "journal": "J Orthop Sports Phys Ther",
+        "date": "2026-08-01",
+        "displayDate": "2026 Aug",
+        "type": "Meta-analysis",
+        "doi": "10.2519/jospt.2026.13846",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42538788/"
+      },
+      {
+        "pmid": "42466774",
+        "title": "Carpal Tunnel Release: Technical Considerations for the Orthopaedic Trauma Surgeon.",
+        "authors": "Coscia A, Weinerman J, Hake M, et al.",
+        "journal": "J Orthop Trauma",
+        "date": "2026-08-01",
+        "displayDate": "2026 Aug 1",
+        "type": "Review",
+        "doi": "10.1097/BOT.0000000000003183",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42466774/"
+      },
+      {
+        "pmid": "42480580",
+        "title": "Optical hand kinematics for machine learning-based screening of carpal tunnel syndrome.",
+        "authors": "Çelikbaş Ş, Akgündoğdu A, Gündüz A",
+        "journal": "Med Eng Phys",
+        "date": "2026-07-29",
+        "displayDate": "2026 Jul 29",
+        "type": null,
+        "doi": "10.1088/1873-4030/ae8dce",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42480580/"
+      },
+      {
+        "pmid": "42654338",
+        "title": "Return-to-Work and Early Functional Recovery Following Office-Based Ultrasound-Guided Microinvasive Carpal Tunnel Release: A Prospective Cohort Study.",
+        "authors": "Lobos CA, Wilcox K, Cottrell A, et al.",
+        "journal": "Medicina (Kaunas)",
+        "date": "2026-07-24",
+        "displayDate": "2026 Jul 24",
+        "type": null,
+        "doi": "10.3390/medicina62081441",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42654338/"
       },
       {
         "pmid": "42476482",
@@ -147,6 +235,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42476482/"
       },
       {
+        "pmid": "42553903",
+        "title": "Optimizing Drill Guide Positioning for Foveal Targeting in Arthroscopic One-Bone Tunnel Triangular Fibrocartilage Complex Repair: A Radiographic and Magnetic Resonance Imaging-Based Study.",
+        "authors": "Nam JJ, Choi IC, Koh Y, et al.",
+        "journal": "Clin Orthop Surg",
+        "date": "2026-07-15",
+        "displayDate": "2026 Jul 15",
+        "type": null,
+        "doi": "10.4055/cios25372",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42553903/"
+      },
+      {
         "pmid": "42442444",
         "title": "Screening for Transthyretin Amyloidosis During Carpal Tunnel Release: An Opportunity for Early Diagnosis.",
         "authors": "Jeanneteau J, Bigorre N",
@@ -156,6 +255,28 @@
         "type": "Review",
         "doi": "10.1016/j.amjcard.2026.07.007",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42442444/"
+      },
+      {
+        "pmid": "42445748",
+        "title": "The Use of Platelet-Rich Plasma for De Quervain's Tenosynovitis: A Systematic Review With Limited Meta-Analysis.",
+        "authors": "Abumadian AW, Binibrahim MI, Sultan AH, et al.",
+        "journal": "Saudi Med J",
+        "date": "2026-07-07",
+        "displayDate": "2026 Jul 7",
+        "type": "Meta-analysis",
+        "doi": "10.15537/1658-3175.8818",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42445748/"
+      },
+      {
+        "pmid": "42579762",
+        "title": "Accessory Flexor Digitorum Superficialis Indicis as Likely Cause of Recalcitrant Carpal Tunnel Syndrome: A Case Report.",
+        "authors": "Wu CM, Cathey JM, Hammert WC, et al.",
+        "journal": "JBJS Case Connect",
+        "date": "2026-07-01",
+        "displayDate": "2026 Jul 1",
+        "type": "Case report",
+        "doi": "10.2106/JBJS.CC.26.00233",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42579762/"
       },
       {
         "pmid": "42365503",
@@ -180,6 +301,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42336036/"
       },
       {
+        "pmid": "42206562",
+        "title": "Efficacy of Perineural Dextrose Versus Corticosteroid Injection for Carpal Tunnel Syndrome: A Randomized, Double-Blind Clinical Trial.",
+        "authors": "Omejec G, Tumpaj VP, Dolinar G, et al.",
+        "journal": "Muscle Nerve",
+        "date": "2026-05-28",
+        "displayDate": "2026 May 28",
+        "type": "Randomized trial",
+        "doi": "10.1002/mus.70292",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42206562/"
+      },
+      {
         "pmid": "42200413",
         "title": "Clinical construct validity and subgroup stability of the Romanian version of the Boston Carpal Tunnel Questionnaire in nerve-conduction-confirmed carpal tunnel syndrome - a cross-sectional study.",
         "authors": "Popescu DN, Popescu C, Morari O, et al.",
@@ -189,6 +321,72 @@
         "type": null,
         "doi": "10.2478/rjim-2026-0012",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42200413/"
+      },
+      {
+        "pmid": "42101400",
+        "title": "Longitudinal Changes in Patient-Reported Outcomes Following Carpal Tunnel Release: A Retrospective Cohort Study.",
+        "authors": "Saito K, Okada M, Hama S, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-05-08",
+        "displayDate": "2026 May 8",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2025.09.011",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42101400/"
+      },
+      {
+        "pmid": "42089868",
+        "title": "Perioperative Prophylactic Antibiotics and Endoscopic Carpal Tunnel Release: A TriNetX Analysis.",
+        "authors": "Allen BE, Kuo KT, Ha J, et al.",
+        "journal": "Ann Plast Surg",
+        "date": "2026-05-06",
+        "displayDate": "2026 May 6",
+        "type": null,
+        "doi": "10.1097/SAP.0000000000004764",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42089868/"
+      },
+      {
+        "pmid": "42068446",
+        "title": "Single-sequence low-field 3D T1-weighted MRI for scaphoid fracture detection compared to radiography: prospective diagnostic accuracy pilot study.",
+        "authors": "Neubauer C, Schuppert C, Reidelbach CS, et al.",
+        "journal": "Emerg Radiol",
+        "date": "2026-05-02",
+        "displayDate": "2026 May 2",
+        "type": null,
+        "doi": "10.1007/s10140-026-02481-3",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42068446/"
+      },
+      {
+        "pmid": "42114282",
+        "title": "Altered blood-based biomarkers in carpal tunnel syndrome. A systematic review and meta-analysis.",
+        "authors": "Menéndez-Cámara J, Molina-Álvarez M, Zabala-Zambrano J, et al.",
+        "journal": "Musculoskelet Sci Pract",
+        "date": "2026-04-30",
+        "displayDate": "2026 Apr 30",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.msksp.2026.103561",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42114282/"
+      },
+      {
+        "pmid": "42002607",
+        "title": "The triangular fibrocartilage complex (TFCC): updated anatomy, variants, and MRI diagnostic pitfalls.",
+        "authors": "Bouredoucen H",
+        "journal": "Skeletal Radiol",
+        "date": "2026-04-20",
+        "displayDate": "2026 Apr 20",
+        "type": "Review",
+        "doi": "10.1007/s00256-026-05219-x",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42002607/"
+      },
+      {
+        "pmid": "42009285",
+        "title": "Pharmacologic and Neurodynamic Interventions for Carpal Tunnel Syndrome: A Randomized Clinical Trial.",
+        "authors": "Unda-Solano FH, Araya-Quintanilla F, Gutiérrez-Espinoza H, et al.",
+        "journal": "Arch Phys Med Rehabil",
+        "date": "2026-04-18",
+        "displayDate": "2026 Apr 18",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.apmr.2026.04.012",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42009285/"
       },
       {
         "pmid": "42013307",
@@ -202,6 +400,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42013307/"
       },
       {
+        "pmid": "41992685",
+        "title": "Secondary Carpal Tunnel Syndrome Due to Flexor Tenosynovitis in a Diabetic Patient.",
+        "authors": "Sharma P, Kale A, Jadhav D",
+        "journal": "Ann Afr Med",
+        "date": "2026-04-16",
+        "displayDate": "2026 Apr 16",
+        "type": "Case report",
+        "doi": "10.4103/aam.aam_796_25",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41992685/"
+      },
+      {
+        "pmid": "41989360",
+        "title": "Carpal Tunnel Release Surgical Techniques.",
+        "authors": "El Bachaoui R, Earp BE, Blazar PE, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-04-16",
+        "displayDate": "2026 Apr 16",
+        "type": "Review",
+        "doi": "10.1016/j.jhsa.2026.03.004",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41989360/"
+      },
+      {
+        "pmid": "41989359",
+        "title": "Interobserver Reliability of the Trampoline Test, Hook Test, and Suction Test in Arthroscopic Assessment of Triangular Fibrocartilage Complex Lesions.",
+        "authors": "Hasegawa H, Levadoux M, Quemener-Tanguy A, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-04-16",
+        "displayDate": "2026 Apr 16",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2026.02.036",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41989359/"
+      },
+      {
         "pmid": "42773590",
         "title": "Pillar pain as a previously undescribed predictor of clinical outcome after carpal tunnel syndrome surgery: A prospective cohort study.",
         "authors": "Calzado-Alvarez I, Carpintero-Lluch R, Lopez-Medina C, et al.",
@@ -213,6 +444,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42773590/"
       },
       {
+        "pmid": "41766175",
+        "title": "Postoperative pain after carpal tunnel or trigger digit release using local anaesthesia with tourniquet or WALANT.",
+        "authors": "Kwak SH, Jang HS, Kim DH, et al.",
+        "journal": "J Hand Surg Eur Vol",
+        "date": "2026-03-01",
+        "displayDate": "2026 Mar 1",
+        "type": null,
+        "doi": "10.1177/17531934261420615",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41766175/"
+      },
+      {
+        "pmid": "41570337",
+        "title": "A Novel Cannula Crafted From Disposable Syringes for Endoscopic Carpal Tunnel Release in the Treatment of Carpal Tunnel Syndrome.",
+        "authors": "Zheng W, Zhang M, Zhao LL, et al.",
+        "journal": "Surg Innov",
+        "date": "2026-01-22",
+        "displayDate": "2026 Jan 22",
+        "type": null,
+        "doi": "10.1177/15533506261417253",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41570337/"
+      },
+      {
+        "pmid": "41811834",
+        "title": "The Inlet Cross-sectional Area: The Most Reliable Ultrasound Parameter for the Diagnosis of Carpal Tunnel Syndrome.",
+        "authors": "Soleimani Z, Eftekharsadat B, Markazi-Movaghar R, et al.",
+        "journal": "Am J Phys Med Rehabil",
+        "date": "2026-01-13",
+        "displayDate": "2026 Jan 13",
+        "type": null,
+        "doi": "10.1097/PHM.0000000000002930",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41811834/"
+      },
+      {
         "pmid": "41528189",
         "title": "Impact of Ultrasound-Guided Corticosteroid Injections on Intervention-Free Survival for de Quervain Tenosynovitis.",
         "authors": "Kim JK, Hammert WC, Mithani SK",
@@ -222,6 +486,72 @@
         "type": null,
         "doi": "10.1097/PRS.0000000000012808",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41528189/"
+      },
+      {
+        "pmid": "41490303",
+        "title": "Current Indications and Outcomes of Arthroscopic Treatment for Radial-Sided Wrist Injuries.",
+        "authors": "Vilai P, Kakar S",
+        "journal": "J Am Acad Orthop Surg",
+        "date": "2025-12-31",
+        "displayDate": "2025 Dec 31",
+        "type": "Review",
+        "doi": "10.5435/JAAOS-D-25-00192",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41490303/"
+      },
+      {
+        "pmid": "41307144",
+        "title": "Most Common Consumer Products Associated With Hand and Wrist Injuries Presenting to US Emergency Departments: An NEISS Database Analysis.",
+        "authors": "Aceto M, Shaylor J, Zumsteg J",
+        "journal": "Hand (N Y)",
+        "date": "2025-11-27",
+        "displayDate": "2025 Nov 27",
+        "type": null,
+        "doi": "10.1177/15589447251392939",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41307144/"
+      },
+      {
+        "pmid": "41287570",
+        "title": "Patient-Directed Care After Carpal Tunnel Release Using Video Integration and Digital Education After Operations (VIDEO Trial): A Randomized Controlled Trial.",
+        "authors": "Bissette RG, Beck JH, Novikova CO, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-11-25",
+        "displayDate": "2025 Nov 25",
+        "type": "Randomized trial",
+        "doi": "10.1177/15589447251389650",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41287570/"
+      },
+      {
+        "pmid": "41015914",
+        "title": "Comparing Online Patient Searches About Carpal Tunnel Release Approaches: A Study on Modern Search Analytics.",
+        "authors": "Miyasaka MS, Ren R, Tran T, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-09-28",
+        "displayDate": "2025 Sep 28",
+        "type": null,
+        "doi": "10.1177/15589447251371246",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41015914/"
+      },
+      {
+        "pmid": "40964734",
+        "title": "Secondary Carpal Tunnel Release After Surgical Fixation of the Distal Radius: A Case-Control Study.",
+        "authors": "den Hengst S, Eppink K, Ghaderi N, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-09-18",
+        "displayDate": "2025 Sep 18",
+        "type": null,
+        "doi": "10.1177/15589447251369031",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40964734/"
+      },
+      {
+        "pmid": "40739662",
+        "title": "Misdiagnosis in carpal tunnel syndrome: amyloidosis and other red flags. A narrative review.",
+        "authors": "Menéndez-Cámara J, Cecilia-López D, García-Lamas L, et al.",
+        "journal": "Diagnosis (Berl)",
+        "date": "2025-08-01",
+        "displayDate": "2025 Aug 1",
+        "type": "Review",
+        "doi": "10.1515/dx-2025-0063",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40739662/"
       }
     ],
     "rehab": [
@@ -303,6 +633,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42228586/"
       },
       {
+        "pmid": "42001196",
+        "title": "Acute Clinical Effects of Dual-Task Resistance Exercise on Muscle Endurance and Pressure Sensitivity in Patients With Carpal Tunnel Syndrome After Surgery.",
+        "authors": "Núñez-Cortés R, Cruz-Montecinos C, López-Bueno L, et al.",
+        "journal": "Musculoskeletal Care",
+        "date": "2026-06-01",
+        "displayDate": "2026 Jun",
+        "type": "Randomized trial",
+        "doi": "10.1002/msc.70223",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42001196/"
+      },
+      {
+        "pmid": "41269848",
+        "title": "Smartwatch Accelerometer Step Counting That Rejects False Positives During Non-Walking Wrist Movement.",
+        "authors": "Xu Z, Chen Y, Pan H, et al.",
+        "journal": "IEEE J Biomed Health Inform",
+        "date": "2026-06-01",
+        "displayDate": "2026 Jun",
+        "type": null,
+        "doi": "10.1109/JBHI.2025.3635190",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41269848/"
+      },
+      {
+        "pmid": "42175515",
+        "title": "Predicting poor wrist function recovery after internal fixation of distal radius fractures: A retrospective study based on multivariate analysis and machine learning models.",
+        "authors": "Deng LP, Li J, Ma T, et al.",
+        "journal": "Medicine (Baltimore)",
+        "date": "2026-05-22",
+        "displayDate": "2026 May 22",
+        "type": null,
+        "doi": "10.1097/MD.0000000000048917",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42175515/"
+      },
+      {
         "pmid": "42228468",
         "title": "Exercise-induced changes in blood pressure and pulse rate in relation to cardiac structure and function assessed by a wearable wrist-type oscillometric blood pressure monitor.",
         "authors": "Zhou Y, Chen Y, Chen YL, et al.",
@@ -312,6 +675,83 @@
         "type": null,
         "doi": "10.1097/HJH.0000000000004353",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42228468/"
+      },
+      {
+        "pmid": "42138726",
+        "title": "Impact of modified Henry approach with preservation of Flexor Carpi Radialis Tendon Sheath on wrist function in the treatment of distal radius fractures.",
+        "authors": "Ma D, Ji J, Zhu Y, et al.",
+        "journal": "Arch Orthop Trauma Surg",
+        "date": "2026-05-15",
+        "displayDate": "2026 May 15",
+        "type": null,
+        "doi": "10.1007/s00402-026-06326-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42138726/"
+      },
+      {
+        "pmid": "42108489",
+        "title": "Effects of semi-independent bedside rehabilitation of the upper limb assisted with a mobile wrist-hand exoneuromusculoskeleton (ENMS) for inpatients with subacute stroke: a randomized controlled trial (RCT).",
+        "authors": "Wang Y, Huang Y, Mao Y, et al.",
+        "journal": "J Neuroeng Rehabil",
+        "date": "2026-05-10",
+        "displayDate": "2026 May 10",
+        "type": "Randomized trial",
+        "doi": "10.1186/s12984-026-02013-7",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42108489/"
+      },
+      {
+        "pmid": "42069972",
+        "title": "Rerupture after flexor tendon repair of the hand and wrist: a retrospective risk factor analysis.",
+        "authors": "Marwieser SF, Vavricka S, Kaiser P, et al.",
+        "journal": "Arch Orthop Trauma Surg",
+        "date": "2026-05-02",
+        "displayDate": "2026 May 2",
+        "type": null,
+        "doi": "10.1007/s00402-026-06302-7",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42069972/"
+      },
+      {
+        "pmid": "41528761",
+        "title": "Effect of ultrasound-guided percutaneous electrolysis and nerve stimulation on pain and function in carpal tunnel syndrome: A randomized clinical trial.",
+        "authors": "Borrella-Andrés S, Rodríguez-Sanz J, López-de-Celis C, et al.",
+        "journal": "Pain Med",
+        "date": "2026-05-01",
+        "displayDate": "2026 May 1",
+        "type": "Randomized trial",
+        "doi": "10.1093/pm/pnaf170",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41528761/"
+      },
+      {
+        "pmid": "42057378",
+        "title": "Comparison of Treatment Outcomes From 6 Weeks of Home-Based Kinesio Taping and Transcutaneous Electrical Nerve Stimulation Combined With Self-Applied Myofascial Stretching in Adults With Carpal Tunnel Syndrome.",
+        "authors": "Hong WH, Chen CL, Lin HC, et al.",
+        "journal": "Med Sci Monit",
+        "date": "2026-04-30",
+        "displayDate": "2026 Apr 30",
+        "type": "Randomized trial",
+        "doi": "10.12659/MSM.951932",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42057378/"
+      },
+      {
+        "pmid": "42020458",
+        "title": "An EEG-EMG-kinematics dataset from wrist pointing tasks for biomarker research in neurorehabilitation.",
+        "authors": "Perez-Blanco JG, Huegel JC, Hernández-Rojas LG, et al.",
+        "journal": "Sci Data",
+        "date": "2026-04-22",
+        "displayDate": "2026 Apr 22",
+        "type": null,
+        "doi": "10.1038/s41597-026-07287-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42020458/"
+      },
+      {
+        "pmid": "42012042",
+        "title": "Management of Volkmann Ischemic Wrist Contracture: A Literature and Case-Based Review of Treatment Modalities with a Focus on Ilizarov Circular Frames.",
+        "authors": "Orfanos I, Kostin E, Kirienko A",
+        "journal": "Acta Orthop Belg",
+        "date": "2026-04-20",
+        "displayDate": "2026 Apr 20",
+        "type": "Review",
+        "doi": "10.52628/92.1.14819",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42012042/"
       },
       {
         "pmid": "42009122",
@@ -325,15 +765,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42009122/"
       },
       {
-        "pmid": "42009285",
-        "title": "Pharmacologic and Neurodynamic Interventions for Carpal Tunnel Syndrome: A Randomized Clinical Trial.",
-        "authors": "Unda-Solano FH, Araya-Quintanilla F, Gutiérrez-Espinoza H, et al.",
-        "journal": "Arch Phys Med Rehabil",
-        "date": "2026-04-18",
-        "displayDate": "2026 Apr 18",
-        "type": "Randomized trial",
-        "doi": "10.1016/j.apmr.2026.04.012",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42009285/"
+        "pmid": "41981029",
+        "title": "The impact of wrist flexion on task performance and compensatory movements in transradial prosthesis users.",
+        "authors": "Miller LA, Boser QA, Darbhe V, et al.",
+        "journal": "Sci Rep",
+        "date": "2026-04-14",
+        "displayDate": "2026 Apr 14",
+        "type": null,
+        "doi": "10.1038/s41598-026-47669-2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41981029/"
       },
       {
         "pmid": "41979159",
@@ -347,6 +787,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41979159/"
       },
       {
+        "pmid": "41956038",
+        "title": "Real-time feedback-based personalized moderate-intensity aerobic brisk walking intervention using wrist-worn photoplethysmography (PPG) on mild-to-moderate depressive.",
+        "authors": "Zhang P, Fu H, Fu Q, et al.",
+        "journal": "Acta Psychol (Amst)",
+        "date": "2026-04-08",
+        "displayDate": "2026 Apr 8",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.actpsy.2026.106782",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41956038/"
+      },
+      {
+        "pmid": "41919928",
+        "title": "Hand Pain and Sensory Deficits: Carpal Tunnel Syndrome: Revision 2026.",
+        "authors": "Erickson M, Lawrence M, Lazinski MJ, et al.",
+        "journal": "J Orthop Sports Phys Ther",
+        "date": "2026-04-01",
+        "displayDate": "2026 Apr",
+        "type": "Guideline",
+        "doi": "10.2519/jospt.2026.0301",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41919928/"
+      },
+      {
         "pmid": "41872728",
         "title": "Adaptation of Neural Common Drive to Motor Units of the Wrist Extensor Agonists in Chronic Lateral Epicondylitis.",
         "authors": "Chen YC, Chen Y, Wu CC, et al.",
@@ -356,6 +818,17 @@
         "type": null,
         "doi": "10.1249/MSS.0000000000003993",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41872728/"
+      },
+      {
+        "pmid": "41901671",
+        "title": "Optimal Skin Incision for the Surgical Treatment of De Quervain Tenosynovitis: A Systematic Review and Meta-Analysis.",
+        "authors": "Kitridis D, Karagergou E, Givissis A, et al.",
+        "journal": "Medicina (Kaunas)",
+        "date": "2026-03-20",
+        "displayDate": "2026 Mar 20",
+        "type": "Meta-analysis",
+        "doi": "10.3390/medicina62030590",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41901671/"
       },
       {
         "pmid": "41854581",
@@ -369,6 +842,94 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41854581/"
       },
       {
+        "pmid": "41851862",
+        "title": "Wrist muscle performance in students with chronic nonspecific neck pain: an isokinetic assessment.",
+        "authors": "Refaey MM, Youssef EF, Gheit AS, et al.",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2026-03-18",
+        "displayDate": "2026 Mar 18",
+        "type": null,
+        "doi": "10.1186/s12891-026-09730-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41851862/"
+      },
+      {
+        "pmid": "41839395",
+        "title": "Dorsal wrist capsular impingement: a systematic review of clinical presentation, imaging findings, arthroscopic characteristics, and treatment outcomes.",
+        "authors": "Wong CR, Khan S, Paul R, et al.",
+        "journal": "Hand Surg Rehabil",
+        "date": "2026-03-14",
+        "displayDate": "2026 Mar 14",
+        "type": "Systematic review",
+        "doi": "10.1016/j.hansur.2026.102639",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41839395/"
+      },
+      {
+        "pmid": "41784594",
+        "title": "Early Recovery Trajectories Predict Achievement of a Patient-Acceptable Symptom State After Open and Endoscopic Carpal Tunnel Release.",
+        "authors": "Hausner CJ, Franchino JT, Hamdan S, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-03-04",
+        "displayDate": "2026 Mar 4",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2026.01.015",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41784594/"
+      },
+      {
+        "pmid": "41774033",
+        "title": "Surgical Management of Wrist Arthritis Is Linked to Increased Carpal Tunnel Syndrome/Carpal Tunnel Release Risk: Rethinking Preoperative Evaluation.",
+        "authors": "Mzeihem M, Foy M, Alvarez J, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-03-03",
+        "displayDate": "2026 Mar 3",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2026.01.013",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41774033/"
+      },
+      {
+        "pmid": "41901541",
+        "title": "Key Outcomes for Evaluating Hand and Wrist Scars: A Nationwide Survey of Clinicians in Saudi Arabia.",
+        "authors": "Bakhsh HR, Alotaibi RW, Aldhahi MI, et al.",
+        "journal": "Medicina (Kaunas)",
+        "date": "2026-02-28",
+        "displayDate": "2026 Feb 28",
+        "type": null,
+        "doi": "10.3390/medicina62030459",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41901541/"
+      },
+      {
+        "pmid": "41763348",
+        "title": "Personalized Treatment Goals in Hand and Wrist Care: Understanding the Influence of Baseline and Target Score on Goal Achievement.",
+        "authors": "van Kooij YE, Loos NL, Hovius SER, et al.",
+        "journal": "Arch Phys Med Rehabil",
+        "date": "2026-02-26",
+        "displayDate": "2026 Feb 26",
+        "type": null,
+        "doi": "10.1016/j.apmr.2026.02.013",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41763348/"
+      },
+      {
+        "pmid": "41742293",
+        "title": "Efficacy of different doses of platelet-rich plasma for moderate carpal tunnel syndrome: study protocol for a prospective, randomized, controlled trial in Guangzhou, China.",
+        "authors": "Li Y, Lu Y, Wei Z, et al.",
+        "journal": "Trials",
+        "date": "2026-02-25",
+        "displayDate": "2026 Feb 25",
+        "type": "Trial protocol",
+        "doi": "10.1186/s13063-026-09538-1",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41742293/"
+      },
+      {
+        "pmid": "41731569",
+        "title": "Guided corticomuscular neuroplasticity for restoration of wrist-hand function post-stroke.",
+        "authors": "Tan F, Qing W, Ip WC, et al.",
+        "journal": "J Neuroeng Rehabil",
+        "date": "2026-02-23",
+        "displayDate": "2026 Feb 23",
+        "type": "Randomized trial",
+        "doi": "10.1186/s12984-026-01915-w",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41731569/"
+      },
+      {
         "pmid": "41674040",
         "title": "The Unified Classification System applied to the management of periprosthetic fractures after Motec(®) total wrist arthroplasty.",
         "authors": "Brown DJ, Hill F, Estfan R, et al.",
@@ -380,15 +941,48 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41674040/"
       },
       {
-        "pmid": "41570337",
-        "title": "A Novel Cannula Crafted From Disposable Syringes for Endoscopic Carpal Tunnel Release in the Treatment of Carpal Tunnel Syndrome.",
-        "authors": "Zheng W, Zhang M, Zhao LL, et al.",
-        "journal": "Surg Innov",
-        "date": "2026-01-22",
-        "displayDate": "2026 Jan 22",
+        "pmid": "41779982",
+        "title": "Externally Powered Peripheral Nerve Stimulator With a Separate Receiver at the Median Nerve for the Treatment of Postoperative Carpal Tunnel Release-Related Chronic Pain in the Upper Extremity: A Case Report.",
+        "authors": "Tran A, Taylor C, Ladwig J, et al.",
+        "journal": "Pain Med Case Rep",
+        "date": "2026-02-01",
+        "displayDate": "2026 Feb",
+        "type": "Case report",
+        "doi": null,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41779982/"
+      },
+      {
+        "pmid": "40663689",
+        "title": "Design, Modeling and Evaluation of Lattice Structure Pneumatic Actuators (LSPAs) for Soft Wrist Rehabilitation Robot.",
+        "authors": "Lai J, Song A, Lu Y, et al.",
+        "journal": "IEEE Trans Biomed Eng",
+        "date": "2026-02-01",
+        "displayDate": "2026 Feb",
         "type": null,
-        "doi": "10.1177/15533506261417253",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41570337/"
+        "doi": "10.1109/TBME.2025.3588902",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40663689/"
+      },
+      {
+        "pmid": "41499334",
+        "title": "Comparison of Extracorporeal Radial Shock Wave Different Doses On Carpal Tunnel Syndrome: A Preliminary Study.",
+        "authors": "Hassan AM, Mohammed Kamel SM, Aboelnasr E, et al.",
+        "journal": "NeuroRehabilitation",
+        "date": "2026-01-07",
+        "displayDate": "2026 Jan 7",
+        "type": null,
+        "doi": "10.1177/10538135251407693",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41499334/"
+      },
+      {
+        "pmid": "41508613",
+        "title": "Role of Alpha-Lipoic Acid as a Co-adjuvant Treatment with Surgical Decompression of Carpal Tunnel Syndrome: A Retrospective Study.",
+        "authors": "Barrera-Ochoa S, Prieto-Meré JA, Mora E, et al.",
+        "journal": "J Hand Surg Asian Pac Vol",
+        "date": "2026-01-05",
+        "displayDate": "2026 Jan 5",
+        "type": null,
+        "doi": "10.1142/S2424835526500104",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41508613/"
       },
       {
         "pmid": "42524355",
@@ -402,17 +996,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42524355/"
       },
       {
-        "pmid": "41490303",
-        "title": "Current Indications and Outcomes of Arthroscopic Treatment for Radial-Sided Wrist Injuries.",
-        "authors": "Vilai P, Kakar S",
-        "journal": "J Am Acad Orthop Surg",
-        "date": "2025-12-31",
-        "displayDate": "2025 Dec 31",
-        "type": "Review",
-        "doi": "10.5435/JAAOS-D-25-00192",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41490303/"
-      },
-      {
         "pmid": "41395746",
         "title": "Algorithms to support the choice of a wrist-hand orthosis for motor function recovery in post-stroke patients: a narrative systematic review.",
         "authors": "Pagès M, Taiar R, Demangeot Y, et al.",
@@ -422,6 +1005,17 @@
         "type": "Systematic review",
         "doi": "10.1080/10749357.2025.2598627",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41395746/"
+      },
+      {
+        "pmid": "41386318",
+        "title": "Accuracy of artificial intelligence in carpal tunnel syndrome management: A comparative analysis of ChatGPT-4o and Gemini 1.5 Pro.",
+        "authors": "Singh P, Shqair L, Naphade O, et al.",
+        "journal": "Hand Surg Rehabil",
+        "date": "2025-12-10",
+        "displayDate": "2025 Dec 10",
+        "type": null,
+        "doi": "10.1016/j.hansur.2025.102560",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41386318/"
       },
       {
         "pmid": "41274538",
@@ -444,6 +1038,72 @@
         "type": "Randomized trial",
         "doi": "10.1016/j.jht.2025.09.006",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41253578/"
+      },
+      {
+        "pmid": "41017618",
+        "title": "Comparison of kinematic wrist motion between dominant and non-dominant hands in bimanual tasks of activities of daily living.",
+        "authors": "Date S, Yamamoto Y, Kurumadani H, et al.",
+        "journal": "J Hand Surg Eur Vol",
+        "date": "2025-09-29",
+        "displayDate": "2025 Sep 29",
+        "type": null,
+        "doi": "10.1177/17531934251381208",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41017618/"
+      },
+      {
+        "pmid": "40899869",
+        "title": "Glucagon-Like Peptide-1 Receptor Agonist Therapy Associated With Fewer Diagnoses of Carpal Tunnel Syndrome Within 2 Years of Treatment.",
+        "authors": "Hiredesai AN, Holle AM, Zhuang J, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-09-03",
+        "displayDate": "2025 Sep 3",
+        "type": null,
+        "doi": "10.1177/15589447251366676",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40899869/"
+      },
+      {
+        "pmid": "40388036",
+        "title": "A Shortened Upper Extremity Functional Capacity Evaluation for Patients with Complaints of Hand, Wrist, Forearm, and Elbow: Composition and Assessment of Construct Validity and Test-Retest Reliability.",
+        "authors": "Berduszek RJ, Dekker R, van der Sluis CK, et al.",
+        "journal": "J Occup Rehabil",
+        "date": "2025-05-19",
+        "displayDate": "2025 May 19",
+        "type": null,
+        "doi": "10.1007/s10926-025-10298-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40388036/"
+      },
+      {
+        "pmid": "40353515",
+        "title": "New-Onset Dupuytren After Surgical Treatment of Carpal Tunnel and Trigger Finger.",
+        "authors": "Maroto-Rodríguez R, Tibau-Alberdi M, Font Bilbeny M, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-05-12",
+        "displayDate": "2025 May 12",
+        "type": null,
+        "doi": "10.1177/15589447251339503",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40353515/"
+      },
+      {
+        "pmid": "40219866",
+        "title": "Utility of Patient-Reported Outcomes in Prognosis of Corticosteroid Injection Treatment Success for Trigger Finger and de Quervain's Stenosing Tenosynovitis.",
+        "authors": "Sobba WD, Jacobi S, Sánchez-Navarro G, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-04-12",
+        "displayDate": "2025 Apr 12",
+        "type": null,
+        "doi": "10.1177/15589447251329577",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40219866/"
+      },
+      {
+        "pmid": "40156353",
+        "title": "Early Amyloid Diagnosis and Treatment: Experience of Single Hand Surgeon With a Series of 182 Carpal Tunnel Biopsies.",
+        "authors": "Vennitti C, Lešević M, Bergin JD, et al.",
+        "journal": "Hand (N Y)",
+        "date": "2025-03-29",
+        "displayDate": "2025 Mar 29",
+        "type": null,
+        "doi": "10.1177/15589447251326617",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40156353/"
       }
     ],
     "training": [
@@ -657,6 +1317,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/36353822/"
       },
       {
+        "pmid": "36344680",
+        "title": "Handgrip strength in older adults with chronic diseases from 27 European countries and Israel.",
+        "authors": "Mey R, Calatayud J, Casaña J, et al.",
+        "journal": "Eur J Clin Nutr",
+        "date": "2022-11-07",
+        "displayDate": "2022 Nov 7",
+        "type": null,
+        "doi": "10.1038/s41430-022-01233-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36344680/"
+      },
+      {
         "pmid": "36274049",
         "title": "Handgrip strength and respiratory disease mortality: Longitudinal analyses from SHARE.",
         "authors": "Mey R, Calatayud J, Casaña J, et al.",
@@ -666,6 +1337,325 @@
         "type": null,
         "doi": "10.1016/j.pulmoe.2022.09.007",
         "url": "https://pubmed.ncbi.nlm.nih.gov/36274049/"
+      },
+      {
+        "pmid": "35785433",
+        "title": "Relationship between handgrip strength, depression and cognitive functioning among older adults: Evidence from longitudinal ageing study in India.",
+        "authors": "Muhammad T, Maurya P",
+        "journal": "Int J Geriatr Psychiatry",
+        "date": "2022-08-01",
+        "displayDate": "2022 Aug",
+        "type": null,
+        "doi": "10.1002/gps.5776",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35785433/"
+      },
+      {
+        "pmid": "35607849",
+        "title": "The Effect of Progressive Resistance Training on Functionality and Handgrip Strength in the Older Individuals of a Community: A Quasi-Experimental Study.",
+        "authors": "Silva Neto LS, Dos Santos CA, Travassos A, et al.",
+        "journal": "Rejuvenation Res",
+        "date": "2022-08-01",
+        "displayDate": "2022 Aug",
+        "type": null,
+        "doi": "10.1089/rej.2021.0029",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35607849/"
+      },
+      {
+        "pmid": "35902609",
+        "title": "Association between changes in working status and hand-grip strength among Korean middle-aged and older adults: a longitudinal panel study.",
+        "authors": "Yun I, Park YS, Park EC, et al.",
+        "journal": "Sci Rep",
+        "date": "2022-07-28",
+        "displayDate": "2022 Jul 28",
+        "type": null,
+        "doi": "10.1038/s41598-022-16373-2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35902609/"
+      },
+      {
+        "pmid": "35733124",
+        "title": "Distal biceps tendon ruptures occur with the almost extended elbow and supinated forearm - an online video analytic study.",
+        "authors": "Lappen S, Siebenlist S, Kadantsev P, et al.",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2022-06-22",
+        "displayDate": "2022 Jun 22",
+        "type": null,
+        "doi": "10.1186/s12891-022-05546-9",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35733124/"
+      },
+      {
+        "pmid": "35583536",
+        "title": "Postoperative early and proactive grip strength training program for distal radius fractures promotes earlier recovery of grip strength: A retrospective study.",
+        "authors": "Kaji Y, Yamaguchi K, Nomura Y, et al.",
+        "journal": "Medicine (Baltimore)",
+        "date": "2022-05-13",
+        "displayDate": "2022 May 13",
+        "type": null,
+        "doi": "10.1097/MD.0000000000029262",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35583536/"
+      },
+      {
+        "pmid": "35344535",
+        "title": "A Study to Identify the Optimum Forearm Floss Band Intensity in 29 Young Adults Performing Blood Flow Restriction Training.",
+        "authors": "Lee Y, Choi J",
+        "journal": "Med Sci Monit",
+        "date": "2022-03-28",
+        "displayDate": "2022 Mar 28",
+        "type": null,
+        "doi": "10.12659/MSM.935771",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35344535/"
+      },
+      {
+        "pmid": "34402694",
+        "title": "What can hand grip strength tell us about type 2 diabetes?: mortality, morbidities and risk of diabetes.",
+        "authors": "Hamasaki H",
+        "journal": "Expert Rev Endocrinol Metab",
+        "date": "2021-08-17",
+        "displayDate": "2021 Aug 17",
+        "type": "Review",
+        "doi": "10.1080/17446651.2021.1967743",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34402694/"
+      },
+      {
+        "pmid": "34455171",
+        "title": "Grip training improves handgrip strength, cognition, and brain white matter in minor acute ischemic stroke patients.",
+        "authors": "Shang X, Meng X, Xiao X, et al.",
+        "journal": "Clin Neurol Neurosurg",
+        "date": "2021-08-13",
+        "displayDate": "2021 Aug 13",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.clineuro.2021.106886",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34455171/"
+      },
+      {
+        "pmid": "34364130",
+        "title": "Examining the impact of grip strength and officer gender on shooting performance.",
+        "authors": "Brown A, Baldwin S, Blaskovits B, et al.",
+        "journal": "Appl Ergon",
+        "date": "2021-08-05",
+        "displayDate": "2021 Aug 5",
+        "type": null,
+        "doi": "10.1016/j.apergo.2021.103536",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34364130/"
+      },
+      {
+        "pmid": "34209004",
+        "title": "Effects of a 12-Week Suspension versus Traditional Resistance Training Program on Body Composition, Bioimpedance Vector Patterns, and Handgrip Strength in Older Men: A Randomized Controlled Trial.",
+        "authors": "Campa F, Schoenfeld BJ, Marini E, et al.",
+        "journal": "Nutrients",
+        "date": "2021-06-30",
+        "displayDate": "2021 Jun 30",
+        "type": "Randomized trial",
+        "doi": "10.3390/nu13072267",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34209004/"
+      },
+      {
+        "pmid": "34069110",
+        "title": "Effect of Handgrip Training in Extreme Heat on the Development of Handgrip Maximal Isometric Strength among Young Males.",
+        "authors": "Bartolomé I, Siquier-Coll J, Pérez-Quintero M, et al.",
+        "journal": "Int J Environ Res Public Health",
+        "date": "2021-05-14",
+        "displayDate": "2021 May 14",
+        "type": null,
+        "doi": "10.3390/ijerph18105240",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34069110/"
+      },
+      {
+        "pmid": "34456547",
+        "title": "Handgrip Strength Cutoff Points for Functional Independence and Wheelchair Ability in Men With Spinal Cord Injury.",
+        "authors": "Neto FR, Gomes Costa RR, Dorneles JR, et al.",
+        "journal": "Top Spinal Cord Inj Rehabil",
+        "date": "2021-01-01",
+        "displayDate": "2021 Fall",
+        "type": null,
+        "doi": "10.46292/sci20-00040",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34456547/"
+      },
+      {
+        "pmid": "34456546",
+        "title": "Peak Torque Prediction Using Handgrip and Strength Predictors in Men and Women With Motor Complete Spinal Cord Injury.",
+        "authors": "Neto FR, Dorneles JR, Carneiro Leão Veloso JH, et al.",
+        "journal": "Top Spinal Cord Inj Rehabil",
+        "date": "2021-01-01",
+        "displayDate": "2021 Fall",
+        "type": null,
+        "doi": "10.46292/sci20-00027",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34456546/"
+      },
+      {
+        "pmid": "33340721",
+        "title": "Can maximal handgrip strength and endurance be improved by an 8-week specialized strength training program in older women? A randomized controlled study.",
+        "authors": "Gerodimos V, Karatrantou K, Kakardaki K, et al.",
+        "journal": "Hand Surg Rehabil",
+        "date": "2020-12-16",
+        "displayDate": "2020 Dec 16",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.hansur.2020.11.007",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33340721/"
+      },
+      {
+        "pmid": "33306977",
+        "title": "Ergogenic effects of lifting straps on movement velocity, grip strength, perceived exertion and grip security during the deadlift exercise.",
+        "authors": "Jukic I, García-Ramos A, Baláš J, et al.",
+        "journal": "Physiol Behav",
+        "date": "2020-12-08",
+        "displayDate": "2020 Dec 8",
+        "type": null,
+        "doi": "10.1016/j.physbeh.2020.113283",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33306977/"
+      },
+      {
+        "pmid": "33022439",
+        "title": "Association between handgrip strength and suicidal ideation in Korean adults.",
+        "authors": "Hwang IC, Ahn HY",
+        "journal": "J Affect Disord",
+        "date": "2020-09-29",
+        "displayDate": "2020 Sep 29",
+        "type": null,
+        "doi": "10.1016/j.jad.2020.09.094",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33022439/"
+      },
+      {
+        "pmid": "32511035",
+        "title": "Determinant Factors of Intraocular Pressure Responses to a Maximal Isometric Handgrip Test: Hand Dominance, Handgrip Strength and Sex.",
+        "authors": "Pérez-Castilla A, García-Ramos A, Redondo B, et al.",
+        "journal": "Curr Eye Res",
+        "date": "2020-06-21",
+        "displayDate": "2020 Jun 21",
+        "type": null,
+        "doi": "10.1080/02713683.2020.1780265",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32511035/"
+      },
+      {
+        "pmid": "32552580",
+        "title": "Validity of Wrist-Worn photoplethysmography devices to measure heart rate: A systematic review and meta-analysis.",
+        "authors": "Zhang Y, Weaver RG, Armstrong B, et al.",
+        "journal": "J Sports Sci",
+        "date": "2020-06-19",
+        "displayDate": "2020 Jun 19",
+        "type": "Meta-analysis",
+        "doi": "10.1080/02640414.2020.1767348",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32552580/"
+      },
+      {
+        "pmid": "32249609",
+        "title": "High cardiovascular reactivity and muscle strength attenuate hypotensive effects of isometric handgrip training in young women: A randomized controlled trial.",
+        "authors": "Yamagata T, Sako T",
+        "journal": "Clin Exp Hypertens",
+        "date": "2020-04-04",
+        "displayDate": "2020 Apr 4",
+        "type": "Randomized trial",
+        "doi": "10.1080/10641963.2020.1747482",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32249609/"
+      },
+      {
+        "pmid": "32216527",
+        "title": "Influence of Handgrip Stabilization During Isokinetic Knee Strength Assessment in Older Women.",
+        "authors": "Nunes JP, Cunha PM, Mayhew JL, et al.",
+        "journal": "Percept Mot Skills",
+        "date": "2020-03-26",
+        "displayDate": "2020 Mar 26",
+        "type": null,
+        "doi": "10.1177/0031512520914109",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32216527/"
+      },
+      {
+        "pmid": "32215897",
+        "title": "Strength Training Induces Greater Increase in Handgrip Strength than Wrestling Training per se.",
+        "authors": "Karatrantou K, Katsoula C, Tsiakaras N, et al.",
+        "journal": "Int J Sports Med",
+        "date": "2020-03-26",
+        "displayDate": "2020 Mar 26",
+        "type": null,
+        "doi": "10.1055/a-1128-7166",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32215897/"
+      },
+      {
+        "pmid": "32222042",
+        "title": "Effects of enhanced cutaneous sensory input on interlimb strength transfer of the wrist extensors.",
+        "authors": "Barss TS, Klarner T, Sun Y, et al.",
+        "journal": "Physiol Rep",
+        "date": "2020-03-01",
+        "displayDate": "2020 Mar",
+        "type": null,
+        "doi": "10.14814/phy2.14406",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32222042/"
+      },
+      {
+        "pmid": "32059579",
+        "title": "Comparison of the Effect of Different Resistance Training Frequencies on Phase Angle and Handgrip Strength in Obese Women: a Randomized Controlled Trial.",
+        "authors": "Toselli S, Badicu G, Bragonzoni L, et al.",
+        "journal": "Int J Environ Res Public Health",
+        "date": "2020-02-12",
+        "displayDate": "2020 Feb 12",
+        "type": "Randomized trial",
+        "doi": "10.3390/ijerph17041163",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32059579/"
+      },
+      {
+        "pmid": "31509473",
+        "title": "Sensory enhancement amplifies interlimb cutaneous reflexes in wrist extensor muscles.",
+        "authors": "Sun Y, Zehr EP",
+        "journal": "J Neurophysiol",
+        "date": "2019-09-11",
+        "displayDate": "2019 Sep 11",
+        "type": null,
+        "doi": "10.1152/jn.00324.2019",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31509473/"
+      },
+      {
+        "pmid": "31465763",
+        "title": "Exercise Interventions for Preventing and Treating Low Bone Mass in the Forearm: A Systematic Review and Meta-analysis.",
+        "authors": "Babatunde OO, Bourton AL, Hind K, et al.",
+        "journal": "Arch Phys Med Rehabil",
+        "date": "2019-08-26",
+        "displayDate": "2019 Aug 26",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.apmr.2019.07.007",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31465763/"
+      },
+      {
+        "pmid": "30798333",
+        "title": "Lean mass, grip strength and risk of type 2 diabetes: a bi-directional Mendelian randomisation study.",
+        "authors": "Yeung CHC, Au Yeung SL, Fong SSM, et al.",
+        "journal": "Diabetologia",
+        "date": "2019-02-23",
+        "displayDate": "2019 Feb 23",
+        "type": null,
+        "doi": "10.1007/s00125-019-4826-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30798333/"
+      },
+      {
+        "pmid": "30672025",
+        "title": "Associations between handgrip strength and mild cognitive impairment in middle-aged and older adults in six low- and middle-income countries.",
+        "authors": "Vancampfort D, Stubbs B, Firth J, et al.",
+        "journal": "Int J Geriatr Psychiatry",
+        "date": "2019-02-17",
+        "displayDate": "2019 Feb 17",
+        "type": null,
+        "doi": "10.1002/gps.5061",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30672025/"
+      },
+      {
+        "pmid": "31291373",
+        "title": "Training-induced changes in daily energy expenditure: Methodological evaluation using wrist-worn accelerometer, heart rate monitor, and doubly labeled water technique.",
+        "authors": "Kinnunen H, Häkkinen K, Schumann M, et al.",
+        "journal": "PLoS One",
+        "date": "2019-01-01",
+        "displayDate": "2019",
+        "type": null,
+        "doi": "10.1371/journal.pone.0219563",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31291373/"
+      },
+      {
+        "pmid": "30200809",
+        "title": "The Association of Handgrip Strength and Mortality: What Does It Tell Us and What Can We Do With It?",
+        "authors": "Buckner SL, Dankel SJ, Bell ZW, et al.",
+        "journal": "Rejuvenation Res",
+        "date": "2018-10-18",
+        "displayDate": "2018 Oct 18",
+        "type": null,
+        "doi": "10.1089/rej.2018.2111",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30200809/"
       }
     ],
     "mechanics": [
@@ -690,17 +1680,6 @@
         "type": null,
         "doi": "10.1002/rcs.70215",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42504036/"
-      },
-      {
-        "pmid": "42480580",
-        "title": "Optical hand kinematics for machine learning-based screening of carpal tunnel syndrome.",
-        "authors": "Çelikbaş Ş, Akgündoğdu A, Gündüz A",
-        "journal": "Med Eng Phys",
-        "date": "2026-07-29",
-        "displayDate": "2026 Jul 29",
-        "type": null,
-        "doi": "10.1088/1873-4030/ae8dce",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42480580/"
       },
       {
         "pmid": "42590572",
@@ -780,6 +1759,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42243910/"
       },
       {
+        "pmid": "42155481",
+        "title": "Physiology-aware latent shift adaptation for sEMG-based hand kinematics decoding across able-bodied and amputee populations.",
+        "authors": "Zhang W, Gao T, Wang J, et al.",
+        "journal": "J Neural Eng",
+        "date": "2026-05-29",
+        "displayDate": "2026 May 29",
+        "type": null,
+        "doi": "10.1088/1741-2552/ae6ff2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42155481/"
+      },
+      {
+        "pmid": "42204046",
+        "title": "Eye-hand coordination during robotic prostate cancer surgery - how surgical vision reflects on instrument kinematics and vice versa.",
+        "authors": "Pirkovets K, Ottens VA, van Oosterom MN, et al.",
+        "journal": "J Robot Surg",
+        "date": "2026-05-28",
+        "displayDate": "2026 May 28",
+        "type": null,
+        "doi": "10.1007/s11701-026-03499-y",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42204046/"
+      },
+      {
         "pmid": "42153919",
         "title": "In Vitro Kinetic and Kinematic Analysis of a Recently Designed Total Wrist Implant.",
         "authors": "Cavallaro SM, Harley BJ, Werner FW",
@@ -791,6 +1792,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42153919/"
       },
       {
+        "pmid": "41885203",
+        "title": "Quantifying Repetitive Hand Flapping Kinematics in Autistic and Non-Autistic Toddlers Using Video-Based Pose Estimation.",
+        "authors": "Stenum J, Eiler E, Roemmich RT, et al.",
+        "journal": "Dev Sci",
+        "date": "2026-05-01",
+        "displayDate": "2026 May",
+        "type": null,
+        "doi": "10.1111/desc.70176",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41885203/"
+      },
+      {
+        "pmid": "42053581",
+        "title": "Morphometric and topographic analysis of the flexor carpi radialis tendon, its tunnel, and the median nerve: an MRI-based anatomical guide for wrist interventions.",
+        "authors": "Kaya S, Secgin Y, Senol D, et al.",
+        "journal": "Surg Radiol Anat",
+        "date": "2026-04-29",
+        "displayDate": "2026 Apr 29",
+        "type": null,
+        "doi": "10.1007/s00276-026-03887-x",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42053581/"
+      },
+      {
         "pmid": "42033429",
         "title": "Brachialis Branch to Radial Nerve Transfer for Reanimation of Wrist and Finger Extension: An Anatomical Feasibility Study.",
         "authors": "Bram L, Frank P, Bram C, et al.",
@@ -800,6 +1823,50 @@
         "type": null,
         "doi": "10.1016/j.jhsa.2026.03.006",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42033429/"
+      },
+      {
+        "pmid": "42122347",
+        "title": "Kinematic Parameters of Normal Hand-to-Mouth Movement in Pediatric Populations: Adaptation of the \"Rab Hand-to-Mouth Protocol\".",
+        "authors": "Pérez-Somarriba Moreno Á, Ortiz-Gutiérrez RM, Martín-Casas P, et al.",
+        "journal": "Sensors (Basel)",
+        "date": "2026-04-23",
+        "displayDate": "2026 Apr 23",
+        "type": null,
+        "doi": "10.3390/s26092625",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42122347/"
+      },
+      {
+        "pmid": "42020467",
+        "title": "Intention-Action Conflict EEG-Hand Kinematics Dataset for Unimanual Control under Congruent and Incongruent Conditions.",
+        "authors": "Cai M, Fu R, Wang Y, et al.",
+        "journal": "Sci Data",
+        "date": "2026-04-22",
+        "displayDate": "2026 Apr 22",
+        "type": null,
+        "doi": "10.1038/s41597-026-07146-x",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42020467/"
+      },
+      {
+        "pmid": "42014070",
+        "title": "Biomechanical filtering supports efficient tactile encoding in the human hand.",
+        "authors": "Tummala N, Reardon G, Dandu B, et al.",
+        "journal": "J R Soc Interface",
+        "date": "2026-04-22",
+        "displayDate": "2026 Apr 22",
+        "type": null,
+        "doi": "10.1098/rsif.2025.0793",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42014070/"
+      },
+      {
+        "pmid": "42120147",
+        "title": "Magnetic resonance imaging of the fingers: Anatomical assessment and evaluation of traumatic pathology.",
+        "authors": "Oca Pernas R, Hormaza Aguirre N, Capelastegui Alber A, et al.",
+        "journal": "Radiologia (Engl Ed)",
+        "date": "2026-04-18",
+        "displayDate": "2026 Apr 18",
+        "type": "Review",
+        "doi": "10.1016/j.rxeng.2026.101655",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42120147/"
       },
       {
         "pmid": "41956829",
@@ -824,6 +1891,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41931091/"
       },
       {
+        "pmid": "42271182",
+        "title": "Comparison of an AI-based hand range of motion measurement with manual goniometry: A prospective cross-sectional pilot study in patients and healthy volunteers.",
+        "authors": "Gu F, Fan J, Lv L, et al.",
+        "journal": "Sci Prog",
+        "date": "2026-04-01",
+        "displayDate": "2026 Apr-Jun",
+        "type": null,
+        "doi": "10.1177/00368504261460247",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42271182/"
+      },
+      {
         "pmid": "41863260",
         "title": "The balanced finger: biomechanics of intrinsic and extrinsic systems and principles of reconstruction.",
         "authors": "Langer MF, Vögelin E",
@@ -833,6 +1911,50 @@
         "type": "Review",
         "doi": "10.1177/17531934261427638",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41863260/"
+      },
+      {
+        "pmid": "41845495",
+        "title": "Quantifying in vivo kinematics of the wrist during opposite dart-throwing motion: a 4D CT study.",
+        "authors": "Jia S, Xiang Z, Lu X, et al.",
+        "journal": "J Orthop Surg Res",
+        "date": "2026-03-17",
+        "displayDate": "2026 Mar 17",
+        "type": null,
+        "doi": "10.1186/s13018-026-06810-7",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41845495/"
+      },
+      {
+        "pmid": "41938886",
+        "title": "An Anatomical Study to Ensure Precise Percutaneous Release of the Annular Pulley in the Trigger Finger.",
+        "authors": "So YI, Lee HI, Song WC, et al.",
+        "journal": "Clin Orthop Surg",
+        "date": "2026-03-12",
+        "displayDate": "2026 Mar 12",
+        "type": null,
+        "doi": "10.4055/cios25123",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41938886/"
+      },
+      {
+        "pmid": "41807417",
+        "title": "A hand biomechanics dataset of kinematics, kinetics, electromyography, and imaging in healthy adults.",
+        "authors": "Diaz MT, Benoit AR, Kearney KM, et al.",
+        "journal": "Sci Data",
+        "date": "2026-03-11",
+        "displayDate": "2026 Mar 11",
+        "type": null,
+        "doi": "10.1038/s41597-026-06939-4",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41807417/"
+      },
+      {
+        "pmid": "41832840",
+        "title": "Development of novel biomechanical outcomes using motion capture to characterize hand function in multiple sclerosis.",
+        "authors": "Rai SM, Du M, Johnston J, et al.",
+        "journal": "Mult Scler Relat Disord",
+        "date": "2026-03-10",
+        "displayDate": "2026 Mar 10",
+        "type": null,
+        "doi": "10.1016/j.msard.2026.107129",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41832840/"
       },
       {
         "pmid": "41792516",
@@ -846,6 +1968,50 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41792516/"
       },
       {
+        "pmid": "41784672",
+        "title": "Anatomical basis of the neurotization of the brachialis muscle to the extensor carpi radialis muscles to restore an active extension of the tetraplegic wrist.",
+        "authors": "Ollivier I, Rapp E, Rapp E, et al.",
+        "journal": "Surg Radiol Anat",
+        "date": "2026-03-05",
+        "displayDate": "2026 Mar 5",
+        "type": null,
+        "doi": "10.1007/s00276-026-03851-9",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41784672/"
+      },
+      {
+        "pmid": "41795573",
+        "title": "In-silico biomechanical simulation of tendon transfers for finger extension in radial nerve palsy.",
+        "authors": "Lee BW, Hong WK, Hwang JS, et al.",
+        "journal": "J Plast Reconstr Aesthet Surg",
+        "date": "2026-02-20",
+        "displayDate": "2026 Feb 20",
+        "type": null,
+        "doi": "10.1016/j.bjps.2026.02.042",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41795573/"
+      },
+      {
+        "pmid": "41864634",
+        "title": "Wrist Anatomy: Open and Arthroscopic Surgical Approaches.",
+        "authors": "Emanuels AF, Wu KY",
+        "journal": "Hand Clin",
+        "date": "2026-02-18",
+        "displayDate": "2026 Feb 18",
+        "type": "Review",
+        "doi": "10.1016/j.hcl.2025.12.001",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41864634/"
+      },
+      {
+        "pmid": "41864623",
+        "title": "How the Wrist Moves: Wrist Biomechanics and Carpal Theories.",
+        "authors": "Mitchell EC, Chambers SB",
+        "journal": "Hand Clin",
+        "date": "2026-02-16",
+        "displayDate": "2026 Feb 16",
+        "type": "Review",
+        "doi": "10.1016/j.hcl.2025.12.002",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41864623/"
+      },
+      {
         "pmid": "41674008",
         "title": "Characteristics of extensor indicis and index extensor digitorum during finger extension: an electromyographic and kinematic study.",
         "authors": "Date S, Nakamae N, Kurumadani H, et al.",
@@ -855,6 +2021,94 @@
         "type": null,
         "doi": "10.1177/17531934261416296",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41674008/"
+      },
+      {
+        "pmid": "41653163",
+        "title": "Validity and Reliability of a 2-Dimensional Artificial Intelligence Camera Software Application to Assess Hand, Wrist, and Forearm Range of Motion.",
+        "authors": "Jeffs AD, Allen AD, Himmelberg SM, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-02-07",
+        "displayDate": "2026 Feb 7",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2025.12.007",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41653163/"
+      },
+      {
+        "pmid": "41627422",
+        "title": "Video-based finger kinematics for degenerative cervical myelopathy: a smartphone-based computer vision approach for screening.",
+        "authors": "Raju VB, Arnest RM, Setlur A, et al.",
+        "journal": "Eur Spine J",
+        "date": "2026-02-02",
+        "displayDate": "2026 Feb 2",
+        "type": null,
+        "doi": "10.1007/s00586-026-09764-w",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41627422/"
+      },
+      {
+        "pmid": "41627275",
+        "title": "Effect of Total Wrist Arthroplasty Alignment on Wrist Range of Motion and Component Impingement.",
+        "authors": "Li Y, Werner FW, Miller MA, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-02-02",
+        "displayDate": "2026 Feb 2",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2025.12.021",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41627275/"
+      },
+      {
+        "pmid": "41569929",
+        "title": "High-Resolution US of the Radial Wrist: Anatomy, Variants, and Clinical Correlates.",
+        "authors": "Billone LM, Grainger AJ",
+        "journal": "Radiographics",
+        "date": "2026-02-01",
+        "displayDate": "2026 Feb",
+        "type": "Review",
+        "doi": "10.1148/rg.250161",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41569929/"
+      },
+      {
+        "pmid": "41549235",
+        "title": "Evaluation of the relationship between the 2D:4D ratio, fine hand motor skills, and anatomy practical examination performance in first-year medical students.",
+        "authors": "Örs A, Atalar H",
+        "journal": "BMC Med Educ",
+        "date": "2026-01-19",
+        "displayDate": "2026 Jan 19",
+        "type": null,
+        "doi": "10.1186/s12909-026-08617-w",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41549235/"
+      },
+      {
+        "pmid": "41546677",
+        "title": "The Role of the Collateral Ligaments in Stabilizing the Distal Interphalangeal Joint in Fingers With Small Mallet Fractures: A Biomechanical Study.",
+        "authors": "Casey JC, Cusano J, Wronski PT, et al.",
+        "journal": "J Hand Surg Am",
+        "date": "2026-01-17",
+        "displayDate": "2026 Jan 17",
+        "type": null,
+        "doi": "10.1016/j.jhsa.2025.11.007",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41546677/"
+      },
+      {
+        "pmid": "41506640",
+        "title": "Imaging of the intrinsic muscles of the hand - part I: high-resolution ultrasound and 3T MRI appearance of symptomatic anatomical variants.",
+        "authors": "Bouredoucen H, Boudabbous S, Poletti PA, et al.",
+        "journal": "Rofo",
+        "date": "2026-01-08",
+        "displayDate": "2026 Jan 8",
+        "type": "Review",
+        "doi": "10.1055/a-2761-4259",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41506640/"
+      },
+      {
+        "pmid": "41805505",
+        "title": "Time-Varying Neuromechanical Dynamics of NMES-Evoked Fine Hand Movements: A Kinematic and Mechanomyographic Study.",
+        "authors": "Zhao Y, Xu C, Wu X, et al.",
+        "journal": "IEEE Trans Neural Syst Rehabil Eng",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": null,
+        "doi": "10.1109/TNSRE.2026.3672524",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41805505/"
       },
       {
         "pmid": "41483889",
@@ -868,6 +2122,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41483889/"
       },
       {
+        "pmid": "41272427",
+        "title": "Dynamic CT-based assessment of ulnar-sided wrist kinematics in healthy participants using automated 3-D analysis.",
+        "authors": "Teule E, Wolters J, Verdonschot N, et al.",
+        "journal": "J Hand Surg Eur Vol",
+        "date": "2025-11-21",
+        "displayDate": "2025 Nov 21",
+        "type": null,
+        "doi": "10.1177/17531934251397297",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41272427/"
+      },
+      {
+        "pmid": "41267349",
+        "title": "Showing the drawing hand of the teacher in an anatomy video lecture-Effect on the student's learning, motivation, and cognitive load.",
+        "authors": "Bertrand MM, Besseyrias A, Gouzi F, et al.",
+        "journal": "Anat Sci Educ",
+        "date": "2025-11-20",
+        "displayDate": "2025 Nov 20",
+        "type": "Randomized trial",
+        "doi": "10.1002/ase.70156",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41267349/"
+      },
+      {
+        "pmid": "41253582",
+        "title": "Finger motion required for Auslan: A biomechanical analysis.",
+        "authors": "Graham DJ, McCarron L, Phillips T, et al.",
+        "journal": "J Hand Ther",
+        "date": "2025-11-17",
+        "displayDate": "2025 Nov 17",
+        "type": null,
+        "doi": "10.1016/j.jht.2025.09.009",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41253582/"
+      },
+      {
         "pmid": "41103129",
         "title": "Biomechanical Comparison of Dorsal Wrist Spanning Plates Versus External Fixation in Distal Radius Fractures With a Simultaneous Axial and Bending Load.",
         "authors": "Ghilzai U, Singh A, Alexander J, et al.",
@@ -879,6 +2166,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41103129/"
       },
       {
+        "pmid": "40992943",
+        "title": "Telemedicine-based measurement of finger joint range of motion in patients: A reliability and concurrent validity study.",
+        "authors": "Létourneau S, Taboun OS, Esmonde-White C, et al.",
+        "journal": "J Hand Ther",
+        "date": "2025-09-23",
+        "displayDate": "2025 Sep 23",
+        "type": null,
+        "doi": "10.1016/j.jht.2025.07.004",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40992943/"
+      },
+      {
+        "pmid": "41265972",
+        "title": "MR Imaging of Clinically Relevant Anatomy and Pathology of the Wrist Ligaments.",
+        "authors": "Zandee van Rilland ED, Bayne CO, Boutin RD",
+        "journal": "Magn Reson Imaging Clin N Am",
+        "date": "2025-09-22",
+        "displayDate": "2025 Sep 22",
+        "type": "Review",
+        "doi": "10.1016/j.mric.2025.08.008",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41265972/"
+      },
+      {
         "pmid": "40699297",
         "title": "Anatomical relationship between the vinculum breve derived from the flexor digitorum superficialis tendon and the volar plate in the proximal interphalangeal joint of the hand: variation in the distribution of attachments.",
         "authors": "Ichigaya T, Fujita K, Kurisaki T, et al.",
@@ -888,7 +2197,30 @@
         "type": null,
         "doi": "10.1007/s12565-025-00887-6",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40699297/"
+      },
+      {
+        "pmid": "40069069",
+        "title": "Dorsal metacarpal artery perforator flaps for traumatic soft tissue defect of finger: A prospective anatomical and clinical study.",
+        "authors": "Singh AP, Dixit PK, Agrawal D, et al.",
+        "journal": "Chin J Traumatol",
+        "date": "2025-02-27",
+        "displayDate": "2025 Feb 27",
+        "type": null,
+        "doi": "10.1016/j.cjtee.2024.11.002",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40069069/"
       }
     ]
+  },
+  "totals": {
+    "injuries": 7190,
+    "rehab": 1746,
+    "training": 89,
+    "mechanics": 1308
+  },
+  "queries": {
+    "injuries": "(\"carpal tunnel\"[ti] OR \"de quervain\"[ti] OR \"triangular fibrocartilage\"[ti] OR TFCC[ti] OR (wrist[ti] AND (sprain[ti] OR injur*[ti] OR pain[ti])) OR \"scaphoid fracture\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "rehab": "((\"carpal tunnel\"[ti] OR \"de quervain\"[ti] OR wrist[ti] OR \"hand pain\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract",
+    "training": "((\"grip strength\"[ti] OR \"handgrip\"[ti] OR forearm[ti] OR wrist[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"grip training\"[tiab])) AND humans[mh] AND english[la] AND hasabstract",
+    "mechanics": "((wrist[ti] OR hand[ti] OR finger*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract"
   }
 }
