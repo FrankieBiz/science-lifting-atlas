@@ -1,0 +1,268 @@
+/* Home body map. It reuses the atlas tokens and anatomy-plate treatment. */
+
+.body-map {
+  max-width: var(--content);
+  margin-inline: auto;
+}
+
+.body-map__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.36fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.body-map__figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.body-map__figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.body-map__frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: var(--body-figure-aspect);
+  border-radius: var(--radius-lg);
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    #4a4c54,
+    #222328 60%,
+    #141519
+  );
+  color: white;
+}
+
+.body-map__frame > img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  filter: grayscale(1) contrast(1.35) brightness(0.98);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.body-map__spots {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+}
+
+.body-map__spot {
+  position: absolute;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--paper-50);
+  text-decoration: none;
+  translate: -50% -50%;
+}
+
+.body-map__spot:focus-visible {
+  outline: 2px solid var(--signal-300);
+  outline-offset: 2px;
+}
+
+.body-map__dot {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--tissue-300);
+  border-radius: 50%;
+  background: var(--tissue-500);
+}
+
+.body-map__dot::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--tissue-300);
+  border-radius: 50%;
+  content: '';
+  animation: body-map-pulse 2.8s var(--ease-out) infinite;
+}
+
+.body-map__label {
+  position: absolute;
+  bottom: calc(100% - 3px);
+  left: 50%;
+  z-index: 2;
+  padding: 0.38rem 0.7rem;
+  border: 1px solid var(--mist-600);
+  border-radius: 999px;
+  background: var(--ink-950);
+  color: var(--paper-50);
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  translate: -50% 0;
+  transition: opacity 140ms ease;
+}
+
+.body-map__spot:hover .body-map__label,
+.body-map__spot:focus-visible .body-map__label {
+  opacity: 1;
+}
+
+.body-map__figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: var(--step--1);
+  text-align: center;
+}
+
+.body-map__index {
+  display: grid;
+  gap: 1.5rem;
+  padding: 0.25rem 0;
+}
+
+.body-map__index h3,
+.part-group > h3 {
+  margin: 0 0 0.65rem;
+  font-size: var(--step-1);
+}
+
+.body-map__index ul {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.body-map__index a {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.body-map__index a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.body-map__index a:focus-visible,
+.body-map__toggle button:focus-visible {
+  border-radius: 0.25rem;
+  outline: 2px solid var(--signal-300);
+  outline-offset: 3px;
+}
+
+.body-map__attribution {
+  margin: 1rem 0 0;
+  color: var(--text-tertiary);
+  font-size: var(--step--1);
+  text-align: right;
+}
+
+.body-map__attribution a {
+  color: inherit;
+}
+
+.part-groups {
+  max-width: var(--content);
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+}
+
+.part-group + .part-group {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.part-card h4 {
+  margin: 0 0 0.4rem;
+  font-size: 1.375rem;
+}
+
+.body-map__toggle {
+  display: none;
+}
+
+.body-map__toggle button {
+  min-height: 2.75rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--rule-strong);
+  background: var(--surface-raised);
+  color: var(--text-secondary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.body-map__toggle button:first-child {
+  border-radius: 999px 0 0 999px;
+}
+
+.body-map__toggle button:last-child {
+  border-left: 0;
+  border-radius: 0 999px 999px 0;
+}
+
+.body-map__toggle button[aria-pressed='true'] {
+  border-color: var(--ink-900);
+  background: var(--ink-900);
+  color: var(--paper-50);
+}
+
+@keyframes body-map-pulse {
+  to {
+    opacity: 0;
+    transform: scale(1.65);
+  }
+}
+
+@media (max-width: 62rem) {
+  .body-map__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .body-map__index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 44rem) {
+  .body-map[data-enhanced='true'] .body-map__toggle {
+    display: flex;
+  }
+
+  .body-map__toggle {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .body-map[data-enhanced='true'] .body-map__figure[data-active='false'] {
+    display: none;
+  }
+
+  .body-map__index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+  }
+}
+
+@media (hover: none) {
+  .body-map__figure[data-active='true'] .body-map__label {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body-map__dot,
+  .body-map__label {
+    animation: none;
+    transition: none;
+  }
+}
