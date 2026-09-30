@@ -26,17 +26,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42798091/"
       },
       {
-        "pmid": "42593127",
-        "title": "Progress on rotator cuff tendon-to-bone interface tissue regeneration and repair.",
-        "authors": "Wu L, Qian C, Wu N, et al.",
-        "journal": "Biomater Sci",
-        "date": "2026-09-15",
-        "displayDate": "2026 Sep 15",
-        "type": "Review",
-        "doi": "10.1039/d6bm00763e",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42593127/"
-      },
-      {
         "pmid": "42760506",
         "title": "Advances in Multi-Omics Approaches for Biomarker Identification in Human Rotator Cuff Disease: A Systematic Review.",
         "authors": "Li X, Liu Y, Zhao R, et al.",
@@ -46,6 +35,28 @@
         "type": "Systematic review",
         "doi": "10.1002/jor.70275",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42760506/"
+      },
+      {
+        "pmid": "42675771",
+        "title": "Outcomes between superior capsular reconstruction and graft bridging with allogenic decellularized dermis graft for massive rotator cuff tear: A case-control study.",
+        "authors": "Chang CD, Weng CJ, Chou WY, et al.",
+        "journal": "Medicine (Baltimore)",
+        "date": "2026-08-28",
+        "displayDate": "2026 Aug 28",
+        "type": null,
+        "doi": "10.1097/MD.0000000000050320",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42675771/"
+      },
+      {
+        "pmid": "42661214",
+        "title": "Surgical anatomy, biomechanics and clinical outcomes of latissimus dorsi transfer for irreparable rotator cuff tears: a review.",
+        "authors": "Hovsepian JM, Cartaya MA, Glaser J, et al.",
+        "journal": "J Orthop Surg Res",
+        "date": "2026-08-28",
+        "displayDate": "2026 Aug 28",
+        "type": "Review",
+        "doi": "10.1186/s13018-026-07200-9",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42661214/"
       },
       {
         "pmid": "42636334",
@@ -70,6 +81,39 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42636223/"
       },
       {
+        "pmid": "42632920",
+        "title": "Effects of Adding Muscle Energy Technique to Joint Mobilization on Pain, Range of Motion, and Shoulder Function After Arthroscopic Rotator Cuff Repair: An Observational Cohort Study.",
+        "authors": "Xianchao C, Xiuqiong Z, Sheng C, et al.",
+        "journal": "Med Sci Monit",
+        "date": "2026-08-23",
+        "displayDate": "2026 Aug 23",
+        "type": null,
+        "doi": "10.12659/MSM.953484",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42632920/"
+      },
+      {
+        "pmid": "42627896",
+        "title": "Engineering a biomimetic multiphasic suture anchor system for enhanced rotator cuff enthesis regeneration.",
+        "authors": "Li Z, Lee SH, Xu L, et al.",
+        "journal": "Sci Adv",
+        "date": "2026-08-21",
+        "displayDate": "2026 Aug 21",
+        "type": null,
+        "doi": "10.1126/sciadv.aea3128",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42627896/"
+      },
+      {
+        "pmid": "42611084",
+        "title": "Topographic anatomy of suprascapular artery branches in the supraspinatus fossa: surgical implications for rotator cuff and muscle advancement.",
+        "authors": "Lee H, Hwang SJ, Koh KH",
+        "journal": "Surg Radiol Anat",
+        "date": "2026-08-18",
+        "displayDate": "2026 Aug 18",
+        "type": null,
+        "doi": "10.1007/s00276-026-03970-3",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42611084/"
+      },
+      {
         "pmid": "42710249",
         "title": "Examining the effect of sex and body mass index on rotator cuff fatty infiltration in young adults without shoulder pathology.",
         "authors": "Boulanger SM, Sheffield DW, Gatti AA, et al.",
@@ -92,37 +136,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42604620/"
       },
       {
-        "pmid": "42550592",
-        "title": "Editorial Commentary: May the Force Be With You-Preoperative Strength Is the Rotator Cuff Retear Predictor We Can Actually Train.",
-        "authors": "Kress DJ, Jildeh TR",
-        "journal": "Arthroscopy",
-        "date": "2026-08-04",
-        "displayDate": "2026 Aug 4",
-        "type": null,
-        "doi": "10.1002/arj.70458",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42550592/"
+        "pmid": "42627941",
+        "title": "Current Approaches to Arthroscopic Management of Anterior Shoulder Instability.",
+        "authors": "Ba S, Macciacchera M, Mikhail N, et al.",
+        "journal": "JBJS Rev",
+        "date": "2026-08-01",
+        "displayDate": "2026 Aug 1",
+        "type": "Review",
+        "doi": "10.2106/JBJS.RVW.26.00033",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42627941/"
       },
       {
-        "pmid": "42535449",
-        "title": "Editorial Commentary: Insurance Peer-to-Peer Reviewers Take Notice! Yet Another Study Showing Benefit for Patch Augmentation for High-Risk Rotator Cuff Repairs.",
-        "authors": "Garrigues GE",
-        "journal": "Arthroscopy",
-        "date": "2026-07-31",
-        "displayDate": "2026 Jul 31",
+        "pmid": "42612622",
+        "title": "Healthcare Professionals Produce Higher Quality Content for Shoulder Dislocation on TikTok.",
+        "authors": "Driad C, Sonesaksith-Turcotte X, Sandman É, et al.",
+        "journal": "J Am Acad Orthop Surg Glob Res Rev",
+        "date": "2026-08-01",
+        "displayDate": "2026 Aug 1",
         "type": null,
-        "doi": "10.1002/arj.70474",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42535449/"
-      },
-      {
-        "pmid": "42531919",
-        "title": "Effectiveness of an AI-based home exercise app for rehabilitation of rotator cuff-related shoulder pain: A randomized controlled trial.",
-        "authors": "Villar-Alises O, Cortés CC, Rodríguez-Piñero Durán M, et al.",
-        "journal": "Musculoskelet Sci Pract",
-        "date": "2026-07-27",
-        "displayDate": "2026 Jul 27",
-        "type": "Randomized trial",
-        "doi": "10.1016/j.msksp.2026.103626",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42531919/"
+        "doi": "10.5435/JAAOSGlobal-D-24-00337",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42612622/"
       },
       {
         "pmid": "42504916",
@@ -147,28 +180,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42504108/"
       },
       {
-        "pmid": "42490312",
-        "title": "A CAD-to-Simulink framework for evaluating impingement-free motion in reverse total shoulder arthroplasty.",
-        "authors": "Ombogo M, Medley J, Langohr GDG, et al.",
-        "journal": "Proc Inst Mech Eng H",
-        "date": "2026-07-23",
-        "displayDate": "2026 Jul 23",
-        "type": null,
-        "doi": "10.1177/09544119261471200",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42490312/"
-      },
-      {
-        "pmid": "42478143",
-        "title": "Editorial Commentary: Stiff Patients After Rotator Cuff Repair: How Many Had Underrecognized Preoperative Adhesive Capsulitis?",
-        "authors": "Shi BY, Amini MH",
-        "journal": "Arthroscopy",
-        "date": "2026-07-20",
-        "displayDate": "2026 Jul 20",
-        "type": null,
-        "doi": "10.1002/arj.70396",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42478143/"
-      },
-      {
         "pmid": "42475843",
         "title": "Novel point-of-care ultrasound approaches for shoulder dislocation: Alternative windows, diagnostic signs, and a stepwise protocol.",
         "authors": "Shokoohi H, Gannon A, Imam MA, et al.",
@@ -178,17 +189,6 @@
         "type": "Review",
         "doi": "10.1016/j.ajem.2026.07.022",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42475843/"
-      },
-      {
-        "pmid": "42437853",
-        "title": "Bioinductive collagen implant augmentation after arthroscopic repair of rotator cuff tears with incomplete footprint coverage: a prospective clinical and morphological study.",
-        "authors": "Nizinski J, Dzianach M, Bushnell B, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-07-12",
-        "displayDate": "2026 Jul 12",
-        "type": null,
-        "doi": "10.1007/s00264-026-06935-8",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42437853/"
       },
       {
         "pmid": "42423301",
@@ -235,39 +235,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42319403/"
       },
       {
-        "pmid": "42314082",
-        "title": "Editorial Commentary: Preoperative Glucagon-Like Peptide-1 Receptor Agonist Use May Improve Outcomes After Arthroscopic Rotator Cuff Repair but Beneficial Effects May Vary Across Patient Subgroups.",
-        "authors": "Moran J, Jimenez AE",
-        "journal": "Arthroscopy",
-        "date": "2026-06-18",
-        "displayDate": "2026 Jun 18",
-        "type": null,
-        "doi": "10.1002/arj.70372",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42314082/"
-      },
-      {
-        "pmid": "42314072",
-        "title": "Glucagon-Like Peptide-1 Receptor Agonist Use in Obese Patients Is Associated With Decreased Risk of Revision and Retears After Arthroscopic Rotator Cuff Repair.",
-        "authors": "Omurzakov A, Omurzakov AM, Burkhart RJ, et al.",
-        "journal": "Arthroscopy",
-        "date": "2026-06-18",
-        "displayDate": "2026 Jun 18",
-        "type": null,
-        "doi": "10.1002/arj.70370",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42314072/"
-      },
-      {
-        "pmid": "42290543",
-        "title": "Moderate to high levels of spin in studies comparing open and arthroscopic Latarjet procedures for anterior shoulder instability: A systematic review from the LaTour Group.",
-        "authors": "Akrivos VS, Claizergues B, Collin P, et al.",
-        "journal": "Knee Surg Sports Traumatol Arthrosc",
-        "date": "2026-06-15",
-        "displayDate": "2026 Jun 15",
-        "type": "Systematic review",
-        "doi": "10.1002/ksa.70476",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42290543/"
-      },
-      {
         "pmid": "42289395",
         "title": "High Rates of Return To Play Following Surgical Stabilization for Shoulder Instability in Adolescent Athletes: A Systematic Review.",
         "authors": "Hodakowski AJ, Hurley ET, Villarreal-Espinosa JB, et al.",
@@ -301,17 +268,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42215817/"
       },
       {
-        "pmid": "42189737",
-        "title": "Editorial Commentary: Retaining Its Clinical Importance: Open Bankart Repair With Inferior Capsular Shift in Collision and Contact Athletes With Recurrent Anterior Shoulder Instability Retains Its Clinical Importance-But Will It Also Endure in the Future?",
-        "authors": "Brockmeyer M",
-        "journal": "Arthroscopy",
-        "date": "2026-05-26",
-        "displayDate": "2026 May 26",
-        "type": null,
-        "doi": "10.1002/arj.70362",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42189737/"
-      },
-      {
         "pmid": "42189676",
         "title": "Comparable Subscapularis Tendon Outcomes After Open Versus Arthroscopic Bankart Repair With Remplissage in Collision/Contact Athletes With Anterior Shoulder Instability: A 5-Year Prospective Cohort Study.",
         "authors": "Bitar IJ, Marangoni LD, Bitar LB, et al.",
@@ -343,17 +299,6 @@
         "type": null,
         "doi": "10.1002/arj.70328",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42159091/"
-      },
-      {
-        "pmid": "42144966",
-        "title": "Editorial Commentary: Rotator Cuff Repair Augmentation: Arguably the Only Meaningful Improvement in Rotator Cuff Repair Outcomes in Last 40 Years, While Being Cost-Effective.",
-        "authors": "Quigley RJ, Sardesai KS, Cole BJ",
-        "journal": "Arthroscopy",
-        "date": "2026-05-18",
-        "displayDate": "2026 May 18",
-        "type": null,
-        "doi": "10.1002/arj.70344",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42144966/"
       },
       {
         "pmid": "42138324",
@@ -400,17 +345,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42099011/"
       },
       {
-        "pmid": "42080816",
-        "title": "Editorial Commentary: Tobacco or Not-All Nicotine Products Negatively Impact Rotator Cuff Surgery.",
-        "authors": "Ernat JJ",
-        "journal": "Arthroscopy",
-        "date": "2026-05-04",
-        "displayDate": "2026 May 4",
-        "type": null,
-        "doi": "10.1002/arj.70199",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42080816/"
-      },
-      {
         "pmid": "42080757",
         "title": "Nontobacco Nicotine Dependence Is Associated With Perioperative Complications and Repeat Surgery After Arthroscopic Rotator Cuff Repair.",
         "authors": "Florentino SA, Berk AN, Good LM, et al.",
@@ -444,28 +378,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42070475/"
       },
       {
-        "pmid": "42049630",
-        "title": "Editorial Commentary: Dermal Allograft Is an Ideal Augmentation for Rotator Cuff Repairs at Risk for Failure.",
-        "authors": "Lin A, Cohen D, Grandberg C",
-        "journal": "Arthroscopy",
-        "date": "2026-04-28",
-        "displayDate": "2026 Apr 28",
-        "type": null,
-        "doi": "10.1002/arj.70194",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42049630/"
-      },
-      {
-        "pmid": "42047459",
-        "title": "Editorial Commentary: Arthroscopically Assisted Lower Trapezius Transfer: Promising Technique Still Searching for the Optimal Indications or Panacea for All Irreparable Rotator Cuff Tears?",
-        "authors": "Rashid MS, Roberts CP",
-        "journal": "Arthroscopy",
-        "date": "2026-04-28",
-        "displayDate": "2026 Apr 28",
-        "type": null,
-        "doi": "10.1002/arj.70195",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42047459/"
-      },
-      {
         "pmid": "42047390",
         "title": "Patch Augmentation Using Acellular Dermal Matrix During Arthroscopic Rotator Cuff Repair Reduces Retear Rates in High-Risk Patients With Rotator Cuff Healing Index 7 or Higher.",
         "authors": "Kim JS, Kim SC, Park JH, et al.",
@@ -488,15 +400,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42036362/"
       },
       {
-        "pmid": "42036064",
-        "title": "Complete resection of the deltoid insertion is associated with post-operative dislocation of reverse total shoulder arthroplasty following proximal humerus oncological resection.",
-        "authors": "Lin N, Zheng L, Li W, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-04-24",
-        "displayDate": "2026 Apr 24",
+        "pmid": "42035316",
+        "title": "Systemic Hormonal Contraceptive Use Is Associated With Greater Odds of Rotator Cuff Tears, Shoulder Instability, Dislocation, and Other Shoulder Pathologies: A Propensity Matched Epidemiological Study.",
+        "authors": "Omurzakov A, Omurzakov AM, Burkhart RJ, et al.",
+        "journal": "Arthroscopy",
+        "date": "2026-04-26",
+        "displayDate": "2026 Apr 26",
         "type": null,
-        "doi": "10.1016/j.jse.2026.04.024",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42036064/"
+        "doi": "10.1002/arj.70201",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42035316/"
       },
       {
         "pmid": "42036062",
@@ -510,26 +422,81 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42036062/"
       },
       {
-        "pmid": "41966468",
-        "title": "The impact of an intact rotator cuff on the outcomes of reverse shoulder arthroplasty: a meta-analysis of 20,924 patients.",
-        "authors": "Daher M, Ashkar I, Parmar T, et al.",
+        "pmid": "41865829",
+        "title": "Family history and heritability of rotator cuff tears.",
+        "authors": "Prakash R, Basnet TB, Liu W, et al.",
         "journal": "J Shoulder Elbow Surg",
-        "date": "2026-04-09",
-        "displayDate": "2026 Apr 9",
-        "type": "Meta-analysis",
-        "doi": "10.1016/j.jse.2026.03.023",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41966468/"
+        "date": "2026-03-20",
+        "displayDate": "2026 Mar 20",
+        "type": null,
+        "doi": "10.1016/j.jse.2026.03.008",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41865829/"
       },
       {
-        "pmid": "41864603",
-        "title": "Cannabis use disorder is associated with increased early postoperative opioid use and pain but no long-term differences after arthroscopic rotator cuff repair: a retrospective cohort study using TriNetX.",
-        "authors": "Sontam TR, Tummala S, Khela HS, et al.",
+        "pmid": "41864606",
+        "title": "Patch augmentation for large-to-massive rotator cuff tears: do they heal well in anterior cable disruption?",
+        "authors": "Jung JW, Kim HH, Rathod P, et al.",
         "journal": "J Shoulder Elbow Surg",
         "date": "2026-03-19",
         "displayDate": "2026 Mar 19",
         "type": null,
-        "doi": "10.1016/j.jse.2026.03.005",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41864603/"
+        "doi": "10.1016/j.jse.2026.03.003",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41864606/"
+      },
+      {
+        "pmid": "41864604",
+        "title": "Magnetic resonance imaging provides computed tomography-equivalent measurements of glenoid retroversion, concavity, and bony shoulder stability ratio after anterior shoulder dislocation.",
+        "authors": "Zehnder P, Kersten M, Resch T, et al.",
+        "journal": "J Shoulder Elbow Surg",
+        "date": "2026-03-19",
+        "displayDate": "2026 Mar 19",
+        "type": null,
+        "doi": "10.1016/j.jse.2026.03.004",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41864604/"
+      },
+      {
+        "pmid": "41833787",
+        "title": "Older age, longer symptom duration, and larger sagittal tear size predict poorer outcomes after margin convergence repair of massive rotator cuff tears.",
+        "authors": "Oklaz EB, Ahmadov A, Aral F, et al.",
+        "journal": "J Shoulder Elbow Surg",
+        "date": "2026-03-14",
+        "displayDate": "2026 Mar 14",
+        "type": null,
+        "doi": "10.1016/j.jse.2026.02.026",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41833787/"
+      },
+      {
+        "pmid": "41718549",
+        "title": "Systematic review and meta-analysis of laser physical agent for pain and disability in rotator cuff tendinopathy: subgroup analysis and meta-regression exploration of randomized control trials.",
+        "authors": "Lin LH, Chou PY, Hsu NW, et al.",
+        "journal": "Disabil Rehabil",
+        "date": "2026-02-20",
+        "displayDate": "2026 Feb 20",
+        "type": "Meta-analysis",
+        "doi": "10.1080/09638288.2026.2632917",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41718549/"
+      },
+      {
+        "pmid": "42018380",
+        "title": "Is one year follow-up sufficient to assess functional outcomes after rotator cuff repair?",
+        "authors": "Pasqualini I, Lucero Viviani N, Turan O, et al.",
+        "journal": "Rev Esp Cir Ortop Traumatol",
+        "date": "2026-02-04",
+        "displayDate": "2026 Feb 4",
+        "type": null,
+        "doi": "10.1016/j.recot.2026.01.004",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42018380/"
+      },
+      {
+        "pmid": "41592328",
+        "title": "Efficacy of Medium-High-Energy Radial Pressure Wave Therapy on Rehabilitation Outcomes After Arthroscopic Rotator Cuff Repair: A Randomized Trial.",
+        "authors": "Wang J, Song Y, Du X, et al.",
+        "journal": "Am J Phys Med Rehabil",
+        "date": "2026-01-05",
+        "displayDate": "2026 Jan 5",
+        "type": "Randomized trial",
+        "doi": "10.1097/PHM.0000000000002936",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41592328/"
       },
       {
         "pmid": "42743217",
@@ -543,6 +510,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42743217/"
       },
       {
+        "pmid": "42723871",
+        "title": "Speed-related increases in plantar tissue stress without affected-side laterality in individuals with unilateral shoulder dislocation.",
+        "authors": "Lu Z, Xiao L, Liang P, et al.",
+        "journal": "Front Public Health",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": null,
+        "doi": "10.3389/fpubh.2026.1916758",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42723871/"
+      },
+      {
         "pmid": "42709705",
         "title": "Application of musculoskeletal ultrasound in postoperative rehabilitation assessment and monitoring after rotator cuff repair: A systematic review.",
         "authors": "Shi Y, Bao Y, Li C",
@@ -552,6 +530,28 @@
         "type": "Systematic review",
         "doi": "10.1371/journal.pone.0357622",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42709705/"
+      },
+      {
+        "pmid": "42623362",
+        "title": "Retrospective analysis of arthroscopic repair outcomes using a modified Mason-Allen suture bridge \"parachute\" technique with bone marrow stimulation for rotator cuff tears.",
+        "authors": "Li S, Zheng S, Sun X, et al.",
+        "journal": "PLoS One",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": null,
+        "doi": "10.1371/journal.pone.0356245",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42623362/"
+      },
+      {
+        "pmid": "41392499",
+        "title": "Early Effects of Kinesio Taping on Clinical Outcomes in Patients With Arthroscopic Rotator Cuff Repair: A Double-Blind, Randomized Controlled Trial.",
+        "authors": "Kodak Mİ, Özüdoğru A, Basat HÇ, et al.",
+        "journal": "Sports Health",
+        "date": "2025-12-14",
+        "displayDate": "2025 Dec 14",
+        "type": "Randomized trial",
+        "doi": "10.1177/19417381251397956",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41392499/"
       }
     ],
     "rehab": [
@@ -565,28 +565,6 @@
         "type": "Randomized trial",
         "doi": "10.4085/1062-6050-0761.25",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42730437/"
-      },
-      {
-        "pmid": "42618962",
-        "title": "Rehabilitation Experiences and Support Needs of Patients With Hemiplegic Shoulder Pain Based on the ICF Framework: A Qualitative Study.",
-        "authors": "Li X, Yang H, Sui M, et al.",
-        "journal": "Musculoskeletal Care",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep",
-        "type": null,
-        "doi": "10.1002/msc.70254",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42618962/"
-      },
-      {
-        "pmid": "42632920",
-        "title": "Effects of Adding Muscle Energy Technique to Joint Mobilization on Pain, Range of Motion, and Shoulder Function After Arthroscopic Rotator Cuff Repair: An Observational Cohort Study.",
-        "authors": "Xianchao C, Xiuqiong Z, Sheng C, et al.",
-        "journal": "Med Sci Monit",
-        "date": "2026-08-23",
-        "displayDate": "2026 Aug 23",
-        "type": null,
-        "doi": "10.12659/MSM.953484",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42632920/"
       },
       {
         "pmid": "42628788",
@@ -622,17 +600,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42545442/"
       },
       {
-        "pmid": "42627941",
-        "title": "Current Approaches to Arthroscopic Management of Anterior Shoulder Instability.",
-        "authors": "Ba S, Macciacchera M, Mikhail N, et al.",
-        "journal": "JBJS Rev",
-        "date": "2026-08-01",
-        "displayDate": "2026 Aug 1",
-        "type": "Review",
-        "doi": "10.2106/JBJS.RVW.26.00033",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42627941/"
-      },
-      {
         "pmid": "42538792",
         "title": "Changes in Pain-Related Fear Predict Shoulder Disability in Rotator Cuff Tendinopathy With Resistance Exercise.",
         "authors": "Mears CK, Heindel MD, Abeles RE, et al.",
@@ -642,17 +609,6 @@
         "type": null,
         "doi": "10.2519/jospt.2026.13563",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42538792/"
-      },
-      {
-        "pmid": "42517165",
-        "title": "Temporal trajectory and predictors of hemiplegic shoulder pain after stroke: a 12-month longitudinal clinical-ultrasound study.",
-        "authors": "Cotellessa F, May MC, Guzzone V, et al.",
-        "journal": "Eur J Phys Rehabil Med",
-        "date": "2026-08-01",
-        "displayDate": "2026 Aug",
-        "type": null,
-        "doi": "10.23736/S1973-9087.26.09443-8",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42517165/"
       },
       {
         "pmid": "42475807",
@@ -708,17 +664,6 @@
         "type": "Case report",
         "doi": "10.2106/JBJS.CC.26.00015",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42462053/"
-      },
-      {
-        "pmid": "42455920",
-        "title": "Assessment and Management Practices for Post-Stroke Shoulder Pain Among Rehabilitation Professionals in Vietnam: A Cross-Sectional Survey.",
-        "authors": "Nguyen NT, Vongsirinavarat M, Piriyaprasarth P, et al.",
-        "journal": "Physiother Res Int",
-        "date": "2026-07-01",
-        "displayDate": "2026 Jul",
-        "type": null,
-        "doi": "10.1002/pri.70290",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42455920/"
       },
       {
         "pmid": "42363076",
@@ -798,17 +743,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42231228/"
       },
       {
-        "pmid": "42226090",
-        "title": "Efficacy of Physical Modalities for Hemiplegic Shoulder Pain After Stroke: A Systematic Review.",
-        "authors": "Spina S, Facciorusso S, D'Ascanio MC, et al.",
-        "journal": "J Neurol Phys Ther",
-        "date": "2026-06-02",
-        "displayDate": "2026 Jun 2",
-        "type": "Systematic review",
-        "doi": "10.1097/NPT.0000000000000562",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42226090/"
-      },
-      {
         "pmid": "42209866",
         "title": "Efficacy of treatment for subacromial pain in older adults: a systematic review and meta-analysis with GRADE recommendations.",
         "authors": "de Castro Mariz G, Xavier DM, Barroso MMF, et al.",
@@ -875,6 +809,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42139015/"
       },
       {
+        "pmid": "42116289",
+        "title": "The association between state direct access laws and earlier use of physical therapy among Medicare patients with rotator cuff tears: A retrospective cohort study.",
+        "authors": "Jindal D, Brooks JM, Hair NL, et al.",
+        "journal": "Medicine (Baltimore)",
+        "date": "2026-05-08",
+        "displayDate": "2026 May 8",
+        "type": null,
+        "doi": "10.1097/MD.0000000000048584",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42116289/"
+      },
+      {
         "pmid": "42099223",
         "title": "Up to date comprehensive review of atraumatic shoulder instability: anatomy, causes, management, and psychosocial considerations.",
         "authors": "Varathan K, Hamad A, Dyke R, et al.",
@@ -886,15 +831,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42099223/"
       },
       {
-        "pmid": "42014354",
-        "title": "Editorial Commentary: Don't Pull Too Hard: Decreasing Tension in Rotator Cuff Repairs, Especially for Large and Retracted Tears, Leads to Superior Outcomes and Healing Rates.",
-        "authors": "Golant A",
-        "journal": "Arthroscopy",
-        "date": "2026-04-21",
-        "displayDate": "2026 Apr 21",
+        "pmid": "42082948",
+        "title": "The relationship between shoulder pain and joint position sense, postural control, tactile sensation, and muscle strength in chronic hemiplegia.",
+        "authors": "Kütükcü B, Yana M",
+        "journal": "BMC Neurol",
+        "date": "2026-05-04",
+        "displayDate": "2026 May 4",
         "type": null,
-        "doi": "10.1002/arj.70134",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42014354/"
+        "doi": "10.1186/s12883-026-04924-3",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42082948/"
+      },
+      {
+        "pmid": "42045508",
+        "title": "Intramuscular electrical stimulation added to home exercise for myofascial shoulder pain: a randomized controlled trial.",
+        "authors": "Podleśny M, Kuszewski M, Borecka B, et al.",
+        "journal": "Sci Rep",
+        "date": "2026-04-27",
+        "displayDate": "2026 Apr 27",
+        "type": "Randomized trial",
+        "doi": "10.1038/s41598-026-50917-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42045508/"
       },
       {
         "pmid": "42014344",
@@ -930,6 +886,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41990400/"
       },
       {
+        "pmid": "41975358",
+        "title": "Effect of scapular stabilization and mobilization-based rehabilitation on pain and shoulder function in subacromial impingement syndrome: a randomized controlled trial.",
+        "authors": "Karakuzu Güngör Z, Tan MS",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2026-04-13",
+        "displayDate": "2026 Apr 13",
+        "type": "Randomized trial",
+        "doi": "10.1186/s12891-026-09760-7",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41975358/"
+      },
+      {
         "pmid": "41946449",
         "title": "Platelet-Rich Plasma Injections for the Treatment of Rotator Cuff Pathology Have Higher Complication Rates of Adhesive Capsulitis than Alternative Injectable Therapies: A Systematic Review and Meta-analysis of Randomized Controlled Trials.",
         "authors": "Driscoll A, Griffin S, Schreiner G, et al.",
@@ -939,6 +906,28 @@
         "type": "Meta-analysis",
         "doi": "10.1002/arj.70163",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41946449/"
+      },
+      {
+        "pmid": "41937355",
+        "title": "Assessment of the Validity and Reliability of the Turkish Version of the Modified Tampa Scale for Kinesiophobia in Patients With Shoulder Pain.",
+        "authors": "Kuculmez O, Bulut D, Topcuoglu IA, et al.",
+        "journal": "Med Sci Monit",
+        "date": "2026-04-06",
+        "displayDate": "2026 Apr 6",
+        "type": null,
+        "doi": "10.12659/MSM.951685",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41937355/"
+      },
+      {
+        "pmid": "41932102",
+        "title": "Supervised versus home exercise program in subacromial impingement syndrome: a randomized controlled trial with 1-year of follow-up.",
+        "authors": "Gutiérrez-Espinoza H, Araya-Quintanilla F, Zavala-González J, et al.",
+        "journal": "Ann Phys Rehabil Med",
+        "date": "2026-04-02",
+        "displayDate": "2026 Apr 2",
+        "type": "Randomized trial",
+        "doi": "10.1016/j.rehab.2026.102106",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41932102/"
       },
       {
         "pmid": "42553900",
@@ -963,17 +952,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41821476/"
       },
       {
-        "pmid": "41718549",
-        "title": "Systematic review and meta-analysis of laser physical agent for pain and disability in rotator cuff tendinopathy: subgroup analysis and meta-regression exploration of randomized control trials.",
-        "authors": "Lin LH, Chou PY, Hsu NW, et al.",
-        "journal": "Disabil Rehabil",
-        "date": "2026-02-20",
-        "displayDate": "2026 Feb 20",
-        "type": "Meta-analysis",
-        "doi": "10.1080/09638288.2026.2632917",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41718549/"
-      },
-      {
         "pmid": "41720248",
         "title": "Effects of adding thoracic extension exercises or thoracic kinesio taping to shoulder exercises on pain and function in adults with subacromial pain syndrome: a randomized controlled trial.",
         "authors": "Altaş EU, Kırmızı M, Şahin A, et al.",
@@ -994,6 +972,17 @@
         "type": null,
         "doi": "10.1016/j.jse.2026.01.013",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41713723/"
+      },
+      {
+        "pmid": "41696950",
+        "title": "The impact of randomized controlled trials on the management of anterior shoulder instability: A bibliometric and altmetrics analysis.",
+        "authors": "AlMasri A, Syan R, Dagher D, et al.",
+        "journal": "Knee Surg Sports Traumatol Arthrosc",
+        "date": "2026-02-16",
+        "displayDate": "2026 Feb 16",
+        "type": null,
+        "doi": "10.1002/ksa.70333",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41696950/"
       },
       {
         "pmid": "41667391",
@@ -1029,15 +1018,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41577231/"
       },
       {
-        "pmid": "41592328",
-        "title": "Efficacy of Medium-High-Energy Radial Pressure Wave Therapy on Rehabilitation Outcomes After Arthroscopic Rotator Cuff Repair: A Randomized Trial.",
-        "authors": "Wang J, Song Y, Du X, et al.",
-        "journal": "Am J Phys Med Rehabil",
+        "pmid": "41490228",
+        "title": "Machine learning prediction for identifying individuals requiring rotator cuff repair: Shoulder muscle strength and questionnaires as the related factors.",
+        "authors": "Kim JS, Hwang UJ, Jo SH, et al.",
+        "journal": "J Back Musculoskelet Rehabil",
         "date": "2026-01-05",
         "displayDate": "2026 Jan 5",
-        "type": "Randomized trial",
-        "doi": "10.1097/PHM.0000000000002936",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41592328/"
+        "type": null,
+        "doi": "10.1177/10538127251412325",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41490228/"
       },
       {
         "pmid": "42201866",
@@ -1051,15 +1040,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42201866/"
       },
       {
-        "pmid": "41443387",
-        "title": "Is subscapularis repair beneficial in patients undergoing reverse shoulder arthroplasty for glenohumeral osteoarthritis with an intact rotator cuff: evaluation of a treatment protocol?",
-        "authors": "Chang K, Toavs T, Covarrubias O, et al.",
-        "journal": "J Shoulder Elbow Surg",
+        "pmid": "41428491",
+        "title": "Occupation-based intervention for subacromial pain syndrome: A pilot randomized controlled trial.",
+        "authors": "Sigirtmac IC, Ay Kiremitci N, Bulbul O, et al.",
+        "journal": "J Back Musculoskelet Rehabil",
         "date": "2025-12-22",
         "displayDate": "2025 Dec 22",
-        "type": null,
-        "doi": "10.1016/j.jse.2025.11.020",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41443387/"
+        "type": "Randomized trial",
+        "doi": "10.1177/10538127251407664",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41428491/"
       },
       {
         "pmid": "41418846",
@@ -1071,17 +1060,6 @@
         "type": null,
         "doi": "10.1016/j.apmr.2025.11.037",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41418846/"
-      },
-      {
-        "pmid": "41392499",
-        "title": "Early Effects of Kinesio Taping on Clinical Outcomes in Patients With Arthroscopic Rotator Cuff Repair: A Double-Blind, Randomized Controlled Trial.",
-        "authors": "Kodak Mİ, Özüdoğru A, Basat HÇ, et al.",
-        "journal": "Sports Health",
-        "date": "2025-12-14",
-        "displayDate": "2025 Dec 14",
-        "type": "Randomized trial",
-        "doi": "10.1177/19417381251397956",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41392499/"
       },
       {
         "pmid": "41320893",
@@ -1104,20 +1082,31 @@
         "type": "Review",
         "doi": "10.1016/j.csm.2025.09.009",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42209053/"
+      },
+      {
+        "pmid": "41318312",
+        "title": "The Shoulder HD Pilot Trial: A qualitative study of patient and therapist experience, acceptability, tolerance and perception of a high and low load-volume intervention for rotator cuff tendinopathy.",
+        "authors": "Naunton J, Barrett S, Kidgell D, et al.",
+        "journal": "J Sci Med Sport",
+        "date": "2025-11-03",
+        "displayDate": "2025 Nov 3",
+        "type": null,
+        "doi": "10.1016/j.jsams.2025.10.014",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41318312/"
+      },
+      {
+        "pmid": "40323261",
+        "title": "Self-reported shoulder pain assessment in adults with spinal cord injury who use a manual wheelchair: A scoping review.",
+        "authors": "Hurd W, Van Straaten M, Patel S, et al.",
+        "journal": "J Spinal Cord Med",
+        "date": "2025-05-05",
+        "displayDate": "2025 May 5",
+        "type": null,
+        "doi": "10.1080/10790268.2025.2483075",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40323261/"
       }
     ],
     "training": [
-      {
-        "pmid": "42562179",
-        "title": "Assessment and management of spastic shoulder in patients with brain injury.",
-        "authors": "Sturbois-Nachef N, Fontaine C, Allart E",
-        "journal": "Hand Surg Rehabil",
-        "date": "2026-08-06",
-        "displayDate": "2026 Aug 6",
-        "type": "Review",
-        "doi": "10.1016/j.hansur.2026.102726",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42562179/"
-      },
       {
         "pmid": "42564656",
         "title": "Electromyographic Analysis of the Shoulder During Isokinetic External Rotation in Baseball Players With Pitching-Impaired Shoulders.",
@@ -1130,50 +1119,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42564656/"
       },
       {
-        "pmid": "42515236",
-        "title": "Feature-Level Fusion of Surface Electromyography and Mechanomyography Signals for MVC-Normalized Shoulder Abduction Force-Level Classification in Healthy Adults.",
-        "authors": "Zhou C, Gao Y, Gou X, et al.",
-        "journal": "Sensors (Basel)",
-        "date": "2026-07-09",
-        "displayDate": "2026 Jul 9",
-        "type": null,
-        "doi": "10.3390/s26144351",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42515236/"
-      },
-      {
-        "pmid": "42423968",
-        "title": "Vascularised fibular graft shoulder arthrodesis after proximal humeral tumour resection with sacrifice of the abductor mechanism.",
-        "authors": "Brotea-Mosoiu S, Cacuci OG, Bodog R, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-07-09",
-        "displayDate": "2026 Jul 9",
-        "type": null,
-        "doi": "10.1007/s00264-026-06934-9",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42423968/"
-      },
-      {
-        "pmid": "42451270",
-        "title": "MoCap-Referenced Neck-Shoulder sEMG-IMU Decoding for Discrete Assistive Commands: A Pilot Study.",
-        "authors": "Majeed AH, Masood F, Abdullah HA",
-        "journal": "Sensors (Basel)",
-        "date": "2026-06-25",
-        "displayDate": "2026 Jun 25",
-        "type": null,
-        "doi": "10.3390/s26134027",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42451270/"
-      },
-      {
-        "pmid": "42269733",
-        "title": "A novel methodological framework for the assessment of the neural control of the shoulder using high-density surface electromyography.",
-        "authors": "Inglis JG, Rio S, Cabral HV, et al.",
-        "journal": "Methods",
-        "date": "2026-06-10",
-        "displayDate": "2026 Jun 10",
-        "type": null,
-        "doi": "10.1016/j.ymeth.2026.06.003",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42269733/"
-      },
-      {
         "pmid": "42157602",
         "title": "The Effect of Scapular-Focused Exercise With or Without Electromyography Biofeedback in High-School Baseball Pitchers With Shoulder Impingement Syndrome: A Randomized Controlled Trial.",
         "authors": "Chung WY, Lee Y",
@@ -1183,50 +1128,6 @@
         "type": "Randomized trial",
         "doi": "10.1177/19417381261433558",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42157602/"
-      },
-      {
-        "pmid": "42188630",
-        "title": "Early Intervention of Hemiplegic Shoulder Pain in the Context of Post-Stroke Shoulder Spasticity: A Canadian Cross-Sectional Survey.",
-        "authors": "Kassam F, MacRae F, Lechner L, et al.",
-        "journal": "Toxins (Basel)",
-        "date": "2026-05-12",
-        "displayDate": "2026 May 12",
-        "type": null,
-        "doi": "10.3390/toxins18050228",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42188630/"
-      },
-      {
-        "pmid": "42044719",
-        "title": "The Effect of Ergonomic Optimization on Shoulder and Neck Mechanics and Symptoms During Simulated Ureteroscopy.",
-        "authors": "Saini G, Sloan MS, Borofsky MS, et al.",
-        "journal": "Urology",
-        "date": "2026-04-25",
-        "displayDate": "2026 Apr 25",
-        "type": null,
-        "doi": "10.1016/j.urology.2026.04.037",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42044719/"
-      },
-      {
-        "pmid": "42024255",
-        "title": "Anterior deltoid atrophy after reverse shoulder arthroplasty: a preliminary prospective study on surgical approach and neurophysiological correlates.",
-        "authors": "Lopiz Y, Rodrígiez-González A, Ossuna-Juntadez E, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-04-23",
-        "displayDate": "2026 Apr 23",
-        "type": null,
-        "doi": "10.1007/s00264-026-06804-4",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42024255/"
-      },
-      {
-        "pmid": "41997040",
-        "title": "Implant design influences muscle activation patterns during functional motions after reverse shoulder arthroplasty.",
-        "authors": "Bayer SH, LeVasseur C, Munsch M, et al.",
-        "journal": "J Electromyogr Kinesiol",
-        "date": "2026-04-14",
-        "displayDate": "2026 Apr 14",
-        "type": null,
-        "doi": "10.1016/j.jelekin.2026.103158",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41997040/"
       },
       {
         "pmid": "41928659",
@@ -1260,39 +1161,6 @@
         "type": null,
         "doi": "10.1002/pri.70198",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41823359/"
-      },
-      {
-        "pmid": "41856352",
-        "title": "Biomechanical changes after reverse total shoulder arthroplasty: a systematic review of advanced measurement technologies.",
-        "authors": "Thomson A, Felix T, Lichtwark G, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-03-18",
-        "displayDate": "2026 Mar 18",
-        "type": "Systematic review",
-        "doi": "10.1016/j.jse.2026.03.002",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41856352/"
-      },
-      {
-        "pmid": "41841549",
-        "title": "Neuromechanical Effects of a Soft Shoulder Exoskeleton in Overhead Industrial Tasks: Evidence from Multimodal Physiological Evaluation.",
-        "authors": "Chen B, Cai J, Wang M, et al.",
-        "journal": "Soft Robot",
-        "date": "2026-03-17",
-        "displayDate": "2026 Mar 17",
-        "type": null,
-        "doi": "10.1177/21695172261432103",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41841549/"
-      },
-      {
-        "pmid": "41894858",
-        "title": "Shoulder muscle synergies before and after reverse total shoulder arthroplasty.",
-        "authors": "Francalanci H, Holzer N, Moissenet F, et al.",
-        "journal": "J Biomech",
-        "date": "2026-03-13",
-        "displayDate": "2026 Mar 13",
-        "type": null,
-        "doi": "10.1016/j.jbiomech.2026.113252",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41894858/"
       },
       {
         "pmid": "41780073",
@@ -1383,17 +1251,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41504507/"
       },
       {
-        "pmid": "42755466",
-        "title": "Paired vagus nerve stimulation for post-stroke shoulder motor recovery: corticospinal-C5 motor network plasticity and rehabilitation applications.",
-        "authors": "Ji X, Zheng W, Ma W, et al.",
-        "journal": "Front Neurol",
-        "date": "2026-01-01",
-        "displayDate": "2026",
-        "type": "Review",
-        "doi": "10.3389/fneur.2026.1949342",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42755466/"
-      },
-      {
         "pmid": "42445121",
         "title": "Blood Flow Restriction Therapy in the Shoulder: A Review.",
         "authors": "Munroe S, Harding C, Gibbs HP, et al.",
@@ -1436,17 +1293,6 @@
         "type": null,
         "doi": "10.1080/10400435.2026.2630939",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41734286/"
-      },
-      {
-        "pmid": "41289135",
-        "title": "Assessment of Neuro-Musculo-Vascular Activity in Hemiplegic Shoulder Pain: A Multimodal Study With HD-sEMG, Ultrasonography, and Laser Speckle Imaging.",
-        "authors": "Xia J, Wei X, Xiang G, et al.",
-        "journal": "IEEE Trans Neural Syst Rehabil Eng",
-        "date": "2026-01-01",
-        "displayDate": "2026",
-        "type": null,
-        "doi": "10.1109/TNSRE.2025.3636606",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41289135/"
       },
       {
         "pmid": "41475871",
@@ -1526,37 +1372,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41327016/"
       },
       {
-        "pmid": "41265011",
-        "title": "Effects of shoulder-assist exoskeletons on muscle activity and balance during a wire pulling task on a simulated scissor lift.",
-        "authors": "Zheng L, Pan C, Kia K, et al.",
-        "journal": "Appl Ergon",
+        "pmid": "41263915",
+        "title": "Effect of adding proprioceptive neuromuscular facilitation to conventional physiotherapy on scapular balance and shoulder proprioception in adolescents with idiopathic scoliosis: a randomised controlled trial protocol.",
+        "authors": "Xu Y, Feng M, Wu R, et al.",
+        "journal": "BMJ Open",
         "date": "2025-11-19",
         "displayDate": "2025 Nov 19",
-        "type": null,
-        "doi": "10.1016/j.apergo.2025.104694",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41265011/"
-      },
-      {
-        "pmid": "41202445",
-        "title": "Development and EMG/metabolic assessment of a passive shoulder exoskeleton providing adjustable support for high arm elevation.",
-        "authors": "Aronis G, Kurz M, Angeli T, et al.",
-        "journal": "Appl Ergon",
-        "date": "2025-11-06",
-        "displayDate": "2025 Nov 6",
-        "type": null,
-        "doi": "10.1016/j.apergo.2025.104681",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41202445/"
-      },
-      {
-        "pmid": "41318312",
-        "title": "The Shoulder HD Pilot Trial: A qualitative study of patient and therapist experience, acceptability, tolerance and perception of a high and low load-volume intervention for rotator cuff tendinopathy.",
-        "authors": "Naunton J, Barrett S, Kidgell D, et al.",
-        "journal": "J Sci Med Sport",
-        "date": "2025-11-03",
-        "displayDate": "2025 Nov 3",
-        "type": null,
-        "doi": "10.1016/j.jsams.2025.10.014",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41318312/"
+        "type": "Trial protocol",
+        "doi": "10.1136/bmjopen-2025-106848",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41263915/"
       },
       {
         "pmid": "41167138",
@@ -1592,6 +1416,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40975205/"
       },
       {
+        "pmid": "40953752",
+        "title": "Age and sex modulate scapular muscle excitation strategies during loaded shoulder flexion.",
+        "authors": "Rochon J, Bohunicky S, Scribbans T",
+        "journal": "Exp Gerontol",
+        "date": "2025-09-13",
+        "displayDate": "2025 Sep 13",
+        "type": null,
+        "doi": "10.1016/j.exger.2025.112897",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40953752/"
+      },
+      {
         "pmid": "41316609",
         "title": "Electromyographic activation patterns in CrossFit® athletes with unilateral subacromial shoulder pain: A cluster analysis approach.",
         "authors": "Almazán-Polo J, Calvo-Lobo C, Guérineau F, et al.",
@@ -1614,15 +1449,48 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40972468/"
       },
       {
-        "pmid": "40902710",
-        "title": "Muscle activation variability in relation to functional internal rotation in reverse total shoulder arthroplasty.",
-        "authors": "Ven L, Zunker JD, Scheys L, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2025-09-01",
-        "displayDate": "2025 Sep 1",
+        "pmid": "40961565",
+        "title": "Quantifying the influence of radiation therapy on functional shoulder health indicators in breast cancer patients: An exploratory study.",
+        "authors": "Valerio MCH, Dickerson CR",
+        "journal": "J Electromyogr Kinesiol",
+        "date": "2025-09-10",
+        "displayDate": "2025 Sep 10",
         "type": null,
-        "doi": "10.1016/j.jse.2025.07.026",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40902710/"
+        "doi": "10.1016/j.jelekin.2025.103071",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40961565/"
+      },
+      {
+        "pmid": "40939370",
+        "title": "Shoulder muscle activity magnitude and timing in individuals with specific scapular movement patterns.",
+        "authors": "Saini G, Goodson M, Ludewig PM",
+        "journal": "J Electromyogr Kinesiol",
+        "date": "2025-09-02",
+        "displayDate": "2025 Sep 2",
+        "type": null,
+        "doi": "10.1016/j.jelekin.2025.103054",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40939370/"
+      },
+      {
+        "pmid": "40859541",
+        "title": "Acupotomy for adhesive capsulitis of the shoulder: A case report.",
+        "authors": "Hu Z, Huang Q, Li Z",
+        "journal": "Medicine (Baltimore)",
+        "date": "2025-08-22",
+        "displayDate": "2025 Aug 22",
+        "type": "Case report",
+        "doi": "10.1097/MD.0000000000044115",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40859541/"
+      },
+      {
+        "pmid": "40836162",
+        "title": "Impact of targeted neck and shoulder muscle training on muscular tension in ear surgeons.",
+        "authors": "Lakomek A, Minhorst S, Schulze M, et al.",
+        "journal": "Eur Arch Otorhinolaryngol",
+        "date": "2025-08-20",
+        "displayDate": "2025 Aug 20",
+        "type": null,
+        "doi": "10.1007/s00405-025-09596-2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40836162/"
       },
       {
         "pmid": "40818603",
@@ -1636,6 +1504,105 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40818603/"
       },
       {
+        "pmid": "40845224",
+        "title": "The Kinetic Link: Investigating Shoulder Strength as a Determinant of Throwing Velocity in Handball Players.",
+        "authors": "García-Buendía G, Martínez-García D, Chirosa Ríos IJ, et al.",
+        "journal": "J Strength Cond Res",
+        "date": "2025-08-13",
+        "displayDate": "2025 Aug 13",
+        "type": null,
+        "doi": "10.1519/JSC.0000000000005239",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40845224/"
+      },
+      {
+        "pmid": "40720242",
+        "title": "Changes in corticospinal excitability of shoulder muscles across functional glenohumeral joint positions.",
+        "authors": "Forman GN, Mannella K, MacKenzie R, et al.",
+        "journal": "J Neurophysiol",
+        "date": "2025-07-28",
+        "displayDate": "2025 Jul 28",
+        "type": null,
+        "doi": "10.1152/jn.00296.2025",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40720242/"
+      },
+      {
+        "pmid": "40694661",
+        "title": "Comparing shoulder muscle activity in symptomatic and asymptomatic groups: the influence of normalization technique.",
+        "authors": "Lang AE, Kim SY",
+        "journal": "Int Biomech",
+        "date": "2025-07-22",
+        "displayDate": "2025 Jul 22",
+        "type": null,
+        "doi": "10.1080/23335432.2025.2537403",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40694661/"
+      },
+      {
+        "pmid": "40660227",
+        "title": "Impairment of neck and shoulder function after neck dissection: a comparative study of goniometry, EMG and paper pencil tool in a randomized controlled trial of level IIb preserving verses conventional neck dissection.",
+        "authors": "Karthikeyan S, Joshi D, Pathak A, et al.",
+        "journal": "World J Surg Oncol",
+        "date": "2025-07-14",
+        "displayDate": "2025 Jul 14",
+        "type": "Randomized trial",
+        "doi": "10.1186/s12957-025-03931-x",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40660227/"
+      },
+      {
+        "pmid": "40601531",
+        "title": "Is synchronous telerehabilitation effective in the treatment of rotator cuff tears? - a randomized controlled trial.",
+        "authors": "Zirek E, Analay Akbaba Y, Guven MF",
+        "journal": "Physiother Theory Pract",
+        "date": "2025-07-02",
+        "displayDate": "2025 Jul 2",
+        "type": "Randomized trial",
+        "doi": "10.1080/09593985.2025.2526021",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40601531/"
+      },
+      {
+        "pmid": "40545326",
+        "title": "Adhesive Capsulitis of the Shoulder.",
+        "authors": "Mullen JP, Hauer TM, Lau EN, et al.",
+        "journal": "Arthroscopy",
+        "date": "2025-07-01",
+        "displayDate": "2025 Jul",
+        "type": "Review",
+        "doi": "10.1016/j.arthro.2025.03.027",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40545326/"
+      },
+      {
+        "pmid": "40543070",
+        "title": "Shoulder Muscle Activity Through Surface Electromyography and Estimation of Physiological Fatigue Using the T-Fast Test in Patients With Glenohumeral Instability: A Cross-Sectional Study.",
+        "authors": "Ramírez-Pérez L, Cuesta-Vargas AI",
+        "journal": "Physiother Res Int",
+        "date": "2025-07-01",
+        "displayDate": "2025 Jul",
+        "type": "Randomized trial",
+        "doi": "10.1002/pri.70085",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40543070/"
+      },
+      {
+        "pmid": "40583556",
+        "title": "Internal consistency, factor structure, and floor/ceiling effect of Quick Disabilities of the Arm, Shoulder, and Hand Questionnaire among people with carpal tunnel syndrome.",
+        "authors": "Miikkulainen A, Saltychev M, Widbom-Kolhanen S, et al.",
+        "journal": "Int J Rehabil Res",
+        "date": "2025-06-30",
+        "displayDate": "2025 Jun 30",
+        "type": null,
+        "doi": "10.1097/MRR.0000000000000673",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40583556/"
+      },
+      {
+        "pmid": "40560750",
+        "title": "Effects of swimming fatigue on neuromuscular parameters in young swimmers with unilateral shoulder pain.",
+        "authors": "Martini M, Cargnel A, Raffini A, et al.",
+        "journal": "J Sports Med Phys Fitness",
+        "date": "2025-06-25",
+        "displayDate": "2025 Jun 25",
+        "type": null,
+        "doi": "10.23736/S0022-4707.25.16467-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40560750/"
+      },
+      {
         "pmid": "40495722",
         "title": "Predictive role of surface electromyography and shoulder kinematic analysis on injury risk in padel players: A proof-of-concept study.",
         "authors": "Marotta N, Lopresti E, Demeco A, et al.",
@@ -1647,6 +1614,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40495722/"
       },
       {
+        "pmid": "40452191",
+        "title": "Analysis of Muscle Recruitment Patterns During Shoulder Rehabilitation Exercises With and Without Elastic Resistance.",
+        "authors": "Tonon A, Pozzo R, Pollastri S, et al.",
+        "journal": "J Musculoskelet Neuronal Interact",
+        "date": "2025-06-01",
+        "displayDate": "2025 Jun 1",
+        "type": null,
+        "doi": "10.22540/JMNI-25-160",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40452191/"
+      },
+      {
         "pmid": "40280551",
         "title": "Evaluating Deltoid Muscle Activation During Manual Wheelchair Propulsion in Parabadminton: Racket Effects and Intensity Levels.",
         "authors": "Oliveira SFM, Oliveira JIV, Fernandes TLB, et al.",
@@ -1656,86 +1634,31 @@
         "type": null,
         "doi": "10.1123/jsr.2024-0151",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40280551/"
+      },
+      {
+        "pmid": "40786099",
+        "title": "Acute effects of lower trapezius activation exercises on shoulder muscle activation during overhead functional tasks in symptomatic and asymptomatic adults.",
+        "authors": "Abiara S, Heinrichs V, Chorneyko A, et al.",
+        "journal": "PeerJ",
+        "date": "2025-01-01",
+        "displayDate": "2025",
+        "type": "Clinical trial",
+        "doi": "10.7717/peerj.19861",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40786099/"
+      },
+      {
+        "pmid": "39382017",
+        "title": "Electromyographic activity of shoulder muscles on two preventive exercise programmes for swimmer's shoulder: elastic band versus weight.",
+        "authors": "Tavares N, Vilas-Boas JP, Castro MA",
+        "journal": "Sports Biomech",
+        "date": "2024-10-09",
+        "displayDate": "2024 Oct 9",
+        "type": null,
+        "doi": "10.1080/14763141.2024.2410891",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39382017/"
       }
     ],
     "mechanics": [
-      {
-        "pmid": "42720785",
-        "title": "Anatomic shoulder arthroplasty: a single surgeon's consecutive series of four hundred and fifty eight patients.",
-        "authors": "Schiffman C, Chin E, Whitson A, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-09-10",
-        "displayDate": "2026 Sep 10",
-        "type": null,
-        "doi": "10.1007/s00264-026-07017-5",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42720785/"
-      },
-      {
-        "pmid": "42708512",
-        "title": "Risk of radial nerve injury during deltoid intramuscular injection in shoulder internal rotation and abduction position-cadaveric anatomical study.",
-        "authors": "Minami N, Nakanishi Y, Kurata S, et al.",
-        "journal": "Hum Vaccin Immunother",
-        "date": "2026-09-08",
-        "displayDate": "2026 Sep 8",
-        "type": null,
-        "doi": "10.1080/21645515.2026.2727733",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42708512/"
-      },
-      {
-        "pmid": "42629458",
-        "title": "Concurrent validity and reliability of an artificial intelligence-assisted physiotherapy assessment system for maximal mouth opening, cervical, and shoulder range of motion in patients with oral cancer.",
-        "authors": "Chen YH, Liu TC, Chao WT, et al.",
-        "journal": "Support Care Cancer",
-        "date": "2026-08-21",
-        "displayDate": "2026 Aug 21",
-        "type": null,
-        "doi": "10.1007/s00520-026-11131-w",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42629458/"
-      },
-      {
-        "pmid": "42677769",
-        "title": "Rotator cuff tear arthropathy and reverse total shoulder arthroplasty: biomechanics and contemporary designs.",
-        "authors": "Cherkezov N, Kovacheva-Predovska D, Dimitrov N",
-        "journal": "Folia Med (Plovdiv)",
-        "date": "2026-08-20",
-        "displayDate": "2026 Aug 20",
-        "type": "Review",
-        "doi": "10.3897/folmed.68.e183236",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42677769/"
-      },
-      {
-        "pmid": "42618084",
-        "title": "Editorial Commentary: Dynamic Anterior Stabilization Is Great! Dynamic Anterior Stabilization Augments Bankart Repair to Help Recreate Native Shoulder Kinematics.",
-        "authors": "Atoun E, Rosinsky PJ",
-        "journal": "Arthroscopy",
-        "date": "2026-08-19",
-        "displayDate": "2026 Aug 19",
-        "type": null,
-        "doi": "10.1002/arj.70496",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42618084/"
-      },
-      {
-        "pmid": "42566805",
-        "title": "Obesity-related differences in shoulder and lumbar loading during manual material handling.",
-        "authors": "La Delfa NJ, Janes HE, Watterworth MWB, et al.",
-        "journal": "Appl Ergon",
-        "date": "2026-08-07",
-        "displayDate": "2026 Aug 7",
-        "type": null,
-        "doi": "10.1016/j.apergo.2026.104863",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42566805/"
-      },
-      {
-        "pmid": "42515827",
-        "title": "Dynamic Anterior Stabilization Shows Glenohumeral Kinematics Closer to Native Motion to Isolated Bankart Repair: A Dual Fluoroscopic Imaging Study.",
-        "authors": "Wu C, Lin Z, Hui Y, et al.",
-        "journal": "Arthroscopy",
-        "date": "2026-07-27",
-        "displayDate": "2026 Jul 27",
-        "type": null,
-        "doi": "10.1002/arj.70401",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42515827/"
-      },
       {
         "pmid": "42476995",
         "title": "Exploring handstand walking biomechanics and shoulder pain.",
@@ -1759,28 +1682,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42477667/"
       },
       {
-        "pmid": "42467093",
-        "title": "Long-term clinical and radiographic outcomes of anatomic total shoulder arthroplasty with a short-stem humeral component: a ten-year follow-up study.",
-        "authors": "Lanzerath F, Loew M, Bockmeyer J, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-07-17",
-        "displayDate": "2026 Jul 17",
-        "type": null,
-        "doi": "10.1007/s00264-026-06920-1",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42467093/"
-      },
-      {
-        "pmid": "42379554",
-        "title": "Time-course changes in bone mineral density after anatomical and reverse total shoulder arthroplasty : a dual-energy X-ray absorptiometry-based study.",
-        "authors": "Nakazawa K, Manaka T, Ito Y, et al.",
-        "journal": "Bone Joint J",
-        "date": "2026-07-01",
-        "displayDate": "2026 Jul 1",
-        "type": null,
-        "doi": "10.1302/0301-620X.108B7.BJJ-2025-1462.R1",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42379554/"
-      },
-      {
         "pmid": "42361116",
         "title": "Effect of the Multicomponent Exercise Program MoveUS on the Kinematic Fatigue of People With Glenohumeral Instability: A Secondary Analysis From a Randomized Controlled Trial.",
         "authors": "Ramírez-Pérez L, Cuesta-Vargas AI",
@@ -1792,17 +1693,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42361116/"
       },
       {
-        "pmid": "42316373",
-        "title": "Validation of a 3D planning tool for glenoid bone loss evaluation in revision anatomic total shoulder arthroplasty.",
-        "authors": "Warnhoff M, Freislederer F, Högl J, et al.",
-        "journal": "BMC Musculoskelet Disord",
-        "date": "2026-06-18",
-        "displayDate": "2026 Jun 18",
-        "type": null,
-        "doi": "10.1186/s12891-026-10087-6",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42316373/"
-      },
-      {
         "pmid": "42315662",
         "title": "Simulated tears of antero-posterior rotator cuff force-couple and reduced glenoid concavity decrease anterior glenohumeral stability: a robot-assisted biomechanical analysis of a load and shift sequence.",
         "authors": "Karlsfeld MJ, Wermers J, Tänzler S, et al.",
@@ -1812,28 +1702,6 @@
         "type": "Review",
         "doi": "10.1007/s00402-026-06383-4",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42315662/"
-      },
-      {
-        "pmid": "42313046",
-        "title": "Evaluation of new normal after shoulder arthroplasty: comparison of anatomic vs. reverse total shoulder arthroplasty.",
-        "authors": "Beleckas CM, Schodlbauer DF, Mousad AD, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-06-18",
-        "displayDate": "2026 Jun 18",
-        "type": null,
-        "doi": "10.1016/j.jse.2026.05.026",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42313046/"
-      },
-      {
-        "pmid": "42307519",
-        "title": "Stemless anatomic and reverse shoulder arthroplasty in patients under 55 years of age with primary glenohumeral osteoarthritis: an analysis of the Australian Orthopedic Association National Joint Replacement Registry at 5 years.",
-        "authors": "Jomaa M, Ingoe H, Hollman F, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-06-17",
-        "displayDate": "2026 Jun 17",
-        "type": null,
-        "doi": "10.1016/j.jse.2026.05.030",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42307519/"
       },
       {
         "pmid": "42308682",
@@ -1858,17 +1726,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42249544/"
       },
       {
-        "pmid": "42243505",
-        "title": "Long-term glenoid loosening, radiological and clinical outcomes in cemented all-polyethylene anatomic total shoulder arthroplasty: a systematic review and meta-analysis.",
-        "authors": "Ranieri R, Illuminati M, Delle Rose G, et al.",
-        "journal": "Int Orthop",
-        "date": "2026-06-05",
-        "displayDate": "2026 Jun 5",
-        "type": "Meta-analysis",
-        "doi": "10.1007/s00264-026-06853-9",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42243505/"
-      },
-      {
         "pmid": "42249885",
         "title": "Neurologic Complications in Shoulder Surgery: Anatomy, Mechanisms, and Surgical Recommendations.",
         "authors": "Paul BR, Galal Y, Sheth M, et al.",
@@ -1878,17 +1735,6 @@
         "type": "Review",
         "doi": "10.5435/JAAOSGlobal-D-23-00234",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42249885/"
-      },
-      {
-        "pmid": "42219180",
-        "title": "Revision after anatomical total shoulder arthroplasty : the influence of age on outcomes in a large nationwide registry study.",
-        "authors": "Smeitink N, Schröder FF, Dorrestijn O, et al.",
-        "journal": "Bone Joint J",
-        "date": "2026-06-01",
-        "displayDate": "2026 Jun 1",
-        "type": null,
-        "doi": "10.1302/0301-620X.108B6.BJJ-2025-1488.R1",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42219180/"
       },
       {
         "pmid": "42174522",
@@ -1902,15 +1748,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42174522/"
       },
       {
-        "pmid": "42171797",
-        "title": "Outcomes after revision of anatomic total shoulder arthroplasty to reverse shoulder arthroplasty and comparison between cemented or metal-backed glenoid in platform systems.",
-        "authors": "Zampeli F, Kazum E, Gomez A, et al.",
-        "journal": "Eur J Orthop Surg Traumatol",
-        "date": "2026-05-22",
-        "displayDate": "2026 May 22",
+        "pmid": "42082230",
+        "title": "Adding reciprocal inhibition to conventional physiotherapy for adhesive capsulitis of the shoulder in Bangladesh: a study protocol for a randomised controlled trial evaluating pain, function and range of motion.",
+        "authors": "Rahman MR, Halder P, Hossain ME, et al.",
+        "journal": "BMJ Open",
+        "date": "2026-05-04",
+        "displayDate": "2026 May 4",
+        "type": "Trial protocol",
+        "doi": "10.1136/bmjopen-2025-108667",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42082230/"
+      },
+      {
+        "pmid": "42069669",
+        "title": "Lateral armrest support improves postural alignment, respiratory mechanics, and shoulder girdle loading during seated eating in healthy young adults: a multidimensional biomechanical evaluation.",
+        "authors": "Tashiro D, Tou K, Okano I, et al.",
+        "journal": "J Neuroeng Rehabil",
+        "date": "2026-05-02",
+        "displayDate": "2026 May 2",
         "type": null,
-        "doi": "10.1007/s00590-026-04777-z",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42171797/"
+        "doi": "10.1186/s12984-026-01960-5",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42069669/"
       },
       {
         "pmid": "42034343",
@@ -1935,17 +1792,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41985469/"
       },
       {
-        "pmid": "41967629",
-        "title": "Return to golf after shoulder arthroplasty: an American Shoulder and Elbow Surgeons multicenter study predicting performance after reverse total shoulder arthroplasty and anatomic total shoulder arthroplasty.",
-        "authors": "ASES Multicenter Research Group",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-04-11",
-        "displayDate": "2026 Apr 11",
-        "type": null,
-        "doi": "10.1016/j.jse.2026.03.021",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41967629/"
-      },
-      {
         "pmid": "42001844",
         "title": "Congruency of fatigue-mediated changes in shear wave velocity, upper limb force, muscle activity, and kinematics of the scapular stabilizer muscles.",
         "authors": "Russell MS, Drake JDM, Chopp-Hurley JN",
@@ -1957,26 +1803,48 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42001844/"
       },
       {
-        "pmid": "41990406",
-        "title": "Additional shoulder roll may not augment the simulation of freestyle stroke kinematics on a swim bench.",
-        "authors": "Webster KF, McCabe CB, Tam EMY, et al.",
-        "journal": "J Electromyogr Kinesiol",
+        "pmid": "41954334",
+        "title": "Effect of intraoperative vs. preoperative interpectoral-pectoserratus plane block on postoperative pain, analgesic use, shoulder range of motion, and muscle strength in breast cancer surgery.",
+        "authors": "Altaş ÖF, Altaş EU, Kebabci E",
+        "journal": "Minerva Anestesiol",
         "date": "2026-04-09",
         "displayDate": "2026 Apr 9",
         "type": null,
-        "doi": "10.1016/j.jelekin.2026.103156",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41990406/"
+        "doi": "10.23736/S0375-9393.26.19518-2",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41954334/"
       },
       {
-        "pmid": "41956283",
-        "title": "Minimum 5-year outcomes of anatomic total shoulder arthroplasty with the Arthrosurface aspherical humerus and inlay glenoid.",
-        "authors": "Harkin W, Lew RM, Hornung A, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-04-07",
-        "displayDate": "2026 Apr 7",
+        "pmid": "41934353",
+        "title": "Restoring Glenoid Concavity: Angled Bone Blocks Provide Biomechanically Superior Function and Restore Glenohumeral Forces Over Flat Constructs in Glenoid Augmentation.",
+        "authors": "Bauer J, Rajan R, Singh R, et al.",
+        "journal": "Am J Sports Med",
+        "date": "2026-04-04",
+        "displayDate": "2026 Apr 4",
         "type": null,
-        "doi": "10.1016/j.jse.2026.03.018",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41956283/"
+        "doi": "10.1177/03635465261429466",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41934353/"
+      },
+      {
+        "pmid": "41946005",
+        "title": "Posterior marker set for shoulder kinematic analysis using optoelectronic systems.",
+        "authors": "De Sanctis L, Carnevale A, Gulotta LV, et al.",
+        "journal": "J Biomech",
+        "date": "2026-04-02",
+        "displayDate": "2026 Apr 2",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2026.113279",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41946005/"
+      },
+      {
+        "pmid": "42160559",
+        "title": "Effectiveness of virtual reality in pain management, range of motion and functional performance in frozen shoulder patients: A systematic review.",
+        "authors": "Qazi AF, Asif A, Fayyaz B, et al.",
+        "journal": "J Pak Med Assoc",
+        "date": "2026-04-01",
+        "displayDate": "2026 Apr",
+        "type": "Systematic review",
+        "doi": "10.47391/JPMA.21673",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42160559/"
       },
       {
         "pmid": "41946213",
@@ -2001,26 +1869,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41887112/"
       },
       {
-        "pmid": "41833785",
-        "title": "Source of lateralization in reverse total shoulder arthroplasty matters: a comparison of glenoid and humeral lateralization on rotator cuff biomechanics.",
-        "authors": "Brusalis CM, Glenday J, Fu MC, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-03-13",
-        "displayDate": "2026 Mar 13",
+        "pmid": "41855818",
+        "title": "Association of the scapulothoracic kinematics and the musculotendinous architecture of supraspinatus during scaption in male college volleyball players with scapular dyskinesis.",
+        "authors": "Chen PT, Mao KS, Chiu CH, et al.",
+        "journal": "J Biomech",
+        "date": "2026-03-14",
+        "displayDate": "2026 Mar 14",
         "type": null,
-        "doi": "10.1016/j.jse.2026.02.021",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41833785/"
+        "doi": "10.1016/j.jbiomech.2026.113255",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41855818/"
       },
       {
-        "pmid": "41812257",
-        "title": "Anatomic Total Shoulder Arthroplasty: Long-Term Clinical, Radiographic, and Patient-Reported Outcomes.",
-        "authors": "Patel AV, White CA, Schroen CA, et al.",
-        "journal": "J Am Acad Orthop Surg",
+        "pmid": "41811646",
+        "title": "Impact of sentinel lymph node biopsy versus axillary lymph node dissection on shoulder range of motion in early rehabilitation after breast cancer surgery.",
+        "authors": "Hieda H, Umemoto Y, Aasaumi A, et al.",
+        "journal": "Breast Cancer",
         "date": "2026-03-11",
         "displayDate": "2026 Mar 11",
         "type": null,
-        "doi": "10.5435/JAAOS-D-25-01121",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41812257/"
+        "doi": "10.1007/s12282-026-01827-6",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41811646/"
       },
       {
         "pmid": "41779314",
@@ -2034,6 +1902,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41779314/"
       },
       {
+        "pmid": "41607007",
+        "title": "Bankart Repair Does Not Stabilize Glenohumeral Joints With 10% Glenoid Bone Loss. A Dynamic Radiostereometry Study of Glenohumeral Joint Kinematics.",
+        "authors": "Borgen L, Kipp JO, Petersen ET, et al.",
+        "journal": "J Orthop Res",
+        "date": "2026-03-01",
+        "displayDate": "2026 Mar",
+        "type": null,
+        "doi": "10.1002/jor.70148",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41607007/"
+      },
+      {
         "pmid": "41780224",
         "title": "Can visuomotor illusions improve shoulder pain, function and range of motion in people with adhesive capsulitis? A systematic review and meta-analysis.",
         "authors": "Bouchard É, Lauzier L, Côté JN, et al.",
@@ -2045,15 +1924,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41780224/"
       },
       {
-        "pmid": "41763290",
-        "title": "Return to weightlifting after shoulder arthroplasty: an ASES multicenter study predicting performance after reverse shoulder arthroplasty and anatomic shoulder arthroplasty.",
-        "authors": "Diestel DR, Sudah S, Veale N, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-02-26",
-        "displayDate": "2026 Feb 26",
+        "pmid": "41724061",
+        "title": "A detailed musculoskeletal multibody simulation framework for computational analysis of the glenohumeral joint biomechanics after total shoulder replacement.",
+        "authors": "Soodmand I, Herrmann S, Klose T, et al.",
+        "journal": "Comput Biol Med",
+        "date": "2026-02-21",
+        "displayDate": "2026 Feb 21",
         "type": null,
-        "doi": "10.1016/j.jse.2026.02.015",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41763290/"
+        "doi": "10.1016/j.compbiomed.2026.111557",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41724061/"
+      },
+      {
+        "pmid": "41721347",
+        "title": "Association of thoracic kyphosis angle with shoulder pain, range of motion, isokinetic muscle strength, and upper extremity function.",
+        "authors": "Yarayan Y, Şevgin Ö",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2026-02-20",
+        "displayDate": "2026 Feb 20",
+        "type": null,
+        "doi": "10.1186/s12891-026-09656-6",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41721347/"
       },
       {
         "pmid": "41722843",
@@ -2067,59 +1957,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41722843/"
       },
       {
-        "pmid": "41720256",
-        "title": "Return to weightlifting following anatomic and reverse shoulder arthroplasty.",
-        "authors": "Abdelshaheed J, Chatterji R, Levy J, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-02-18",
-        "displayDate": "2026 Feb 18",
+        "pmid": "41649027",
+        "title": "Scapular Morphology and Posterior Shoulder Stability: Biomechanical Evidence From an Advanced Cadaveric Shoulder Simulator.",
+        "authors": "Hochreiter B, Fleurette J, Haddara M, et al.",
+        "journal": "Am J Sports Med",
+        "date": "2026-02-06",
+        "displayDate": "2026 Feb 6",
         "type": null,
-        "doi": "10.1016/j.jse.2026.02.002",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41720256/"
-      },
-      {
-        "pmid": "41672298",
-        "title": "Lesser tuberosity osteotomy repair in stemless anatomic shoulder arthroplasty: a biomechanical analysis of repair techniques.",
-        "authors": "Kirkham MS, Percin B, Christy KB, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-02-09",
-        "displayDate": "2026 Feb 9",
-        "type": null,
-        "doi": "10.1016/j.jse.2026.01.009",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41672298/"
-      },
-      {
-        "pmid": "41577230",
-        "title": "Outcomes of transosseous suture-cable repair for lesser tuberosity osteotomy in stemless anatomic total shoulder arthroplasty: a retrospective case series.",
-        "authors": "Yeramosu T, Zahir J, Ghayyad K, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-01-21",
-        "displayDate": "2026 Jan 21",
-        "type": "Case report",
-        "doi": "10.1016/j.jse.2025.12.015",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41577230/"
-      },
-      {
-        "pmid": "41577229",
-        "title": "SECEC Grammont Award 2025: the resting arm position influences impingement-free range of motion and the distalization and lateralization shoulder angle in reverse shoulder arthroplasty using Imascap preoperative planning software.",
-        "authors": "Vervaecke AJ, Gauci MO, Le Brigand J, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-01-21",
-        "displayDate": "2026 Jan 21",
-        "type": null,
-        "doi": "10.1016/j.jse.2025.12.014",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41577229/"
-      },
-      {
-        "pmid": "41564999",
-        "title": "Reverse and anatomic total shoulder arthroplasty for glenohumeral osteoarthritis: a propensity-matched comparison at early and midterm follow-up.",
-        "authors": "Leinweber KA, Bowler AR, Diestel DR, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2026-01-19",
-        "displayDate": "2026 Jan 19",
-        "type": null,
-        "doi": "10.1016/j.jse.2025.12.008",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41564999/"
+        "doi": "10.1177/03635465251411312",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41649027/"
       },
       {
         "pmid": "41543217",
@@ -2131,6 +1977,28 @@
         "type": "Meta-analysis",
         "doi": "10.1080/09593985.2026.2615392",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41543217/"
+      },
+      {
+        "pmid": "41537911",
+        "title": "Factors affecting shoulder joint range of motion after breast cancer surgery: a retrospective cohort study in Japan.",
+        "authors": "Koyama S, Ozeki M, Nakano N, et al.",
+        "journal": "Support Care Cancer",
+        "date": "2026-01-15",
+        "displayDate": "2026 Jan 15",
+        "type": null,
+        "doi": "10.1007/s00520-025-10260-y",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41537911/"
+      },
+      {
+        "pmid": "42345217",
+        "title": "Levator scapulae muscle variability: pathology or anatomical variant? A narrative review with pragmatic classification and imaging relevance.",
+        "authors": "Szostak Z, Piech P, Bronikowska A, et al.",
+        "journal": "Folia Morphol (Warsz)",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": "Review",
+        "doi": "10.5603/fm.110979",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42345217/"
       },
       {
         "pmid": "42263094",
@@ -2155,15 +2023,37 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42158203/"
       },
       {
-        "pmid": "41423062",
-        "title": "Comparing clinical and functional outcomes following anatomic total shoulder arthroplasty based on humeral component length (Equinoxe; Exactech, Inc.).",
-        "authors": "Aibinder WR, Mazeh M, Elwell JA, et al.",
-        "journal": "J Shoulder Elbow Surg",
-        "date": "2025-12-19",
-        "displayDate": "2025 Dec 19",
+        "pmid": "42095409",
+        "title": "Effects of Neuromuscular Physiotherapy on Pain, Range of Motion, and Function in Shoulder-Related Disorders: A Meta-Analysis and Systematic Review.",
+        "authors": "Zhang Y, Lu D, Lan Y",
+        "journal": "Pain Res Manag",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": "Meta-analysis",
+        "doi": "10.1155/prm/3157666",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42095409/"
+      },
+      {
+        "pmid": "41747316",
+        "title": "Shoulder characteristics in para athletes: A comparative analysis of range of motion, posture, and muscle function.",
+        "authors": "Sanchis GJB, Resende RA, Martins PFF, et al.",
+        "journal": "Rehabilitacion (Madr)",
+        "date": "2026-01-01",
+        "displayDate": "2026 Jan-Mar",
         "type": null,
-        "doi": "10.1016/j.jse.2025.11.015",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41423062/"
+        "doi": "10.1016/j.rh.2026.100969",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41747316/"
+      },
+      {
+        "pmid": "41429271",
+        "title": "Radiological and clinical evaluation of stemless anatomical shoulder arthoplasty Affinis Short™ (Mathys) with a minimum follow-up of 5 years.",
+        "authors": "Gentilhomme P, Siboni R, Herault A, et al.",
+        "journal": "Orthop Traumatol Surg Res",
+        "date": "2025-12-20",
+        "displayDate": "2025 Dec 20",
+        "type": null,
+        "doi": "10.1016/j.otsr.2025.104578",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41429271/"
       },
       {
         "pmid": "41420279",
@@ -2177,50 +2067,160 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41420279/"
       },
       {
-        "pmid": "41380955",
-        "title": "Postoperative scapular neck length is associated with strength and rotational range of motion following reverse total shoulder arthroplasty with the Arthrex Univers Revers.",
-        "authors": "Denard AD, Werner BC, Schuette HB, et al.",
+        "pmid": "41386993",
+        "title": "Anatomic versus reverse total shoulder replacement for patients with osteoarthritis and intact rotator cuff: the RAPSODI-UK randomised controlled trial protocol.",
+        "authors": "Rodrick HL, Dias J, Watts AC, et al.",
+        "journal": "BMJ Open",
+        "date": "2025-12-12",
+        "displayDate": "2025 Dec 12",
+        "type": "Trial protocol",
+        "doi": "10.1136/bmjopen-2025-106740",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41386993/"
+      },
+      {
+        "pmid": "41272459",
+        "title": "Association Between Eccentric and Isometric Shoulder Rotation Strength, Shoulder Range of Motion and Injury Incidence in the Shoulder in Adolescent Competitive Tennis Players: The SMASH Cohort Study.",
+        "authors": "Johansson F, Batt M, Ellenbecker T, et al.",
+        "journal": "Sports Health",
+        "date": "2025-11-21",
+        "displayDate": "2025 Nov 21",
+        "type": null,
+        "doi": "10.1177/19417381251396149",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41272459/"
+      },
+      {
+        "pmid": "41047759",
+        "title": "Associations between upper trunk rotation kinematics, shoulder and elbow joint kinetics and pitching performance in Australian baseball pitchers.",
+        "authors": "Mine K, Jones M, Saunders S, et al.",
+        "journal": "J Sports Sci",
+        "date": "2025-10-05",
+        "displayDate": "2025 Oct 5",
+        "type": null,
+        "doi": "10.1080/02640414.2025.2569008",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41047759/"
+      },
+      {
+        "pmid": "40990567",
+        "title": "Arthroscopic Bankart Repair With Remplissage Results in Low Recurrent Instability Rates Without Reducing Shoulder Range of Motion at Midterm Follow-up: A Systematic Review of Studies With Minimum 5-Year Outcomes.",
+        "authors": "Tansey PJ Jr, Clark DS, Ruelos VCB, et al.",
+        "journal": "Am J Sports Med",
+        "date": "2025-09-24",
+        "displayDate": "2025 Sep 24",
+        "type": "Systematic review",
+        "doi": "10.1177/03635465251324930",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40990567/"
+      },
+      {
+        "pmid": "40944973",
+        "title": "Three-dimensional markerless pose estimation for anatomical landmarks of the shoulder and upper limb.",
+        "authors": "Lefebvre F, Rogowski I, Long N, et al.",
+        "journal": "J Electromyogr Kinesiol",
+        "date": "2025-09-10",
+        "displayDate": "2025 Sep 10",
+        "type": null,
+        "doi": "10.1016/j.jelekin.2025.103067",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40944973/"
+      },
+      {
+        "pmid": "40876940",
+        "title": "Comparison of Markerless and Conventional Marker-Based Shoulder Kinematics Models During Activities of Daily Living in Patients With Glenohumeral Osteoarthritis.",
+        "authors": "Haddas R, Morriss N, Schillinger E, et al.",
+        "journal": "J Orthop Res",
+        "date": "2025-08-28",
+        "displayDate": "2025 Aug 28",
+        "type": null,
+        "doi": "10.1002/jor.70047",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40876940/"
+      },
+      {
+        "pmid": "40843660",
+        "title": "Role of stretching interventions in enhancing the shoulder range of motion in overhead athletes with glenohumeral internal rotation deficit: A systematic review and meta-analysis.",
+        "authors": "Iida N, Velasquez Garcia A, Kuroiwa T, et al.",
+        "journal": "PM R",
+        "date": "2025-08-22",
+        "displayDate": "2025 Aug 22",
+        "type": "Meta-analysis",
+        "doi": "10.1002/pmrj.13453",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40843660/"
+      },
+      {
+        "pmid": "41356542",
+        "title": "Enhanced Rotational Stability with the Locking Anchor EndoButton System: A Biomechanical Comparison of Free Bone Graft Non-Screw Methods for Anterior Shoulder Instability.",
+        "authors": "Tosun MF, Oklaz EB, Kaya İ, et al.",
+        "journal": "Clin Orthop Surg",
+        "date": "2025-08-21",
+        "displayDate": "2025 Aug 21",
+        "type": null,
+        "doi": "10.4055/cios24459",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41356542/"
+      },
+      {
+        "pmid": "40738124",
+        "title": "A Description of Scapular Biomechanics in the Windmill Softball Pitch in Early High School Pitchers.",
+        "authors": "Holtz KA, Lerch B, Zaremski JL, et al.",
+        "journal": "Int J Sports Med",
+        "date": "2025-07-30",
+        "displayDate": "2025 Jul 30",
+        "type": null,
+        "doi": "10.1055/a-2647-0188",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40738124/"
+      },
+      {
+        "pmid": "40629870",
+        "title": "Is disability associated with range of motion, pain and mental health-related quality of life in subjects with frozen shoulder? A cross-sectional study.",
+        "authors": "Poser A, Brindisino F, Lot S, et al.",
+        "journal": "Physiother Theory Pract",
+        "date": "2025-07-09",
+        "displayDate": "2025 Jul 9",
+        "type": null,
+        "doi": "10.1080/09593985.2025.2530197",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40629870/"
+      },
+      {
+        "pmid": "40348392",
+        "title": "Sequential Changes in Scapular Range of Motion After An Intervention Using the KOJI AWARENESS Original \"Wall Angel Slider\" Exercise.",
+        "authors": "Murofushi K, Mitomo S, Hirohata K, et al.",
+        "journal": "J Sport Rehabil",
+        "date": "2025-05-09",
+        "displayDate": "2025 May 9",
+        "type": null,
+        "doi": "10.1123/jsr.2024-0426",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40348392/"
+      },
+      {
+        "pmid": "40239916",
+        "title": "Why do primary anatomic total shoulder arthroplasties fail today? A systematic review and meta-analysis.",
+        "authors": "Lauck BJ, Cathey JM, Adams NC, et al.",
         "journal": "J Shoulder Elbow Surg",
-        "date": "2025-12-09",
-        "displayDate": "2025 Dec 9",
-        "type": null,
-        "doi": "10.1016/j.jse.2025.10.021",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41380955/"
+        "date": "2025-04-15",
+        "displayDate": "2025 Apr 15",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.jse.2025.02.057",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40239916/"
       },
       {
-        "pmid": "41370736",
-        "title": "Minimum 48-month Clinical and Radiographic Outcomes of Anatomic Total Shoulder Arthroplasty With a Partially Cemented All-polyethylene Fluted Central Peg Glenoid Component.",
-        "authors": "Christensen RG, Griswold BG, Sears BW, et al.",
-        "journal": "J Am Acad Orthop Surg",
-        "date": "2025-12-03",
-        "displayDate": "2025 Dec 3",
+        "pmid": "40174749",
+        "title": "Biomechanical comparisons of screw fixation vs. suture button fixation for managing anterior shoulder instability with distal clavicle bone graft.",
+        "authors": "Kuan FC, Hsu KL, Lin FH, et al.",
+        "journal": "J Shoulder Elbow Surg",
+        "date": "2025-03-31",
+        "displayDate": "2025 Mar 31",
         "type": null,
-        "doi": "10.5435/JAAOS-D-25-00185",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41370736/"
-      },
-      {
-        "pmid": "40938283",
-        "title": "The Impact of Shoulder Abduction on the Anatomy of the Interscalene Triangle.",
-        "authors": "Randall A, Buddle S",
-        "journal": "Clin Anat",
-        "date": "2025-09-12",
-        "displayDate": "2025 Sep 12",
-        "type": null,
-        "doi": "10.1002/ca.70023",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40938283/"
+        "doi": "10.1016/j.jse.2025.02.044",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40174749/"
       }
     ]
   },
   "totals": {
-    "injuries": 9830,
-    "rehab": 2553,
-    "training": 805,
-    "mechanics": 2179
+    "injuries": 9143,
+    "rehab": 2310,
+    "training": 742,
+    "mechanics": 1478
   },
   "queries": {
-    "injuries": "(\"rotator cuff\"[ti] OR (impingement[ti] AND shoulder[ti]) OR \"SLAP lesion*\"[ti] OR \"superior labr*\"[ti] OR (shoulder[ti] AND (dislocation[ti] OR instability[ti])) OR \"subacromial pain\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
-    "rehab": "((shoulder pain[ti] OR \"rotator cuff\"[ti] OR \"subacromial\"[ti] OR \"shoulder instability\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "training": "((shoulder[ti] OR deltoid[ti] OR \"rotator cuff\"[ti] OR \"overhead press\"[ti] OR \"lateral raise\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract",
-    "mechanics": "((shoulder[ti] OR glenohumeral[ti] OR scapula*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract"
+    "injuries": "(\"rotator cuff\"[ti] OR (impingement[ti] AND shoulder[ti]) OR \"SLAP lesion*\"[ti] OR \"superior labr*\"[ti] OR (shoulder[ti] AND (dislocation[ti] OR instability[ti])) OR \"subacromial pain\"[ti] NOT arthroplasty[ti] NOT \"Editorial Commentary\"[ti] NOT hemiplegic[ti] NOT stroke[ti] NOT \"brain injury\"[ti] NOT spastic[ti] NOT \"Glucagon-Like\"[ti] NOT \"GLP-1\"[ti] NOT opioid[ti] NOT cannabis[ti] NOT tumor*[ti] NOT tumour*[ti] NOT arthrodesis[ti] NOT \"artificial intelligence\"[ti] NOT \"AI-based\"[ti] NOT insurance[ti] NOT spin[ti] NOT bioinductive[ti] NOT \"tendon-to-bone\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "rehab": "((\"shoulder pain\"[ti] OR \"rotator cuff\"[ti] OR \"subacromial\"[ti] OR \"shoulder instability\"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti]) NOT arthroplasty[ti] NOT \"Editorial Commentary\"[ti] NOT hemiplegic[ti] NOT stroke[ti] NOT \"brain injury\"[ti] NOT spastic[ti] NOT \"Glucagon-Like\"[ti] NOT \"GLP-1\"[ti] NOT opioid[ti] NOT cannabis[ti] NOT tumor*[ti] NOT tumour*[ti] NOT arthrodesis[ti] NOT \"artificial intelligence\"[ti] NOT \"AI-based\"[ti] NOT \"Rehabilitation Experiences\"[ti] NOT \"Support Needs\"[ti] NOT regeneration[ti] NOT laser[ti] NOT \"physical agent\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "training": "((shoulder[ti] OR deltoid[ti] OR \"rotator cuff\"[ti] OR \"overhead press\"[ti] OR \"lateral raise\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab]) NOT arthroplasty[ti] NOT \"Editorial Commentary\"[ti] NOT hemiplegic[ti] NOT stroke[ti] NOT \"brain injury\"[ti] NOT spastic[ti] NOT \"Glucagon-Like\"[ti] NOT \"GLP-1\"[ti] NOT opioid[ti] NOT cannabis[ti] NOT tumor*[ti] NOT tumour*[ti] NOT arthrodesis[ti] NOT \"artificial intelligence\"[ti] NOT \"AI-based\"[ti] NOT exoskeleton*[ti] NOT decoding[ti] NOT \"Feature-Level\"[ti] NOT \"sEMG-IMU\"[ti] NOT graft[ti] NOT \"vagus\"[ti] NOT ergonomic*[ti] NOT implant*[ti] NOT \"neural control\"[ti] NOT methodological[ti] NOT \"pain-related fear\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "mechanics": "((shoulder[ti] OR glenohumeral[ti] OR scapula*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti]) NOT arthroplasty[ti] NOT \"Editorial Commentary\"[ti] NOT hemiplegic[ti] NOT stroke[ti] NOT \"brain injury\"[ti] NOT spastic[ti] NOT \"Glucagon-Like\"[ti] NOT \"GLP-1\"[ti] NOT opioid[ti] NOT cannabis[ti] NOT tumor*[ti] NOT tumour*[ti] NOT arthrodesis[ti] NOT \"artificial intelligence\"[ti] NOT \"AI-based\"[ti] NOT \"artificial intelligence\"[ti] NOT nerve*[ti] NOT injection[ti] NOT golf[ti] NOT obesity[ti] NOT \"muscle energy\"[ti] NOT mobilization[ti] NOT \"Dynamic Anterior\"[ti] NOT \"new normal\"[ti] NOT \"interscalene\"[ti] NOT fractur*[ti] NOT plate[ti]) AND humans[mh] AND english[la] AND hasabstract"
   }
 }
