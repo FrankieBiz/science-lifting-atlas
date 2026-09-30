@@ -47,6 +47,14 @@ try {
       .getByRole('group', { name: 'Study type' })
       .getByRole('button', { name: 'Reviews' })
       .click();
+    await page.evaluate(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+    });
+    await page.waitForFunction(() => window.scrollY === 0);
     const file = path.join(OUT, `elbow-rehab-reviews-${size.name}.png`);
     await page.screenshot({ path: file, fullPage: true });
     console.log(file);

@@ -40,9 +40,7 @@ for (const part of BODY_PARTS) {
         );
 
         await expect(
-          page
-            .locator(`#studies-${id} .study-panel__count`)
-            .getByRole('link', { name: /See all/ }),
+          page.locator(`#studies-${id} .study-panel__count a`),
         ).toHaveAttribute(
           'href',
           /^https:\/\/pubmed\.ncbi\.nlm\.nih\.gov\/\?term=/,
