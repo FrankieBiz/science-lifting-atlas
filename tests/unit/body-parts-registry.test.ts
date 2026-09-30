@@ -27,16 +27,6 @@ const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
     mechanics:
       '((shoulder[ti] OR glenohumeral[ti] OR scapula*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
   },
-  elbow: {
-    injuries:
-      '("tennis elbow"[ti] OR "lateral epicondyl*"[ti] OR "medial epicondyl*"[ti] OR "golfer\'s elbow"[ti] OR "lateral elbow tendinopathy"[ti] OR ("distal biceps"[ti] NOT femoris[ti]) OR ("ulnar collateral ligament"[ti] AND elbow[tiab]) OR "triceps tendon"[ti] OR "cubital tunnel"[ti]) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '(("tennis elbow"[ti] OR "lateral epicondyl*"[ti] OR "medial epicondyl*"[ti] OR "elbow tendinopathy"[ti] OR ("distal biceps"[ti] NOT femoris[ti])) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '(("elbow flexor*"[ti] OR "elbow extensor*"[ti] OR "elbow flexion"[ti] OR "biceps brachii"[ti] OR "triceps brachii"[ti] OR brachialis[ti] OR "arm curl*"[ti] OR "biceps curl*"[ti] OR "upper arm"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "resistance exercise"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '(elbow[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
-  },
 };
 
 describe('body-part registry', () => {
