@@ -1,0 +1,48 @@
+---
+import SiteHeader from '../components/sbla-012/SiteHeader.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  current?: 'home' | 'entity' | 'methodology';
+  noindex?: boolean;
+}
+
+const { title, description, current, noindex = false } = Astro.props;
+const pageTitle =
+  title === 'Science-Based Lifting Atlas'
+    ? title
+    : `${title} · Science-Based Lifting Atlas`;
+const routeDepth = Astro.url.pathname.split('/').filter(Boolean).length;
+const rootHref = routeDepth === 0 ? './' : '../'.repeat(routeDepth);
+const evidenceHref = `${rootHref}#evidence-trace`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body class:list={[current && `page-${current}`]}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader current={current} rootHref={rootHref} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Science-Based Lifting Atlas · evidence before certainty</p>
+      <nav aria-label="Footer navigation">
+        <a href={`${rootHref}methodology/`}>Methodology</a>
+        <a href={evidenceHref}>Evidence process</a>
+        <span>Prototype · 2026</span>
+      </nav>
+    </footer>
+  </body>
+</html>

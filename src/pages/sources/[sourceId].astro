@@ -1,0 +1,346 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+import PrototypeBanner from '../../components/sbla-012/PrototypeBanner.astro';
+import AtlasLayout from '../../layouts/AtlasLayout.astro';
+import {
+  classifyPreviewRecord,
+  prototypePreviewEnabled,
+} from '../../lib/presentation/sbla012';
+
+type Source = CollectionEntry<'sources'>['data'];
+type EvidenceRole =
+  'supports' | 'qualifies' | 'contradicts' | 'neutral-context';
+type ReferencingClaim = Readonly<{
+  id: string;
+  plainLanguage: string;
+  role: EvidenceRole;
+  entities: ReadonlyArray<{
+    href: string;
+    label: string;
+  }>;
+}>;
+
+export async function getStaticPaths() {
+  const prototypeEnabled = prototypePreviewEnabled(process.env);
+  if (!prototypeEnabled) return [];
+
+  const [claims, sources, muscles, exercises] = await Promise.all([
+    getCollection('claims'),
+    getCollection('sources'),
+    getCollection('muscles'),
+    getCollection('exercises'),
+  ]);
+  const prototypeClaims = claims.filter(
+    (entry) =>
+      classifyPreviewRecord(entry.data, prototypeEnabled) === 'prototype',
+  );
+  const entitiesByClaimId = new Map<
+    string,
+    Array<{ href: string; label: string }>
+  >();
+
+  for (const entity of [
+    ...muscles.map((entry) => ({ kind: 'muscles', data: entry.data })),
+    ...exercises.map((entry) => ({ kind: 'exercises', data: entry.data })),
+  ]) {
+    if (classifyPreviewRecord(entity.data, prototypeEnabled) !== 'prototype') {
+      continue;
+    }
+    const claimIds = new Set([
+      ...entity.data.summaryClaimIds,
+      ...entity.data.sections.flatMap((section) => section.claimIds),
+    ]);
+    for (const claimId of claimIds) {
+      const backlinks = entitiesByClaimId.get(claimId) ?? [];
+      backlinks.push({
+        href: `../../${entity.kind}/${entity.data.slug}/#claim-${claimId}`,
+        label: entity.data.name,
+      });
+      entitiesByClaimId.set(claimId, backlinks);
+    }
+  }
+
+  return sources.flatMap((entry) => {
+    const referencingClaims = prototypeClaims.flatMap((claim) =>
+      claim.data.sourceLinks
+        .filter((link) => link.sourceId === entry.data.id)
+        .map((link) => ({
+          id: claim.data.id,
+          plainLanguage: claim.data.plainLanguage,
+          role: link.role,
+          entities: entitiesByClaimId.get(claim.data.id) ?? [],
+        })),
+    );
+    if (referencingClaims.length === 0) return [];
+    return [
+      {
+        params: { sourceId: entry.data.id },
+        props: { source: entry.data, referencingClaims },
+      },
+    ];
+  });
+}
+
+interface Props {
+  source: Source;
+  referencingClaims: ReferencingClaim[];
+}
+
+const { source, referencingClaims } = Astro.props;
+const externalHref =
+  source.urls.doi ?? source.urls.pubmed ?? source.urls.primary;
+const authorLine =
+  source.authors.length > 0
+    ? source.authors.join(', ')
+    : 'Institutional or unattributed record';
+const primaryIdentifier = source.identifiers.doi
+  ? `DOI ${source.identifiers.doi}`
+  : source.identifiers.pmid
+    ? `PMID ${source.identifiers.pmid}`
+    : source.identifiers.pmcid
+      ? source.identifiers.pmcid
+      : source.identifiers.isbn
+        ? `ISBN ${source.identifiers.isbn}`
+        : source.id;
+const roleOrder: EvidenceRole[] = [
+  'supports',
+  'qualifies',
+  'contradicts',
+  'neutral-context',
+];
+const roleDescriptions: Record<EvidenceRole, string> = {
+  supports: 'Directly contributes to the claim.',
+  qualifies: 'Narrows how confidently the claim can be read.',
+  contradicts: 'Reports evidence that points against the claim.',
+  'neutral-context': 'Adds context without deciding the claim.',
+};
+const roleCounts = new Map<EvidenceRole, number>();
+for (const claim of referencingClaims) {
+  roleCounts.set(claim.role, (roleCounts.get(claim.role) ?? 0) + 1);
+}
+const activeRoles = roleOrder.filter((role) => roleCounts.has(role));
+const formatToken = (value: string) => value.replaceAll('-', ' ');
+---
+
+<AtlasLayout
+  title={source.title}
+  description="Local review prototype source record."
+  current="entity"
+  noindex
+>
+  <PrototypeBanner />
+  <article class="source-page source-dossier">
+    <header class="source-page__header source-dossier__header">
+      <div class="source-dossier__identity">
+        <p class="micro-label">Research dossier / {primaryIdentifier}</p>
+        <ul class="source-dossier__flags" aria-label="Source classifications">
+          <li>{formatToken(source.type)}</li>
+          <li>{formatToken(source.publication.stage)}</li>
+          <li data-status={source.publication.status}>
+            {formatToken(source.publication.status)}
+          </li>
+        </ul>
+        <h1>{source.title}</h1>
+        <p class="source-dossier__citation">{authorLine} · {source.year}</p>
+        {
+          externalHref && (
+            <a class="source-dossier__primary-link" href={externalHref}>
+              Read the source record <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
+      </div>
+
+      <aside class="source-dossier__readout" aria-labelledby="readout-title">
+        <p class="micro-label">Dossier readout</p>
+        <h2 id="readout-title">How this record enters the atlas.</h2>
+        <dl>
+          <div>
+            <dt>Claim connections</dt>
+            <dd>{String(referencingClaims.length).padStart(2, '0')}</dd>
+          </div>
+          <div>
+            <dt>Evidence roles</dt>
+            <dd>{String(activeRoles.length).padStart(2, '0')}</dd>
+          </div>
+          <div>
+            <dt>Applicability</dt>
+            <dd>{formatToken(source.quality.applicability)}</dd>
+          </div>
+          <div>
+            <dt>Risk of bias</dt>
+            <dd>{formatToken(source.quality.riskOfBias)}</dd>
+          </div>
+          <div>
+            <dt>Access</dt>
+            <dd>{formatToken(source.access.level)}</dd>
+          </div>
+          <div>
+            <dt>Status checked</dt>
+            <dd>{source.publication.statusCheckedAt ?? 'Not recorded'}</dd>
+          </div>
+        </dl>
+      </aside>
+    </header>
+
+    <section
+      class="source-page__summary source-dossier__contribution"
+      aria-labelledby="source-summary-title"
+    >
+      <p class="micro-label">Project extraction</p>
+      <div>
+        <h2 id="source-summary-title">What this source contributes.</h2>
+        <p>{source.projectSummary}</p>
+      </div>
+      <dl aria-label="Evidence-role balance">
+        {
+          activeRoles.map((role) => (
+            <div data-role={role}>
+              <dt>{formatToken(role)}</dt>
+              <dd>{String(roleCounts.get(role)).padStart(2, '0')}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section
+      class="source-page__methods source-dossier__methods"
+      aria-labelledby="methods-title"
+    >
+      <header>
+        <div>
+          <p class="micro-label">Study register</p>
+          <h2 id="methods-title">Read the method before the result.</h2>
+        </div>
+        <p>
+          The atlas keeps study design, applicability, and review caveats next
+          to every downstream claim. Missing fields are named rather than
+          inferred.
+        </p>
+      </header>
+      <dl class="source-dossier__method-grid">
+        <div class="source-dossier__method-grid__wide">
+          <dt>Population or evidence base</dt><dd>{source.study.population}</dd>
+        </div>
+        <div><dt>Intervention</dt><dd>{source.study.intervention}</dd></div>
+        <div><dt>Comparator</dt><dd>{source.study.comparator}</dd></div>
+        <div>
+          <dt>Sample size</dt><dd>
+            {source.study.sampleSize ?? 'Not reported'}
+          </dd>
+        </div>
+        <div>
+          <dt>Duration</dt><dd>
+            {
+              source.study.durationWeeks
+                ? `${source.study.durationWeeks} weeks`
+                : 'Not reported or not applicable'
+            }
+          </dd>
+        </div>
+      </dl>
+
+      <div class="source-dossier__context-band">
+        <section aria-labelledby="outcomes-title">
+          <p class="micro-label" id="outcomes-title">Extracted outcomes</p>
+          <ul class="source-dossier__outcomes">
+            {source.study.outcomes.map((outcome) => <li>{outcome}</li>)}
+          </ul>
+        </section>
+        <dl>
+          <div>
+            <dt>Funding disclosure</dt>
+            <dd>{source.funding ?? 'Not reported in this record'}</dd>
+          </div>
+          <div>
+            <dt>Conflict disclosure</dt>
+            <dd>{source.conflicts ?? 'Not reported in this record'}</dd>
+          </div>
+          <div>
+            <dt>License</dt>
+            <dd>{source.access.license ?? 'No license recorded'}</dd>
+          </div>
+          <div>
+            <dt>Next status check</dt>
+            <dd>{source.publication.nextStatusCheckAt ?? 'Not scheduled'}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <details class="source-dossier__limitations">
+        <summary>
+          <span>Quality notes and extraction limits</span>
+          <span>{String(source.quality.notes.length).padStart(2, '0')}</span>
+        </summary>
+        <ol>{source.quality.notes.map((note) => <li>{note}</li>)}</ol>
+        {
+          source.publication.statusSource && (
+            <p>
+              <strong>Status source:</strong> {source.publication.statusSource}
+            </p>
+          )
+        }
+      </details>
+    </section>
+
+    <section
+      class="source-page__claims source-dossier__claims"
+      aria-labelledby="claims-title"
+    >
+      <header>
+        <div>
+          <p class="micro-label">
+            Reverse evidence trace / {
+              String(referencingClaims.length).padStart(2, '0')
+            }
+          </p>
+          <h2 id="claims-title">Where this record changes the atlas.</h2>
+        </div>
+        <p>
+          Each connection names the source's role. Follow a backlink to see the
+          claim in its muscle or exercise context.
+        </p>
+      </header>
+
+      <ul class="source-dossier__role-key" aria-label="Evidence-role key">
+        {
+          activeRoles.map((role) => (
+            <li data-role={role}>
+              <span>
+                {formatToken(role)} · {roleCounts.get(role)}
+              </span>
+              <small>{roleDescriptions[role]}</small>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ol>
+        {
+          referencingClaims.map((claim, index) => (
+            <li data-role={claim.role}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <header>
+                  <strong>{formatToken(claim.role)}</strong>
+                  <small>{claim.id}</small>
+                </header>
+                <p>{claim.plainLanguage}</p>
+                {claim.entities.length > 0 && (
+                  <nav aria-label={`Return to records for ${claim.id}`}>
+                    <span>See in context</span>
+                    {claim.entities.map((entity) => (
+                      <a href={entity.href}>{entity.label} ↗</a>
+                    ))}
+                  </nav>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </article>
+</AtlasLayout>

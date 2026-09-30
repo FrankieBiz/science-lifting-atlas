@@ -16,6 +16,10 @@ review and three parallel lanes (Product, Evidence, 3D). The canonical product
 and execution requirements live in
 [`docs/product/master-plan.md`](docs/product/master-plan.md).
 
+SBLA-012 remains the current static vertical-slice task. Reviewed records remain unpublished, and the normal build excludes their scientific claim and entity routes pending owner approval. The body-part directory provides general educational overviews and automatically fetched PubMed lists; each page states that studies are not individually vetted. The accepted asset direction remains 2D/text authoritative, with BodyParts3D limited to optional enhancement and no asset purchase.
+
+On 2026-09-24, the owner removed SBLA-012's 3–5 participant gate. Static acceptance and remaining review steps are recorded in [SBLA-012 static acceptance](docs/product/usability/SBLA-012-static-acceptance.md). The owner hold on production anatomy work for SBLA-013 through SBLA-015 remains active.
+
 ## Prerequisites
 
 - Node.js 24.20.0 LTS (exactly; see `.node-version` and `.nvmrc`)
@@ -49,6 +53,7 @@ pnpm exec playwright install --with-deps chromium
 | `pnpm verify`           | Run formatting, linting, type checking, unit tests, stage-aware content/graph/evidence checks, the production build, repository contract, asset scorecard, and Gate A decision contract. |
 | `pnpm test:portability` | Serve the existing static output with a bare `node:http` server. For direct use, run `pnpm build && pnpm test:portability`; `pnpm verify` already builds first.                          |
 | `pnpm test:e2e`         | Build and test the static output in Chromium, including JavaScript-disabled behavior.                                                                                                    |
+| `pnpm test:prototype`   | Check the local-only unpublished static journey in Chromium with JavaScript disabled; refuses CI and production environments.                                                            |
 | `pnpm test:a11y`        | Check the executable foundation accessibility contract. Later tasks expand this into the full accessibility matrix.                                                                      |
 | `pnpm test:visual`      | Check deterministic viewport definitions. Later tasks add screenshot baselines.                                                                                                          |
 | `pnpm test:performance` | Check that the master-plan budgets are represented. Later tasks measure actual bundles and assets.                                                                                       |

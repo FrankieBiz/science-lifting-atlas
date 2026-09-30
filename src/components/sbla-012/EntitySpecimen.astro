@@ -1,0 +1,114 @@
+---
+import bodyPoster from '../../../assets/derived/bodyparts3d/sbla005-poster.webp?url';
+
+interface Props {
+  category: string;
+  index: string;
+  name: string;
+  descriptor: string;
+  definition?: string[];
+}
+
+const { category, name, descriptor, definition = [] } = Astro.props;
+const isExercise = category.toLowerCase() === 'exercise';
+---
+
+<header class="entity-hero">
+  <div class="entity-hero__title">
+    <p class="micro-label">{category} record</p>
+    <h1>{name}</h1>
+    <p>{descriptor}</p>
+    <nav class="entity-hero__signals" aria-label="On this record">
+      <a class="button button--primary" href="#summary-title">Key takeaways</a>
+      <a class="button button--quiet" href="#evidence-spine-title"
+        >Explore evidence <span aria-hidden="true">›</span></a
+      >
+    </nav>
+  </div>
+
+  <figure
+    class:list={[
+      'entity-hero__specimen',
+      isExercise && 'entity-hero__specimen--exercise',
+    ]}
+  >
+    {
+      isExercise ? (
+        <div class="exercise-definition-preview">
+          <p class="micro-label">What you’ll explore</p>
+          <h2>{name}</h2>
+          <ul>
+            {definition.slice(0, 3).map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <a href="#scope-title">Read the full movement definition</a>
+        </div>
+      ) : (
+        <>
+          <img
+            src={bodyPoster}
+            width="720"
+            height="960"
+            alt="BodyParts3D anterior muscular-system evaluation render for anatomical context."
+          />
+        </>
+      )
+    }
+    <figcaption>
+      {
+        isExercise ? (
+          <>
+            <span>Movement scope</span>
+            <small>
+              Read what this record includes before applying its findings
+            </small>
+          </>
+        ) : (
+          <>
+            <span>Visual context · pectoral region</span>
+            <small>Static evaluation plate · authoritative 2D fallback</small>
+            <small>
+              BodyParts3D, © The Database Center for Life Science licensed under
+              CC Attribution 4.0 International
+            </small>
+          </>
+        )
+      }
+    </figcaption>
+  </figure>
+</header>
+
+<style>
+  .entity-hero__specimen--exercise {
+    height: auto;
+    min-height: 28rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .entity-hero__specimen--exercise figcaption {
+    position: static;
+    margin-top: auto;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .exercise-definition-preview {
+    padding: clamp(1.25rem, 4vw, 3rem);
+    align-self: center;
+    width: 100%;
+  }
+  .exercise-definition-preview h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.2;
+  }
+  .exercise-definition-preview ul {
+    padding-left: 1.25rem;
+    line-height: 1.7;
+  }
+  .exercise-definition-preview li {
+    margin-block: 1rem;
+  }
+  .exercise-definition-preview a {
+    text-underline-offset: 0.25em;
+  }
+</style>

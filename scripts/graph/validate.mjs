@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   canonicalJson,
-  compileEvidenceGraph,
+  compilePublicEvidenceGraph,
   GraphCompilationError,
 } from '../../src/lib/graph/compiler.ts';
 import { partitionRecords } from '../../src/lib/content/registry.ts';
@@ -25,9 +25,12 @@ if (asOfIssues.length > 0) {
     process.exitCode = 1;
   } else {
     try {
-      const graph = compileEvidenceGraph(partitionRecords(loaded.records), {
-        asOf,
-      });
+      const graph = compilePublicEvidenceGraph(
+        partitionRecords(loaded.records),
+        {
+          asOf,
+        },
+      );
       const expected = canonicalJson(graph);
       const outputPath = path.join(
         repositoryRoot,

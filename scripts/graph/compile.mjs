@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { partitionRecords } from '../../src/lib/content/registry.ts';
 import {
   canonicalJson,
-  compileEvidenceGraph,
+  compilePublicEvidenceGraph,
   GraphCompilationError,
 } from '../../src/lib/graph/compiler.ts';
 import { validateAsOfDate } from '../../src/lib/content/validation.ts';
@@ -29,9 +29,12 @@ if (asOfIssues.length > 0) {
     process.exitCode = 1;
   } else {
     try {
-      const graph = compileEvidenceGraph(partitionRecords(loaded.records), {
-        asOf,
-      });
+      const graph = compilePublicEvidenceGraph(
+        partitionRecords(loaded.records),
+        {
+          asOf,
+        },
+      );
       await mkdir(path.dirname(outputPath), { recursive: true });
       await writeFile(outputPath, canonicalJson(graph), 'utf8');
       console.log(

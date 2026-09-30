@@ -1,0 +1,79 @@
+import { expect, test } from '@playwright/test';
+
+test.use({ javaScriptEnabled: false });
+
+test('the static home journey exposes evidence status without unpublished claim routes', async ({
+  page,
+}) => {
+  await page.goto('/');
+
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Know what you’re training.' }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'From anatomy to evidence.' }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Useful first. Auditable always.' }),
+  ).toBeVisible();
+
+  const atlasStatus = page.locator('dl[aria-label="Current atlas status"]');
+  await expect(atlasStatus.getByText('reviewed claims')).toBeVisible();
+  await expect(atlasStatus.getByText('movement records')).toBeVisible();
+  await expect(page.getByText('First evidence chain in review')).toBeVisible();
+
+  await expect(
+    page.getByRole('navigation', { name: 'Primary navigation' }),
+  ).toBeVisible();
+  await expect(page.locator('a[href*="/muscles/"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="/exercises/"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="/sources/"]')).toHaveCount(0);
+});
+
+test('the methodology route discloses AI roles and the publication gate', async ({
+  page,
+}) => {
+  await page.goto('/methodology/');
+
+  await expect(
+    page.getByRole('heading', { name: 'How the atlas earns a statement.' }),
+  ).toBeVisible();
+  await expect(page.getByText('AI review is not credentialed')).toBeVisible();
+  await expect(
+    page.getByText('No scientific claim is public yet.'),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Fail-closed publication' }),
+  ).toBeVisible();
+});
+
+test('the ordinary build excludes every unpublished prototype route', async ({
+  request,
+}) => {
+  for (const route of [
+    '/muscles/pectoralis-major/',
+    '/exercises/barbell-flat-bench-press/',
+    '/exercises/cable-fly-standing-bilateral-shoulder-height/',
+    '/sources/source-pmid-9356931/',
+  ]) {
+    const response = await request.get(route);
+    expect(response.status(), route).toBe(404);
+  }
+});
+
+test('the ordinary build excludes unpublished records from its public graph', async ({
+  request,
+}) => {
+  const response = await request.get('/data/evidence-graph.v1.json');
+  expect(response.status()).toBe(200);
+
+  const graph = (await response.json()) as {
+    nodes: Array<{ publicationState?: string; label: string }>;
+  };
+  expect(graph.nodes).not.toContainEqual(
+    expect.objectContaining({ publicationState: 'unpublished' }),
+  );
+  expect(JSON.stringify(graph)).not.toContain(
+    'Studies disagree about whether changing your grip width',
+  );
+});
