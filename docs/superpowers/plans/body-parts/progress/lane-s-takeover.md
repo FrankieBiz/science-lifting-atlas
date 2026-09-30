@@ -1,18 +1,21 @@
-# Lane S takeover of Lane L region tasks
+# Who did which task (Lane S takeover of Lane L tasks)
 
-The owner directed fully autonomous operation, and Lane L had not started its
-region tasks. Lane S is taking Lane L's region tasks from the **end** of the
-Lane L order (XLRHandy §2) so that, if Lane L resumes at the start of its list,
-the two meet in the middle without editing the same file.
+The owner directed fully autonomous operation. Lane S (Claude Sonnet 5.5) took
+Lane L's region tasks from the end of Lane L's order (XLRHandy §2) while Luna
+worked from the start, so the two met in the middle without editing the same
+file. Each row below links to that task's own progress note for details.
 
-Before starting any region below, check `git log FrankieBiz/body-parts-atlas`
-for its merge and `git branch --list 'bp/R-*'` for an open branch.
+| Task             | Done by      | Notes                                                                     |
+| ---------------- | ------------ | ------------------------------------------------------------------------- |
+| R-neck           | Luna         | Merged. Luna's pass replaced an earlier Lane S pass (705-match training). |
+| R-shoulder       | Lane S       | Training spot check 14/20, owner decision pending.                        |
+| R-elbow          | Lane S       | Training spot check 16/20, owner decision pending.                        |
+| R-wrist-and-hand | Lane S       | Training query rebuilt (grip as training target, not health marker).      |
+| R-lower-back     | Lane S       | Plate moved to the back view. Training spot check 16/20.                  |
+| R-hip-and-groin  | Lane S       | Back-view glute hotspot added.                                            |
+| R-knee           | Lane S       | Training made knee-specific (thigh work lives on Thigh).                  |
+| R-ankle-and-foot | Lane S       | Training retargeted (calf work lives on Lower leg).                       |
+| Q1               | Lane S, Luna | Lane S wrote the scripts. Luna ran them: e2e 44/44, 30 screenshots.       |
 
-| Region         | Status                       |
-| -------------- | ---------------------------- |
-| ankle-and-foot | done (merged with this note) |
-
-Each merged region is removed from the QUERY_SNAPSHOT in
-`tests/unit/body-parts-registry.test.ts` by its R task, because revised
-queries intentionally differ from the T1 originals.
-| Q1 | scripts written; browser run BLOCKED, see Q1.md |
+The original-query snapshot test from T1 was removed once every region had
+deliberately revised queries. The relevance test is the query guard now.
