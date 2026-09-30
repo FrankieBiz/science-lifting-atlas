@@ -37,28 +37,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42709462/"
       },
       {
-        "pmid": "42599677",
-        "title": "Analysis of deep learning techniques in computer-aided diagnosis for meniscus injuries: a systematic literature review.",
-        "authors": "Memon V, Syed Aluwee SAZB, Kumar YJ, et al.",
-        "journal": "Comput Assist Surg (Abingdon)",
-        "date": "2026-08-14",
-        "displayDate": "2026 Aug 14",
-        "type": "Systematic review",
-        "doi": "10.1080/24699322.2026.2692844",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42599677/"
-      },
-      {
-        "pmid": "42607620",
-        "title": "Assessing the performance of AI chatbots in answering common questions about Patellofemoral Pain Syndrome.",
-        "authors": "Zhang L, Fan S, Arunkumar Y, et al.",
-        "journal": "Musculoskelet Sci Pract",
-        "date": "2026-08-11",
-        "displayDate": "2026 Aug 11",
-        "type": null,
-        "doi": "10.1016/j.msksp.2026.103636",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42607620/"
-      },
-      {
         "pmid": "42574779",
         "title": "Influence of visualization portal selection on femoral tunnel placement and anterior knee pain after anterior cruciate ligament reconstruction.",
         "authors": "Altuntas Y, Ipek E, Balkanlı B, et al.",
@@ -158,17 +136,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42474471/"
       },
       {
-        "pmid": "42470974",
-        "title": "Muscle synergy-driven deep learning for predicting multiphase knee joint loading in ACL-reconstructed patients.",
-        "authors": "Yuan Y, Chen T, Xu D, et al.",
-        "journal": "Comput Methods Programs Biomed",
-        "date": "2026-07-13",
-        "displayDate": "2026 Jul 13",
-        "type": null,
-        "doi": "10.1016/j.cmpb.2026.109544",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42470974/"
-      },
-      {
         "pmid": "42443128",
         "title": "Isolated Meniscus Repairs in Youth Have a 19% Complication Rate and 9% Failure Rate With Variations by Tear Type, Location, Range of Motion Protocol, and Sex at 8 Months.",
         "authors": "Agonias K, Knell G, Pacicca D, et al.",
@@ -233,17 +200,6 @@
         "type": null,
         "doi": "10.1002/arj.70435",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42378642/"
-      },
-      {
-        "pmid": "42377343",
-        "title": "Artificial intelligence demonstrates comparable diagnostic accuracy to radiologists for anterior cruciate ligament tears on MRI: A systematic review and meta-analysis.",
-        "authors": "Moraes de Oliveira G, Zotter S, Tao B, et al.",
-        "journal": "Knee Surg Sports Traumatol Arthrosc",
-        "date": "2026-06-30",
-        "displayDate": "2026 Jun 30",
-        "type": "Meta-analysis",
-        "doi": "10.1002/ksa.70478",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42377343/"
       },
       {
         "pmid": "42365665",
@@ -464,6 +420,50 @@
         "type": null,
         "doi": "10.1002/arj.70337",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42138215/"
+      },
+      {
+        "pmid": "42133198",
+        "title": "An Evidence-Based and Mechanistic Approach to Reducing the Risk of Anterior Cruciate Ligament Injury: An Exercise and Sport Science Australia Position Statement.",
+        "authors": "Collings TJ, Diamond LE, Barrett RS, et al.",
+        "journal": "Sports Med",
+        "date": "2026-05-14",
+        "displayDate": "2026 May 14",
+        "type": null,
+        "doi": "10.1007/s40279-026-02450-3",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42133198/"
+      },
+      {
+        "pmid": "42080314",
+        "title": "Age is a Risk Factor for Postoperative Stiffness Following Surgical Treatment of Pediatric Discoid Lateral Meniscus: A Report From the SCORE Multicenter Database.",
+        "authors": "Baird H, McKay S, Knell G, et al.",
+        "journal": "J Pediatr Orthop",
+        "date": "2026-05-04",
+        "displayDate": "2026 May 4",
+        "type": null,
+        "doi": "10.1097/BPO.0000000000003264",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42080314/"
+      },
+      {
+        "pmid": "42025209",
+        "title": "Medial Meniscus Posterior Root Shows More Severe Histologic Degeneration in Female Patients With Advanced Osteoarthritis and Varus Alignment: A Histopathologic Analysis of Human Menisci.",
+        "authors": "Dzidzishvili L, Terzi MÁ, Nájar EE, et al.",
+        "journal": "Clin Orthop Relat Res",
+        "date": "2026-04-23",
+        "displayDate": "2026 Apr 23",
+        "type": null,
+        "doi": "10.1097/CORR.0000000000003950",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42025209/"
+      },
+      {
+        "pmid": "42025190",
+        "title": "Impact of Internet+ Rehabilitation on Arthroscopic Treatment Outcomes for Knee Meniscal Injuries and Factors Influencing Knee Osteoarthritis.",
+        "authors": "Qiu L, Yuan H, Tang L",
+        "journal": "J Knee Surg",
+        "date": "2026-04-23",
+        "displayDate": "2026 Apr 23",
+        "type": "Randomized trial",
+        "doi": "10.1055/a-2835-3645",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42025190/"
       },
       {
         "pmid": "41769928",
@@ -721,17 +721,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42703695/"
       },
       {
-        "pmid": "42685385",
-        "title": "Patient-reported knee osteoarthritis problems and rehabilitation goals: A qualitative study.",
-        "authors": "Haber T, Ahler JR, Campbell PK, et al.",
-        "journal": "Braz J Phys Ther",
-        "date": "2026-09-01",
-        "displayDate": "2026 Sep-Oct",
-        "type": null,
-        "doi": "10.1016/j.bjpt.2026.101624",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42685385/"
-      },
-      {
         "pmid": "42676087",
         "title": "Tailoring Resistance Exercise for Knee Osteoarthritis: An Intervention Systematic Review With Dose-Response Meta-analysis of the Effects of Intensity and Volume.",
         "authors": "Núñez-Cortés R, Suso-Martí L, Tur-Boned A, et al.",
@@ -864,17 +853,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42585691/"
       },
       {
-        "pmid": "42400934",
-        "title": "General practitioners' perceptions and experiences of knee osteoarthritis management: a qualitative study of barriers and facilitators to delivering guideline-recommended treatments.",
-        "authors": "Trulsson AMC, Risør T, Reventlow S, et al.",
-        "journal": "Scand J Prim Health Care",
-        "date": "2026-07-04",
-        "displayDate": "2026 Jul 4",
-        "type": null,
-        "doi": "10.1080/02813432.2026.2688368",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42400934/"
-      },
-      {
         "pmid": "42413231",
         "title": "Landing mechanics after anterior cruciate ligament reconstruction: reliability and clinical insights from the forward single-leg hop test.",
         "authors": "Faivre O, Labrousse A, Gosselin N, et al.",
@@ -906,17 +884,6 @@
         "type": null,
         "doi": "10.1016/j.joca.2026.06.004",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42302891/"
-      },
-      {
-        "pmid": "42284853",
-        "title": "Evaluation of the performance of large language models in the management of hip and knee osteoarthritis: analysis of EULAR 2023 recommendations.",
-        "authors": "Mirza Y, Sari F, Arslan S",
-        "journal": "Knee",
-        "date": "2026-06-12",
-        "displayDate": "2026 Jun 12",
-        "type": null,
-        "doi": "10.1016/j.knee.2026.104524",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42284853/"
       },
       {
         "pmid": "42241894",
@@ -974,17 +941,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42136133/"
       },
       {
-        "pmid": "42133198",
-        "title": "An Evidence-Based and Mechanistic Approach to Reducing the Risk of Anterior Cruciate Ligament Injury: An Exercise and Sport Science Australia Position Statement.",
-        "authors": "Collings TJ, Diamond LE, Barrett RS, et al.",
-        "journal": "Sports Med",
-        "date": "2026-05-14",
-        "displayDate": "2026 May 14",
-        "type": null,
-        "doi": "10.1007/s40279-026-02450-3",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42133198/"
-      },
-      {
         "pmid": "42116545",
         "title": "Mismatch Between Physical and Psychological Outcomes at Return to Sport After ACL Reconstruction and the Association With Second ACL Injury Risk: A Cohort Study.",
         "authors": "Piussi R, Lindskog J, Högberg J, et al.",
@@ -1016,17 +972,6 @@
         "type": null,
         "doi": "10.1249/MSS.0000000000004010",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42044292/"
-      },
-      {
-        "pmid": "42025190",
-        "title": "Impact of Internet+ Rehabilitation on Arthroscopic Treatment Outcomes for Knee Meniscal Injuries and Factors Influencing Knee Osteoarthritis.",
-        "authors": "Qiu L, Yuan H, Tang L",
-        "journal": "J Knee Surg",
-        "date": "2026-04-23",
-        "displayDate": "2026 Apr 23",
-        "type": "Randomized trial",
-        "doi": "10.1055/a-2835-3645",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42025190/"
       },
       {
         "pmid": "42012192",
@@ -1073,6 +1018,28 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41946460/"
       },
       {
+        "pmid": "41876969",
+        "title": "Effects of transcranial direct current stimulation on pain and function in patients with knee osteoarthritis: A systematic review and meta-analysis.",
+        "authors": "Moreno-Segura N, Mollà-Casanova S, Muñoz-Gómez E, et al.",
+        "journal": "PM R",
+        "date": "2026-03-24",
+        "displayDate": "2026 Mar 24",
+        "type": "Meta-analysis",
+        "doi": "10.1002/pmrj.70104",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41876969/"
+      },
+      {
+        "pmid": "41802622",
+        "title": "Efficacy of Progressive Exercise Snacking for Middle-Aged and Older Adults With Knee Osteoarthritis: A Systematic Review and Meta-analysis.",
+        "authors": "Meng L, Chen J, Huo X, et al.",
+        "journal": "Arch Phys Med Rehabil",
+        "date": "2026-03-07",
+        "displayDate": "2026 Mar 7",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.apmr.2026.02.493",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41802622/"
+      },
+      {
         "pmid": "41742784",
         "title": "Effect of neuromuscular electrical stimulation associated with therapeutic exercise on pain, function, and strength of people with knee osteoarthritis: a systematic review with meta-analysis of randomized clinical trials with GRADE recommendations.",
         "authors": "da Silva AC, Rafael GC, Castro RQ, et al.",
@@ -1082,6 +1049,39 @@
         "type": "Meta-analysis",
         "doi": "10.1080/09638288.2026.2633271",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41742784/"
+      },
+      {
+        "pmid": "41742778",
+        "title": "How is the rating of perceived effort reported in anterior cruciate ligament and knee osteoarthritis rehabilitation studies? A scoping review.",
+        "authors": "Maciel DG, Sales do Nascimento JD, França IM, et al.",
+        "journal": "Disabil Rehabil",
+        "date": "2026-02-26",
+        "displayDate": "2026 Feb 26",
+        "type": null,
+        "doi": "10.1080/09638288.2026.2633261",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41742778/"
+      },
+      {
+        "pmid": "41720756",
+        "title": "Arthroscopic management of patellar tendinopathy: a systematic review evaluating clinical outcomes and return to sport.",
+        "authors": "Dhaliwal A, Stubbs S, Hatter M, et al.",
+        "journal": "Res Sports Med",
+        "date": "2026-02-20",
+        "displayDate": "2026 Feb 20",
+        "type": "Meta-analysis",
+        "doi": "10.1080/15438627.2026.2633279",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41720756/"
+      },
+      {
+        "pmid": "41760441",
+        "title": "Evaluating the efficacy of intra-articular human amniotic suspension allografts for knee osteoarthritis management: A systematic review and meta-analysis.",
+        "authors": "Serag I, Abouzid M",
+        "journal": "Chin J Traumatol",
+        "date": "2026-02-10",
+        "displayDate": "2026 Feb 10",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.cjtee.2025.05.005",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41760441/"
       },
       {
         "pmid": "42769154",
@@ -1108,26 +1108,26 @@
     ],
     "training": [
       {
-        "pmid": "42803768",
-        "title": "Standing Up to Dysglycemia: Textile Electromyography Identifies Hamstring Muscle Activity Benefits.",
-        "authors": "Li Q, Brakenridge CJ, Qin J, et al.",
-        "journal": "Scand J Med Sci Sports",
-        "date": "2026-10-01",
-        "displayDate": "2026 Oct",
-        "type": null,
-        "doi": "10.1111/sms.70371",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42803768/"
+        "pmid": "42773464",
+        "title": "Effects of pain neuroscience education combined with blood flow restriction training on chronic postoperative pain following total knee arthroplasty: a randomized controlled trial protocol.",
+        "authors": "Xu J, Sun P, Yang J, et al.",
+        "journal": "J Orthop Surg Res",
+        "date": "2026-08-20",
+        "displayDate": "2026 Aug 20",
+        "type": "Trial protocol",
+        "doi": "10.1186/s13018-026-07146-y",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42773464/"
       },
       {
-        "pmid": "42647178",
-        "title": "Downhill running differentially reduces stimulated contraction torque in human quadriceps muscles.",
-        "authors": "Rawdon C, Ingalls CP, Yang F, et al.",
-        "journal": "J Appl Physiol (1985)",
-        "date": "2026-08-26",
-        "displayDate": "2026 Aug 26",
+        "pmid": "42610294",
+        "title": "Influence of Isokinetic Muscle Strength Training Combined With Early Functional Exercise on Joint Function After Knee Cruciate Ligament Reconstruction.",
+        "authors": "Lin Y, Chen T, Lin H, et al.",
+        "journal": "Ann Ital Chir",
+        "date": "2026-08-13",
+        "displayDate": "2026 Aug 13",
         "type": null,
-        "doi": "10.1152/japplphysiol.00765.2025",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42647178/"
+        "doi": "10.62713/aic.4757",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42610294/"
       },
       {
         "pmid": "42573448",
@@ -1141,6 +1141,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42573448/"
       },
       {
+        "pmid": "42608056",
+        "title": "Multiligamentous Knee Injury in a Skeletally Immature Athlete.",
+        "authors": "Murray J, Bijwadia S, Ristow J, et al.",
+        "journal": "J Am Acad Orthop Surg Glob Res Rev",
+        "date": "2026-08-01",
+        "displayDate": "2026 Aug 1",
+        "type": "Case report",
+        "doi": "10.5435/JAAOSGlobal-D-25-00266",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42608056/"
+      },
+      {
         "pmid": "42516016",
         "title": "Intermuscular coordination adaptations to strength training: Insights from muscle synergy analysis during squats with different loads.",
         "authors": "Santos PDG, Vaz JR, Gomes M, et al.",
@@ -1150,6 +1161,17 @@
         "type": null,
         "doi": "10.1080/02640414.2026.2705723",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42516016/"
+      },
+      {
+        "pmid": "42505419",
+        "title": "Pharmacological Targeting of Type H Endothelial Cells in Knee Osteoarthritis: From Molecular Signaling to Cellular Homeostasis.",
+        "authors": "Yan C, Sui C, Wan Q, et al.",
+        "journal": "Cells",
+        "date": "2026-07-22",
+        "displayDate": "2026 Jul 22",
+        "type": "Review",
+        "doi": "10.3390/cells15141312",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42505419/"
       },
       {
         "pmid": "42479598",
@@ -1218,28 +1240,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42487231/"
       },
       {
-        "pmid": "42478622",
-        "title": "Training and Detraining Effects of Eccentric Exercise and Static Stretching on Hamstring Aponeurosis Dimensions.",
-        "authors": "Sahinis C, Kawama R, Okuda Y, et al.",
-        "journal": "Scand J Med Sci Sports",
-        "date": "2026-07-01",
-        "displayDate": "2026 Jul",
-        "type": null,
-        "doi": "10.1111/sms.70351",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42478622/"
-      },
-      {
-        "pmid": "42433116",
-        "title": "Persistent Human Quadriceps Muscle Volume Deficits Following ACL Reconstruction Are Associated With No Detectable Between-Leg Differences in Vastus Lateralis Muscle Signaling at Rest or Immediately Following Resistance Exercise.",
-        "authors": "Smith MJ, Belhaj MR, Timmins RG, et al.",
-        "journal": "Scand J Med Sci Sports",
-        "date": "2026-07-01",
-        "displayDate": "2026 Jul",
-        "type": null,
-        "doi": "10.1111/sms.70343",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42433116/"
-      },
-      {
         "pmid": "42405484",
         "title": "Effects of Continuous and Cluster-Set Configurations Performed to Failure on Performance and Physiological Responses in the Bench Press and Half Squat.",
         "authors": "Tsoukos A, Ververis A, Bogdanis GC",
@@ -1273,6 +1273,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42335115/"
       },
       {
+        "pmid": "42333915",
+        "title": "Association Between Menstrual Cycle Regularity, Neuromuscular Control, and Dynamic Knee Stability in Female Athletes: A Longitudinal Repeated-Measures Study.",
+        "authors": "Enang EO, Moneke UN, Madu EO",
+        "journal": "Physiother Res Int",
+        "date": "2026-07-01",
+        "displayDate": "2026 Jul",
+        "type": null,
+        "doi": "10.1002/pri.70248",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42333915/"
+      },
+      {
         "pmid": "42512791",
         "title": "Effects of Medial and Lateral Foot Wedge Placement on Lower Limb Biomechanics and Muscle Activation During the Split Squat: A Randomized Crossover Trial.",
         "authors": "Lee SH, Lee YM, Shin HJ, et al.",
@@ -1282,6 +1293,28 @@
         "type": "Randomized trial",
         "doi": "10.3390/medicina62071249",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42512791/"
+      },
+      {
+        "pmid": "42379100",
+        "title": "Interlimb differences in knee joint loading and stress distribution following anterior cruciate ligament reconstruction during stair descent.",
+        "authors": "Wei Y, Xu D, Zhou Z, et al.",
+        "journal": "Clin Biomech (Bristol)",
+        "date": "2026-06-23",
+        "displayDate": "2026 Jun 23",
+        "type": null,
+        "doi": "10.1016/j.clinbiomech.2026.106907",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42379100/"
+      },
+      {
+        "pmid": "42320304",
+        "title": "A neural network for predicting knee contact forces from clinic-friendly data.",
+        "authors": "Sun Y, Pizzolato C, Diamond LE, et al.",
+        "journal": "J Biomech",
+        "date": "2026-06-15",
+        "displayDate": "2026 Jun 15",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2026.113417",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42320304/"
       },
       {
         "pmid": "42299849",
@@ -1295,6 +1328,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42299849/"
       },
       {
+        "pmid": "42271346",
+        "title": "Diffuse pigmented villonodular synovitis incidentally identified during revision total knee arthroplasty for aseptic loosening: a case report.",
+        "authors": "Lee TH, Lee YS, Ahn GY, et al.",
+        "journal": "BMC Musculoskelet Disord",
+        "date": "2026-06-10",
+        "displayDate": "2026 Jun 10",
+        "type": "Case report",
+        "doi": "10.1186/s12891-026-09853-3",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42271346/"
+      },
+      {
         "pmid": "42270836",
         "title": "Acute effects of foam rolling versus passive rest following a single bout of explosive squat jump exercise.",
         "authors": "Rodoplu C, Fischer J, Burger C, et al.",
@@ -1304,17 +1348,6 @@
         "type": "Randomized trial",
         "doi": "10.1038/s41598-026-57044-w",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42270836/"
-      },
-      {
-        "pmid": "42281054",
-        "title": "Validation of Insole Pressure Sensor Algorithms: Implications for In-Field Detection of Initial Contact and Hamstring Muscle Pre-Activity During Side-Cutting.",
-        "authors": "Zwicky EE, Nedergaard NJ, Alkjær T, et al.",
-        "journal": "Sensors (Basel)",
-        "date": "2026-06-03",
-        "displayDate": "2026 Jun 3",
-        "type": null,
-        "doi": "10.3390/s26113539",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42281054/"
       },
       {
         "pmid": "42287257",
@@ -1350,15 +1383,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42223150/"
       },
       {
-        "pmid": "42220023",
-        "title": "Effects of a 6-Week Home-Based High- or Regular-Volume Static Stretching or Hamstring Resistance Exercise in Young Men with Hamstring Tightness.",
-        "authors": "Luangpon N, Srijunto W, Chaovalit S, et al.",
-        "journal": "J Musculoskelet Neuronal Interact",
-        "date": "2026-06-01",
-        "displayDate": "2026 Jun 1",
-        "type": "Randomized trial",
-        "doi": "10.22540/JMNI-26-181",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42220023/"
+        "pmid": "42356038",
+        "title": "Effects of Knee Flexion Angle on Gluteus Medius Activation and Activation Ratios During the Modified Clamshell Exercise.",
+        "authors": "Lee HY, Zhang YH, Kim KC, et al.",
+        "journal": "Medicina (Kaunas)",
+        "date": "2026-05-25",
+        "displayDate": "2026 May 25",
+        "type": null,
+        "doi": "10.3390/medicina62061025",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42356038/"
       },
       {
         "pmid": "42178301",
@@ -1383,15 +1416,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42356020/"
       },
       {
-        "pmid": "42208112",
-        "title": "Continuous and discrete electromyographic analysis of trunk and hip extensor musculature during the Biering-Sørensen test in athletes with a history of hamstring strain injury.",
-        "authors": "Kellis E, Giakas G, Baltzopoulos V",
-        "journal": "J Electromyogr Kinesiol",
-        "date": "2026-05-18",
-        "displayDate": "2026 May 18",
+        "pmid": "42216594",
+        "title": "Effect of Repetitive Transcranial Magnetic Stimulation Combined With Lower Limb Rehabilitation Robots on Knee Hyperextension in Stroke Patients With Hemiplegia.",
+        "authors": "Wang B, Zhu X, Wang Y, et al.",
+        "journal": "Br J Hosp Med (Lond)",
+        "date": "2026-05-22",
+        "displayDate": "2026 May 22",
         "type": null,
-        "doi": "10.1016/j.jelekin.2026.103178",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42208112/"
+        "doi": "10.31083/BJHM54136",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42216594/"
       },
       {
         "pmid": "42139598",
@@ -1405,17 +1438,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42139598/"
       },
       {
-        "pmid": "42142186",
-        "title": "Neuromuscular contributions to inter-limb quadriceps strength asymmetries across contraction types in healthy adults.",
-        "authors": "Alaux H, Barrué-Belou S, Matta PM, et al.",
-        "journal": "Eur J Appl Physiol",
-        "date": "2026-05-16",
-        "displayDate": "2026 May 16",
-        "type": null,
-        "doi": "10.1007/s00421-026-06251-4",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42142186/"
-      },
-      {
         "pmid": "42127360",
         "title": "Effects of Isolated Eccentric Squat Training at Different Velocities on Countermovement Jump Performance, Quadriceps Function, and Hypertrophy.",
         "authors": "Soda N, Shimokochi Y",
@@ -1425,17 +1447,6 @@
         "type": null,
         "doi": "10.1519/JSC.0000000000005516",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42127360/"
-      },
-      {
-        "pmid": "42119525",
-        "title": "Reliability of flywheel hip extension and leg curl tests and their associations with isokinetic hamstring strength.",
-        "authors": "Nutarelli S, Biancofiore F, Mattina A, et al.",
-        "journal": "J Biomech",
-        "date": "2026-05-12",
-        "displayDate": "2026 May 12",
-        "type": null,
-        "doi": "10.1016/j.jbiomech.2026.113357",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42119525/"
       },
       {
         "pmid": "42119794",
@@ -1460,37 +1471,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42092870/"
       },
       {
-        "pmid": "42017976",
-        "title": "Joint-Level Analysis of the Barbell Back Squat During Chain and Elastic Variable Resistance Use.",
-        "authors": "Alves AV, Leicht AS, Deakin GB, et al.",
-        "journal": "J Strength Cond Res",
+        "pmid": "42106968",
+        "title": "Joint Reaction Forces Decrease Following Total Knee Arthroplasty up to 12-Months Post-Surgery.",
+        "authors": "Herath SP, Hobbs D, Thewlis D, et al.",
+        "journal": "J Orthop Res",
         "date": "2026-05-01",
-        "displayDate": "2026 May 1",
+        "displayDate": "2026 May",
         "type": null,
-        "doi": "10.1519/JSC.0000000000005353",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42017976/"
+        "doi": "10.1002/jor.70222",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42106968/"
       },
       {
-        "pmid": "42053977",
-        "title": "Expiratory loading modulates the quadriceps muscle pump-induced venous return during rhythmic isometric exercise.",
-        "authors": "Shiozawa K, Kondo H, Seo N, et al.",
-        "journal": "Am J Physiol Regul Integr Comp Physiol",
-        "date": "2026-04-29",
-        "displayDate": "2026 Apr 29",
-        "type": null,
-        "doi": "10.1152/ajpregu.00052.2026",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42053977/"
-      },
-      {
-        "pmid": "42050703",
-        "title": "The role of quadriceps strength and quadriceps-focused rehabilitation following medial meniscus posterior root repair: a systematic review.",
-        "authors": "Zhao W, Liu Q, Ren G, et al.",
-        "journal": "J Orthop Surg Res",
-        "date": "2026-04-29",
-        "displayDate": "2026 Apr 29",
-        "type": "Systematic review",
-        "doi": "10.1186/s13018-026-06877-2",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42050703/"
+        "pmid": "42030701",
+        "title": "Efficacy and safety of resistance training for knee osteoarthritis and subsequent knee replacement: A systematic review and meta-analysis.",
+        "authors": "Brown RCC, Mora-Traverso M, Fernández-González M, et al.",
+        "journal": "Ann Phys Rehabil Med",
+        "date": "2026-04-23",
+        "displayDate": "2026 Apr 23",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.rehab.2026.102122",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42030701/"
       },
       {
         "pmid": "41983698",
@@ -1504,37 +1504,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41983698/"
       },
       {
-        "pmid": "42017977",
-        "title": "Energy Expenditure Analysis and Prediction in Smith Machine Squats Integrating Mechanical Loads and Sex.",
-        "authors": "Qiao Z, Guo B, Gao Y, et al.",
-        "journal": "J Strength Cond Res",
-        "date": "2026-04-14",
-        "displayDate": "2026 Apr 14",
-        "type": null,
-        "doi": "10.1519/JSC.0000000000005368",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42017977/"
-      },
-      {
-        "pmid": "41854869",
-        "title": "Hamstrings-to-quadriceps ratio in female and male children and adolescents across the velocity spectrum.",
-        "authors": "Searles SA, Shoemaker ME, Cramer JT, et al.",
-        "journal": "Eur J Appl Physiol",
-        "date": "2026-03-19",
-        "displayDate": "2026 Mar 19",
-        "type": null,
-        "doi": "10.1007/s00421-026-06199-5",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41854869/"
-      },
-      {
-        "pmid": "41853883",
-        "title": "Intra-set rest preserves barbell velocity during a free-weight back squat exercise by shifting energy system contribution.",
-        "authors": "Hobein E, Edel A, Jukic I, et al.",
-        "journal": "Exp Physiol",
-        "date": "2026-03-19",
-        "displayDate": "2026 Mar 19",
-        "type": null,
-        "doi": "10.1113/EP093514",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41853883/"
+        "pmid": "42008941",
+        "title": "High-Intensity Resistance Training Enhances Strength, But Not Muscle Mass and Physical Functioning Gains during Total Knee Arthroplasty Rehabilitation.",
+        "authors": "Monsegue AP, Wilms EJC, Kramer CS, et al.",
+        "journal": "Med Sci Sports Exerc",
+        "date": "2026-04-07",
+        "displayDate": "2026 Apr 7",
+        "type": "Randomized trial",
+        "doi": "10.1249/MSS.0000000000004003",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42008941/"
       },
       {
         "pmid": "41850193",
@@ -1548,6 +1526,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41850193/"
       },
       {
+        "pmid": "41693614",
+        "title": "Does Long-Term Lower Extremity Strength Training in Adults With Knee Osteoarthritis and Varus Alignment Reduce Knee Joint Loading During Gait?",
+        "authors": "Messier SP, Vigliotti MN, Rice PE, et al.",
+        "journal": "Arthritis Care Res (Hoboken)",
+        "date": "2026-03-10",
+        "displayDate": "2026 Mar 10",
+        "type": "Randomized trial",
+        "doi": "10.1002/acr.80017",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41693614/"
+      },
+      {
         "pmid": "41711902",
         "title": "Strength gains and absence of hypertrophy and cross-education in knee extensors following short-term low-volume eccentric training in untrained young men.",
         "authors": "Sato S, Maroto-Izquierdo S, Nunes JP, et al.",
@@ -1557,6 +1546,28 @@
         "type": null,
         "doi": "10.1007/s00421-026-06169-x",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41711902/"
+      },
+      {
+        "pmid": "41699098",
+        "title": "Evaluation of physeal abnormalities of the knee with MRI.",
+        "authors": "Jaramillo D, Perdomo-Luna C, Kvist O",
+        "journal": "Skeletal Radiol",
+        "date": "2026-02-16",
+        "displayDate": "2026 Feb 16",
+        "type": "Review",
+        "doi": "10.1007/s00256-026-05154-x",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41699098/"
+      },
+      {
+        "pmid": "41634530",
+        "title": "Posterior Knee TGCT (Formerly PVNS) Masquerading as a Popliteal Lesion: Combined Arthroscopic Synovectomy and Posterior Open Excision With 8-Year Disease-Free Follow-Up.",
+        "authors": "Kougioumtzis I, Papageorgiou P, Kanakis D, et al.",
+        "journal": "Sports Health",
+        "date": "2026-02-03",
+        "displayDate": "2026 Feb 3",
+        "type": "Case report",
+        "doi": "10.1177/19417381251410244",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41634530/"
       },
       {
         "pmid": "41630124",
@@ -1570,37 +1581,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41630124/"
       },
       {
-        "pmid": "41620887",
-        "title": "Longitudinal changes in hamstring muscle morphology in adolescent competitive alpine skiers are sex-specific: a 4-year cohort study.",
-        "authors": "Fitze DP, Hanimann J, Franchi MV, et al.",
-        "journal": "Ann Med",
-        "date": "2026-02-01",
-        "displayDate": "2026 Feb 1",
-        "type": null,
-        "doi": "10.1080/07853890.2026.2620897",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41620887/"
-      },
-      {
-        "pmid": "41525792",
-        "title": "Hamstring Training and Football Performance: A Systematic Review and Meta-Analysis.",
-        "authors": "Riego-Ruiz A, Martínez-García D, Chirosa-Ríos I, et al.",
-        "journal": "Int J Sports Med",
-        "date": "2026-01-12",
-        "displayDate": "2026 Jan 12",
+        "pmid": "42730390",
+        "title": "Age-moderating effects and training characteristics of neuromuscular training for preventing knee injuries: a systematic review and meta-analysis.",
+        "authors": "Yao Y, Pan M, Niu X",
+        "journal": "Front Public Health",
+        "date": "2026-01-01",
+        "displayDate": "2026",
         "type": "Meta-analysis",
-        "doi": "10.1055/a-2785-7739",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41525792/"
-      },
-      {
-        "pmid": "41512088",
-        "title": "Effects of unstable loads and surfaces on core and lower limb muscle activation during Bulgarian squats.",
-        "authors": "Moon S, Seo G, Lee J, et al.",
-        "journal": "J Back Musculoskelet Rehabil",
-        "date": "2026-01-09",
-        "displayDate": "2026 Jan 9",
-        "type": "Clinical trial",
-        "doi": "10.1177/10538127251406954",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41512088/"
+        "doi": "10.3389/fpubh.2026.1822715",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42730390/"
       },
       {
         "pmid": "42640920",
@@ -1625,15 +1614,37 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42579678/"
       },
       {
-        "pmid": "41428052",
-        "title": "Reduced knee extensor torque steadiness and increased motor unit discharge rate variability in young people with patellofemoral pain: a pilot study.",
-        "authors": "Arvanitidis M, Falla D, Negro F, et al.",
-        "journal": "Eur J Appl Physiol",
-        "date": "2025-12-22",
-        "displayDate": "2025 Dec 22",
-        "type": null,
-        "doi": "10.1007/s00421-025-06083-8",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41428052/"
+        "pmid": "42293609",
+        "title": "The effects of Tai Chi Chuan combined with unstable resistance training on knee muscle strength and dynamic balance in female college students: a randomized controlled study protocol.",
+        "authors": "He J, Su X, Wang L, et al.",
+        "journal": "Front Public Health",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": "Trial protocol",
+        "doi": "10.3389/fpubh.2026.1868830",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42293609/"
+      },
+      {
+        "pmid": "42085418",
+        "title": "High-intensity eccentric hip abductor strength training improves dynamic knee valgus in a task-dependent manner in asymptomatic young women: A pilot study.",
+        "authors": "Fésüs Á, Sebesi B, Murlasits Z, et al.",
+        "journal": "PLoS One",
+        "date": "2026-01-01",
+        "displayDate": "2026",
+        "type": "Randomized trial",
+        "doi": "10.1371/journal.pone.0330140",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42085418/"
+      },
+      {
+        "pmid": "41320898",
+        "title": "Preoperative High-Intensity Strength Training and Outcomes After Total Knee Arthroplasty: A Systematic Review and Meta-analysis.",
+        "authors": "Huang ST, Yang SW",
+        "journal": "Sports Health",
+        "date": "2025-11-30",
+        "displayDate": "2025 Nov 30",
+        "type": "Meta-analysis",
+        "doi": "10.1177/19417381251388638",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41320898/"
       },
       {
         "pmid": "40803880",
@@ -1645,17 +1656,6 @@
         "type": "Randomized trial",
         "doi": "10.1620/tjem.2025.J099",
         "url": "https://pubmed.ncbi.nlm.nih.gov/40803880/"
-      },
-      {
-        "pmid": "40739858",
-        "title": "Effects of Flywheel Leg Curls on Muscle Structure and Function in Athletes with a History of Hamstring Strain Injury: A Randomized Controlled Trial.",
-        "authors": "Sampietro M, Campana V, Pereira Thiem L, et al.",
-        "journal": "Sports Health",
-        "date": "2025-07-30",
-        "displayDate": "2025 Jul 30",
-        "type": "Randomized trial",
-        "doi": "10.1177/19417381251355960",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40739858/"
       }
     ],
     "mechanics": [
@@ -1715,17 +1715,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42639742/"
       },
       {
-        "pmid": "42635872",
-        "title": "Kinematical-aligning of femoral component decreases overstuffing of lateral distal condyle and provides better patellar tracking and postoperative outcomes in robotic-assisted total knee arthroplasty.",
-        "authors": "Zhang R, Xu N, Wang Z, et al.",
-        "journal": "J Robot Surg",
-        "date": "2026-08-24",
-        "displayDate": "2026 Aug 24",
-        "type": null,
-        "doi": "10.1007/s11701-026-03847-y",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42635872/"
-      },
-      {
         "pmid": "42653464",
         "title": "From Joint Loading to Osteoarthritis: A Multiscale Review of Knee Mechanobiology and Digital Modelling.",
         "authors": "Stańczak M, Kacprzak B, Hagner-Derengowska M",
@@ -1768,39 +1757,6 @@
         "type": null,
         "doi": "10.1016/j.jbiomech.2026.113514",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42607559/"
-      },
-      {
-        "pmid": "42561440",
-        "title": "Association between Kinematic Patterns and Patient-Reported Outcome Measures in Revision Total Knee Arthroplasty.",
-        "authors": "Stroobant L, Vermue H, VAN DE Cotte A, et al.",
-        "journal": "Acta Orthop Belg",
-        "date": "2026-08-05",
-        "displayDate": "2026 Aug 5",
-        "type": null,
-        "doi": "10.52628/92.2.15398",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42561440/"
-      },
-      {
-        "pmid": "42556107",
-        "title": "Bicruciate-stabilized total knee arthroplasty shows kinematics closer to the native knee than cruciate-substituting total knee arthroplasty: a cadaveric study using the Journey II system.",
-        "authors": "Shigekiyo S, Wada K, Hamada D, et al.",
-        "journal": "Knee",
-        "date": "2026-08-05",
-        "displayDate": "2026 Aug 5",
-        "type": null,
-        "doi": "10.1016/j.knee.2026.104589",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42556107/"
-      },
-      {
-        "pmid": "42425131",
-        "title": "Deviating from mechanical alignment in total knee arthroplasty: are native kinematic and ligament strain restoration interchangeable targets?",
-        "authors": "Tzanetis P, Verdonschot N",
-        "journal": "Med Eng Phys",
-        "date": "2026-08-04",
-        "displayDate": "2026 Aug 4",
-        "type": null,
-        "doi": "10.1088/1873-4030/ae8859",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42425131/"
       },
       {
         "pmid": "42551219",
@@ -1858,17 +1814,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42546476/"
       },
       {
-        "pmid": "42462879",
-        "title": "Biomechanical Assessment of Pin-Site Fractures in Intra- Versus Extraincisional Pinning Technique for Robotic Total Knee Arthroplasty: A Cadaver Study.",
-        "authors": "Liau ZQG, Shao-Rong Pang A, Kee Ern ET, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-07-16",
-        "displayDate": "2026 Jul 16",
-        "type": null,
-        "doi": "10.1016/j.arth.2026.07.025",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42462879/"
-      },
-      {
         "pmid": "42462657",
         "title": "Combined physical and mental fatigue induces multiplanar knee biomechanical alterations during unanticipated sidestep cutting in highly trained male soccer players: A randomized crossover trial.",
         "authors": "Liu W, Wang Z, Dos'Santos T, et al.",
@@ -1891,6 +1836,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42438201/"
       },
       {
+        "pmid": "42436340",
+        "title": "Finite element musculoskeletal modelling of cruciate ligament contact and its effect on knee joint kinematics and biomechanics.",
+        "authors": "Wang D, Xu J, Liu L, et al.",
+        "journal": "Biomech Model Mechanobiol",
+        "date": "2026-07-11",
+        "displayDate": "2026 Jul 11",
+        "type": null,
+        "doi": "10.1007/s10237-026-02104-3",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42436340/"
+      },
+      {
         "pmid": "42348971",
         "title": "An exploration of the association between knee confidence and knee biomechanics in people with knee osteoarthritis.",
         "authors": "Binnie T, Smith A, Ng L, et al.",
@@ -1900,28 +1856,6 @@
         "type": null,
         "doi": "10.1016/j.gaitpost.2026.110267",
         "url": "https://pubmed.ncbi.nlm.nih.gov/42348971/"
-      },
-      {
-        "pmid": "42379100",
-        "title": "Interlimb differences in knee joint loading and stress distribution following anterior cruciate ligament reconstruction during stair descent.",
-        "authors": "Wei Y, Xu D, Zhou Z, et al.",
-        "journal": "Clin Biomech (Bristol)",
-        "date": "2026-06-23",
-        "displayDate": "2026 Jun 23",
-        "type": null,
-        "doi": "10.1016/j.clinbiomech.2026.106907",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42379100/"
-      },
-      {
-        "pmid": "42335757",
-        "title": "Following the footsteps: wearable sensors quantify principal component informed kinetic gait outcomes before and after knee arthroplasty.",
-        "authors": "MacDonald B, Dorrance A, Dunbar M, et al.",
-        "journal": "J Biomech",
-        "date": "2026-06-20",
-        "displayDate": "2026 Jun 20",
-        "type": null,
-        "doi": "10.1016/j.jbiomech.2026.113428",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42335757/"
       },
       {
         "pmid": "42320236",
@@ -1968,15 +1902,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42263852/"
       },
       {
-        "pmid": "42235618",
-        "title": "The Impact of Photographic Evidence on Postoperative Range of Motion Following Total Knee Arthroplasty: A Randomized Control Trial.",
-        "authors": "Farooq H, Howard J, Johnson B, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-06-02",
-        "displayDate": "2026 Jun 2",
-        "type": "Randomized trial",
-        "doi": "10.1016/j.arth.2026.05.068",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42235618/"
+        "pmid": "42233995",
+        "title": "A novel integrative multi-scale framework of inflammation and mechanical loading in knee osteoarthritis.",
+        "authors": "Lai J, Lacroix D",
+        "journal": "Biomech Model Mechanobiol",
+        "date": "2026-06-03",
+        "displayDate": "2026 Jun 3",
+        "type": null,
+        "doi": "10.1007/s10237-026-02072-8",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42233995/"
       },
       {
         "pmid": "42235271",
@@ -2034,15 +1968,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42059955/"
       },
       {
-        "pmid": "42035720",
-        "title": "How does patient-specific unicompartmental knee arthroplasty influence squatting biomechanics at mid-term follow up?",
-        "authors": "M'barki H, Belzile EL, Bédard M, et al.",
-        "journal": "Knee",
-        "date": "2026-04-25",
-        "displayDate": "2026 Apr 25",
+        "pmid": "42061204",
+        "title": "Short-term and long-term in vivo 3D kinematics of the knee joint during split squat after anterior cruciate ligament reconstruction.",
+        "authors": "Lee S, Kim S, Kim D, et al.",
+        "journal": "Clin Biomech (Bristol)",
+        "date": "2026-04-22",
+        "displayDate": "2026 Apr 22",
         "type": null,
-        "doi": "10.1016/j.knee.2026.104481",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42035720/"
+        "doi": "10.1016/j.clinbiomech.2026.106861",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42061204/"
       },
       {
         "pmid": "41987752",
@@ -2056,15 +1990,59 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41987752/"
       },
       {
-        "pmid": "42009581",
-        "title": "Patella Resurfacing Is Associated With Improving Six-Month Outcomes in Kinematically Aligned Total Knee Arthroplasty: A Propensity Score-Matched Analysis.",
-        "authors": "Ng Y, Chen J, Jared Chua HY, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-04-01",
-        "displayDate": "2026 Apr 1",
+        "pmid": "42001761",
+        "title": "Single-step and cumulative knee loading during high cadence running.",
+        "authors": "Evans RJ, Willy RW, Boers T, et al.",
+        "journal": "J Biomech",
+        "date": "2026-04-14",
+        "displayDate": "2026 Apr 14",
         "type": null,
-        "doi": "10.1016/j.arth.2026.03.005",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/42009581/"
+        "doi": "10.1016/j.jbiomech.2026.113304",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42001761/"
+      },
+      {
+        "pmid": "41980350",
+        "title": "Are running biomechanics different between females and males with knee injuries? A systematic review and meta-analysis.",
+        "authors": "Tamer S, De Oliveira Silva D, Pazzinatto MF, et al.",
+        "journal": "Gait Posture",
+        "date": "2026-04-09",
+        "displayDate": "2026 Apr 9",
+        "type": "Meta-analysis",
+        "doi": "10.1016/j.gaitpost.2026.110187",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41980350/"
+      },
+      {
+        "pmid": "41962398",
+        "title": "Knee and trunk biomechanics during a single leg drop vertical jump. The effects of horizontal distance, sex, and limb dominance.",
+        "authors": "Lynch B, Bond C, Noonan B",
+        "journal": "Gait Posture",
+        "date": "2026-04-08",
+        "displayDate": "2026 Apr 8",
+        "type": null,
+        "doi": "10.1016/j.gaitpost.2026.110190",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41962398/"
+      },
+      {
+        "pmid": "41965981",
+        "title": "Loading rate during weight acceptance: Differential contributions of the knee and contralateral ankle with aging.",
+        "authors": "Toda H",
+        "journal": "Gait Posture",
+        "date": "2026-04-07",
+        "displayDate": "2026 Apr 7",
+        "type": null,
+        "doi": "10.1016/j.gaitpost.2026.110185",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41965981/"
+      },
+      {
+        "pmid": "41955713",
+        "title": "Hip, knee, and ankle running kinematics during stance for anterior cruciate ligament reconstruction patients.",
+        "authors": "Lee H, Remmel A, Oh M, et al.",
+        "journal": "Clin Biomech (Bristol)",
+        "date": "2026-03-31",
+        "displayDate": "2026 Mar 31",
+        "type": null,
+        "doi": "10.1016/j.clinbiomech.2026.106826",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41955713/"
       },
       {
         "pmid": "41915620",
@@ -2078,26 +2056,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41915620/"
       },
       {
-        "pmid": "41862142",
-        "title": "Kinematic and Mechanical Alignment Yield Similar Outcomes in Total Knee Arthroplasty: A Systematic Review and a Meta-Analysis of Randomized Controlled Trials.",
-        "authors": "Blackman BW, Burow CA, Macciacchera MP, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-03-19",
-        "displayDate": "2026 Mar 19",
-        "type": "Meta-analysis",
-        "doi": "10.1016/j.arth.2026.01.036",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41862142/"
+        "pmid": "42264792",
+        "title": "Acute non-local effects on range of motion and drop jumping performance following static stretching of the knee extensors and knee flexors.",
+        "authors": "Scardina A, Nakamura M, Rossi C, et al.",
+        "journal": "J Bodyw Mov Ther",
+        "date": "2026-03-11",
+        "displayDate": "2026 Mar 11",
+        "type": null,
+        "doi": "10.1016/j.jbmt.2026.03.016",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42264792/"
       },
       {
-        "pmid": "41693614",
-        "title": "Does Long-Term Lower Extremity Strength Training in Adults With Knee Osteoarthritis and Varus Alignment Reduce Knee Joint Loading During Gait?",
-        "authors": "Messier SP, Vigliotti MN, Rice PE, et al.",
-        "journal": "Arthritis Care Res (Hoboken)",
-        "date": "2026-03-10",
-        "displayDate": "2026 Mar 10",
-        "type": "Randomized trial",
-        "doi": "10.1002/acr.80017",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41693614/"
+        "pmid": "41761497",
+        "title": "Effects of yoga on pain, physical function, and biomechanical/impairment outcomes in knee osteoarthritis: A systematic review and three-level meta-analysis.",
+        "authors": "Zhou J, Jawis MN, Li S",
+        "journal": "J Back Musculoskelet Rehabil",
+        "date": "2026-02-27",
+        "displayDate": "2026 Feb 27",
+        "type": "Meta-analysis",
+        "doi": "10.1177/10538127261421867",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41761497/"
       },
       {
         "pmid": "41663662",
@@ -2111,15 +2089,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41663662/"
       },
       {
-        "pmid": "41650998",
-        "title": "Intraoperative Assessment of Kinematics Using Robotic-Assisted Total Knee Arthroplasty Is Reliable: A Cadaver-Based Study.",
-        "authors": "Hampp E, Ali AA, Szabo N, et al.",
-        "journal": "J Knee Surg",
-        "date": "2026-02-06",
-        "displayDate": "2026 Feb 6",
-        "type": null,
-        "doi": "10.1055/a-2796-8502",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41650998/"
+        "pmid": "41612762",
+        "title": "Heel elevation increases ankle and knee range of motion during squatting in healthy adults: a systematic review with meta-analysis.",
+        "authors": "Ghasemi M, Emami M, Mohammadi Yaghoubi U",
+        "journal": "Sports Biomech",
+        "date": "2026-01-29",
+        "displayDate": "2026 Jan 29",
+        "type": "Meta-analysis",
+        "doi": "10.1080/14763141.2026.2619893",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41612762/"
       },
       {
         "pmid": "41591485",
@@ -2144,39 +2122,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41580507/"
       },
       {
-        "pmid": "41592270",
-        "title": "Effect of Postoperative Medication on Range of Motion After Total Knee Arthroplasty: An Evaluation of Venous Thromboembolism Chemoprophylaxis.",
-        "authors": "Kirwood KL, Dornan GJ, Dietrich AN, et al.",
-        "journal": "J Am Acad Orthop Surg",
-        "date": "2026-01-23",
-        "displayDate": "2026 Jan 23",
-        "type": null,
-        "doi": "10.5435/JAAOS-D-25-00421",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41592270/"
-      },
-      {
-        "pmid": "41577305",
-        "title": "Is the Posterior Cruciate Ligament Necessary in Cruciate-Substituting Total Knee Arthroplasty? A Cadaveric Comparison of Knee Kinematics With or Without the Posterior Cruciate Ligament Versus the Native Knee.",
-        "authors": "Shigekiyo S, Hamada D, Wada K, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-01-21",
-        "displayDate": "2026 Jan 21",
-        "type": null,
-        "doi": "10.1016/j.arth.2026.01.050",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41577305/"
-      },
-      {
-        "pmid": "41534610",
-        "title": "Anatomical Relationship of the Popliteal Artery to Tibial Landmarks at Resection Levels in Total Knee Arthroplasty: A Cadaver Study.",
-        "authors": "Imai H, Kawarai Y, Nakamura J, et al.",
-        "journal": "J Arthroplasty",
-        "date": "2026-01-12",
-        "displayDate": "2026 Jan 12",
-        "type": null,
-        "doi": "10.1016/j.arth.2026.01.030",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41534610/"
-      },
-      {
         "pmid": "42761032",
         "title": "Lower limb biomechanics and knee tissue loading under fatigue during the badminton forward lunge in recreational female players.",
         "authors": "Chen J, Zhang Y, Ye M, et al.",
@@ -2188,15 +2133,37 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/42761032/"
       },
       {
-        "pmid": "41353725",
-        "title": "Smaller medial component gaps at deep flexion are associated with better patient-reported outcomes after robotic-assisted cruciate-retaining total knee arthroplasty using an anatomically designed implant.",
-        "authors": "Nakamura Y, Ogawa H, Ota Y, et al.",
-        "journal": "Knee Surg Sports Traumatol Arthrosc",
-        "date": "2025-12-07",
-        "displayDate": "2025 Dec 7",
+        "pmid": "41927213",
+        "title": "Exploring the association between the knee injury and osteoarthritis outcome score-patellofemoral subscale and lower extremity kinematics and strength in individuals with patellofemoral pain.",
+        "authors": "Gbotosho O, Kim S, Mangum LC, et al.",
+        "journal": "J Bodyw Mov Ther",
+        "date": "2025-12-11",
+        "displayDate": "2025 Dec 11",
         "type": null,
-        "doi": "10.1002/ksa.70214",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41353725/"
+        "doi": "10.1016/j.jbmt.2025.12.014",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41927213/"
+      },
+      {
+        "pmid": "41258659",
+        "title": "Posteromedial Meniscocapsular Ramp Lesions of the Knee: An MRI-Focused Review, From the AJR Special Series on Critical Anatomy.",
+        "authors": "Nguyen JC, Lawrence JTR, Griffith JF",
+        "journal": "AJR Am J Roentgenol",
+        "date": "2025-11-19",
+        "displayDate": "2025 Nov 19",
+        "type": "Review",
+        "doi": "10.2214/AJR.25.33912",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41258659/"
+      },
+      {
+        "pmid": "41190936",
+        "title": "Dynamic coronal plane knee alignment: Femoral anatomy determines kinematic curve morphology, tibial anatomy determines curve position.",
+        "authors": "Ismailidis P, Leicht A, Doma K, et al.",
+        "journal": "Knee Surg Sports Traumatol Arthrosc",
+        "date": "2025-11-05",
+        "displayDate": "2025 Nov 5",
+        "type": null,
+        "doi": "10.1002/ksa.70152",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41190936/"
       },
       {
         "pmid": "41048123",
@@ -2208,19 +2175,52 @@
         "type": "Review",
         "doi": "10.1002/ksa.70078",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41048123/"
+      },
+      {
+        "pmid": "40955957",
+        "title": "Step-by-step insight into gait analysis: A narrative review unlocking knee biomechanics.",
+        "authors": "Spallone G, Mancini L, Carnevale A, et al.",
+        "journal": "Knee Surg Sports Traumatol Arthrosc",
+        "date": "2025-09-16",
+        "displayDate": "2025 Sep 16",
+        "type": "Review",
+        "doi": "10.1002/ksa.70067",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40955957/"
+      },
+      {
+        "pmid": "40726382",
+        "title": "Artificial anterolateral ligament reconstruction provides similar knee kinematics as compared to an autologous reconstruction and a lateral extra-articular tenodesis.",
+        "authors": "Ying H, Li X, Yao G, et al.",
+        "journal": "Knee Surg Sports Traumatol Arthrosc",
+        "date": "2025-07-29",
+        "displayDate": "2025 Jul 29",
+        "type": null,
+        "doi": "10.1002/ksa.12811",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40726382/"
+      },
+      {
+        "pmid": "40202824",
+        "title": "The influence of knee varus deformity on the kinetic and kinematic characteristics of musculoskeletal models during gait.",
+        "authors": "Tabeiy S, Karimpour M, Shirvani A, et al.",
+        "journal": "Comput Methods Biomech Biomed Engin",
+        "date": "2025-04-09",
+        "displayDate": "2025 Apr 9",
+        "type": null,
+        "doi": "10.1080/10255842.2025.2487817",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40202824/"
       }
     ]
   },
   "totals": {
-    "injuries": 20565,
-    "rehab": 6752,
-    "training": 1256,
-    "mechanics": 4042
+    "injuries": 20569,
+    "rehab": 6608,
+    "training": 1730,
+    "mechanics": 2805
   },
   "queries": {
-    "injuries": "(\"anterior cruciate ligament\"[ti] OR ACL[ti] OR meniscus[ti] OR meniscal[ti] OR \"patellofemoral pain\"[ti] OR \"patellar tendinopathy\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
-    "rehab": "((\"anterior cruciate ligament\"[ti] OR ACL[ti] OR \"knee osteoarthritis\"[ti] OR \"patellofemoral pain\"[ti] OR \"patellar tendinopathy\"[ti] OR meniscal[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "training": "((quadriceps[ti] OR hamstring*[ti] OR squat*[ti] OR \"knee extens*\"[ti] OR \"leg press\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract",
-    "mechanics": "(knee[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract"
+    "injuries": "(\"anterior cruciate ligament\"[ti] OR ACL[ti] OR meniscus[ti] OR meniscal[ti] OR \"patellofemoral pain\"[ti] OR \"patellar tendinopathy\"[ti] OR \"iliotibial band syndrome\"[ti] NOT \"deep learning\"[ti] NOT chatbot*[ti] NOT \"artificial intelligence\"[ti] NOT \"large language\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "rehab": "((\"anterior cruciate ligament\"[ti] OR ACL[ti] OR \"knee osteoarthritis\"[ti] OR \"patellofemoral pain\"[ti] OR \"patellar tendinopathy\"[ti] OR meniscal[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti]) NOT \"deep learning\"[ti] NOT chatbot*[ti] NOT \"artificial intelligence\"[ti] NOT \"large language\"[ti] NOT perception*[ti] NOT qualitative[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "training": "((squat*[ti] OR \"knee extens*\"[ti] OR \"leg press\"[ti] OR \"patellar tendon\"[ti] OR knee[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab]) NOT \"deep learning\"[ti] NOT chatbot*[ti] NOT \"artificial intelligence\"[ti] NOT \"large language\"[ti] NOT exoskeleton*[ti] NOT implantation[ti] NOT surrogate[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "mechanics": "(knee[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti]) NOT \"deep learning\"[ti] NOT chatbot*[ti] NOT \"artificial intelligence\"[ti] NOT \"large language\"[ti] NOT arthroplasty[ti] NOT replacement[ti] NOT fractur*[ti] NOT popliteal[ti] NOT pin[ti]) AND humans[mh] AND english[la] AND hasabstract"
   }
 }
