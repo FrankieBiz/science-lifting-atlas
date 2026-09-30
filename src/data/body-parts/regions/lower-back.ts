@@ -65,7 +65,7 @@ const region: BodyPart = {
     category(
       'training',
       'Lifting, trunk training, and resistance exercise.',
-      '("low back"[ti] OR lumbar[ti] OR deadlift*[ti] OR "trunk muscle*"[ti] OR "back extensor*"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "weight lifting"[tiab] OR weightlifting[tiab] OR powerlifting[tiab]) NOT astronaut*[ti] NOT "machine learning"[ti] NOT lifestyle[ti]',
+      '("low back"[ti] OR lumbar[ti] OR deadlift*[ti] OR "trunk muscle*"[ti] OR "back extensor*"[ti] OR "back extension"[ti] OR "spinal erector*"[ti] OR "erector spinae"[ti] OR "trunk extensor*"[ti] OR "Romanian deadlift"[ti] OR "good morning"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "weight lifting"[tiab] OR weightlifting[tiab] OR powerlifting[tiab]) AND (training[ti] OR exercis*[ti] OR strength*[ti] OR deadlift*[ti] OR lifting[ti] OR resistance[ti] OR hypertrophy[ti]) NOT astronaut*[ti] NOT "machine learning"[ti] NOT lifestyle[ti] NOT hamstring*[ti] NOT "load-velocity"[ti] NOT "load velocity"[ti] NOT hammock[ti] NOT autonomic[ti] NOT "pain reprocessing"[ti] NOT telerehabilitation[ti] NOT "Response to"[ti]',
       /low back|lumbar|sciatica|spondyl|disc|deadlift|back extensor|trunk|spine|spinal|lifting|back pain/i,
     ),
     category(
