@@ -28,6 +28,22 @@ const evidenceHref = `${rootHref}#evidence-trace`;
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <meta name="theme-color" content="#ffffff" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href={`${rootHref}favicon.svg`} />
+    <link rel="alternate icon" href={`${rootHref}favicon.ico`} />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={`${rootHref}apple-touch-icon.png`}
+    />
+    <link rel="manifest" href={`${rootHref}site.webmanifest`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${rootHref}og-image.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${rootHref}twitter-image.png`} />
     <title>{pageTitle}</title>
   </head>
   <body class:list={[current && `page-${current}`]}>

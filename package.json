@@ -41,6 +41,7 @@
     "assets:mesh-map": "node scripts/assets/mesh-map.mjs",
     "assets:conversion:contract": "vitest run tests/unit/asset-conversion.test.ts",
     "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write",
+    "assets:digital": "node scripts/assets/generate-digital-assets.mjs",
     "studies:fetch": "NODE_USE_ENV_PROXY=1 node scripts/studies/fetch.mjs",
     "studies:preview": "NODE_USE_ENV_PROXY=1 node scripts/studies/preview.mjs",
     "qa:screens": "node scripts/qa/screens.mjs"
@@ -63,6 +64,7 @@
     "prettier-plugin-astro": "0.14.1",
     "remark-mdx": "3.1.1",
     "remark-parse": "11.0.0",
+    "sharp": "0.35.4",
     "typescript": "6.0.3",
     "typescript-eslint": "8.68.0",
     "unified": "11.0.5",
