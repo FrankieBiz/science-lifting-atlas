@@ -8,7 +8,7 @@ const region: BodyPart = {
   status: 'published',
   tagline: 'Seven vertebrae holding up your head.',
   whatItDoes:
-    'The neck, or cervical spine, supports the head and lets it nod, turn, and tilt. It also protects the spinal cord and the nerves that run to the shoulders and arms. Deep neck muscles hold the vertebrae steady, while larger muscles such as the upper trapezius link the neck to the shoulder blade.',
+    'The neck, or cervical spine, supports the head and lets it nod, turn, and tilt. It protects the spinal cord and the nerves that run to the shoulders and arms. Deep neck muscles steady the vertebrae, while larger muscles such as the upper trapezius connect the neck to the shoulder blades. Together, they help stabilize the head and upper body during lifts that load the shoulders and arms.',
   keyParts: [
     'Seven cervical vertebrae (C1–C7) and their discs',
     'Deep neck flexors and extensors',
@@ -18,22 +18,22 @@ const region: BodyPart = {
   commonInjuries: [
     {
       name: 'Non-specific neck pain',
-      summary:
-        'The most common type: pain and stiffness without a single identifiable structural cause.',
+      summary: 'Pain or stiffness without one clear structural cause.',
     },
     {
-      name: 'Cervical radiculopathy',
+      name: 'Pinched neck nerve (cervical radiculopathy)',
       summary:
-        'A pinched nerve root causing pain, tingling, or weakness down the arm.',
+        'Pressure or irritation at a neck nerve root can cause pain, tingling, numbness, or weakness that travels into the arm.',
     },
     {
-      name: 'Whiplash-associated disorders',
+      name: 'Whiplash (whiplash-associated disorder)',
       summary:
-        'Neck pain after a sudden acceleration-deceleration injury, such as a car collision.',
+        'A quick back-and-forth or sideways movement of the head can strain neck tissues and lead to pain and stiffness.',
     },
     {
       name: 'Muscle strain',
-      summary: 'Acute pain after an awkward movement or sudden load.',
+      summary:
+        'An overstretched neck muscle can cause sudden pain and tenderness after a quick movement or heavy effort.',
     },
   ],
   safetyNote:
@@ -56,13 +56,13 @@ const region: BodyPart = {
     category(
       'training',
       'Neck and upper-trapezius strength training.',
-      '(neck[ti] OR cervical[ti] OR "upper trapezius"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR strengthening[tiab])',
+      '("neck muscle"[ti] OR "cervical muscle"[ti] OR "neck strength"[ti] OR "neck strengthening"[ti] OR "upper trapezius"[ti]) AND (training[ti] OR exercise[ti] OR strengthening[ti] OR strength[ti]) NOT femor*[ti] NOT radiotherap*[ti] NOT cancer*[ti] NOT oncol*[ti]',
       /neck|cervical|whiplash|trapezius|radiculopathy/i,
     ),
     category(
       'mechanics',
       'How the cervical spine is built and how it moves.',
-      `("cervical spine"[ti] OR neck[ti]) AND ${MECH}`,
+      `("cervical spine"[ti] OR "cervical vertebrae"[ti] OR "cervical kinematics"[ti]) AND ${MECH}`,
       /neck|cervical|whiplash|trapezius|radiculopathy/i,
     ),
   ],
