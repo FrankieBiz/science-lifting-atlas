@@ -1,7 +1,8 @@
 ---
-import posterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
+import frontPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
+import backPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster-back.png?url';
 import type { BodyPart } from '../../data/body-parts/index.ts';
-import { plateImageStyle } from '../../lib/body-parts/plate.ts';
+import { POSTERS, plateImageStyle } from '../../lib/body-parts/plate.ts';
 
 interface Props {
   part: BodyPart;
@@ -12,7 +13,14 @@ const { part, variant } = Astro.props;
 // The plate crops the poster so the region sits at the centre.
 const plateRatio = variant === 'hero' ? 5 / 4 : 3 / 4;
 const zoom = variant === 'hero' ? part.plate.zoom : part.plate.zoom * 0.85;
-const { width, left, top } = plateImageStyle(part.plate, zoom, plateRatio);
+const view = part.plate.view;
+const posterUrl = view === 'back' ? backPosterUrl : frontPosterUrl;
+const { width, left, top } = plateImageStyle(
+  part.plate,
+  zoom,
+  plateRatio,
+  POSTERS[view],
+);
 ---
 
 <figure
@@ -22,8 +30,8 @@ const { width, left, top } = plateImageStyle(part.plate, zoom, plateRatio);
   <img
     src={posterUrl}
     alt=""
-    width="862"
-    height="672"
+    width={POSTERS[view].width}
+    height={POSTERS[view].height}
     loading={variant === 'hero' ? 'eager' : 'lazy'}
     style={`width: ${width.toFixed(2)}%; left: ${left.toFixed(2)}%; top: ${top.toFixed(2)}%`}
   />
@@ -32,7 +40,7 @@ const { width, left, top } = plateImageStyle(part.plate, zoom, plateRatio);
     variant === 'hero' && (
       <figcaption>
         <span class="region-plate__dot" aria-hidden="true" />
-        {part.name} · anterior view
+        {part.name} · {view} view
       </figcaption>
     )
   }
