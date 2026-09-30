@@ -1130,17 +1130,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41826633/"
       },
       {
-        "pmid": "41785724",
-        "title": "Forearm support is associated with reduced upper arm muscle activity during direction-specific isometric wrist exertions in young healthy adults.",
-        "authors": "Gerditschke L, Antosiak C, McDonald LS, et al.",
-        "journal": "J Electromyogr Kinesiol",
-        "date": "2026-02-24",
-        "displayDate": "2026 Feb 24",
-        "type": null,
-        "doi": "10.1016/j.jelekin.2026.103130",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/41785724/"
-      },
-      {
         "pmid": "41359274",
         "title": "Small muscle mass exercise enhances muscular adaptations? Effects of unilateral and bilateral biceps curl on maximum strength and muscle size changes.",
         "authors": "Kassiano W, Tricoli I, Gomes F, et al.",
@@ -1150,6 +1139,17 @@
         "type": "Randomized trial",
         "doi": "10.1007/s00421-025-06033-4",
         "url": "https://pubmed.ncbi.nlm.nih.gov/41359274/"
+      },
+      {
+        "pmid": "41385870",
+        "title": "Biceps brachii regional shear modulus following elbow flexion exercises at different muscle lengths.",
+        "authors": "de Oliveira Silva A, Albuquerque Brandão MC, da Matta TT, et al.",
+        "journal": "J Biomech",
+        "date": "2025-12-03",
+        "displayDate": "2025 Dec 3",
+        "type": null,
+        "doi": "10.1016/j.jbiomech.2025.113104",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41385870/"
       },
       {
         "pmid": "41964922",
@@ -1174,6 +1174,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41247250/"
       },
       {
+        "pmid": "41108382",
+        "title": "Effective number of maximal eccentric contractions in the early phase of twice-weekly training to increase muscle strength and thickness of the elbow flexors in untrained young adults.",
+        "authors": "Sato S, Yoshida R, Murakami Y, et al.",
+        "journal": "Eur J Appl Physiol",
+        "date": "2025-10-18",
+        "displayDate": "2025 Oct 18",
+        "type": null,
+        "doi": "10.1007/s00421-025-06023-6",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41108382/"
+      },
+      {
         "pmid": "41102692",
         "title": "Elbow flexion training with blood flow restriction improves strength, proprioception, and performance in healthy individuals: a randomized controlled trial.",
         "authors": "Yeşilyaprak SS, Dere D",
@@ -1185,15 +1196,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/41102692/"
       },
       {
-        "pmid": "40940384",
-        "title": "Age-related differences in muscular coordination while performing elbow flexion and extension movements at different velocities.",
-        "authors": "Romero Avila E, Siebers HL, Bollheimer LC, et al.",
-        "journal": "Sci Rep",
-        "date": "2025-09-12",
-        "displayDate": "2025 Sep 12",
+        "pmid": "40992409",
+        "title": "Reliability of Different Protocols for Elbow Flexion and Extension Strength Measurement via Hand-held Dynamometer.",
+        "authors": "Yeşilyaprak SS, Özden F, Karabay D, et al.",
+        "journal": "Sportverletz Sportschaden",
+        "date": "2025-09-24",
+        "displayDate": "2025 Sep 24",
         "type": null,
-        "doi": "10.1038/s41598-025-19126-z",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40940384/"
+        "doi": "10.1055/a-2657-6783",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40992409/"
+      },
+      {
+        "pmid": "40888935",
+        "title": "Corticospinal drive modulation to agonist and antagonist arm muscles following strength training and detraining.",
+        "authors": "Basereh A, Rajabi H, Gharibzadeh S, et al.",
+        "journal": "Exp Brain Res",
+        "date": "2025-09-01",
+        "displayDate": "2025 Sep 1",
+        "type": null,
+        "doi": "10.1007/s00221-025-07155-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40888935/"
       },
       {
         "pmid": "40388208",
@@ -1207,15 +1229,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40388208/"
       },
       {
-        "pmid": "40285855",
-        "title": "Alterations in muscular control when performing unfamiliar elbow flexion and extension movements.",
-        "authors": "Romero Avila E, Disselhorst-Klug C",
-        "journal": "Eur J Appl Physiol",
-        "date": "2025-04-26",
-        "displayDate": "2025 Apr 26",
+        "pmid": "40324312",
+        "title": "Prolonged low-frequency force depression recovery response following an isometric triceps extension to volitional fatigue at a high versus low intensity contraction.",
+        "authors": "Veerasammy S, Davidson JB, Friedel JI, et al.",
+        "journal": "Appl Ergon",
+        "date": "2025-05-04",
+        "displayDate": "2025 May 4",
         "type": null,
-        "doi": "10.1007/s00421-025-05791-5",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40285855/"
+        "doi": "10.1016/j.apergo.2025.104552",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40324312/"
+      },
+      {
+        "pmid": "40168762",
+        "title": "Comparison of volitional control and strength in elbow flexion after ipsilateral C7 transfer or double fascicular transfer in C5-6 brachial plexus injuries.",
+        "authors": "Lee YH, Citron I, Chang TN, et al.",
+        "journal": "Neurosurg Focus",
+        "date": "2025-04-01",
+        "displayDate": "2025 Apr 1",
+        "type": null,
+        "doi": "10.3171/2025.1.FOCUS24884",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40168762/"
       },
       {
         "pmid": "40082069",
@@ -1229,15 +1262,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40082069/"
       },
       {
-        "pmid": "40218676",
-        "title": "Altered Muscle-Brain Connectivity During Left and Right Biceps Brachii Isometric Contraction Following Sleep Deprivation: Insights from PLV and PDC.",
-        "authors": "Chi P, Bai Y, Du W, et al.",
-        "journal": "Sensors (Basel)",
-        "date": "2025-03-28",
-        "displayDate": "2025 Mar 28",
+        "pmid": "40122955",
+        "title": "Reliability of the biceps curl test and proposed percentiles in schoolchildren living at moderate altitude in Peru.",
+        "authors": "Cossio-Bolaños M, Vidal-Espinoza R, Sulla-Torres J, et al.",
+        "journal": "Sci Rep",
+        "date": "2025-03-24",
+        "displayDate": "2025 Mar 24",
         "type": null,
-        "doi": "10.3390/s25072162",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40218676/"
+        "doi": "10.1038/s41598-025-89656-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40122955/"
+      },
+      {
+        "pmid": "40089846",
+        "title": "Assessing climbing-specific strength: The impact of body position and elbow flexion on reliability and predictive validity.",
+        "authors": "Stien N, Andersen V, Langer K, et al.",
+        "journal": "J Sports Sci",
+        "date": "2025-03-15",
+        "displayDate": "2025 Mar 15",
+        "type": null,
+        "doi": "10.1080/02640414.2025.2477863",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40089846/"
       },
       {
         "pmid": "40266635",
@@ -1262,26 +1306,15 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40030076/"
       },
       {
-        "pmid": "39982496",
-        "title": "Diagnostic utility of deep tendon reflex responses in rectus femoris and triceps brachii in fibromyalgia: a clinical and electrophysiological study.",
-        "authors": "Coskun Benlidayi I, Deniz V, Ornek C, et al.",
-        "journal": "Rheumatol Int",
-        "date": "2025-02-21",
-        "displayDate": "2025 Feb 21",
-        "type": null,
-        "doi": "10.1007/s00296-025-05808-4",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/39982496/"
-      },
-      {
-        "pmid": "40622930",
-        "title": "Comparison of muscle activity distribution in the biceps brachii using monopolar and bipolar multichannel surface electromyography.",
-        "authors": "Ito K, Kikuchi A, Sato T",
-        "journal": "PLoS One",
-        "date": "2025-01-01",
-        "displayDate": "2025",
-        "type": null,
-        "doi": "10.1371/journal.pone.0325464",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/40622930/"
+        "pmid": "39809454",
+        "title": "Distinct muscle growth and strength adaptations after preacher and incline biceps curls.",
+        "authors": "Kassiano W, Costa B, Kunevaliki G, et al.",
+        "journal": "Int J Sports Med",
+        "date": "2025-01-14",
+        "displayDate": "2025 Jan 14",
+        "type": "Randomized trial",
+        "doi": "10.1055/a-2517-0509",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39809454/"
       },
       {
         "pmid": "40513129",
@@ -1295,6 +1328,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/40513129/"
       },
       {
+        "pmid": "39810291",
+        "title": "Transcranial Magnetic Stimulation Inter-Pulse Interval Does Not Influence Corticospinal Excitability to the Biceps Brachii During Submaximal Isometric Elbow Flexion.",
+        "authors": "Imeson DH, Gerditschke L, Brown LE, et al.",
+        "journal": "Eur J Neurosci",
+        "date": "2025-01-01",
+        "displayDate": "2025 Jan",
+        "type": null,
+        "doi": "10.1111/ejn.16671",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39810291/"
+      },
+      {
         "pmid": "39449136",
         "title": "Similar Regional Hypertrophy of the Elbow Flexor Muscles in Response to Low-Load Training With Vascular Occlusion at Short Versus Long Muscle Lengths.",
         "authors": "da Silva Vendruscolo L, Brendon H, Hevia-Larraín V, et al.",
@@ -1304,17 +1348,6 @@
         "type": "Randomized trial",
         "doi": "10.1177/19417381241287522",
         "url": "https://pubmed.ncbi.nlm.nih.gov/39449136/"
-      },
-      {
-        "pmid": "39358929",
-        "title": "Inducing ipsilateral motor-evoked potentials in the biceps brachii muscle in healthy humans.",
-        "authors": "Hu N, Tanel M, Baker SN, et al.",
-        "journal": "Eur J Neurosci",
-        "date": "2024-10-02",
-        "displayDate": "2024 Oct 2",
-        "type": null,
-        "doi": "10.1111/ejn.16548",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/39358929/"
       },
       {
         "pmid": "39243691",
@@ -1328,17 +1361,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/39243691/"
       },
       {
-        "pmid": "39095333",
-        "title": "Sex-related differences in corticospinal excitability outcome measures of the biceps brachii during a submaximal elbow flexor contraction.",
-        "authors": "Olarogba OB, Lockyer EJ, Antolinez AK, et al.",
-        "journal": "Physiol Rep",
-        "date": "2024-08-01",
-        "displayDate": "2024 Aug",
-        "type": null,
-        "doi": "10.14814/phy2.16102",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/39095333/"
-      },
-      {
         "pmid": "39593419",
         "title": "Exercise selection plays an important role in inducing non-uniform acute responses on elbow flexors muscle thickness.",
         "authors": "Leitão BFM, Albarello JCS, Halmenschlager GH, et al.",
@@ -1348,6 +1370,50 @@
         "type": null,
         "doi": "10.1016/j.jbmt.2024.07.028",
         "url": "https://pubmed.ncbi.nlm.nih.gov/39593419/"
+      },
+      {
+        "pmid": "39593630",
+        "title": "Acute effects of blood flow restriction on EMG activity of arm muscles during karate tsuki strike in young men.",
+        "authors": "Soltani M, Shafiei M, Ariabod A, et al.",
+        "journal": "J Bodyw Mov Ther",
+        "date": "2024-05-05",
+        "displayDate": "2024 May 5",
+        "type": null,
+        "doi": "10.1016/j.jbmt.2024.05.005",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39593630/"
+      },
+      {
+        "pmid": "38546928",
+        "title": "Biceps brachii elastography in well-trained men post eccentric exercise-induced muscle damage.",
+        "authors": "Brandão MCA, Matias LA, da Matta TT, et al.",
+        "journal": "J Ultrasound",
+        "date": "2024-03-28",
+        "displayDate": "2024 Mar 28",
+        "type": null,
+        "doi": "10.1007/s40477-024-00886-9",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38546928/"
+      },
+      {
+        "pmid": "38562634",
+        "title": "Low Hand Grip Strength, Mid-Upper Arm Muscle Area, Calf Circumference, Serum Albumin Level, and Muscle Fiber Diameter as Risk Factors for Independent Walking Inability in Patients with Hip Fracture 6 Weeks after Bipolar Hemiarthroplasty Surgery.",
+        "authors": "Savio SD, Kawiyana IKS, Wiratnaya IGE, et al.",
+        "journal": "Clin Orthop Surg",
+        "date": "2024-03-15",
+        "displayDate": "2024 Mar 15",
+        "type": null,
+        "doi": "10.4055/cios23256",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38562634/"
+      },
+      {
+        "pmid": "38413632",
+        "title": "Effects of isometric training and R.I.C.E. treatment on the arm muscle performance of swimmers with elbow pain.",
+        "authors": "Li W, Hadizadeh M, Yusof A, et al.",
+        "journal": "Sci Rep",
+        "date": "2024-02-27",
+        "displayDate": "2024 Feb 27",
+        "type": null,
+        "doi": "10.1038/s41598-024-54789-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38413632/"
       },
       {
         "pmid": "38236301",
@@ -1361,48 +1427,103 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/38236301/"
       },
       {
-        "pmid": "38033268",
-        "title": "The Relationship Between Elbow Flexion Postures and Overhead Reaching in Birth Brachial Plexus Injuries.",
-        "authors": "Goins TR, Fox J, Saul K, et al.",
-        "journal": "Pediatr Phys Ther",
-        "date": "2023-11-30",
-        "displayDate": "2023 Nov 30",
+        "pmid": "38798834",
+        "title": "Effectiveness of upper arm and breathing exercises to improve inflammatory markers in severe COVID-19 patients.",
+        "authors": "Tarigan AP, Firdaus R, Pandia P, et al.",
+        "journal": "Narra J",
+        "date": "2024-01-01",
+        "displayDate": "2024 Jan 1",
         "type": null,
-        "doi": "10.1097/PEP.0000000000001059",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/38033268/"
+        "doi": "10.52225/narra.v4i1.417",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38798834/"
       },
       {
-        "pmid": "38083311",
-        "title": "Spasticity assessment with muscle coactivation of elbow flexors during passive stretch in Post-stroke Hemiplegia.",
-        "authors": "Wang H, Geng Y, Fang P, et al.",
-        "journal": "Annu Int Conf IEEE Eng Med Biol Soc",
-        "date": "2023-07-01",
-        "displayDate": "2023 Jul",
+        "pmid": "38526856",
+        "title": "Comparison of decrease in elbow flexion strength in patients after tenotomy and tenodesis of the long head of the biceps brachii.",
+        "authors": "Krause R, Majcher A, Steno B",
+        "journal": "Bratisl Lek Listy",
+        "date": "2024-01-01",
+        "displayDate": "2024",
         "type": null,
-        "doi": "10.1109/EMBC40787.2023.10340440",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/38083311/"
+        "doi": "10.4149/BLL_2024_32",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38526856/"
       },
       {
-        "pmid": "37417026",
-        "title": "Accessory heads of biceps brachii muscle its embryogenesis and clinical implications: Cadaveric study.",
-        "authors": "Chakravarthi KK, Sarvepalli A, Siddegowda SK, et al.",
-        "journal": "Ann Afr Med",
-        "date": "2023-07-01",
-        "displayDate": "2023 Jul-Sep",
+        "pmid": "38045754",
+        "title": "Relationships between Changes in Muscle Shear Modulus, Urinary Titin N- Terminal Fragment, and Maximum Voluntary Contraction Torque after Eccentric Exercise of the Elbow Flexors.",
+        "authors": "Inami T, Yamaguchi S, Nishioka T, et al.",
+        "journal": "J Sports Sci Med",
+        "date": "2023-12-01",
+        "displayDate": "2023 Dec",
         "type": null,
-        "doi": "10.4103/aam.aam_93_22",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/37417026/"
+        "doi": "10.52082/jssm.2024.797",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38045754/"
       },
       {
-        "pmid": "37208978",
-        "title": "Shear wave ultrasound elastography of the biceps brachii can be used as a precise proxy for passive elbow torque in individuals with hemiparetic stroke.",
-        "authors": "Ellis MD, Gurari N, Gerritsen NTA, et al.",
-        "journal": "Physiol Rep",
-        "date": "2023-05-01",
-        "displayDate": "2023 May",
+        "pmid": "37675501",
+        "title": "Pectoralis major and triceps brachii cross-sectional area measured on different planes: the effect on the muscle size-strength relationship.",
+        "authors": "Lanza MB, Martins-Costa HC, de Almeida AR, et al.",
+        "journal": "J Sports Med Phys Fitness",
+        "date": "2023-09-07",
+        "displayDate": "2023 Sep 7",
         "type": null,
-        "doi": "10.14814/phy2.15691",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/37208978/"
+        "doi": "10.23736/S0022-4707.23.15090-0",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37675501/"
+      },
+      {
+        "pmid": "37642310",
+        "title": "Contralateral versus ipsilateral protective effect against muscle damage of the elbow flexors and knee extensors induced by maximal eccentric exercise.",
+        "authors": "Chen TC, Chen HL, Tseng WC, et al.",
+        "journal": "Scand J Med Sci Sports",
+        "date": "2023-08-29",
+        "displayDate": "2023 Aug 29",
+        "type": "Randomized trial",
+        "doi": "10.1111/sms.14482",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37642310/"
+      },
+      {
+        "pmid": "37505230",
+        "title": "Weekly minimum frequency of one maximal eccentric contraction to increase muscle strength of the elbow flexors.",
+        "authors": "Yoshida R, Kasahara K, Murakami Y, et al.",
+        "journal": "Eur J Appl Physiol",
+        "date": "2023-07-28",
+        "displayDate": "2023 Jul 28",
+        "type": null,
+        "doi": "10.1007/s00421-023-05281-6",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37505230/"
+      },
+      {
+        "pmid": "37219738",
+        "title": "Electromyographic and mechanomyographic responses of the biceps brachii during concentric and eccentric muscle actions to failure at high and low relative loads.",
+        "authors": "Benitez B, Dinyer-McNeely TK, McCallum L, et al.",
+        "journal": "Eur J Appl Physiol",
+        "date": "2023-05-23",
+        "displayDate": "2023 May 23",
+        "type": null,
+        "doi": "10.1007/s00421-023-05199-z",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37219738/"
+      },
+      {
+        "pmid": "37167343",
+        "title": "Low-intensity climbing with blood flow restriction over 5 weeks increases grip and elbow flexor endurance in advanced climbers: A randomized controlled trial.",
+        "authors": "Held S, Rappelt L, Rein R, et al.",
+        "journal": "Eur J Sport Sci",
+        "date": "2023-05-11",
+        "displayDate": "2023 May 11",
+        "type": "Randomized trial",
+        "doi": "10.1080/17461391.2023.2207079",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37167343/"
+      },
+      {
+        "pmid": "37102697",
+        "title": "Two weeks of arm cycling sprint interval training enhances spinal excitability to the biceps brachii.",
+        "authors": "Lockyer EJ, Alizadeh S, Compton CT, et al.",
+        "journal": "J Appl Physiol (1985)",
+        "date": "2023-04-27",
+        "displayDate": "2023 Apr 27",
+        "type": null,
+        "doi": "10.1152/japplphysiol.00367.2022",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37102697/"
       },
       {
         "pmid": "37277376",
@@ -1416,17 +1537,6 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/37277376/"
       },
       {
-        "pmid": "36856799",
-        "title": "Muscle strength and activity in men and women performing maximal effort biceps curl exercise on a new machine that automates eccentric overload and drop setting.",
-        "authors": "Nuzzo JL, Pinto MD, Nosaka K",
-        "journal": "Eur J Appl Physiol",
-        "date": "2023-03-01",
-        "displayDate": "2023 Mar 1",
-        "type": null,
-        "doi": "10.1007/s00421-023-05157-9",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/36856799/"
-      },
-      {
         "pmid": "36900849",
         "title": "Effects of Different Isometric Training Programs on Muscle Size and Function in the Elbow Flexors.",
         "authors": "Zou Z, Morimoto N, Nakatani M, et al.",
@@ -1436,6 +1546,17 @@
         "type": "Randomized trial",
         "doi": "10.3390/ijerph20053837",
         "url": "https://pubmed.ncbi.nlm.nih.gov/36900849/"
+      },
+      {
+        "pmid": "36728005",
+        "title": "Comparison in Repetitions to Failure Between Concentric-Only and Eccentric-Only Dumbbell Arm Curl Exercise at Four Different Relative Intensities.",
+        "authors": "Shibata K, Yamaguchi T, Takizawa K, et al.",
+        "journal": "J Strength Cond Res",
+        "date": "2023-01-18",
+        "displayDate": "2023 Jan 18",
+        "type": null,
+        "doi": "10.1519/JSC.0000000000004470",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36728005/"
       },
       {
         "pmid": "36623326",
@@ -1449,15 +1570,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/36623326/"
       },
       {
-        "pmid": "36371993",
-        "title": "Shear wave elastography characterizes passive and active mechanical properties of biceps brachii muscle in vivo.",
-        "authors": "Zimmer M, Kleiser B, Marquetand J, et al.",
-        "journal": "J Mech Behav Biomed Mater",
-        "date": "2022-11-02",
-        "displayDate": "2022 Nov 2",
+        "pmid": "36501196",
+        "title": "Mid-Arm Muscle Circumference or Body Weight-Standardized Hand Grip Strength in the GLIM Superiorly Predicts Survival in Chinese Colorectal Cancer Patients.",
+        "authors": "Wu T, Xu H, Zou Y, et al.",
+        "journal": "Nutrients",
+        "date": "2022-12-05",
+        "displayDate": "2022 Dec 5",
         "type": null,
-        "doi": "10.1016/j.jmbbm.2022.105543",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/36371993/"
+        "doi": "10.3390/nu14235166",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36501196/"
+      },
+      {
+        "pmid": "36427271",
+        "title": "Muscle damage induced by maximal eccentric exercise of the elbow flexors after 3-week immobilization.",
+        "authors": "Chen TC, Kang HY, Tseng WC, et al.",
+        "journal": "Scand J Med Sci Sports",
+        "date": "2022-12-04",
+        "displayDate": "2022 Dec 4",
+        "type": null,
+        "doi": "10.1111/sms.14279",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36427271/"
       },
       {
         "pmid": "36107233",
@@ -1482,6 +1614,17 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/36112819/"
       },
       {
+        "pmid": "36001032",
+        "title": "What is the Elbow Flexion Strength After Free Functional Gracilis Muscle Transfer for Adult Traumatic Complete Brachial Plexus Injuries?",
+        "authors": "Steendam TC, Nelissen RGHH, Malessy MJA, et al.",
+        "journal": "Clin Orthop Relat Res",
+        "date": "2022-08-24",
+        "displayDate": "2022 Aug 24",
+        "type": null,
+        "doi": "10.1097/CORR.0000000000002311",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36001032/"
+      },
+      {
         "pmid": "35819335",
         "title": "Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position.",
         "authors": "Maeo S, Wu Y, Huang M, et al.",
@@ -1493,169 +1636,26 @@
         "url": "https://pubmed.ncbi.nlm.nih.gov/35819335/"
       },
       {
-        "pmid": "35843943",
-        "title": "Intermittent theta burst stimulation modulates biceps brachii corticomotor excitability in individuals with tetraplegia.",
-        "authors": "Mittal N, Majdic BC, Peterson CL",
-        "journal": "J Neuroeng Rehabil",
-        "date": "2022-07-17",
-        "displayDate": "2022 Jul 17",
-        "type": "Clinical trial",
-        "doi": "10.1186/s12984-022-01049-9",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/35843943/"
+        "pmid": "35579077",
+        "title": "Development and validation of a grading system for assessing muscle mass phenotype using mid-upper arm muscle area and handgrip strength in patients with incurable cancer.",
+        "authors": "Calixto-Lima L, Souza-Silva R, Oliveira LC, et al.",
+        "journal": "Nutr Clin Pract",
+        "date": "2022-05-17",
+        "displayDate": "2022 May 17",
+        "type": "Randomized trial",
+        "doi": "10.1002/ncp.10857",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35579077/"
       },
       {
-        "pmid": "35466801",
-        "title": "Differences in shuntflow (Qa), cardiac function and mortality between hemodialysis patients with a lower-arm fistula, an upper-arm fistula, and an arteriovenous graft.",
-        "authors": "Drouven JW, Wiegersma J, Assa S, et al.",
-        "journal": "J Vasc Access",
-        "date": "2022-04-23",
-        "displayDate": "2022 Apr 23",
-        "type": null,
-        "doi": "10.1177/11297298221092741",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/35466801/"
-      },
-      {
-        "pmid": "35134618",
-        "title": "Comparison of neuromuscular block measured by compressomyography at the upper arm and electromyography at the adductor pollicis muscle in obese and non-obese patients: An observational study.",
-        "authors": "Honing GHM, Torensma B, Martini CH, et al.",
-        "journal": "J Clin Anesth",
-        "date": "2022-02-05",
-        "displayDate": "2022 Feb 5",
-        "type": null,
-        "doi": "10.1016/j.jclinane.2022.110673",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/35134618/"
-      },
-      {
-        "pmid": "35176686",
-        "title": "Distribution of innervation zone and muscle fiber conduction velocity in the biceps brachii muscle.",
-        "authors": "Li X, Huang C, Lu Z, et al.",
-        "journal": "J Electromyogr Kinesiol",
-        "date": "2022-02-04",
-        "displayDate": "2022 Feb 4",
-        "type": null,
-        "doi": "10.1016/j.jelekin.2022.102637",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/35176686/"
-      },
-      {
-        "pmid": "35283993",
-        "title": "The Effects of the Biceps Brachii and Brachioradialis on Elbow Flexor Muscle Strength and Spasticity in Stroke Patients.",
-        "authors": "Yu B, Zhang X, Cheng Y, et al.",
-        "journal": "Neural Plast",
+        "pmid": "36619554",
+        "title": "Large mid-upper arm circumference is associated with reduced insulin resistance independent of BMI and waist circumference: A cross-sectional study in the Chinese population.",
+        "authors": "Wang J, He L, Yang N, et al.",
+        "journal": "Front Endocrinol (Lausanne)",
         "date": "2022-01-01",
         "displayDate": "2022",
         "type": null,
-        "doi": "10.1155/2022/1295908",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/35283993/"
-      },
-      {
-        "pmid": "34855523",
-        "title": "Submaximal isometric fatiguing exercise of the elbow flexors has no age-related effect on GABA(B)-mediated inhibition.",
-        "authors": "Otieno LA, Semmler JG, Smith AE, et al.",
-        "journal": "J Appl Physiol (1985)",
-        "date": "2021-12-02",
-        "displayDate": "2021 Dec 2",
-        "type": null,
-        "doi": "10.1152/japplphysiol.00288.2021",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/34855523/"
-      },
-      {
-        "pmid": "34666407",
-        "title": "Double Fascicular Transfer Using Partially Injured Donor Nerves: Is It Powerful Enough to Restore Elbow Flexion in Acute Brachial Plexus Injuries?",
-        "authors": "Chang TN, Lu JC, Lee CH, et al.",
-        "journal": "J Reconstr Microsurg",
-        "date": "2021-10-19",
-        "displayDate": "2021 Oct 19",
-        "type": null,
-        "doi": "10.1055/s-0041-1736320",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/34666407/"
-      },
-      {
-        "pmid": "34633247",
-        "title": "Dynamic contraction and fatigue analysis in biceps brachii muscles using synchrosqueezed wavelet transform and singular value features.",
-        "authors": "Hari LM, Venugopal G, Ramakrishnan S",
-        "journal": "Proc Inst Mech Eng H",
-        "date": "2021-10-11",
-        "displayDate": "2021 Oct 11",
-        "type": null,
-        "doi": "10.1177/09544119211048011",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/34633247/"
-      },
-      {
-        "pmid": "34611058",
-        "title": "Electromyographic and Systemic Physiological Thresholds in Single-Joint Elbow Flexion Movements.",
-        "authors": "Tilp M, Kitzberger L, Schappacher-Tilp G, et al.",
-        "journal": "Int J Sports Physiol Perform",
-        "date": "2021-10-05",
-        "displayDate": "2021 Oct 5",
-        "type": null,
-        "doi": "10.1123/ijspp.2021-0163",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/34611058/"
-      },
-      {
-        "pmid": "31268995",
-        "title": "Single-Joint Exercise Results in Higher Hypertrophy of Elbow Flexors Than Multijoint Exercise.",
-        "authors": "Mannarino P, Matta T, Lima J, et al.",
-        "journal": "J Strength Cond Res",
-        "date": "2021-10-01",
-        "displayDate": "2021 Oct 1",
-        "type": null,
-        "doi": "10.1519/JSC.0000000000003234",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/31268995/"
-      },
-      {
-        "pmid": "34010758",
-        "title": "Relative variability in muscle activation amplitude, muscle oxygenation, and muscle thickness: Changes with dynamic low-load elbow flexion fatigue and relationships in young and older females.",
-        "authors": "Bailey CA, Yoon S, Côté JN",
-        "journal": "J Electromyogr Kinesiol",
-        "date": "2021-05-07",
-        "displayDate": "2021 May 7",
-        "type": null,
-        "doi": "10.1016/j.jelekin.2021.102553",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/34010758/"
-      },
-      {
-        "pmid": "34211323",
-        "title": "Unilateral Quadriceps Fatigue Induces Greater Impairments of Ipsilateral versus Contralateral Elbow Flexors and Plantar Flexors Performance in Physically Active Young Adults.",
-        "authors": "Whitten JHD, Hodgson DD, Drinkwater EJ, et al.",
-        "journal": "J Sports Sci Med",
-        "date": "2021-03-15",
-        "displayDate": "2021 Mar 15",
-        "type": "Randomized trial",
-        "doi": "10.52082/jssm.2021.300",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/34211323/"
-      },
-      {
-        "pmid": "33577401",
-        "title": "Striking muscle adaptations induced by volume-dependent repeated bouts of low-intensity eccentric exercise of the elbow flexors.",
-        "authors": "Chen TC, Tseng WC, Chen HL, et al.",
-        "journal": "Appl Physiol Nutr Metab",
-        "date": "2021-02-12",
-        "displayDate": "2021 Feb 12",
-        "type": null,
-        "doi": "10.1139/apnm-2020-1016",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/33577401/"
-      },
-      {
-        "pmid": "33210297",
-        "title": "Anatomy of the nerves to the teres minor and the long head of the triceps brachii for electromyography.",
-        "authors": "Kim MG, Hong EA, Nam YS, et al.",
-        "journal": "Muscle Nerve",
-        "date": "2020-12-13",
-        "displayDate": "2020 Dec 13",
-        "type": null,
-        "doi": "10.1002/mus.27122",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/33210297/"
-      },
-      {
-        "pmid": "33296273",
-        "title": "Neuromuscular fatigue of the elbow flexors during repeated maximal arm cycling sprints: the effects of forearm position.",
-        "authors": "Lockyer EJ, Buckle NCM, Collins BW, et al.",
-        "journal": "Appl Physiol Nutr Metab",
-        "date": "2020-12-09",
-        "displayDate": "2020 Dec 9",
-        "type": null,
-        "doi": "10.1139/apnm-2020-0519",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/33296273/"
+        "doi": "10.3389/fendo.2022.1054671",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36619554/"
       }
     ],
     "mechanics": [
@@ -2214,13 +2214,13 @@
   "totals": {
     "injuries": 2572,
     "rehab": 653,
-    "training": 235,
+    "training": 346,
     "mechanics": 445
   },
   "queries": {
     "injuries": "(\"tennis elbow\"[ti] OR \"lateral epicondyl*\"[ti] OR \"medial epicondyl*\"[ti] OR \"golfer's elbow\"[ti] OR \"lateral elbow tendinopathy\"[ti] OR (\"distal biceps\"[ti] NOT femoris[ti]) OR (\"ulnar collateral ligament\"[ti] AND elbow[tiab]) OR \"triceps tendon\"[ti] OR \"cubital tunnel\"[ti] NOT \"nerve transfer*\"[ti] NOT reinnervation[ti] NOT \"supercharged\"[ti] NOT osteotomy[ti] NOT fixation[ti] NOT osseous[ti] NOT \"UK Biobank\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
     "rehab": "((\"tennis elbow\"[ti] OR \"lateral epicondyl*\"[ti] OR \"medial epicondyl*\"[ti] OR \"elbow tendinopathy\"[ti] OR (\"distal biceps\"[ti] NOT femoris[ti])) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR \"physical therapy\"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract",
-    "training": "((\"elbow flexor*\"[ti] OR \"elbow extensor*\"[ti] OR \"elbow flexion\"[ti] OR \"biceps brachii\"[ti] OR \"triceps brachii\"[ti] OR brachialis[ti] OR \"arm curl*\"[ti] OR \"biceps curl*\"[ti] OR \"upper arm\"[ti]) AND (\"resistance training\"[tiab] OR \"strength training\"[tiab] OR \"resistance exercise\"[tiab] OR hypertrophy[tiab] OR electromyography[tiab]) NOT orthotic[ti] NOT orthosis[ti] NOT exoskeleton*[ti] NOT \"human-in-the-loop\"[ti] NOT \"hill-type\"[ti] NOT myoelectric[ti] NOT diabetes[ti] NOT \"muscle aging\"[ti] NOT \"intracortical\"[ti] NOT \"spectral\"[ti] NOT \"motor unit\"[ti] NOT \"assisted\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
+    "training": "((\"elbow flexor*\"[ti] OR \"elbow extensor*\"[ti] OR \"elbow flexion\"[ti] OR \"biceps brachii\"[ti] OR \"triceps brachii\"[ti] OR brachialis[ti] OR \"arm curl*\"[ti] OR \"biceps curl*\"[ti] OR \"triceps extension*\"[ti] OR \"preacher curl*\"[ti] OR \"upper arm\"[ti] OR \"arm muscle*\"[ti]) AND (training[ti] OR exercis*[ti] OR strength*[ti] OR hypertrophy[ti] OR resistance[ti] OR curl*[ti] OR \"blood flow restriction\"[ti] OR eccentric[ti] OR \"range of motion\"[ti] OR isometric[ti]) NOT orthotic[ti] NOT orthosis[ti] NOT exoskeleton*[ti] NOT \"human-in-the-loop\"[ti] NOT \"hill-type\"[ti] NOT myoelectric[ti] NOT diabetes[ti] NOT \"muscle aging\"[ti] NOT intracortical[ti] NOT spectral[ti] NOT \"motor unit\"[ti] NOT assisted[ti] NOT connectivity[ti] NOT reflex[ti] NOT \"motor-evoked\"[ti] NOT \"motor evoked\"[ti] NOT cortical[ti] NOT brain[ti] NOT cerebral[ti] NOT \"muscle-brain\"[ti] NOT diagnostic[ti] NOT stroke[ti] NOT \"muscle mass index\"[ti] NOT \"functional decline\"[ti] NOT \"exercise capacity\"[ti] NOT \"hand posture\"[ti] NOT \"wrist exertions\"[ti] NOT women[ti] NOT \"older\"[ti]) AND humans[mh] AND english[la] AND hasabstract",
     "mechanics": "(elbow[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR \"range of motion\"[ti] OR loading[ti]) NOT prosthe*[ti] NOT fracture*[ti] NOT arthroplasty[ti] NOT \"pose estimation\"[ti] NOT \"neural network\"[ti] NOT \"wavelet\"[ti] NOT smartphone*[ti] NOT golf[ti] NOT \"shoulder arthroplasty\"[ti]) AND humans[mh] AND english[la] AND hasabstract"
   }
 }
