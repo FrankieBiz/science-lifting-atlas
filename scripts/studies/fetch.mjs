@@ -5,7 +5,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { BODY_PARTS } from '../../src/data/body-parts.ts';
+import { BODY_PARTS } from '../../src/data/body-parts/index.ts';
 import { sortNewestFirst, toStudy } from '../../src/lib/studies/studies.ts';
 
 const EUTILS = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils';
@@ -70,7 +70,7 @@ async function summarize(ids) {
 }
 
 /**
- * @param {import('../../src/data/body-parts.ts').BodyPart} part
+ * @param {import('../../src/data/body-parts/index.ts').BodyPart} part
  * @returns {Promise<import('../../src/lib/studies/studies.ts').StudyFile>}
  */
 async function fetchPart(part) {

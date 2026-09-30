@@ -1,6 +1,7 @@
 ---
 import posterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
-import type { BodyPart } from '../../data/body-parts';
+import type { BodyPart } from '../../data/body-parts/index.ts';
+import { plateImageStyle } from '../../lib/body-parts/plate.ts';
 
 interface Props {
   part: BodyPart;
@@ -8,14 +9,10 @@ interface Props {
 }
 
 const { part, variant } = Astro.props;
-// Poster is 862 × 672. The plate crops it so the region sits at the centre.
-const POSTER_RATIO = 672 / 862;
+// The plate crops the poster so the region sits at the centre.
 const plateRatio = variant === 'hero' ? 5 / 4 : 3 / 4;
-const zoom = variant === 'hero' ? part.focus.zoom : part.focus.zoom * 0.85;
-const width = zoom * 100;
-const left = 50 - (part.focus.x / 100) * width;
-const top =
-  50 - ((part.focus.y / 100) * zoom * POSTER_RATIO * 100) / plateRatio;
+const zoom = variant === 'hero' ? part.plate.zoom : part.plate.zoom * 0.85;
+const { width, left, top } = plateImageStyle(part.plate, zoom, plateRatio);
 ---
 
 <figure

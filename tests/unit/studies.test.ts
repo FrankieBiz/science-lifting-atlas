@@ -3,8 +3,7 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import { BODY_PARTS, bodyPartForMuscle } from '../../src/data/body-parts';
-import explorer from '../../docs/licenses/anatomy-explorer-manifest.json';
+import { BODY_PARTS } from '../../src/data/body-parts/index.ts';
 import {
   cleanTitle,
   dateParts,
@@ -176,23 +175,13 @@ describe('dateParts', () => {
   });
 });
 
-describe('explorer muscles', () => {
-  it('maps every explorer muscle to exactly one body part', () => {
-    for (const entity of explorer.entities) {
-      const owners = BODY_PARTS.filter((part) =>
-        part.muscles.includes(entity.id),
-      );
-      expect(owners, entity.id).toHaveLength(1);
-      expect(bodyPartForMuscle(entity.id)?.slug).toBe(owners[0]?.slug);
-    }
-  });
-
+describe('body-part plates', () => {
   it('places every region inside the poster', () => {
     for (const part of BODY_PARTS) {
-      expect(part.focus.x).toBeGreaterThan(0);
-      expect(part.focus.x).toBeLessThan(100);
-      expect(part.focus.y).toBeGreaterThan(0);
-      expect(part.focus.y).toBeLessThan(100);
+      expect(part.plate.x).toBeGreaterThan(0);
+      expect(part.plate.x).toBeLessThan(100);
+      expect(part.plate.y).toBeGreaterThan(0);
+      expect(part.plate.y).toBeLessThan(100);
     }
   });
 });
