@@ -1,5 +1,5 @@
 import type { BodyPart } from '../types.ts';
-import { category, REHAB, TRAIN, MECH } from '../shared.ts';
+import { category, REHAB, MECH } from '../shared.ts';
 
 const region: BodyPart = {
   slug: 'elbow',
@@ -68,7 +68,7 @@ const region: BodyPart = {
     category(
       'training',
       'Biceps, triceps, and elbow-flexor training research.',
-      `("elbow flexor*"[ti] OR "elbow extensor*"[ti] OR "elbow flexion"[ti] OR "biceps brachii"[ti] OR "triceps brachii"[ti] OR brachialis[ti] OR "arm curl*"[ti] OR "biceps curl*"[ti] OR "upper arm"[ti]) AND ${TRAIN} NOT orthotic[ti] NOT orthosis[ti] NOT exoskeleton*[ti] NOT "human-in-the-loop"[ti] NOT "hill-type"[ti] NOT myoelectric[ti] NOT diabetes[ti] NOT "muscle aging"[ti] NOT "intracortical"[ti] NOT "spectral"[ti] NOT "motor unit"[ti] NOT "assisted"[ti]`,
+      '("elbow flexor*"[ti] OR "elbow extensor*"[ti] OR "elbow flexion"[ti] OR "biceps brachii"[ti] OR "triceps brachii"[ti] OR brachialis[ti] OR "arm curl*"[ti] OR "biceps curl*"[ti] OR "triceps extension*"[ti] OR "preacher curl*"[ti] OR "upper arm"[ti] OR "arm muscle*"[ti]) AND (training[ti] OR exercis*[ti] OR strength*[ti] OR hypertrophy[ti] OR resistance[ti] OR curl*[ti] OR "blood flow restriction"[ti] OR eccentric[ti] OR "range of motion"[ti] OR isometric[ti]) NOT orthotic[ti] NOT orthosis[ti] NOT exoskeleton*[ti] NOT "human-in-the-loop"[ti] NOT "hill-type"[ti] NOT myoelectric[ti] NOT diabetes[ti] NOT "muscle aging"[ti] NOT intracortical[ti] NOT spectral[ti] NOT "motor unit"[ti] NOT assisted[ti] NOT connectivity[ti] NOT reflex[ti] NOT "motor-evoked"[ti] NOT "motor evoked"[ti] NOT cortical[ti] NOT brain[ti] NOT cerebral[ti] NOT "muscle-brain"[ti] NOT diagnostic[ti] NOT stroke[ti] NOT "muscle mass index"[ti] NOT "functional decline"[ti] NOT "exercise capacity"[ti] NOT "hand posture"[ti] NOT "wrist exertions"[ti] NOT women[ti] NOT "older"[ti]',
       /elbow|epicondyl|biceps|triceps|brachialis|ulnar collateral|cubital|arm curl|upper arm/i,
     ),
     category(
