@@ -16,18 +16,7 @@ import { validateBodyPart } from '../../src/lib/body-parts/validate.ts';
 
 /** PubMed terms as they were before the registry split (must never drift). */
 // Regions are removed from this snapshot when their R task deliberately revises the queries.
-const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
-  shoulder: {
-    injuries:
-      '("rotator cuff"[ti] OR (impingement[ti] AND shoulder[ti]) OR "SLAP lesion*"[ti] OR "superior labr*"[ti] OR (shoulder[ti] AND (dislocation[ti] OR instability[ti])) OR "subacromial pain"[ti]) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '((shoulder pain[ti] OR "rotator cuff"[ti] OR "subacromial"[ti] OR "shoulder instability"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '((shoulder[ti] OR deltoid[ti] OR "rotator cuff"[ti] OR "overhead press"[ti] OR "lateral raise"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "resistance exercise"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '((shoulder[ti] OR glenohumeral[ti] OR scapula*[ti]) AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
-  },
-};
+const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {};
 
 describe('body-part registry', () => {
   it('has one file per region, in REGION_ORDER', () => {
