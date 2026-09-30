@@ -1,110 +1,113 @@
-// Pull the newest PubMed studies for every body-part category and write them
-// to src/data/studies/<slug>.json. Run with `pnpm studies:fetch`, then commit.
-// Optional: `pnpm studies:fetch elbow knee` refreshes only those regions.
+// Pull the newest PubMed studies for every published body-part category and
+// write them to src/data/studies/<slug>.json. Run with `pnpm studies:fetch`,
+// then commit. `pnpm studies:fetch elbow knee` refreshes only those regions.
+// Set NCBI_API_KEY for a faster request rate.
 
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { BODY_PARTS } from '../../src/data/body-parts/index.ts';
-import { sortNewestFirst, toStudy } from '../../src/lib/studies/studies.ts';
+import { createPubmedClient } from '../../src/lib/studies/pubmed.ts';
 
-const EUTILS = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils';
-const PER_CATEGORY = 20;
-// NCBI allows three requests a second without an API key.
-const REQUEST_GAP_MS = 400;
+const PER_CATEGORY = 50;
+// Over-fetch so de-duplication against earlier categories still fills the list.
+const SEARCH_DEPTH = 100;
+const MIN_PER_CATEGORY = 10;
 const OUT_DIR = path.resolve('src/data/studies');
 
-/** @param {number} ms */
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const client = createPubmedClient();
 
 /**
- * @param {string} url
- * @returns {Promise<any>}
+ * @param {string} slug
+ * @returns {Promise<Set<string>>} PMIDs in the region's previous file
  */
-async function getJson(url) {
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
-    await sleep(REQUEST_GAP_MS);
-    const response = await fetch(url);
-    if (response.ok) return response.json();
-    if (attempt === 3) {
-      throw new Error(`${response.status} ${response.statusText} for ${url}`);
-    }
-    await sleep(1000 * attempt);
+async function previousPmids(slug) {
+  try {
+    const file = JSON.parse(
+      await readFile(path.join(OUT_DIR, `${slug}.json`), 'utf8'),
+    );
+    return new Set(
+      Object.values(file.categories ?? {})
+        .flat()
+        .map((/** @type {any} */ study) => study.pmid),
+    );
+  } catch {
+    return new Set();
   }
-  throw new Error(`unreachable: ${url}`);
-}
-
-/**
- * @param {string} term
- * @param {number} retmax
- * @returns {Promise<string[]>}
- */
-async function search(term, retmax) {
-  const params = new URLSearchParams({
-    db: 'pubmed',
-    term,
-    retmax: String(retmax),
-    sort: 'pub_date',
-    retmode: 'json',
-  });
-  const data = await getJson(`${EUTILS}/esearch.fcgi?${params}`);
-  return data.esearchresult?.idlist ?? [];
-}
-
-/**
- * @param {string[]} ids
- * @returns {Promise<import('../../src/lib/studies/studies.ts').Study[]>}
- */
-async function summarize(ids) {
-  if (ids.length === 0) return [];
-  const params = new URLSearchParams({
-    db: 'pubmed',
-    id: ids.join(','),
-    retmode: 'json',
-  });
-  const data = await getJson(`${EUTILS}/esummary.fcgi?${params}`);
-  const result = data.result ?? {};
-  /** @type {string[]} */
-  const uids = result.uids ?? [];
-  return uids.flatMap((uid) => toStudy(result[uid]) ?? []);
 }
 
 /**
  * @param {import('../../src/data/body-parts/index.ts').BodyPart} part
- * @returns {Promise<import('../../src/lib/studies/studies.ts').StudyFile>}
+ * @returns {Promise<{ file: import('../../src/lib/studies/studies.ts').StudyFile, problems: string[], summary: string }>}
  */
 async function fetchPart(part) {
+  const before = await previousPmids(part.slug);
   /** @type {Set<string>} */
   const seen = new Set();
-  /** @type {Record<string, import('../../src/lib/studies/studies.ts').Study[]>} */
-  const categories = {};
+  const categories = /** @type {any} */ ({});
+  const totals = /** @type {any} */ ({});
+  const queries = /** @type {any} */ ({});
+  /** @type {string[]} */
+  const problems = [];
+  /** @type {string[]} */
+  const parts = [];
+  // Order matters: a study keeps the first category it appears in.
   for (const category of part.categories) {
-    // Over-fetch so de-duplication against earlier categories still fills the list.
-    const ids = await search(category.query, PER_CATEGORY * 2);
+    const { ids, count } = await client.search(category.query, SEARCH_DEPTH);
     const fresh = ids.filter((id) => !seen.has(id)).slice(0, PER_CATEGORY);
     fresh.forEach((id) => seen.add(id));
-    const studies = sortNewestFirst(await summarize(fresh));
+    const studies = await client.summarize(fresh);
     categories[category.id] = studies;
-    console.log(`  ${part.slug}/${category.id}: ${studies.length}`);
+    totals[category.id] = count;
+    queries[category.id] = category.query;
+    const added = studies.filter((study) => !before.has(study.pmid)).length;
+    parts.push(`${category.id} ${studies.length} (+${added} new)`);
+    if (studies.length < MIN_PER_CATEGORY) {
+      problems.push(
+        `${part.slug}/${category.id}: only ${studies.length} studies (need ${MIN_PER_CATEGORY}); query returned ${count} matches`,
+      );
+    }
   }
   return {
-    slug: part.slug,
-    fetchedAt: new Date().toISOString().slice(0, 10),
-    categories,
+    file: {
+      slug: part.slug,
+      fetchedAt: new Date().toISOString().slice(0, 10),
+      categories,
+      totals,
+      queries,
+    },
+    problems,
+    summary: `${part.slug}: ${parts.join(', ')}`,
   };
 }
 
-const only = new Set(process.argv.slice(2));
+const requested = process.argv.slice(2);
+const unknown = requested.filter(
+  (slug) => !BODY_PARTS.some((part) => part.slug === slug),
+);
+if (unknown.length > 0) {
+  console.error(`Not a published region: ${unknown.join(', ')}`);
+  process.exit(1);
+}
+const only = new Set(requested);
 const parts = BODY_PARTS.filter(
   (part) => only.size === 0 || only.has(part.slug),
 );
 
 await mkdir(OUT_DIR, { recursive: true });
+let failed = false;
 for (const part of parts) {
-  console.log(part.name);
-  const file = await fetchPart(part);
+  const { file, problems, summary } = await fetchPart(part);
+  if (problems.length > 0) {
+    failed = true;
+    for (const problem of problems) console.error(`ERROR ${problem}`);
+    console.error(`${part.slug}: file NOT written`);
+    continue;
+  }
   await writeFile(
     path.join(OUT_DIR, `${part.slug}.json`),
     `${JSON.stringify(file, null, 2)}\n`,
   );
+  console.log(summary);
 }
+if (failed) process.exit(1);

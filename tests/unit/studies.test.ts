@@ -10,7 +10,10 @@ import {
   formatAuthors,
   parsePubmedDate,
   publishedDate,
+  pubmedSearchUrl,
+  relevanceMisses,
   sortNewestFirst,
+  studyKind,
   studyType,
   toStudy,
   type Study,
@@ -183,5 +186,38 @@ describe('body-part plates', () => {
       expect(part.plate.y).toBeGreaterThan(0);
       expect(part.plate.y).toBeLessThan(100);
     }
+  });
+});
+
+describe('studyKind', () => {
+  it.each([
+    ['Meta-analysis', 'review'],
+    ['Systematic review', 'review'],
+    ['Review', 'review'],
+    ['Guideline', 'review'],
+    ['Randomized trial', 'trial'],
+    ['Clinical trial', 'trial'],
+    ['Trial protocol', 'other'],
+    ['Case report', 'other'],
+    [null, 'other'],
+  ] as const)('%s → %s', (type, kind) => {
+    expect(studyKind(type)).toBe(kind);
+  });
+});
+
+describe('pubmedSearchUrl', () => {
+  it('encodes the term and sorts by date', () => {
+    expect(pubmedSearchUrl('"tennis elbow"[ti] AND humans[mh]')).toBe(
+      'https://pubmed.ncbi.nlm.nih.gov/?term=%22tennis%20elbow%22%5Bti%5D%20AND%20humans%5Bmh%5D&sort=date',
+    );
+  });
+});
+
+describe('relevanceMisses', () => {
+  it('returns the studies whose title does not match', () => {
+    const on = { ...study('1', '2026-01-01'), title: 'Elbow tendinopathy' };
+    const off = { ...study('2', '2026-01-01'), title: 'Kidney outcomes' };
+    expect(relevanceMisses([on, off], /elbow/i)).toEqual([off]);
+    expect(relevanceMisses([], /elbow/i)).toEqual([]);
   });
 });
