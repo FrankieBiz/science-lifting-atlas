@@ -19,7 +19,7 @@ Branch: bp/R-shoulder · Base: 0e149e9 · Head: 6f282b4 (plus this note) · Agen
 | training  | 742          | 20/20                              | 14/20 on topic (shoulder strength, EMG during exercise, scapular-focused exercise, shoulder press grip width); 6 marginal (a questionnaire psychometric paper, a qualitative-study paper, two imaging or nerve-dysfunction papers, a handedness asymmetry paper, a joint-position-sense paper) |
 | mechanics | 1,508        | 19/20 before widening, 20/20 after | 17/20 on topic (shoulder and scapular kinematics, anatomy, handstand and throwing biomechanics); 3 marginal (an osteopathic-technique meta-analysis, a neurologic-complications surgery review, an anatomical-variant imaging review)                                                          |
 
-Training is the weakest: 14/20 is below the plan's 18/20 bar. The shoulder-training literature is large, but EMG-based search terms (`TRAIN` includes `electromyography[tiab]`) pull in diagnostic and qualitative papers. I stopped after two exclusion rounds rather than keep adding terms. **Owner call:** accept this as an exception, or ask for a training query without the `electromyography` term (it will return fewer, more lifting-focused papers). The `mustMatch` test passes on all 50 stored titles.
+**Update (follow-up branch bp/R-shoulder-training):** the 14/20 training spot check above was fixed. The training query no longer uses the shared \`TRAIN\` constant (its \`electromyography[tiab]\` term pulled in diagnostic and qualitative papers). It now needs a shoulder-strength, exercise or lifting phrase in the title (shoulder press, overhead press, lateral raise, shoulder strength or strengthening, rotator cuff strength or exercise, scapular exercise or strengthening, deltoid, shoulder muscle) plus a training, exercise, strength, press, raise, hypertrophy, activation or resistance word, with the earlier exclusions plus \`NOT nursing NOT "machine learning" NOT wheelchair NOT parabadminton NOT surgeons NOT immobilization NOT "electrical muscle stimulation" NOT percussive\`. Result: 283 matches, 20/20 \`mustMatch\`, about 18/20 on topic (the strays are a YouTube video-quality study and a handedness-asymmetry study). The blurb is now "Shoulder strength, exercise, and lifting research." The owner decision on this exception is no longer needed.
 
 ## Query changes
 
@@ -38,10 +38,9 @@ Training is the weakest: 14/20 is below the plan's 18/20 bar. The shoulder-train
 
 - **Lane crossing:** a Lane L task done by Lane S under the owner's autonomous direction.
 - **Test edit outside the R-task file list:** removed the `shoulder` entry from `QUERY_SNAPSHOT` in `tests/unit/body-parts-registry.test.ts` (queries changed on purpose). With this region the snapshot is empty.
-- **Training spot check 14/20** (above), recorded rather than hidden.
+- Training spot check was 14/20, since fixed by the follow-up above.
 - Owner review: injury wording was written from general knowledge and the §6 brief; I could not open MedlinePlus/NHS/AAOS pages here, so it stays conservative and general.
 
 ## Needs from other tasks / owner
 
-- Owner decision on the training spot check (accept or narrow).
 - Owner read-through of `/body/shoulder/`.

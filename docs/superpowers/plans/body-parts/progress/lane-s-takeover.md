@@ -8,7 +8,7 @@ file. Each row below links to that task's own progress note for details.
 | Task             | Done by      | Notes                                                                     |
 | ---------------- | ------------ | ------------------------------------------------------------------------- |
 | R-neck           | Luna         | Merged. Luna's pass replaced an earlier Lane S pass (705-match training). |
-| R-shoulder       | Lane S       | Training spot check 14/20, owner decision pending.                        |
+| R-shoulder       | Lane S       | Training query rebuilt after a 14/20 spot check; now about 18/20.         |
 | R-elbow          | Lane S       | Training spot check 16/20, owner decision pending.                        |
 | R-wrist-and-hand | Lane S       | Training query rebuilt (grip as training target, not health marker).      |
 | R-lower-back     | Lane S       | Plate moved to the back view. Training spot check 16/20.                  |

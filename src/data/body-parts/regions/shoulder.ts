@@ -1,5 +1,5 @@
 import type { BodyPart } from '../types.ts';
-import { category, REHAB, TRAIN, MECH } from '../shared.ts';
+import { category, REHAB, MECH } from '../shared.ts';
 
 const region: BodyPart = {
   slug: 'shoulder',
@@ -60,8 +60,8 @@ const region: BodyPart = {
     ),
     category(
       'training',
-      'Resistance training, muscle activation, and performance.',
-      `(shoulder[ti] OR deltoid[ti] OR "rotator cuff"[ti] OR "overhead press"[ti] OR "lateral raise"[ti]) AND ${TRAIN} NOT arthroplasty[ti] NOT "Editorial Commentary"[ti] NOT hemiplegic[ti] NOT stroke[ti] NOT "brain injury"[ti] NOT spastic[ti] NOT "Glucagon-Like"[ti] NOT "GLP-1"[ti] NOT opioid[ti] NOT cannabis[ti] NOT tumor*[ti] NOT tumour*[ti] NOT arthrodesis[ti] NOT "artificial intelligence"[ti] NOT "AI-based"[ti] NOT exoskeleton*[ti] NOT decoding[ti] NOT "Feature-Level"[ti] NOT "sEMG-IMU"[ti] NOT graft[ti] NOT "vagus"[ti] NOT ergonomic*[ti] NOT implant*[ti] NOT "neural control"[ti] NOT methodological[ti] NOT "pain-related fear"[ti]`,
+      'Shoulder strength, exercise, and lifting research.',
+      '("shoulder press"[ti] OR "overhead press"[ti] OR "lateral raise*"[ti] OR "shoulder strength*"[ti] OR "shoulder strengthening"[ti] OR "shoulder exercise*"[ti] OR "shoulder resistance"[ti] OR "rotator cuff strength*"[ti] OR "rotator cuff exercise*"[ti] OR "rotator cuff strengthening"[ti] OR "scapular exercise*"[ti] OR "scapular strengthening"[ti] OR deltoid[ti] OR "shoulder training"[ti] OR "shoulder hypertrophy"[ti] OR "shoulder muscle*"[ti]) AND (training[ti] OR exercis*[ti] OR strength*[ti] OR press[ti] OR raise*[ti] OR hypertrophy[ti] OR activation[ti] OR resistance[ti]) NOT arthroplasty[ti] NOT hemiplegic[ti] NOT stroke[ti] NOT exoskeleton*[ti] NOT "Editorial Commentary"[ti] NOT questionnaire[ti] NOT qualitative[ti] NOT "brain injury"[ti] NOT spastic[ti] NOT tumor*[ti] NOT "artificial intelligence"[ti] NOT nursing[ti] NOT "machine learning"[ti] NOT wheelchair[ti] NOT parabadminton[ti] NOT surgeons[ti] NOT immobilization[ti] NOT "electrical muscle stimulation"[ti] NOT "percussive"[ti]',
       /shoulder|rotator cuff|glenohumeral|subacromial|labr|SLAP|deltoid|acromioclavicular|impingement|lateral raise|overhead press|scapul|supraspinatus/i,
     ),
     category(
