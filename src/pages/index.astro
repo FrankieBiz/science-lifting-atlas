@@ -1,8 +1,12 @@
 ---
+import RegionPlate from '../components/body-parts/RegionPlate.astro';
 import AnatomyExplorer from '../components/sbla-013/AnatomyExplorer.astro';
+import { BODY_PARTS } from '../data/body-parts';
 import { getCollection } from 'astro:content';
 import AtlasLayout from '../layouts/AtlasLayout.astro';
 import { prototypePreviewEnabled } from '../lib/presentation/sbla012';
+import { studyCount } from '../lib/studies/load';
+import '../styles/body-parts.css';
 
 const prototypeEnabled = prototypePreviewEnabled(process.env);
 const [claims, sources, exercises] = await Promise.all([
@@ -85,6 +89,42 @@ const records = [
       <div><dt>{sources.length}</dt><dd>source records</dd></div>
       <div><dt>{exercises.length}</dt><dd>movement records</dd></div>
     </dl>
+  </section>
+
+  <section
+    id="body-parts"
+    class="home-body-parts"
+    aria-labelledby="body-parts-title"
+  >
+    <header>
+      <div>
+        <p class="micro-label">Browse by body part</p>
+        <h2 id="body-parts-title">Start where it matters to you.</h2>
+      </div>
+      <p>
+        What each area does, how it gets hurt, and the newest research, all in
+        one place.
+      </p>
+    </header>
+    <ul class="part-grid">
+      {
+        BODY_PARTS.map((part) => (
+          <li>
+            <a class="part-card" href={`./body/${part.slug}/`}>
+              <RegionPlate part={part} variant="card" />
+              <span class="part-card__body">
+                <h3>{part.name}</h3>
+                <p>{part.tagline}</p>
+                <p class="part-card__count">
+                  {studyCount(part.slug)} studies{' '}
+                  <span aria-hidden="true">›</span>
+                </p>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <section class="home-collection" aria-labelledby="collection-title">

@@ -39,7 +39,8 @@
     "assets:coverage": "node scripts/assets/coverage.mjs",
     "assets:mesh-map": "node scripts/assets/mesh-map.mjs",
     "assets:conversion:contract": "vitest run tests/unit/asset-conversion.test.ts",
-    "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write"
+    "assets:full-benchmark": "node scripts/assets/full-benchmark.mjs --write",
+    "studies:fetch": "NODE_USE_ENV_PROXY=1 node scripts/studies/fetch.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
