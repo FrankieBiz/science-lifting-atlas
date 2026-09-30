@@ -1,7 +1,8 @@
 ---
 import RegionPlate from '../components/body-parts/RegionPlate.astro';
+import BodyMap from '../components/body-parts/BodyMap.astro';
 import AnatomyExplorer from '../components/sbla-013/AnatomyExplorer.astro';
-import { BODY_PARTS } from '../data/body-parts/index.ts';
+import { GROUPS, bodyPartsInGroup } from '../data/body-parts/index.ts';
 import { getCollection } from 'astro:content';
 import AtlasLayout from '../layouts/AtlasLayout.astro';
 import { prototypePreviewEnabled } from '../lib/presentation/sbla012';
@@ -106,25 +107,36 @@ const records = [
         one place.
       </p>
     </header>
-    <ul class="part-grid">
+    <BodyMap />
+    <div class="part-groups">
       {
-        BODY_PARTS.map((part) => (
-          <li>
-            <a class="part-card" href={`./body/${part.slug}/`}>
-              <RegionPlate part={part} variant="card" />
-              <span class="part-card__body">
-                <h3>{part.name}</h3>
-                <p>{part.tagline}</p>
-                <p class="part-card__count">
-                  {studyCount(part.slug)} studies{' '}
-                  <span aria-hidden="true">›</span>
-                </p>
-              </span>
-            </a>
-          </li>
+        GROUPS.map((group) => (
+          <section
+            class="part-group"
+            aria-labelledby={`part-group-${group.id}`}
+          >
+            <h3 id={`part-group-${group.id}`}>{group.label}</h3>
+            <ul class="part-grid">
+              {bodyPartsInGroup(group.id).map((part) => (
+                <li>
+                  <a class="part-card" href={`./body/${part.slug}/`}>
+                    <RegionPlate part={part} variant="card" />
+                    <span class="part-card__body">
+                      <h4>{part.name}</h4>
+                      <p>{part.tagline}</p>
+                      <p class="part-card__count">
+                        {studyCount(part.slug)} studies{' '}
+                        <span aria-hidden="true">›</span>
+                      </p>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))
       }
-    </ul>
+    </div>
   </section>
 
   <section class="home-collection" aria-labelledby="collection-title">
