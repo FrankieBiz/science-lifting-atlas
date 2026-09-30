@@ -6,7 +6,7 @@ test('a body part shows its overview, injuries, and newest-first studies', async
   await page.goto('/');
   await page
     .locator('#body-parts')
-    .getByRole('link', { name: /Elbow/ })
+    .locator('a.part-card', { hasText: 'Elbow' })
     .click();
 
   await expect(page).toHaveURL(/\/body\/elbow\/$/);
