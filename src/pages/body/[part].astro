@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 
 import RegionPlate from '../../components/body-parts/RegionPlate.astro';
-import { BODY_PARTS, type BodyPart } from '../../data/body-parts';
+import { BODY_PARTS, type BodyPart } from '../../data/body-parts/index.ts';
 import AtlasLayout from '../../layouts/AtlasLayout.astro';
 import { loadStudies, studyCount } from '../../lib/studies/load';
 import { dateParts } from '../../lib/studies/studies';
