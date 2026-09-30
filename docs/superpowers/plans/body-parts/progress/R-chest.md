@@ -14,8 +14,8 @@ Branch: bp/R-chest · Base: dedb57a · Head: 443d014 (plus this note) · Agent: 
 | --------- | ------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | injuries  | 434          | 19/20                          | 19/20 on topic; 1 about a spine surgical approach (FAMA) that mentions sterno-clavicular dislocation     |
 | rehab     | 121          | 20/20                          | 20/20 on topic (sternoclavicular joint and pectoralis major rupture treatment)                           |
-| training  | 280          | 20/20 (seed-tuned run)         | 20/20 on topic (bench press, push-up); earlier scapular-surgery papers removed with NOT terms            |
-| mechanics | 119          | 20/20 (seed-tuned run)         | 20/20 on topic (bench press kinematics, pectoral and SC anatomy); breast-surgery and ARDS papers removed |
+| training  | 280          | 20/20 (final queries)         | 20/20 on topic (bench press, push-up); earlier scapular-surgery papers removed with NOT terms            |
+| mechanics | 119          | 20/20 (final queries)         | 20/20 on topic (bench press kinematics, pectoral and SC anatomy); breast-surgery and ARDS papers removed |
 
 Rehab (121) and mechanics (119) are below 150 but above 60, which the plan allows for narrow regions.
 
