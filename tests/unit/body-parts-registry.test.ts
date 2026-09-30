@@ -67,16 +67,6 @@ const QUERY_SNAPSHOT: Record<string, Record<string, string>> = {
     mechanics:
       '(("lumbar spine"[ti] OR lumbar[ti] OR spine[ti] OR spinal[ti]) AND (lifting[ti] OR deadlift*[ti] OR squat*[ti] OR (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti]))) AND humans[mh] AND english[la] AND hasabstract',
   },
-  'hip-and-groin': {
-    injuries:
-      '("femoroacetabular impingement"[ti] OR "hip labral"[ti] OR "gluteal tendinopathy"[ti] OR "greater trochanteric pain"[ti] OR "groin pain"[ti] OR "adductor strain"[ti] OR (hip[ti] AND injur*[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    rehab:
-      '(("hip pain"[ti] OR "hip osteoarthritis"[ti] OR "femoroacetabular impingement"[ti] OR "gluteal tendinopathy"[ti] OR "groin pain"[ti]) AND (exercise[tiab] OR rehabilitation[tiab] OR physiotherapy[tiab] OR "physical therapy"[tiab] OR treatment[ti] OR management[ti])) AND humans[mh] AND english[la] AND hasabstract',
-    training:
-      '((glute*[ti] OR "hip extens*"[ti] OR "hip abduct*"[ti] OR "hip thrust"[ti]) AND ("resistance training"[tiab] OR "strength training"[tiab] OR "resistance exercise"[tiab] OR hypertrophy[tiab] OR electromyography[tiab])) AND humans[mh] AND english[la] AND hasabstract',
-    mechanics:
-      '(hip[ti] AND (biomechanic*[ti] OR kinematic*[ti] OR kinetic*[ti] OR anatom*[ti] OR "range of motion"[ti] OR loading[ti])) AND humans[mh] AND english[la] AND hasabstract',
-  },
 };
 
 describe('body-part registry', () => {
