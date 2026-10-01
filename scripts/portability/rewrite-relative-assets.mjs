@@ -32,11 +32,27 @@ export async function rewriteRelativeAssetUrls(outputDirectory) {
       const relativeRoot = relative(dirname(file), root).split(sep).join('/');
       const prefix = relativeRoot ? `${relativeRoot}/assets/` : './assets/';
       const html = await readFile(file, 'utf8');
-      const rewritten = html.replace(/(["'])\.\/assets\//gu, `$1${prefix}`);
+      const rewritten = rewriteAssetPrefix(html, prefix);
 
       if (rewritten !== html) await writeFile(file, rewritten, 'utf8');
     }),
   );
+}
+
+/**
+ * Point every `./assets/` reference at `prefix`: quoted attribute values, plus
+ * the later candidates of a `srcset`, which follow a comma, not a quote.
+ * @param {string} html
+ * @param {string} prefix
+ */
+export function rewriteAssetPrefix(html, prefix) {
+  return html
+    .replace(
+      /((?:image)?srcset=)(["'])(.*?)\2/giu,
+      (_match, name, quote, value) =>
+        `${name}${quote}${value.replace(/(^|,\s*)\.\/assets\//gu, `$1${prefix}`)}${quote}`,
+    )
+    .replace(/(["'])\.\/assets\//gu, `$1${prefix}`);
 }
 
 /** @param {string} directory @returns {Promise<string[]>} */

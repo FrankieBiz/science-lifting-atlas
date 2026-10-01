@@ -1,4 +1,5 @@
 import type { PosterPoint, PosterView } from '../../data/body-parts/types.ts';
+import { POSTER_FRAME } from './poster.ts';
 
 type Crop = Readonly<{ x0: number; x1: number; y0: number; y1: number }>;
 
@@ -7,8 +8,6 @@ export const BODY_CROP: Readonly<Record<PosterView, Crop>> = {
   front: { x0: 34, x1: 66, y0: 4, y1: 97 },
   back: { x0: 35, x1: 65, y0: 4, y1: 96 },
 };
-
-const POSTER = { width: 862, height: 672 } as const;
 
 /** CSS percentages for positioning a full poster inside its cropped figure. */
 export function mapImageStyle(view: PosterView) {
@@ -35,7 +34,7 @@ export function mapPoint(point: PosterPoint) {
 /** Figure width divided by figure height for the visible poster crop. */
 export function figureAspect(view: PosterView) {
   const { x0, x1, y0, y1 } = BODY_CROP[view];
-  return ((x1 - x0) * POSTER.width) / ((y1 - y0) * POSTER.height);
+  return ((x1 - x0) * POSTER_FRAME.width) / ((y1 - y0) * POSTER_FRAME.height);
 }
 
 /** Smallest distance between points displayed on the same figure. */
