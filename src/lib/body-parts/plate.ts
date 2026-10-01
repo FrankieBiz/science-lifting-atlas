@@ -1,9 +1,11 @@
 // Pure crop math for the anatomy plate. The poster is cropped and zoomed so
 // a chosen point sits at the centre of the plate.
 
+import { POSTER_FRAME } from './poster.ts';
+
 export const POSTERS = {
-  front: { width: 862, height: 672 },
-  back: { width: 862, height: 672 },
+  front: POSTER_FRAME,
+  back: POSTER_FRAME,
 } as const;
 
 /** Position the poster so (x, y) sits at the plate centre. plateRatio = plate height / plate width. */

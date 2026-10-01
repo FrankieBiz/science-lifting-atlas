@@ -2,14 +2,16 @@
 import MuscleGuide from './MuscleGuide.astro';
 import { bodyPartForMuscle } from '../../data/body-parts/index.ts';
 import modelUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer.glb?url';
-import posterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
 import manifest from '../../../docs/licenses/anatomy-explorer-manifest.json';
 import '../../styles/anatomy-explorer.css';
+import { HOME_POSTER_SIZES, posterImage } from '../body-parts/poster-image.ts';
 
 interface Props {
   prototypeEnabled: boolean;
 }
 const { prototypeEnabled } = Astro.props;
+// The explorer sits on the home page, so it shares the body map's poster file.
+const poster = await posterImage('front', HOME_POSTER_SIZES);
 const entities = manifest.entities.map((entity) => ({
   ...entity,
   region: bodyPartForMuscle(entity.id),
@@ -36,10 +38,8 @@ const initialRegion = entities.find(
     <img
       data-anatomy-poster
       class="anatomy-explorer__poster"
-      src={posterUrl}
+      {...poster}
       alt="Static BodyParts3D muscular anatomy reference."
-      width="720"
-      height="960"
       fetchpriority="high"
     />
     <canvas

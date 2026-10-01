@@ -1,6 +1,4 @@
 ---
-import frontPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster.png?url';
-import backPosterUrl from '../../../assets/derived/bodyparts3d/anatomy-explorer-poster-back.png?url';
 import {
   BODY_PARTS,
   GROUPS,
@@ -13,10 +11,19 @@ import {
   mapPoint,
 } from '../../lib/body-parts/body-map.ts';
 import '../../styles/body-map.css';
+import { HOME_POSTER_SIZES, posterImage } from './poster-image.ts';
 
 const figures = [
-  { view: 'front', label: 'Front', poster: frontPosterUrl },
-  { view: 'back', label: 'Back', poster: backPosterUrl },
+  {
+    view: 'front',
+    label: 'Front',
+    poster: await posterImage('front', HOME_POSTER_SIZES),
+  },
+  {
+    view: 'back',
+    label: 'Back',
+    poster: await posterImage('back', HOME_POSTER_SIZES),
+  },
 ] as const;
 
 function spotsFor(view: PosterView) {
@@ -62,11 +69,9 @@ function spotsFor(view: PosterView) {
             >
               <div class="body-map__frame">
                 <img
-                  src={poster}
+                  {...poster}
                   alt=""
                   aria-hidden="true"
-                  width="862"
-                  height="672"
                   loading="eager"
                   style={`width: ${imageStyle.width.toFixed(3)}%; left: ${imageStyle.left.toFixed(3)}%; top: ${imageStyle.top.toFixed(3)}%`}
                 />

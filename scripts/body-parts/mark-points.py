@@ -23,6 +23,7 @@ POSTERS = {
 BACKGROUND = (0x28, 0x28, 0x2E, 255)
 RING = (225, 29, 72, 255)
 SCALE = 2
+FRAME = (862, 672)  # POSTER_FRAME in src/lib/body-parts/poster.ts
 NODE_SCRIPT = (
     "import('./src/data/body-parts/index.ts').then(m => console.log(JSON.stringify("
     "m.ALL_BODY_PARTS.map(({slug, plate, hotspots}) => ({slug, plate, hotspots})))))"
@@ -57,7 +58,9 @@ def dashed_ring(draw, cx, cy, radius, width):
 
 
 def render(view, regions, out_path):
-    poster = Image.open(POSTERS[view]).convert("RGBA")
+    # Rings and labels are sized for the 862x672 frame the points are
+    # measured against; the poster files are captured at a multiple of it.
+    poster = Image.open(POSTERS[view]).convert("RGBA").resize(FRAME, Image.LANCZOS)
     canvas = Image.new("RGBA", poster.size, BACKGROUND)
     canvas.alpha_composite(poster)
     bbox = poster.split()[3].getbbox()
