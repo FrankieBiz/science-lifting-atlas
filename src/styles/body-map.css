@@ -37,6 +37,7 @@
     #141519
   );
   color: white;
+  --focus: var(--focus-on-dark);
 }
 
 .body-map__frame > img {
@@ -67,7 +68,7 @@
 }
 
 .body-map__spot:focus-visible {
-  outline: 2px solid var(--signal-300);
+  outline: 2px solid var(--focus, var(--signal-300));
   outline-offset: 2px;
 }
 
@@ -112,6 +113,18 @@
 .body-map__spot:hover .body-map__label,
 .body-map__spot:focus-visible .body-map__label {
   opacity: 1;
+}
+
+/* Near the side edges a centred label would be cut off by the frame. */
+.body-map__spot[data-label-edge='start'] .body-map__label {
+  left: 0;
+  translate: none;
+}
+
+.body-map__spot[data-label-edge='end'] .body-map__label {
+  right: 0;
+  left: auto;
+  translate: none;
 }
 
 .body-map__figure figcaption {
@@ -253,7 +266,10 @@
   }
 }
 
+/* Touch has no hover, so show labels. Once the script has run, every displayed
+   figure is labelled; without it, only the front figure is. */
 @media (hover: none) {
+  .body-map[data-enhanced='true'] .body-map__label,
   .body-map__figure[data-active='true'] .body-map__label {
     opacity: 1;
   }

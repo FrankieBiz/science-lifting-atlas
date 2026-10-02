@@ -37,6 +37,17 @@ export function figureAspect(view: PosterView) {
   return ((x1 - x0) * POSTER_FRAME.width) / ((y1 - y0) * POSTER_FRAME.height);
 }
 
+/**
+ * Which edge of a hotspot its label should align to. Labels are wider than the
+ * 44px target, so near the side edges a centred label is cut off by the
+ * figure's `overflow: hidden`; aligning it to the inner edge keeps it visible.
+ */
+export function labelEdge(leftPercent: number): 'start' | 'center' | 'end' {
+  if (leftPercent < 30) return 'start';
+  if (leftPercent > 70) return 'end';
+  return 'center';
+}
+
 /** Smallest distance between points displayed on the same figure. */
 export function closestPairPx(points: PosterPoint[], figureWidthPx: number) {
   let closest = Number.POSITIVE_INFINITY;

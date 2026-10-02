@@ -8,6 +8,10 @@
   --accent: #0066cc;
   --accent-hover: #0055ad;
   --accent-soft: #eef5ff;
+  /* Keyboard focus ring. Dark surfaces switch to the light variant, because the
+     accent blue falls to roughly 1.4–3:1 against them. */
+  --focus: var(--accent);
+  --focus-on-dark: #ffffff;
   --anatomy: #a83d4e;
   --ink-1000: #1d1d1f;
   --ink-950: #232328;
