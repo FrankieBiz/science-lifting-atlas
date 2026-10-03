@@ -36,6 +36,7 @@
     "test:portability": "vitest run --config vitest.portability.config.ts",
     "assets:spike": "node scripts/assets/spike.mjs",
     "assets:capture-posters": "node scripts/assets/capture-posters.mjs",
+    "assets:render-posters": "python3 scripts/assets/render-posters.py",
     "assets:decision": "node scripts/assets/decision.mjs",
     "assets:benchmark": "node scripts/assets/benchmark.mjs",
     "assets:coverage": "node scripts/assets/coverage.mjs",

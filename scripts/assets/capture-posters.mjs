@@ -1,5 +1,10 @@
 // Capture the front and back anatomy posters from the live explorer.
 //
+// NOTE: the committed posters are now produced by
+// scripts/assets/render-posters.py (pnpm assets:render-posters), which uses
+// the same camera and frame but richer shading. Running this script instead
+// replaces them with the explorer's own flatter single-colour look.
+//
 // The posters keep the explorer's 862×672 framing, because every hotspot and
 // plate point is stored as a percentage of that frame. Only the pixel count
 // grows: the stage is rendered SUPERSAMPLE times larger than the output and
